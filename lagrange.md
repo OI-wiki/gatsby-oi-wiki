@@ -1,4 +1,4 @@
-author: Billchenchina, Ghastlcon, hsfzLZH1
+author: Ir1d, TrisolarisHD, YanWQ-monad
 
 ??? note " 例题[Luogu P4781【模板】拉格朗日插值](https://www.luogu.org/problemnew/show/P4781)"
 
