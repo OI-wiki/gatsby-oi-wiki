@@ -34,8 +34,9 @@ const plugins = [
         {
           resolve: 'gatsby-remark-copy-linked-files'
         },
-        
       ],
+      remarkPlugins: [require("remark-details")],
+      rehypePlugins: [require('rehype-details')],
       extensions: [".mdx", ".md"]
     }
   },
@@ -55,6 +56,7 @@ const plugins = [
     options: {
       plugins: [
         `gatsby-remark-mathjax`,
+        
       ],
     },
   },
