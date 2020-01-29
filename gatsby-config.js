@@ -35,8 +35,8 @@ const plugins = [
           resolve: 'gatsby-remark-copy-linked-files'
         },
       ],
-      remarkPlugins: [require("remark-details")],
-      rehypePlugins: [require('rehype-details')],
+      remarkPlugins: [require("remark-math"), require("remark-details")],
+      rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
       extensions: [".mdx", ".md"]
     }
   },
@@ -49,15 +49,6 @@ const plugins = [
       head: true,
       // enable ip anonymization
       anonymize: false,
-    },
-  },
-  {
-    resolve: `gatsby-transformer-remark`,
-    options: {
-      plugins: [
-        `gatsby-remark-mathjax`,
-        
-      ],
     },
   },
 ];
