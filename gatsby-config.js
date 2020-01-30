@@ -4,7 +4,7 @@ module.exports = {
       resolve: 'gatsby-theme-dox',
       options: {
         basePath: '/',
-        contentPath: 'docs'
+        contentPath: 'docs/**/*'
       }
     }
   ]
