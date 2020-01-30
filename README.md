@@ -1,5 +1,9 @@
 # 为换框架所做出的尝试（
 
+Demo: https://oi-wiki-ng.netlify.com/
+
+TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
+
 ## 如何参与
 
 `yarn install` 或 `npm install` 安装所需插件
