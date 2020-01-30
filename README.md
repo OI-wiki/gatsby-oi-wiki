@@ -11,3 +11,5 @@
 ## FAQ
 
 - 先不用加入 wiki 中大量的文件，sidebar 和子文件夹均测试过已经 work 了
+- 在点 sidebar 切换页面之后 mathjax 不会重新加载
+- 图片不能再放 `./images` 了，目前来看应该得放 `/static`
