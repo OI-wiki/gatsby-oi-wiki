@@ -17,3 +17,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 - 先不用加入 wiki 中大量的文件，sidebar 和子文件夹均测试过已经 work 了
 - 在点 sidebar 切换页面之后 mathjax 不会重新加载
 - 图片不能再放 `./images` 了，目前来看应该得放 `/static`
+
+## 目前遇到的 BUG
+
+1. `sidebar.mdx`的链接必须是绝对链接（以`/`开头）
