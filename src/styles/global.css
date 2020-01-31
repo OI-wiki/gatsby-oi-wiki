@@ -1,3 +1,10 @@
+.toc {
+    right: 2em;
+    top: 5em;
+    float: right;
+    position: fixed;
+    width: 310px
+}
 img{
     max-width: 100%
 }
