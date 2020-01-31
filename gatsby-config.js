@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: 'OI Wiki',
     description: 'Guide for OI',
-    author: 'OI Wiki Team'
+    author: 'OI Wiki Team',
   },
   plugins: [
     {
@@ -38,5 +38,6 @@ module.exports = {
         extensions: [".mdx", ".md"]
       }
     },
+    `gatsby-plugin-catch-links`,
   ]
 }
