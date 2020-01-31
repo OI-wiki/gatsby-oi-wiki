@@ -4425,7 +4425,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@^3.0.0, extend@~3.0.2:
+extend@^3.0.0, extend@^3.0.2, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.npm.taobao.org/extend/download/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha1-+LETa0Bx+9jrFAr/hYsQGewpFfo=
@@ -4993,6 +4993,12 @@ gatsby-remark-copy-linked-files@^2.1.36:
     path-is-inside "^1.0.2"
     probe-image-size "^4.1.1"
     unist-util-visit "^1.4.1"
+
+"gatsby-remark-table-of-contents@file:local_modules/gatsby-remark-table-of-contents":
+  version "0.0.9"
+  dependencies:
+    js-yaml "^3.13.1"
+    mdast-util-toc "^4.2.0"
 
 gatsby-source-filesystem@^2.1.43:
   version "2.1.47"
@@ -7323,6 +7329,17 @@ mdast-util-toc@^3.1.0:
     github-slugger "^1.2.1"
     mdast-util-to-string "^1.0.5"
     unist-util-is "^2.1.2"
+    unist-util-visit "^1.1.0"
+
+mdast-util-toc@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.npm.taobao.org/mdast-util-toc/download/mdast-util-toc-4.2.0.tgz#9085c4313359c981e4c1d22efe02f8ce01072da4"
+  integrity sha1-kIXEMTNZyYHkwdIu/gL4zgEHLaQ=
+  dependencies:
+    extend "^3.0.2"
+    github-slugger "^1.2.1"
+    mdast-util-to-string "^1.0.5"
+    unist-util-is "^3.0.0"
     unist-util-visit "^1.1.0"
 
 mdn-data@2.0.4:
