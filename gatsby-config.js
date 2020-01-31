@@ -1,4 +1,9 @@
 module.exports = {
+  siteMetadata: {
+    title: 'OI Wiki',
+    description: 'Guide for OI',
+    author: 'OI Wiki Team'
+  },
   plugins: [
     {
       resolve: 'gatsby-theme-dox',
