@@ -1,8 +1,9 @@
-import components from 'gatsby-theme-dox/src/components'
-import Img from './components/Img'
+import Prism from '@theme-ui/prism'
 import Link from './components/Link'
+import Img from './components/Img'
 
 export default {
-    ...components,
-    a: Link,
+  a: Link,
+  code: Prism,
+  pre: props => props.children
 }
