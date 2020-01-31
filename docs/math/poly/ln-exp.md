@@ -1,3 +1,5 @@
+# 多项式对数函数 | 指数函数
+
 ## Description
 
 给定多项式 $f\left(x\right)$ ，求模 $x^{n}$ 意义下的 $\ln{f\left(x\right)}$ 与 $\exp{f\left(x\right)}$ 。

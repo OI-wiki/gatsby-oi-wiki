@@ -1,3 +1,5 @@
+# 多项式求逆
+
 ## Description
 
 给定多项式 $f\left(x\right)$ ，求 $f^{-1}\left(x\right)$ 。

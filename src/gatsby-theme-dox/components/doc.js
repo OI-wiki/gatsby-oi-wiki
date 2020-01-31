@@ -9,7 +9,7 @@ function Doc({ data: { doc }, location }) {
   const description = doc.description || doc.excerpt
 
   return (
-    <Layout location={location}>
+    <Layout location={location} doc={doc}>
       <SEO title={title} description={description} />
       <MDXRenderer>{doc.body}</MDXRenderer>
     </Layout>
