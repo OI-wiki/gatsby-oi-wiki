@@ -25,7 +25,13 @@ module.exports = {
               // These files will not be copied
               ignoreFileExtensions: ['.md']
             }
-          }
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              isIconAfterHeader: true,
+            }
+          },
         ],
         remarkPlugins: [require("remark-math"), require("remark-details")],
         rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
