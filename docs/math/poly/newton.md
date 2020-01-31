@@ -86,7 +86,7 @@ $$
 T\left(n\right)=T\left(\frac{n}{2}\right)+O\left(n\log{n}\right)=O\left(n\log{n}\right)
 $$
 
-### <span id="exp"> [多项式 exp](../ln-exp) </span>
+### <span id="exp"> [多项式 exp](./ln-exp) </span>
 
 设给定函数为 $h\left(x\right)$ ，有方程：
 

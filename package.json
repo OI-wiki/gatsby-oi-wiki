@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "gatsby": "^2.18.17",
+    "gatsby-remark-autolink-headers": "^2.1.23",
     "gatsby-remark-copy-linked-files": "^2.1.36",
     "gatsby-theme-dox": "*",
     "hast-util-to-text": "^1.0.1",
