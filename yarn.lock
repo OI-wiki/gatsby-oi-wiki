@@ -4886,6 +4886,14 @@ gatsby-page-utils@^0.0.38:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
+gatsby-plugin-catch-links@^2.1.24:
+  version "2.1.24"
+  resolved "https://registry.npm.taobao.org/gatsby-plugin-catch-links/download/gatsby-plugin-catch-links-2.1.24.tgz#fc936eeaffc078445ef358773a57b8110c916136"
+  integrity sha1-/JNu6v/AeERe81h3Ole4EQyRYTY=
+  dependencies:
+    "@babel/runtime" "^7.7.6"
+    escape-string-regexp "^1.0.5"
+
 gatsby-plugin-mdx@^1.0.64:
   version "1.0.69"
   resolved "https://registry.npm.taobao.org/gatsby-plugin-mdx/download/gatsby-plugin-mdx-1.0.69.tgz#11b33a5478dd7ab005c8b093e402b4ccb1c122db"
