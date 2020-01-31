@@ -5,6 +5,9 @@
     position: fixed;
     width: 310px
 }
+.toc ul{
+    list-style-type: none;
+}
 img{
     max-width: 100%
 }
