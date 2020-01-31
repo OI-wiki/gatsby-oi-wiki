@@ -8,8 +8,9 @@ import Navbar from './Navbar'
 import ScreenReader from './ScreenReader'
 import Sidebar from './Sidebar'
 import SidebarToggler from './Sidebar/Toggler'
+import AuthorsArray from './AuthorsArray'
 
-function Layout({ children, location }) {
+function Layout({ children, location ,doc}) {
   const [sidebar, sidebarOpen, setSidebarOpen, sidebarToggler] = useSidebar()
 
   const { theme } = useThemeUI()
@@ -53,6 +54,11 @@ function Layout({ children, location }) {
         >
           {children}
         </main>
+
+        <div>
+          <span>贡献者（们）</span>
+          <AuthorsArray authors={doc.parent.frontmatter.author} />
+        </div>
 
         <Footer />
       </div>

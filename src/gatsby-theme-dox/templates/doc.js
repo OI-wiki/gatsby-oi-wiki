@@ -18,6 +18,13 @@ export const query = graphql`
       headings {
         value
       }
+      parent {
+        ... on Mdx {
+          frontmatter {
+            author
+          }
+        }
+      }
     }
   }
 `
