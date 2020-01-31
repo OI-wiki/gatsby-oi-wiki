@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        gatsbyRemarkPlugins: [],
+        gatsbyRemarkPlugins: ["gatsby-remark-copy-linked-files"],
         remarkPlugins: [require("remark-math"), require("remark-details")],
         rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
         extensions: [".mdx", ".md"]
