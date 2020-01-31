@@ -161,9 +161,10 @@ export default {
     },
     root: {
       minHeight: '100vh',
-      maxWidth: 980,
+      maxWidth: 1100,
       mx: 'auto',
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+      marginLeft: '5em'
     },
     sidebar: {
       float: 'left',

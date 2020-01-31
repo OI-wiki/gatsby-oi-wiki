@@ -1,3 +1,5 @@
+# 多项式三角函数
+
 ## Description
 
 给定多项式 $f\left(x\right)$ ，求模 $x^{n}$ 意义下的 $\sin{f\left(x\right)}, \cos{f\left(x\right)}$ 与 $\tan{f\left(x\right)}$ 。

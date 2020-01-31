@@ -1,3 +1,5 @@
+# 多项式开根
+
 ## Description
 
 给定多项式 $g\left(x\right)$ ，求 $f\left(x\right)$ ，满足：

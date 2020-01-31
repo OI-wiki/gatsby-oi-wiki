@@ -1,3 +1,5 @@
+# 多项式除法 | 取模
+
 ## Description
 
 给定多项式 $f\left(x\right),g\left(x\right)$ ，求 $g\left(x\right)$ 除 $f\left(x\right)$ 的商 $Q\left(x\right)$ 和余数 $R\left(x\right)$ 。
