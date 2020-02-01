@@ -11,7 +11,7 @@ function Header({ num }) {
 function AuthorsArray({ authors }) {
   const arr =
     authors == null ? null : authors == undefined ? null : authors.split(",");
-    console.log(arr);
+    // console.log(arr);
   return (
     <div>
       {/* {arr.length > 1?(<span>贡献者们：</span>):(<span>贡献者：</span>)} */}
