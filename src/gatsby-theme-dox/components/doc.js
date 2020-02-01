@@ -7,9 +7,10 @@ function Doc({ data: { doc }, location }) {
   const title = doc.slug === '/' ? null : doc.title || headingTitle
   const description = doc.description || doc.excerpt
   const authors = doc.parent.frontmatter.author || null;
+  const tags = doc.parent.frontmatter.tags || null;
 
   return (
-    <Layout location={location} authors={authors} title={title} description={description}>
+    <Layout location={location} authors={authors} title={title} description={description} tags={tags}>
       <MDXRenderer>{doc.body}</MDXRenderer>
     </Layout>
   )
