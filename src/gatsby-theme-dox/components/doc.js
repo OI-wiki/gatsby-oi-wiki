@@ -1,7 +1,6 @@
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Layout from '../components/layout'
-import SEO from '../components/SEO'
 
 function Doc({ data: { doc }, location }) {
   const headingTitle = doc.headings[0] && doc.headings[0].value
@@ -10,8 +9,7 @@ function Doc({ data: { doc }, location }) {
   const authors = doc.parent.frontmatter.author || null;
 
   return (
-    <Layout location={location} authors={authors}>
-      <SEO title={title} description={description} />
+    <Layout location={location} authors={authors} title={title} description={description}>
       <MDXRenderer>{doc.body}</MDXRenderer>
     </Layout>
   )
