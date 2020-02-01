@@ -19,6 +19,8 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 - 图片不能再放 `./images` 了，目前来看应该得放 `/static`
 - `sidebar.mdx`的链接必须是绝对链接（以`/`开头）
 - Latex中不能出现`\left<\right>`，否则会gg。要写成`\left\langle\right\rangle`。
+- netlify 好像会把 url 最后的 `/` 给自动去掉。检查内链用的页面：https://oi-wiki-ng.netlify.com/math/poly/newton/
+- 主题里面有 remark-emoji 和 remark-slug 但是不知道什么原因没有 work。可能我们要在 gatsby-config 里面也加一下
 
 ## 关于 gatsby-remark-table-of-contents
 
