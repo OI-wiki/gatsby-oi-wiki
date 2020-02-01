@@ -28,24 +28,13 @@ const transformer = (markdownAST, pluginOptions) => {
 
   // find position of TOC
   // [TOC]
-  const index = prefs.every? 
-    markdownAST.children.findIndex(
-      node => node.type === "heading" && node.depth == 1
-    ) :
-    markdownAST.children.findIndex(
-      node => node.type === "paragraph" && node.children[0].type === "linkReference" && node.children[0].label === "TOC"
-    );
+  const index = markdownAST.children.findIndex(
+    node => node.type === "paragraph" && node.children[0].type === "linkReference" && node.children[0].label === "TOC"
+  );
 
   // we have no TOC
-  if (index === -1) {
+  if (prefs.every == false && index === -1) {
     return;
-  }
-
-  try {
-    let parsePrefs = yaml.safeLoad(markdownAST.children[index].value);
-    prefs = { ...prefs, ...keysToCamel(parsePrefs) };
-  } catch (e) {
-    console.log("Can't parse TOC-Configuration", e);
   }
 
   // this ist the ast we nned consider
@@ -81,17 +70,12 @@ const transformer = (markdownAST, pluginOptions) => {
 
   if(prefs.every){
     if(result.map==null){
-      markdownAST.children = [].concat(
-        markdownAST.children.slice(0, index + 1),
-        L,R,
-        markdownAST.children.slice(index + 1)
-      );
+      return;
     }else {
       // insert the TOC≤
       markdownAST.children = [].concat(
-        markdownAST.children.slice(0, index + 1),
         L, result.map, R,
-        markdownAST.children.slice(index + 1)
+        markdownAST.children
       );
     }
   }else {

@@ -5,5 +5,7 @@ items:
     link: /theme-guide
   - title: 数学
     link: /math
+  - title: Tags
+    link: /tags
   - title: GitHub
     link: https://github.com/OI-Wiki/OI-Wiki
