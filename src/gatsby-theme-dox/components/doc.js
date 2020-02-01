@@ -7,9 +7,10 @@ function Doc({ data: { doc }, location }) {
   const headingTitle = doc.headings[0] && doc.headings[0].value
   const title = doc.slug === '/' ? null : doc.title || headingTitle
   const description = doc.description || doc.excerpt
+  const authors = doc.parent.frontmatter.author || null;
 
   return (
-    <Layout location={location} doc={doc}>
+    <Layout location={location} authors={authors}>
       <SEO title={title} description={description} />
       <MDXRenderer>{doc.body}</MDXRenderer>
     </Layout>
