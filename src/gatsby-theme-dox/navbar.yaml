@@ -1,3 +1,9 @@
 items:
+  - title: 简介
+    link: /
+  - title: Theme Guide
+    link: /theme-guide
+  - title: 数学
+    link: /math
   - title: GitHub
     link: https://github.com/OI-Wiki/OI-Wiki
