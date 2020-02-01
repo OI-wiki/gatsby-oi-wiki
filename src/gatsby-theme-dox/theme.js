@@ -69,31 +69,31 @@ export default {
       fontFamily: 'body',
       fontWeight: 'body',
       lineHeight: 'body',
-      fontSize: [2, 3]
+      fontSize: [1, 2]
     },
     h1: {
       variant: 'textStyles.heading',
-      fontSize: [6, 7]
+      fontSize: [5, 6]
     },
     h2: {
       variant: 'textStyles.heading',
-      fontSize: [5, 6]
+      fontSize: [4, 5]
     },
     h3: {
       variant: 'textStyles.heading',
-      fontSize: [4, 5]
+      fontSize: [3, 4]
     },
     h4: {
       variant: 'textStyles.heading',
-      fontSize: [3, 4]
+      fontSize: [2, 3]
     },
     h5: {
       variant: 'textStyles.heading',
-      fontSize: [2, 3]
+      fontSize: [1, 2]
     },
     h6: {
       variant: 'textStyles.heading',
-      fontSize: [1, 2]
+      fontSize: [0, 1]
     },
     p: {},
     a: {

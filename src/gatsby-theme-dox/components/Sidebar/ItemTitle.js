@@ -45,6 +45,7 @@ const styles = {
     variant: 'linkStyles.nav',
     display: 'block',
     pr: '2.5rem',
+    p: '0.4rem 1.3rem',
     ':hover': {
       variant: 'linkStyles.nav.:hover',
       bg: alpha('primary', 0.05)
