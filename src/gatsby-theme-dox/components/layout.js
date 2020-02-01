@@ -59,6 +59,7 @@ function Layout({ children, location, authors, title, description}) {
 
         <AuthorsArray authors={authors} />
 
+
         <Footer />
       </div>
     </Styled.root>

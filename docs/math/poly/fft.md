@@ -1,5 +1,7 @@
 ---
+title: 快速傅里叶变换
 author: AndrewWayne, GavinZhengOI, ChungZH, henryrabbit, Xeonacid, sshwy, Yukimaikoriya
+tags: ["math","polynomial"]
 ---
 
 # 快速傅里叶变换
