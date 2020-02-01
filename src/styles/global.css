@@ -11,3 +11,11 @@
 img{
     max-width: 100%
 }
+
+.logo {
+    margin-left: 1em;
+}
+
+.logo-text {
+    margin-left: 2em;
+}
