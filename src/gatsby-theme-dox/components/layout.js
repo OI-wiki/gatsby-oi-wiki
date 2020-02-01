@@ -10,7 +10,7 @@ import Sidebar from './Sidebar'
 import SidebarToggler from './Sidebar/Toggler'
 import AuthorsArray from './AuthorsArray'
 
-function Layout({ children, location ,doc}) {
+function Layout({ children, location, authors}) {
   const [sidebar, sidebarOpen, setSidebarOpen, sidebarToggler] = useSidebar()
 
   const { theme } = useThemeUI()
@@ -55,10 +55,7 @@ function Layout({ children, location ,doc}) {
           {children}
         </main>
 
-        <div>
-          <span>贡献者（们）</span>
-          <AuthorsArray authors={doc.parent.frontmatter.author} />
-        </div>
+        <AuthorsArray authors={authors} />
 
         <Footer />
       </div>

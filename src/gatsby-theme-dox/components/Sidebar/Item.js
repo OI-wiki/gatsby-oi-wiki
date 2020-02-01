@@ -24,7 +24,7 @@ function Item({
   toggleItem
 }) {
   const isParentOfActiveItem = isItemActive(activeItemParentLinks, item)
-  const isActive = item.link === location.pathname || isParentOfActiveItem
+  const isActive = item.link === (location?location.pathname:"") || isParentOfActiveItem
 
   const isExpanded = openItems[item.link]
 

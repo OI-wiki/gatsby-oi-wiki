@@ -52,7 +52,8 @@ export const getItems = children => {
 }
 
 const isItemActive = (item, location) => {
-  const linkMatchesPathname = item.link === location.pathname
+  console.log(location)
+  const linkMatchesPathname = item.link === (location?location.pathname:"")
 
   if (linkMatchesPathname) {
     return item
