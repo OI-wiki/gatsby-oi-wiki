@@ -5,9 +5,11 @@
     position: fixed;
     width: 310px
 }
-.toc ul{
+.toc ul {
     list-style-type: none;
+    padding-left: 1em;
 }
+
 img{
     max-width: 100%
 }
@@ -15,7 +17,8 @@ img{
 .logo {
     margin-left: 1em;
 }
-
 .logo-text {
-    margin-left: 2em;
+    margin-left: 1em;
+    vertical-align: 7px;
+    font-size: 18px;
 }
