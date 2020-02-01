@@ -32,7 +32,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 1. exclude：排除一些标题不在TOC中；
 2. tight：让生成的toc列表更紧凑
-3. every：魔改的。设为true：对每篇文章生成TOC，放在h1的下面。如果没有h1就不生成TOC。设为false：将文章中第一个单独`[TOC]`的段落替换为TOC。
+3. every：魔改的。设为true：对每篇文章生成TOC，放在开头。如果没有h1就不生成TOC。设为false：将文章中第一个单独`[TOC]`的段落替换为TOC。
 4. fromHeading,toHeading：设置生成TOC的标题大小范围
 
 要加feature可以随时提出～
