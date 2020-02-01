@@ -6,7 +6,7 @@ import React from 'react'
 import Layout from '../gatsby-theme-dox/components/layout'
 
 const page = () => (
-  <Layout>
+  <Layout location={location}>
   <div>
     <Helmet title={`404 Page`} />
     <div>

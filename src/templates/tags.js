@@ -3,8 +3,9 @@ import PropTypes from "prop-types"
 
 // Components
 import { Link, graphql } from "gatsby"
+import Layout from '../gatsby-theme-dox/components/layout'
 
-const Tags = ({ pageContext, data }) => {
+const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
   const tagHeader = `${totalCount} post${
@@ -12,6 +13,7 @@ const Tags = ({ pageContext, data }) => {
   } tagged with "${tag}"`
 
   return (
+    <Layout location={location}>
     <div>
       <h1>{tagHeader}</h1>
       <ul>
@@ -31,6 +33,7 @@ const Tags = ({ pageContext, data }) => {
             */}
       <Link to="/tags">All tags</Link>
     </div>
+    </Layout>
   )
 }
 
