@@ -22,6 +22,7 @@ export const query = graphql`
         ... on Mdx {
           frontmatter {
             author
+            tags
           }
         }
       }

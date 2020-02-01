@@ -10,8 +10,9 @@ import ScreenReader from './ScreenReader'
 import Sidebar from './Sidebar'
 import SidebarToggler from './Sidebar/Toggler'
 import AuthorsArray from './AuthorsArray'
+import Tags from './Tags'
 
-function Layout({ children, location, authors, title, description}) {
+function Layout({ children, location, authors, title, description, tags}) {
   const [sidebar, sidebarOpen, setSidebarOpen, sidebarToggler] = useSidebar()
 
   const { theme } = useThemeUI()
@@ -59,6 +60,7 @@ function Layout({ children, location, authors, title, description}) {
 
         <AuthorsArray authors={authors} />
 
+        <Tags tags={tags} />
 
         <Footer />
       </div>
