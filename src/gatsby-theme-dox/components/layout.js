@@ -11,8 +11,9 @@ import Sidebar from './Sidebar'
 import SidebarToggler from './Sidebar/Toggler'
 import AuthorsArray from './AuthorsArray'
 import Tags from './Tags'
+import Toc from './Toc'
 
-function Layout({ children, location, authors, title, description, tags}) {
+function Layout({ children, location, authors, title, description, tags, toc}) {
   const [sidebar, sidebarOpen, setSidebarOpen, sidebarToggler] = useSidebar()
 
   const { theme } = useThemeUI()
@@ -64,6 +65,9 @@ function Layout({ children, location, authors, title, description, tags}) {
 
         <Footer />
       </div>
+
+      <Toc toc={toc} />
+
     </Styled.root>
   )
 }

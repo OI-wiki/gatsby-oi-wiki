@@ -32,16 +32,16 @@ module.exports = {
               isIconAfterHeader: true,
             }
           },
-          {
-            resolve: `gatsby-remark-table-of-contents`,
-            options: {
-              exclude: "Table of Contents",
-              tight: true,
-              every: true,
-              fromHeading: 2,
-              toHeading: 6
-            }
-          },
+          //{
+          //  resolve: `gatsby-remark-table-of-contents`,
+          //  options: {
+          //    exclude: "Table of Contents",
+          //    tight: true,
+          //    every: true,
+          //    fromHeading: 2,
+          //    toHeading: 6
+          //  }
+          //},
         ],
         remarkPlugins: [require("remark-math"), require("remark-details")],
         rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],

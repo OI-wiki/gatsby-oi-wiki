@@ -199,6 +199,27 @@ export default {
       mx: 'auto',
       my: 4,
       px: 3
+    },
+    toc: {
+      right: '2em',
+      top: '5em',
+      float: 'right',
+      position: 'fixed',
+      width: '310px',
+      a: {
+        color: 'primary',
+        textDecoration: 'none',
+        ':hover': {
+          textDecoration: 'underline'
+        },
+        '&.active': {
+          color: 'text'
+        }
+      },
+      ul: {
+        listStyleType: 'none',
+        paddingLeft: '1em'
+      }
     }
   }
 }
