@@ -102,7 +102,7 @@ $$
 $$
 \omega_n^n=1\\
 \omega_n^k=\omega_{2n}^{2k}\\
-\omega_{2n}^{k+n}=-\omega_{2n}^k\\
+\omega_{2n}^{k+n}=-\omega_{2n}^k
 $$
 
 ## 快速傅里叶变换

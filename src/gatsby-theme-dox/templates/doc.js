@@ -24,6 +24,7 @@ export const query = graphql`
             author
             tags
           }
+          toc: tableOfContents
         }
       }
     }
