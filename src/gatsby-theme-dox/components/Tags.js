@@ -10,10 +10,10 @@ function Header({ num }) {
 function Tags({ tags }) {
   const arr=tags
   return (
-    <div class={`tags-list`}>
+    <div className={`tags-list`}>
       <Header num={arr?arr.length:0}></Header>
       {arr?arr.map(tag => (
-        <span class={`tag-item`}> {tag} </span>
+        <span className={`tag-item`}> {tag} </span>
       )):""}
     </div>
   );
