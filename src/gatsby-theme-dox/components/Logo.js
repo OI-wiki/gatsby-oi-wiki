@@ -3,9 +3,9 @@ import SchoolIcon from '@material-ui/icons/School';
 
 function Logo(props) {
   return (
-    <div class="logo">
+    <div className="logo">
       <SchoolIcon fontSize="large" /> 
-      <span class="logo-text">OI Wiki</span>
+      <span className="logo-text">OI Wiki</span>
     </div>
   )
 }

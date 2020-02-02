@@ -13,11 +13,11 @@ function AuthorsArray({ authors }) {
     authors == null ? null : authors == undefined ? null : authors.split(",");
     // console.log(arr);
   return (
-    <div class={`authors-list`}>
+    <div className={`authors-list`}>
       {/* {arr.length > 1?(<span>贡献者们：</span>):(<span>贡献者：</span>)} */}
       <Header num={arr?arr.length:0}></Header>
       {arr?arr.map(author => (
-        <span class={`author-name`}> {author} </span>
+        <span className={`author-name`}> {author} </span>
       )):""}
     </div>
   );

@@ -1,6 +1,7 @@
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Layout from '../components/layout'
+import Container from '@material-ui/core/Container';
 
 function Doc({ data: { doc }, location }) {
   const headingTitle = doc.headings[0] && doc.headings[0].value
@@ -12,7 +13,9 @@ function Doc({ data: { doc }, location }) {
 
   return (
     <Layout location={location} authors={authors} title={title} description={description} tags={tags} toc={toc}>
-      <MDXRenderer>{doc.body}</MDXRenderer>
+      <Container maxWidth="sm">
+        <MDXRenderer>{doc.body}</MDXRenderer>
+      </Container>
     </Layout>
   )
 }

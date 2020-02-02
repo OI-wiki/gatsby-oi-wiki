@@ -19,7 +19,7 @@ export default function({ toc }){
     return  (
         <div
             sx={theme.layout.toc}
-            class='toc'
+            className='toc'
         >
             {toc != undefined && toc != null && toc.items != undefined && toc.items != null? (
                 <ul>
