@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { graphql, useStaticQuery } from "gatsby";
 import { css, jsx, Styled, useThemeUI } from 'theme-ui'
 
 function TocItem({ tocNode }) {
@@ -17,14 +16,12 @@ function TocItem({ tocNode }) {
 
 export default function({ toc }){
     const { theme } = useThemeUI()
-    console.log("theme.layout.toc")
-    console.log(theme.layout.toc)
     return  (
         <div
             sx={theme.layout.toc}
             class='toc'
         >
-            {toc.items != undefined && toc.items != null? (
+            {toc != undefined && toc != null && toc.items != undefined && toc.items != null? (
                 <ul>
                     <TocItem tocNode={toc.items[0]} />
                 </ul>

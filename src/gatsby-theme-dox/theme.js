@@ -161,10 +161,9 @@ export default {
     },
     root: {
       minHeight: '100vh',
-      maxWidth: 1100,
+      maxWidth: '95%',
       mx: 'auto',
-      overflowX: 'hidden',
-      marginLeft: '5em'
+      overflowX: 'hidden'
     },
     sidebar: {
       float: 'left',
@@ -185,7 +184,7 @@ export default {
       width: [
         '100%',
         null,
-        theme => `calc(100% - ${theme.layout.sidebar.width}px)`
+        theme => `calc(100% - ${theme.layout.sidebar.width}px - ${theme.layout.toc.width}px)`
       ],
       ml: [null, null, theme => theme.layout.sidebar.width],
       float: [null, null, 'left'],
@@ -201,11 +200,12 @@ export default {
       px: 3
     },
     toc: {
+      visibility: ['hidden', null, 'visible'],
       right: '2em',
       top: '5em',
       float: 'right',
       position: 'fixed',
-      width: '310px',
+      width: 300,
       a: {
         color: 'primary',
         textDecoration: 'none',
