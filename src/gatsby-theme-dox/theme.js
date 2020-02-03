@@ -19,9 +19,11 @@ export default {
     secondary: '#2EC4B6',
     accent: '#FF9F1C',
     muted: '#FAFAFA',
+    toc: '#484848',
     modes: {
       dark: {
         text: '#FDFFFC',
+        toc: '#D3D3D3',
         background: '#011627'
       }
     }
@@ -207,10 +209,12 @@ export default {
       position: 'fixed',
       width: 300,
       a: {
-        color: 'primary',
+        color: 'toc',
         textDecoration: 'none',
+        transition: '0.2s',
         ':hover': {
-          textDecoration: 'underline'
+          transition: '0.2s',
+          color: 'primary'
         },
         '&.active': {
           color: 'text'

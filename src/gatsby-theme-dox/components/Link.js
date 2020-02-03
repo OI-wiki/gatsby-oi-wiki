@@ -6,6 +6,7 @@ import { jsx } from 'theme-ui'
 const linkStyles = { variant: 'styles.a' }
 
 function linkFix(url){
+    if(url.match('.md')!=null)url='../'+url.replace('.md','/');
     if(url.match('#')!=null)return url;
     if(url.split('/').slice(-1)=='')return url;
     return url+'/';
