@@ -13,9 +13,7 @@ function Doc({ data: { doc }, location }) {
 
   return (
     <Layout location={location} authors={authors} title={title} description={description} tags={tags} toc={toc}>
-      <Container maxWidth="sm">
-        <MDXRenderer>{doc.body}</MDXRenderer>
-      </Container>
+      <MDXRenderer>{doc.body}</MDXRenderer>
     </Layout>
   )
 }
