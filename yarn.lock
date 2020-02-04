@@ -9711,10 +9711,10 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-details@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/rehype-details/download/rehype-details-1.0.0.tgz#508f3641f4ba663ca54576bff508a26e1268be1e"
-  integrity sha1-UI82QfS6ZjylRXa/9QiibhJovh4=
+rehype-details@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npm.taobao.org/rehype-details/download/rehype-details-1.5.0.tgz?cache=0&sync_timestamp=1580787233489&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frehype-details%2Fdownload%2Frehype-details-1.5.0.tgz#2114be5a63d6495b636d789c1972006af194f9b2"
+  integrity sha1-IRS+WmPWSVtjbXicGXIAavGU+bI=
   dependencies:
     rehype-stringify "^6.0.1"
     remark-parse "^7.0.2"
