@@ -8,7 +8,19 @@ import ScreenReader from '../ScreenReader'
 const Title = LogoComponent ? ScreenReader : 'span'
 
 const logo = LogoComponent && (
-  <LogoComponent aria-hidden sx={{ display: 'block', height: '1.5em' }} />
+  <LogoComponent 
+    aria-hidden 
+    sx={{
+        display: 'block',
+        height: '1.5em' ,
+        ml: '1em',
+        span: {
+            ml: '1em',
+            verticalAlign: '7px',
+            fontSize: '18px'
+        }
+    }}
+  />
 )
 
 function Branding() {
