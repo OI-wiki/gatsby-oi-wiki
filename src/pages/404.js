@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 // Components
 import { Helmet } from "react-helmet"
 import React from 'react'
-import Layout from '../gatsby-theme-dox/components/layout'
+import Layout from '../components/layout'
 
 const page = () => (
   <Layout>

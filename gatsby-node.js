@@ -67,7 +67,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  // const blogPostTemplate = path.resolve("src/templates/blog.js")
+  const docTemplate = path.resolve("src/templates/doc.js")
   const tagTemplate = path.resolve("src/templates/tags.js")
 
   const result = await graphql(`
@@ -81,6 +81,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             fields {
               slug
             }
+            id
             frontmatter {
               tags
             }
@@ -101,15 +102,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  // const posts = result.data.postsRemark.edges
-
-  // // Create post detail pages
-  // posts.forEach(({ node }) => {
-  //   createPage({
-  //     path: node.fields.slug,
-  //     component: blogPostTemplate,
-  //   })
-  // })
+  const posts = result.data.postsRemark.edges
+  // console.log(posts)
+  // Create post detail pages
+  posts.forEach(({ node }, index) => {
+    const previous = index === posts.length - 1 ? null : posts[index + 1]
+    const next = index === 0 ? null : posts[index - 1]
+    createPage({
+      path: node.fields.slug,
+      component: docTemplate,
+      context: {
+          id: node.id,
+          previous,
+          next
+        }
+    })
+  })
 
   // Extract tag data from query
   const tags = result.data.tagsGroup.group
@@ -124,4 +132,32 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       },
     })
   })
+
+
+  if (result.errors) {
+    reporter.panic(result.errors)
+  }
+
+  
+
+  // const docs = result.data.allMdx.nodes
+
+  /*
+  docs.forEach((doc, index) => {
+    // const previous = index === docs.length - 1 ? null : docs[index + 1]
+    // const next = index === 0 ? null : docs[index - 1]
+    const { slug } = doc.fields.slug
+    console.log(slug)
+
+    createPage({
+      path: slug,
+      component: DocTemplate,
+      // context: {
+      //   ...doc,
+      //   previous,
+      //   next
+      // }
+    })
+  })
+  */
 }

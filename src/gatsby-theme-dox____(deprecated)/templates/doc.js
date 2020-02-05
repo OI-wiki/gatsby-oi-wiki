@@ -8,25 +8,22 @@ export default ({ data, location }) => {
 
 export const query = graphql`
   query($id: String!) {
-    doc: doc(id: { eq: $id }) {
+    mdx: mdx(id: { eq: $id }) {
       id
-      slug
-      title
-      description
+      fields {
+        slug
+      }
       excerpt
       body
       headings {
         value
       }
-      parent {
-        ... on Mdx {
           frontmatter {
             author
             tags
           }
           toc: tableOfContents
-        }
-      }
+       
     }
   }
 `

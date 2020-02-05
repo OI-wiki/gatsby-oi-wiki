@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import navbarData from '../navbar.yaml'
-import ColorModeButton from './ColorModeButton'
+// import ColorModeButton from './ColorModeButton'
 import Link from './Link'
 
 function Navbar() {
@@ -17,7 +17,7 @@ function Navbar() {
             </li>
           ))}
           <li sx={{ display: 'inline-block' }}>
-            <ColorModeButton />
+            {/* <ColorModeButton /> */}
           </li>
         </ul>
       </div>
