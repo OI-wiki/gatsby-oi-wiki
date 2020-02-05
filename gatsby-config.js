@@ -6,11 +6,10 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-theme-dox',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        basePath: '/',
-        contentPath: 'docs/',
-        mdx: false 
+        name: './docs/',
+        path: './docs/',
       }
     },
     {

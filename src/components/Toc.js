@@ -15,10 +15,10 @@ function TocItem({ tocNode }) {
 }
 
 export default function({ toc }){
-    const { theme } = useThemeUI()
+    // const { theme } = useThemeUI()
     return  (
         <div
-            sx={theme.layout.toc}
+            // sx={theme.layout.toc}
             className='toc'
         >
             {toc != undefined && toc != null && toc.items != undefined && toc.items != null? (
