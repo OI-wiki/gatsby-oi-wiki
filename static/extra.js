@@ -7,4 +7,3 @@ MathJax.Hub.Config({
     fontCache: 'global'
   }
 });
-

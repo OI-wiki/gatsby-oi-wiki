@@ -149,6 +149,9 @@ export default {
       color: 'rgba(0,0,0,.54)',
       margin: '1em 0',
       boxSizing: 'inherit'
+    },
+    img: {
+      maxWidth: '100%'
     }
   },
   layout: {
