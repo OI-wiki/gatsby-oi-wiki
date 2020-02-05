@@ -8,5 +8,5 @@ export default {
   code: Prism,
   pre: props => props.children,
   details: Details,
-  summary: Summary
+  summary: Summary,
 }

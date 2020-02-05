@@ -48,5 +48,7 @@ module.exports = {
       }
     },
     `gatsby-plugin-catch-links`,
+    `gatsby-plugin-theme-ui`,
+    `gatsby-plugin-react-helmet`,
   ]
 }
