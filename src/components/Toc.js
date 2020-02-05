@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx, Styled, useThemeUI } from 'theme-ui'
+import { jsx } from 'theme-ui'
 
 function TocItem({ tocNode }) {
     return (
@@ -14,14 +14,14 @@ function TocItem({ tocNode }) {
     )
 }
 
-export default function({ toc }){
-    // const { theme } = useThemeUI()
+export default function({ toc, ...props }){
     return  (
-        <div
-            // sx={theme.layout.toc}
-            className='toc'
-        >
-            {toc != undefined && toc != null && toc.items != undefined && toc.items != null? (
+        <div className='toc' {...props} >
+            {
+                toc != undefined && 
+                    toc != null && 
+                    toc.items != undefined && 
+                    toc.items != null? (
                 <ul>
                     <TocItem tocNode={toc.items[0]} />
                 </ul>
