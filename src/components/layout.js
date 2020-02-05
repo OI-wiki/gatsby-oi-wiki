@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { Global } from "@emotion/core";
 import { jsx } from "theme-ui";
+import theme from '../theme'
+//Components
 import myFooter from "./Footer";
 import Navbar from "./Navbar";
 import AuthorsArray from "./AuthorsArray";
@@ -23,37 +25,51 @@ function myLayout({
   toc
 }) {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      {/* <Global /> */}
-      <Header>
-        <Navbar />
-      </Header>
-      <Layout>
-          <SideBar width={200} style={{ background: '#fff' }} />
-          <Layout style={{ padding: '0 24px 24px' }}>
+      <Layout style={{ minHeight: "100vh" }}>
+        {/* <Global /> */}
+        <Header 
+            sx={{
+                position: 'fixed',
+                zIndex: '20',
+                width: '100%'
+            }}
+        >
+          <Navbar />
+        </Header>
+        <Layout>
 
-          <Content style={{
-            background: '#fff',
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}>
-            <Breadcrumb>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-              <Card title={title}>{children}</Card>
-          </Content>
-          </Layout>
+            <SideBar 
+              style={{ background: '#fff' }} 
+              sx={theme.layout.sidebar}
+            />
+  
+            <Layout 
+              //style={{ padding: '0 24px 24px' }} 
+              sx={theme.layout.main}
+            >
+              <Content style={{
+                background: '#fff',
+                padding: 24,
+                margin: 0,
+                minHeight: 280,
+              }}>
+                <Breadcrumb>
+                  <Breadcrumb.Item>User</Breadcrumb.Item>
+                  <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                </Breadcrumb>
+                  <Card title={title}>{children}</Card>
+              </Content>
+              <AuthorsArray authors={authors} />
+              <Tags tags={tags} />
+            </Layout>
+  
+            <Toc toc={toc} sx={theme.layout.toc} />
 
-          <AuthorsArray authors={authors} />
-
-          <Tags tags={tags} />
-
-          <Toc toc={toc} />
-          </Layout>
-          <Footer style={{ textAlign: "center" }}>{/* <myFooter /> */}</Footer>
-    </Layout>
+        </Layout>
+        <Footer style={{ textAlign: "center" }}>
+            {/* <myFooter /> */}
+        </Footer>
+      </Layout>
   );
 }
 

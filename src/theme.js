@@ -180,7 +180,11 @@ export default {
     sidebar: {
       float: 'left',
       width: 300,
-      minHeight: '100%',
+      maxwidth: 300,
+      height: '92%',
+      background: '#fff',
+      overflow: 'auto',
+      overflowX: 'hidden',
       mr: '-100%',
       position: 'absolute',
       left: [theme => -theme.layout.sidebar.width, null, 'auto'],
@@ -190,9 +194,12 @@ export default {
       '&.active': {
         left: 'auto',
         visibility: 'visible'
-      }
+      },
+      position: 'fixed',
+      top: '4em'
     },
     main: {
+      mt: '4em',
       width: [
         '100%',
         null,
@@ -213,8 +220,8 @@ export default {
     },
     toc: {
       visibility: ['hidden', null, 'visible'],
-      right: '2em',
-      top: '5em',
+      right: '0em',
+      top: '6em',
       float: 'right',
       position: 'fixed',
       width: 300,
