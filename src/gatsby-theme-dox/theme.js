@@ -142,6 +142,13 @@ export default {
       border: '1px solid',
       borderColor: alpha('text', 0.25),
       p: '0.25em 0.5em'
+    },
+    blockquote: {
+      pl: '.6rem',
+      borderLeft: '.3rem solid rgba(0,0,0,.26)',
+      color: 'rgba(0,0,0,.54)',
+      margin: '1em 0',
+      boxSizing: 'inherit'
     }
   },
   layout: {
