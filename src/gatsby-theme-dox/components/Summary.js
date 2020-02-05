@@ -2,6 +2,7 @@
 import { Link as GatsbyLink } from 'gatsby'
 import { jsx } from 'theme-ui'
 import NoteIcon from '@material-ui/icons/Edit';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function({ className = '', children, ...props }){
     if(className.match('note')){
@@ -16,7 +17,7 @@ export default function({ className = '', children, ...props }){
                     outline: 'none',
                     cursor: 'pointer',
                     p: {
-                        display: 'inline',
+                        display: 'inline-block',
                         margin: 0
                     },
                     '::-webkit-details-marker': {
@@ -31,6 +32,14 @@ export default function({ className = '', children, ...props }){
                     }}
                 />
                 {children}
+                <ExpandMoreIcon 
+                    className='expand-more-icon'
+                    sx={{
+                        verticalAlign: '-4px',
+                        ml: '1rem',
+                        float: 'right'
+                    }}
+                />
             </summary>
         )
     }

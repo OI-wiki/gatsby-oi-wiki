@@ -10,7 +10,14 @@ const detailsStyle = {
     borderLeft: '.3rem solid #448aff',
     borderRadius: '.1rem',
     overflow: 'auto',
-    fontSize: '80%'
+    fontSize: '80%',
+    '&[open]':{
+        summary: {
+            '.expand-more-icon':{
+                transform: 'rotate(180deg)'
+            }
+        }
+    }
 }
 
 export default function({ className = '', children, ...props }){

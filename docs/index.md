@@ -1,6 +1,8 @@
+---
 disqus:
 pagetime:
 title: OI Wiki
+---
 
 # 欢迎来到 **OI Wiki** ！ [![GitHub watchers](https://img.shields.io/github/watchers/OI-wiki/OI-wiki.svg?style=social&label=Watch)](https://github.com/OI-wiki/OI-wiki)  [![GitHub stars](https://img.shields.io/github/stars/OI-wiki/OI-wiki.svg?style=social&label=Stars)](https://github.com/OI-wiki/OI-wiki) 
 
