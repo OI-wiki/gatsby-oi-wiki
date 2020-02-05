@@ -6,8 +6,8 @@ import { jsx } from 'theme-ui'
 const linkStyles = { variant: 'styles.a' }
 
 function linkFix(url){
-    if(url.match('.md')!=null)url='../'+url.replace('.md','/');
-    if(url.match('#')!=null)return url;
+    if(/\.md/.test(url))url='../'+url.replace(/\.md/,'/');
+    if(/\#/.test(url))return url;
     if(url.split('/').slice(-1)=='')return url;
     return url+'/';
 }
@@ -15,15 +15,11 @@ function linkFix(url){
 function Link({ to = '', href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
 
-  return 1 ? (
+  return (
     <a {...props} href={linkFix(href)} sx={linkStyles}>
       {children}
     </a>
-  ) : (
-    <GatsbyLink {...props} to={href} activeClassName="active" sx={linkStyles}>
-      {children}
-    </GatsbyLink>
-  )
+  ) 
 }
 
 export default Link
