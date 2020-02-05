@@ -97,7 +97,9 @@ export default {
       variant: 'textStyles.heading',
       fontSize: [0, 1]
     },
-    p: {},
+    p: {
+      fontSize: [1, 2]
+    },
     a: {
       color: 'primary',
       textDecoration: 'none',
