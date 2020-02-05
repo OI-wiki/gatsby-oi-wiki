@@ -32,7 +32,7 @@ function Item(props) {
 export default function(props) {
   // console.log(pathList)
   return (
-    <div
+    <Sider
       breakpoint="lg"
       collapsedWidth="300"
       onBreakpoint={broken => {
@@ -42,6 +42,7 @@ export default function(props) {
         console.log(collapsed, type);
       }}
       theme="light"
+      width="300"
       {...props}
     >
       <Link to="/blog"></Link>
@@ -51,6 +52,6 @@ export default function(props) {
           <Item item={item} />
         ))}
       </Menu>
-    </div>
+    </Sider>
   );
 }
