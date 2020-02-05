@@ -24,32 +24,35 @@ function myLayout({
 }) {
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Global />
+      {/* <Global /> */}
       <Header>
         <Navbar />
       </Header>
       <Layout>
-        <Layout>
-          <SideBar />
+          <SideBar width={200} style={{ background: '#fff' }} />
+          <Layout style={{ padding: '0 24px 24px' }}>
 
-          <Content>
+          <Content style={{
+            background: '#fff',
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+          }}>
             <Breadcrumb>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            <div>
               <Card title={title}>{children}</Card>
-            </div>
           </Content>
+          </Layout>
 
           <AuthorsArray authors={authors} />
 
           <Tags tags={tags} />
 
           <Toc toc={toc} />
+          </Layout>
           <Footer style={{ textAlign: "center" }}>{/* <myFooter /> */}</Footer>
-        </Layout>
-      </Layout>
     </Layout>
   );
 }

@@ -15,7 +15,7 @@ function Item(props) {
   // console.log(value);
   // if (value.length)
   if (typeof(value) === "string") {
-    return (<Menu.Item key={key}>
+    return (<Menu.Item key={key} {...other}>
       <span>
         <Link to={value}>{key}</Link>
       </span>
@@ -24,12 +24,12 @@ function Item(props) {
   // array
   return (<SubMenu key={key} title={<span>{key}</span>} {...other}>
     {value.map(item => (
-      <Item item={item} />
+      <Item item={item} {...other}/>
     ))}
   </SubMenu>)
 }
 
-export default function() {
+export default function(props) {
   // console.log(pathList)
   return (
     <Sider
@@ -42,10 +42,12 @@ export default function() {
         console.log(collapsed, type);
       }}
       theme="light"
+      width={200} style={{ background: '#fff' }}
+      {...props}
     >
       <Link to="/blog"></Link>
       <div className="logo" />
-      <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
+      <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
         {pathList.map(item => (
           <Item item={item} />
         ))}
