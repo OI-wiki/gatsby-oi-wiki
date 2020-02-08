@@ -3,7 +3,7 @@ import React from 'react'
 import Doc from '../components/doc'
 
 export default ({ data, location }) => {
-  console.log(data)
+  // console.log(data)
   return <Doc data={data} location={location} />
 }
 

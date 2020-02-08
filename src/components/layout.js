@@ -25,7 +25,7 @@ function myLayout({
   tags,
   toc
 }) {
-  console.log('location',location);
+  // console.log('location',location);
   return (
       <Layout style={{ minHeight: "100vh",background: '#fff' }}>
         {/* <Global /> */}

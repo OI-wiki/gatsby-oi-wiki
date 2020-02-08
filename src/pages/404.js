@@ -5,8 +5,8 @@ import { Helmet } from "react-helmet"
 import React from 'react'
 import Layout from '../components/layout'
 
-const page = () => (
-  <Layout>
+const page = (location) => (
+  <Layout location={location}>
   <div>
     <Helmet title={`404 Page`} />
     <div>
