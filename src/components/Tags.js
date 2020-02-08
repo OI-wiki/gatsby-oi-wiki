@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { graphql, useStaticQuery } from "gatsby";
 import { jsx } from "theme-ui";
+import { Card } from "antd";
 
 function Header({ num }) {
     if (num <= 0) return <span>本页面没有标签</span>
@@ -10,12 +11,16 @@ function Header({ num }) {
 function Tags({ tags }) {
   const arr=tags
   return (
-    <div className={`tags-list`}>
+    <Card size="small" className={`tags-list`} style={{
+      background: '#fff',
+      padding: 2,
+      marginTop: 12,
+    }}>
       <Header num={arr?arr.length:0}></Header>
       {arr?arr.map(tag => (
         <span className={`tag-item`}> {tag} </span>
       )):""}
-    </div>
+    </Card>
   );
 }
 
