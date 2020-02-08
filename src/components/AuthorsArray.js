@@ -17,7 +17,7 @@ function AuthorsArray({ authors }) {
       {/* {arr.length > 1?(<span>贡献者们：</span>):(<span>贡献者：</span>)} */}
       <Header num={arr?arr.length:0}></Header>
       {arr?arr.map(author => (
-        <span className={`author-name`}> {author} </span>
+        <span className={`author-name`} key={author}> {author} </span>
       )):""}
     </div>
   );

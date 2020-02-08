@@ -15,20 +15,24 @@ function Item(props) {
   // console.log(value);
   // if (value.length)
   if (typeof(value) === "string") {
-    return (<Menu.Item key={key} {...other}>
+    var ret=(<Menu.Item key={key} {...other}>
         <Link to={value}>
             <span>
                 {key}
             </span>
         </Link>
     </Menu.Item>)
+      console.log('ret',ret);
+      return ret
   }
   // array
-  return (<SubMenu key={key} title={<span>{key}</span>} {...other}>
+  var ret=(<SubMenu key={key} title={<span>{key}</span>} {...other}>
     {value.map(item => (
       <Item item={item} {...other}/>
     ))}
   </SubMenu>)
+  console.log('ret-submenu',ret);
+    return ret;
 }
 
 export default function(props) {
@@ -49,7 +53,7 @@ export default function(props) {
     >
       <Link to="/blog"></Link>
       <div className="logo" />
-      <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
+      <Menu theme="light" defaultSelectedKeys={["item_3"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
         {pathList.map(item => (
           <Item item={item} />
         ))}
