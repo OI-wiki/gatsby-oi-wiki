@@ -10,7 +10,7 @@ export default function({ className = '', children, ...props }){
             <summary className={className} {...props}
                 sx={{
                     margin: '0 -0.6rem',
-                    padding: '.7rem .6rem .7rem 1rem',
+                    padding: '.5rem .6rem .5rem 1rem',
                     borderBottom: '.05rem solid rgba(68,138,255,.1)',
                     backgroundColor: 'rgba(68,138,255,.1)',
                     fontWeight: 700,
@@ -18,7 +18,11 @@ export default function({ className = '', children, ...props }){
                     cursor: 'pointer',
                     p: {
                         display: 'inline-block',
-                        margin: 0
+                        margin: 0,
+                        fontSize: '14px'
+                    },
+                    svg: {
+                        fontSize: '20px'
                     },
                     '::-webkit-details-marker': {
                         display: 'none'

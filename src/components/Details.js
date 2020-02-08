@@ -7,10 +7,10 @@ const detailsStyle = {
     position: 'relative',
     margin: '1.5625em 0',
     padding: '0 .6rem',
-    borderLeft: '.3rem solid #448aff',
+    borderLeft: '.25rem solid #448aff',
     borderRadius: '.1rem',
     overflow: 'auto',
-    fontSize: '80%',
+    fontSize: '14px',
     '&[open]':{
         summary: {
             '.expand-more-icon':{
