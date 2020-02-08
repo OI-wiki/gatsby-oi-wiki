@@ -75,27 +75,39 @@ export default {
     },
     h1: {
       variant: 'textStyles.heading',
-      fontSize: [5, 6]
+      fontSize: [5, 6],
+      pt: '3rem',
+      mt: '-3rem'
     },
     h2: {
       variant: 'textStyles.heading',
-      fontSize: [4, 5]
+      fontSize: [4, 5],
+      pt: '3rem',
+      mt: '-1.5rem'
     },
     h3: {
       variant: 'textStyles.heading',
-      fontSize: [3, 4]
+      fontSize: [3, 4],
+      pt: '3rem',
+      mt: '-2rem'
     },
     h4: {
       variant: 'textStyles.heading',
-      fontSize: [2, 3]
+      fontSize: [2, 3],
+      pt: '3rem',
+      mt: '-2.5rem'
     },
     h5: {
       variant: 'textStyles.heading',
-      fontSize: [1, 2]
+      fontSize: [1, 2],
+      pt: '3rem',
+      mt: '-2.75rem'
     },
     h6: {
       variant: 'textStyles.heading',
-      fontSize: [0, 1]
+      fontSize: [0, 1],
+      pt: '3rem',
+      mt: '-3rem'
     },
     p: {
       fontSize: [1, 2]
@@ -181,9 +193,8 @@ export default {
     },
     sidebar: {
       float: 'left',
-      width: 300,
-      maxwidth: 300,
-      height: '92%',
+      width: '19%',
+      height: '94%',
       background: '#fff',
       overflow: 'auto',
       overflowX: 'hidden',
@@ -198,14 +209,14 @@ export default {
         visibility: 'visible'
       },
       position: 'fixed',
-      top: '4em'
+      top: '3rem'
     },
     main: {
       mt: '4em',
       width: [
         '100%',
         null,
-        theme => `calc(100% - ${theme.layout.sidebar.width}px - ${theme.layout.toc.width}px)`
+        theme => `calc(100% - ${theme.layout.sidebar.width} - ${theme.layout.toc.width})`
       ],
       ml: [null, null, theme => theme.layout.sidebar.width],
       float: [null, null, 'left'],
@@ -226,7 +237,7 @@ export default {
       top: '6em',
       float: 'right',
       position: 'fixed',
-      width: 300,
+      width: '20%',
       a: {
         color: 'toc',
         textDecoration: 'none',
