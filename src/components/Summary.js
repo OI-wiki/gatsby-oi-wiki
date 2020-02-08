@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import { Link as GatsbyLink } from 'gatsby'
 import { jsx } from 'theme-ui'
-import NoteIcon from '@material-ui/icons/Edit';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {FaPen, FaArrowDown} from 'react-icons/fa'
 
 export default function({ className = '', children, ...props }){
     if(className.match('note')){
@@ -29,14 +28,14 @@ export default function({ className = '', children, ...props }){
                     }
                 }}
             >
-                <NoteIcon 
+                <FaPen 
                     sx={{
                         verticalAlign: '-4px',
                         mr: '0.6rem'
                     }}
                 />
                 {children}
-                <ExpandMoreIcon 
+                <FaArrowDown 
                     className='expand-more-icon'
                     sx={{
                         verticalAlign: '-4px',
