@@ -8,7 +8,7 @@ import prism from '@theme-ui/prism/presets/theme-ui'
 import { alpha } from '@theme-ui/color'
 
 export default {
-  breakpoints: ['640px', '960px'],
+  breakpoints: ['768px', '992px', '1200px'],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   initialColorMode: 'light',
   useColorSchemeMediaQuery: true,
@@ -202,7 +202,7 @@ export default {
       mr: '-100%',
       position: 'absolute',
       left: [theme => -theme.layout.sidebar.width, null, 'auto'],
-      visibility: ['hidden', null, 'visible'],
+      visibility: ['hidden', null, null, 'visible'],
       transition: 'left 0.1s',
       outline: 0,
       '&.active': {
@@ -218,10 +218,11 @@ export default {
       width: [
         '100%',
         null,
+        null,
         theme => `calc(100% - ${theme.layout.sidebar.width} - ${theme.layout.toc.width})`
       ],
-      ml: [null, null, theme => theme.layout.sidebar.width],
-      float: [null, null, 'left'],
+      ml: [null, null, null, theme => theme.layout.sidebar.width],
+      float: [null, null, null, 'left'],
       transition: 'margin-left 0.1s',
       '&.pushed': {
         ml: theme => theme.layout.sidebar.width
@@ -234,7 +235,7 @@ export default {
       px: 3
     },
     toc: {
-      visibility: ['hidden', null, 'visible'],
+      visibility: ['hidden', null, null, 'visible'],
       right: '0em',
       top: '6em',
       float: 'right',
@@ -261,8 +262,8 @@ export default {
       }
     },
     footer: {
-      width: ['100%',null,theme => `calc(100% - ${theme.layout.sidebar.width})`],
-      ml: [null, null, theme => theme.layout.sidebar.width]
+      width: ['100%',null, null, theme => `calc(100% - ${theme.layout.sidebar.width})`],
+      ml: [null, null, null, theme => theme.layout.sidebar.width]
     }
   }
 }

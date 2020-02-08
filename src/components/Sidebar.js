@@ -35,7 +35,7 @@ export default function(props) {
   // console.log(pathList)
   return (
     <Sider
-      breakpoint="lg"
+      breakpoint="xl"
       collapsedWidth="0"
       onBreakpoint={broken => {
         console.log(broken);
