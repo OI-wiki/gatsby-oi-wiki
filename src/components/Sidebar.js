@@ -62,6 +62,7 @@ export default function(props) {
       var k=openkey(item,props.pathname);
       if(k != null)okey=k;
   });
+  if(okey==null)okey=[];
   return (
     <Sider
       breakpoint="xl"

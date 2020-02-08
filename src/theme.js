@@ -210,7 +210,12 @@ export default {
         visibility: 'visible'
       },
       position: 'fixed',
-      top: '3rem'
+      top: '3rem',
+      a: {
+        ':hover':{
+          textDecoration: 'none'
+        }
+      }
     },
     main: {
       background: '#fff',
