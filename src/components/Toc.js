@@ -30,7 +30,7 @@ function getIDs(node) {
 }
 
 export default function({ toc, ...props }){
-    if (toc && toc.items) toc = toc.items[0].items[0];
+    //if (toc && toc.items) toc = toc.items[0];
     // console.log(toc, toc.items, 'items')
     let tocIDs = []
     toc.items.forEach(node => {
