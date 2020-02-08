@@ -7,7 +7,7 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import Sider from 'antd/lib/layout/Sider';
 
 function Item(props) {
-  // console.log(props);
+  console.log(props);
   // const {items, ...other} = props;
   // console.log(items, other);
   const items = props
@@ -35,8 +35,33 @@ function Item(props) {
     return ret;
 }
 
+function openkey(props,pathname){
+  const items = props
+  const arr = Object.entries(items)[0];
+  const key = arr[0], value = arr[1];
+    if(typeof(value) === "string"){
+        if(value === pathname) return [key];
+        return null;
+    }
+    var ret=null;
+    value.forEach( item => {
+        var k=openkey(item,pathname);
+        if(k != null)ret=k;
+    })
+    if(ret!=null)ret.push(key);
+    return ret;
+}
+
 export default function(props) {
   // console.log(pathList)
+    pathList.map(item => (
+          Item(item)
+        ))
+  var okey=null;
+  pathList.forEach( item => {
+      var k=openkey(item,props.pathname);
+      if(k != null)okey=k;
+  });
   return (
     <Sider
       breakpoint="xl"
@@ -53,7 +78,7 @@ export default function(props) {
     >
       <Link to="/"></Link>
       <div className="logo" />
-      <Menu theme="light" defaultSelectedKeys={["1"]} defaultOpenKeys={["数学", "多项式", "Theme Guide"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
+      <Menu theme="light" defaultSelectedKeys={[okey[0]]} defaultOpenKeys={okey} mode="inline" style={{ height: '100%', borderRight: 0 }}>
         {pathList.map(item => (
           Item(item)
         ))}

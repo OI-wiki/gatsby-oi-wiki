@@ -25,6 +25,7 @@ function myLayout({
   tags,
   toc
 }) {
+  console.log('location',location);
   return (
       <Layout style={{ minHeight: "100vh",background: '#fff' }}>
         {/* <Global /> */}
@@ -44,6 +45,7 @@ function myLayout({
             <SideBar 
               style={{ background: '#fff' }} 
               sx={theme.layout.sidebar}
+              pathname={location.pathname}
             />
   
             <Layout 
