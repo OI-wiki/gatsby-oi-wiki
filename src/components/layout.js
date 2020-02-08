@@ -28,15 +28,17 @@ function myLayout({
       <Layout style={{ minHeight: "100vh" }}>
         {/* <Global /> */}
         <Header 
-            sx={{
-                position: 'fixed',
-                zIndex: '20',
-                width: '100%'
-            }}
+          sx={{
+              position: 'fixed',
+              zIndex: '20',
+              width: '100%',
+              height: 48,
+              lineHeight: '48px'
+          }}
         >
           <Navbar />
         </Header>
-        <Layout>
+        <Layout style={{ background: '#fff' }} >
 
             <SideBar 
               style={{ background: '#fff' }} 
@@ -57,7 +59,7 @@ function myLayout({
                   <Breadcrumb.Item>User</Breadcrumb.Item>
                   <Breadcrumb.Item>Bill</Breadcrumb.Item>
                 </Breadcrumb>
-                  <Card title={title}>{children}</Card>
+                <Card>{children}</Card>
               </Content>
               <AuthorsArray authors={authors} />
               <Tags tags={tags} />

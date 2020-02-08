@@ -16,9 +16,11 @@ function Item(props) {
   // if (value.length)
   if (typeof(value) === "string") {
     return (<Menu.Item key={key} {...other}>
-      <span>
-        <Link to={value}>{key}</Link>
-      </span>
+        <Link to={value}>
+            <span>
+                {key}
+            </span>
+        </Link>
     </Menu.Item>)
   }
   // array
@@ -34,7 +36,7 @@ export default function(props) {
   return (
     <Sider
       breakpoint="lg"
-      collapsedWidth="300"
+      collapsedWidth="0"
       onBreakpoint={broken => {
         console.log(broken);
       }}
@@ -42,7 +44,7 @@ export default function(props) {
         console.log(collapsed, type);
       }}
       theme="light"
-      width="300"
+      width="19%"
       {...props}
     >
       <Link to="/blog"></Link>
