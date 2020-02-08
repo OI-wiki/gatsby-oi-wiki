@@ -7,31 +7,31 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import Sider from 'antd/lib/layout/Sider';
 
 function Item(props) {
-  // console.log(item);
-  const {item, ...other} = props;
-  const arr = Object.entries(item)[0];
+  // console.log(props);
+  // const {items, ...other} = props;
+  // console.log(items, other);
+  const items = props
+  const arr = Object.entries(items)[0];
   // console.log(arr);
   const key = arr[0], value = arr[1];
   // console.log(value);
   // if (value.length)
   if (typeof(value) === "string") {
-    var ret=(<Menu.Item key={key} {...other}>
+    return (<Menu.Item key={key}>
         <Link to={value}>
             <span>
                 {key}
             </span>
         </Link>
     </Menu.Item>)
-      console.log('ret',ret);
       return ret
   }
   // array
-  var ret=(<SubMenu key={key} title={<span>{key}</span>} {...other}>
+  return (<SubMenu key={key} title={<span>{key}</span>}>
     {value.map(item => (
-      <Item item={item} {...other}/>
+      Item(item)
     ))}
   </SubMenu>)
-  console.log('ret-submenu',ret);
     return ret;
 }
 
@@ -51,11 +51,11 @@ export default function(props) {
       width="19%"
       {...props}
     >
-      <Link to="/blog"></Link>
+      <Link to="/"></Link>
       <div className="logo" />
-      <Menu theme="light" defaultSelectedKeys={["item_3"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
+      <Menu theme="light" defaultSelectedKeys={["1"]} defaultOpenKeys={["数学", "多项式", "Theme Guide"]} mode="inline" style={{ height: '100%', borderRight: 0 }}>
         {pathList.map(item => (
-          <Item item={item} />
+          Item(item)
         ))}
       </Menu>
     </Sider>
