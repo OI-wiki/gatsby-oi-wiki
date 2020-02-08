@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import Scrollspy from 'react-scrollspy'
+// import Scrollspy from 'react-scrollspy'
 
 function TocItem({ tocNode }) {
     // console.log(tocNode, 'toc')
@@ -43,9 +43,9 @@ export default function({ toc, ...props }){
         <div className='toc' {...props} >
             {
                 toc && toc.items ? (
-                <Scrollspy items={tocIDs} currentClassName="is-current">
+                <ul items={tocIDs} currentClassName="is-current">
                     {toc.items.map( subNode => (<TocItem tocNode={subNode} />))}
-                </Scrollspy>
+                </ul>
             ) : ''}
         </div>
     )
