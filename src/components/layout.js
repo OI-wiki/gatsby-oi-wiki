@@ -3,7 +3,8 @@ import { Global } from "@emotion/core";
 import { jsx } from "theme-ui";
 import theme from '../theme'
 //Components
-import myFooter from "./Footer";
+import { MDXProvider } from '@mdx-js/react'
+import FooterMDX from '../footer.mdx'
 import Navbar from "./Navbar";
 import AuthorsArray from "./AuthorsArray";
 import Tags from "./Tags";
@@ -25,18 +26,20 @@ function myLayout({
   toc
 }) {
   return (
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: "100vh",background: '#fff' }}>
         {/* <Global /> */}
         <Header 
-            sx={{
-                position: 'fixed',
-                zIndex: '20',
-                width: '100%'
-            }}
+          sx={{
+              position: 'fixed',
+              zIndex: '20',
+              width: '100%',
+              height: 48,
+              lineHeight: '48px'
+          }}
         >
           <Navbar />
         </Header>
-        <Layout>
+        <Layout style={{ background: '#fff' }} >
 
             <SideBar 
               style={{ background: '#fff' }} 
@@ -66,8 +69,10 @@ function myLayout({
             <Toc toc={toc} sx={theme.layout.toc} />
 
         </Layout>
-        <Footer style={{ textAlign: "center" }}>
-            {/* <myFooter /> */}
+        <Footer style={{ textAlign: "center" }} sx={theme.layout.footer}>
+          <MDXProvider>
+            <FooterMDX />
+          </MDXProvider>
         </Footer>
       </Layout>
   );
