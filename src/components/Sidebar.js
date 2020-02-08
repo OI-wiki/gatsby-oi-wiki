@@ -7,7 +7,7 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import Sider from 'antd/lib/layout/Sider';
 
 function Item(props) {
-  console.log(props);
+  // console.log(props);
   // const {items, ...other} = props;
   // console.log(items, other);
   const items = props
