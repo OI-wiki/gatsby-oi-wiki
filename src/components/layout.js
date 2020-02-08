@@ -57,7 +57,7 @@ function myLayout({
                   <Breadcrumb.Item>User</Breadcrumb.Item>
                   <Breadcrumb.Item>Bill</Breadcrumb.Item>
                 </Breadcrumb>
-                  <Card title={title}>{children}</Card>
+                  <Card>{children}</Card>
               </Content>
               <AuthorsArray authors={authors} />
               <Tags tags={tags} />
