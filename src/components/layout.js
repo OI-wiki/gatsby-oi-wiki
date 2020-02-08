@@ -10,7 +10,7 @@ import AuthorsArray from "./AuthorsArray";
 import Tags from "./Tags";
 import Toc from "./Toc";
 import Link from "./Link";
-import { Button, Layout, Menu, Breadcrumb, Icon, Card } from "antd";
+import { Layout, Card, BackTop } from "antd";
 import SideBar from "./Sidebar";
 import "antd/dist/antd.css";
 
@@ -56,14 +56,11 @@ function myLayout({
                 margin: 0,
                 minHeight: 280,
               }}>
-                <Breadcrumb>
-                  <Breadcrumb.Item>User</Breadcrumb.Item>
-                  <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                </Breadcrumb>
                   <Card>{children}</Card>
-              </Content>
               <AuthorsArray authors={authors} />
               <Tags tags={tags} />
+              <BackTop />
+              </Content>
             </Layout>
   
             <Toc toc={toc} sx={theme.layout.toc} />
