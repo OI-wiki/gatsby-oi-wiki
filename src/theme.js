@@ -20,6 +20,7 @@ export default {
     accent: '#FF9F1C',
     muted: '#FAFAFA',
     toc: '#484848',
+    hover: '#1890FF',
     modes: {
       dark: {
         text: '#FDFFFC',
@@ -254,6 +255,9 @@ export default {
       ul: {
         listStyleType: 'none',
         paddingLeft: '1em'
+      },
+      ".is-current a": {
+        color: 'primary'
       }
     },
     footer: {
