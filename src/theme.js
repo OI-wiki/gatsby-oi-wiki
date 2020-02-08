@@ -212,6 +212,7 @@ export default {
       top: '3rem'
     },
     main: {
+      background: '#fff',
       mt: '4em',
       width: [
         '100%',
@@ -254,6 +255,10 @@ export default {
         listStyleType: 'none',
         paddingLeft: '1em'
       }
+    },
+    footer: {
+      width: ['100%',null,theme => `calc(100% - ${theme.layout.sidebar.width})`],
+      ml: [null, null, theme => theme.layout.sidebar.width]
     }
   }
 }
