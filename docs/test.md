@@ -9,6 +9,15 @@ $$
 \sqrt{2}
 $$
 
+inline Code `inlineCode`
+
+```c++
+#include <cstdio>
+int main() {
+    return 0;
+}
+```
+
 !!! warning
     我们平常写的除法是向 0 取整，而这里的右移是向下取整（注意这里的区别），即当数大于等于 0 时两种方法等价，当数小于 0 时会有区别，如： $-1 \div 2 = 0$ , 而 $-1 >> 1 = -1$
  `num * 10 = (num<<1) + (num<<3)` 
