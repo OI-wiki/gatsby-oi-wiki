@@ -1,10 +1,6 @@
 items:
-  - title: 简介
-    link: /
-  - title: Theme Guide
-    link: /theme-guide
-  - title: 数学
-    link: /math
+  - title: 页面列表
+    link: /pages
   - title: Tags
     link: /tags
   - title: GitHub

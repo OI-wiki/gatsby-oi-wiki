@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { Link as GatsbyLink } from 'gatsby'
 import { jsx } from 'theme-ui'
-import {FaPen, FaArrowDown} from 'react-icons/fa'
+import {MdEdit, MdExpandMore} from 'react-icons/md'
 
 export default function({ className = '', children, ...props }){
     if(className.match('note')){
@@ -28,14 +28,14 @@ export default function({ className = '', children, ...props }){
                     }
                 }}
             >
-                <FaPen 
+                <MdEdit 
                     sx={{
                         verticalAlign: '-4px',
                         mr: '0.6rem'
                     }}
                 />
                 {children}
-                <FaArrowDown 
+                <MdExpandMore 
                     className='expand-more-icon'
                     sx={{
                         verticalAlign: '-4px',
