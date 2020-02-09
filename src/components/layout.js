@@ -35,7 +35,8 @@ function myLayout({
               zIndex: '20',
               width: '100%',
               height: 48,
-              lineHeight: '48px'
+              lineHeight: '48px',
+              background: '#fff'
           }}
         >
           <Navbar />

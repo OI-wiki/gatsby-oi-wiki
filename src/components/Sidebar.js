@@ -77,8 +77,6 @@ export default function(props) {
       width="19%"
       {...props}
     >
-      <Link to="/"></Link>
-      <div className="logo" />
       <Menu theme="light" defaultSelectedKeys={[okey[0]]} defaultOpenKeys={okey} mode="inline" style={{ height: '100%', borderRight: 0 }}>
         {pathList.map(item => (
           Item(item)
