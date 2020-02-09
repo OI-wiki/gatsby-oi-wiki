@@ -193,29 +193,27 @@ export default {
       overflowX: 'hidden'
     },
     sidebar: {
-      float: 'left',
       width: '19%',
       height: '94%',
       background: '#fff',
-      overflow: 'auto',
-      overflowX: 'hidden',
-      mr: '-100%',
-      position: 'absolute',
+      // mr: '-100%',
       left: [theme => -theme.layout.sidebar.width, null, 'auto'],
-      visibility: ['hidden', null, null, 'visible'],
+      visibility: [null, null, null, 'visible'],
       transition: 'left 0.1s',
       outline: 0,
       '&.active': {
         left: 'auto',
         visibility: 'visible'
       },
-      position: 'fixed',
       top: '3rem',
       a: {
         ':hover':{
           textDecoration: 'none'
         }
       }
+    },
+    www: {
+      'flex-direction': 'row'
     },
     main: {
       background: '#fff',
@@ -226,7 +224,7 @@ export default {
         null,
         theme => `calc(100% - ${theme.layout.sidebar.width} - ${theme.layout.toc.width})`
       ],
-      ml: [null, null, null, theme => theme.layout.sidebar.width],
+      // ml: [null, null, null, theme => theme.layout.sidebar.width],
       float: [null, null, null, 'left'],
       transition: 'margin-left 0.1s',
       '&.pushed': {
