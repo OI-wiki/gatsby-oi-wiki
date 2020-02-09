@@ -231,6 +231,7 @@ export default {
       "&.pushed": {
         ml: theme => theme.layout.sidebar.width,
       },
+      flex: "none",
     },
     container: {
       width: "100%",

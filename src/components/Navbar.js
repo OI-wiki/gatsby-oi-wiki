@@ -34,8 +34,8 @@ function Navbar() {
           >
             <MdSchool
               className="logo"
-              size={48}
-              sx={{ paddingTop: "0.5rem", paddingRight: "0.5rem" }}
+              size={30}
+              sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
             ></MdSchool>
           </Link>
           <span>OI Wiki</span>
