@@ -36,7 +36,8 @@ function myLayout({
               width: '100%',
               height: 48,
               lineHeight: '48px',
-              background: '#fff'
+              background: '#fff',
+              padding: '0px'
           }}
         >
           <Navbar />

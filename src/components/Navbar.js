@@ -5,35 +5,36 @@ import navbarData from '../navbar.yaml'
 import Link from './Link'
 import { MdSchool } from "react-icons/md";
 import Search from 'antd/lib/input/Search';
+import theme from '../theme'
 
 function Navbar() {
   return (
-    <nav aria-label="Navbar Menu">
+    <nav aria-label="Navbar Menu" sx={{
+      'box-shadow': '0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2)',
+      width: '100%',
+    }}>
       <div 
         sx={{
           color: 'black',
         }}
         className='nav-firstrow'
       >
-        <ul sx={{ listStyle: 'none', m: 0, ml: 'auto', p: 0}}>
+        <ul sx={theme.layout.navbar.navList}>
             <Link to="/"  sx={{
               float: 'left',
               fontSize: 'large', 
               color: 'black',
           }}>
-                <MdSchool className="logo" size={48} sx={{paddingTop: '0.5rem'}}>
+                <MdSchool className="logo" size={48} sx={{paddingTop: '0.5rem', paddingRight: '0.5rem'}}>
           </MdSchool>
           </Link>
             <span>OI Wiki</span>
             <div sx={{float: 'right'}}>
-
-            {/* <Search
-      placeholder="input search text"
-      enterButton="Search"
-      size="medium"
+            <Search
+      placeholder="键入进行搜索"
       onSearch={value => console.log(value)}
-      sx={{display: 'inline-block'}}
-    /> */}
+      style={{ width: 200 }}
+    />
           {navbarData.items.map(item => (
             <li key={item.link} sx={{ ml: 3, display: 'inline-block' }}>
               <Link 
@@ -49,14 +50,6 @@ function Navbar() {
           ))}
           </div>
         </ul>
-      </div>
-      <div sx={{
-          textAlign: 'right',
-          color: 'black'
-        }}
-        className="nav-secondrow"
-      >
-
       </div>
     </nav>
   )
