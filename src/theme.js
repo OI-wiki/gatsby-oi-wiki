@@ -267,6 +267,11 @@ export default {
     footer: {
       width: ['100%',null, null, theme => `calc(100% - ${theme.layout.sidebar.width})`],
       ml: [null, null, null, theme => theme.layout.sidebar.width]
+    },
+    navbar: {
+      navList: {
+        listStyle: 'none', m: 0, ml: 'auto', p: 0
+      }
     }
   }
 }
