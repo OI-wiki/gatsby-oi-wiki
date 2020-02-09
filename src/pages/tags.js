@@ -7,8 +7,8 @@ import kebabCase from "lodash/kebabCase"
 // Components
 // import { Helmet } from "react-helmet"
 import { graphql } from "gatsby"
-import Layout from '../components/layout'
-import Link from '../components/Link'
+import Layout from "../components/layout"
+import Link from "../components/Link"
 
 const TagsPage = ({
   data: {
@@ -17,24 +17,24 @@ const TagsPage = ({
       siteMetadata: { title },
     },
   },
-  location
+  location,
 }) => (
   <Layout location={location}>
-  <div>
-    {/* <Helmet title={title} /> */}
     <div>
-      <h1>Tags</h1>
-      <ul>
-        {group.map(tag => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {/* <Helmet title={title} /> */}
+      <div>
+        <h1>Tags</h1>
+        <ul>
+          {group.map(tag => (
+            <li key={tag.fieldValue}>
+              <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+                {tag.fieldValue} ({tag.totalCount})
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  </div>
   </Layout>
 )
 

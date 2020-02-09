@@ -1,19 +1,19 @@
 module.exports = {
   siteMetadata: {
-    title: 'OI Wiki',
-    description: 'Guide for OI',
-    author: 'OI Wiki Team',
+    title: "OI Wiki",
+    description: "Guide for OI",
+    author: "OI Wiki Team",
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: './docs/',
-        path: './docs/',
-      }
+        name: "./docs/",
+        path: "./docs/",
+      },
     },
     {
-      resolve: 'gatsby-plugin-mdx',
+      resolve: "gatsby-plugin-mdx",
       options: {
         gatsbyRemarkPlugins: [
           {
@@ -22,14 +22,14 @@ module.exports = {
               // By default, `.md` is specified
               // ignoreFileExtensions: ['.md']
               // These files will not be copied
-              ignoreFileExtensions: ['.md']
-            }
+              ignoreFileExtensions: [".md"],
+            },
           },
           {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               isIconAfterHeader: true,
-            }
+            },
           },
           //{
           //  resolve: `gatsby-remark-table-of-contents`,
@@ -43,12 +43,12 @@ module.exports = {
           //},
         ],
         remarkPlugins: [require("remark-math"), require("remark-details")],
-        rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
-        extensions: [".mdx", ".md"]
-      }
+        rehypePlugins: [require("rehype-mathjax"), require("rehype-details")],
+        extensions: [".mdx", ".md"],
+      },
     },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-react-helmet`,
-  ]
+  ],
 }

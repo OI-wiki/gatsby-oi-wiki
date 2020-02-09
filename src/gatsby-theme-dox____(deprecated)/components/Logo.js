@@ -1,10 +1,10 @@
-import React from 'react'
-import SchoolIcon from '@material-ui/icons/School';
+import React from "react"
+import SchoolIcon from "@material-ui/icons/School"
 
 function Logo(props) {
   return (
-    <div className='logo' {...props}>
-      <SchoolIcon fontSize="large" /> 
+    <div className="logo" {...props}>
+      <SchoolIcon fontSize="large" />
       <span className="logo-text">OI Wiki</span>
     </div>
   )

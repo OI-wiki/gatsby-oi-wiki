@@ -1,9 +1,15 @@
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-    displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"],
+    ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"],
+    ],
   },
   svg: {
-    fontCache: 'global'
-  }
-});
+    fontCache: "global",
+  },
+})

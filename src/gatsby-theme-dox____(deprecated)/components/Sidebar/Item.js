@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { useRef } from 'react'
-import { jsx } from 'theme-ui'
-import ItemTitle from './ItemTitle'
+import { useRef } from "react"
+import { jsx } from "theme-ui"
+import ItemTitle from "./ItemTitle"
 
 export const isItemActive = (activeItemParentLinks, item) => {
   if (activeItemParentLinks) {
@@ -21,14 +21,15 @@ function Item({
   openItems,
   activeItem,
   activeItemParentLinks,
-  toggleItem
+  toggleItem,
 }) {
   const isParentOfActiveItem = isItemActive(activeItemParentLinks, item)
-  const isActive = item.link === (location?location.pathname:"") || isParentOfActiveItem
+  const isActive =
+    item.link === (location ? location.pathname : "") || isParentOfActiveItem
 
   const isExpanded = openItems[item.link]
 
-  const id = useRef(item.link.replace(/\W+/g, '')).current
+  const id = useRef(item.link.replace(/\W+/g, "")).current
 
   return (
     <li>
@@ -44,7 +45,7 @@ function Item({
         <ul
           id={id}
           aria-expanded={isExpanded}
-          sx={{ display: isExpanded ? 'block' : 'none' }}
+          sx={{ display: isExpanded ? "block" : "none" }}
         >
           {item.items.map(subitem => (
             <Item
