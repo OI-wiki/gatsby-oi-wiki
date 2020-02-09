@@ -7,7 +7,8 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "yarn develop",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "format": "prettier --write \"**/*.{js,jsx,json}\"",
   },
   "dependencies": {
     "@emotion/core": "^10.0.27",
@@ -26,6 +27,7 @@
     "gatsby-remark-table-of-contents": "file:local_modules/gatsby-remark-table-of-contents",
     "gatsby-source-filesystem": "^2.1.48",
     "hast-util-to-text": "^1.0.1",
+    "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
