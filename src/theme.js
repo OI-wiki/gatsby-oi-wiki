@@ -193,9 +193,11 @@ export default {
       overflowX: "hidden",
     },
     sidebar: {
-      width: "19%",
+      width: "300px",
       height: "94%",
       background: "#fff",
+      position: "fixed",
+      zIndex: 19,
       // mr: '-100%',
       left: [theme => -theme.layout.sidebar.width, null, "auto"],
       visibility: [null, null, null, "visible"],
@@ -225,8 +227,8 @@ export default {
         theme =>
           `calc(100% - ${theme.layout.sidebar.width} - ${theme.layout.toc.width})`,
       ],
-      // ml: [null, null, null, theme => theme.layout.sidebar.width],
-      float: [null, null, null, "left"],
+      ml: [null, null, null, theme => theme.layout.sidebar.width],
+        //float: [null, null, null, "left"],
       transition: "margin-left 0.1s",
       "&.pushed": {
         ml: theme => theme.layout.sidebar.width,

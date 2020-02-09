@@ -74,7 +74,7 @@ export default function(props) {
         console.log(collapsed, type)
       }}
       theme="light"
-      width="19%"
+      width="300px"
       {...props}
     >
       <Menu
