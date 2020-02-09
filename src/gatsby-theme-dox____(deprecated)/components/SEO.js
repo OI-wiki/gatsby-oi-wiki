@@ -1,6 +1,6 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from "react"
+import { Helmet } from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang = `en`, meta = [], keywords = [], title }) {
   const { site } = useStaticQuery(
@@ -31,13 +31,13 @@ function SEO({ description, lang = `en`, meta = [], keywords = [], title }) {
         { property: `og:description`, content: metaDescription },
         { property: `og:type`, content: `article` },
         { name: `twitter:card`, content: `summary` },
-        { name: `twitter:creator`, content: `@${site.siteMetadata.author}` }
+        { name: `twitter:creator`, content: `@${site.siteMetadata.author}` },
       ].concat(
         [
           ...meta,
           keywords.length
             ? { name: `keywords`, content: keywords.join(`, `) }
-            : null
+            : null,
         ].filter(Boolean)
       )}
     />

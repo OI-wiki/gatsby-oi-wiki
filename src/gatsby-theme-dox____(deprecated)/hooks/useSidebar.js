@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 
 const isBrowser = typeof window !== `undefined`
 
@@ -16,7 +16,7 @@ function useSidebar() {
     top: false,
     bottom: false,
     topOffset: 0,
-    lastWindowPos: 0
+    lastWindowPos: 0,
   })
 
   const onResizeHandler = useCallback(() => {
@@ -42,7 +42,7 @@ function useSidebar() {
           store.current.top = false
           store.current.topOffset = sidebarOffsetTop > 0 ? sidebarOffsetTop : 0
           sidebar.current.setAttribute(
-            'style',
+            "style",
             `top: ${store.current.topOffset}px;`
           )
         } else if (
@@ -51,31 +51,31 @@ function useSidebar() {
           sidebarHeight < bodyHeight
         ) {
           store.current.bottom = true
-          sidebar.current.setAttribute('style', 'position: fixed; bottom: 0;')
+          sidebar.current.setAttribute("style", "position: fixed; bottom: 0;")
         }
       } else if (windowPos < lastWindowPos) {
         if (bottom) {
           store.current.bottom = false
           store.current.topOffset = sidebarOffsetTop > 0 ? sidebarOffsetTop : 0
           sidebar.current.setAttribute(
-            'style',
+            "style",
             `top: ${store.current.topOffset}px;`
           )
         } else if (!top && windowPos < sidebarOffsetTop) {
           store.current.top = true
-          sidebar.current.setAttribute('style', 'position: fixed;')
+          sidebar.current.setAttribute("style", "position: fixed;")
         }
       } else {
         store.current.top = store.current.bottom = false
         store.current.topOffset = sidebarOffsetTop ? sidebarOffsetTop : 0
         sidebar.current.setAttribute(
-          'style',
+          "style",
           `top: ${store.current.topOffset}px;`
         )
       }
     } else if (!top) {
       store.current.top = true
-      sidebar.current.setAttribute('style', 'position: fixed;')
+      sidebar.current.setAttribute("style", "position: fixed;")
     }
 
     store.current.lastWindowPos = windowPos
@@ -86,12 +86,12 @@ function useSidebar() {
       onResizeHandler()
       onScrollHandler()
 
-      window.addEventListener('resize', onResizeHandler)
-      window.addEventListener('scroll', onScrollHandler)
+      window.addEventListener("resize", onResizeHandler)
+      window.addEventListener("scroll", onScrollHandler)
 
       return () => {
-        window.removeEventListener('resize', onResizeHandler)
-        window.removeEventListener('scroll', onScrollHandler)
+        window.removeEventListener("resize", onResizeHandler)
+        window.removeEventListener("scroll", onScrollHandler)
       }
     }
   }, [onResizeHandler, onScrollHandler])

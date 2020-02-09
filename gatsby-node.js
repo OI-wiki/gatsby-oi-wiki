@@ -63,7 +63,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 //   })
 // }
 
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
@@ -112,10 +111,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.fields.slug,
       component: docTemplate,
       context: {
-          id: node.id,
-          previous,
-          next
-        }
+        id: node.id,
+        previous,
+        next,
+      },
     })
   })
 
@@ -133,12 +132,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   })
 
-
   if (result.errors) {
     reporter.panic(result.errors)
   }
-
-  
 
   // const docs = result.data.allMdx.nodes
 

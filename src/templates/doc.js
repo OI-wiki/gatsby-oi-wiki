@@ -1,6 +1,6 @@
-import { graphql } from 'gatsby'
-import React from 'react'
-import Doc from '../components/doc'
+import { graphql } from "gatsby"
+import React from "react"
+import Doc from "../components/doc"
 
 export default ({ data, location }) => {
   // console.log(data)
@@ -19,12 +19,11 @@ export const query = graphql`
       headings {
         value
       }
-          frontmatter {
-            author
-            tags
-          }
-          toc: tableOfContents
-       
+      frontmatter {
+        author
+        tags
+      }
+      toc: tableOfContents
     }
   }
 `

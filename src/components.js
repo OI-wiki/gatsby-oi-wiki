@@ -1,7 +1,7 @@
 // import Prism from '@theme-ui/prism'
-import Link from './components/Link'
-import Details from './components/Details'
-import Summary from './components/Summary'
+import Link from "./components/Link"
+import Details from "./components/Details"
+import Summary from "./components/Summary"
 
 export default {
   a: Link,

@@ -1,4 +1,4 @@
-import { Children } from 'react'
+import { Children } from "react"
 
 const simplifyChildren = (children, depth = 0) => {
   return Children.toArray(children).reduce((items, item) => {
@@ -6,19 +6,19 @@ const simplifyChildren = (children, depth = 0) => {
       return items
     }
 
-    if (item.props.mdxType === 'a') {
+    if (item.props.mdxType === "a") {
       return items.concat({
         link: item.props.href,
-        title: item.props.children
+        title: item.props.children,
       })
     }
 
-    if (depth > 0 && item.props.mdxType === 'ul') {
+    if (depth > 0 && item.props.mdxType === "ul") {
       const last = items[items.length - 1]
 
       items[items.length - 1] = {
         ...last,
-        items: simplifyChildren(item.props.children)
+        items: simplifyChildren(item.props.children),
       }
 
       return items
@@ -53,7 +53,7 @@ export const getItems = children => {
 
 const isItemActive = (item, location) => {
   // console.log(location)
-  const linkMatchesPathname = item.link === (location?location.pathname:"")
+  const linkMatchesPathname = item.link === (location ? location.pathname : "")
 
   if (linkMatchesPathname) {
     return item
