@@ -40,7 +40,7 @@ function myLayout({
         >
           <Navbar />
         </Header>
-        <Layout style={{ background: '#fff' }} >
+        <Layout style={{ background: '#fff'}} sx={theme.layout.www} >
 
             <SideBar 
               style={{ background: '#fff' }} 
