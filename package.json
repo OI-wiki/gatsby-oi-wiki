@@ -28,6 +28,7 @@
     "gatsby-remark-vscode": "^2.0.2",
     "gatsby-source-filesystem": "^2.1.48",
     "hast-util-to-text": "^1.0.1",
+    "mdast-util-toc": "^5.0.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
