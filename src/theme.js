@@ -225,7 +225,7 @@ export default {
         null,
         null,
         theme =>
-          `calc(100% - ${theme.layout.sidebar.width} - ${theme.layout.toc.width})`,
+          `calc(100% - ${theme.layout.sidebar.width}px - ${theme.layout.toc.width})`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
         //float: [null, null, null, "left"],
