@@ -82,7 +82,14 @@ export default function(props) {
         defaultSelectedKeys={[okey[0]]}
         defaultOpenKeys={okey}
         mode="inline"
-        style={{ height: "100%", borderRight: 0, overflowY:"auto" }}
+        sx={{
+            height: "100%", borderRight: 0,
+            overflowY:"hidden",
+            overflowX:"hidden",
+            ':hover': {
+                overflowY:"auto"
+            }
+        }}
       >
         {pathList.map(item => Item(item))}
       </Menu>
