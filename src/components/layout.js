@@ -61,7 +61,7 @@ function myLayout({
               minHeight: 280,
             }}
           >
-            <Card>{children}</Card>
+            <Card title={title} headStyle={{fontSize: '2.5rem'}} >{children}</Card>
             <AuthorsArray authors={authors} />
             <Tags tags={tags} />
             <BackTop />
