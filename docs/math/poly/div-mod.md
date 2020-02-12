@@ -1,4 +1,7 @@
-# 多项式除法 | 取模
+---
+title: 多项式除法 | 取模
+tags: ["math","polynomial"]
+---
 
 ## Description
 

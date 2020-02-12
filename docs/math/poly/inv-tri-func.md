@@ -1,4 +1,7 @@
-# 多项式反三角函数
+---
+title: 多项式反三角函数
+tags: ["math","polynomial"]
+---
 
 ## Description
 

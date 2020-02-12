@@ -1,4 +1,7 @@
-# 多项式开根
+---
+title: 多项式开根
+tags: ["math","polynomial"]
+---
 
 ## Description
 

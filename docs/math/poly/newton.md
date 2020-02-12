@@ -1,3 +1,8 @@
+---
+title: 多项式牛顿迭代
+tags: ["math","polynomial"]
+---
+
 ## Description
 
 给定多项式 $g\left(x\right)$ ，已知有 $f\left(x\right)$ 满足：

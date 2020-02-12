@@ -1,4 +1,7 @@
-# 多项式简介
+---
+title: 多项式简介
+tags: ["math","polynomial"]
+---
 
 ## 前置知识
 
