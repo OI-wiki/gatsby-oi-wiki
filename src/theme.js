@@ -273,7 +273,7 @@ export default {
         "100%",
         null,
         null,
-        theme => `calc(100% - ${theme.layout.sidebar.width})`,
+        theme => `calc(100% - ${theme.layout.sidebar.width}px)`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
     },
