@@ -1,8 +1,8 @@
 ---
+title: 快速沃尔什变换
 author: Xeonacid
 ---
 
-# 快速沃尔什变换
 
 （本文转载自 [桃酱的算法笔记](https://zhuanlan.zhihu.com/c_1005817911142838272) ，原文戳 [链接](https://zhuanlan.zhihu.com/p/41867199) ，已获得作者授权）
 

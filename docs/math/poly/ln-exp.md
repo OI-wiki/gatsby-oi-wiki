@@ -1,4 +1,7 @@
-# 多项式对数函数 | 指数函数
+---
+title: 多项式对数函数 | 指数函数
+tags: ["math","polynomial"]
+---
 
 ## Description
 
