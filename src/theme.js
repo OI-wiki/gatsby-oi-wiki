@@ -118,6 +118,7 @@ export default {
       textDecoration: "none",
       ":hover": {
         textDecoration: "underline",
+        
       },
       "&.active": {
         color: "text",
@@ -168,6 +169,9 @@ export default {
     img: {
       maxWidth: "100%",
     },
+  },
+  links:{
+    color : "#fff",
   },
   layout: {
     global: {
@@ -273,7 +277,7 @@ export default {
         "100%",
         null,
         null,
-        theme => `calc(100% - ${theme.layout.sidebar.width})`,
+        theme => `calc(100% - ${theme.layout.sidebar.width}px)`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
     },
@@ -284,6 +288,7 @@ export default {
         ml: "auto",
         p: 0,
       },
+      
     },
   },
 }

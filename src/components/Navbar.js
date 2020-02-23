@@ -1,20 +1,47 @@
 /** @jsx jsx */
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
+import navbarSubData from "../navbarSub.yaml"
 // import ColorModeButton from './ColorModeButton'
 import Link from "./Link"
 import { MdSchool } from "react-icons/md"
 import Search from "antd/lib/input/Search"
 import theme from "../theme"
+import classNames from 'classnames'
+import {Menu,Icon} from 'antd'
+// import algoliasearch from 'algoliasearch/lite';
+// import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+const {SubMenu} = Menu;
 
-function Navbar() {
+
+// const searchClient = algoliasearch(
+//   'latency',
+//   '6be0576ff61c053d5f9a3225e2a90f76'
+// );
+
+class Navbar extends React.Component {
+  state = {
+    current: 'mail',
+  };
+
+  handleClick = e => {
+    console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
+  };
+  render(){
   return (
+
     <nav
       aria-label="Navbar Menu"
       sx={{
         "box-shadow":
           "0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2)",
         width: "100%",
+        padding: "0 8%"
       }}
     >
       <div
@@ -25,7 +52,7 @@ function Navbar() {
       >
         <ul sx={theme.layout.navbar.navList}>
           <Link
-            to="/"
+             href='https://oi-wiki.org/'
             sx={{
               float: "left",
               fontSize: "large",
@@ -38,31 +65,77 @@ function Navbar() {
               sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
             ></MdSchool>
           </Link>
-          <span>OI Wiki</span>
-          <div sx={{ float: "right" }}>
+          <Link href='https://oi-wiki.org/'
+          sx={{
+            color: "text",
+            ":hover":{
+              color :"#1E90FF",
+              textDecoration: "none"
+            }
+          }}
+          >OI WiKi</Link>
+          <Menu sx={{ float: "right" }}  className="layui-nav" onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
             <Search
               placeholder="键入进行搜索"
               onSearch={value => console.log(value)}
-              style={{ width: 200 }}
+              style={{ width: 200
+                
+              }}
+              
             />
-            {navbarData.items.map(item => (
-              <li key={item.link} sx={{ ml: 3, display: "inline-block" }}>
-                <Link
+   
+      <SubMenu
+          title={
+            <span className="submenu-title-wrapper">
+              <Icon type="edit" />
+             学习文档
+             <Icon type="caret-down" />
+            </span>
+          }
+        >
+      {navbarSubData.items.map(item => (
+       <Menu.Item key={item.link}
+         
+       
+       >
+          <Link
                   to={item.link}
-                  sx={{
-                    variant: "linkStyles.nav",
-                    padding: "0rem 0.5rem",
-                  }}
+                 
+
                 >
                   {item.title}
                 </Link>
-              </li>
+
+       </Menu.Item>
+           
+
+        ))} 
+        </SubMenu>
+
+            {navbarData.items.map(item => (
+              <Menu.Item key={item.link} 
+               className={classNames({
+                  'link' : true,
+                 'layui-hide-xs' : true,  
+               })}
+             
+               
+              >
+                <Link
+                  to={item.link}
+                 
+
+                >
+                  {item.title}
+                </Link>
+              </Menu.Item>
             ))}
-          </div>
+          </Menu>
         </ul>
       </div>
     </nav>
   )
+  }
 }
 
 export default Navbar

@@ -10,7 +10,7 @@ import AuthorsArray from "./AuthorsArray"
 import Tags from "./Tags"
 import Toc from "./Toc"
 import Link from "./Link"
-import { Layout, Card, BackTop } from "antd"
+import { Layout, Card, BackTop ,Row,Col} from "antd"
 import SideBar from "./Sidebar"
 import "antd/dist/antd.css"
 
@@ -56,24 +56,146 @@ function myLayout({
           <Content
             style={{
               background: "#fff",
-              padding: 24,
+              
               margin: 0,
               minHeight: 280,
             }}
           >
-            <Card>{children}</Card>
+            <Card title={title} headStyle={{fontSize: '16px'}} 
+              sx={{
+                padding: "24px",
+                lineHeight: "2rem",
+                
+                color: "#304455"
+              }}
+              bordered={false}
+            >{children}</Card>
             <AuthorsArray authors={authors} />
             <Tags tags={tags} />
-            <BackTop />
+            <BackTop>
+      <div className="backTop"></div>
+    </BackTop>
           </Content>
         </Layout>
 
         <Toc toc={toc} sx={theme.layout.toc} />
       </Layout>
-      <Footer style={{ textAlign: "center" }} sx={theme.layout.footer}>
-        <MDXProvider>
-          <FooterMDX />
-        </MDXProvider>
+      <Footer sx={theme.layout.footer}
+        className="oiFooter"
+      >
+         <Row type="flex" justify="space-around">
+          <Col span={4}>
+             <h3 className="footer-h3"
+             >相关资源</h3>
+             <Link
+                className="footer-link"
+             >洛谷 <span
+              className="footer-link-decoration"
+             >新手推荐洛谷</span></Link>
+             <Link
+                className="footer-link"
+             >电子书<span
+             className="footer-link-decoration"
+            >OI 的推荐书籍（PDF,在线文档）</span></Link>
+              <Link
+                className="footer-link"
+             >UOL<span
+             className="footer-link-decoration"
+            >优秀的出题人</span></Link>
+              <Link
+                className="footer-link"
+             >LOJ<span
+             className="footer-link-decoration"
+            >题目很全</span></Link>
+          </Col>
+          <Col span={4}>
+             <h3 className="footer-h3"
+             >社区</h3>
+             <Link
+                className="footer-link"
+             >洛谷 <span
+              className="footer-link-decoration"
+             >新手推荐洛谷</span></Link>
+             <Link
+                className="footer-link"
+             >电子书<span
+             className="footer-link-decoration"
+            >OI 的推荐书籍（PDF,在线文档）</span></Link>
+              <Link
+                className="footer-link"
+             >UOL<span
+             className="footer-link-decoration"
+            >优秀的出题人</span></Link>
+              <Link
+                className="footer-link"
+             >LOJ<span
+             className="footer-link-decoration"
+            >题目很全</span></Link>
+          </Col>
+          <Col span={4}>
+             <h3 className="footer-h3"
+             >帮助</h3>
+             <Link
+                className="footer-link"
+             >洛谷 <span
+              className="footer-link-decoration"
+             >新手推荐洛谷</span></Link>
+             <Link
+                className="footer-link"
+             >电子书<span
+             className="footer-link-decoration"
+            >OI 的推荐书籍（PDF,在线文档）</span></Link>
+              <Link
+                className="footer-link"
+             >UOL<span
+             className="footer-link-decoration"
+            >优秀的出题人</span></Link>
+              <Link
+                className="footer-link"
+             >LOJ<span
+             className="footer-link-decoration"
+            >题目很全</span></Link>
+          </Col>
+          <Col span={4}>
+             <h3 className="footer-h3"
+             >加入/联系</h3>
+             <Link
+                className="footer-link"
+             >洛谷 <span
+              className="footer-link-decoration"
+             >新手推荐洛谷</span></Link>
+             <Link
+                className="footer-link"
+             >电子书<span
+             className="footer-link-decoration"
+            >OI 的推荐书籍（PDF,在线文档）</span></Link>
+              <Link
+                className="footer-link"
+             >UOL<span
+             className="footer-link-decoration"
+            >优秀的出题人</span></Link>
+              <Link
+                className="footer-link"
+             >LOJ<span
+             className="footer-link-decoration"
+            >题目很全</span></Link>
+          </Col>
+        </Row>
+        <Row
+        sx={{
+          display: "block",
+          marginTop: "50px"
+
+        }}  
+        >
+          <Col span={8}>
+            <div className="footer-logo"></div>
+          </Col>
+          <Col span={8}>
+            <div className="footer-right">Copyright © 2016 - 2020 OI Wiki Team</div>
+          </Col>
+        
+        </Row>
       </Footer>
     </Layout>
   )

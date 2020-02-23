@@ -19,21 +19,32 @@ function Item(props) {
   // if (value.length)
   if (typeof value === "string") {
     return (
-      <Menu.Item key={key}>
-        <Link to={value}>
-          <span>{key}</span>
+      <Menu.Item key={key}
+      >
+        <Link to={value}
+          sx={{
+            color: "#304455!important"
+          }}
+        >
+          {key}
         </Link>
       </Menu.Item>
     )
-    return ret
+    
   }
   // array
   return (
-    <SubMenu key={key} title={<span>{key}</span>}>
+    <SubMenu key={key} title={<h3
+      sx ={{
+        fontSize: "14px",
+        fontWeight: 600,
+        color: "#273849"
+      }}
+    >{key}</h3>}>
       {value.map(item => Item(item))}
     </SubMenu>
   )
-  return ret
+ 
 }
 
 function openkey(props, pathname) {
@@ -82,7 +93,15 @@ export default function(props) {
         defaultSelectedKeys={[okey[0]]}
         defaultOpenKeys={okey}
         mode="inline"
-        style={{ height: "100%", borderRight: 0, overflowY:"auto" }}
+        sx={{
+            height: "100%", borderRight: 0,
+            overflowY:"hidden",
+            overflowX:"hidden",
+            ':hover': {
+                overflowY:"auto"
+            },
+            marginTop: "30px",
+        }}
       >
         {pathList.map(item => Item(item))}
       </Menu>

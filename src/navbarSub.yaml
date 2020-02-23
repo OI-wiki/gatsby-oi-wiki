@@ -1,0 +1,25 @@
+items:
+  - title: 语言基础
+    link: /pages
+  - title: 算法基础
+    link: /tags
+  - title: 搜索
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 动态规划
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 字符串
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 数学
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 数据结构
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 图论
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 计算几何
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 杂项
+    link: https://github.com/OI-Wiki/OI-Wiki
+  - title: 专题
+    link: https://github.com/OI-Wiki/OI-Wiki
+
+
