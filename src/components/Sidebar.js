@@ -100,7 +100,7 @@ export default function(props) {
             ':hover': {
                 overflowY:"auto"
             },
-            marginTop: "30px",
+            //marginTop: "30px",
             '::-webkit-scrollbar': {
                 width: 6,
                 //backgroundColor: '#fff'
