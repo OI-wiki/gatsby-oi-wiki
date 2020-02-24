@@ -1,7 +1,7 @@
 import { graphql } from "gatsby"
 import React from "react"
 import Doc from "../components/doc"
-import '../other/css/layui.css'
+//import '../other/css/layui.css'
 import '../other/css/style.css'
 
 export default ({ data, location }) => {
