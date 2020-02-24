@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from "gatsby"
 import { jsx } from "theme-ui"
 import { MdEdit, MdExpandMore } from "react-icons/md"
 
-export default function({ className = "", children, ...props }) {
+export default function({ className = null, children, ...props }) {
   if (className.match("note")) {
     return (
       <summary
@@ -11,7 +11,7 @@ export default function({ className = "", children, ...props }) {
         {...props}
         sx={{
           margin: "0 -0.6rem",
-          padding: ".5rem .6rem .5rem 1rem",
+          padding: ".2rem .6rem .2rem 1rem",
           borderBottom: ".05rem solid rgba(68,138,255,.1)",
           backgroundColor: "rgba(68,138,255,.1)",
           fontWeight: 700,
@@ -33,6 +33,7 @@ export default function({ className = "", children, ...props }) {
         <MdEdit
           sx={{
             verticalAlign: "-4px",
+            marginTop: '7px',
             mr: "0.6rem",
           }}
         />
@@ -41,6 +42,7 @@ export default function({ className = "", children, ...props }) {
           className="expand-more-icon"
           sx={{
             verticalAlign: "-4px",
+            marginTop: '7px',
             ml: "1rem",
             float: "right",
           }}
