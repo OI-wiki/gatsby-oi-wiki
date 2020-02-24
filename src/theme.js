@@ -199,7 +199,7 @@ export default {
     },
     sidebar: {
       width: 300,
-      height: "94%",
+      height: "91%",
       background: "#fff",
       position: "fixed",
       zIndex: 19,
@@ -212,7 +212,7 @@ export default {
         left: "auto",
         visibility: "visible",
       },
-      top: "3rem",
+      top: "4rem",
       a: {
         ":hover": {
           textDecoration: "none",

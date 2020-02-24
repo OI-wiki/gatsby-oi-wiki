@@ -60,10 +60,19 @@ function myLayout({
               minHeight: 280,
             }}
           >
-            <Card title={title} headStyle={{ fontSize: '2.5rem' }} 
+            <Card
+              title={title} 
+              headStyle={{ fontSize: '2.5rem' }} 
+              bodyStyle={{ fontSize: '16px' }}
               sx={{
                 padding: "0 24px",
                 p: {
+                  lineHeight: "2rem",
+                },
+                ol: {
+                  lineHeight: "2rem",
+                },
+                ul: {
                   lineHeight: "2rem",
                 },
                 color: "#304455"
