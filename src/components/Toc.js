@@ -3,12 +3,12 @@ import { jsx } from "theme-ui"
 import { Anchor } from 'antd';
 const { Link } = Anchor;
 
-function TocItem({ tocNode,key,...props }) {
+function TocItem({ tocNode, kkey, ...props }) {
   return (
-    <Link href={tocNode.url?tocNode.url:null} title={tocNode.title?tocNode.title:null} key={key} >
+    <Link href={tocNode.url?tocNode.url:null} title={tocNode.title?tocNode.title:null} key={kkey} >
       {tocNode.items? 
           tocNode.items.map( (subNode,id) => (
-            <TocItem tocNode={subNode} key={`${key}-${id}`}/>
+            <TocItem tocNode={subNode} kkey={`${kkey}-${id}`}/>
           ))
       : (
         ""
@@ -39,7 +39,7 @@ export default function({ toc, key, ...props }) {
       {toc && toc.items ? (
         <Anchor offsetTop="18" >
           {toc.items.map( (subNode,id) => (
-            <TocItem tocNode={subNode} key={`${key}-${id}`} />
+            <TocItem tocNode={subNode} kkey={`${key}-${id}`} />
           ))}
         </Anchor>
       ) : (
