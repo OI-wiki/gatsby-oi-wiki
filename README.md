@@ -1,6 +1,6 @@
 # 为换框架所做出的尝试（
 
-Demo: https://oi-wiki-ng.netlify.com/
+Demo: https://ng.oi-wiki.org/
 
 TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
