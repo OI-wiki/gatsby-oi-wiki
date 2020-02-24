@@ -48,7 +48,7 @@ class Navbar extends React.Component {
       >
         <ul sx={theme.layout.navbar.navList}>
           <Link
-            href='https://oi-wiki.org/'
+            href='/'
             sx={{
               float: "left",
               fontSize: "large",
@@ -61,7 +61,7 @@ class Navbar extends React.Component {
               sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
             ></MdSchool>
           </Link>
-          <Link href='https://oi-wiki.org/'
+          <Link href='/'
             sx={{
               color: "text",
               ":hover":{
