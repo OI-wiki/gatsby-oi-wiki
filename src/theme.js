@@ -125,6 +125,7 @@ export default {
       },
     },
     pre: {
+      marginTop: '0.7rem',
       fontFamily: "monospace",
       overflowX: "auto",
       p: 3,
@@ -219,7 +220,7 @@ export default {
       },
     },
     www: {
-      "flex-direction": "row",
+      flexDirection: "row",
     },
     main: {
       background: "#fff",

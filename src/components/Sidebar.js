@@ -3,8 +3,9 @@ import Link from "./Link"
 import { jsx } from "theme-ui"
 import { Layout, Menu, Icon } from "antd"
 import pathList from "../sidebar.yaml"
-import SubMenu from "antd/lib/menu/SubMenu"
-import Sider from "antd/lib/layout/Sider"
+
+const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 function Item(props) {
   // console.log(props);
@@ -19,8 +20,7 @@ function Item(props) {
   // if (value.length)
   if (typeof value === "string") {
     return (
-      <Menu.Item key={key}
-      >
+      <Menu.Item key={key} >
         <Link to={value}
           sx={{
             color: "#304455!important"
@@ -101,6 +101,14 @@ export default function(props) {
                 overflowY:"auto"
             },
             marginTop: "30px",
+            '::-webkit-scrollbar': {
+                width: 6,
+                //backgroundColor: '#fff'
+            },
+            '::-webkit-scrollbar-thumb':{
+                backgroundColor: '#E3E3E3',
+                borderRadius: 20
+            }
         }}
       >
         {pathList.map(item => Item(item))}

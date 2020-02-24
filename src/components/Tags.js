@@ -23,7 +23,7 @@ function Tags({ tags }) {
       <Header num={arr ? arr.length : 0}></Header>
       {arr
         ? arr.map(tag => (
-            <a className={`tag-item`} href={"/tags/" + tag}>
+            <a className={`tag-item`} href={"/tags/" + tag} key={`tag-${tag}`} >
               {" "}
               {tag}{" "}
             </a>

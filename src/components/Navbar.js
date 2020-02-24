@@ -4,17 +4,15 @@ import ReactDOM from 'react-dom';
 import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
 import navbarSubData from "../navbarSub.yaml"
-// import ColorModeButton from './ColorModeButton'
 import Link from "./Link"
 import { MdSchool } from "react-icons/md"
-import Search from "antd/lib/input/Search"
 import theme from "../theme"
 import classNames from 'classnames'
-import {Menu,Icon} from 'antd'
+import { Menu,Icon,Input } from 'antd'
 // import algoliasearch from 'algoliasearch/lite';
 // import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-const {SubMenu} = Menu;
-
+const { SubMenu } = Menu;
+const { Search } = Input;
 
 // const searchClient = algoliasearch(
 //   'latency',
@@ -38,21 +36,19 @@ class Navbar extends React.Component {
     <nav
       aria-label="Navbar Menu"
       sx={{
-        "box-shadow":
+        boxShadow:
           "0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2)",
         width: "100%",
-        padding: "0 8%"
+        padding: "0 3%"
       }}
     >
       <div
-        sx={{
-          color: "black",
-        }}
+        sx={{ color: "black" }}
         className="nav-firstrow"
       >
         <ul sx={theme.layout.navbar.navList}>
           <Link
-             href='https://oi-wiki.org/'
+            href='https://oi-wiki.org/'
             sx={{
               float: "left",
               fontSize: "large",
@@ -66,66 +62,55 @@ class Navbar extends React.Component {
             ></MdSchool>
           </Link>
           <Link href='https://oi-wiki.org/'
-          sx={{
-            color: "text",
-            ":hover":{
-              color :"#1E90FF",
-              textDecoration: "none"
-            }
-          }}
+            sx={{
+              color: "text",
+              ":hover":{
+                color :"#1E90FF",
+                textDecoration: "none"
+              }
+            }}
           >OI WiKi</Link>
-          <Menu sx={{ float: "right" }}  className="layui-nav" onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-            <Search
-              placeholder="键入进行搜索"
-              onSearch={value => console.log(value)}
-              style={{ width: 200
-                
-              }}
-              
-            />
+          <Menu 
+            sx={{ float: "right" }} 
+            className="layui-nav" 
+            onClick={this.handleClick}
+            selectedKeys={[this.state.current]}
+            mode="horizontal"
+          >
+            <Menu.Item key="menu-search">
+              <Search
+                placeholder="键入进行搜索"
+                onSearch={value => console.log(value)}
+                style={{ width: 200 }}
+              />
+            </Menu.Item>
    
-      <SubMenu
-          title={
-            <span className="submenu-title-wrapper">
-              <Icon type="edit" />
-             学习文档
-             <Icon type="caret-down" />
-            </span>
-          }
-        >
-      {navbarSubData.items.map(item => (
-       <Menu.Item key={item.link}
-         
-       
-       >
-          <Link
-                  to={item.link}
-                 
-
-                >
-                  {item.title}
-                </Link>
-
-       </Menu.Item>
-           
-
-        ))} 
-        </SubMenu>
+            <SubMenu
+                title={
+                  <span className="submenu-title-wrapper">
+                    <Icon type="edit" />
+                    学习文档
+                    <Icon type="caret-down" />
+                  </span>
+                }
+            >
+              {navbarSubData.items.map(item => (
+                <Menu.Item key={item.link}>
+                   <Link to={item.link}>
+                     {item.title}
+                   </Link>
+                </Menu.Item>
+              ))} 
+            </SubMenu>
 
             {navbarData.items.map(item => (
               <Menu.Item key={item.link} 
                className={classNames({
-                  'link' : true,
+                 'link' : true,
                  'layui-hide-xs' : true,  
                })}
-             
-               
               >
-                <Link
-                  to={item.link}
-                 
-
-                >
+                <Link to={item.link} >
                   {item.title}
                 </Link>
               </Menu.Item>
