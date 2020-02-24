@@ -13,9 +13,6 @@ import {Menu,Icon} from 'antd'
 
 const {SubMenu} = Menu;
 
-
-
-
 class Navbar extends React.Component {
   state = {
     current: 'mail',
@@ -40,9 +37,7 @@ class Navbar extends React.Component {
       }}
     >
       <div
-        sx={{
-          color: "black",
-        }}
+        sx={{color: "black"}}
         className="nav-firstrow"
       >
         <ul sx={theme.layout.navbar.navList}>
@@ -58,7 +53,7 @@ class Navbar extends React.Component {
               className="logo"
               size={30}
               sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
-            ></MdSchool>
+            />
           </Link>
           <Link href='https://oi-wiki.org/'
           sx={{
@@ -76,33 +71,23 @@ class Navbar extends React.Component {
               style={{ width: 200 }}
             />
              
-      <SubMenu
-          title={
-            <span className="submenu-title-wrapper">
-              <Icon type="edit" />
-             学习文档
-             <Icon type="caret-down" />
-            </span>
-          }
-        >
-      {navbarSubData.items.map(item => (
-       <Menu.Item key={item.link}
-         
-       
-       >
-          <Link
-                  to={item.link}
-                 
-
-                >
-                  {item.title}
-                </Link>
-
-       </Menu.Item>
-           
-
-        ))} 
-        </SubMenu>
+            <SubMenu
+                title={
+                  <span className="submenu-title-wrapper">
+                    <Icon type="edit" />
+                   学习文档
+                   <Icon type="caret-down" />
+                  </span>
+                }
+              >
+              {navbarSubData.items.map(item => (
+                <Menu.Item key={item.link}>
+                   <Link to={item.link}>
+                     {item.title}
+                   </Link>
+                </Menu.Item>
+              ))} 
+            </SubMenu>
 
             {navbarData.items.map(item => (
               <Menu.Item key={item.link} 
@@ -110,14 +95,8 @@ class Navbar extends React.Component {
                   'link' : true,
                  'layui-hide-xs' : true,  
                })}
-             
-               
               >
-                <Link
-                  to={item.link}
-                 
-
-                >
+                <Link to={item.link} >
                   {item.title}
                 </Link>
               </Menu.Item>

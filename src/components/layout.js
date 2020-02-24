@@ -56,16 +56,16 @@ function myLayout({
           <Content
             style={{
               background: "#fff",
-              
               margin: 0,
               minHeight: 280,
             }}
           >
-            <Card title={title} headStyle={{fontSize: '16px'}} 
+            <Card title={title} headStyle={{ fontSize: '2.5rem' }} 
               sx={{
-                padding: "24px",
-                lineHeight: "2rem",
-                
+                padding: "0 24px",
+                p: {
+                  lineHeight: "2rem",
+                },
                 color: "#304455"
               }}
               bordered={false}
@@ -73,12 +73,13 @@ function myLayout({
             <AuthorsArray authors={authors} />
             <Tags tags={tags} />
             <BackTop>
-      <div className="backTop"></div>
-    </BackTop>
+              <div className="backTop"></div>
+            </BackTop>
           </Content>
         </Layout>
 
-        <Toc toc={toc} sx={theme.layout.toc} />
+        <Toc toc={toc} sx={theme.layout.toc} key={location.key} />
+
       </Layout>
       <Footer sx={theme.layout.footer}
         className="oiFooter"
