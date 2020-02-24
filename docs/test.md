@@ -1,19 +1,46 @@
 ---
-title: "测试页wwww"
+title: "测试页"
 tags: ["animals", "Chicago", "zoos", "中文"]
 ---
 
-$a_i$
+## H2
+
+content
+
+### H3
+
+content
+
+#### H4
+
+content
+
+##### H5
+
+content
+
+###### H6
+
+**bold** *italic* `inlineCode`
+
+inline math: $a^2+b^2=c^2$
+
+math block:
 
 $$
-\sqrt{2}
+x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}
 $$
-
-inline Code `inlineCode`
 
 ```c++
+//Code block
 #include <cstdio>
+
+void func(){ }
 int main() {
+    int a,b;
+    func();
+    cin>>a>>b;
+    cout<<a+b;
     return 0;
 }
 ```
@@ -33,17 +60,8 @@ int main() {
     ```c++
     #include <cstdio>
     ```
- **分析** 
-
-???+warning "关于函数式线段树"
-    **函数式线段树** 是指使用函数式编程思想的线段树。在函数式编程思想中，将计算机运算视为数学函数，并避免可改变的状态或变量。不难发现，函数式线段树是[完全可持久化](/ds/persistent/#_2)的。
-
-
 !!! warning "注"
     注意区分 **基数排序** 与 **桶排序** 
-
-!!! 举个例子  
-几个家族进行宴会，但是家族普遍长寿，所以人数众多。由于长时间的分离以及年龄的增长，这些人逐渐忘掉了自己的亲人，只记得自己的爸爸是谁了，而最长者（称为「祖先」）的父亲已经去世，他只知道自己是祖先。为了确定自己是哪个家族，他们想出了一个办法，只要问自己的爸爸是不是祖先，一层一层的向上问，直到问到祖先。如果要判断两人是否在同一家族，只要看两人的祖先是不是同一人就可以了。
 
 !!! note " 例题[luogu P4322\[JSOI2016\]最佳团体](https://www.luogu.org/problemnew/show/P4322)"
     题目大意：有一棵 $n+1$ 个结点的树，根为 $0$ 号结点。每个结点 $i$ 有一个价值 $p_i$ 和费用 $s_i$ 。你需要选择 $k$ 个结点 $a_1,a_2,\ldots,a_k$ （不包括 $0$ 号结点），使得
@@ -51,17 +69,22 @@ int main() {
     $$
     \frac{\sum_{i=1}^k p_{a_i}}{\sum_{i=1}^k s_{a_i}}
     $$
-
+    
     最大。你需要保证对于你选择的一个树上结点，它的父亲一定被选中。求出这个最大的比值。
 
 !!! warning `random_shuffle` 已于 C++14 标准中被弃用，于 C++17 标准中被移除。
 
-??? note " 例题[Luogu P2949\[USACO09OPEN\]工作调度 Work Scheduling](https://www.luogu.org/problemnew/show/P2949)"
+> Blockquote
+> 
+> Blockquote
 
-最大。你需要保证对于你选择的一个树上结点，它的父亲一定被选中。求出这个最大的比值。
+1. item 1
+2. item 2
+3. item 3
+4. item 4
 
-??? note " 例题[Luogu P2949\[USACO09OPEN\]工作调度 Work Scheduling](https://www.luogu.org/problemnew/show/P2949)"
 
-
-最大。你需要保证对于你选择的一个树上结点，它的父亲一定被选中。求出这个最大的比值。
-
+- A
+- B
+- C
+- D
