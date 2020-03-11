@@ -2,6 +2,7 @@
 import { graphql, useStaticQuery } from "gatsby"
 import { jsx } from "theme-ui"
 import { Card } from "antd"
+import { ChipSet, Chip } from '@material/react-chips'
 
 function Header({ num }) {
   if (num <= 0) return <span>本页面未记录贡献者</span>
@@ -24,14 +25,14 @@ function AuthorsArray({ authors }) {
     >
       {/* {arr.length > 1?(<span>贡献者们：</span>):(<span>贡献者：</span>)} */}
       <Header num={arr ? arr.length : 0}></Header>
-      {arr
-        ? arr.map(author => (
-            <span className={`author-name`} key={author}>
-              {" "}
-              {author}{" "}
-            </span>
+      <ChipSet>
+        {arr
+          ? arr.map(author => (
+            <Chip label={` ${author} `} key={author}>
+            </Chip>
           ))
-        : ""}
+          : ""}
+      </ChipSet>
     </Card>
   )
 }
