@@ -1,7 +1,7 @@
 import React from "react"
 
 function Img({ src, alt, ...props }) {
-  console.log(src)
+  // console.log(src)
   return (
     <img
       {...props}

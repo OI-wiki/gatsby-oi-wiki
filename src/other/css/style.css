@@ -9,7 +9,7 @@
 .link a:hover{
 
     text-decoration: none!important;
-}   
+}
 footer{
 	color: #fff;
 }
@@ -30,7 +30,7 @@ footer{
 	text-align:center;
 	color:#FFF;
 	text-decoration:none;
-	
+
 }
 .footer-right{
 	margin-top: 20px;
@@ -59,4 +59,10 @@ footer{
 	background-image:  url("../images/footer-left.png");
 	height: 60px;
 	width: 200px;
+}
+
+@media (max-width: 820px) {
+  .hide-nav-on-xs {
+    display:none;
+  }
 }
