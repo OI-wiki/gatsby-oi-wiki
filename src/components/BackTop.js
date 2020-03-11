@@ -22,7 +22,6 @@ class Navbar extends React.Component {
   };
 
   handleClick = e => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });
@@ -75,7 +74,7 @@ class Navbar extends React.Component {
               onSearch={value => console.log(value)}
               style={{ width: 200 }}
             />
-             
+
       <SubMenu
           title={
             <span className="submenu-title-wrapper">
@@ -87,35 +86,35 @@ class Navbar extends React.Component {
         >
       {navbarSubData.items.map(item => (
        <Menu.Item key={item.link}
-         
-       
+
+
        >
           <Link
                   to={item.link}
-                 
+
 
                 >
                   {item.title}
                 </Link>
 
        </Menu.Item>
-           
 
-        ))} 
+
+        ))}
         </SubMenu>
 
             {navbarData.items.map(item => (
-              <Menu.Item key={item.link} 
+              <Menu.Item key={item.link}
                className={classNames({
                   'link' : true,
-                 'layui-hide-xs' : true,  
+                 'layui-hide-xs' : true,
                })}
-             
-               
+
+
               >
                 <Link
                   to={item.link}
-                 
+
 
                 >
                   {item.title}

@@ -72,10 +72,10 @@ export default function(props) {
       breakpoint="xl"
       collapsedWidth="0"
       onBreakpoint={broken => {
-        console.log(broken)
+        // console.log(broken)
       }}
       onCollapse={(collapsed, type) => {
-        console.log(collapsed, type)
+        // console.log(collapsed, type)
       }}
       theme="light"
       width="300px"
