@@ -8,7 +8,8 @@ import Link from "./Link"
 import { MdSchool } from "react-icons/md"
 import theme from "../theme"
 import classNames from 'classnames'
-import { Menu, Icon, Input } from 'antd'
+import { Menu, Input } from 'antd'
+import { EditFilled, CaretDownFilled } from '@ant-design/icons'
 // import algoliasearch from 'algoliasearch/lite';
 // import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
 const { SubMenu } = Menu;
@@ -88,9 +89,9 @@ class Navbar extends React.Component {
               <SubMenu
                 title={
                   <span className="submenu-title-wrapper">
-                    <Icon type="edit" />
+                    <EditFilled />
                     学习文档
-                    <Icon type="caret-down" />
+                    <CaretDownFilled />
                   </span>
                 }
               >
