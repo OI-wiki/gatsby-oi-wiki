@@ -6,9 +6,9 @@ const { Link } = Anchor;
 function TocItem({ tocNode, kkey, ...props }) {
   return (
     <Link href={tocNode.url?tocNode.url:null} title={tocNode.title?tocNode.title:null} key={kkey} >
-      {tocNode.items? 
+      {tocNode.items?
           tocNode.items.map( (subNode,id) => (
-            <TocItem tocNode={subNode} kkey={`${kkey}-${id}`}/>
+            <TocItem tocNode={subNode} kkey={`${kkey}-${id}`} key={`${kkey}-${id}`}/>
           ))
       : (
         ""
@@ -39,7 +39,7 @@ export default function({ toc, key, ...props }) {
       {toc && toc.items ? (
         <Anchor offsetTop="18" >
           {toc.items.map( (subNode,id) => (
-            <TocItem tocNode={subNode} kkey={`${key}-${id}`} />
+            <TocItem tocNode={subNode} kkey={`${key}-${id}`} key={`${key}-${id}`} />
           ))}
         </Anchor>
       ) : (

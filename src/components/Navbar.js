@@ -70,9 +70,9 @@ class Navbar extends React.Component {
               }
             }}
           >OI WiKi</Link>
-          <Menu 
-            sx={{ float: "right" }} 
-            className="layui-nav" 
+          <Menu
+            sx={{ float: "right" }}
+            className="layui-nav"
             onClick={this.handleClick}
             selectedKeys={[this.state.current]}
             mode="horizontal"
@@ -80,11 +80,11 @@ class Navbar extends React.Component {
             <Menu.Item key="menu-search">
               <Search
                 placeholder="键入进行搜索"
-                onSearch={value => console.log(value)}
+                onSearch={value => /*console.log(value)*/ value}
                 style={{ width: 200 }}
               />
             </Menu.Item>
-   
+
             <SubMenu
                 title={
                   <span className="submenu-title-wrapper">
@@ -100,14 +100,14 @@ class Navbar extends React.Component {
                      {item.title}
                    </Link>
                 </Menu.Item>
-              ))} 
+              ))}
             </SubMenu>
 
             {navbarData.items.map(item => (
-              <Menu.Item key={item.link} 
+              <Menu.Item key={item.link}
                className={classNames({
                  'link' : true,
-                 'layui-hide-xs' : true,  
+                 'layui-hide-xs' : true,
                })}
               >
                 <Link to={item.link} >
