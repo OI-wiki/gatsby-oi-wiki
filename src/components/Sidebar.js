@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from "./Link"
 import { jsx } from "theme-ui"
-import { Layout, Menu, Icon } from "antd"
+import { Layout, Menu } from "antd"
 import pathList from "../sidebar.yaml"
 
 const { SubMenu } = Menu;

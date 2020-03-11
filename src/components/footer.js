@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import Link from "./Link"
 import { jsx } from "theme-ui"
-import { Layout, Menu, Icon } from "antd"
+import { Menu } from "antd"
 import pathList from "../footer.yaml"
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 
 function Item(props) {
   const items = props
