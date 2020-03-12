@@ -3,7 +3,7 @@ import Link from "./Link"
 import { jsx } from "theme-ui"
 import { Menu } from "antd"
 import pathList from "../footer.yaml"
-import { Row } from 'antd';
+import { Row } from "antd"
 
 function Item(props) {
   const items = props
@@ -12,11 +12,11 @@ function Item(props) {
     value = arr[1]
   if (typeof value === "string") {
     return (
-      <Menu.Item key={key}
-      >
-        <Link to={value}
+      <Menu.Item key={key}>
+        <Link
+          to={value}
           sx={{
-            color: "#304455!important"
+            color: "#304455!important",
           }}
         >
           {key}
@@ -27,13 +27,20 @@ function Item(props) {
   }
   // array
   return (
-    <SubMenu key={key} title={<h3
-      sx ={{
-        fontSize: "14px",
-        fontWeight: 600,
-        color: "#273849"
-      }}
-    >{key}</h3>}>
+    <SubMenu
+      key={key}
+      title={
+        <h3
+          sx={{
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#273849",
+          }}
+        >
+          {key}
+        </h3>
+      }
+    >
       {value.map(item => Item(item))}
     </SubMenu>
   )
@@ -81,8 +88,7 @@ export default function(props) {
       width="300px"
       {...props}
     >
-      <Row type="flex" justify="space-around"
-      >
+      <Row type="flex" justify="space-around">
         {pathList.map(item => Item(item))}
       </Row>
     </Sider>

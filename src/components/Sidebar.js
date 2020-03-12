@@ -4,8 +4,8 @@ import { jsx } from "theme-ui"
 import { Layout, Menu } from "antd"
 import pathList from "../sidebar.yaml"
 
-const { SubMenu } = Menu;
-const { Sider } = Layout;
+const { SubMenu } = Menu
+const { Sider } = Layout
 
 function Item(props) {
   // console.log(props);
@@ -20,31 +20,37 @@ function Item(props) {
   // if (value.length)
   if (typeof value === "string") {
     return (
-      <Menu.Item key={key} >
-        <Link to={value}
+      <Menu.Item key={key}>
+        <Link
+          to={value}
           sx={{
-            color: "#304455!important"
+            color: "#304455!important",
           }}
         >
           {key}
         </Link>
       </Menu.Item>
     )
-
   }
   // array
   return (
-    <SubMenu key={key} title={<h3
-      sx ={{
-        fontSize: "14px",
-        fontWeight: 600,
-        color: "#273849"
-      }}
-    >{key}</h3>}>
+    <SubMenu
+      key={key}
+      title={
+        <h3
+          sx={{
+            fontSize: "14px",
+            fontWeight: 600,
+            color: "#273849",
+          }}
+        >
+          {key}
+        </h3>
+      }
+    >
       {value.map(item => Item(item))}
     </SubMenu>
   )
-
 }
 
 function openkey(props, pathname) {
@@ -94,21 +100,22 @@ export default function(props) {
         defaultOpenKeys={okey}
         mode="inline"
         sx={{
-            height: "100%", borderRight: 0,
-            overflowY:"hidden",
-            overflowX:"hidden",
-            ':hover': {
-                overflowY:"auto"
-            },
-            //marginTop: "30px",
-            '::-webkit-scrollbar': {
-                width: 6,
-                //backgroundColor: '#fff'
-            },
-            '::-webkit-scrollbar-thumb':{
-                backgroundColor: '#E3E3E3',
-                borderRadius: 20
-            }
+          height: "100%",
+          borderRight: 0,
+          overflowY: "hidden",
+          overflowX: "hidden",
+          ":hover": {
+            overflowY: "auto",
+          },
+          //marginTop: "30px",
+          "::-webkit-scrollbar": {
+            width: 6,
+            //backgroundColor: '#fff'
+          },
+          "::-webkit-scrollbar-thumb": {
+            backgroundColor: "#E3E3E3",
+            borderRadius: 20,
+          },
         }}
       >
         {pathList.map(item => Item(item))}

@@ -1,19 +1,19 @@
 /** @jsx jsx */
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react"
+import ReactDOM from "react-dom"
 import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
 import navbarSubData from "../navbarSub.yaml"
 import Link from "./Link"
 import { MdSchool } from "react-icons/md"
 import theme from "../theme"
-import classNames from 'classnames'
-import { Menu, Input } from 'antd'
-import { EditFilled, CaretDownFilled } from '@ant-design/icons'
+import classNames from "classnames"
+import { Menu, Input } from "antd"
+import { EditFilled, CaretDownFilled } from "@ant-design/icons"
 // import algoliasearch from 'algoliasearch/lite';
 // import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
-const { SubMenu } = Menu;
-const { Search } = Input;
+const { SubMenu } = Menu
+const { Search } = Input
 
 // const searchClient = algoliasearch(
 //   'latency',
@@ -22,34 +22,30 @@ const { Search } = Input;
 
 class Navbar extends React.Component {
   state = {
-    current: 'mail',
-  };
+    current: "mail",
+  }
 
   handleClick = e => {
-    console.log('click ', e);
+    console.log("click ", e)
     this.setState({
       current: e.key,
-    });
-  };
+    })
+  }
   render() {
     return (
-
       <nav
         aria-label="Navbar Menu"
         sx={{
           boxShadow:
             "0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2)",
           width: "100%",
-          padding: "0 3%"
+          padding: "0 3%",
         }}
       >
-        <div
-          sx={{ color: "black" }}
-          className="nav-firstrow"
-        >
+        <div sx={{ color: "black" }} className="nav-firstrow">
           <ul sx={theme.layout.navbar.navList}>
             <Link
-              href='/'
+              href="/"
               sx={{
                 float: "left",
                 fontSize: "large",
@@ -62,21 +58,24 @@ class Navbar extends React.Component {
                 sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
               ></MdSchool>
             </Link>
-            <Link href='/'
+            <Link
+              href="/"
               sx={{
                 color: "black",
                 ":hover": {
                   color: "#1E90FF",
-                  textDecoration: "none"
-                }
+                  textDecoration: "none",
+                },
               }}
-            >OI Wiki</Link>
+            >
+              OI Wiki
+            </Link>
             <Menu
               sx={{ float: "right" }}
               onClick={this.handleClick}
               selectedKeys={[this.state.current]}
               mode="horizontal"
-              className={'hide-nav-on-xs'}
+              className={"hide-nav-on-xs"}
             >
               <Menu.Item key="menu-search">
                 <Search
@@ -97,22 +96,19 @@ class Navbar extends React.Component {
               >
                 {navbarSubData.items.map(item => (
                   <Menu.Item key={item.link}>
-                    <Link to={item.link}>
-                      {item.title}
-                    </Link>
+                    <Link to={item.link}>{item.title}</Link>
                   </Menu.Item>
                 ))}
               </SubMenu>
 
               {navbarData.items.map(item => (
-                <Menu.Item key={item.link}
+                <Menu.Item
+                  key={item.link}
                   className={classNames({
-                    'link': true,
+                    link: true,
                   })}
                 >
-                  <Link to={item.link} >
-                    {item.title}
-                  </Link>
+                  <Link to={item.link}>{item.title}</Link>
                 </Menu.Item>
               ))}
             </Menu>

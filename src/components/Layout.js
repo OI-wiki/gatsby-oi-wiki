@@ -49,9 +49,7 @@ function myLayout({
           pathname={location.pathname}
         />
 
-        <Layout
-          sx={theme.layout.main}
-        >
+        <Layout sx={theme.layout.main}>
           <Content
             style={{
               background: "#fff",
@@ -61,8 +59,8 @@ function myLayout({
           >
             <Card
               title={title}
-              headStyle={{ fontSize: '2.5rem' }}
-              bodyStyle={{ fontSize: '16px' }}
+              headStyle={{ fontSize: "2.5rem" }}
+              bodyStyle={{ fontSize: "16px" }}
               sx={{
                 padding: "0 24px",
                 p: {
@@ -74,10 +72,12 @@ function myLayout({
                 ul: {
                   lineHeight: "2rem",
                 },
-                color: "#304455"
+                color: "#304455",
               }}
               bordered={false}
-            >{children}</Card>
+            >
+              {children}
+            </Card>
             <Card>
               <AuthorsArray authors={authors} />
               <Tags tags={tags} />
@@ -89,25 +89,22 @@ function myLayout({
         </Layout>
 
         <Toc toc={toc} sx={theme.layout.toc} key={location.key} />
-
       </Layout>
-      <Footer sx={theme.layout.footer}
-        className="oiFooter"
-      >
+      <Footer sx={theme.layout.footer} className="oiFooter">
         <Row
           sx={{
             display: "block",
-            marginTop: "50px"
-
+            marginTop: "50px",
           }}
         >
           <Col span={8}>
             <div className="footer-logo"></div>
           </Col>
           <Col span={8}>
-            <div className="footer-right">Copyright © 2016 - 2020 OI Wiki Team</div>
+            <div className="footer-right">
+              Copyright © 2016 - 2020 OI Wiki Team
+            </div>
           </Col>
-
         </Row>
       </Footer>
     </Layout>
