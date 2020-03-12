@@ -5,7 +5,7 @@ import { Select } from "antd"
 
 const { Option } = Select
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import Tags from "../components/Tags"
 import Link from "../components/Link"
 

@@ -1,6 +1,6 @@
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import React from "react"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 function mdx({ data: { mdx }, location }) {
   const headingTitle = mdx.headings[0] && mdx.headings[0].value
