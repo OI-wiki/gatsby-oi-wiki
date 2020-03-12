@@ -64,13 +64,13 @@ class Navbar extends React.Component {
             </Link>
             <Link href='/'
               sx={{
-                color: "text",
+                color: "black",
                 ":hover": {
                   color: "#1E90FF",
                   textDecoration: "none"
                 }
               }}
-            >OI WiKi</Link>
+            >OI Wiki</Link>
             <Menu
               sx={{ float: "right" }}
               onClick={this.handleClick}
