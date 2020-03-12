@@ -12,7 +12,6 @@ function Header({ num }) {
 function AuthorsArray({ authors }) {
   const arr =
     authors == null ? null : authors == undefined ? null : authors.split(",")
-  // console.log(arr);
   return (
     <div>
       <Header num={arr ? arr.length : 0}></Header>
