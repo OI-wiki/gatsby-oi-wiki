@@ -14,15 +14,7 @@ function Header({ num }) {
 function Tags({ tags }) {
   const arr = tags
   return (
-    <Card
-      size="small"
-      className={`tags-list`}
-      style={{
-        background: "#fff",
-        padding: 2,
-        marginTop: 12,
-      }}
-    >
+    <div>
       <Header num={arr ? arr.length : 0}></Header>
       <ChipSet>
         {arr
@@ -34,7 +26,7 @@ function Tags({ tags }) {
           ))
           : ""}
       </ChipSet>
-    </Card>
+    </div>
   )
 }
 

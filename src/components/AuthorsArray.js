@@ -14,16 +14,7 @@ function AuthorsArray({ authors }) {
     authors == null ? null : authors == undefined ? null : authors.split(",")
   // console.log(arr);
   return (
-    <Card
-      size="small"
-      className={`authors-list`}
-      style={{
-        background: "#fff",
-        padding: 2,
-        marginTop: 12,
-      }}
-    >
-      {/* {arr.length > 1?(<span>贡献者们：</span>):(<span>贡献者：</span>)} */}
+    <div>
       <Header num={arr ? arr.length : 0}></Header>
       <ChipSet>
         {arr
@@ -33,7 +24,7 @@ function AuthorsArray({ authors }) {
           ))
           : ""}
       </ChipSet>
-    </Card>
+    </div>
   )
 }
 

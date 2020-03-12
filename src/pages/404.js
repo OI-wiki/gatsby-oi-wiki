@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 // Components
 import { Helmet } from "react-helmet"
 import React from "react"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 const page = location => (
   <Layout location={location}>
