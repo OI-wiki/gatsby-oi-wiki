@@ -1,75 +1,75 @@
 import React from "react"
 import { graphql } from "gatsby"
-
-import { Select } from "antd"
-
-const { Option } = Select
-
 import Layout from "../components/Layout"
 import Tags from "../components/Tags"
 import Link from "../components/Link"
+import { Card, Row, Col, Select } from "antd"
+const { Option } = Select
 
-const BlogIndex = ({ data }, location) => {
-  const { edges: posts, group } = data.allMdx
-  const children = []
-  group.forEach(tag => {
-    children.push(<Option key={tag.fieldValue}>{tag.fieldValue}</Option>)
-  })
-
-  function handleChange(value) {
-    const allPages = document.getElementsByClassName("page-listitem")
-    if (value.length > 0) {
-      // console.log(`selected ${value}`);
-      // console.log((value))
-      for (let x of allPages) {
-        // console.log(x)
-        x.style.display = "none"
-      }
-      const newTags = document.getElementsByClassName(value.join(" "))
-      for (let x of newTags) {
-        // console.log(x)
-        x.style.display = "unset"
-      }
-      // console.log(document.getElementsByClassName(value.join(' ')))
-    } else {
-      for (let x of allPages) {
-        // console.log(x)
-        x.style.display = "unset"
-      }
+class BlogIndex extends React.Component {
+  data;
+  location;
+  children = [];
+  posts;
+  group;
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedKeys: []
     }
+    this.data = props.data
+    this.location = props.location
+    const { edges: posts, group } = this.data.allMdx
+    this.posts = posts;
+    this.group = group;
+    this.group.forEach(tag => {
+      this.children.push(<Option key={tag.fieldValue}>{tag.fieldValue}</Option>)
+    })
   }
-  return (
-    <Layout location={location}>
+  handleChange(value) {
+    this.setState({
+      selectedKeys: value
+    })
+  }
+  render() {
+    return (<Layout location={this.location}>
       <h1>按标签筛选页面：</h1>
       <Select
         mode="multiple"
         style={{ width: "100%" }}
         placeholder="请选择，留空展示所有页面"
         defaultValue={[]}
-        onChange={handleChange}
+        onChange={this.handleChange.bind(this)}
       >
-        {children}
+        {this.children}
       </Select>
-      <ul>
-        {posts.map(({ node: post }) => (
-          <li
-            key={post.id}
-            className={
-              (post.frontmatter.tags
-                ? post.frontmatter.tags.join(" ")
-                : "no-tags") + " page-listitem"
-            }
-            style={{ display: "unset" }}
-          >
-            <Link to={post.fields.slug}>
-              <h2>{post.frontmatter.title}</h2>
-            </Link>
-            <Tags tags={post.frontmatter.tags} />
-          </li>
-        ))}
-      </ul>
-    </Layout>
-  )
+      <Row gutter={16}>
+        {this.posts.map(({ node: post }) => {
+          let allKeys = [...this.state.selectedKeys]
+          let isSelected
+          let tags = post.frontmatter.tags || []
+          if (allKeys === []) {
+            isSelected = true
+          } else {
+            isSelected = allKeys.map(x => tags.reduce((prev, curr) => prev || curr === x, false)).reduce((prev, curr) => prev && curr, true)
+          }
+          if (!isSelected)
+            return (<div key={post.id}/>)
+          else
+            return (
+              <Col span={8} key={post.id}>
+                <Card
+                  title={<Link to={post.fields.slug}> {post.frontmatter.title} </Link>}
+                  bordered={true}
+                >
+                  <Tags tags={ tags } />
+                </Card>
+              </Col>
+            )
+        })}
+      </Row>
+    </Layout>)
+  }
 }
 export const pageQuery = graphql`
   query blogIndex {
