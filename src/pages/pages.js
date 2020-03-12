@@ -54,15 +54,21 @@ class BlogIndex extends React.Component {
             isSelected = allKeys.map(x => tags.reduce((prev, curr) => prev || curr === x, false)).reduce((prev, curr) => prev && curr, true)
           }
           if (!isSelected)
-            return (<div key={post.id}/>)
+            return (<div key={post.id} />)
           else
             return (
               <Col span={8} key={post.id}>
                 <Card
-                  title={<Link to={post.fields.slug}> {post.frontmatter.title} </Link>}
+                  title={<a href={post.fields.slug} sx={{
+                    ":hover": {
+                      color: "#1E90FF",
+                      textDecoration: "none"
+                    },
+                    color: "black"
+                  }}> {post.frontmatter.title || "本页面没有标题"} </a>}
                   bordered={true}
                 >
-                  <Tags tags={ tags } />
+                  <Tags tags={tags} />
                 </Card>
               </Col>
             )
