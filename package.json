@@ -43,5 +43,12 @@
     "remark-math": "^2.0.0",
     "theme-ui": "^0.3.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "husky": "^4.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format"
+    }
+  }
 }
