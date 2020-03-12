@@ -33,7 +33,7 @@ export default function({ className = null, children, ...props }) {
         <MdEdit
           sx={{
             verticalAlign: "-4px",
-            marginTop: '7px',
+            marginTop: "7px",
             mr: "0.6rem",
           }}
         />
@@ -42,7 +42,7 @@ export default function({ className = null, children, ...props }) {
           className="expand-more-icon"
           sx={{
             verticalAlign: "-4px",
-            marginTop: '7px',
+            marginTop: "7px",
             ml: "1rem",
             float: "right",
           }}

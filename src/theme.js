@@ -118,14 +118,13 @@ export default {
       textDecoration: "none",
       ":hover": {
         textDecoration: "underline",
-        
       },
       "&.active": {
         color: "text",
       },
     },
     pre: {
-      marginTop: '0.7rem',
+      marginTop: "0.7rem",
       fontFamily: "monospace",
       overflowX: "auto",
       p: 3,
@@ -171,8 +170,8 @@ export default {
       maxWidth: "100%",
     },
   },
-  links:{
-    color : "#fff",
+  links: {
+    color: "#fff",
   },
   layout: {
     global: {
@@ -233,7 +232,7 @@ export default {
           `calc(100% - ${theme.layout.sidebar.width}px - ${theme.layout.toc.width})`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
-        //float: [null, null, null, "left"],
+      //float: [null, null, null, "left"],
       transition: "margin-left 0.1s",
       "&.pushed": {
         ml: theme => theme.layout.sidebar.width,
@@ -289,7 +288,6 @@ export default {
         ml: "auto",
         p: 0,
       },
-      
     },
   },
 }
