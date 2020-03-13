@@ -22,7 +22,10 @@ export default function HTML(props) {
         />
         {props.postBodyComponents}
       </body>
-      <script src="https://cdn.staticfile.org/mathjax/3.0.1/es5/startup.js" id="MathJax-script"></script>
+      <script
+        src="https://cdn.staticfile.org/mathjax/3.0.1/es5/startup.js"
+        id="MathJax-script"
+      ></script>
       <script src="/extra.js"></script>
     </html>
   )
