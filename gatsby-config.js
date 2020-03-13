@@ -14,10 +14,20 @@ module.exports = {
         path: "./docs/",
       },
     },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: "gatsby-plugin-mdx",
       options: {
         gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 900,
+              withWebp: true,
+              tracedSVG: true,
+            },
+          },
           {
             resolve: "gatsby-remark-copy-linked-files",
             options: {
@@ -33,16 +43,6 @@ module.exports = {
               isIconAfterHeader: true,
             },
           },
-          //{
-          //  resolve: `gatsby-remark-table-of-contents`,
-          //  options: {
-          //    exclude: "Table of Contents",
-          //    tight: true,
-          //    every: true,
-          //    fromHeading: 2,
-          //    toHeading: 6
-          //  }
-          //},
           {
             resolve: `gatsby-remark-vscode`,
             options: {
