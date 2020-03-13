@@ -44,7 +44,7 @@ class BlogIndex extends React.Component {
         >
           {this.children}
         </Select>
-        <Row gutter={[16,{ xs: 8, sm: 16, md: 24, lg: 32 }]}>
+        <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
           {this.posts.map(({ node: post }) => {
             let allKeys = [...this.state.selectedKeys]
             let isSelected
@@ -61,7 +61,15 @@ class BlogIndex extends React.Component {
             if (!isSelected) return <div key={post.id} />
             else
               return (
-                <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={4} key={post.id}>
+                <Col
+                  xs={24}
+                  sm={12}
+                  md={12}
+                  lg={8}
+                  xl={8}
+                  xxl={4}
+                  key={post.id}
+                >
                   <Card
                     title={
                       <a
