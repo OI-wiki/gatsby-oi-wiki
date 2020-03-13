@@ -22,7 +22,7 @@ export default function HTML(props) {
         />
         {props.postBodyComponents}
       </body>
-      <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      <script src="https://cdn.staticfile.org/mathjax/3.0.1/es5/startup.js" id="MathJax-script"></script>
       <script src="/extra.js"></script>
     </html>
   )

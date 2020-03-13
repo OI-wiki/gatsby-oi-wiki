@@ -5,6 +5,6 @@ exports.onRouteUpdate = ({ location, prevLocation }) => {
   //console.log("new pathname", location.pathname);
   ;(function() {
     //reload mathjax
-    window.MathJax.Hub.Typeset()
+    window.MathJax.typeset()
   })()
 }
