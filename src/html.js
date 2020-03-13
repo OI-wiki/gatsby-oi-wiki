@@ -26,7 +26,6 @@ export default function HTML(props) {
       <script
         src="https://cdn.staticfile.org/mathjax/3.0.1/es5/tex-mml-chtml.js"
         id="MathJax-script"
-        async
       ></script>
     </html>
   )
