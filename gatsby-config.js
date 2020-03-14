@@ -14,6 +14,16 @@ module.exports = {
         path: "./docs/",
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `OI Wiki`,
+        short_name: `OI Wiki`,
+        start_url: `/`,
+        display: `standalone`,
+        icon: `icon/favicon_512x512.png`,
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
