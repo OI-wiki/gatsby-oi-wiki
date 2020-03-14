@@ -20,6 +20,8 @@ function myLayout({
   description,
   tags,
   toc,
+  relativePath,
+  modifiedTime,
 }) {
   // console.log('location',location);
   return (
@@ -77,7 +79,7 @@ function myLayout({
             >
               {children}
             </Card>
-            <Meta authors={authors} tags={tags}></Meta>
+            <Meta authors={authors} tags={tags} relativePath={relativePath} modifiedTime={modifiedTime}></Meta>
             <BackTop></BackTop>
           </Content>
         </Layout>
