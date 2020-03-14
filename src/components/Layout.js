@@ -82,9 +82,7 @@ function myLayout({
               <AuthorsArray authors={authors} />
               <Tags tags={tags} />
             </Card>
-            <BackTop>
-              <div className="backTop"></div>
-            </BackTop>
+            <BackTop></BackTop>
           </Content>
         </Layout>
 
