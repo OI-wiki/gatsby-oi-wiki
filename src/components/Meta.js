@@ -22,17 +22,17 @@ function Meta({ authors, tags, relativePath, modifiedTime }) {
       <Tags tags={tags} />
       <div
         sx={{
-          "border-left": "5px solid #ff1700",
+          borderLeft: "5px solid #ff1700",
           margin: "20px 0",
-          "padding-left": "1.5rem",
+          paddingLeft: "1.5rem",
         }}
       >
         <span>
           <MdBuild />
           本页面最近更新：
         </span>
-        <span class="facts_modified">{modifiedTime}</span>，
-        <a class="edit_history" href={historyURL + relativePath}>
+        <span className="facts_modified">{modifiedTime}</span>，
+        <a className="edit_history" href={historyURL + relativePath}>
           更新历史
         </a>
         <br />
@@ -42,7 +42,7 @@ function Meta({ authors, tags, relativePath, modifiedTime }) {
           <a
             href={editURL + relativePath}
             title="编辑此页"
-            class="page_edit_url"
+            className="page_edit_url"
           >
             在 GitHub 上编辑此页！
           </a>
