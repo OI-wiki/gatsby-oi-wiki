@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import Tags from "../components/Tags"
 import Link from "../components/Link"
 import { Card, Row, Col, Select } from "antd"
+import Helmet from "react-helmet"
 const { Option } = Select
 
 class BlogIndex extends React.Component {
@@ -34,6 +35,7 @@ class BlogIndex extends React.Component {
   render() {
     return (
       <Layout location={this.location}>
+        <Helmet title="目录页 - OI Wiki"></Helmet>
         <h1>按标签筛选页面：</h1>
         <Select
           mode="multiple"

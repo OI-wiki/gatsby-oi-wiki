@@ -1,11 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-// Utilities
+import Helmet from "react-helmet"
 import kebabCase from "lodash/kebabCase"
-
-// Components
-// import { Helmet } from "react-helmet"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Link from "../components/Link"
@@ -20,20 +16,18 @@ const TagsPage = ({
   location,
 }) => (
   <Layout location={location}>
+    <Helmet title="标签页 - OI Wiki"></Helmet>
     <div>
-      {/* <Helmet title={title} /> */}
-      <div>
-        <h1>Tags</h1>
-        <ul>
-          {group.map(tag => (
-            <li key={tag.fieldValue}>
-              <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-                {tag.fieldValue} ({tag.totalCount})
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h1>Tags</h1>
+      <ul>
+        {group.map(tag => (
+          <li key={tag.fieldValue}>
+            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+              {tag.fieldValue} ({tag.totalCount})
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   </Layout>
 )
