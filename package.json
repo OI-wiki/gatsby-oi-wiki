@@ -21,6 +21,7 @@
     "classnames": "^2.2.6",
     "gatsby": "^2.18.17",
     "gatsby-plugin-catch-links": "^2.1.24",
+    "gatsby-plugin-manifest": "^2.2.47",
     "gatsby-plugin-mdx": "^1.0.71",
     "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-sharp": "^2.4.12",
