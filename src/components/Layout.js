@@ -3,9 +3,8 @@ import { jsx } from "theme-ui"
 import theme from "../theme"
 //Components
 import Navbar from "./Navbar"
-import AuthorsArray from "./AuthorsArray"
-import Tags from "./Tags"
 import Toc from "./Toc"
+import Meta from "./Meta"
 import { Layout, Card, BackTop, Row, Col } from "antd"
 import SideBar from "./Sidebar"
 import { Helmet } from "react-helmet"
@@ -78,10 +77,7 @@ function myLayout({
             >
               {children}
             </Card>
-            <Card>
-              <AuthorsArray authors={authors} />
-              <Tags tags={tags} />
-            </Card>
+            <Meta authors={authors} tags={tags}></Meta>
             <BackTop></BackTop>
           </Content>
         </Layout>
