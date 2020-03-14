@@ -79,7 +79,12 @@ function myLayout({
             >
               {children}
             </Card>
-            <Meta authors={authors} tags={tags} relativePath={relativePath} modifiedTime={modifiedTime}></Meta>
+            <Meta
+              authors={authors}
+              tags={tags}
+              relativePath={relativePath}
+              modifiedTime={modifiedTime}
+            ></Meta>
             <BackTop></BackTop>
           </Content>
         </Layout>
