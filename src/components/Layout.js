@@ -1,17 +1,14 @@
 /** @jsx jsx */
-import { Global } from "@emotion/core"
 import { jsx } from "theme-ui"
 import theme from "../theme"
 //Components
-import { MDXProvider } from "@mdx-js/react"
-import FooterMDX from "../footer.mdx"
 import Navbar from "./Navbar"
 import AuthorsArray from "./AuthorsArray"
 import Tags from "./Tags"
 import Toc from "./Toc"
-import Link from "./Link"
 import { Layout, Card, BackTop, Row, Col } from "antd"
 import SideBar from "./Sidebar"
+import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 
 const { Header, Content, Footer, Sider } = Layout
@@ -29,6 +26,9 @@ function myLayout({
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {/* <Global /> */}
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <Header
         sx={{
           position: "fixed",
