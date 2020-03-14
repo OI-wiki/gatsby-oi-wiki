@@ -13,10 +13,9 @@ function Header({ num }) {
   if (num == 1) return <span>贡献者：</span>
   if (num > 1) return <span>贡献者们：</span>
 }
-function Meta({ authors, tags, relativePath,
- modifiedTime, }) {
-  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/'
-  const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/'
+function Meta({ authors, tags, relativePath, modifiedTime }) {
+  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
+  const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
   return (
     <Card sx={{ lineHeights: theme.lineHeights.body }}>
       <AuthorsArray authors={authors} />
@@ -32,8 +31,10 @@ function Meta({ authors, tags, relativePath,
           <MdBuild />
           本页面最近更新：
         </span>
-      <span class="facts_modified">{modifiedTime}</span>，
-        <a class="edit_history" href={historyURL + relativePath}>更新历史</a>
+        <span class="facts_modified">{modifiedTime}</span>，
+        <a class="edit_history" href={historyURL + relativePath}>
+          更新历史
+        </a>
         <br />
         <span>
           <MdEdit />
