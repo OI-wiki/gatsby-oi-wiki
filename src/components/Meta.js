@@ -13,7 +13,10 @@ function Header({ num }) {
   if (num == 1) return <span>贡献者：</span>
   if (num > 1) return <span>贡献者们：</span>
 }
-function Meta({ authors, tags }) {
+function Meta({ authors, tags, relativePath,
+ modifiedTime, }) {
+  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/'
+  const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/'
   return (
     <Card sx={{ lineHeights: theme.lineHeights.body }}>
       <AuthorsArray authors={authors} />
@@ -29,15 +32,15 @@ function Meta({ authors, tags }) {
           <MdBuild />
           本页面最近更新：
         </span>
-        <span class="facts_modified"></span>，
-        <a class="edit_history">更新历史</a>
+      <span class="facts_modified">{modifiedTime}</span>，
+        <a class="edit_history" href={historyURL + relativePath}>更新历史</a>
         <br />
         <span>
           <MdEdit />
           发现错误？想一起完善？{" "}
           <a
-            href="{{ page.edit_url }}"
-            title="{{ lang.t('edit.link.title') }}"
+            href={editURL + relativePath}
+            title="编辑此页"
             class="page_edit_url"
           >
             在 GitHub 上编辑此页！

@@ -26,6 +26,12 @@ export const query = graphql`
         title
       }
       toc: tableOfContents
+      parent {
+        ... on File {
+          relativePath
+          modifiedTime(formatString: "YYYY/MM/DD")
+        }
+      }
     }
   }
 `

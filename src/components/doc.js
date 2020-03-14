@@ -9,6 +9,9 @@ function mdx({ data: { mdx }, location }) {
   const authors = mdx.frontmatter.author || null
   const tags = mdx.frontmatter.tags || null
   const toc = mdx.toc || null
+  // console.log(mdx)
+  const relativePath = mdx.parent.relativePath || ""
+  const modifiedTime = mdx.parent.modifiedTime || ""
 
   return (
     <Layout
@@ -18,6 +21,8 @@ function mdx({ data: { mdx }, location }) {
       description={description}
       tags={tags}
       toc={toc}
+      relativePath={relativePath}
+      modifiedTime={modifiedTime}
     >
       <MDXRenderer>{mdx.body}</MDXRenderer>
     </Layout>
