@@ -27,7 +27,7 @@ function myLayout({
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {/* <Global /> */}
       <Helmet>
-        <title>{title}</title>
+        <title>{title === "OI Wiki" ? title : `${title} - OI Wiki`}</title>
       </Helmet>
       <Header
         sx={{
