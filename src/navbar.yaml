@@ -1,7 +1,7 @@
 items:
-  - title: 练习网站
+  - title: 目录页
     link: /pages
-  - title: HULU
+  - title: 标签页
     link: /tags
   - title: GitHub
     link: https://github.com/OI-Wiki/OI-Wiki

@@ -17,7 +17,11 @@ function AuthorsArray({ authors }) {
       <Header num={arr ? arr.length : 0}></Header>
       <ChipSet>
         {arr
-          ? arr.map(author => <Chip label={` ${author} `} key={author}></Chip>)
+          ? arr.map(author => (
+              <a href={"https://github.com/" + author.trim()}>
+                <Chip label={` ${author} `} key={author}></Chip>{" "}
+              </a>
+            ))
           : ""}
       </ChipSet>
     </div>
