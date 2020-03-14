@@ -211,7 +211,7 @@ export default {
         left: "auto",
         visibility: "visible",
       },
-      top: "4rem",
+      top: "3rem",
       a: {
         ":hover": {
           textDecoration: "none",
