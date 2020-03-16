@@ -23,6 +23,7 @@
     "gatsby-plugin-catch-links": "^2.1.28",
     "gatsby-plugin-manifest": "^2.2.48",
     "gatsby-plugin-mdx": "^1.0.83",
+    "gatsby-plugin-offline": "^3.0.41",
     "gatsby-plugin-react-helmet": "^3.1.24",
     "gatsby-plugin-sharp": "^2.4.13",
     "gatsby-plugin-theme-ui": "^0.3.0",
