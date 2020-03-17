@@ -95,12 +95,8 @@ function myLayout({
         <Row
           sx={{
             display: "block",
-            marginTop: "50px",
           }}
         >
-          <Col span={8}>
-            <div className="footer-logo"></div>
-          </Col>
           <Col span={8}>
             <div className="footer-right">
               Copyright © 2016 - 2020 OI Wiki Team
