@@ -5,10 +5,12 @@ import theme from "../theme"
 import Navbar from "./Navbar"
 import Toc from "./Toc"
 import Meta from "./Meta"
+import useWindowSize from "./WindowSize"
 import { Layout, Card, BackTop, Row, Col } from "antd"
 import SideBar from "./Sidebar"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
+import { useState } from "react"
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -23,7 +25,7 @@ function myLayout({
   relativePath,
   modifiedTime,
 }) {
-  // console.log('location',location);
+  let [collapsed, setCollapsed] = useState(window.innerWidth < 1200)
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {/* <Global /> */}
@@ -41,13 +43,19 @@ function myLayout({
           padding: "0px",
         }}
       >
-        <Navbar />
+        <Navbar toggleSider={() => setCollapsed(!collapsed)} />
       </Header>
       <Layout style={{ background: "#fff" }} sx={theme.layout.www}>
         <SideBar
           style={{ background: "#fff" }}
           sx={theme.layout.sidebar}
           pathname={location.pathname}
+          breakpoint="xl"
+          onBreakpoint={broken =>
+            broken ? setCollapsed(true) : setCollapsed(false)
+          }
+          collapsed={collapsed}
+          trigger={null}
         />
 
         <Layout sx={theme.layout.main}>

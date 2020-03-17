@@ -5,7 +5,7 @@ import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
 import navbarSubData from "../navbarSub.yaml"
 import Link from "./Link"
-import { MdSchool } from "react-icons/md"
+import { MdSchool, MdArrowBack, MdMenu } from "react-icons/md"
 import theme from "../theme"
 import classNames from "classnames"
 import { Menu, Input } from "antd"
@@ -21,12 +21,15 @@ const { Search } = Input
 // );
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   state = {
     current: "mail",
   }
 
   handleClick = e => {
-    console.log("click ", e)
     this.setState({
       current: e.key,
     })
@@ -39,25 +42,18 @@ class Navbar extends React.Component {
           boxShadow:
             "0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2)",
           width: "100%",
-          padding: "0 3%",
+          padding: "0 24px",
         }}
       >
         <div sx={{ color: "black" }} className="nav-firstrow">
           <ul sx={theme.layout.navbar.navList}>
-            <Link
-              href="/"
-              sx={{
-                float: "left",
-                fontSize: "large",
-                color: "black",
-              }}
+            <a
+              sx={{ float: "left", color: "black" }}
+              onClick={this.props.toggleSider}
             >
-              <MdSchool
-                className="logo"
-                size={30}
-                sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
-              ></MdSchool>
-            </Link>
+              <MdMenu size={24} sx={{ m: "0.8rem 1rem 0rem 0rem" }}></MdMenu>
+            </a>
+
             <Link
               href="/"
               sx={{
@@ -66,6 +62,7 @@ class Navbar extends React.Component {
                   color: "#1E90FF",
                   textDecoration: "none",
                 },
+                fontSize: "22px",
               }}
             >
               OI Wiki
