@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 
 // Components
 import { Link, graphql } from "gatsby"
+import Helmet from "react-helmet"
 import Layout from "../components/Layout"
 
 const Tags = ({ pageContext, data, location }) => {
@@ -14,6 +15,7 @@ const Tags = ({ pageContext, data, location }) => {
 
   return (
     <Layout location={location}>
+      <Helmet title={` ${tag} - 标签页 - OI Wiki`}></Helmet>
       <div>
         <h1>{tagHeader}</h1>
         <ul>
