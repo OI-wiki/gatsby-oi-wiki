@@ -5,7 +5,7 @@ import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
 import navbarSubData from "../navbarSub.yaml"
 import Link from "./Link"
-import { MdSchool, MdArrowBack, MdMenu } from "react-icons/md"
+import { MdMenu } from "react-icons/md"
 import theme from "../theme"
 import classNames from "classnames"
 import { Menu, Input } from "antd"
@@ -51,7 +51,7 @@ class Navbar extends React.Component {
               sx={{ float: "left", color: "black" }}
               onClick={this.props.toggleSider}
             >
-              <MdMenu size={24} sx={{ m: "0.8rem 1rem 0rem 0rem" }}></MdMenu>
+              <MdMenu size={24} sx={{ m: "0.85rem 1rem 0rem 0rem" }}></MdMenu>
             </a>
 
             <Link

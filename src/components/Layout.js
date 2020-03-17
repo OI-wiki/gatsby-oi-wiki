@@ -5,7 +5,6 @@ import theme from "../theme"
 import Navbar from "./Navbar"
 import Toc from "./Toc"
 import Meta from "./Meta"
-import useWindowSize from "./WindowSize"
 import { Layout, Card, BackTop, Row, Col } from "antd"
 import SideBar from "./Sidebar"
 import { Helmet } from "react-helmet"
@@ -25,7 +24,7 @@ function myLayout({
   relativePath,
   modifiedTime,
 }) {
-  let [collapsed, setCollapsed] = useState(window.innerWidth < 1200)
+  let [collapsed, setCollapsed] = useState(typeof window !== 'undefined' ? window.innerWidth < 1200 : false)
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {/* <Global /> */}
