@@ -14,7 +14,7 @@ import { useState } from "react"
 const { Header, Content, Footer, Sider } = Layout
 
 const LazySider = Loadable({
-  loader: () => import("./SideBar"),
+  loader: () => import("./Sidebar"),
   loading: () => <div />,
 })
 
