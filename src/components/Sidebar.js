@@ -70,11 +70,9 @@ function openkey(props, pathname) {
   if (ret != null) ret.push(key)
   return ret
 }
-
 export default function(props) {
-  // console.log(pathList)
   pathList.map(item => Item(item))
-  var okey = null
+  let okey = null
   pathList.forEach(item => {
     var k = openkey(item, props.pathname)
     if (k != null) okey = k
@@ -84,9 +82,6 @@ export default function(props) {
     <Sider
       breakpoint="xl"
       collapsedWidth="0"
-      onBreakpoint={broken => {
-        // console.log(broken)
-      }}
       onCollapse={(collapsed, type) => {
         // console.log(collapsed, type)
       }}
