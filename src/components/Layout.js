@@ -5,13 +5,18 @@ import theme from "../theme"
 import Navbar from "./Navbar"
 import Toc from "./Toc"
 import Meta from "./Meta"
+import Loadable from "react-loadable"
 import { Layout, Card, BackTop, Row, Col } from "antd"
-import SideBar from "./Sidebar"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
 
 const { Header, Content, Footer, Sider } = Layout
+
+const LazySider = Loadable({
+  loader: () => import("./SideBar"),
+  loading: () => <div />,
+})
 
 function myLayout({
   children,
@@ -24,7 +29,9 @@ function myLayout({
   relativePath,
   modifiedTime,
 }) {
-  let [collapsed, setCollapsed] = useState(typeof window !== 'undefined' ? window.innerWidth < 1200 : false)
+  let [collapsed, setCollapsed] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 1200 : false
+  )
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {/* <Global /> */}
@@ -45,7 +52,7 @@ function myLayout({
         <Navbar toggleSider={() => setCollapsed(!collapsed)} />
       </Header>
       <Layout style={{ background: "#fff" }} sx={theme.layout.www}>
-        <SideBar
+        <LazySider
           style={{ background: "#fff" }}
           sx={theme.layout.sidebar}
           pathname={location.pathname}
