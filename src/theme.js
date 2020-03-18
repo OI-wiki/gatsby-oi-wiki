@@ -218,6 +218,25 @@ export default {
         },
       },
     },
+    navbar: {
+      navList: {
+        listStyle: "none",
+        m: 0,
+        ml: "auto",
+        p: 0,
+      },
+      logo: {
+        float: "left",
+        fontSize: "large",
+        color: "black",
+        display: ["none", null, null, "inline"],
+      },
+      toggleSider: {
+        float: "left",
+        color: "black",
+        display: ["inline", null, null, "none"],
+      },
+    },
     www: {
       flexDirection: "row",
     },
@@ -280,14 +299,6 @@ export default {
         theme => `calc(100% - ${theme.layout.sidebar.width}px)`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
-    },
-    navbar: {
-      navList: {
-        listStyle: "none",
-        m: 0,
-        ml: "auto",
-        p: 0,
-      },
     },
   },
 }

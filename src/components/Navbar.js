@@ -5,7 +5,7 @@ import { jsx } from "theme-ui"
 import navbarData from "../navbar.yaml"
 import navbarSubData from "../navbarSub.yaml"
 import Link from "./Link"
-import { MdMenu } from "react-icons/md"
+import { MdMenu, MdSchool } from "react-icons/md"
 import theme from "../theme"
 import classNames from "classnames"
 import { Menu, Input } from "antd"
@@ -48,12 +48,18 @@ class Navbar extends React.Component {
         <div sx={{ color: "black" }} className="nav-firstrow">
           <ul sx={theme.layout.navbar.navList}>
             <a
-              sx={{ float: "left", color: "black" }}
+              sx={theme.layout.navbar.toggleSider}
               onClick={this.props.toggleSider}
             >
               <MdMenu size={24} sx={{ m: "0.85rem 1rem 0rem 0rem" }}></MdMenu>
             </a>
-
+            <a href="/" sx={theme.layout.navbar.logo}>
+              <MdSchool
+                className="logo"
+                size={30}
+                sx={{ m: "0.5rem 1rem 0.5rem 1rem" }}
+              ></MdSchool>
+            </a>
             <Link
               href="/"
               sx={{
