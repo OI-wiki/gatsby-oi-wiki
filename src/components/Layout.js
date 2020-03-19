@@ -5,8 +5,9 @@ import theme from "../theme"
 import Navbar from "./Navbar"
 import Toc from "./Toc"
 import Meta from "./Meta"
+import FooterContent from "./Footer"
 import Loadable from "react-loadable"
-import { Layout, Card, BackTop, Row, Col } from "antd"
+import { Layout, Card, BackTop } from "antd"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
@@ -106,17 +107,7 @@ function myLayout({
         <Toc toc={toc} sx={theme.layout.toc} key={location.key} />
       </Layout>
       <Footer sx={theme.layout.footer} className="oiFooter">
-        <Row
-          sx={{
-            display: "block",
-          }}
-        >
-          <Col span={8}>
-            <div className="footer-right">
-              Copyright © 2016 - 2020 OI Wiki Team
-            </div>
-          </Col>
-        </Row>
+        <FooterContent />
       </Footer>
     </Layout>
   )

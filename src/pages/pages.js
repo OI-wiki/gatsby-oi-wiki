@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Tags from "../components/Tags"
-import Link from "../components/Link"
 import { Card, Row, Col, Select } from "antd"
 import Helmet from "react-helmet"
 const { Option } = Select
