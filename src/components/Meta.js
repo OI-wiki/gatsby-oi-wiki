@@ -1,18 +1,11 @@
 /** @jsx jsx */
-import { graphql, useStaticQuery } from "gatsby"
 import { jsx } from "theme-ui"
 import { Card } from "antd"
-import { ChipSet, Chip } from "@material/react-chips"
 import AuthorsArray from "./AuthorsArray"
 import Tags from "./Tags"
 import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
 import theme from "../theme"
 
-function Header({ num }) {
-  if (num <= 0) return <span>本页面未记录贡献者</span>
-  if (num == 1) return <span>贡献者：</span>
-  if (num > 1) return <span>贡献者们：</span>
-}
 function Meta({ authors, tags, relativePath, modifiedTime }) {
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"

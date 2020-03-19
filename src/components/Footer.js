@@ -1,96 +1,40 @@
 /** @jsx jsx */
-import Link from "./Link"
+import { StaticQuery, graphql } from "gatsby"
+import { Row, Col } from "antd"
 import { jsx } from "theme-ui"
-import { Menu } from "antd"
-import pathList from "../footer.yaml"
-import { Row } from "antd"
 
-function Item(props) {
-  const items = props
-  const arr = Object.entries(items)[0]
-  const key = arr[0],
-    value = arr[1]
-  if (typeof value === "string") {
-    return (
-      <Menu.Item key={key}>
-        <Link
-          to={value}
-          sx={{
-            color: "#304455!important",
-          }}
-        >
-          {key}
-        </Link>
-      </Menu.Item>
-    )
-    return ret
-  }
-  // array
-  return (
-    <SubMenu
-      key={key}
-      title={
-        <h3
-          sx={{
-            fontSize: "14px",
-            fontWeight: 600,
-            color: "#273849",
-          }}
-        >
-          {key}
-        </h3>
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query lastestCommit {
+        allGitCommit(limit: 1) {
+          nodes {
+            hash
+            date
+          }
+        }
       }
-    >
-      {value.map(item => Item(item))}
-    </SubMenu>
-  )
-  return ret
-}
+    `}
+    render={data => <FooterContent data={data} {...props} />}
+  />
+)
 
-function openkey(props, pathname) {
-  const items = props
-  const arr = Object.entries(items)[0]
-  const key = arr[0],
-    value = arr[1]
-  if (typeof value === "string") {
-    if (value === pathname) return [key]
-    return null
-  }
-  var ret = null
-  value.forEach(item => {
-    var k = openkey(item, pathname)
-    if (k != null) ret = k
-  })
-  if (ret != null) ret.push(key)
-  return ret
-}
+function FooterContent({ data }) {
+  let lastestCommit = data.allGitCommit.nodes[0]
 
-export default function(props) {
-  // console.log(pathList)
-  pathList.map(item => Item(item))
-  var okey = null
-  pathList.forEach(item => {
-    var k = openkey(item, props.pathname)
-    if (k != null) okey = k
-  })
-  if (okey == null) okey = []
   return (
-    <Sider
-      breakpoint="xl"
-      collapsedWidth="0"
-      onBreakpoint={broken => {
-        // console.log(broken)
+    <Row
+      sx={{
+        display: "block",
       }}
-      onCollapse={(collapsed, type) => {
-        // console.log(collapsed, type)
-      }}
-      theme="light"
-      width="300px"
-      {...props}
     >
-      <Row type="flex" justify="space-around">
-        {pathList.map(item => Item(item))}
-      </Row>
-    </Sider>
+      <Col span={8}>
+        <div className="footer-right">Copyright © 2016 - 2020 OI Wiki Team</div>
+      </Col>
+      <Col span={8}>
+        最近更新: {lastestCommit.hash.substr(0, 7)},{" "}
+        {lastestCommit.date.substr(0, 10)}
+      </Col>
+    </Row>
   )
 }

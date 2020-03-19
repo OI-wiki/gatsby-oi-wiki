@@ -7,6 +7,7 @@ module.exports = {
     author: "OI Wiki Team",
   },
   plugins: [
+    `gatsby-source-local-git`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

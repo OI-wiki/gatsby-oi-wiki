@@ -1,7 +1,5 @@
 /** @jsx jsx */
-import { graphql, useStaticQuery } from "gatsby"
 import { jsx } from "theme-ui"
-import { Card } from "antd"
 import "@material/react-chips/dist/chips.css"
 import { ChipSet, Chip } from "@material/react-chips"
 
