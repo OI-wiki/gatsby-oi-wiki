@@ -15,7 +15,7 @@ const TagsPage = ({
   },
   location,
 }) => (
-  <Layout location={location}>
+  <Layout location={location} noMeta="true">
     <Helmet title="标签页 - OI Wiki"></Helmet>
     <div>
       <h1>Tags</h1>

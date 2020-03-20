@@ -24,6 +24,8 @@ export const query = graphql`
         author
         tags
         title
+        noMeta
+        noComment
       }
       toc: tableOfContents
       parent {

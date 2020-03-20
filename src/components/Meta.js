@@ -6,10 +6,10 @@ import Tags from "./Tags"
 import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
 import theme from "../theme"
 
-function Meta({ authors, tags, relativePath, modifiedTime }) {
+function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
-  return (
+  if (noMeta == "false") {return (
     <Card sx={{ lineHeights: theme.lineHeights.body }}>
       <AuthorsArray authors={authors} />
       <Tags tags={tags} />
@@ -54,7 +54,7 @@ function Meta({ authors, tags, relativePath, modifiedTime }) {
         </span>
       </div>
     </Card>
-  )
+  )} else return (<div></div>);
 }
 
 export default Meta
