@@ -20,16 +20,16 @@ export default props => (
 )
 
 function FooterContent({ data }) {
-  let lastestCommit = data.allGitCommit.nodes[0]
-
+  let { date, hash } = data.allGitCommit.nodes[0]
   return (
     <Row>
       <Col span={24}>
-        <div className="footer-right">Copyright © 2016 - 2020 OI Wiki Team</div>
+        <div className="footer-right">
+          Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
+        </div>
       </Col>
       <Col span={24}>
-        最近更新: {lastestCommit.hash.substr(0, 7)},{" "}
-        {lastestCommit.date.substr(0, 10)}
+        最近更新: {hash.substr(0, 7)}, {date.substr(0, 10)}
       </Col>
     </Row>
   )
