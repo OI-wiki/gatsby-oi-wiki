@@ -34,10 +34,12 @@ function myLayout({
   const isSSR = typeof window === "undefined"
   const isSmallScreen = !isSSR && window.innerWidth < 1200
   let [collapsed, setCollapsed] = useState(isSmallScreen)
-  const clickLayer = (<div
-    sx={{ position: "fixed", zIndex: 2, height: "100%", width: "100%" }}
-    onClick={() => setCollapsed(true)}
-  />)
+  const clickLayer = (
+    <div
+      sx={{ position: "fixed", zIndex: 2, height: "100%", width: "100%" }}
+      onClick={() => setCollapsed(true)}
+    />
+  )
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
       {!collapsed && isSmallScreen && clickLayer}
