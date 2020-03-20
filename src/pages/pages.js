@@ -33,7 +33,7 @@ class BlogIndex extends React.Component {
   }
   render() {
     return (
-      <Layout location={this.location}>
+      <Layout location={this.location} noMeta="true">
         <Helmet title="目录页 - OI Wiki"></Helmet>
         <h1>按标签筛选页面：</h1>
         <Select

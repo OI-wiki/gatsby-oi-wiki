@@ -14,7 +14,7 @@ const Tags = ({ pageContext, data, location }) => {
   } tagged with "${tag}"`
 
   return (
-    <Layout location={location}>
+    <Layout location={location} noMeta="true" >
       <Helmet title={` ${tag} - 标签页 - OI Wiki`}></Helmet>
       <div>
         <h1>{tagHeader}</h1>

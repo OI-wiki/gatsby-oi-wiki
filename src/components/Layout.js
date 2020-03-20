@@ -29,6 +29,7 @@ function myLayout({
   toc,
   relativePath,
   modifiedTime,
+  noMeta,
 }) {
   let [collapsed, setCollapsed] = useState(
     typeof window !== "undefined" ? window.innerWidth < 1200 : false
@@ -99,6 +100,7 @@ function myLayout({
               tags={tags}
               relativePath={relativePath}
               modifiedTime={modifiedTime}
+              noMeta={noMeta}
             ></Meta>
             <BackTop></BackTop>
           </Content>
