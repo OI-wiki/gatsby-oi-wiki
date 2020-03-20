@@ -198,7 +198,7 @@ export default {
     },
     sidebar: {
       width: 300,
-      height: "91%",
+      height: "100%",
       background: "#fff",
       position: "fixed",
       zIndex: 19,
