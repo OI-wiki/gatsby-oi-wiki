@@ -31,12 +31,17 @@ function myLayout({
   modifiedTime,
   noMeta,
 }) {
-  let [collapsed, setCollapsed] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 1200 : false
-  )
+  const isSSR = typeof window === "undefined"
+  const isSmallScreen = !isSSR && window.innerWidth < 1200
+  let [collapsed, setCollapsed] = useState(isSmallScreen)
+  const clickLayer = (<div
+    sx={{ position: "fixed", zIndex: 2, height: "100%", width: "100%" }}
+    onClick={() => setCollapsed(true)}
+  />)
   return (
     <Layout style={{ minHeight: "100vh", background: "#fff" }}>
-      {/* <Global /> */}
+      {!collapsed && isSmallScreen && clickLayer}
+      {/* if sider is open, and we are on small screen, show this layer */}
       <Helmet>
         <title>{title === "OI Wiki" ? title : `${title} - OI Wiki`}</title>
       </Helmet>
