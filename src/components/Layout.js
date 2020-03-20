@@ -36,7 +36,13 @@ function myLayout({
   let [collapsed, setCollapsed] = useState(isSmallScreen)
   const clickLayer = (
     <div
-      sx={{ position: "fixed", zIndex: 2, height: "100%", width: "100%" }}
+      sx={{
+        position: "fixed",
+        zIndex: 2,
+        height: "100%",
+        width: "100%",
+        background: "rgba(0, 0, 0, .60)",
+      }}
       onClick={() => setCollapsed(true)}
     />
   )
