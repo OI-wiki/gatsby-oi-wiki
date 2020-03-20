@@ -9,7 +9,6 @@ function mdx({ data: { mdx }, location }) {
   const authors = mdx.frontmatter.author || null
   const tags = mdx.frontmatter.tags || null
   const noMeta = mdx.frontmatter.noMeta || "false"
-  console.log(mdx.frontmatter.noMeta, noMeta)
   const hasComment = mdx.frontmatter.hasComment || null
   const toc = mdx.toc || null
   // console.log(mdx)
