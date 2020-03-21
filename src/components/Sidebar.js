@@ -1,120 +1,82 @@
 /** @jsx jsx */
 import Link from "./Link"
 import { jsx } from "theme-ui"
-import { Layout, Menu } from "antd"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import Collapse from "@material-ui/core/Collapse"
+import ListItemText from "@material-ui/core/ListItemText"
 import pathList from "../sidebar.yaml"
-
-const { SubMenu } = Menu
+import { Layout } from "antd"
 const { Sider } = Layout
+import { useState } from "react"
+import { MdExpandMore, MdExpandLess } from "react-icons/md"
 
-function Item(props) {
-  // console.log(props);
-  // const {items, ...other} = props;
-  // console.log(items, other);
+function Item(props, padding, pathname) {
   const items = props
   const arr = Object.entries(items)[0]
-  // console.log(arr);
   const key = arr[0],
     value = arr[1]
-  // console.log(value);
-  // if (value.length)
   if (typeof value === "string") {
-    return (
-      <Menu.Item key={key}>
-        <Link
-          to={value}
-          sx={{
-            color: "#304455!important",
-          }}
+    return [
+      <Link
+        to={value}
+        sx={{
+          color: "#304455!important",
+        }}
+        key={key}
+      >
+        <ListItem
+          button
+          style={{ paddingLeft: padding }}
+          selected={value === pathname}
         >
-          {key}
-        </Link>
-      </Menu.Item>
-    )
+          <ListItemText primary={key} />
+        </ListItem>
+      </Link>,
+      value === pathname,
+    ]
   }
   // array
-  return (
-    <SubMenu
-      key={key}
-      title={
-        <h3
-          sx={{
-            fontSize: "14px",
-            fontWeight: 600,
-            color: "#273849",
-          }}
-        >
-          {key}
-        </h3>
-      }
-    >
-      {value.map(item => Item(item))}
-    </SubMenu>
+  const listItemsResult = value.map(item => Item(item, padding + 16, pathname))
+  const shouldOpen = listItemsResult.reduce(
+    (prev, [, curr]) => curr || prev,
+    false
   )
-}
-
-function openkey(props, pathname) {
-  const items = props
-  const arr = Object.entries(items)[0]
-  const key = arr[0],
-    value = arr[1]
-  if (typeof value === "string") {
-    if (value === pathname) return [key]
-    return null
-  }
-  var ret = null
-  value.forEach(item => {
-    var k = openkey(item, pathname)
-    if (k != null) ret = k
-  })
-  if (ret != null) ret.push(key)
-  return ret
+  const listItems = listItemsResult.map(([v]) => v)
+  let [open, setOpen] = useState(shouldOpen)
+  return [
+    <div key={key}>
+      <ListItem
+        button
+        onClick={() => setOpen(!open)}
+        style={{ color: "rgb(48, 68, 85)", paddingLeft: padding }}
+      >
+        <ListItemText primary={key} />
+        {open ? <MdExpandLess /> : <MdExpandMore />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List disablePadding>{listItems}</List>
+      </Collapse>
+    </div>,
+    shouldOpen,
+  ]
 }
 export default function(props) {
-  pathList.map(item => Item(item))
-  let okey = null
-  pathList.forEach(item => {
-    var k = openkey(item, props.pathname)
-    if (k != null) okey = k
-  })
-  if (okey == null) okey = []
   return (
     <Sider
       breakpoint="xl"
       collapsedWidth="0"
-      onCollapse={(collapsed, type) => {
-        // console.log(collapsed, type)
-      }}
       theme="light"
       width="300px"
+      sx={{
+        height: "100%",
+        overflow: "auto",
+      }}
       {...props}
     >
-      <Menu
-        theme="light"
-        defaultSelectedKeys={[okey[0]]}
-        defaultOpenKeys={okey}
-        mode="inline"
-        sx={{
-          height: "100%",
-          borderRight: 0,
-          overflowY: "hidden",
-          overflowX: "hidden",
-          ":hover": {
-            overflowY: "auto",
-          },
-          //marginTop: "30px",
-          "::-webkit-scrollbar": {
-            width: 6,
-            //backgroundColor: '#fff'
-          },
-          "::-webkit-scrollbar-thumb": {
-            backgroundColor: "#E3E3E3",
-            borderRadius: 20,
-          },
-        }}
-      >
-        {pathList.map(item => Item(item))}
-      </Menu>
+      <List sx={{ width: "100%" }}>
+        {pathList.map(item => Item(item, 16, props.pathname))}
+      </List>
     </Sider>
   )
 }
