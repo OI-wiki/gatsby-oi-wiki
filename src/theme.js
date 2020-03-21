@@ -239,6 +239,7 @@ export default {
     },
     www: {
       flexDirection: "row",
+      background: "#fff",
     },
     main: {
       background: "#fff",
@@ -299,6 +300,9 @@ export default {
         theme => `calc(100% - ${theme.layout.sidebar.width}px)`,
       ],
       ml: [null, null, null, theme => theme.layout.sidebar.width],
+    },
+    search: {
+      width: 200
     },
   },
 }
