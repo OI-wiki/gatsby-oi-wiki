@@ -48,7 +48,7 @@ function myLayout({
     />
   )
   return (
-    <Layout style={{ minHeight: "100vh", background: "#fff" }}>
+    <Layout>
       {!collapsed && isSmallScreen && clickLayer}
       {/* if sider is open, and we are on small screen, show this layer */}
       <Helmet>
@@ -67,9 +67,8 @@ function myLayout({
       >
         <Navbar toggleSider={() => setCollapsed(!collapsed)} />
       </Header>
-      <Layout style={{ background: "#fff" }} sx={theme.layout.www}>
+      <Layout sx={theme.layout.www}>
         <LazySider
-          style={{ background: "#fff" }}
           sx={theme.layout.sidebar}
           pathname={location.pathname}
           breakpoint="xl"
@@ -81,13 +80,7 @@ function myLayout({
         />
 
         <Layout sx={theme.layout.main}>
-          <Content
-            style={{
-              background: "#fff",
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
+          <Content>
             <Card
               title={title}
               headStyle={{ fontSize: "2.5rem" }}

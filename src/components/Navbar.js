@@ -84,7 +84,7 @@ class Navbar extends React.Component {
                 <Search
                   placeholder="键入进行搜索"
                   onSearch={value => /*console.log(value)*/ value}
-                  style={{ width: 200 }}
+                  sx={theme.styles.search}
                 />
               </Menu.Item>
 
