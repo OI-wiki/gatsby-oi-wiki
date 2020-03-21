@@ -8,7 +8,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 `yarn install` 或 `npm install` 安装所需插件
 
-`yarn develop` 或 `npm develop` 本地启动一个 server
+`yarn develop` 或 `npm run develop` 本地启动一个 server
 
 去 [插件列表](https://www.gatsbyjs.org/plugins/) 找有趣的功能尝试加入进来
 
