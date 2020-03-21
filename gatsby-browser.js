@@ -8,11 +8,11 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
 }
 
 export const onClientEntry = () => {
-  if (process.env.NODE_ENV !== 'production') {
-    const whyDidYouRender = require('@welldone-software/why-did-you-render')
-    console.log('tracking react')
+  if (process.env.NODE_ENV !== "production") {
+    const whyDidYouRender = require("@welldone-software/why-did-you-render")
+    console.log("tracking react")
     whyDidYouRender(React, {
-      trackAllPureComponents: true
+      trackAllPureComponents: true,
     })
   }
 }

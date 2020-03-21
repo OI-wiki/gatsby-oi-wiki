@@ -302,7 +302,7 @@ export default {
       ml: [null, null, null, theme => theme.layout.sidebar.width],
     },
     search: {
-      width: 200
+      width: 200,
     },
   },
 }
