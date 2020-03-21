@@ -42,6 +42,7 @@ function myLayout({
         height: "100%",
         width: "100%",
         background: "rgba(0, 0, 0, .60)",
+        display: ["block", null, null, "none"],
       }}
       onClick={() => setCollapsed(true)}
     />
