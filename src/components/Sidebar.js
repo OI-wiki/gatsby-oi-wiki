@@ -23,9 +23,9 @@ function Item(props, padding, pathname) {
         sx={{
           color: "#304455!important",
         }}
+        key={key}
       >
         <ListItem
-          key={key}
           button
           style={{ paddingLeft: padding }}
           selected={value === pathname}
@@ -45,10 +45,9 @@ function Item(props, padding, pathname) {
   const listItems = listItemsResult.map(([v]) => v)
   let [open, setOpen] = useState(shouldOpen)
   return [
-    <div>
+    <div key={key}>
       <ListItem
         button
-        key={key}
         onClick={() => setOpen(!open)}
         style={{ color: "rgb(48, 68, 85)", paddingLeft: padding }}
       >
