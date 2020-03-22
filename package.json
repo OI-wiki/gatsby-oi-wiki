@@ -39,7 +39,7 @@
     "gitalk": "^1.6.2",
     "hast-util-to-text": "^2.0.0",
     "mdast-util-toc": "^5.0.2",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
