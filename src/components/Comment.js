@@ -1,10 +1,7 @@
 /** @jsx jsx */
 import "gitalk/dist/gitalk.css"
 import GitalkComponent from "gitalk/dist/gitalk-component"
-// import GitalkComponent from 'gitalk/src/gitalk'
 import { jsx } from "theme-ui"
-import { Card } from "antd"
-import theme from "../theme"
 
 function Gitalk({ title, noComment }) {
   // console.log(noComment,  title)

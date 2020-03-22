@@ -304,5 +304,9 @@ export default {
     search: {
       width: 200,
     },
+    comment: {
+      marginLeft: 24,
+      marginRight: 24,
+    },
   },
 }

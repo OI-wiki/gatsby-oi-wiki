@@ -116,7 +116,9 @@ function myLayout({
               modifiedTime={modifiedTime}
               noMeta={noMeta}
             ></Meta>
-            <LazyComment title={title} noComment={noComment}></LazyComment>
+            <div sx={theme.layout.comment}>
+              <LazyComment title={title} noComment={noComment}></LazyComment>
+            </div>
             <BackTop></BackTop>
           </Content>
         </Layout>
