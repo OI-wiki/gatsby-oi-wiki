@@ -36,6 +36,7 @@
     "gatsby-source-filesystem": "^2.1.55",
     "gatsby-source-local-git": "^0.2.2",
     "gatsby-transformer-sharp": "^2.3.19",
+    "gitalk": "^1.6.2",
     "hast-util-to-text": "^1.0.1",
     "mdast-util-toc": "^5.0.2",
     "prettier": "^1.19.1",
