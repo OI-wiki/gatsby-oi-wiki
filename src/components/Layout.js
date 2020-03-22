@@ -11,7 +11,7 @@ import { Layout, Card, BackTop } from "antd"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
-import Comment from './Comment'
+import Comment from "./Comment"
 
 const { Header, Content, Footer, Sider } = Layout
 
