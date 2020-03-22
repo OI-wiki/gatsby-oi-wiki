@@ -11,6 +11,7 @@ import { Layout, Card, BackTop } from "antd"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
+import Comment from './Comment'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -30,6 +31,7 @@ function myLayout({
   relativePath,
   modifiedTime,
   noMeta,
+  noComment,
 }) {
   const isSSR = typeof window === "undefined"
   const isSmallScreen = !isSSR && window.innerWidth < 1200
@@ -47,12 +49,13 @@ function myLayout({
       onClick={() => setCollapsed(true)}
     />
   )
+  const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   return (
     <Layout>
       {!collapsed && isSmallScreen && clickLayer}
       {/* if sider is open, and we are on small screen, show this layer */}
       <Helmet>
-        <title>{title === "OI Wiki" ? title : `${title} - OI Wiki`}</title>
+        <title>{title}</title>
       </Helmet>
       <Header
         sx={{
@@ -82,7 +85,7 @@ function myLayout({
         <Layout sx={theme.layout.main}>
           <Content>
             <Card
-              title={title}
+              title={pageTitle}
               headStyle={{ fontSize: "2.5rem" }}
               bodyStyle={{ fontSize: "16px" }}
               sx={{
@@ -109,6 +112,7 @@ function myLayout({
               modifiedTime={modifiedTime}
               noMeta={noMeta}
             ></Meta>
+            <Comment title={title} noComment={noComment}></Comment>
             <BackTop></BackTop>
           </Content>
         </Layout>
