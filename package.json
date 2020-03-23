@@ -33,7 +33,7 @@
     "gatsby-remark-images": "^3.2.0",
     "gatsby-remark-table-of-contents": "0.0.9",
     "gatsby-remark-vscode": "^2.0.3",
-    "gatsby-source-filesystem": "^2.2.1",
+    "gatsby-source-filesystem": "^2.2.2",
     "gatsby-source-local-git": "^0.2.2",
     "gatsby-transformer-sharp": "^2.4.1",
     "gitalk": "^1.6.2",
