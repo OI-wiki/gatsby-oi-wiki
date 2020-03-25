@@ -20,7 +20,7 @@
     "@theme-ui/prism": "^0.3.0",
     "antd": "^4.0.3",
     "classnames": "^2.2.6",
-    "gatsby": "^2.20.4",
+    "gatsby": "^2.20.6",
     "gatsby-plugin-catch-links": "^2.2.0",
     "gatsby-plugin-manifest": "^2.3.1",
     "gatsby-plugin-mdx": "^1.1.2",
