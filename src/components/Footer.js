@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { Row, Col } from "antd"
 import { jsx } from "theme-ui"
 
-export default props => (
+export default (props) => (
   <StaticQuery
     query={graphql`
       query lastestCommit {
@@ -15,7 +15,7 @@ export default props => (
         }
       }
     `}
-    render={data => <FooterContent data={data} {...props} />}
+    render={(data) => <FooterContent data={data} {...props} />}
   />
 )
 

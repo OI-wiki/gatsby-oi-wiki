@@ -29,7 +29,7 @@ class Navbar extends React.Component {
     current: "mail",
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     this.setState({
       current: e.key,
     })
@@ -83,7 +83,7 @@ class Navbar extends React.Component {
               <Menu.Item key="menu-search">
                 <Search
                   placeholder="键入进行搜索"
-                  onSearch={value => /*console.log(value)*/ value}
+                  onSearch={(value) => /*console.log(value)*/ value}
                   sx={theme.styles.search}
                 />
               </Menu.Item>
@@ -97,14 +97,14 @@ class Navbar extends React.Component {
                   </span>
                 }
               >
-                {navbarSubData.items.map(item => (
+                {navbarSubData.items.map((item) => (
                   <Menu.Item key={item.link}>
                     <Link to={item.link}>{item.title}</Link>
                   </Menu.Item>
                 ))}
               </SubMenu>
 
-              {navbarData.items.map(item => (
+              {navbarData.items.map((item) => (
                 <Menu.Item
                   key={item.link}
                   className={classNames({

@@ -37,7 +37,9 @@ function Item(props, padding, pathname) {
     ]
   }
   // array
-  const listItemsResult = value.map(item => Item(item, padding + 16, pathname))
+  const listItemsResult = value.map((item) =>
+    Item(item, padding + 16, pathname)
+  )
   const shouldOpen = listItemsResult.reduce(
     (prev, [, curr]) => curr || prev,
     false
@@ -61,7 +63,7 @@ function Item(props, padding, pathname) {
     shouldOpen,
   ]
 }
-export default function(props) {
+export default function (props) {
   return (
     <Sider
       breakpoint="xl"
@@ -74,8 +76,8 @@ export default function(props) {
       }}
       {...props}
     >
-      <List sx={{ width: "100%" }}>
-        {pathList.map(item => Item(item, 16, props.pathname))}
+      <List sx={{ width: "100%", height: "100%" }}>
+        {pathList.map((item) => Item(item, 16, props.pathname))}
       </List>
     </Sider>
   )

@@ -55,7 +55,7 @@ module.exports = {
               // Absolute path to the directory where extensions will be downloaded. Defaults to inside node_modules.
               extensionDataDirectory: path.resolve("extensions"),
               languageAliases: {}, // Map of custom/unknown language codes to standard/known language codes
-              replaceColor: x => x, // Function allowing replacement of a theme color with another. Useful for replacing hex colors with CSS variables.
+              replaceColor: (x) => x, // Function allowing replacement of a theme color with another. Useful for replacing hex colors with CSS variables.
               getLineClassName: ({
                 // Function allowing dynamic setting of additional class names on individual lines
                 content, //   - the string content of the line

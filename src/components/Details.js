@@ -21,7 +21,7 @@ const detailsStyle = {
   },
 }
 
-export default function({ className = "", children, ...props }) {
+export default function ({ className = "", children, ...props }) {
   return className.match("open") ? (
     <details className={className} sx={detailsStyle} {...props} open>
       {children}
