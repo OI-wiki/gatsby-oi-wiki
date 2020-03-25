@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui"
 import "@material/react-chips/dist/chips.css"
 import { ChipSet, Chip } from "@material/react-chips"
+const _ = require("lodash")
 
 function Header({ num }) {
   if (num <= 0) return <span>本页面没有标签</span>
@@ -16,7 +17,7 @@ function Tags({ tags }) {
       <ChipSet>
         {arr
           ? arr.map((tag) => (
-              <a href={"/tags/" + tag} key={`tag-${tag}`}>
+              <a href={"/tags/" + _.kebabCase(tag)} key={`tag-${tag}`}>
                 <Chip label={`tag-item`} label={` ${tag} `}></Chip>
               </a>
             ))
