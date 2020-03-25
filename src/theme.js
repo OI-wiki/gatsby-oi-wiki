@@ -248,14 +248,14 @@ export default {
         "100%",
         null,
         null,
-        theme =>
+        (theme) =>
           `calc(100% - ${theme.layout.sidebar.width}px - ${theme.layout.toc.width})`,
       ],
-      ml: [null, null, null, theme => theme.layout.sidebar.width],
+      ml: [null, null, null, (theme) => theme.layout.sidebar.width],
       //float: [null, null, null, "left"],
       transition: "margin-left 0.1s",
       "&.pushed": {
-        ml: theme => theme.layout.sidebar.width,
+        ml: (theme) => theme.layout.sidebar.width,
       },
       flex: "none",
     },
@@ -297,9 +297,9 @@ export default {
         "100%",
         null,
         null,
-        theme => `calc(100% - ${theme.layout.sidebar.width}px)`,
+        (theme) => `calc(100% - ${theme.layout.sidebar.width}px)`,
       ],
-      ml: [null, null, null, theme => theme.layout.sidebar.width],
+      ml: [null, null, null, (theme) => theme.layout.sidebar.width],
     },
     search: {
       width: 200,

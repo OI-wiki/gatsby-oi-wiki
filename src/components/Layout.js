@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
 
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Footer } = Layout
 
 const LazySider = Loadable({
   loader: () => import("./Sidebar"),
@@ -79,7 +79,7 @@ function myLayout({
           sx={theme.layout.sidebar}
           pathname={location.pathname}
           breakpoint="xl"
-          onBreakpoint={broken =>
+          onBreakpoint={(broken) =>
             broken ? setCollapsed(true) : setCollapsed(false)
           }
           collapsed={collapsed}

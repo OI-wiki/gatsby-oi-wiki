@@ -33,7 +33,7 @@ function TocItem({ tocNode, kkey, ...props }) {
 //  return res
 //}
 
-export default function({ toc, key, ...props }) {
+export default function ({ toc, key, ...props }) {
   //let tocIDs = []
   //if (toc && toc.items) {
   //  toc.items.forEach(node => {

@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet"
 import React from "react"
 import Layout from "../components/Layout"
 
-const page = location => (
+const page = (location) => (
   <Layout location={location}>
     <div>
       <Helmet title={`404 Page`} />

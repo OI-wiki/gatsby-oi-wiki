@@ -22,7 +22,7 @@ class BlogIndex extends React.Component {
     const { edges: posts, group } = this.data.allMdx
     this.posts = posts
     this.group = group
-    this.group.forEach(tag => {
+    this.group.forEach((tag) => {
       this.children.push(<Option key={tag.fieldValue}>{tag.fieldValue}</Option>)
     })
   }
@@ -54,7 +54,7 @@ class BlogIndex extends React.Component {
               isSelected = true
             } else {
               isSelected = allKeys
-                .map(x =>
+                .map((x) =>
                   tags.reduce((prev, curr) => prev || curr === x, false)
                 )
                 .reduce((prev, curr) => prev && curr, true)

@@ -1,5 +1,5 @@
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  ;(function() {
+  ;(function () {
     // reload mathjax
     MathJax.typeset()
   })()
