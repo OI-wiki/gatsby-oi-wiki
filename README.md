@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Ir1d/oi-wiki-ng) 
+
 # 为换框架所做出的尝试（
 
 Demo: https://ng.oi-wiki.org/
