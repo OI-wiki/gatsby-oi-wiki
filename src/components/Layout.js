@@ -11,23 +11,12 @@ import { Layout, Card, BackTop } from "antd"
 import { Helmet } from "react-helmet"
 import "antd/dist/antd.css"
 import { useState } from "react"
-import Skeleton from "@material-ui/lab/Skeleton"
-const { Header, Content, Footer, Sider } = Layout
+
+const { Header, Content, Footer } = Layout
 
 const LazySider = Loadable({
   loader: () => import("./Sidebar"),
-  loading: () => (
-    <div style={{ marginTop: 24, marginLeft: 16 }}>
-      {Array.from({ length: 18 }, (_, i) => i).map((_) => (
-        <Skeleton
-          animation="wave"
-          variant="text"
-          width={280}
-          style={{ marginTop: 12 }}
-        />
-      ))}
-    </div>
-  ),
+  loading: () => <div />,
 })
 
 const LazyComment = Loadable({
@@ -86,21 +75,17 @@ function myLayout({
         <Navbar toggleSider={() => setCollapsed(!collapsed)} />
       </Header>
       <Layout sx={theme.layout.www}>
-        <Sider
-          breakpoint="xl"
-          collapsedWidth="0"
-          theme="light"
-          width="300px"
+        <LazySider
           sx={theme.layout.sidebar}
+          pathname={location.pathname}
           breakpoint="xl"
           onBreakpoint={(broken) =>
             broken ? setCollapsed(true) : setCollapsed(false)
           }
           collapsed={collapsed}
           trigger={null}
-        >
-          <LazySider pathname={location.pathname} />
-        </Sider>
+        />
+
         <Layout sx={theme.layout.main}>
           <Content>
             <Card
