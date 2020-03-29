@@ -258,6 +258,7 @@ export default {
         ml: (theme) => theme.layout.sidebar.width,
       },
       flex: "none",
+      minHeight: "100vh"
     },
     container: {
       width: "100%",
