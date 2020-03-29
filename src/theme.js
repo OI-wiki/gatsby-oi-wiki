@@ -206,7 +206,6 @@ export default {
       //left: [theme => -theme.layout.sidebar.width, null, "auto"],
       visibility: [null, null, null, "visible"],
       transition: "left 0.1s",
-      overflow: "auto",
       outline: 0,
       "&.active": {
         left: "auto",
@@ -259,7 +258,6 @@ export default {
         ml: (theme) => theme.layout.sidebar.width,
       },
       flex: "none",
-      minHeight: "100vh",
     },
     container: {
       width: "100%",
