@@ -65,20 +65,8 @@ function Item(props, padding, pathname) {
 }
 export default function (props) {
   return (
-    <Sider
-      breakpoint="xl"
-      collapsedWidth="0"
-      theme="light"
-      width="300px"
-      sx={{
-        height: "100%",
-        overflow: "auto",
-      }}
-      {...props}
-    >
-      <List sx={{ width: "100%", height: "100%" }}>
-        {pathList.map((item) => Item(item, 16, props.pathname))}
-      </List>
-    </Sider>
+    <List sx={{ width: "100%", height: "100%" }}>
+      {pathList.map((item) => Item(item, 16, props.pathname))}
+    </List>
   )
 }
