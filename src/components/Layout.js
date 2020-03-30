@@ -6,10 +6,10 @@ import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
 import { useTheme, makeStyles } from "@material-ui/core/styles"
-import Card from '@material-ui/core/Card';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import Card from "@material-ui/core/Card"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import CardContent from "@material-ui/core/CardContent"
+import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
-  }
-}));
+    marginBottom: theme.spacing(2),
+  },
+}))
 
 const LazyComment = Loadable({
   loader: () => import("./Comment"),
@@ -41,11 +41,11 @@ function myLayout({
   noMeta,
   noComment,
 }) {
-  const classes = useStyles();
-  const theme = useTheme();
+  const classes = useStyles()
+  const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   return (
-    <div sx={{ display: 'flex' }}>
+    <div sx={{ display: "flex" }}>
       <Helmet>
         <title>{title}</title>
       </Helmet>
@@ -63,13 +63,13 @@ function myLayout({
               {children}
             </Typography>
             <Divider className={classes.divider} />
-              <Meta
-                authors={authors}
-                tags={tags}
-                relativePath={relativePath}
-                modifiedTime={modifiedTime}
-                noMeta={noMeta}
-              />
+            <Meta
+              authors={authors}
+              tags={tags}
+              relativePath={relativePath}
+              modifiedTime={modifiedTime}
+              noMeta={noMeta}
+            />
           </CardContent>
         </Card>
 
@@ -77,7 +77,7 @@ function myLayout({
           <LazyComment title={title} noComment={noComment}></LazyComment>
         </div>
       </main>
-    </div >
+    </div>
   )
 }
 
