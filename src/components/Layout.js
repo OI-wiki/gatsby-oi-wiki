@@ -16,6 +16,7 @@ import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
 import Footer from "./Footer"
+import { useEffect } from "react"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
@@ -59,7 +60,7 @@ function myLayout({
   return (
     <div sx={{ display: "flex" }}>
       <Helmet>
-        <title>{`${title} - OI Wiki`}</title>
+        <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
       </Helmet>
       <CssBaseline />
       <Navbar pathname={location.pathname} />
@@ -84,20 +85,24 @@ function myLayout({
               />
             </CardContent>
           </Card>
-          <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
-            <ExpansionPanelSummary
-              expandIcon={<MdExpandMore />}
-              aria-controls="comment"
-              id="panel1a-header"
-            >
-              <Typography className={classes.heading}>评论</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <div sx={{ marginLeft: 24, marginRight: 24 }}>
-                <LazyComment title={title} noComment={noComment}></LazyComment>
-              </div>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+          {noComment === "true" ? (
+            <div />
+          ) : (
+            <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
+              <ExpansionPanelSummary
+                expandIcon={<MdExpandMore />}
+                aria-controls="comment"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>评论</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div sx={{ marginLeft: 24, marginRight: 24 }}>
+                  <LazyComment title={title}></LazyComment>
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          )}
         </div>
         <Divider />
         <div className={classes.footer}>

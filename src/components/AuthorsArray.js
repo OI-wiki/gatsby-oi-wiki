@@ -16,8 +16,8 @@ function AuthorsArray({ authors }) {
       <ChipSet>
         {arr
           ? arr.map((author) => (
-              <Link href={"https://github.com/" + author.trim()}>
-                <Chip label={` ${author} `} key={author}></Chip>{" "}
+            <Link href={"https://github.com/" + author.trim()} key={author}>
+                <Chip label={` ${author} `} ></Chip>{" "}
               </Link>
             ))
           : ""}
