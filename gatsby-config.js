@@ -126,9 +126,9 @@ module.exports = {
             edges {
               node {
                 id
-				fields{
-				  slug
-				}
+                fields{
+                  slug
+                }
               }
             }
           }
