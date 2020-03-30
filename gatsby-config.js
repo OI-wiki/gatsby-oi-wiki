@@ -144,6 +144,7 @@ module.exports = {
         exclude: [
           `/dev-404-page/`,
           `/404/`,
+          `/404.html`,
           `/offline-plugin-app-shell-fallback/`,
           //          `/(\/)?hash-\S*/`, // you can also pass valid RegExp to exclude internal tags for example
         ],
