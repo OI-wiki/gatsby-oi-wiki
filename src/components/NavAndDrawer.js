@@ -16,16 +16,16 @@ import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    [theme.breakpoints.up("lg")]: {
-      width: drawerWidth,
-      flexShrink: 0,
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  hiddenDrawer: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
     },
   },
   appBar: {
-    [theme.breakpoints.up("lg")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
+    zIndex: theme.zIndex.drawer + 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -126,37 +126,36 @@ function ResponsiveDrawer(props) {
           </div>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden lgUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <SiderContent {...props} />
-          </Drawer>
-        </Hidden>
-        <Hidden mdDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            <SiderContent {...props} />
-          </Drawer>
-        </Hidden>
-      </nav>
+      <Hidden lgUp implementation="css">
+        <Drawer
+          container={container}
+          variant="temporary"
+          anchor={theme.direction === "rtl" ? "right" : "left"}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <SiderContent {...props} />
+        </Drawer>
+      </Hidden>
+      <Hidden mdDown implementation="css">
+        <Drawer
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          variant="permanent"
+          open
+        >
+          <div className={classes.toolbar} />
+          <SiderContent {...props} />
+        </Drawer>
+      </Hidden>
     </>
   )
 }
