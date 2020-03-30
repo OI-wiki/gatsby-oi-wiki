@@ -40,3 +40,7 @@ footer{
     display:none;
   }
 }
+
+.ant-anchor-ink-ball {
+    transition: top .15s ease-in-out !important;
+}
