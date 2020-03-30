@@ -7,19 +7,31 @@ import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
 import { useTheme, makeStyles } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
+import { MdExpandMore } from "react-icons/md"
+import ExpansionPanel from "@material-ui/core/ExpansionPanel"
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
+import Footer from "./Footer"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
+  },
+  main: {
     padding: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   divider: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
+  },
+  footer: {
+    background: "#fff",
+    padding: theme.spacing(3),
   },
 }))
 
@@ -47,34 +59,49 @@ function myLayout({
   return (
     <div sx={{ display: "flex" }}>
       <Helmet>
-        <title>{title}</title>
+        <title>{`${title} - OI Wiki`}</title>
       </Helmet>
       <CssBaseline />
       <Navbar pathname={location.pathname} />
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Card>
-          <CardContent>
-            <Typography variant="h3" component="h2">
-              {pageTitle}
-            </Typography>
-            <Divider className={classes.divider} />
-            <Typography variant="body1" component="div">
-              {children}
-            </Typography>
-            <Divider className={classes.divider} />
-            <Meta
-              authors={authors}
-              tags={tags}
-              relativePath={relativePath}
-              modifiedTime={modifiedTime}
-              noMeta={noMeta}
-            />
-          </CardContent>
-        </Card>
-
-        <div sx={{ marginLeft: 24, marginRight: 24 }}>
-          <LazyComment title={title} noComment={noComment}></LazyComment>
+        <div className={classes.main}>
+          <div className={classes.toolbar} />
+          <Card>
+            <CardContent sx={{ padding: theme.spacing(4) }}>
+              <Typography variant="h3" component="h2">
+                {pageTitle}
+              </Typography>
+              <Divider className={classes.divider} />
+              <Typography variant="body1" component="div">
+                {children}
+              </Typography>
+              <Meta
+                authors={authors}
+                tags={tags}
+                relativePath={relativePath}
+                modifiedTime={modifiedTime}
+                noMeta={noMeta}
+              />
+            </CardContent>
+          </Card>
+          <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
+            <ExpansionPanelSummary
+              expandIcon={<MdExpandMore />}
+              aria-controls="comment"
+              id="panel1a-header"
+            >
+              <Typography className={classes.heading}>评论</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div sx={{ marginLeft: 24, marginRight: 24 }}>
+                <LazyComment title={title} noComment={noComment}></LazyComment>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </div>
+        <Divider />
+        <div className={classes.footer}>
+          <Footer />
         </div>
       </main>
     </div>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { ChipSet, Chip } from "@material/react-chips"
-
+import Link from "./Link"
 function Header({ num }) {
   if (num <= 0) return <span>本页面未记录贡献者</span>
   if (num == 1) return <span>贡献者：</span>
@@ -16,9 +16,9 @@ function AuthorsArray({ authors }) {
       <ChipSet>
         {arr
           ? arr.map((author) => (
-              <a href={"https://github.com/" + author.trim()}>
+              <Link href={"https://github.com/" + author.trim()}>
                 <Chip label={` ${author} `} key={author}></Chip>{" "}
-              </a>
+              </Link>
             ))
           : ""}
       </ChipSet>

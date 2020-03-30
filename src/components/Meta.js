@@ -3,21 +3,25 @@ import { jsx } from "theme-ui"
 import AuthorsArray from "./AuthorsArray"
 import Tags from "./Tags"
 import Link from "./Link"
+import Divider from "@material-ui/core/Divider"
 import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
+import { useTheme } from "@material-ui/core/styles"
+import Paper from "@material-ui/core/Paper"
 
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
+  const theme = useTheme()
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
   if (noMeta == "false") {
     return (
-      <div>
+      <Paper sx={{ padding: theme.spacing(2) }} elevation={1}>
         <AuthorsArray authors={authors} />
         <Tags tags={tags} />
         <div
           sx={{
             borderLeft: "5px solid #ff1700",
             margin: "20px 0",
-            paddingLeft: "1.5rem",
+            paddingLeft: "1rem",
             textDecoration: "none",
           }}
         >
@@ -48,7 +52,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
             协议之条款下提供，附加条款亦可能应用
           </span>
         </div>
-      </div>
+      </Paper>
     )
   } else return <div></div>
 }
