@@ -15,7 +15,12 @@ function linkFix(url) {
 
 function Link({ to = "", href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
-
+  if (href.match(/https:\/\//) !== null)
+    return (
+      <a {...props} href={href} sx={linkStyles}>
+        {children}
+      </a>
+    )
   return (
     <GatsbyLink {...props} to={linkFix(href)} sx={linkStyles}>
       {children}
