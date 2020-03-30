@@ -5,6 +5,7 @@ module.exports = {
     title: "OI Wiki",
     description: "Guide for OI",
     author: "OI Wiki Team",
+	siteUrl: `https://ng.oi-wiki.org`,
   },
   plugins: [
     `gatsby-source-local-git`,
@@ -114,6 +115,41 @@ module.exports = {
           clientsClaim: true,
         },
       },
+    },
+	{
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options: {
+        // 1 query for each data type
+        query: `
+        {
+          allMdx {
+            edges {
+              node {
+                id
+				fields{
+				  slug
+				}
+              }
+            }
+          }
+        }`,
+        mapping: {
+          // Each data type can be mapped to a predefined sitemap
+          // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
+          // The default sitemap - if none is passed - will be pages
+          allMdx: {
+            sitemap: `documents`,
+          },
+        },
+        exclude: [
+          `/dev-404-page/`,
+          `/404/`,
+          `/offline-plugin-app-shell-fallback/`,
+//          `/(\/)?hash-\S*/`, // you can also pass valid RegExp to exclude internal tags for example
+        ],
+        createLinkInHead: true, // optional: create a link in the `<head>` of your site
+        addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
+	  }
     },
     // "gatsby-plugin-webpack-bundle-analyser-v2"
     // when you need to analyze bundle size, enable it
