@@ -73,6 +73,14 @@ module.exports = {
         extensions: [".mdx", ".md"],
       },
     },
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-react-helmet`,
@@ -152,7 +160,7 @@ module.exports = {
         addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
       },
     },
-    // "gatsby-plugin-webpack-bundle-analyser-v2"
+    "gatsby-plugin-webpack-bundle-analyser-v2"
     // when you need to analyze bundle size, enable it
   ],
 }
