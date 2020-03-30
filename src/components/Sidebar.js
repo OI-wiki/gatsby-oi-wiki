@@ -6,8 +6,6 @@ import ListItem from "@material-ui/core/ListItem"
 import Collapse from "@material-ui/core/Collapse"
 import ListItemText from "@material-ui/core/ListItemText"
 import pathList from "../sidebar.yaml"
-import { Layout } from "antd"
-const { Sider } = Layout
 import { useState } from "react"
 import { MdExpandMore, MdExpandLess } from "react-icons/md"
 
@@ -65,20 +63,8 @@ function Item(props, padding, pathname) {
 }
 export default function (props) {
   return (
-    <Sider
-      breakpoint="xl"
-      collapsedWidth="0"
-      theme="light"
-      width="300px"
-      sx={{
-        height: "100%",
-        overflow: "auto",
-      }}
-      {...props}
-    >
-      <List sx={{ width: "100%", height: "100%" }}>
-        {pathList.map((item) => Item(item, 16, props.pathname))}
-      </List>
-    </Sider>
+    <List sx={{ width: "100%", height: "100%" }}>
+      {pathList.map((item) => Item(item, 16, props.pathname))}
+    </List>
   )
 }

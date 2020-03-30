@@ -2,8 +2,9 @@
 import { Link as GatsbyLink } from "gatsby"
 import isAbsoluteURL from "is-absolute-url"
 import { jsx } from "theme-ui"
+import theme from "../theme"
 
-const linkStyles = { variant: "styles.a" }
+const linkStyles = theme.styles.a
 
 function linkFix(url) {
   if (/\.md/.test(url)) url = "../" + url.replace(/\.md/, "/")
@@ -16,9 +17,9 @@ function Link({ to = "", href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
 
   return (
-    <a {...props} href={linkFix(href)} sx={linkStyles}>
+    <GatsbyLink {...props} to={linkFix(href)} sx={linkStyles}>
       {children}
-    </a>
+    </GatsbyLink>
   )
 }
 
