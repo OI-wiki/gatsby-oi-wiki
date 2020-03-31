@@ -11,7 +11,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 首先，准备好Git和Node.js（其中包含npm）
 
 ```shell
-npm install -g windows-build-tools #如果你是Windows用户，请务必在进行下列操作前执行此项；
+npm install -g windows-build-tools #如果你是Windows用户，请务必在进行下列操作前在拥有管理员权限的窗口执行此项；
                                    #该操作将执行20分钟甚至更多，期间可能会出现停在一个页面不动以及CPU飙升的情况，属正常现象
 git clone https://github.com/Ir1d/oi-wiki-ng.git #将仓库克隆至本地
 cd oi-wiki-ng #进入仓库文件夹
