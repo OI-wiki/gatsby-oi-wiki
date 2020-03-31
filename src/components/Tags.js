@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import "@material/react-chips/dist/chips.css"
-import { ChipSet, Chip } from "@material/react-chips"
+import { Chip, ChipSet } from "@material/react-chips"
 import kebabCase from "lodash/kebabCase"
 import Link from "./Link"
 
@@ -14,14 +14,14 @@ function Tags({ tags }) {
   const arr = tags
   return (
     <div>
-      <Header num={arr ? arr.length : 0}></Header>
+      <Header num={arr ? arr.length : 0}/>
       <ChipSet>
         {arr
           ? arr.map((tag) => (
-              <Link href={"/tags/" + kebabCase(tag)} key={`tag-${tag}`}>
-                <Chip label={`tag-item`} label={` ${tag} `}></Chip>
-              </Link>
-            ))
+            <Link href={"/tags/" + kebabCase(tag)} key={`tag-${tag}`}>
+              <Chip label={` ${tag} `}/>
+            </Link>
+          ))
           : ""}
       </ChipSet>
     </div>

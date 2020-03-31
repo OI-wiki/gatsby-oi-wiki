@@ -11,9 +11,11 @@ import Typography from "@material-ui/core/Typography"
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import InputBase from "@material-ui/core/InputBase"
 import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
-const drawerWidth = 300
 import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
+
+const drawerWidth = 300
+
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
@@ -101,10 +103,10 @@ function ResponsiveDrawer(props) {
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MdMenu />
+            <MdMenu/>
           </IconButton>
           <IconButton component={Link} color="inherit" to="/">
-            <MdSchool />
+            <MdSchool/>
           </IconButton>
           <Button href="/" sx={{ color: "#fff" }}>
             <Typography variant="h6" noWrap>
@@ -114,7 +116,7 @@ function ResponsiveDrawer(props) {
           <Hidden mdDown implementation="css">
             <div className={classes.search}>
               <div className={classes.searchIcon}>
-                <MdSearch />
+                <MdSearch/>
               </div>
               <InputBase
                 placeholder="Search…"
@@ -154,7 +156,7 @@ function ResponsiveDrawer(props) {
           variant="permanent"
           open
         >
-          <div className={classes.toolbar} />
+          <div className={classes.toolbar}/>
           <SiderContent {...props} />
         </Drawer>
       </Hidden>

@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import { Link as GatsbyLink } from "gatsby"
 import { jsx } from "theme-ui"
 import { MdEdit, MdExpandMore } from "react-icons/md"
 
-export default function ({ className = null, children, ...props }) {
+export default function({ className = null, children, ...props }) {
   if (className.match("note")) {
     return (
       <summary

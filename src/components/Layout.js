@@ -5,7 +5,7 @@ import Navbar from "./NavAndDrawer"
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
-import { useTheme, makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
 import { MdExpandMore } from "react-icons/md"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
@@ -18,6 +18,7 @@ import Divider from "@material-ui/core/Divider"
 import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
 import React from "react"
+
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
@@ -46,47 +47,47 @@ const useStyles = makeStyles((theme) => ({
 
 const LazyComment = Loadable({
   loader: () => import("./Comment"),
-  loading: () => <div />,
+  loading: () => <div/>,
 })
 
 const LazyToc = Loadable({
   loader: () => import("./Toc"),
-  loading: () => <div />,
+  loading: () => <div/>,
 })
 
 function myLayout({
-  children,
-  location,
-  authors,
-  title,
-  description,
-  tags,
-  toc,
-  relativePath,
-  modifiedTime,
-  noMeta,
-  noComment,
-}) {
+                    children,
+                    location,
+                    authors,
+                    title,
+                    description,
+                    tags,
+                    toc,
+                    relativePath,
+                    modifiedTime,
+                    noMeta,
+                    noComment,
+                  }) {
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   return (
     <>
-      <CssBaseline />
+      <CssBaseline/>
       <div sx={{ display: "flex" }} className={classes.container}>
         <Helmet>
           <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
         </Helmet>
-        <Navbar pathname={location.pathname} />
+        <Navbar pathname={location.pathname}/>
         <main className={classes.content}>
           <div className={classes.main}>
-            <div className={classes.toolbar} />
+            <div className={classes.toolbar}/>
             <Card>
               <CardContent sx={{ padding: theme.spacing(4) }}>
                 <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>
-                <Divider className={classes.divider} />
+                <Divider className={classes.divider}/>
                 <Typography variant="body1" component="div">
                   {children}
                 </Typography>
@@ -102,7 +103,7 @@ function myLayout({
             {noComment === "false" && (
               <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
                 <ExpansionPanelSummary
-                  expandIcon={<MdExpandMore />}
+                  expandIcon={<MdExpandMore/>}
                   aria-controls="comment"
                   id="panel1a-header"
                 >
@@ -110,20 +111,20 @@ function myLayout({
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <Container>
-                    <LazyComment title={title}></LazyComment>
+                    <LazyComment title={title}/>
                   </Container>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             )}
           </div>
-          <Divider />
+          <Divider/>
           <div className={classes.footer}>
-            <Footer />
+            <Footer/>
           </div>
         </main>
       </div>
       {toc && toc.items && (
-        <LazyToc toc={toc} key={location.key} pathname={location.pathname} />
+        <LazyToc toc={toc} key={location.key} pathname={location.pathname}/>
       )}
     </>
   )

@@ -3,7 +3,6 @@ import { jsx } from "theme-ui"
 import AuthorsArray from "./AuthorsArray"
 import Tags from "./Tags"
 import Link from "./Link"
-import Divider from "@material-ui/core/Divider"
 import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
 import { useTheme } from "@material-ui/core/styles"
 import Paper from "@material-ui/core/Paper"
@@ -12,11 +11,11 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const theme = useTheme()
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
-  if (noMeta == "false") {
+  if (noMeta === "false") {
     return (
       <Paper sx={{ padding: theme.spacing(2) }} elevation={1}>
-        <AuthorsArray authors={authors} />
-        <Tags tags={tags} />
+        <AuthorsArray authors={authors}/>
+        <Tags tags={tags}/>
         <div
           sx={{
             borderLeft: "5px solid #ff1700",
@@ -26,22 +25,22 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           }}
         >
           <span>
-            <MdBuild />
+            <MdBuild/>
             本页面最近更新：
           </span>
           <span>{modifiedTime}</span>，
           <Link href={historyURL + relativePath}>更新历史</Link>
-          <br />
+          <br/>
           <span>
-            <MdEdit />
+            <MdEdit/>
             发现错误？想一起完善？{" "}
             <Link href={editURL + relativePath} title="编辑此页">
               在 GitHub 上编辑此页！
             </Link>
           </span>
-          <br />
+          <br/>
           <span>
-            <MdCopyright />
+            <MdCopyright/>
             本页面的全部内容在{" "}
             <strong>
               <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
@@ -54,7 +53,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
         </div>
       </Paper>
     )
-  } else return <div></div>
+  } else return <div/>
 }
 
 export default Meta

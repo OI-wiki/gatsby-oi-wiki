@@ -8,8 +8,8 @@ const linkStyles = theme.styles.a
 
 function linkFix(url) {
   if (/\.md/.test(url)) url = "../" + url.replace(/\.md/, "/")
-  if (/\#/.test(url)) return url
-  if (url.split("/").slice(-1) == "") return url
+  if (/#/.test(url)) return url
+  if (url.split("/").slice(-1)[0] === "") return url
   return url + "/"
 }
 
