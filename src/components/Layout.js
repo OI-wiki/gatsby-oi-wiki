@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     width: "100%",
+    overflow: "inherit",
   },
   main: {
     padding: theme.spacing(3),
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0.5),
     },
     minHeight: "100vh",
+    overflow: "inherit",
   },
   divider: {
     marginTop: theme.spacing(2),
@@ -48,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - 20%)`,
     },
+    overflow: "auto",
   },
 }))
 
@@ -88,8 +91,10 @@ function myLayout({
         <main className={classes.content}>
           <div className={classes.main}>
             <div className={classes.toolbar}/>
-            <Card>
-              <CardContent>
+            <Card sx={{ overflow: "inherit" }}>
+              <CardContent sx={{
+                overflow: "auto",
+              }}>
                 <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>
