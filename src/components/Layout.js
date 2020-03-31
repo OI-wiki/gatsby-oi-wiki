@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    width: "100%"
+    width: "100%",
   },
   main: {
     padding: theme.spacing(3),
@@ -83,7 +83,7 @@ function myLayout({
             <div className={classes.toolbar} />
             <Card>
               <CardContent sx={{ padding: theme.spacing(4) }}>
-                <Typography variant="h3" component="h2">
+                <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>
                 <Divider className={classes.divider} />
@@ -98,7 +98,7 @@ function myLayout({
                   noMeta={noMeta}
                 />
               </CardContent>
-              </Card>
+            </Card>
             {noComment === "false" && (
               <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
                 <ExpansionPanelSummary
