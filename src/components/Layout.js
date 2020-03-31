@@ -14,13 +14,15 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
-import { Divider } from "@material-ui/core"
+import Divider from "@material-ui/core/Divider"
+import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
 import React from "react"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
+    width: "100%"
   },
   main: {
     padding: theme.spacing(3),
@@ -96,7 +98,7 @@ function myLayout({
                   noMeta={noMeta}
                 />
               </CardContent>
-            </Card>
+              </Card>
             {noComment === "false" && (
               <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
                 <ExpansionPanelSummary
@@ -107,9 +109,9 @@ function myLayout({
                   <Typography className={classes.heading}>评论</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                  <div sx={{ marginLeft: 24, marginRight: 24 }}>
+                  <Container>
                     <LazyComment title={title}></LazyComment>
-                  </div>
+                  </Container>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             )}

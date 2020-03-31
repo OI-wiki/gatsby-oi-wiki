@@ -111,19 +111,21 @@ function ResponsiveDrawer(props) {
               OI Wiki
             </Typography>
           </Button>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <MdSearch />
+          <Hidden mdDown implementation="css">
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <MdSearch />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
+          </Hidden>
         </Toolbar>
       </AppBar>
       <Hidden lgUp implementation="css">
