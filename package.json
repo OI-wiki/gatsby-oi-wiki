@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@material-ui/core": "^4.9.7",
+    "@material-ui/styles": "^4.9.6",
     "@material/react-chips": "^0.15.0",
     "@mdx-js/mdx": "^1.5.8",
     "@mdx-js/react": "^1.5.8",
@@ -20,10 +21,12 @@
     "@theme-ui/prism": "^0.3.0",
     "antd": "^4.0.3",
     "classnames": "^2.2.6",
+    "clsx": "^1.1.0",
     "gatsby": "^2.20.8",
     "gatsby-plugin-advanced-sitemap": "^1.5.2",
     "gatsby-plugin-catch-links": "^2.2.0",
     "gatsby-plugin-manifest": "^2.3.3",
+    "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-mdx": "^1.1.3",
     "gatsby-plugin-offline": "^3.1.2",
     "gatsby-plugin-react-helmet": "^3.2.0",
@@ -55,6 +58,7 @@
   },
   "devDependencies": {
     "@welldone-software/why-did-you-render": "^4.0.5",
+    "eslint": "^6.8.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.8",
     "husky": "^4.2.3"
   },
