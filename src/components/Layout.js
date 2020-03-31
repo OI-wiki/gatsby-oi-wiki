@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     padding: theme.spacing(3),
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(0.5),
+    },
     minHeight: "100vh",
   },
   divider: {
@@ -86,7 +89,7 @@ function myLayout({
           <div className={classes.main}>
             <div className={classes.toolbar}/>
             <Card>
-              <CardContent sx={{ padding: theme.spacing(4) }}>
+              <CardContent>
                 <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>

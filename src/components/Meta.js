@@ -13,7 +13,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
   if (noMeta === "false") {
     return (
-      <Paper sx={{ padding: theme.spacing(2) }} elevation={1}>
+      <Paper sx={{ padding: theme.spacing(2) }} variant="outlined">
         <AuthorsArray authors={authors}/>
         <Tags tags={tags}/>
         <div
