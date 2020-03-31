@@ -103,7 +103,7 @@ function ResponsiveDrawer(props) {
           >
             <MdMenu />
           </IconButton>
-          <IconButton component={Link} color="inherit" href="/">
+          <IconButton component={Link} color="inherit" to="/">
             <MdSchool />
           </IconButton>
           <Button href="/" sx={{ color: "#fff" }}>

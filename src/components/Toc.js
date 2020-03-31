@@ -6,7 +6,7 @@ import throttle from "lodash/throttle"
 import { makeStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import clsx from "clsx"
-import Link from "./Link"
+import MuiLink from "@material-ui/core/Link"
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -79,19 +79,23 @@ function useThrottledOnScroll(callback, delay) {
   }, [throttledCallback])
 }
 
+function getIDfromURL(url) {
+  return url.substring(1, url.length)
+}
+
 function getItems(items) {
   const itemsResult = []
   items.forEach((item2) => {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
-      node: document.getElementById(item2.url),
+      node: document.getElementById(getIDfromURL(item2.url)),
     })
     if (item2.items) {
       item2.items.forEach((item3) => {
         itemsResult.push({
           ...item3,
-          node: document.getElementById(item3.url),
+          node: document.getElementById(getIDfromURL(item3.url)),
         })
       })
     }
@@ -173,7 +177,7 @@ export default function ToC(props) {
   )
 
   const itemLink = (item, secondary) => (
-    <Link
+    <MuiLink
       display="block"
       color={activeState === item.url ? "textPrimary" : "textSecondary"}
       href={`${pathname}${item.url}`}
@@ -182,11 +186,11 @@ export default function ToC(props) {
       className={clsx(
         classes.item,
         { [classes.secondaryItem]: secondary },
-        activeState === item.hash ? classes.active : undefined
+        activeState === item.url ? classes.active : undefined
       )}
     >
       <span dangerouslySetInnerHTML={{ __html: item.title }} />
-    </Link>
+    </MuiLink>
   )
   return (
     <nav className={classes.main} aria-label={"pageTOC"}>
