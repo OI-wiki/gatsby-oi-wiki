@@ -4,7 +4,7 @@ import Details from "./components/Details"
 import Summary from "./components/Summary"
 
 export default {
-  a: Link,
+  // a: Link,
   // code: Prism,
   // pre: props => props.children,
   details: Details,

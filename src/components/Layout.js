@@ -16,7 +16,8 @@ import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
 import Footer from "./Footer"
-import { useEffect } from "react"
+import Toc from "./Toc"
+import React from "react"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   main: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(1),
+    minHeight: "100vh",
   },
   divider: {
     marginTop: theme.spacing(2),
@@ -33,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     background: "#fff",
     padding: theme.spacing(3),
+  },
+  container: {
+    [theme.breakpoints.up("md")]: {
+      width: `calc(100% - 20%)`,
+    },
   },
 }))
 
@@ -58,58 +65,61 @@ function myLayout({
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   return (
-    <div sx={{ display: "flex" }}>
-      <Helmet>
-        <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
-      </Helmet>
-      <CssBaseline />
-      <Navbar pathname={location.pathname} />
-      <main className={classes.content}>
-        <div className={classes.main}>
-          <div className={classes.toolbar} />
-          <Card>
-            <CardContent sx={{ padding: theme.spacing(4) }}>
-              <Typography variant="h3" component="h2">
-                {pageTitle}
-              </Typography>
-              <Divider className={classes.divider} />
-              <Typography variant="body1" component="div">
-                {children}
-              </Typography>
-              <Meta
-                authors={authors}
-                tags={tags}
-                relativePath={relativePath}
-                modifiedTime={modifiedTime}
-                noMeta={noMeta}
-              />
-            </CardContent>
-          </Card>
-          {noComment === "true" ? (
-            <div />
-          ) : (
-            <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
-              <ExpansionPanelSummary
-                expandIcon={<MdExpandMore />}
-                aria-controls="comment"
-                id="panel1a-header"
-              >
-                <Typography className={classes.heading}>评论</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <div sx={{ marginLeft: 24, marginRight: 24 }}>
-                  <LazyComment title={title}></LazyComment>
-                </div>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          )}
-        </div>
-        <Divider />
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-      </main>
-    </div>
+    <>
+      <div sx={{ display: "flex" }} className={classes.container}>
+        <Helmet>
+          <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
+        </Helmet>
+        <CssBaseline />
+        <Navbar pathname={location.pathname} />
+        <main className={classes.content}>
+          <div className={classes.main}>
+            <div className={classes.toolbar} />
+            <Card>
+              <CardContent sx={{ padding: theme.spacing(4) }}>
+                <Typography variant="h3" component="h2">
+                  {pageTitle}
+                </Typography>
+                <Divider className={classes.divider} />
+                <Typography variant="body1" component="div">
+                  {children}
+                </Typography>
+                <Meta
+                  authors={authors}
+                  tags={tags}
+                  relativePath={relativePath}
+                  modifiedTime={modifiedTime}
+                  noMeta={noMeta}
+                />
+              </CardContent>
+            </Card>
+            {noComment === "false" && (
+              <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
+                <ExpansionPanelSummary
+                  expandIcon={<MdExpandMore />}
+                  aria-controls="comment"
+                  id="panel1a-header"
+                >
+                  <Typography className={classes.heading}>评论</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <div sx={{ marginLeft: 24, marginRight: 24 }}>
+                    <LazyComment title={title}></LazyComment>
+                  </div>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            )}
+          </div>
+          <Divider />
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        </main>
+      </div>
+      {toc.items && (
+        <Toc toc={toc} key={location.key} pathname={location.pathname} />
+      )}
+    </>
   )
 }
 
