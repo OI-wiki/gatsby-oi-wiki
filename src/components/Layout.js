@@ -119,20 +119,21 @@ function myLayout({
               </CardContent>
             </Card>
             {noComment === "false" && (
-              <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
-                <ExpansionPanelSummary
-                  expandIcon={<MdExpandMore/>}
-                  aria-controls="comment"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>评论</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Container>
-                    <LazyComment title={title}/>
-                  </Container>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+              <div style={{ width: "100%" }}>
+                <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
+                  <ExpansionPanelSummary
+                    expandIcon={<MdExpandMore/>}
+                    aria-controls="comment"
+                  >
+                    <Typography className={classes.heading}>评论</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Container>
+                      <LazyComment title={title}/>
+                    </Container>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </div>
             )}
           </div>
         </main>
