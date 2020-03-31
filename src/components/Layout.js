@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 //Components
-import Navbar from "./NavAndDrawer"
+import NavAndDrawer from "./NavAndDrawer"
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
@@ -78,7 +78,7 @@ function myLayout({
         <Helmet>
           <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
         </Helmet>
-        <Navbar pathname={location.pathname}/>
+        <NavAndDrawer pathname={location.pathname}/>
         <main className={classes.content}>
           <div className={classes.main}>
             <div className={classes.toolbar}/>
