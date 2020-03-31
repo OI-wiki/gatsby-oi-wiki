@@ -15,7 +15,7 @@ function linkFix(url) {
 
 function Link({ to = "", href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
-  if (href.match(/https:\/\//) !== null)
+  if (isAbsoluteLink)
     return (
       <a {...props} href={href} sx={linkStyles}>
         {children}
