@@ -10,8 +10,7 @@ function Header({ num }) {
 }
 
 function AuthorsArray({ authors }) {
-  const arr =
-    authors == null ? null : authors ? null : authors.split(",")
+  const arr = authors == null ? null : authors ? null : authors.split(",")
   return (
     <div>
       <Header num={arr ? arr.length : 0}/>

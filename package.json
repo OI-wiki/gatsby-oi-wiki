@@ -62,10 +62,5 @@
     "eslint": "^6.8.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.8",
     "husky": "^4.2.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format"
-    }
   }
 }
