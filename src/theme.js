@@ -14,7 +14,7 @@ export default {
   useColorSchemeMediaQuery: true,
   colors: {
     text: "#011627",
-    background: "#FDFFFC",
+    background: "rgba(0,0,0,.06)",
     primary: "#1890ff",
     secondary: "#2EC4B6",
     accent: "#FF9F1C",
@@ -23,9 +23,9 @@ export default {
     hover: "#1890FF",
     modes: {
       dark: {
-        text: "#FDFFFC",
-        toc: "#D3D3D3",
-        background: "#011627",
+        // text: "#FDFFFC",
+        // toc: "#D3D3D3",
+        // background: "#011627",
       },
     },
   },
@@ -117,7 +117,7 @@ export default {
       color: "primary",
       textDecoration: "none",
       ":hover": {
-        textDecoration: "underline",
+        textDecoration: "none",
       },
       "&.active": {
         color: "text",
@@ -304,10 +304,6 @@ export default {
     },
     search: {
       width: 200,
-    },
-    comment: {
-      marginLeft: 24,
-      marginRight: 24,
     },
   },
 }
