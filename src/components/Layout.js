@@ -119,8 +119,8 @@ function myLayout({
               </CardContent>
             </Card>
             {noComment === "false" && (
-              <div style={{ width: "100%" }}>
-                <ExpansionPanel sx={{ marginTop: theme.spacing(2) }}>
+              <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
+                <ExpansionPanel>
                   <ExpansionPanelSummary
                     expandIcon={<MdExpandMore/>}
                     aria-controls="comment"
