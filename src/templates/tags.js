@@ -1,8 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-
 // Components
-import { Link, graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Helmet from "react-helmet"
 import Layout from "../components/Layout"
 
@@ -15,7 +14,7 @@ const Tags = ({ pageContext, data, location }) => {
 
   return (
     <Layout location={location} noMeta="true">
-      <Helmet title={` ${tag} - 标签页 - OI Wiki`}></Helmet>
+      <Helmet title={` ${tag} - 标签页 - OI Wiki`}/>
       <div>
         <h1>{tagHeader}</h1>
         <ul>
@@ -56,7 +55,7 @@ Tags.propTypes = {
               slug: PropTypes.string.isRequired,
             }),
           }),
-        }).isRequired
+        }).isRequired,
       ),
     }),
   }),

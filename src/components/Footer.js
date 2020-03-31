@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { StaticQuery, graphql } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import Grid from "@material-ui/core/Grid"
 import { jsx } from "theme-ui"
 

@@ -7,16 +7,16 @@ import Layout from "../components/Layout"
 import Link from "../components/Link"
 
 const TagsPage = ({
-  data: {
-    allMdx: { group },
-    site: {
-      siteMetadata: { title },
-    },
-  },
-  location,
-}) => (
+                    data: {
+                      allMdx: { group },
+                      site: {
+                        siteMetadata: { title },
+                      },
+                    },
+                    location,
+                  }) => (
   <Layout location={location} noMeta="true">
-    <Helmet title="标签页 - OI Wiki"></Helmet>
+    <Helmet title="标签页 - OI Wiki"/>
     <div>
       <h1>Tags</h1>
       <ul>
@@ -39,7 +39,7 @@ TagsPage.propTypes = {
         PropTypes.shape({
           fieldValue: PropTypes.string.isRequired,
           totalCount: PropTypes.number.isRequired,
-        }).isRequired
+        }).isRequired,
       ),
     }),
     site: PropTypes.shape({

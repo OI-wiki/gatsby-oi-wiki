@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { useEffect, useMemo, useCallback, useRef, useState } from "react"
-import React from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import throttle from "lodash/throttle"
 import { makeStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
@@ -59,12 +58,13 @@ const useStyles = makeStyles((theme) => ({
   active: {},
 }))
 
-const noop = () => {}
+const noop = () => {
+}
 
 function useThrottledOnScroll(callback, delay) {
   const throttledCallback = useMemo(
     () => (callback ? throttle(callback, delay) : noop),
-    [callback, delay]
+    [callback, delay],
   )
 
   useEffect(() => {
@@ -133,8 +133,8 @@ export default function ToC(props) {
       if (
         item.node &&
         item.node.offsetTop <
-          document.documentElement.scrollTop +
-            document.documentElement.clientHeight / 8
+        document.documentElement.scrollTop +
+        document.documentElement.clientHeight / 8
       ) {
         active = item
         break
@@ -174,7 +174,7 @@ export default function ToC(props) {
     () => () => {
       clearTimeout(unsetClickedRef.current)
     },
-    []
+    [],
   )
 
   const itemLink = (item, secondary) => (
@@ -187,10 +187,10 @@ export default function ToC(props) {
       className={clsx(
         classes.item,
         { [classes.secondaryItem]: secondary },
-        activeState === item.url ? classes.active : undefined
+        activeState === item.url ? classes.active : undefined,
       )}
     >
-      <span dangerouslySetInnerHTML={{ __html: item.title }} />
+      <span dangerouslySetInnerHTML={{ __html: item.title }}/>
     </MuiLink>
   )
   return (

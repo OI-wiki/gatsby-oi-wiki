@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { Link as GatsbyLink } from "gatsby"
 import { jsx } from "theme-ui"
 
 const detailsStyle = {
@@ -21,7 +20,7 @@ const detailsStyle = {
   },
 }
 
-export default function ({ className = "", children, ...props }) {
+export default function({ className = "", children, ...props }) {
   return className.match("open") ? (
     <details className={className} sx={detailsStyle} {...props} open>
       {children}

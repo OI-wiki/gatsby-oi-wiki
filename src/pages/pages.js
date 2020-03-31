@@ -2,8 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Tags from "../components/Tags"
-import { Card, Row, Col, Select } from "antd"
+import { Card, Col, Row, Select } from "antd"
 import Helmet from "react-helmet"
+
 const { Option } = Select
 
 class BlogIndex extends React.Component {
@@ -12,6 +13,7 @@ class BlogIndex extends React.Component {
   children = []
   posts
   group
+
   constructor(props) {
     super(props)
     this.state = {
@@ -26,15 +28,17 @@ class BlogIndex extends React.Component {
       this.children.push(<Option key={tag.fieldValue}>{tag.fieldValue}</Option>)
     })
   }
+
   handleChange(value) {
     this.setState({
       selectedKeys: value,
     })
   }
+
   render() {
     return (
       <Layout location={this.location} noMeta="true">
-        <Helmet title="目录页 - OI Wiki"></Helmet>
+        <Helmet title="目录页 - OI Wiki"/>
         <h1>按标签筛选页面：</h1>
         <Select
           mode="multiple"
@@ -55,11 +59,11 @@ class BlogIndex extends React.Component {
             } else {
               isSelected = allKeys
                 .map((x) =>
-                  tags.reduce((prev, curr) => prev || curr === x, false)
+                  tags.reduce((prev, curr) => prev || curr === x, false),
                 )
                 .reduce((prev, curr) => prev && curr, true)
             }
-            if (!isSelected) return <div key={post.id} />
+            if (!isSelected) return <div key={post.id}/>
             else
               return (
                 <Col
@@ -89,7 +93,7 @@ class BlogIndex extends React.Component {
                     }
                     bordered={true}
                   >
-                    <Tags tags={tags} />
+                    <Tags tags={tags}/>
                   </Card>
                 </Col>
               )
@@ -99,6 +103,7 @@ class BlogIndex extends React.Component {
     )
   }
 }
+
 export const pageQuery = graphql`
   query blogIndex {
     allMdx {
