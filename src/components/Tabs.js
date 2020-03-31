@@ -1,14 +1,14 @@
 import React from "react"
 import Tab from "@material-ui/core/Tab"
 import Tabs from "@material-ui/core/Tabs"
-import { makeStyles } from "@material-ui/styles"
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
-    paddingLeft: 4,
-    paddingRight: 4,
-    width: 36,
-    minWidth: 80,
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(0.5),
+    width: "6em",
+    minWidth: "6em",
   },
 }))
 
