@@ -120,7 +120,7 @@ function myLayout({
           </div>
         </main>
       </div>
-      {toc.items && (
+      {toc && toc.items && (
         <LazyToc toc={toc} key={location.key} pathname={location.pathname} />
       )}
     </>
