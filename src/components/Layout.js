@@ -16,7 +16,6 @@ import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
 import Footer from "./Footer"
-import Toc from "./Toc"
 import React from "react"
 const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -48,6 +47,11 @@ const LazyComment = Loadable({
   loading: () => <div />,
 })
 
+const LazyToc = Loadable({
+  loader: () => import("./Toc"),
+  loading: () => <div />,
+})
+
 function myLayout({
   children,
   location,
@@ -66,11 +70,11 @@ function myLayout({
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   return (
     <>
+      <CssBaseline />
       <div sx={{ display: "flex" }} className={classes.container}>
         <Helmet>
           <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
         </Helmet>
-        <CssBaseline />
         <Navbar pathname={location.pathname} />
         <main className={classes.content}>
           <div className={classes.main}>
@@ -117,7 +121,7 @@ function myLayout({
         </main>
       </div>
       {toc.items && (
-        <Toc toc={toc} key={location.key} pathname={location.pathname} />
+        <LazyToc toc={toc} key={location.key} pathname={location.pathname} />
       )}
     </>
   )
