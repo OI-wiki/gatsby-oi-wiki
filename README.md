@@ -8,7 +8,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 ## 如何参与
 
-首先，准备好Git和Node.JS（其中包含npm）
+首先，准备好Git和Node.js（其中包含npm）
 
 ```shell
 npm install -g windows-build-tools #如果你是Windows用户，请务必在进行下列操作前执行此项；
@@ -18,13 +18,13 @@ cd oi-wiki-ng #进入仓库文件夹
 npm install #安装依赖
 ```
 
-至此，准备工作已经完成；你可能需要一些工具来解决下载慢/下载难问题。
+至此，准备工作已经完成；你可能需要一些工具来解决下载慢/下载难问题。接下来，是一些基本操作：
 
 ```shell
 gatsby develop #运行一个本地服务器，在浏览器输入 http://localhost:8000/ 即可访问
 # ---
-gatsby build #渲染页面
-gatsby serve #为刚刚生成的文件运行一个“服务器”，在浏览器输入 http://localhost:9000/ 即可访问
+gatsby build #渲染并生成静态页面
+gatsby serve #为刚刚生成的文件运行一个本地服务器，在浏览器输入 http://localhost:9000/ 即可访问
              #与之前不同的是，前者运行的服务器在运行期间会随着文件的变化而变化，后者则保持不变
 # ---
 gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理缓存
@@ -32,7 +32,7 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
              #你也可以通过手动删除这两个文件夹达到清理效果
 ```
 
-去 [插件列表](https://www.gatsbyjs.org/plugins/) 找有趣的功能尝试加入进来
+现在，你可以去 [插件列表](https://www.gatsbyjs.org/plugins/) 找有趣的功能尝试加入进来
 
 ## FAQ
 
