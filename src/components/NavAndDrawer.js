@@ -13,6 +13,7 @@ import InputBase from "@material-ui/core/InputBase"
 import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
 import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
+import Tabs from "./Tabs"
 
 const drawerWidth = 300
 
@@ -36,7 +37,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    [theme.breakpoints.down("md")]: {
+      minHeight: 64,
+    },
+    minHeight: 48 + 64,
+    alignItems: "flex-start",
+  },
   drawerPaper: {
     width: drawerWidth,
   },
@@ -88,7 +95,21 @@ function ResponsiveDrawer(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
-
+  const tabData = [
+    { title: "简介" },
+    { title: "语言基础" },
+    { title: "算法基础" },
+    { title: "搜索" },
+    { title: "动态规划" },
+    { title: "字符串" },
+    { title: "数学", link: "/math" },
+    { title: "数据结构" },
+    { title: "图论" },
+    { title: "计算几何" },
+    { title: "杂项" },
+    { title: "专题" },
+    { title: "关于 Hulu" },
+  ]
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -131,6 +152,9 @@ function ResponsiveDrawer(props) {
             </div>
           </Hidden>
         </Toolbar>
+        <Hidden mdDown>
+          <Tabs tabs={tabData}/>
+        </Hidden>
       </AppBar>
       <Hidden lgUp implementation="css">
         <Drawer

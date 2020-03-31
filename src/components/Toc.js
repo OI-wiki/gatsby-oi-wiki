@@ -9,9 +9,9 @@ import MuiLink from "@material-ui/core/Link"
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    top: theme.spacing(5),
+    top: theme.spacing(6),
+    marginTop: theme.spacing(6),
     right: 0,
-    marginTop: theme.spacing(5),
     width: "20%",
     flexShrink: 0,
     position: "fixed",
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "block",
+    },
+    [theme.breakpoints.down("md")]: {
+      top: theme.spacing(3),
+      marginTop: theme.spacing(3),
     },
   },
   contents: {
