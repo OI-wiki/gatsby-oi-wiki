@@ -105,15 +105,17 @@ function ResponsiveDrawer(props) {
           >
             <MdMenu/>
           </IconButton>
-          <IconButton component={Link} color="inherit" to="/">
-            <MdSchool/>
-          </IconButton>
+          <Hidden mdDown implementation={"css"}>
+            <IconButton component={Link} color="inherit" to="/">
+              <MdSchool/>
+            </IconButton>
+          </Hidden>
           <Button href="/" sx={{ color: "#fff" }}>
             <Typography variant="h6" noWrap>
               OI Wiki
             </Typography>
           </Button>
-          <Hidden mdDown implementation="css">
+          <Hidden smDown implementation="css">
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <MdSearch/>
