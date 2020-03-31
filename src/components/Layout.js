@@ -20,17 +20,22 @@ import Footer from "./Footer"
 import React from "react"
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    [theme.breakpoints.down("md")]: {
+      minHeight: 64,
+    },
+    minHeight: 48 + 64,
+    alignItems: "flex-start",
+  },
   content: {
     flexGrow: 1,
     width: "100%",
     overflow: "inherit",
   },
   main: {
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(0.5),
+    padding: theme.spacing(2),
     [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(0.5),
+      padding: theme.spacing(1),
     },
     minHeight: "100vh",
     overflow: "inherit",
@@ -92,9 +97,11 @@ function myLayout({
           <div className={classes.main}>
             <div className={classes.toolbar}/>
             <Card sx={{ overflow: "inherit" }}>
-              <CardContent sx={{
-                overflow: "auto",
-              }}>
+              <CardContent
+                sx={{
+                  overflow: "auto",
+                }}
+              >
                 <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>
@@ -128,7 +135,6 @@ function myLayout({
               </ExpansionPanel>
             )}
           </div>
-
         </main>
       </div>
       {toc && toc.items && (
