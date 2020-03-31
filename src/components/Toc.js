@@ -41,14 +41,14 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       borderLeft: `4px solid ${
         theme.palette.type === "light"
-          ? theme.palette.grey[200]
+          ? theme.palette.grey[300]
           : theme.palette.grey[900]
       }`,
     },
     "&$active,&:active": {
       borderLeft: `4px solid ${
         theme.palette.type === "light"
-          ? theme.palette.grey[300]
+          ? theme.palette.grey[400]
           : theme.palette.grey[800]
       }`,
     },
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   secondaryItem: {
     paddingLeft: theme.spacing(2.5),
   },
+  active: {},
 }))
 
 const noop = () => {}
