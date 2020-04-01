@@ -23,6 +23,7 @@ export default function(props) {
     <Tabs value={value} onChange={handleChange}>
       {tabs.map(({ title, link }) => (
         <Tab
+          key={title}
           label={title}
           component="a"
           className={classes.tabs}
