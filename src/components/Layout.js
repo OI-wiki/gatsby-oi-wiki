@@ -96,7 +96,7 @@ function myLayout({
         <main className={classes.content}>
           <div className={classes.main}>
             <div className={classes.toolbar}/>
-            <Card sx={{ overflow: "inherit" }}>
+            <Card sx={{ overflow: "inherit" }} elevation={3}>
               <CardContent
                 sx={{
                   overflow: "auto",
@@ -120,7 +120,7 @@ function myLayout({
             </Card>
             {noComment === "false" && (
               <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
-                <ExpansionPanel>
+                <ExpansionPanel elevation={3}>
                   <ExpansionPanelSummary
                     expandIcon={<MdExpandMore/>}
                     aria-controls="comment"
