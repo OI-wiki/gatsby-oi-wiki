@@ -48,12 +48,12 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.background.paper,
     padding: theme.spacing(3),
     [theme.breakpoints.up("lg")]: {
-      marginLeft: 300,
+      marginLeft: 250,
     },
   },
   container: {
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - 20%)`,
+      width: `calc(100% - 15%)`,
     },
     overflow: "auto",
   },
