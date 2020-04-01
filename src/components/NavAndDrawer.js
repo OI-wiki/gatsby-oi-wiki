@@ -152,7 +152,7 @@ function ResponsiveDrawer(props) {
             </div>
           </Hidden>
         </Toolbar>
-        <Hidden mdDown>
+        <Hidden mdDown implementation={"css"}>
           <Tabs tabs={tabData}/>
         </Hidden>
       </AppBar>
