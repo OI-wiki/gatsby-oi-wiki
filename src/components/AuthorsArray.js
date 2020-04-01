@@ -1,7 +1,14 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Chip, ChipSet } from "@material/react-chips"
-import Link from "./Link"
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Chip from "@material-ui/core/Chip"
+
+const useStyles = makeStyles((theme) => ({
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+}))
 
 function Header({ num }) {
   if (num <= 0) return <span>本页面未记录贡献者</span>
@@ -10,19 +17,25 @@ function Header({ num }) {
 }
 
 function AuthorsArray({ authors }) {
-  const arr = authors == null ? null : authors ? null : authors.split(",")
+  const arr = authors && authors.split(",")
+  const classes = useStyles()
   return (
     <div>
       <Header num={arr ? arr.length : 0}/>
-      <ChipSet>
-        {arr
-          ? arr.map((author) => (
-            <Link href={"https://github.com/" + author.trim()} key={author}>
-              <Chip label={` ${author} `}/>{" "}
-            </Link>
+      <div>
+        {arr && arr.map(
+          (author) => (
+            <Chip label={` ${author} `}
+                  key={author}
+                  clickable
+                  className={classes.chip}
+                  component={"a"}
+                  variant="outlined"
+                  href={"https://github.com/" + author.trim()}
+            />
           ))
-          : ""}
-      </ChipSet>
+        }
+      </div>
     </div>
   )
 }

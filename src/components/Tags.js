@@ -1,9 +1,14 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import "@material/react-chips/dist/chips.css"
-import { Chip, ChipSet } from "@material/react-chips"
+import { makeStyles } from "@material-ui/core/styles"
+import Chip from "@material-ui/core/Chip"
 import kebabCase from "lodash/kebabCase"
-import Link from "./Link"
+
+const useStyles = makeStyles((theme) => ({
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+}))
 
 function Header({ num }) {
   if (num <= 0) return <span>本页面没有标签</span>
@@ -12,20 +17,23 @@ function Header({ num }) {
 
 function Tags({ tags }) {
   const arr = tags
+  const classes = useStyles()
   return (
     <div>
       <Header num={arr ? arr.length : 0}/>
-      <ChipSet>
-        {arr
-          ? arr.map((tag) => (
-            <Link href={"/tags/" + kebabCase(tag)} key={`tag-${tag}`}>
-              <Chip label={` ${tag} `}/>
-            </Link>
-          ))
-          : ""}
-      </ChipSet>
-    </div>
-  )
+      <div>
+        {arr && arr.map((tag) => (
+          <Chip label={` ${tag} `}
+                href={"/tags/" + kebabCase(tag)}
+                key={`tag-${tag}`}
+                component={"a"}
+                variant="outlined"
+                clickable
+                className={classes.chip}
+          />
+        ))}
+      </div>
+    </div>)
 }
 
 export default Tags
