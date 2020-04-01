@@ -120,7 +120,6 @@ export default {
       marginTop: "0.7rem",
       fontFamily: "monospace",
       overflowX: "auto",
-      p: 3,
       borderRadius: "0.5rem",
       bg: "text",
       color: "background",
