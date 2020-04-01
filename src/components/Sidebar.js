@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import Link from "./Link"
+import MuiLink from "@material-ui/core/Link"
 import { jsx } from "theme-ui"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -8,28 +8,26 @@ import ListItemText from "@material-ui/core/ListItemText"
 import pathList from "../sidebar.yaml"
 import { useState } from "react"
 import { MdExpandLess, MdExpandMore } from "react-icons/md"
+import { useTheme } from "@material-ui/core/styles"
 
 function Item(props, padding, pathname) {
+  const theme = useTheme()
   const arr = Object.entries(props)[0]
   const key = arr[0],
     value = arr[1]
   if (typeof value === "string") {
     return [
-      <Link
-        to={value}
-        sx={{
-          color: "#304455!important",
-        }}
+      <ListItem
+        button
+        style={{ paddingLeft: padding }}
+        selected={value === pathname}
+        component={MuiLink}
+        href={value}
         key={key}
+        sx={{ color: theme.palette.text.primary }}
       >
-        <ListItem
-          button
-          style={{ paddingLeft: padding }}
-          selected={value === pathname}
-        >
-          <ListItemText primary={key}/>
-        </ListItem>
-      </Link>,
+        <ListItemText primary={key}/>
+      </ListItem>,
       value === pathname,
     ]
   }
@@ -48,7 +46,7 @@ function Item(props, padding, pathname) {
       <ListItem
         button
         onClick={() => setOpen(!open)}
-        style={{ color: "rgb(48, 68, 85)", paddingLeft: padding }}
+        style={{ paddingLeft: padding }}
       >
         <ListItemText primary={key}/>
         {open ? <MdExpandLess/> : <MdExpandMore/>}

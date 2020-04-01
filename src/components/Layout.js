@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   footer: {
-    background: "#fff",
+    background: theme.palette.background.paper,
     padding: theme.spacing(3),
     [theme.breakpoints.up("lg")]: {
       marginLeft: 300,
