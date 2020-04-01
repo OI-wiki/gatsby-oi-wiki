@@ -25,14 +25,18 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           }}
         >
           <span>
-            <MdBuild/>
+            <small>
+              <MdBuild/>
+            </small>
             本页面最近更新：
           </span>
           <span>{modifiedTime}</span>，
           <Link href={historyURL + relativePath}>更新历史</Link>
           <br/>
           <span>
-            <MdEdit/>
+            <small>
+              <MdEdit/>
+            </small>
             发现错误？想一起完善？{" "}
             <Link href={editURL + relativePath} title="编辑此页">
               在 GitHub 上编辑此页！
@@ -40,7 +44,9 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           </span>
           <br/>
           <span>
-            <MdCopyright/>
+            <small>
+              <MdCopyright/>
+            </small>
             本页面的全部内容在{" "}
             <strong>
               <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
