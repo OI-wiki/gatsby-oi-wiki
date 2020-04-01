@@ -9,6 +9,7 @@ import pathList from "../sidebar.yaml"
 import { useState } from "react"
 import { MdExpandLess, MdExpandMore } from "react-icons/md"
 import { useTheme } from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
 
 function Item(props, padding, pathname) {
   const theme = useTheme()
@@ -24,9 +25,12 @@ function Item(props, padding, pathname) {
         component={MuiLink}
         href={value}
         key={key}
-        sx={{ color: theme.palette.text.primary }}
+        sx={{ color: theme.palette.text.primary, lineHeight: 1.2 }}
       >
-        <ListItemText primary={key}/>
+        <ListItemText primary={
+          <Typography variant={"body2"} component={"span"}>
+            {key}
+          </Typography>}/>
       </ListItem>,
       value === pathname,
     ]
@@ -46,9 +50,13 @@ function Item(props, padding, pathname) {
       <ListItem
         button
         onClick={() => setOpen(!open)}
-        style={{ paddingLeft: padding }}
+        sx={{ paddingLeft: padding, lineHeight: 1.2 }}
       >
-        <ListItemText primary={key}/>
+        <ListItemText primary={
+          <Typography variant={"body2"} component={"span"}>
+            {key}
+          </Typography>}
+        />
         {open ? <MdExpandLess/> : <MdExpandMore/>}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
