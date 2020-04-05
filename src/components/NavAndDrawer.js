@@ -15,7 +15,7 @@ import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
 import Tabs from "./Tabs"
 
-const drawerWidth = 300
+const drawerWidth = 250
 
 const useStyles = makeStyles((theme) => ({
   drawer: {

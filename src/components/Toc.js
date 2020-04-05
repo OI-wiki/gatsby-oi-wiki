@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(6),
     marginTop: theme.spacing(6),
     right: 0,
-    width: "20%",
+    width: "15%",
     flexShrink: 0,
     position: "fixed",
     height: "calc(100vh - 70px)",

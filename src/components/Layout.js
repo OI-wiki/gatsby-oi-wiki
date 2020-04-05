@@ -18,6 +18,7 @@ import Divider from "@material-ui/core/Divider"
 import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
 import React from "react"
+import ToC from "./Toc"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -48,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.background.paper,
     padding: theme.spacing(3),
     [theme.breakpoints.up("lg")]: {
-      marginLeft: 300,
+      marginLeft: 250,
     },
   },
   container: {
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - 20%)`,
+      width: `calc(100% - 15%)`,
     },
     overflow: "auto",
   },
@@ -61,11 +62,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LazyComment = Loadable({
   loader: () => import("./Comment"),
-  loading: () => <div/>,
-})
-
-const LazyToc = Loadable({
-  loader: () => import("./Toc"),
   loading: () => <div/>,
 })
 
@@ -139,7 +135,7 @@ function myLayout({
         </main>
       </div>
       {toc && toc.items && (
-        <LazyToc toc={toc} key={location.key} pathname={location.pathname}/>
+        <ToC toc={toc} key={location.key} pathname={location.pathname}/>
       )}
       <Divider/>
       <div className={classes.footer}>
