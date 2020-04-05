@@ -3,7 +3,17 @@ title: "测试页"
 tags: ["animals", "Chicago", "zoos", "中文"]
 ---
 
+[index.md](./index.md)
+
+[https://oi-wiki.org](https://oi-wiki.org)
+
 ## H2
+
+## 中文标题
+
+<h2 id = "index"> 附B：文章检索 </h2>
+
+如果手写了 h2 将不会出现在 toc 里。
 
 content
 
