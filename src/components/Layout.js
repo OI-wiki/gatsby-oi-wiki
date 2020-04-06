@@ -2,12 +2,13 @@
 import { jsx } from "theme-ui"
 //Components
 import NavAndDrawer from "./NavAndDrawer"
+import IconButton from '@material-ui/core/IconButton';
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
-import { MdExpandMore } from "react-icons/md"
+import { MdExpandMore, MdEdit } from "react-icons/md"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
@@ -18,6 +19,7 @@ import Divider from "@material-ui/core/Divider"
 import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
 import React from "react"
+import Grid from '@material-ui/core/Grid';
 import ToC from "./Toc"
 import BackTop from "./BackTop"
 
@@ -59,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     },
     overflow: "auto",
   },
+  iconbutton: {
+    float: 'right'
+  },
 }))
 
 const LazyComment = Loadable({
@@ -82,6 +87,7 @@ function myLayout({
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
+  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   return (
     <>
       <CssBaseline/>
@@ -99,9 +105,24 @@ function myLayout({
                   overflow: "auto",
                 }}
               >
-                <Typography variant="h4" component="h3">
-                  {pageTitle}
-                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs>
+                    <Typography variant="h4" component="h3">
+                      {pageTitle}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs>
+                    <IconButton
+                      component="a"
+                      className={classes.iconbutton}
+                      href={editURL + relativePath}
+                      target="_blank"
+                      rel="noopener nofollow"
+                    >
+                      <MdEdit font-size="small"/>
+                    </IconButton>
+                  </Grid>
+                </Grid>
                 <Divider className={classes.divider}/>
                 <Typography variant="body1" component="div">
                   {children}

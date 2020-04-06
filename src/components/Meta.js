@@ -9,8 +9,8 @@ import Paper from "@material-ui/core/Paper"
 
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const theme = useTheme()
-  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
-  const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/"
+  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
+  const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/docs/"
   if (noMeta === "false") {
     return (
       <Paper sx={{ padding: theme.spacing(2) }} variant="outlined">
