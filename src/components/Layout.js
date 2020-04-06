@@ -135,7 +135,7 @@ function myLayout({
         </main>
       </div>
       {toc && toc.items && (
-        <ToC toc={toc} key={location.key} pathname={location.pathname}/>
+        <ToC toc={toc} pathname={location.pathname}/>
       )}
       <Divider/>
       <div className={classes.footer}>
