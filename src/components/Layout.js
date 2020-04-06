@@ -2,6 +2,8 @@
 import { jsx } from "theme-ui"
 //Components
 import NavAndDrawer from "./NavAndDrawer"
+import { MdEdit } from "react-icons/md"
+import IconButton from '@material-ui/core/IconButton';
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
@@ -82,6 +84,7 @@ function myLayout({
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
+  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/"
   return (
     <>
       <CssBaseline/>
@@ -99,9 +102,20 @@ function myLayout({
                   overflow: "auto",
                 }}
               >
+                <div align="right">
+                  <IconButton
+                    component="a"
+                    href={editURL + relativePath}
+                    target="_blank"
+                    rel="noopener nofollow"
+                  >
+                    <MdEdit font-size="small"/>
+                  </IconButton>
+                </div>
                 <Typography variant="h4" component="h3">
                   {pageTitle}
                 </Typography>
+
                 <Divider className={classes.divider}/>
                 <Typography variant="body1" component="div">
                   {children}
