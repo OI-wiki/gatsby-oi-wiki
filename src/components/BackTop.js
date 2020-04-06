@@ -2,8 +2,10 @@
 import Fab from "@material-ui/core/Fab"
 import ArrowUpward from "@material-ui/icons/ArrowUpward"
 import { jsx } from "theme-ui"
-import React from "react"
+import React, { useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
+import useThrottledOnScroll from "../lib/useThrottledOnScroll"
+import Zoom from "@material-ui/core/Zoom"
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -22,9 +24,13 @@ export default function() {
   const handleClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
   }
+  const [yPos, setyPos] = useState(0)
+  useThrottledOnScroll(() => setyPos(window.scrollY), 166)
   return (
-    <Fab className={classes.fab} onClick={handleClick}>
-      <ArrowUpward/>
-    </Fab>
+    <Zoom in={yPos > 400}>
+      <Fab className={classes.fab} onClick={handleClick}>
+        <ArrowUpward/>
+      </Fab>
+    </Zoom>
   )
 }
