@@ -10,6 +10,7 @@ function mdx({ data: { mdx }, location }) {
   const tags = mdx.frontmatter.tags || null
   const noMeta = mdx.frontmatter.noMeta || "false"
   const noComment = mdx.frontmatter.noComment || "false"
+  const noEdit = mdx.frontmatter.noEdit || "false"
   const toc = mdx.toc || null
   // console.log(mdx)
   const relativePath = mdx.parent.relativePath || ""
@@ -27,6 +28,7 @@ function mdx({ data: { mdx }, location }) {
       modifiedTime={modifiedTime}
       noMeta={noMeta}
       noComment={noComment}
+      noEdit={noEdit}
     >
       <MDXRenderer>{mdx.body}</MDXRenderer>
     </Layout>

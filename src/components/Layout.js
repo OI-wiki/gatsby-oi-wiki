@@ -99,6 +99,7 @@ function myLayout({
                     modifiedTime,
                     noMeta,
                     noComment,
+                    noEdit,
                   }) {
   const classes = useStyles()
   const theme = useTheme()
@@ -153,14 +154,16 @@ function myLayout({
                       {pageTitle}
                     </Typography>
                   </Grid>
-                  <Grid item xs>
-                    <IconButton
-                      onClick={() => setDialogOpen(true)}
-                      className={classes.iconButton}
-                    >
-                      <MdEdit font-size="medium"/>
-                    </IconButton>
+                  { noEdit === "false" && (
+                      <Grid item xs>
+                        <IconButton
+                          onClick={() => setDialogOpen(true)}
+                          className={classes.iconButton}
+                        >
+                        <MdEdit font-size="medium"/>
+                      </IconButton>
                   </Grid>
+                  )}
                 </Grid>
                 <Divider className={classes.divider}/>
                 <Typography variant="body1" component="div">
