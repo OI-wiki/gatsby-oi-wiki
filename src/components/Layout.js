@@ -147,13 +147,13 @@ function myLayout({
                   overflow: "auto",
                 }}
               >
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                   <Grid item xs>
                     <Typography variant="h4" component="h3">
                       {pageTitle}
                     </Typography>
                   </Grid>
-                  <Grid item xs>
+                  <Grid item xs={1}>
                     <IconButton
                       onClick={() => setDialogOpen(true)}
                       className={classes.iconButton}
