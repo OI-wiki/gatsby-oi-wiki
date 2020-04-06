@@ -24,6 +24,7 @@ export default function({ className = null, children, ...props }) {
           svg: {
             fontSize: "20px",
           },
+          listStyle: "none",
           "::-webkit-details-marker": {
             display: "none",
           },
