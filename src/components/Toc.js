@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import throttle from "lodash/throttle"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import clsx from "clsx"
 import MuiLink from "@material-ui/core/Link"
@@ -109,7 +109,8 @@ function getItems(items) {
 }
 
 export default function ToC(props) {
-  const { toc, key, pathname } = props
+  const theme = useTheme()
+  const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
   const itemsClientRef = useRef([])
@@ -162,7 +163,10 @@ export default function ToC(props) {
     ) {
       return
     }
-
+    event.preventDefault()
+    const navbarOffset = 64 + 12
+    const targetElement = document.getElementById(hash.substring(1, hash.length))
+    window.scrollTo({ top: targetElement.offsetTop - navbarOffset, left: 0, behavior: "smooth" })
     // Used to disable findActiveIndex if the page scrolls due to a click
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {
