@@ -19,6 +19,7 @@ import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
 import React from "react"
 import ToC from "./Toc"
+import BackTop from "./BackTop"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -141,6 +142,7 @@ function myLayout({
       <div className={classes.footer}>
         <Footer/>
       </div>
+      <BackTop/>
     </>
   )
 }
