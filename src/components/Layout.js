@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 //Components
 import NavAndDrawer from "./NavAndDrawer"
-import { MdEdit } from "react-icons/md"
+import { MdEdit } from "react-icons/md/edit"
 import IconButton from '@material-ui/core/IconButton';
 import Meta from "./Meta"
 import Loadable from "react-loadable"
