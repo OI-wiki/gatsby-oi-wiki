@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import throttle from "lodash/throttle"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import clsx from "clsx"
 import MuiLink from "@material-ui/core/Link"
+import useThrottledOnScroll from "../lib/useThrottledOnScroll"
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -61,28 +61,6 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {},
 }))
-
-const noop = () => {
-}
-
-function useThrottledOnScroll(callback, delay) {
-  const throttledCallback = useMemo(
-    () => (callback ? throttle(callback, delay) : noop),
-    [callback, delay],
-  )
-
-  useEffect(() => {
-    if (throttledCallback === noop) {
-      return undefined
-    }
-
-    window.addEventListener("scroll", throttledCallback)
-    return () => {
-      window.removeEventListener("scroll", throttledCallback)
-      throttledCallback.cancel()
-    }
-  }, [throttledCallback])
-}
 
 function getIDfromURL(url) {
   return url.substring(1, url.length)
