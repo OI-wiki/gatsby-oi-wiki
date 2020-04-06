@@ -2,14 +2,13 @@
 import { jsx } from "theme-ui"
 //Components
 import NavAndDrawer from "./NavAndDrawer"
-import { MdEdit } from "react-icons/md/edit"
 import IconButton from '@material-ui/core/IconButton';
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
-import { MdExpandMore } from "react-icons/md"
+import { MdExpandMore, MdEdit } from "react-icons/md"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
