@@ -14,6 +14,7 @@ import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
 import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
 import Tabs from "./Tabs"
+import tabData from "../tabs.yaml"
 
 const drawerWidth = 250
 
@@ -91,25 +92,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function ResponsiveDrawer(props) {
-  const { container } = props
+  const { container, pathname } = props
   const classes = useStyles()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
-  const tabData = [
-    { title: "简介" },
-    { title: "语言基础" },
-    { title: "算法基础" },
-    { title: "搜索" },
-    { title: "动态规划" },
-    { title: "字符串" },
-    { title: "数学", link: "/math" },
-    { title: "数据结构" },
-    { title: "图论" },
-    { title: "计算几何" },
-    { title: "杂项" },
-    { title: "专题" },
-    { title: "关于 Hulu" },
-  ]
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
