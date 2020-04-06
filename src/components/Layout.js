@@ -2,13 +2,13 @@
 import { jsx } from "theme-ui"
 //Components
 import NavAndDrawer from "./NavAndDrawer"
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton"
 import Meta from "./Meta"
 import Loadable from "react-loadable"
 import { Helmet } from "react-helmet"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Card from "@material-ui/core/Card"
-import { MdExpandMore, MdEdit } from "react-icons/md"
+import { MdEdit, MdExpandMore } from "react-icons/md"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
@@ -18,11 +18,27 @@ import Typography from "@material-ui/core/Typography"
 import Divider from "@material-ui/core/Divider"
 import Container from "@material-ui/core/Container"
 import Footer from "./Footer"
-import React from "react"
-import Grid from '@material-ui/core/Grid';
+import React, { useState } from "react"
+import Grid from "@material-ui/core/Grid"
 import ToC from "./Toc"
 import BackTop from "./BackTop"
+import { Dialog } from "@material-ui/core"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogActions from "@material-ui/core/DialogActions"
+import Button from "@material-ui/core/Button"
+import Link from "./Link"
 
+const editWarning =
+  <>
+    <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
+    <p>不过在开始之前，我们需要您了解并熟知
+      <Link to={"/intro/htc/"}>
+        如何参与
+      </Link>
+      里的内容，以避免在编辑时产生不必要的麻烦。</p>
+    <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
+  </>
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     [theme.breakpoints.down("md")]: {
@@ -61,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
     },
     overflow: "auto",
   },
-  iconbutton: {
-    float: 'right'
+  iconButton: {
+    float: "right",
   },
 }))
 
@@ -88,9 +104,35 @@ function myLayout({
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const EditingDialog = (
+    <Dialog open={dialogOpen} onClose={() => {
+      setDialogOpen(false)
+    }}>
+      <DialogTitle>{"编辑前须知"}</DialogTitle>
+      <DialogContent>
+        {editWarning}
+      </DialogContent>
+      <DialogActions>
+        <Button
+          component="a"
+          className={classes.iconButton}
+          href={editURL + relativePath}
+          target="_blank"
+          rel="noopener nofollow"
+          onClick={() => {
+            setDialogOpen(false)
+          }}
+        >
+          开始编辑
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
   return (
     <>
       <CssBaseline/>
+      {EditingDialog}
       <div sx={{ display: "flex" }} className={classes.container}>
         <Helmet>
           <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
@@ -113,13 +155,10 @@ function myLayout({
                   </Grid>
                   <Grid item xs>
                     <IconButton
-                      component="a"
-                      className={classes.iconbutton}
-                      href={editURL + relativePath}
-                      target="_blank"
-                      rel="noopener nofollow"
+                      onClick={() => setDialogOpen(true)}
+                      className={classes.iconButton}
                     >
-                      <MdEdit font-size="small"/>
+                      <MdEdit font-size="medium"/>
                     </IconButton>
                   </Grid>
                 </Grid>
