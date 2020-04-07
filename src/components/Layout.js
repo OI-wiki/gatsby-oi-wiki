@@ -25,12 +25,13 @@ import BackTop from "./BackTop"
 import { Dialog } from "@material-ui/core"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogActions from "@material-ui/core/DialogActions"
 import Button from "@material-ui/core/Button"
 import Link from "./Link"
 
 const editWarning =
-  <>
+  <DialogContentText>
     <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
     <p>不过在开始之前，我们需要您了解并熟知
       <Link to={"/intro/htc/"}>
@@ -38,7 +39,7 @@ const editWarning =
       </Link>
       里的内容，以避免在编辑时产生不必要的麻烦。</p>
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
-  </>
+  </DialogContentText>
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     [theme.breakpoints.down("md")]: {
@@ -116,8 +117,14 @@ function myLayout({
       </DialogContent>
       <DialogActions>
         <Button
+          onClick={() => {
+            setDialogOpen(false)
+          }}
+        >
+          取消
+        </Button>
+        <Button
           component="a"
-          className={classes.iconButton}
           href={editURL + relativePath}
           target="_blank"
           rel="noopener nofollow"
@@ -154,15 +161,15 @@ function myLayout({
                       {pageTitle}
                     </Typography>
                   </Grid>
-                  { noEdit === "false" && (
-                      <Grid item xs={1}>
-                        <IconButton
-                          onClick={() => setDialogOpen(true)}
-                          className={classes.iconButton}
-                        >
+                  {noEdit === "false" && (
+                    <Grid item xs={1}>
+                      <IconButton
+                        onClick={() => setDialogOpen(true)}
+                        className={classes.iconButton}
+                      >
                         <MdEdit font-size="medium"/>
                       </IconButton>
-                  </Grid>
+                    </Grid>
                   )}
                 </Grid>
                 <Divider className={classes.divider}/>
