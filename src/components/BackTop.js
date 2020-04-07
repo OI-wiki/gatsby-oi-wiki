@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
     background: theme.palette.background.paper,
+    "&:hover": {
+      background: theme.palette.background.paper,
+    },
     [theme.breakpoints.down("sm")]: {
       bottom: theme.spacing(4),
       right: theme.spacing(4),
