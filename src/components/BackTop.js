@@ -10,6 +10,7 @@ import Zoom from "@material-ui/core/Zoom"
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
+    background: theme.palette.background.paper,
     [theme.breakpoints.down("sm")]: {
       bottom: theme.spacing(4),
       right: theme.spacing(4),
@@ -28,7 +29,7 @@ export default function() {
   useThrottledOnScroll(() => setyPos(window.scrollY), 166)
   return (
     <Zoom in={yPos > 400}>
-      <Fab className={classes.fab} onClick={handleClick}>
+      <Fab disableRipple className={classes.fab} onClick={handleClick}>
         <ArrowUpward/>
       </Fab>
     </Zoom>
