@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    background: theme.palette.background.paper,
+    color: theme.palette.text.primary,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -56,9 +58,9 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.black, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.black, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -119,7 +121,7 @@ function ResponsiveDrawer(props) {
               <MdSchool/>
             </IconButton>
           </Hidden>
-          <Button href="/" sx={{ color: "#fff" }}>
+          <Button href="/" sx={{ /*color: "#fff"*/ }}>
             <Typography variant="h6" noWrap>
               OI Wiki
             </Typography>

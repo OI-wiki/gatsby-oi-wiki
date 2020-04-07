@@ -14,7 +14,7 @@ export default {
   useColorSchemeMediaQuery: true,
   colors: {
     text: "#011627",
-    background: "rgba(0,0,0,.06)",
+    background: "#FFFFFF",
     primary: "#1890ff",
     secondary: "#2EC4B6",
     accent: "#FF9F1C",
