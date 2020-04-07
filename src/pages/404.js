@@ -4,12 +4,11 @@ import React from "react"
 import Layout from "../components/Layout"
 
 const page = (location) => (
-  <Layout location={location}>
+  <Layout location={location} noEdit="true" title="404 Not Found">
     <div>
-      <Helmet title={`404 Page`}/>
       <div>
-        <h1>404 is Found</h1>
-        <p>你是从哪里点进来的呢？</p>
+        <h1>没有找到这个页面</h1>
+        <p>如果你是无意间来到这里的，请告诉我们你是从哪里来的哦。</p>
       </div>
     </div>
   </Layout>
