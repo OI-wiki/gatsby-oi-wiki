@@ -13,8 +13,7 @@ const Tags = ({ pageContext, data, location }) => {
   } tagged with "${tag}"`
 
   return (
-    <Layout location={location} noMeta="true">
-      <Helmet title={` ${tag} - 标签页 - OI Wiki`}/>
+    <Layout location={location} noMeta="true" title={`${tag} 标签页`}>
       <div>
         <h1>{tagHeader}</h1>
         <ul>
@@ -28,11 +27,8 @@ const Tags = ({ pageContext, data, location }) => {
             )
           })}
         </ul>
-        {/*
-              This links to a page that does not yet exist.
-              You'll come back to it!
-            */}
-        <Link to="/tags">All tags</Link>
+
+        <Link to="/tags">所有标签</Link>
       </div>
     </Layout>
   )
