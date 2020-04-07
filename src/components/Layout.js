@@ -66,7 +66,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   footer: {
-    background: theme.palette.background.paper,
+    background: "#f1f3f4",
+    color: "#616161",
     padding: theme.spacing(3),
     [theme.breakpoints.up("lg")]: {
       marginLeft: 250,
