@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
 import { MdEdit, MdExpandMore } from "react-icons/md"
+import { jsx } from "theme-ui"
 
 export default function({ className = null, children, ...props }) {
   if (className.match("note")) {

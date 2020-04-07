@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import MuiLink from "@material-ui/core/Link"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import clsx from "clsx"
-import MuiLink from "@material-ui/core/Link"
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { jsx } from "theme-ui"
 import useThrottledOnScroll from "../lib/useThrottledOnScroll"
 
 const useStyles = makeStyles((theme) => ({
@@ -143,8 +143,14 @@ export default function ToC(props) {
     }
     event.preventDefault()
     const navbarOffset = 64 + 12
-    const targetElement = document.getElementById(hash.substring(1, hash.length))
-    window.scrollTo({ top: targetElement.offsetTop - navbarOffset, left: 0, behavior: "smooth" })
+    const targetElement = document.getElementById(
+      hash.substring(1, hash.length),
+    )
+    window.scrollTo({
+      top: targetElement.offsetTop - navbarOffset,
+      left: 0,
+      behavior: "smooth",
+    })
     // Used to disable findActiveIndex if the page scrolls due to a click
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {

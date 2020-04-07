@@ -1,8 +1,7 @@
-import React from "react"
-import PropTypes from "prop-types"
 // Components
 import { graphql, Link } from "gatsby"
-import Helmet from "react-helmet"
+import PropTypes from "prop-types"
+import React from "react"
 import Layout from "../components/Layout"
 
 const Tags = ({ pageContext, data, location }) => {

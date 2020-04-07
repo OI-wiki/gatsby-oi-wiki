@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import { makeStyles } from "@material-ui/core/styles"
 import Chip from "@material-ui/core/Chip"
+import { makeStyles } from "@material-ui/core/styles"
 import kebabCase from "lodash/kebabCase"
+import { jsx } from "theme-ui"
 
 const useStyles = makeStyles((theme) => ({
   chip: {
@@ -22,18 +22,21 @@ function Tags({ tags }) {
     <div>
       <Header num={arr ? arr.length : 0}/>
       <div>
-        {arr && arr.map((tag) => (
-          <Chip label={` ${tag} `}
-                href={"/tags/" + kebabCase(tag)}
-                key={`tag-${tag}`}
-                component={"a"}
-                variant="outlined"
-                clickable
-                className={classes.chip}
+        {arr &&
+        arr.map((tag) => (
+          <Chip
+            label={` ${tag} `}
+            href={"/tags/" + kebabCase(tag)}
+            key={`tag-${tag}`}
+            component={"a"}
+            variant="outlined"
+            clickable
+            className={classes.chip}
           />
         ))}
       </div>
-    </div>)
+    </div>
+  )
 }
 
 export default Tags

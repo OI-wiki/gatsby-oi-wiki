@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import "gitalk/dist/gitalk.css"
 import GitalkComponent from "gitalk/dist/gitalk-component"
+import "gitalk/dist/gitalk.css"
 import { jsx } from "theme-ui"
 
 function Gitalk({ title }) {

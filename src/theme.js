@@ -4,8 +4,8 @@
  * @see https://theme-ui.com/gatsby-plugin/
  */
 
-import prism from "@theme-ui/prism/presets/theme-ui"
 import { alpha } from "@theme-ui/color"
+import prism from "@theme-ui/prism/presets/theme-ui"
 
 export default {
   breakpoints: ["768px", "992px", "1200px"],
@@ -21,7 +21,7 @@ export default {
     muted: "#FAFAFA",
     toc: "#484848",
     hover: "#1890FF",
-      },
+  },
   fonts: {
     body:
       "-apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",

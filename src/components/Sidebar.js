@@ -1,15 +1,15 @@
 /** @jsx jsx */
+import Collapse from "@material-ui/core/Collapse"
 import MuiLink from "@material-ui/core/Link"
-import { jsx } from "theme-ui"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
-import Collapse from "@material-ui/core/Collapse"
 import ListItemText from "@material-ui/core/ListItemText"
-import pathList from "../sidebar.yaml"
-import { useState } from "react"
-import { MdExpandLess, MdExpandMore } from "react-icons/md"
 import { useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
+import { useState } from "react"
+import { MdExpandLess, MdExpandMore } from "react-icons/md"
+import { jsx } from "theme-ui"
+import pathList from "../sidebar.yaml"
 
 function Item(props, padding, pathname) {
   const theme = useTheme()
@@ -27,10 +27,13 @@ function Item(props, padding, pathname) {
         key={key}
         sx={{ color: theme.palette.text.primary, lineHeight: 1.2 }}
       >
-        <ListItemText primary={
-          <Typography variant={"body2"} component={"span"}>
-            {key}
-          </Typography>}/>
+        <ListItemText
+          primary={
+            <Typography variant={"body2"} component={"span"}>
+              {key}
+            </Typography>
+          }
+        />
       </ListItem>,
       value === pathname,
     ]
@@ -52,10 +55,12 @@ function Item(props, padding, pathname) {
         onClick={() => setOpen(!open)}
         sx={{ paddingLeft: padding, lineHeight: 1.2 }}
       >
-        <ListItemText primary={
-          <Typography variant={"body2"} component={"span"}>
-            {key}
-          </Typography>}
+        <ListItemText
+          primary={
+            <Typography variant={"body2"} component={"span"}>
+              {key}
+            </Typography>
+          }
         />
         {open ? <MdExpandLess/> : <MdExpandMore/>}
       </ListItem>
