@@ -1,11 +1,11 @@
 /** @jsx jsx */
+import Paper from "@material-ui/core/Paper"
+import { useTheme } from "@material-ui/core/styles"
+import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
 import { jsx } from "theme-ui"
 import AuthorsArray from "./AuthorsArray"
-import Tags from "./Tags"
 import Link from "./Link"
-import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
-import { useTheme } from "@material-ui/core/styles"
-import Paper from "@material-ui/core/Paper"
+import Tags from "./Tags"
 
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const theme = useTheme()

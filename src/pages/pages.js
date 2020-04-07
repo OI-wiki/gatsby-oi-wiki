@@ -1,23 +1,23 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import React, { useState } from "react"
-import { graphql } from "gatsby"
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
 import Checkbox from "@material-ui/core/Checkbox"
-import TextField from "@material-ui/core/TextField"
-import Autocomplete from "@material-ui/lab/Autocomplete"
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank"
-import CheckBoxIcon from "@material-ui/icons/CheckBox"
-import Layout from "../components/Layout"
 import Grid from "@material-ui/core/Grid"
 import { makeStyles } from "@material-ui/core/styles"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
+import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
-import parse from "autosuggest-highlight/parse"
+import CheckBoxIcon from "@material-ui/icons/CheckBox"
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank"
+import Autocomplete from "@material-ui/lab/Autocomplete"
 import match from "autosuggest-highlight/match"
+import parse from "autosuggest-highlight/parse"
+import { graphql } from "gatsby"
+import React, { useState } from "react"
+import { jsx } from "theme-ui"
+import Layout from "../components/Layout"
 import Link from "../components/Link"
 import Tags from "../components/Tags"
-import CardActions from "@material-ui/core/CardActions"
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small"/>
 const checkedIcon = <CheckBoxIcon fontSize="small"/>
@@ -54,32 +54,32 @@ function PageItem(props) {
 }
 
 function matchTags(pageTags, selectedTags) {
-  if (selectedTags.length === 0)
-    return true
-  if (!pageTags)
-    return false
+  if (selectedTags.length === 0) return true
+  if (!pageTags) return false
   const matchTag = (tags, selected) => {
     return tags.includes(selected)
   }
-  const res = selectedTags.map(selected => matchTag(pageTags, selected))
-  return res.every(v => v === true)
+  const res = selectedTags.map((selected) => matchTag(pageTags, selected))
+  return res.every((v) => v === true)
 }
 
 function BlogIndex(props) {
   const { location } = props
   const {
     data: {
-      allMdx: {
-        edges,
-        group,
-      },
+      allMdx: { edges, group },
     },
   } = props
-  const articles = edges.map(x => x.node)
+  const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
   const [selectedTags, setSelectedTags] = useState([])
   return (
-    <Layout location={location} noMeta={"true"} noEdit={"true"} title={"目录页"}>
+    <Layout
+      location={location}
+      noMeta={"true"}
+      noEdit={"true"}
+      title={"目录页"}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Autocomplete
@@ -103,29 +103,33 @@ function BlogIndex(props) {
                     checked={selected}
                   />
                   {parts.map((part, index) => (
-                    <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                    <span
+                      key={index}
+                      style={{ fontWeight: part.highlight ? 700 : 400 }}
+                    >
                       {part.text}
                     </span>
                   ))}
-                </>)
+                </>
+              )
             }}
             sx={{ width: "100%" }}
             renderInput={(params) => (
-              <TextField {...params} variant="outlined" label="搜索标签..." placeholder="搜索标签..."/>
+              <TextField
+                {...params}
+                variant="outlined"
+                label="搜索标签..."
+                placeholder="搜索标签..."
+              />
             )}
           />
         </Grid>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-      >
-        {
-          articles.map(
-            x => (matchTags(x.frontmatter.tags, selectedTags) &&
-              <PageItem {...x}/>)
-          )
-        }
+      <Grid container spacing={2}>
+        {articles.map(
+          (x) =>
+            matchTags(x.frontmatter.tags, selectedTags) && <PageItem {...x} />,
+        )}
       </Grid>
     </Layout>
   )

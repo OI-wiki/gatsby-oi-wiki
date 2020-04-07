@@ -1,45 +1,44 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-//Components
-import NavAndDrawer from "./NavAndDrawer"
-import IconButton from "@material-ui/core/IconButton"
-import Meta from "./Meta"
-import Loadable from "react-loadable"
-import { Helmet } from "react-helmet"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Card from "@material-ui/core/Card"
-import { MdEdit, MdExpandMore } from "react-icons/md"
-import ExpansionPanel from "@material-ui/core/ExpansionPanel"
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import CardContent from "@material-ui/core/CardContent"
-import Typography from "@material-ui/core/Typography"
-import Divider from "@material-ui/core/Divider"
+import Button from "@material-ui/core/Button"
 import Container from "@material-ui/core/Container"
-import Footer from "./Footer"
-import React, { useState } from "react"
-import Grid from "@material-ui/core/Grid"
-import ToC from "./Toc"
-import BackTop from "./BackTop"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import Dialog from "@material-ui/core/Dialog"
-import DialogTitle from "@material-ui/core/DialogTitle"
+import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogActions from "@material-ui/core/DialogActions"
-import Button from "@material-ui/core/Button"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import Divider from "@material-ui/core/Divider"
+import ExpansionPanel from "@material-ui/core/ExpansionPanel"
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import Grid from "@material-ui/core/Grid"
+import IconButton from "@material-ui/core/IconButton"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import React, { useState } from "react"
+import { Helmet } from "react-helmet"
+import { MdEdit, MdExpandMore } from "react-icons/md"
+import Loadable from "react-loadable"
+import { jsx } from "theme-ui"
+import BackTop from "./BackTop"
+import Footer from "./Footer"
 import Link from "./Link"
+import Meta from "./Meta"
+//Components
+import NavAndDrawer from "./NavAndDrawer"
+import ToC from "./Toc"
 
-const editWarning =
+const editWarning = (
   <DialogContentText>
     <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
-    <p>不过在开始之前，我们需要您了解并熟知
-      <Link to={"/intro/htc/"}>
-        如何参与
-      </Link>
-      里的内容，以避免在编辑时产生不必要的麻烦。</p>
+    <p>
+      不过在开始之前，我们需要您了解并熟知
+      <Link to={"/intro/htc/"}>如何参与</Link>
+      里的内容，以避免在编辑时产生不必要的麻烦。
+    </p>
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
   </DialogContentText>
+)
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     [theme.breakpoints.down("md")]: {
@@ -109,13 +108,14 @@ function myLayout({
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   const [dialogOpen, setDialogOpen] = useState(false)
   const EditingDialog = (
-    <Dialog open={dialogOpen} onClose={() => {
-      setDialogOpen(false)
-    }}>
+    <Dialog
+      open={dialogOpen}
+      onClose={() => {
+        setDialogOpen(false)
+      }}
+    >
       <DialogTitle>{"编辑前须知"}</DialogTitle>
-      <DialogContent>
-        {editWarning}
-      </DialogContent>
+      <DialogContent>{editWarning}</DialogContent>
       <DialogActions>
         <Button
           onClick={() => {
@@ -151,34 +151,34 @@ function myLayout({
           <div className={classes.main}>
             <div className={classes.toolbar}/>
 
-                <Grid container spacing={2}>
-                  <Grid item xs>
-                    <Typography variant="h4" component="h3">
-                      {pageTitle}
-                    </Typography>
-                  </Grid>
-                  {noEdit === "false" && (
-                    <Grid item xs={1}>
-                      <IconButton
-                        onClick={() => setDialogOpen(true)}
-                        className={classes.iconButton}
-                      >
-                        <MdEdit font-size="medium"/>
-                      </IconButton>
-                    </Grid>
-                  )}
-                </Grid>
-                <Divider className={classes.divider}/>
-                <Typography variant="body1" component="div">
-                  {children}
+            <Grid container spacing={2}>
+              <Grid item xs>
+                <Typography variant="h4" component="h3">
+                  {pageTitle}
                 </Typography>
-                <Meta
-                  authors={authors}
-                  tags={tags}
-                  relativePath={relativePath}
-                  modifiedTime={modifiedTime}
-                  noMeta={noMeta}
-                />
+              </Grid>
+              {noEdit === "false" && (
+                <Grid item xs={1}>
+                  <IconButton
+                    onClick={() => setDialogOpen(true)}
+                    className={classes.iconButton}
+                  >
+                    <MdEdit font-size="medium"/>
+                  </IconButton>
+                </Grid>
+              )}
+            </Grid>
+            <Divider className={classes.divider}/>
+            <Typography variant="body1" component="div">
+              {children}
+            </Typography>
+            <Meta
+              authors={authors}
+              tags={tags}
+              relativePath={relativePath}
+              modifiedTime={modifiedTime}
+              noMeta={noMeta}
+            />
             {noComment === "false" && (
               <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
                 <ExpansionPanel variant={"outlined"}>
@@ -199,9 +199,7 @@ function myLayout({
           </div>
         </main>
       </div>
-      {toc && toc.items && (
-        <ToC toc={toc} pathname={location.pathname}/>
-      )}
+      {toc && toc.items && <ToC toc={toc} pathname={location.pathname}/>}
       <Divider/>
       <div className={classes.footer}>
         <Footer/>

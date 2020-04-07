@@ -1,7 +1,7 @@
-import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
 import Tab from "@material-ui/core/Tab"
 import Tabs from "@material-ui/core/Tabs"
-import { makeStyles } from "@material-ui/core/styles"
+import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   tabs: {

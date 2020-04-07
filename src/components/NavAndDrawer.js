@@ -1,21 +1,21 @@
 /** @jsx jsx */
-import React from "react"
-import { jsx } from "theme-ui"
 import AppBar from "@material-ui/core/AppBar"
-import Drawer from "@material-ui/core/Drawer"
 import Button from "@material-ui/core/Button"
+import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
 import IconButton from "@material-ui/core/IconButton"
+import InputBase from "@material-ui/core/InputBase"
+import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
-import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
-import InputBase from "@material-ui/core/InputBase"
-import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
-import { FaGithub } from "react-icons/fa"
-import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
-import Tabs from "./Tabs"
+import React from "react"
+import { FaGithub } from "react-icons/fa"
+import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
+import { jsx } from "theme-ui"
 import tabData from "../tabs.yaml"
+import SiderContent from "./Sidebar"
+import Tabs from "./Tabs"
 
 const drawerWidth = 250
 
@@ -121,7 +121,14 @@ function ResponsiveDrawer(props) {
               <MdSchool/>
             </IconButton>
           </Hidden>
-          <Button href="/" sx={{ /*color: "#fff"*/ }}>
+          <Button
+            href="/"
+            sx={
+              {
+                /*color: "#fff"*/
+              }
+            }
+          >
             <Typography variant="h6" noWrap>
               OI Wiki
             </Typography>
@@ -142,11 +149,7 @@ function ResponsiveDrawer(props) {
               />
             </div>
           </Hidden>
-          <IconButton
-            component={"a"}
-            href={OIWikiGithub}
-            color={"inherit"}
-          >
+          <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
             <FaGithub/>
           </IconButton>
         </Toolbar>

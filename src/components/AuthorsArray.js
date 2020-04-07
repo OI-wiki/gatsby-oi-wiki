@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
 import Chip from "@material-ui/core/Chip"
+import { makeStyles } from "@material-ui/core/styles"
+import React from "react"
+import { jsx } from "theme-ui"
 
 const useStyles = makeStyles((theme) => ({
   chip: {
@@ -23,18 +23,18 @@ function AuthorsArray({ authors }) {
     <div>
       <Header num={arr ? arr.length : 0}/>
       <div>
-        {arr && arr.map(
-          (author) => (
-            <Chip label={` ${author} `}
-                  key={author}
-                  clickable
-                  className={classes.chip}
-                  component={"a"}
-                  variant="outlined"
-                  href={"https://github.com/" + author.trim()}
-            />
-          ))
-        }
+        {arr &&
+        arr.map((author) => (
+          <Chip
+            label={` ${author} `}
+            key={author}
+            clickable
+            className={classes.chip}
+            component={"a"}
+            variant="outlined"
+            href={"https://github.com/" + author.trim()}
+          />
+        ))}
       </div>
     </div>
   )
