@@ -1,8 +1,112 @@
+/** @jsx jsx */
+import { jsx } from "theme-ui"
 import React from "react"
 import { graphql } from "gatsby"
+import Checkbox from "@material-ui/core/Checkbox"
+import TextField from "@material-ui/core/TextField"
+import Autocomplete from "@material-ui/lab/Autocomplete"
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank"
+import CheckBoxIcon from "@material-ui/icons/CheckBox"
+import Layout from "../components/Layout"
+import Grid from "@material-ui/core/Grid"
+import { makeStyles } from "@material-ui/core/styles"
+import Card from "@material-ui/core/Card"
+import CardContent from "@material-ui/core/CardContent"
+import Typography from "@material-ui/core/Typography"
+import parse from "autosuggest-highlight/parse"
+import match from "autosuggest-highlight/match"
+import Link from "../components/Link"
+import Tags from "../components/Tags"
+import CardActions from "@material-ui/core/CardActions"
 
-function BlogIndex() {
-  return <div/>
+const icon = <CheckBoxOutlineBlankIcon fontSize="small"/>
+const checkedIcon = <CheckBoxIcon fontSize="small"/>
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  title: {
+    fontSize: 14,
+  },
+})
+
+function pageItem(props) {
+  const classes = useStyles()
+  const {
+    id,
+    frontmatter: { title, tags },
+    fields: { slug: link },
+  } = props
+  return (
+    <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+      <Card className={classes.root} variant={"outlined"}>
+        <CardContent>
+          <Typography variant="h5" component={Link} to={link}>
+            {title}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Tags tags={tags}/>
+        </CardActions>
+      </Card>
+    </Grid>
+  )
+}
+
+function BlogIndex(props) {
+  const { location } = props
+  const {
+    data: {
+      allMdx: {
+        edges,
+        group: tags,
+      },
+    },
+  } = props
+  const articles = edges.map(x => x.node)
+  return (
+    <Layout location={location} noMeta={"true"} noEdit={"true"} title={"目录页"}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Autocomplete
+            onChange={(e) => {console.log(e.target)}}
+            multiple
+            options={tags}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.fieldValue}
+            renderOption={(option, { inputValue, selected }) => {
+              const matches = match(option.fieldValue, inputValue)
+              const parts = parse(option.fieldValue, matches)
+              return (
+                <>
+                  <Checkbox
+                    icon={icon}
+                    checkedIcon={checkedIcon}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {parts.map((part, index) => (
+                    <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                      {part.text}
+                    </span>
+                  ))}
+                </>)
+            }}
+            sx={{ width: "100%" }}
+            renderInput={(params) => (
+              <TextField {...params} variant="outlined" label="搜索标签..." placeholder="搜索标签..."/>
+            )}
+          />
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        spacing={2}
+      >
+        {articles.map(x => pageItem(x))}
+      </Grid>
+    </Layout>
+  )
 }
 
 // class BlogIndex extends React.Component {
