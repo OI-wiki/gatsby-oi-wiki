@@ -149,7 +149,7 @@ function myLayout({
         <main className={classes.content}>
           <div className={classes.main}>
             <div className={classes.toolbar}/>
-            
+
                 <Grid container spacing={2}>
                   <Grid item xs>
                     <Typography variant="h4" component="h3">
@@ -180,7 +180,7 @@ function myLayout({
                 />
             {noComment === "false" && (
               <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
-                <ExpansionPanel elevation={3}>
+                <ExpansionPanel variant={"outlined"}>
                   <ExpansionPanelSummary
                     expandIcon={<MdExpandMore/>}
                     aria-controls="comment"
