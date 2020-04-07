@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography"
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import InputBase from "@material-ui/core/InputBase"
 import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
+import { FaGithub } from "react-icons/fa"
 import SiderContent from "./Sidebar"
 import { Link } from "gatsby"
 import Tabs from "./Tabs"
@@ -96,6 +97,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const OIWikiGithub = "https://github.com/OI-wiki/OI-wiki"
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -122,6 +124,7 @@ function ResponsiveDrawer(props) {
               OI Wiki
             </Typography>
           </Button>
+          <div style={{ flexGrow: 1 }}/>
           <Hidden smDown implementation="css">
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -137,6 +140,13 @@ function ResponsiveDrawer(props) {
               />
             </div>
           </Hidden>
+          <IconButton
+            component={"a"}
+            href={OIWikiGithub}
+            color={"inherit"}
+          >
+            <FaGithub/>
+          </IconButton>
         </Toolbar>
         <Hidden mdDown implementation={"css"}>
           <Tabs tabs={tabData}/>
