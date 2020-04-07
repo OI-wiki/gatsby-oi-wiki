@@ -149,12 +149,7 @@ function myLayout({
         <main className={classes.content}>
           <div className={classes.main}>
             <div className={classes.toolbar}/>
-            <Card sx={{ overflow: "inherit" }} elevation={3}>
-              <CardContent
-                sx={{
-                  overflow: "auto",
-                }}
-              >
+            
                 <Grid container spacing={2}>
                   <Grid item xs>
                     <Typography variant="h4" component="h3">
@@ -183,8 +178,6 @@ function myLayout({
                   modifiedTime={modifiedTime}
                   noMeta={noMeta}
                 />
-              </CardContent>
-            </Card>
             {noComment === "false" && (
               <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
                 <ExpansionPanel elevation={3}>
