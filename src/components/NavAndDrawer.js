@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton"
 import InputBase from "@material-ui/core/InputBase"
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
+import Tooltip from '@material-ui/core/Tooltip'
 import Typography from "@material-ui/core/Typography"
 import { Link } from "gatsby"
 import React from "react"
@@ -149,9 +150,11 @@ function ResponsiveDrawer(props) {
               />
             </div>
           </Hidden>
-          <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
-            <FaGithub/>
-          </IconButton>
+          <Tooltip title="GitHub 存储库" placement="bottom">
+            <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
+              <FaGithub/>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation={"css"}>
           <Tabs tabs={tabData}/>
