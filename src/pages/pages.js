@@ -22,14 +22,7 @@ import Tags from "../components/Tags"
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small"/>
 const checkedIcon = <CheckBoxIcon fontSize="small"/>
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  title: {
-    fontSize: 14,
-  },
-})
+const useStyles = makeStyles({})
 
 function PageItem(props) {
   const classes = useStyles()
@@ -40,7 +33,7 @@ function PageItem(props) {
   } = props
   return (
     <Grid item key={id}>
-      <Card className={classes.root} variant={"outlined"}>
+      <Card variant={"outlined"}>
         <CardContent>
           <Typography variant="h5" component={Link} to={link}>
             {title}
@@ -172,7 +165,7 @@ function BlogIndex(props) {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={2} justify={"space-evenly"}>
+      <Grid container spacing={2} justify={"center"}>
         <GridItems filteredItems={filteredItems}/>
       </Grid>
     </Layout>
