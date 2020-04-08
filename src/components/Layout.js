@@ -53,9 +53,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "inherit",
   },
   main: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(1),
+      padding: theme.spacing(2),
     },
     minHeight: "100vh",
     overflow: "inherit",
@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - 15%)`,
     },
+    overflow: "auto",
+  },
+  containerNoToC: {
     overflow: "auto",
   },
   iconButton: {
@@ -101,10 +104,12 @@ function myLayout({
                     noMeta,
                     noComment,
                     noEdit,
+                    noToC,
                   }) {
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
+  const displayToC = toc && toc.items && noToC !== "true"
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   const [dialogOpen, setDialogOpen] = useState(false)
   const EditingDialog = (
@@ -142,7 +147,7 @@ function myLayout({
     <>
       <CssBaseline/>
       {EditingDialog}
-      <div sx={{ display: "flex" }} className={classes.container}>
+      <div sx={{ display: "flex" }} className={displayToC ? classes.container : classes.containerToC}>
         <Helmet>
           <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
         </Helmet>
@@ -199,7 +204,7 @@ function myLayout({
           </div>
         </main>
       </div>
-      {toc && toc.items && <ToC toc={toc} pathname={location.pathname}/>}
+      {displayToC && <ToC toc={toc} pathname={location.pathname}/>}
       <Divider/>
       <div className={classes.footer}>
         <Footer/>
