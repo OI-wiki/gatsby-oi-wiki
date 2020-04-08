@@ -61,6 +61,103 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
     overflow: "inherit",
   },
+  typo: {
+    '& h2[id]:target:before': {
+      [theme.breakpoints.down("md")]: {
+        paddingTop: "70px",
+        marginTop: "-70px",
+      },
+      paddingTop: "120px",
+      marginTop: "-120px",
+    },
+    '& h2[id]:before': {
+      display: "block", 
+      content: '" "',
+      marginTop: "-8px",
+      paddingTop: "8px",
+      position: "relative",
+      zIndex: "-1",
+    },
+    "& h2": {
+      position: "static!important"
+    },
+    '& h3[id]:target:before': {
+      [theme.breakpoints.down("md")]: {
+        paddingTop: "69px",
+        marginTop: "-69px",
+      },
+      paddingTop: "119px",
+      marginTop: "-119px",
+    },
+    '& h3[id]:before': {
+      display: "block", 
+      content: '" "',
+      marginTop: "-8px",
+      paddingTop: "8px",
+      position: "relative",
+      zIndex: "-1",
+    },
+    "& h3": {
+      position: "static!important"
+    },
+    '& h4[id]:target:before': {
+      [theme.breakpoints.down("md")]: {
+        paddingTop: "68px",
+        marginTop: "-68px",
+      },
+      paddingTop: "118px",
+      marginTop: "-118px",
+    },
+    '& h4[id]:before': {
+      display: "block", 
+      content: '" "',
+      marginTop: "-8px",
+      paddingTop: "8px",
+      position: "relative",
+      zIndex: "-1",
+    },
+    "& h4": {
+      position: "static!important"
+    },
+    '& h5[id]:target:before': {
+      [theme.breakpoints.down("md")]: {
+        paddingTop: "68px",
+        marginTop: "-68px",
+      },
+      paddingTop: "116px",
+      marginTop: "-116px",
+    },
+    '& h5[id]:before': {
+      display: "block", 
+      content: '" "',
+      marginTop: "-8px",
+      paddingTop: "8px",
+      position: "relative",
+      zIndex: "-1",
+    },
+    "& h5": {
+      position: "static!important"
+    },
+    '& h6[id]:target:before': {
+      [theme.breakpoints.down("md")]: {
+        paddingTop: "67px",
+        marginTop: "-67px",
+      },
+      paddingTop: "114px",
+      marginTop: "-114px",
+    },
+    '& h6[id]:before': {
+      display: "block", 
+      content: '" "',
+      marginTop: "-8px",
+      paddingTop: "8px",
+      position: "relative",
+      zIndex: "-1",
+    },
+    "& h6": {
+      position: "static!important"
+    },
+  },
   divider: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
