@@ -6,7 +6,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 ## 如何参与
 
-首先，你可以把本项目 Fork 一份。
+一般情况下，你需要把本项目先 Fork 一份。
 
 ### 方法一：本地编写
 
@@ -16,7 +16,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 # 只有 Windows 用户需要执行这一句，请务必在进行下列操作前在拥有管理员权限的窗口执行此项
 # 该操作将执行20分钟甚至更多，期间可能会出现停在一个页面不动以及CPU飙升的情况，属正常现象
 npm install -g windows-build-tools
-git clone https://github.com/你的 GitHub 用户名/oi-wiki-ng.git #将仓库克隆至本地
+git clone https://github.com/{你的 GitHub 用户名}/oi-wiki-ng.git #将仓库克隆至本地
 cd oi-wiki-ng #进入仓库文件夹
 npm install #安装依赖
 ```
@@ -43,9 +43,9 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 
 ![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)
 
-我们适配了 Gitpod。它相当于是一个云端的 VS Code。打开 `https://gitpod.io/#https://github.com/你的用户名/oi-wiki-ng`，Gitpod 就会创建一个 Workspace。
+我们适配了 Gitpod。它相当于是一个云端的 VS Code。打开 `https://gitpod.io/#https://github.com/{你的用户名}/oi-wiki-ng`，Gitpod 就会创建一个 Workspace。
 
-> 不要**重复**创建 Workspace，每一次打开 `https://gitpod.io/#https://github.com/你的用户名/oi-wiki-ng` 的链接都会创建一个新的 Workspace。第一次创建了之后就可以直接打开 `gitpod.io` 找回你原来的 Workspace 就行了，请节省资源。
+> 不要**重复**创建 Workspace，每一次打开 `https://gitpod.io/#https://github.com/{你的用户名}/oi-wiki-ng` 的链接都会创建一个新的 Workspace。第一次创建了之后就可以直接打开 `gitpod.io` 找回你原来的 Workspace 就行了，请节省资源。
 
 然后，它会自动执行 `npm install` 和 `npm run develop` 的命令，右下角弹出一个 **A service is available on port 8000** 的窗口，点击 **Open Browser** 就可以打开预览了。
 
