@@ -39,7 +39,7 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 
 ### 方法二：Gitpod 编写
 
-> 此方法不适用于菜鸟！
+> 此方法适用于有一定的开发经验和英语基础的同学
 
 ![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)
 
