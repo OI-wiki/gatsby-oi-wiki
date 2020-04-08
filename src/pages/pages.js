@@ -1,10 +1,11 @@
 /** @jsx jsx */
+import { useMediaQuery } from "@material-ui/core"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
 import CardContent from "@material-ui/core/CardContent"
 import Checkbox from "@material-ui/core/Checkbox"
 import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
 import CheckBoxIcon from "@material-ui/icons/CheckBox"
@@ -38,7 +39,7 @@ function PageItem(props) {
     fields: { slug: link },
   } = props
   return (
-    <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={id}>
+    <Grid item key={id}>
       <Card className={classes.root} variant={"outlined"}>
         <CardContent>
           <Typography variant="h5" component={Link} to={link}>
@@ -63,6 +64,51 @@ function matchTags(pageTags, selectedTags) {
   return res.every((v) => v === true)
 }
 
+function GridItems(props) {
+  const theme = useTheme()
+  const { filteredItems } = props
+  let columnCount
+  const upXL = useMediaQuery(theme.breakpoints.up("lg"))
+  const upSmall = useMediaQuery(theme.breakpoints.up("sm"))
+  if (upXL) {
+    columnCount = 3
+    return (
+      <>
+        <Grid container item xs={4} direction={"column"} spacing={2}>
+          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
+        </Grid>
+        <Grid container item xs={4} direction={"column"} spacing={2}>
+          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
+        </Grid>
+        <Grid container item xs={4} direction={"column"} spacing={2}>
+          {filteredItems.map((x, idx) => idx % columnCount === 2 && <PageItem {...x} />)}
+        </Grid>
+      </>
+    )
+  } else if (upSmall) {
+    columnCount = 2
+    return (
+      <>
+        <Grid container item xs={6} direction={"column"} spacing={2}>
+          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
+        </Grid>
+        <Grid container item xs={6} direction={"column"} spacing={2}>
+          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
+        </Grid>
+      </>
+    )
+  } else {
+    columnCount = 1
+    return (
+      <>
+        <Grid container item xs={12} direction={"column"} spacing={2}>
+          {filteredItems.map(x => <PageItem {...x} />)}
+        </Grid>
+      </>
+    )
+  }
+}
+
 function BlogIndex(props) {
   const { location } = props
   const {
@@ -73,14 +119,16 @@ function BlogIndex(props) {
   const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
   const [selectedTags, setSelectedTags] = useState([])
+  const filteredItems = articles.map((x) => matchTags(x.frontmatter.tags, selectedTags) && x).filter(x => x !== false)
   return (
     <Layout
       location={location}
       noMeta={"true"}
       noEdit={"true"}
+      noToC={"true"}
       title={"目录页"}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justify={"center"}>
         <Grid item xs={12}>
           <Autocomplete
             value={selectedTags}
@@ -113,7 +161,6 @@ function BlogIndex(props) {
                 </>
               )
             }}
-            sx={{ width: "100%" }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -125,11 +172,8 @@ function BlogIndex(props) {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
-        {articles.map(
-          (x) =>
-            matchTags(x.frontmatter.tags, selectedTags) && <PageItem {...x} />,
-        )}
+      <Grid container spacing={2} justify={"space-evenly"}>
+        <GridItems filteredItems={filteredItems}/>
       </Grid>
     </Layout>
   )
