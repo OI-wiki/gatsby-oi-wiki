@@ -11,6 +11,7 @@ import Divider from "@material-ui/core/Divider"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
+import Tooltip from '@material-ui/core/Tooltip'
 import Grid from "@material-ui/core/Grid"
 import IconButton from "@material-ui/core/IconButton"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
@@ -164,12 +165,14 @@ function myLayout({
               </Grid>
               {noEdit === "false" && (
                 <Grid item xs={1}>
-                  <IconButton
-                    onClick={() => setDialogOpen(true)}
-                    className={classes.iconButton}
-                  >
-                    <MdEdit font-size="medium"/>
-                  </IconButton>
+                  <Tooltip title="编辑页面" placement="left">
+                    <IconButton
+                      onClick={() => setDialogOpen(true)}
+                      className={classes.iconButton}
+                    >
+                      <MdEdit font-size="medium"/>
+                    </IconButton>
+                  </Tooltip>
                 </Grid>
               )}
             </Grid>
