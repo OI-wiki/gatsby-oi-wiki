@@ -272,7 +272,7 @@ function myLayout({
                   )}
                 </Grid>
                 <Divider className={classes.divider}/>
-                <Typography variant="body1" component="div">
+                <Typography variant="body1" component="div" className={classes.typo}>
                   {children}
                 </Typography>
                 <Meta
