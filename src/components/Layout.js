@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "inherit",
   },
   main: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(5),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(2),
     },
@@ -73,12 +73,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   container: {
-    [theme.breakpoints.up("md")]: {
-      width: `calc(100% - 15%)`,
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: 250,
     },
-    overflow: "auto",
-  },
-  containerNoToC: {
     overflow: "auto",
   },
   iconButton: {
@@ -146,65 +143,73 @@ function myLayout({
   return (
     <>
       <CssBaseline/>
+      <Helmet>
+        <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
+      </Helmet>
       {EditingDialog}
-      <div sx={{ display: "flex" }} className={displayToC ? classes.container : classes.containerToC}>
-        <Helmet>
-          <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
-        </Helmet>
-        <NavAndDrawer pathname={location.pathname}/>
-        <main className={classes.content}>
-          <div className={classes.main}>
-            <div className={classes.toolbar}/>
-
-            <Grid container spacing={2}>
-              <Grid item xs>
-                <Typography variant="h4" component="h3">
-                  {pageTitle}
-                </Typography>
-              </Grid>
-              {noEdit === "false" && (
-                <Grid item xs={1}>
-                  <IconButton
-                    onClick={() => setDialogOpen(true)}
-                    className={classes.iconButton}
-                  >
-                    <MdEdit font-size="medium"/>
-                  </IconButton>
+      <NavAndDrawer pathname={location.pathname}/>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={10} sm={12} lg={10} xl={10}>
+          <div className={classes.toolbar}/>
+          <div className={classes.container}>
+            <main className={classes.content}>
+              <div className={classes.main}>
+                <Grid container spacing={2}>
+                  <Grid item xs>
+                    <Typography variant="h4" component="h3">
+                      {pageTitle}
+                    </Typography>
+                  </Grid>
+                  {noEdit === "false" && (
+                    <Grid item xs={1}>
+                      <IconButton
+                        onClick={() => setDialogOpen(true)}
+                        className={classes.iconButton}
+                      >
+                        <MdEdit fontSize="medium"/>
+                      </IconButton>
+                    </Grid>
+                  )}
                 </Grid>
-              )}
-            </Grid>
-            <Divider className={classes.divider}/>
-            <Typography variant="body1" component="div">
-              {children}
-            </Typography>
-            <Meta
-              authors={authors}
-              tags={tags}
-              relativePath={relativePath}
-              modifiedTime={modifiedTime}
-              noMeta={noMeta}
-            />
-            {noComment === "false" && (
-              <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
-                <ExpansionPanel variant={"outlined"}>
-                  <ExpansionPanelSummary
-                    expandIcon={<MdExpandMore/>}
-                    aria-controls="comment"
-                  >
-                    <Typography className={classes.heading}>评论</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <Container>
-                      <LazyComment title={title}/>
-                    </Container>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
+                <Divider className={classes.divider}/>
+                <Typography variant="body1" component="div">
+                  {children}
+                </Typography>
+                <Meta
+                  authors={authors}
+                  tags={tags}
+                  relativePath={relativePath}
+                  modifiedTime={modifiedTime}
+                  noMeta={noMeta}
+                />
+                {noComment === "false" && (
+                  <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
+                    <ExpansionPanel variant={"outlined"}>
+                      <ExpansionPanelSummary
+                        expandIcon={<MdExpandMore/>}
+                        aria-controls="comment"
+                      >
+                        <Typography className={classes.heading}>评论</Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <Container>
+                          <LazyComment title={title}/>
+                        </Container>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                  </div>
+                )}
               </div>
-            )}
+            </main>
           </div>
-        </main>
-      </div>
-      {displayToC && <ToC toc={toc} pathname={location.pathname}/>}
+        </Grid>
+        {
+          displayToC &&
+          <Grid item xs>
+            <ToC toc={toc} pathname={location.pathname}/>
+          </Grid>
+        }
+      </Grid>
       <Divider/>
       <div className={classes.footer}>
         <Footer/>
