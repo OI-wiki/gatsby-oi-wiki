@@ -9,8 +9,6 @@ import useThrottledOnScroll from "../lib/useThrottledOnScroll"
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    top: theme.spacing(6),
-    marginTop: theme.spacing(6),
     right: 0,
     width: "15%",
     flexShrink: 0,
@@ -19,10 +17,13 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
     padding: theme.spacing(2, 2, 2, 0),
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "block",
+      top: theme.spacing(7),
+      marginTop: theme.spacing(7),
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.only("md")]: {
+      display: "block",
       top: theme.spacing(3),
       marginTop: theme.spacing(3),
     },
