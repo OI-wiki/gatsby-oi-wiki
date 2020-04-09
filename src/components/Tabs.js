@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
       opacity: "1",
     },
   },
+  indicator: {
+    height: "6px"
+  }
 }))
 
 export default function(props) {
@@ -24,7 +27,7 @@ export default function(props) {
     setValue(newValue)
   }
   return (
-    <Tabs value={value} onChange={handleChange}>
+    <Tabs value={value} onChange={handleChange} classes={classes}>
       {tabs.map(({ title, link }) => (
         <Tab
           key={title}
