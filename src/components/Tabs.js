@@ -4,11 +4,15 @@ import Tabs from "@material-ui/core/Tabs"
 import React from "react"
 
 const useStyles = makeStyles((theme) => ({
-  tabs: {
+  tab: {
     paddingLeft: theme.spacing(0.5),
     paddingRight: theme.spacing(0.5),
     width: "6em",
     minWidth: "6em",
+    "&:hover": {
+      color: "#000",
+      opacity: "1",
+    },
   },
 }))
 
@@ -26,7 +30,7 @@ export default function(props) {
           key={title}
           label={title}
           component="a"
-          className={classes.tabs}
+          className={classes.tab}
           href={link ? link : "."}
         />
       ))}
