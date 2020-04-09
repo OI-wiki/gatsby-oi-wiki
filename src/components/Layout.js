@@ -11,10 +11,10 @@ import Divider from "@material-ui/core/Divider"
 import ExpansionPanel from "@material-ui/core/ExpansionPanel"
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
-import Tooltip from '@material-ui/core/Tooltip'
 import Grid from "@material-ui/core/Grid"
 import IconButton from "@material-ui/core/IconButton"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
+import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
 import React, { useState } from "react"
 import { Helmet } from "react-helmet"
@@ -25,7 +25,6 @@ import BackTop from "./BackTop"
 import Footer from "./Footer"
 import Link from "./Link"
 import Meta from "./Meta"
-//Components
 import NavAndDrawer from "./NavAndDrawer"
 import ToC from "./Toc"
 
@@ -149,7 +148,7 @@ function myLayout({
       </Helmet>
       {EditingDialog}
       <NavAndDrawer pathname={location.pathname}/>
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item xs={12} md={10} sm={12} lg={10} xl={10}>
           <div className={classes.toolbar}/>
           <div className={classes.container}>
