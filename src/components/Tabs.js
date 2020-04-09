@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "6em",
   },
   indicator: {
-    height: "6px"
+    height: "3px"
   }
 }))
 
