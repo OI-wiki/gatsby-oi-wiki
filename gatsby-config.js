@@ -41,7 +41,7 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-autolink-headers`,
+            resolve: require.resolve(`./plugins/gatsby-local-autolinks`),
             options: {
               isIconAfterHeader: true,
             },
