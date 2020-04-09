@@ -5,10 +5,9 @@ import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
-    paddingLeft: theme.spacing(0.5),
-    paddingRight: theme.spacing(0.5),
-    width: "6em",
-    minWidth: "6em",
+    paddingLeft: theme.spacing(2.5),
+    paddingRight: theme.spacing(2.5),
+    minWidth: "0",
   },
   indicator: {
     height: "3px"
