@@ -3,7 +3,7 @@ import React from "react"
 
 export default function HTML(props) {
   return (
-    <html lang="zh" {...props.htmlAttributes}>
+    <html lang="zh-cmn-Hans" {...props.htmlAttributes}>
     <head>
       <meta charSet="utf-8"/>
       <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
