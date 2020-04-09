@@ -69,5 +69,10 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 - netlify 好像会把 url 最后的 `/` 给自动去掉。检查内链用的页面：https://oi-wiki-ng.netlify.com/math/poly/newton/
 - 主题里面有 remark-emoji 和 remark-slug 但是不知道什么原因没有 work。可能我们要在 gatsby-config 里面也加一下
 - 由于插件的存在，建议直接使用 jpg/png 图片，插件会自动生成对应的 webp 图片。
+- 可以借鉴学习的设计：
+  - https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU
+  - https://source.android.com/
+  - http://material.io
+  - https://cloud.google.com/vision/docs/quickstart
 
 要加 feature 可以随时提出～
