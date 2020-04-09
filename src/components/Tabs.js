@@ -4,6 +4,7 @@ import Tabs from "@material-ui/core/Tabs"
 import React from "react"
 
 const useStyles = makeStyles((theme) => ({
+<<<<<<< HEAD
   tab: {
     paddingLeft: theme.spacing(0.5),
     paddingRight: theme.spacing(0.5),
@@ -13,6 +14,12 @@ const useStyles = makeStyles((theme) => ({
       color: "#000",
       opacity: "1",
     },
+=======
+  tabs: {
+    paddingLeft: theme.spacing(2.5),
+    paddingRight: theme.spacing(2.5),
+    minWidth: "0",
+>>>>>>> m
   },
   indicator: {
     height: "3px"
