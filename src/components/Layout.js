@@ -157,7 +157,7 @@ function myLayout({
                 <Grid container spacing={2}>
                   <Grid item xs>
                     <Typography variant="h4" component="h3">
-                      {pageTitle}
+                      {title}
                     </Typography>
                   </Grid>
                   {noEdit === "false" && (
