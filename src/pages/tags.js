@@ -5,13 +5,8 @@ import PropTypes from "prop-types"
 import React from "react"
 import Layout from "../components/Layout"
 import Link from "../components/Link"
-import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip'
 
-const useStyles = makeStyles((theme) => ({
-  chip: {
-    margin: theme.spacing(0.5),
-  },
-}))
 const TagsPage = ({
                     data: {
                       allMdx: { group },
