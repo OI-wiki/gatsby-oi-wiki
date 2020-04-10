@@ -162,7 +162,7 @@ function myLayout({
                   </Grid>
                   {noEdit === "false" && (
                     <Grid item xs={1}>
-                      <Tooltip title="编辑页面" placement="left">
+                      <Tooltip title="编辑页面" placement="left" arrow>
                         <IconButton
                           onClick={() => setDialogOpen(true)}
                           className={classes.iconButton}
