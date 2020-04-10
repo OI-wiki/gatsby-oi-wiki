@@ -1,4 +1,4 @@
-# 为换框架所做出的尝试（
+# 为换框架所做出的尝试
 
 Demo: https://ng.oi-wiki.org/
 
