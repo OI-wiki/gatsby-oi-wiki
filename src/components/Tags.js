@@ -10,31 +10,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Header({ num }) {
-  if (num <= 0) return <span>本页面没有标签</span>
-  return <span>标签：</span>
-}
-
 function Tags({ tags }) {
   const arr = tags
   const classes = useStyles()
   return (
     <div>
-      <Header num={arr ? arr.length : 0}/>
-      <div>
-        {arr &&
-        arr.map((tag) => (
-          <Chip
-            label={` ${tag} `}
-            href={"/tags/" + kebabCase(tag)}
-            key={`tag-${tag}`}
-            component={"a"}
-            variant="outlined"
-            clickable
-            className={classes.chip}
-          />
-        ))}
-      </div>
+      {arr &&
+      arr.map((tag) => (
+        <Chip
+          label={` #${tag} `}
+          href={"/tags/" + kebabCase(tag)}
+          key={`tag-${tag}`}
+          component={"a"}
+          variant="outlined"
+          clickable
+          className={classes.chip}
+        />
+      ))}
     </div>
   )
 }

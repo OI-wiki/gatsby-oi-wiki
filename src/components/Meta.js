@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import Divider from "@material-ui/core/Divider"
 import Paper from "@material-ui/core/Paper"
 import { useTheme } from "@material-ui/core/styles"
 import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
@@ -15,12 +16,12 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
     return (
       <Paper sx={{ padding: theme.spacing(2) }} variant="outlined">
         <AuthorsArray authors={authors}/>
+        <Divider sx={{ marginTop: "8px", marginBottom: "8px" }}/>
         <Tags tags={tags}/>
         <div
           sx={{
-            borderLeft: "5px solid #ff1700",
             margin: "20px 0",
-            paddingLeft: "1rem",
+            paddingLeft: ".5rem",
             textDecoration: "none",
           }}
         >

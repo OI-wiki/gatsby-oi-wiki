@@ -10,32 +10,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Header({ num }) {
-  if (num <= 0) return <span>本页面未记录贡献者</span>
-  if (num === 1) return <span>贡献者：</span>
-  if (num > 1) return <span>贡献者们：</span>
-}
-
 function AuthorsArray({ authors }) {
-  const arr = authors && authors.split(",")
+  const arr = authors && authors.split(",").map(x => x.trim())
   const classes = useStyles()
   return (
     <div>
-      <Header num={arr ? arr.length : 0}/>
-      <div>
-        {arr &&
-        arr.map((author) => (
-          <Chip
-            label={` ${author} `}
-            key={author}
-            clickable
-            className={classes.chip}
-            component={"a"}
-            variant="outlined"
-            href={"https://github.com/" + author.trim()}
-          />
-        ))}
-      </div>
+      {arr &&
+      arr.map((author) => (
+        <Chip
+          label={` @${author} `}
+          key={author}
+          clickable
+          className={classes.chip}
+          component={"a"}
+          variant="outlined"
+          href={"https://github.com/" + author.trim()}
+        />
+      ))}
     </div>
   )
 }
