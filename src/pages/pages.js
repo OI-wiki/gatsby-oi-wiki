@@ -7,8 +7,6 @@ import Grid from "@material-ui/core/Grid"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
-import CheckBoxIcon from "@material-ui/icons/CheckBox"
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import match from "autosuggest-highlight/match"
 import parse from "autosuggest-highlight/parse"
@@ -19,8 +17,6 @@ import Layout from "../components/Layout"
 import Link from "../components/Link"
 import Tags from "../components/Tags"
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small"/>
-const checkedIcon = <CheckBoxIcon fontSize="small"/>
 const useStyles = makeStyles({})
 
 function PageItem(props) {
@@ -34,7 +30,7 @@ function PageItem(props) {
     <Grid item key={id}>
       <Card variant={"outlined"}>
         <CardContent>
-          <Typography variant="h5" component={Link} to={link}>
+          <Typography variant="h6" component={Link} to={link}>
             {title}
           </Typography>
         </CardContent>
