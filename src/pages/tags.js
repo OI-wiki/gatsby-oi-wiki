@@ -1,10 +1,18 @@
+/** @jsx jsx */
+import Chip from "@material-ui/core/Chip"
+import { makeStyles } from "@material-ui/core/styles"
 import { graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import PropTypes from "prop-types"
 import React from "react"
+import { jsx } from "theme-ui"
 import Layout from "../components/Layout"
-import Link from "../components/Link"
 
+const useStyles = makeStyles((theme) => ({
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+}))
 const TagsPage = ({
                     data: {
                       allMdx: { group },
@@ -13,22 +21,26 @@ const TagsPage = ({
                       },
                     },
                     location,
-                  }) => (
-  <Layout location={location} noMeta="true" title="标签页">
-    <div>
-      <h1>Tags</h1>
-      <ul>
+                  }) => {
+  const classes = useStyles()
+  return (
+    <Layout location={location} noMeta="true" title="标签页">
+      <div>
         {group.map((tag) => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
+          <Chip
+            label={`${tag.fieldValue}(${tag.totalCount})`}
+            variant="outlined"
+            component={"a"}
+            clickable
+            key={tag.fieldValue}
+            href={"/tags/" + kebabCase(tag.fieldValue)}
+            className={classes.chip}
+          />
         ))}
-      </ul>
-    </div>
-  </Layout>
-)
+      </div>
+    </Layout>
+  )
+}
 
 TagsPage.propTypes = {
   data: PropTypes.shape({
