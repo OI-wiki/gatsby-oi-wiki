@@ -3,7 +3,6 @@ import { useMediaQuery } from "@material-ui/core"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
 import CardContent from "@material-ui/core/CardContent"
-import Checkbox from "@material-ui/core/Checkbox"
 import Grid from "@material-ui/core/Grid"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
@@ -131,27 +130,20 @@ function BlogIndex(props) {
             multiple
             options={tags}
             disableCloseOnSelect
+            filterSelectedOptions
             getOptionLabel={(option) => option}
-            renderOption={(option, { inputValue, selected }) => {
+            renderOption={(option, { inputValue }) => {
               const matches = match(option, inputValue)
               const parts = parse(option, matches)
               return (
-                <>
-                  <Checkbox
-                    icon={icon}
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
-                  />
-                  {parts.map((part, index) => (
-                    <span
-                      key={index}
-                      style={{ fontWeight: part.highlight ? 700 : 400 }}
-                    >
+                parts.map((part, index) => (
+                  <span
+                    key={index}
+                    style={{ fontWeight: part.highlight ? 700 : 400 }}
+                  >
                       {part.text}
                     </span>
-                  ))}
-                </>
+                ))
               )
             }}
             renderInput={(params) => (
