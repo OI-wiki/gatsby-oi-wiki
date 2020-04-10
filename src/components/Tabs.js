@@ -13,20 +13,24 @@ const useStyles = makeStyles((theme) => ({
       opacity: "1",
     },
   },
+}))
+
+const useIndicatorStyles = makeStyles(() => ({
   indicator: {
-    height: "3px"
-  }
+    height: "3px",
+  },
 }))
 
 export default function(props) {
   const classes = useStyles()
+  const indicatorClasses = useIndicatorStyles()
   const [value, setValue] = React.useState(0)
   const { tabs } = props
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
   return (
-    <Tabs value={value} onChange={handleChange} classes={classes}>
+    <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
       {tabs.map(({ title, link }) => (
         <Tab
           key={title}
