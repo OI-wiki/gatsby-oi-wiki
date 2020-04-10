@@ -142,14 +142,10 @@ module.exports = ({
     </script>
     `
 
-  const finalcode = styles + script
-
-  /**
-    markdownAST.children.push({
+  markdownAST.children.push({
     type: 'html',
-    value: finalcode
+    value: styles + script
   });
-  */
 
   return markdownAST
 }
