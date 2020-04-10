@@ -62,13 +62,13 @@ function GridItems(props) {
     columnCount = 3
     return (
       <>
-        <Grid container item xs={4} direction={"column"} spacing={2}>
+        <Grid container item xs direction={"column"} spacing={2} >
           {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
         </Grid>
-        <Grid container item xs={4} direction={"column"} spacing={2}>
+        <Grid container item xs direction={"column"} spacing={2}>
           {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
         </Grid>
-        <Grid container item xs={4} direction={"column"} spacing={2}>
+        <Grid container item xs direction={"column"} spacing={2}>
           {filteredItems.map((x, idx) => idx % columnCount === 2 && <PageItem {...x} />)}
         </Grid>
       </>
@@ -77,10 +77,10 @@ function GridItems(props) {
     columnCount = 2
     return (
       <>
-        <Grid container item xs={6} direction={"column"} spacing={2}>
+        <Grid container item xs direction={"column"} spacing={2}>
           {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
         </Grid>
-        <Grid container item xs={6} direction={"column"} spacing={2}>
+        <Grid container item xs direction={"column"} spacing={2}>
           {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
         </Grid>
       </>
@@ -89,7 +89,7 @@ function GridItems(props) {
     columnCount = 1
     return (
       <>
-        <Grid container item xs={12} direction={"column"} spacing={2}>
+        <Grid container item direction={"column"} spacing={2}>
           {filteredItems.map(x => <PageItem {...x} />)}
         </Grid>
       </>
