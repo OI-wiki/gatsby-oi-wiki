@@ -150,7 +150,7 @@ function ResponsiveDrawer(props) {
               />
             </div>
           </Hidden>
-          <Tooltip title="GitHub 存储库" placement="bottom">
+          <Tooltip title="GitHub 存储库" placement="bottom" arrow>
             <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
               <FaGithub/>
             </IconButton>
