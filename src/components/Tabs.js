@@ -45,6 +45,7 @@ export default function(props) {
     <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
       {tabs.map(({ title, link }) => (
         <Tab
+          disableRipple 
           key={title}
           label={title}
           component="a"
