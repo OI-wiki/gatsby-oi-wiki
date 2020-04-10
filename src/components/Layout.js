@@ -156,7 +156,7 @@ function myLayout({
               <div className={classes.main}>
                 <Grid container spacing={2}>
                   <Grid item xs>
-                    <Typography variant="h4" component="h3">
+                    <Typography variant="h4" component="h1">
                       {title}
                     </Typography>
                   </Grid>
