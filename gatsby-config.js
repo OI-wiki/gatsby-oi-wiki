@@ -47,7 +47,7 @@ module.exports = {
             },
           },*/
           {
-            resolve: require.resolve('./plugins/gatsby-remark-autolink-headers'),
+            resolve: `gatsby-local-autolink-headers`,
           },
           {
             resolve: `gatsby-remark-vscode`,
