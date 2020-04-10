@@ -116,7 +116,7 @@ function BlogIndex(props) {
       noToC={"true"}
       title={"目录页"}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} justify={"center"}>
         <Grid item xs={12}>
           <Autocomplete
             value={selectedTags}
@@ -152,7 +152,7 @@ function BlogIndex(props) {
             )}
           />
         </Grid>
-        <Grid item xs={12} container spacing={2} justify={"center"}>
+        <Grid container xs={12} spacing={2} justify={"center"}>
           <GridItems filteredItems={filteredItems}/>
         </Grid>
       </Grid>
