@@ -63,13 +63,13 @@ function GridItems(props) {
     return (
       <>
         <Grid container item xs={4} direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
+          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem key={x.id} {...x} />)}
         </Grid>
         <Grid container item xs={4} direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
+          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem key={x.id} {...x} />)}
         </Grid>
         <Grid container item xs={4} direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 2 && <PageItem {...x} />)}
+          {filteredItems.map((x, idx) => idx % columnCount === 2 && <PageItem key={x.id} {...x} />)}
         </Grid>
       </>
     )
@@ -78,10 +78,10 @@ function GridItems(props) {
     return (
       <>
         <Grid container item xs={6} direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem {...x} />)}
+          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem key={x.id} {...x} />)}
         </Grid>
         <Grid container item xs={6} direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem {...x} />)}
+          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem key={x.id} {...x} />)}
         </Grid>
       </>
     )
@@ -90,7 +90,7 @@ function GridItems(props) {
     return (
       <>
         <Grid container item xs={12} direction={"column"} spacing={2}>
-          {filteredItems.map(x => <PageItem {...x} />)}
+          {filteredItems.map(x => <PageItem key={x.id} {...x} />)}
         </Grid>
       </>
     )
@@ -116,7 +116,7 @@ function BlogIndex(props) {
       noToC={"true"}
       title={"目录页"}
     >
-      <Grid container spacing={2} justify={"center"}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Autocomplete
             value={selectedTags}
@@ -152,9 +152,9 @@ function BlogIndex(props) {
             )}
           />
         </Grid>
-      </Grid>
-      <Grid container spacing={2} justify={"center"}>
-        <GridItems filteredItems={filteredItems}/>
+        <Grid item xs={12} container spacing={2} justify={"center"}>
+          <GridItems filteredItems={filteredItems}/>
+        </Grid>
       </Grid>
     </Layout>
   )
