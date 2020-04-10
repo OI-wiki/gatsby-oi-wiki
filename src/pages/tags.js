@@ -1,9 +1,19 @@
 import { graphql } from "gatsby"
+import { makeStyles } from "@material-ui/core/styles"
 import kebabCase from "lodash/kebabCase"
 import PropTypes from "prop-types"
 import React from "react"
 import Layout from "../components/Layout"
+import Avatar from "@material-ui/core/Avatar"
 import Link from "../components/Link"
+
+import Chip from '@material-ui/core/Chip';
+
+const useStyles = makeStyles((theme) => ({
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+}))
 
 const TagsPage = ({
                     data: {
@@ -14,18 +24,19 @@ const TagsPage = ({
                     },
                     location,
                   }) => (
+
   <Layout location={location} noMeta="true" title="标签页">
     <div>
-      <h1>Tags</h1>
-      <ul>
-        {group.map((tag) => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {group.map((tag) => (
+        <Chip
+          label={`${tag.fieldValue}(${tag.totalCount})`}
+          variant="outlined"
+          className={useStyles().chip}
+          component={"a"}
+          clickable
+          href={"/tags/" + kebabCase(tag.fieldValue)}
+        />
+      ))}
     </div>
   </Layout>
 )
