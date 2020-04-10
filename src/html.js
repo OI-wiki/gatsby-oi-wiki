@@ -12,6 +12,7 @@ export default function HTML(props) {
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
       {props.headComponents}
+      <link rel="stylesheet" type="text/css" href="/extra.css" />
     </head>
     <body {...props.bodyAttributes}>
     {props.preBodyComponents}
