@@ -4,9 +4,7 @@ import kebabCase from "lodash/kebabCase"
 import PropTypes from "prop-types"
 import React from "react"
 import Layout from "../components/Layout"
-import Avatar from "@material-ui/core/Avatar"
 import Link from "../components/Link"
-
 import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.5),
   },
 }))
-
 const TagsPage = ({
                     data: {
                       allMdx: { group },
@@ -31,10 +28,10 @@ const TagsPage = ({
         <Chip
           label={`${tag.fieldValue}(${tag.totalCount})`}
           variant="outlined"
-          className={useStyles().chip}
           component={"a"}
           clickable
           href={"/tags/" + kebabCase(tag.fieldValue)}
+          style={{margin: 4}}
         />
       ))}
     </div>
