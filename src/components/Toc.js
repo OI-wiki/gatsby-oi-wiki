@@ -142,16 +142,6 @@ export default function ToC(props) {
     ) {
       return
     }
-    event.preventDefault()
-    const navbarOffset = 64 + 12
-    const targetElement = document.getElementById(
-      hash.substring(1, hash.length),
-    )
-    window.scrollTo({
-      top: targetElement.offsetTop - navbarOffset,
-      left: 0,
-      behavior: "smooth",
-    })
     // Used to disable findActiveIndex if the page scrolls due to a click
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {
