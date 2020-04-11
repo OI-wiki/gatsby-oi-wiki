@@ -166,7 +166,7 @@ function ResponsiveDrawer(props) {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation={"css"}>
-          <Tabs tabs={tabData}/>
+          <Tabs tabs={tabData} location={pathname}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="css">
