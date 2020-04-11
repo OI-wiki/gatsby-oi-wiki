@@ -3,16 +3,8 @@ const visit = require(`unist-util-visit`)
 const slugs = require(`github-slugger`)()
 const deburr = require(`lodash/deburr`)
 
-function patch(context, key, value) {
-  if (!context[key]) {
-    context[key] = value
-  }
-
-  return context[key]
-}
-
-function concealedAnchor(id) {
-  const nodeHtml = `<a class="anchor" id="${id}"></a>`
+function concealedAnchor(conClassName,id) {
+  const nodeHtml = `<a class="${conClassName}" name="${id}"></a>`
 
   return nodeHtml
 }
@@ -23,7 +15,8 @@ module.exports = ({
   markdownAST
 }, {
   icon = svgIcon,
-  className = `anchorLink`,
+  className = 'anchorLink',
+  conClassName = 'anchor',
   maintainCase = false,
   removeAccents = false,
   enableCustomId = false,
@@ -55,7 +48,7 @@ module.exports = ({
 
     node.children.push({
       type: 'html',
-      value: concealedAnchor(id),
+      value: concealedAnchor(conClassName,id),
     })
 
     if (icon !== false) {
@@ -75,19 +68,17 @@ module.exports = ({
             type: `raw`,
             // The Octicon link icon is the default. But users can set their own icon via the "icon" option.
             value: icon,
-          }, ],
+          },],
         },
       })
     }
 
   })
-  
-  /**
+
   markdownAST.children.push({
     type: 'html',
-    value: renderHtml(className, offsetY)
+    value: `<style>.${className}.before{position:absolute;top:0;left:0;transform:translateX(-100%);padding-right:4px}.${className}.after{display:inline-block;padding-left:4px}h1 .${className} svg,h2 .${className} svg,h3 .${className} svg,h4 .${className} svg,h5 .${className} svg,h6 .${className} svg{visibility:hidden}h1 .${className}:focus svg,h1:hover .${className} svg,h2 .${className}:focus svg,h2:hover .${className} svg,h3 .${className}:focus svg,h3:hover .${className} svg,h4 .${className}:focus svg,h4:hover .${className} svg,h5 .${className}:focus svg,h5:hover .${className} svg,h6 .${className}:focus svg,h6:hover .${className} svg{visibility:visible}a.anchor{display:inline-block;position:relative;top:-159px;visibility:hidden}@media only screen and (max-width:1279.95px){a.anchor{top:-101px}}</style>`,
   });
-  */
 
   return markdownAST
 }
