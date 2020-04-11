@@ -40,11 +40,17 @@ module.exports = {
               ignoreFileExtensions: [".md"],
             },
           },
-          {
+          /**{
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               isIconAfterHeader: true,
             },
+          },*/
+          {
+            resolve: `gatsby-local-autolink-headers`,
+            options: {
+              isIconAfterHeader: true,
+            }
           },
           {
             resolve: `gatsby-remark-vscode`,
