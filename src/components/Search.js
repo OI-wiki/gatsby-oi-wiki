@@ -53,7 +53,7 @@ class Result extends React.Component {
     const { ev } = this.state
 
     let sta = [], Rsize
-    const result = fetch(`https://search.oi-wiki.org:8443/?s=${ev}`, {
+    const result = fetch(`https://search.oi-wiki.org:8443/?s=${encodeURIComponent(ev)}`, {
       // credentials: "same-origin"
     })
       .then((response) => response.json())
