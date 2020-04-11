@@ -16,6 +16,7 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
+import Typography from "@material-ui/core/Typography"
 
 import IconButton from "@material-ui/core/IconButton"
 import { MdSearch } from "react-icons/md"
@@ -77,19 +78,20 @@ class Result extends React.Component {
       })
     )
   }
-
+  
   render() {
     // console.log(this.state.val[0])
     const { ev, val, searched } = this.state
     // console.log(searched)
     // console.log(val[0])
+    
     return (
       <>
         <TextField
-          id="standard-full-width"
+          id="standard-search"
+          type="search"
           style={{ margin: 0 }}
-          placeholder="搜索..."
-          helperText="键入以开始搜索"
+          placeholder="键入以开始搜索"
           fullWidth
           margin="normal"
           InputLabelProps={{
@@ -103,30 +105,24 @@ class Result extends React.Component {
             {val.map((item) => {
               /* Render article */
               return (
-                <ListItem button class="md-search-result__item">
-                  <a
-                    href={item.url}
-                    title={item.title}
-                    class="md-search-result__link"
-                    tabindex="-1"
-                  >
-                    <article
-                      class="md-search-result__article
-                      md-search-result__article--document"
-                    >
-                      <h1
-                        class="md-search-result__title"
-                        dangerouslySetInnerHTML={{
-                          __html: item.title.replace(ev, `<em>${ev}</em>`),
-                        }}
-                      ></h1>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item.highlight ? item.highlight : "",
-                        }}
-                      ></div>
-                    </article>
-                  </a>
+                <ListItem button component="a" href={item.url}>
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="h6"
+                          dangerouslySetInnerHTML={{
+                            __html: item.title.replace(ev, `<em>${ev}</em>`),
+                          }}
+                        ></Typography>
+                      }
+                      secondary={
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: item.highlight ? item.highlight : "",
+                          }}
+                        ></div>
+                      } 
+                    />
                 </ListItem>
               )
             })}
