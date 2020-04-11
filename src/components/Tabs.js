@@ -24,8 +24,20 @@ const useIndicatorStyles = makeStyles(() => ({
 export default function(props) {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
-  const [value, setValue] = React.useState(0)
-  const { tabs } = props
+  
+  const { tabs, location } = props
+  const state = (() => { 
+    for(const tab in tabs) {
+      if(tabs[tab].link == '/'){
+        if(location == (tabs[tab] || { link: undefined }).link) return +tab
+        else continue
+      }
+      if((location || "").startsWith(tabs[tab].link)) return +tab
+    }
+    return false
+  })()
+
+  const [value, setValue] = React.useState(state)
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -33,6 +45,7 @@ export default function(props) {
     <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
       {tabs.map(({ title, link }) => (
         <Tab
+          disableRipple 
           key={title}
           label={title}
           component="a"
