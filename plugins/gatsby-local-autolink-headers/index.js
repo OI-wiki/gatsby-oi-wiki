@@ -4,7 +4,7 @@ const slugs = require(`github-slugger`)()
 const deburr = require(`lodash/deburr`)
 
 function concealedAnchor(conClassName,id) {
-  const nodeHtml = `<a class="${conClassName}" name="${id}"></a>`
+  const nodeHtml = `<a class="${conClassName}" id="${id}"></a>`
 
   return nodeHtml
 }
