@@ -146,8 +146,7 @@ function BlogIndex(props) {
               <TextField
                 {...params}
                 variant="outlined"
-                label="搜索标签..."
-                placeholder="搜索标签..."
+                placeholder="键入以按标签搜索..."
               />
             )}
           />
