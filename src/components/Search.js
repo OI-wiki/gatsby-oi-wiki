@@ -1,14 +1,16 @@
 /** @jsx jsx */
+import Backdrop from "@material-ui/core/Backdrop"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import IconButton from "@material-ui/core/IconButton"
+import InputBase from "@material-ui/core/InputBase"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
+import Paper from "@material-ui/core/Paper"
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles"
-import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
 import FindInPageIcon from "@material-ui/icons/FindInPage"
 import React, { useState } from "react"
@@ -21,10 +23,6 @@ const styles = (theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: "61px",
   },
   searchResultPrimary: {
     "& em": {
@@ -41,17 +39,61 @@ const styles = (theme) => ({
       // 使用 box shadow 模拟下划线
     },
   },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "12vw",
+      "&:focus": {
+        width: "30vw",
+      },
+    },
+  },
   resultPaper: {
-    // marginTop: "12px",
-    // minWidth: "500px",
-    // maxWidth: "600px",
-    // position: "absolute",
-    // right: "0 !important",
-    // top: "100%",
-    // maxHeight: "70vh",
-    // overflowY: "scroll",
-    // overflowX: "hidden",
-    // zIndex: 5
+    marginTop: "12px",
+    minWidth: "calc(30vw + 56px)",
+    maxWidth: "50vw",
+    position: "absolute",
+    right: "0 !important",
+    top: "100%",
+    maxHeight: "80vh",
+    overflowY: "auto",
+    overflowX: "hidden",
+    zIndex: theme.zIndex.drawer + 2,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.black, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    zIndex: theme.zIndex.drawer + 2,
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })
 
@@ -90,7 +132,9 @@ function SearchResultList(props) {
       })}
     </List>
   ) : searched ? (
-    "没有找到符合条件的结果"
+    <Typography variant={"body1"} sx={{ padding: "8px" }}>
+      没有找到符合条件的结果
+    </Typography>
   ) : (
     ""
   )
@@ -103,6 +147,7 @@ class Result extends React.Component {
       ev: "",
       val: [],
       searched: false,
+      open: false,
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -138,22 +183,35 @@ class Result extends React.Component {
   }
 
   render() {
-    const { ev, val, searched } = this.state
+    const { ev, val, searched, open } = this.state
     return (
       <>
-        <TextField
-          id="standard-search"
-          type="search"
-          style={{ margin: 0 }}
-          placeholder="键入以开始搜索"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={this.update.bind(this)}
-        />
-        <SearchResultList ev={ev} val={val} searched={searched} classes={this.props.classes}/>
+        <div className={this.props.classes.search}>
+          <div className={this.props.classes.searchIcon}>
+            <MdSearch/>
+          </div>
+          <InputBase
+            type="search"
+            placeholder="键入以开始搜索"
+            onChange={this.update.bind(this)}
+            onFocus={() => {
+              this.setState({ open: true })
+            }}
+            onBlur={() => {
+              this.setState({ open: false })
+            }}
+            classes={{
+              root: this.props.classes.inputRoot,
+              input: this.props.classes.inputInput,
+            }}
+          />
+          {open && <Paper className={this.props.classes.resultPaper}>
+            <SearchResultList ev={ev} val={val} searched={searched} classes={this.props.classes}/>
+          </Paper>}
+        </div>
+        <Backdrop className={this.props.classes.backdrop} open={open} onClick={() => {
+          this.setState({ open: false })
+        }}/>
       </>
     )
   }
@@ -186,4 +244,4 @@ function Search(props) {
   )
 }
 
-export default withStyles(styles)(Search)
+export default withStyles(styles)(Result)

@@ -4,17 +4,17 @@ import Button from "@material-ui/core/Button"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
 import IconButton from "@material-ui/core/IconButton"
-import InputBase from "@material-ui/core/InputBase"
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
-import Tooltip from '@material-ui/core/Tooltip'
+import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
 import { Link } from "gatsby"
 import React from "react"
 import { FaGithub } from "react-icons/fa"
-import { MdMenu, MdSchool, MdSearch } from "react-icons/md"
+import { MdMenu, MdSchool } from "react-icons/md"
 import { jsx } from "theme-ui"
 import tabData from "../tabs.yaml"
+import Search from "./Search"
 import SiderContent from "./Sidebar"
 import Tabs from "./Tabs"
 
@@ -65,43 +65,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.black, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.black, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
 }))
 
 function ResponsiveDrawer(props) {
@@ -145,19 +108,7 @@ function ResponsiveDrawer(props) {
           </Button>
           <div style={{ flexGrow: 1 }}/>
           <Hidden smDown implementation="css">
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <MdSearch/>
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
+            <Search/>
           </Hidden>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
             <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
