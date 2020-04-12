@@ -197,9 +197,6 @@ class Result extends React.Component {
             onFocus={() => {
               this.setState({ open: true })
             }}
-            onBlur={() => {
-              this.setState({ open: false })
-            }}
             classes={{
               root: this.props.classes.inputRoot,
               input: this.props.classes.inputInput,
