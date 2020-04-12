@@ -27,11 +27,9 @@ export default function HTML(props) {
           tex: {
             inlineMath: [
               ["$", "$"],
-              ["\\(", "\\)"],
             ],
             displayMath: [
               ["$$", "$$"],
-              ["\\[", "\\]"],
             ],
           },
         }` }} />
