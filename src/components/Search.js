@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper"
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import FindInPageIcon from "@material-ui/icons/FindInPage"
+import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
@@ -27,15 +28,15 @@ const styles = (theme) => ({
   searchResultPrimary: {
     "& em": {
       fontStyle: "normal",
-      color: fade(theme.palette.primary.main, .95),
-      background: fade(theme.palette.primary.main, .08),
+      color: fade(theme.palette.primary.main, 0.95),
+      background: fade(theme.palette.primary.main, 0.08),
     },
   },
   searchResultSecondary: {
     "& em": {
       fontStyle: "normal",
       padding: "0 0 2px",
-      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, .5)}`,
+      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, 0.5)}`,
       // 使用 box shadow 模拟下划线
     },
   },
@@ -73,10 +74,6 @@ const styles = (theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.black, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.black, 0.25),
-    },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
@@ -84,6 +81,18 @@ const styles = (theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto",
+    },
+  },
+  searchColorBlack: {
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.black, 0.25),
+    },
+  },
+  searchColorWhite: {
+    backgroundColor: fade(theme.palette.common.white, 0.8),
+    "&:hover": {
+      backgroundColor: theme.palette.common.white,
     },
   },
   searchIcon: {
@@ -186,9 +195,16 @@ class Result extends React.Component {
     const { ev, val, searched, open } = this.state
     return (
       <>
-        <div className={this.props.classes.search}>
+        <div
+          className={clsx(
+            this.props.classes.search,
+            open
+              ? this.props.classes.searchColorWhite
+              : this.props.classes.searchColorBlack
+          )}
+        >
           <div className={this.props.classes.searchIcon}>
-            <MdSearch/>
+            <MdSearch />
           </div>
           <InputBase
             type="search"
@@ -202,13 +218,24 @@ class Result extends React.Component {
               input: this.props.classes.inputInput,
             }}
           />
-          {open && <Paper className={this.props.classes.resultPaper}>
-            <SearchResultList ev={ev} val={val} searched={searched} classes={this.props.classes}/>
-          </Paper>}
+          {open && (
+            <Paper className={this.props.classes.resultPaper}>
+              <SearchResultList
+                ev={ev}
+                val={val}
+                searched={searched}
+                classes={this.props.classes}
+              />
+            </Paper>
+          )}
         </div>
-        <Backdrop className={this.props.classes.backdrop} open={open} onClick={() => {
-          this.setState({ open: false })
-        }}/>
+        <Backdrop
+          className={this.props.classes.backdrop}
+          open={open}
+          onClick={() => {
+            this.setState({ open: false })
+          }}
+        />
       </>
     )
   }
