@@ -22,8 +22,26 @@ const styles = (theme) => ({
     flexWrap: "wrap",
   },
   textField: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
     marginRight: "61px",
+  },
+  searchResultPrimary: {
+    "& em": {
+      fontStyle: "normal",
+      fontWeight: 700,
+      textDecoration: "underline",
+      textUnderlineOffset: "0.15rem",
+      // color: fade(theme.palette.secondary.main, 0.5)
+    },
+  },
+  searchResultSecondary: {
+    "& em": {
+      fontStyle: "normal",
+      textDecoration: `underline`,
+      fontWeight: 700,
+      textUnderlineOffset: "0.15rem",
+      // color: fade(theme.palette.secondary.main, 0.8)
+    },
   },
 })
 
@@ -75,7 +93,6 @@ class Result extends React.Component {
     const { ev, val, searched } = this.state
     // console.log(searched)
     // console.log(val[0])
-
     return (
       <>
         <TextField
@@ -96,11 +113,12 @@ class Result extends React.Component {
             {val.map((item) => {
               /* Render article */
               return (
-                <ListItem button component="a" href={item.url}>
+                <ListItem button component="a" href={item.url} key={item.url}>
                   <ListItemText
                     primary={
                       <Typography
                         variant="h6"
+                        className={this.props.classes.searchResultPrimary}
                         dangerouslySetInnerHTML={{
                           __html: item.title.replace(ev, `<em>${ev}</em>`),
                         }}
@@ -108,6 +126,7 @@ class Result extends React.Component {
                     }
                     secondary={
                       <div
+                        className={this.props.classes.searchResultSecondary}
                         dangerouslySetInnerHTML={{
                           __html: item.highlight ? item.highlight : "",
                         }}
@@ -155,4 +174,4 @@ function Search() {
   )
 }
 
-export default withStyles(styles)(Search)
+export default withStyles(styles)(Result)
