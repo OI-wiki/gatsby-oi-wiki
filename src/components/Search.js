@@ -2,14 +2,15 @@
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
-
 import IconButton from "@material-ui/core/IconButton"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
-import { makeStyles, withStyles } from "@material-ui/core/styles"
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import Typography from "@material-ui/core/Typography"
+import FindInPageIcon from "@material-ui/icons/FindInPage"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
@@ -28,22 +29,72 @@ const styles = (theme) => ({
   searchResultPrimary: {
     "& em": {
       fontStyle: "normal",
-      fontWeight: 700,
-      textDecoration: "underline",
-      textUnderlineOffset: "0.15rem",
-      // color: fade(theme.palette.secondary.main, 0.5)
+      color: fade(theme.palette.primary.main, .95),
+      background: fade(theme.palette.primary.main, .08),
     },
   },
   searchResultSecondary: {
     "& em": {
       fontStyle: "normal",
-      textDecoration: `underline`,
-      fontWeight: 700,
-      textUnderlineOffset: "0.15rem",
-      // color: fade(theme.palette.secondary.main, 0.8)
+      padding: "0 0 2px",
+      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, .5)}`,
+      // 使用 box shadow 模拟下划线
     },
   },
+  resultPaper: {
+    // marginTop: "12px",
+    // minWidth: "500px",
+    // maxWidth: "600px",
+    // position: "absolute",
+    // right: "0 !important",
+    // top: "100%",
+    // maxHeight: "70vh",
+    // overflowY: "scroll",
+    // overflowX: "hidden",
+    // zIndex: 5
+  },
 })
+
+function SearchResultList(props) {
+  const { val, searched, ev, classes } = props
+  return val.length !== 0 ? (
+    <List>
+      {val.map((item) => {
+        /* Render article */
+        return (
+          <ListItem button divider component="a" href={item.url} key={item.url}>
+            <ListItemIcon>
+              <FindInPageIcon/>
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography
+                  variant="h6"
+                  className={classes.searchResultPrimary}
+                  dangerouslySetInnerHTML={{
+                    __html: item.title.replace(ev, `<em>${ev}</em>`),
+                  }}
+                />
+              }
+              secondary={
+                <div
+                  className={classes.searchResultSecondary}
+                  dangerouslySetInnerHTML={{
+                    __html: item.highlight ? item.highlight : "",
+                  }}
+                />
+              }
+            />
+          </ListItem>
+        )
+      })}
+    </List>
+  ) : searched ? (
+    "没有找到符合条件的结果"
+  ) : (
+    ""
+  )
+}
 
 class Result extends React.Component {
   constructor(props) {
@@ -57,8 +108,6 @@ class Result extends React.Component {
   }
 
   update(ev) {
-    // console.log(ev.type)
-    // if (ev.type === "focus" || ev.type === "keyup") {
     clearTimeout(this.timer)
     this.setState({
       ev: ev.target.value,
@@ -89,10 +138,7 @@ class Result extends React.Component {
   }
 
   render() {
-    // console.log(this.state.val[0])
     const { ev, val, searched } = this.state
-    // console.log(searched)
-    // console.log(val[0])
     return (
       <>
         <TextField
@@ -107,47 +153,13 @@ class Result extends React.Component {
           }}
           onChange={this.update.bind(this)}
         />
-
-        {val.length !== 0 ? (
-          <List>
-            {val.map((item) => {
-              /* Render article */
-              return (
-                <ListItem button component="a" href={item.url} key={item.url}>
-                  <ListItemText
-                    primary={
-                      <Typography
-                        variant="h6"
-                        className={this.props.classes.searchResultPrimary}
-                        dangerouslySetInnerHTML={{
-                          __html: item.title.replace(ev, `<em>${ev}</em>`),
-                        }}
-                      />
-                    }
-                    secondary={
-                      <div
-                        className={this.props.classes.searchResultSecondary}
-                        dangerouslySetInnerHTML={{
-                          __html: item.highlight ? item.highlight : "",
-                        }}
-                      />
-                    }
-                  />
-                </ListItem>
-              )
-            })}
-          </List>
-        ) : searched ? (
-          "没有找到符合条件的结果"
-        ) : (
-          ""
-        )}
+        <SearchResultList ev={ev} val={val} searched={searched} classes={this.props.classes}/>
       </>
     )
   }
 }
 
-function Search() {
+function Search(props) {
   const [dialogOpen, setDialogOpen] = useState(true)
   const classes = useStyles()
   return (
@@ -167,11 +179,11 @@ function Search() {
       >
         <DialogTitle>{"搜索"}</DialogTitle>
         <DialogContent>
-          <Result/>
+          <Result classes={props.classes}/>
         </DialogContent>
       </Dialog>
     </>
   )
 }
 
-export default withStyles(styles)(Result)
+export default withStyles(styles)(Search)
