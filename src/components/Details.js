@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
+import { ExpansionPanel, ExpansionPanelDetails, Container } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core"
 
 const detailsStyle = {
   boxShadow:
@@ -20,14 +22,39 @@ const detailsStyle = {
   },
 }
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "&, &:first-child, &:last-child": {
+      margin: "0.8em 0 !important"
+    },
+  },
+  "expanded": {
+    "&, &:first-child, &:last-child": {
+      margin: "1.2em 0 !important"
+    },
+  }
+}))
+
 export default function({ className = "", children, ...props }) {
-  return className.match("open") ? (
-    <details className={className} sx={detailsStyle} {...props} open>
-      {children}
-    </details>
-  ) : (
-    <details className={className} sx={detailsStyle} {...props}>
-      {children}
-    </details>
-  )
+  
+  const classes = useStyles()
+  
+  return <ExpansionPanel variant="outlined" classes={classes} defaultExpanded={!!className.match("open")}>
+    {children[0]}
+    <ExpansionPanelDetails>
+      <Container>
+        {children.slice(1)}
+      </Container>
+    </ExpansionPanelDetails>
+  </ExpansionPanel>
+
+  // return className.match("open") ? (
+  //   <details className={className} sx={detailsStyle} {...props} open>
+  //     {children}
+  //   </details>
+  // ) : (
+  //   <details className={className} sx={detailsStyle} {...props}>
+  //     {children}
+  //   </details>
+  // )
 }

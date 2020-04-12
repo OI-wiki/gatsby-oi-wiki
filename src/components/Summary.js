@@ -1,58 +1,79 @@
 /** @jsx jsx */
 import { MdEdit, MdExpandMore } from "react-icons/md"
 import { jsx } from "theme-ui"
+import { ExpansionPanelSummary, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    margin: "0",
+    "& p": {
+      margin: "0"
+    }
+  },
+}))
 
 export default function({ className = null, children, ...props }) {
-  if (className.match("note")) {
-    return (
-      <summary
-        className={className}
-        {...props}
-        sx={{
-          margin: "0 -0.6rem",
-          padding: ".2rem .6rem .2rem 1rem",
-          borderBottom: ".05rem solid rgba(68,138,255,.1)",
-          backgroundColor: "rgba(68,138,255,.1)",
-          fontWeight: 700,
-          outline: "none",
-          cursor: "pointer",
-          p: {
-            display: "inline-block",
-            margin: 0,
-            fontSize: "14px",
-          },
-          svg: {
-            fontSize: "20px",
-          },
-          listStyle: "none",
-          "::-webkit-details-marker": {
-            display: "none",
-          },
-        }}
-      >
-        <MdEdit
-          sx={{
-            verticalAlign: "-4px",
-            marginTop: "7px",
-            mr: "0.6rem",
-          }}
-        />
-        {children}
-        <MdExpandMore
-          className="expand-more-icon"
-          sx={{
-            verticalAlign: "-4px",
-            marginTop: "7px",
-            ml: "1rem",
-            float: "right",
-          }}
-        />
-      </summary>
-    )
-  }
-  return (
-    <summary className={className} {...props}>
-      {children}
-    </summary>
-  )
+
+  const classes = useStyles()
+
+  return <ExpansionPanelSummary
+    classes={classes}
+    expandIcon={<MdExpandMore/>}
+    aria-controls="expand"
+    {...props}
+  >
+    {children}
+  </ExpansionPanelSummary>
+  // if (className.match("note")) {
+  //   return (
+  //     <summary
+  //       className={className}
+  //       {...props}
+  //       sx={{
+  //         margin: "0 -0.6rem",
+  //         padding: ".2rem .6rem .2rem 1rem",
+  //         borderBottom: ".05rem solid rgba(68,138,255,.1)",
+  //         backgroundColor: "rgba(68,138,255,.1)",
+  //         fontWeight: 700,
+  //         outline: "none",
+  //         cursor: "pointer",
+  //         p: {
+  //           display: "inline-block",
+  //           margin: 0,
+  //           fontSize: "14px",
+  //         },
+  //         svg: {
+  //           fontSize: "20px",
+  //         },
+  //         listStyle: "none",
+  //         "::-webkit-details-marker": {
+  //           display: "none",
+  //         },
+  //       }}
+  //     >
+  //       <MdEdit
+  //         sx={{
+  //           verticalAlign: "-4px",
+  //           marginTop: "7px",
+  //           mr: "0.6rem",
+  //         }}
+  //       />
+  //       {children}
+  //       <MdExpandMore
+  //         className="expand-more-icon"
+  //         sx={{
+  //           verticalAlign: "-4px",
+  //           marginTop: "7px",
+  //           ml: "1rem",
+  //           float: "right",
+  //         }}
+  //       />
+  //     </summary>
+  //   )
+  // }
+  // return (
+  //   <summary className={className} {...props}>
+  //     {children}
+  //   </summary>
+  // )
 }
