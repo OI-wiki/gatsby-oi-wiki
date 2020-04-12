@@ -23,11 +23,12 @@ export default function({ className = "", children, ...props }) {
   
   const classes = useStyles()
   
+  const cont = children instanceof Array? children : [children]
   return <ExpansionPanel variant="outlined" classes={classes} defaultExpanded={!!className.match("open")}>
-    {children[0]}
+    {cont[0]}
     <ExpansionPanelDetails style={{padding: "0"}}>
       <Container>
-        {children.slice(1)}
+        {cont.slice(1)}
       </Container>
     </ExpansionPanelDetails>
   </ExpansionPanel>
