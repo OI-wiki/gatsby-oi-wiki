@@ -50,7 +50,7 @@ const styles = (theme) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "12vw",
+      width: "15vw",
       "&:focus": {
         width: "30vw",
       },
