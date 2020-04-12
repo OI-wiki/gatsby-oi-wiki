@@ -57,7 +57,7 @@ const styles = (theme) => ({
   },
   resultPaper: {
     marginTop: "12px",
-    minWidth: "calc(30vw + 56px)",
+    minWidth: `calc(30vw + 1em + ${theme.spacing(4)}px)`,
     maxWidth: "50vw",
     position: "absolute",
     right: "0 !important",
