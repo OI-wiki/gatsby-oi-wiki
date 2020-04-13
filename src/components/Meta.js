@@ -1,17 +1,26 @@
 /** @jsx jsx */
 import Divider from "@material-ui/core/Divider"
 import Paper from "@material-ui/core/Paper"
-import { useTheme } from "@material-ui/core/styles"
-import { MdBuild, MdCopyright, MdEdit } from "react-icons/md"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import HistoryIcon from "@material-ui/icons/History"
+import EditIcon from "@material-ui/icons/Edit"
+import CopyrightIcon from "@material-ui/icons/Copyright"
 import { jsx } from "theme-ui"
 import AuthorsArray from "./AuthorsArray"
 import Link from "./Link"
 import Tags from "./Tags"
 
+const useStyles = makeStyles({
+  metaicon: {
+    verticalAlign: "text-top",
+  },
+})
+
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   const theme = useTheme()
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/docs/"
+  const classes = useStyles();
   if (noMeta === "false") {
     return (
       <Paper sx={{ padding: theme.spacing(2) }} variant="outlined">
@@ -26,18 +35,14 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           }}
         >
           <span>
-            <small>
-              <MdBuild/>
-            </small>
+            <HistoryIcon fontSize="small" className={classes.metaicon} />
             本页面最近更新：
           </span>
           <span>{modifiedTime}</span>，
           <Link href={historyURL + relativePath}>更新历史</Link>
           <br/>
           <span>
-            <small>
-              <MdEdit/>
-            </small>
+            <EditIcon fontSize="small" className={classes.metaicon} />
             发现错误？想一起完善？{" "}
             <Link href={editURL + relativePath} title="编辑此页">
               在 GitHub 上编辑此页！
@@ -45,9 +50,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           </span>
           <br/>
           <span>
-            <small>
-              <MdCopyright/>
-            </small>
+            <CopyrightIcon fontSize="small" className={classes.metaicon} />
             本页面的全部内容在{" "}
             <strong>
               <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
