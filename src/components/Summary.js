@@ -6,19 +6,29 @@ import { makeStyles } from "@material-ui/core/styles"
 import blue from '@material-ui/core/colors/blue'
 
 const useStyles = makeStyles((theme) => ({
-  expanded: {},
+  expanded: {}, // DONT DELETE THIS
   root: {
     background: blue[50],
-    maxHeight: "36px",
     minHeight: "36px",
     "&$expanded": {
-      minHeight: "48px",
+      minHeight: "36px",
+      height: "auto",
     },
+    height: "auto",
+  },
+  expandIcon: {
+    padding: "2px",
+    "&$expanded": {
+      padding: "2px",
+    }
   },
   content: {
     margin: "0",
     "& p": {
       margin: "0"
+    },
+    "&$expanded": {
+      margin: "0",
     },
     fontWeight: "bold"
   },
