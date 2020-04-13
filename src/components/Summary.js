@@ -6,8 +6,14 @@ import { makeStyles } from "@material-ui/core/styles"
 import blue from '@material-ui/core/colors/blue'
 
 const useStyles = makeStyles((theme) => ({
+  expanded: {},
   root: {
-    background: blue[50]
+    background: blue[50],
+    maxHeight: "36px",
+    minHeight: "36px",
+    "&$expanded": {
+      minHeight: "48px",
+    },
   },
   content: {
     margin: "0",
