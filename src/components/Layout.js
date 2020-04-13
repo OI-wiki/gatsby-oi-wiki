@@ -13,6 +13,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import Grid from "@material-ui/core/Grid"
 import IconButton from "@material-ui/core/IconButton"
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
@@ -81,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
   iconButton: {
     float: "right",
   },
+  icon: {
+    verticalAlign: "text-top",
+    fontSize: "1.3rem",
+  },
 }))
 
 const LazyComment = Loadable({
@@ -116,7 +121,10 @@ function myLayout({
         setDialogOpen(false)
       }}
     >
-      <DialogTitle>{"编辑前须知"}</DialogTitle>
+      <DialogTitle>
+          <InfoOutlinedIcon className={classes.icon} fontSize="small"/>
+          编辑前须知
+      </DialogTitle>
       <DialogContent>{editWarning}</DialogContent>
       <DialogActions>
         <Button
