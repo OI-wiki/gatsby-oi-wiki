@@ -3,31 +3,39 @@ import { graphql, Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import Layout from "../components/Layout"
+import Typography from "@material-ui/core/Typography"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import BookIcon from "@material-ui/icons/Book"
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos"
+import Button from "@material-ui/core/Button"
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+  const tagHeader = `共 ${totalCount} 篇文章被打上了 "${tag}" 标签：`
 
   return (
-    <Layout location={location} noMeta="true" title={`${tag} 标签页`}>
+    <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
       <div>
-        <h1>{tagHeader}</h1>
-        <ul>
+        <Typography variant="h5" component="h2">{tagHeader}</Typography>
+        <List>
           {edges.map(({ node }) => {
             const { slug } = node.fields
             const { title } = node.frontmatter
             return (
-              <li key={slug}>
-                <Link to={slug}>{title}</Link>
-              </li>
+              <ListItem button divider component="a" href={slug} key={slug}>
+                <ListItemIcon>
+                  <BookIcon />
+                </ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItem>
             )
           })}
-        </ul>
-
-        <Link to="/tags">所有标签</Link>
+        </List>
+        <Button variant="outlined" color="primary" startIcon={<ArrowBackIosIcon />} href="/tags">所有标签</Button>
       </div>
     </Layout>
   )
