@@ -122,8 +122,8 @@ function myLayout({
       }}
     >
       <DialogTitle>
-          <InfoOutlinedIcon className={classes.icon} fontSize="small"/>
-          编辑前须知
+        <InfoOutlinedIcon className={classes.icon} fontSize="small"/>
+        编辑前须知
       </DialogTitle>
       <DialogContent>{editWarning}</DialogContent>
       <DialogActions>
