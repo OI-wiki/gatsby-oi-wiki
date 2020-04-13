@@ -8,6 +8,9 @@ import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks"
+import LocalOfferIcon from "@material-ui/icons/LocalOffer"
+import SearchIcon from "@material-ui/icons/Search"
 import { Link } from "gatsby"
 import React from "react"
 import { FaGithub } from "react-icons/fa"
@@ -110,6 +113,21 @@ function ResponsiveDrawer(props) {
           <Hidden smDown implementation="css">
             <Search/>
           </Hidden>
+          <Hidden mdUp implementation={"css"}>
+            <IconButton color={"inherit"}>
+              <SearchIcon/>
+            </IconButton>
+          </Hidden>
+          <Tooltip title="标签页" placement="bottom" arrow>
+            <IconButton component={"a"} href={"/tags"} color={"inherit"}>
+              <LocalOfferIcon/>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="目录页" placement="bottom" arrow>
+            <IconButton component={"a"} href={"/pages"} color={"inherit"}>
+              <LibraryBooksIcon/>
+            </IconButton>
+          </Tooltip>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
             <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
               <FaGithub/>

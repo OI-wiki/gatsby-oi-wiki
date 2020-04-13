@@ -20,12 +20,18 @@ function Item(props, padding, pathname) {
     return [
       <ListItem
         button
-        style={{ paddingLeft: padding }}
         selected={value === pathname}
         component={MuiLink}
         href={value}
         key={key}
-        sx={{ color: theme.palette.text.primary, lineHeight: 1.2 }}
+        sx={{
+          color: theme.palette.text.primary,
+          lineHeight: 1.2,
+          paddingLeft: padding,
+          ":hover": {
+            textDecoration: "none",
+          },
+        }}
       >
         <ListItemText
           primary={
