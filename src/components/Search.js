@@ -17,6 +17,7 @@ import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
+import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles({})
 
@@ -106,7 +107,7 @@ const styles = (theme) => ({
   },
   searchmsg: {
     padding: "8px 8px 8px 20px",
-    backgroundColor :"#f5f5f5",
+    backgroundColor: grey[100],
   },
 })
 
