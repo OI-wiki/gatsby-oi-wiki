@@ -7,7 +7,7 @@ import blue from '@material-ui/core/colors/blue'
 const useStyles = makeStyles((theme) => ({
   root: {
     "&, &:first-child, &:last-child": {
-      margin: "0.8em 0 !important"
+      margin: "1.2em 0 !important"
     },
     borderLeft: ".3rem solid",
     borderLeftColor: blue[500]
