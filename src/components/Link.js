@@ -2,9 +2,21 @@
 import { Link as GatsbyLink } from "gatsby"
 import isAbsoluteURL from "is-absolute-url"
 import { jsx } from "theme-ui"
-import theme from "../theme"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import lightBlue from '@material-ui/core/colors/lightBlue'
 
-const linkStyles = theme.styles.a
+const useStyles = makeStyles((theme) => ({
+  link: {
+    color: lightBlue[500],
+    textDecoration: "none",
+    ":hover": {
+      textDecoration: "none",
+    },
+    "&.active": {
+      color: theme.palette.text.primary,
+    },
+  }
+}))
 
 function linkFix(url) {
   if (/\.md/.test(url)) url = "../" + url.replace(/\.md/, "/")
@@ -15,14 +27,16 @@ function linkFix(url) {
 
 function Link({ to = "", href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
+  const classes = useStyles()
+  const theme = useTheme()
   if (isAbsoluteLink)
     return (
-      <a {...props} href={href} sx={linkStyles}>
+      <a {...props} href={href} className={classes.link}>
         {children}
       </a>
     )
   return (
-    <GatsbyLink {...props} to={linkFix(href)} sx={linkStyles}>
+    <GatsbyLink {...props} to={linkFix(href)} className={classes.link}>
       {children}
     </GatsbyLink>
   )
