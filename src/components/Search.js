@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import Backdrop from "@material-ui/core/Backdrop"
+import grey from "@material-ui/core/colors/grey"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
@@ -17,7 +18,6 @@ import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
-import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles({})
 
@@ -75,6 +75,7 @@ const styles = (theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
+    maxWidth: `calc(30vw + 1em + ${theme.spacing(4)}px)`,
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
@@ -105,7 +106,7 @@ const styles = (theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  searchmsg: {
+  searchMessage: {
     padding: "8px 8px 8px 20px",
     backgroundColor: grey[100],
   },
@@ -116,7 +117,7 @@ function SearchResultList(props) {
   const valcount = val.length
   return valcount !== 0 ? (
     <>
-      <Typography variant="body1" className={classes.searchmsg}>
+      <Typography variant="body1" className={classes.searchMessage}>
         共找到 {valcount} 条搜索结果：
       </Typography>
       <List>
@@ -125,7 +126,7 @@ function SearchResultList(props) {
           return (
             <ListItem button divider component="a" href={item.url} key={item.url}>
               <ListItemIcon>
-                <FindInPageIcon />
+                <FindInPageIcon/>
               </ListItemIcon>
               <ListItemText
                 primary={
@@ -152,7 +153,7 @@ function SearchResultList(props) {
       </List>
     </>
   ) : searched ? (
-    <Typography variant={"body1"} className={classes.searchmsg}>
+    <Typography variant={"body1"} className={classes.searchMessage}>
       没有找到符合条件的结果
     </Typography>
   ) : (
