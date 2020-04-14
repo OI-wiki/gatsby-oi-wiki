@@ -114,6 +114,7 @@ function BlogIndex(props) {
       noMeta={"true"}
       noEdit={"true"}
       noToC={"true"}
+      overflow={"true"}
       title={"目录页"}
     >
       <Grid container spacing={2} justify={"center"}>
