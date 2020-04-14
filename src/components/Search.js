@@ -104,44 +104,54 @@ const styles = (theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  searchmsg: {
+    padding: "8px 8px 8px 20px",
+    backgroundColor :"#f5f5f5",
+  },
 })
 
 function SearchResultList(props) {
   const { val, searched, ev, classes } = props
-  return val.length !== 0 ? (
-    <List>
-      {val.map((item) => {
-        /* Render article */
-        return (
-          <ListItem button divider component="a" href={item.url} key={item.url}>
-            <ListItemIcon>
-              <FindInPageIcon/>
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography
-                  variant="h6"
-                  className={classes.searchResultPrimary}
-                  dangerouslySetInnerHTML={{
-                    __html: item.title.replace(ev, `<em>${ev}</em>`),
-                  }}
-                />
-              }
-              secondary={
-                <div
-                  className={classes.searchResultSecondary}
-                  dangerouslySetInnerHTML={{
-                    __html: item.highlight ? item.highlight : "",
-                  }}
-                />
-              }
-            />
-          </ListItem>
-        )
-      })}
-    </List>
+  const valcount = val.length
+  return valcount !== 0 ? (
+    <>
+      <Typography variant="body1" className={classes.searchmsg}>
+        共找到 {valcount} 条搜索结果：
+      </Typography>
+      <List>
+        {val.map((item) => {
+          /* Render article */
+          return (
+            <ListItem button divider component="a" href={item.url} key={item.url}>
+              <ListItemIcon>
+                <FindInPageIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    variant="h6"
+                    className={classes.searchResultPrimary}
+                    dangerouslySetInnerHTML={{
+                      __html: item.title.replace(ev, `<em>${ev}</em>`),
+                    }}
+                  />
+                }
+                secondary={
+                  <div
+                    className={classes.searchResultSecondary}
+                    dangerouslySetInnerHTML={{
+                      __html: item.highlight ? item.highlight : "",
+                    }}
+                  />
+                }
+              />
+            </ListItem>
+          )
+        })}
+      </List>
+    </>
   ) : searched ? (
-    <Typography variant={"body1"} sx={{ padding: "8px" }}>
+    <Typography variant={"body1"} className={classes.searchmsg}>
       没有找到符合条件的结果
     </Typography>
   ) : (
