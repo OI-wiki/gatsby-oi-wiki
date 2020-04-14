@@ -17,6 +17,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
 import React, { useState } from "react"
+import grey from '@material-ui/core/colors/grey'
 import { Helmet } from "react-helmet"
 import { MdEdit, MdExpandMore } from "react-icons/md"
 import Loadable from "react-loadable"
@@ -65,8 +66,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   footer: {
-    background: "#f1f3f4",
-    color: "#616161",
+    background: grey[200],
+    color: grey[700],
     padding: theme.spacing(3),
     [theme.breakpoints.up("lg")]: {
       marginLeft: 250,
