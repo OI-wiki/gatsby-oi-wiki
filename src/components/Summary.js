@@ -1,26 +1,37 @@
 /** @jsx jsx */
-import { MdEdit, MdExpandMore } from "react-icons/md"
-import { jsx } from "theme-ui"
-import { ExpansionPanelSummary } from '@material-ui/core'
+import { ExpansionPanelSummary } from "@material-ui/core"
+import blue from "@material-ui/core/colors/blue"
 import { makeStyles } from "@material-ui/core/styles"
-import blue from '@material-ui/core/colors/blue'
+import EditIcon from "@material-ui/icons/Edit"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import { jsx } from "theme-ui"
 
 const useStyles = makeStyles((theme) => ({
-  expanded: {},
+  expanded: {}, // DONT DELETE THIS
   root: {
     background: blue[50],
-    maxHeight: "36px",
     minHeight: "36px",
     "&$expanded": {
-      minHeight: "48px",
+      minHeight: "36px",
+      height: "auto",
     },
+    height: "auto",
+  },
+  expandIcon: {
+    padding: "2px",
+    "&$expanded": {
+      padding: "2px",
+    }
   },
   content: {
-    margin: "0",
+    margin: "4px",
     "& p": {
-      margin: "0"
+      margin: "4px",
     },
-    fontWeight: "bold"
+    "&$expanded": {
+      margin: "4px",
+    },
+    fontWeight: "bold",
   },
 }))
 
@@ -28,16 +39,21 @@ export default function({ className = null, children, ...props }) {
 
   const classes = useStyles()
 
-  return <ExpansionPanelSummary
-    classes={classes}
-    expandIcon={<MdExpandMore/>}
-    aria-controls="expand"
-    {...props}
-  >
-    <MdEdit style={{ 
-      margin: "0px 10px 2px -5px", 
-      fontSize: "20px", 
-      color: blue[500] }}/>
-    {children}
-  </ExpansionPanelSummary>
+  return (
+    <ExpansionPanelSummary
+      classes={classes}
+      expandIcon={<ExpandMoreIcon/>}
+      aria-controls="expand"
+      {...props}
+    >
+      <EditIcon
+        style={{
+          margin: "0px 10px 2px -5px",
+          alignSelf: "center",
+          color: blue[500],
+        }}
+      />
+      {children}
+    </ExpansionPanelSummary>
+  )
 }
