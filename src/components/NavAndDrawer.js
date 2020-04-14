@@ -99,11 +99,11 @@ function ResponsiveDrawer(props) {
           </Hidden>
           <Button
             href="/"
-            sx={
-              {
+            // sx={
+              // {
                 /*color: "#fff"*/
-              }
-            }
+              // }
+            // }
           >
             <Typography variant="h6" noWrap>
               OI Wiki

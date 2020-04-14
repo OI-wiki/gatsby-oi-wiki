@@ -2,7 +2,7 @@
 import { MdEdit, MdExpandMore } from "react-icons/md"
 import { jsx } from "theme-ui"
 import { ExpansionPanelSummary } from '@material-ui/core'
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import blue from '@material-ui/core/colors/blue'
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function({ className = null, children, ...props }) {
 
   const classes = useStyles()
-
+  const theme = useTheme()
   return <ExpansionPanelSummary
     classes={classes}
     expandIcon={<MdExpandMore/>}
