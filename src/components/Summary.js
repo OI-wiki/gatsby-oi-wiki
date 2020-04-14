@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   content: {
-    margin: "0",
+    margin: "4px",
     "& p": {
-      margin: "0"
+      margin: "4px",
     },
     "&$expanded": {
-      margin: "0",
+      margin: "4px",
     },
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 }))
 
