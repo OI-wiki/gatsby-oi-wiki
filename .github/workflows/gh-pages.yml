@@ -1,4 +1,4 @@
-name: github pages
+name: GitHub Pages
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      
+
       - name: Cache install
         uses: actions/cache@v1
         with:
@@ -31,7 +31,7 @@ jobs:
           key: ${{ runner.os }}-dep-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-dep-
-      
+
       - run: npm install
 
       - run: npm run build
