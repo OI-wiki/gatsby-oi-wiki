@@ -89,14 +89,7 @@ function ResponsiveDrawer(props) {
               <MdSchool/>
             </IconButton>
           </Hidden>
-          <Button
-            href="/"
-            sx={
-              {
-                /*color: "#fff"*/
-              }
-            }
-          >
+          <Button href="/">
             <Typography variant="h6" noWrap>
               OI Wiki
             </Typography>

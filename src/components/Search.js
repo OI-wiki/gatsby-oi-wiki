@@ -76,6 +76,7 @@ const styles = (theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
+    maxWidth: `calc(30vw + 1em + ${theme.spacing(4)}px)`,
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
@@ -106,7 +107,7 @@ const styles = (theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  searchmsg: {
+  searchMessage: {
     padding: "8px 8px 8px 20px",
     backgroundColor: grey[100],
   },
@@ -117,7 +118,7 @@ function SearchResultList(props) {
   const valcount = val.length
   return valcount !== 0 ? (
     <>
-      <Typography variant="body1" className={classes.searchmsg}>
+      <Typography variant="body1" className={classes.searchMessage}>
         共找到 {valcount} 条搜索结果：
       </Typography>
       <List>
@@ -153,7 +154,7 @@ function SearchResultList(props) {
       </List>
     </>
   ) : searched ? (
-    <Typography variant={"body1"} className={classes.searchmsg}>
+    <Typography variant={"body1"} className={classes.searchMessage}>
       没有找到符合条件的结果
     </Typography>
   ) : (

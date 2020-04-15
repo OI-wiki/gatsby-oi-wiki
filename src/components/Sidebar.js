@@ -4,14 +4,34 @@ import MuiLink from "@material-ui/core/Link"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
-import { useTheme } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { useState } from "react"
 import { MdExpandLess, MdExpandMore } from "react-icons/md"
 import { jsx } from "theme-ui"
 import pathList from "../sidebar.yaml"
 
+const useStyles = makeStyles((theme) => ({
+  listitem: {
+    color: theme.palette.text.primary,
+    lineHeight: 1.2,
+    paddingLeft: props => props.padding,
+    ":hover": {
+      textDecoration: "none",
+    },
+  },
+  oplistitem: {
+    paddingLeft: props => props.padding,
+    lineHeight: 1.2
+  },
+  list: {
+    width: "100%",
+    height: "100%"
+  }
+}))
+
 function Item(props, padding, pathname) {
+  const classes = useStyles({padding})
   const theme = useTheme()
   const arr = Object.entries(props)[0]
   const key = arr[0],
@@ -24,14 +44,7 @@ function Item(props, padding, pathname) {
         component={MuiLink}
         href={value}
         key={key}
-        sx={{
-          color: theme.palette.text.primary,
-          lineHeight: 1.2,
-          paddingLeft: padding,
-          ":hover": {
-            textDecoration: "none",
-          },
-        }}
+        className={classes.listitem}
       >
         <ListItemText
           primary={
@@ -59,7 +72,7 @@ function Item(props, padding, pathname) {
       <ListItem
         button
         onClick={() => setOpen(!open)}
-        sx={{ paddingLeft: padding, lineHeight: 1.2 }}
+        className={classes.oplistitem}
       >
         <ListItemText
           primary={
@@ -79,8 +92,10 @@ function Item(props, padding, pathname) {
 }
 
 export default function(props) {
+  const classes = useStyles()
+  const theme = useTheme()
   return (
-    <List sx={{ width: "100%", height: "100%" }}>
+    <List className={classes.list}>
       {pathList.map((item) => Item(item, 16, props.pathname))}
     </List>
   )
