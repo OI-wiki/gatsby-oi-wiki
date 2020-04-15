@@ -23,7 +23,8 @@ module.exports = {
     'react'
   ],
   rules: {
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "comma-dangle": [2, "always-multiline"]
   },
   settings: {
     react: {
