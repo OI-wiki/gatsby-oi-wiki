@@ -10,30 +10,36 @@ import AuthorsArray from "./AuthorsArray"
 import Link from "./Link"
 import Tags from "./Tags"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   metaicon: {
     verticalAlign: "text-top",
   },
-})
+  paper: {
+    padding: theme.spacing(2)
+  },
+  divider: {
+    marginTop: "8px",
+    marginBottom: "8px"
+  },
+  meta: {
+    margin: "20px 0",
+    paddingLeft: ".5rem",
+    textDecoration: "none",
+  }
+}))
 
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
-  const theme = useTheme()
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/docs/"
-  const classes = useStyles();
+  const classes = useStyles()
+  const theme = useTheme()
   if (noMeta === "false") {
     return (
-      <Paper sx={{ padding: theme.spacing(2) }} variant="outlined">
+      <Paper className={classes.paper} variant="outlined">
         <AuthorsArray authors={authors}/>
-        <Divider sx={{ marginTop: "8px", marginBottom: "8px" }}/>
+        <Divider className={classes.divider}/>
         <Tags tags={tags}/>
-        <div
-          sx={{
-            margin: "20px 0",
-            paddingLeft: ".5rem",
-            textDecoration: "none",
-          }}
-        >
+        <div className={classes.meta}>
           <span>
             <HistoryIcon fontSize="small" className={classes.metaicon} />
             本页面最近更新：
