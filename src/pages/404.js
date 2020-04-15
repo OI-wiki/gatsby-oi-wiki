@@ -1,6 +1,6 @@
 // Components
-import React from "react"
-import Layout from "../components/Layout"
+import React from 'react'
+import Layout from '../components/Layout'
 
 const page = (location) => (
   <Layout location={location} noEdit="true" title="404 Not Found">

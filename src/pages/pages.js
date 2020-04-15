@@ -1,33 +1,30 @@
-import { useMediaQuery } from "@material-ui/core"
-import Card from "@material-ui/core/Card"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import Grid from "@material-ui/core/Grid"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import TextField from "@material-ui/core/TextField"
-import Typography from "@material-ui/core/Typography"
-import Autocomplete from "@material-ui/lab/Autocomplete"
-import match from "autosuggest-highlight/match"
-import parse from "autosuggest-highlight/parse"
-import { graphql } from "gatsby"
-import React, { useState } from "react"
+import { useMediaQuery } from '@material-ui/core'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Grid from '@material-ui/core/Grid'
+import { useTheme } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import match from 'autosuggest-highlight/match'
+import parse from 'autosuggest-highlight/parse'
+import { graphql } from 'gatsby'
+import React, { useState } from 'react'
 
-import Layout from "../components/Layout"
-import Link from "../components/Link"
-import Tags from "../components/Tags"
+import Layout from '../components/Layout'
+import Link from '../components/Link'
+import Tags from '../components/Tags'
 
-const useStyles = makeStyles({})
-
-function PageItem(props) {
-  const classes = useStyles()
+function PageItem (props) {
   const {
     id,
     frontmatter: { title, tags },
-    fields: { slug: link },
+    fields: { slug: link }
   } = props
   return (
     <Grid item key={id}>
-      <Card variant={"outlined"}>
+      <Card variant={'outlined'}>
         <CardContent>
           <Typography variant="h6" component={Link} to={link}>
             {title}
@@ -41,7 +38,7 @@ function PageItem(props) {
   )
 }
 
-function matchTags(pageTags, selectedTags) {
+function matchTags (pageTags, selectedTags) {
   if (selectedTags.length === 0) return true
   if (!pageTags) return false
   const matchTag = (tags, selected) => {
@@ -51,29 +48,29 @@ function matchTags(pageTags, selectedTags) {
   return res.every((v) => v === true)
 }
 
-function GridItems(props) {
+function GridItems (props) {
   const theme = useTheme()
   const { filteredItems } = props
   let columnCount
-  const upXL = useMediaQuery(theme.breakpoints.up("lg"))
-  const upSmall = useMediaQuery(theme.breakpoints.up("sm"))
+  const upXL = useMediaQuery(theme.breakpoints.up('lg'))
+  const upSmall = useMediaQuery(theme.breakpoints.up('sm'))
   if (upXL) {
     columnCount = 3
     return (
       <>
-        <Grid container item xs direction={"column"} spacing={2}>
+        <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
               idx % columnCount === 0 && <PageItem key={x.id} {...x} />
           )}
         </Grid>
-        <Grid container item xs direction={"column"} spacing={2}>
+        <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
               idx % columnCount === 1 && <PageItem key={x.id} {...x} />
           )}
         </Grid>
-        <Grid container item xs direction={"column"} spacing={2}>
+        <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
               idx % columnCount === 2 && <PageItem key={x.id} {...x} />
@@ -85,13 +82,13 @@ function GridItems(props) {
     columnCount = 2
     return (
       <>
-        <Grid container item xs direction={"column"} spacing={2}>
+        <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
               idx % columnCount === 0 && <PageItem key={x.id} {...x} />
           )}
         </Grid>
-        <Grid container item xs direction={"column"} spacing={2}>
+        <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
               idx % columnCount === 1 && <PageItem key={x.id} {...x} />
@@ -103,7 +100,7 @@ function GridItems(props) {
     columnCount = 1
     return (
       <>
-        <Grid container item direction={"column"} spacing={2}>
+        <Grid container item direction={'column'} spacing={2}>
           {filteredItems.map((x) => (
             <PageItem key={x.id} {...x} />
           ))}
@@ -113,12 +110,12 @@ function GridItems(props) {
   }
 }
 
-function BlogIndex(props) {
+function BlogIndex (props) {
   const { location } = props
   const {
     data: {
-      allMdx: { edges, group },
-    },
+      allMdx: { edges, group }
+    }
   } = props
   const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
@@ -129,13 +126,13 @@ function BlogIndex(props) {
   return (
     <Layout
       location={location}
-      noMeta={"true"}
-      noEdit={"true"}
-      noToC={"true"}
-      overflow={"true"}
-      title={"目录页"}
+      noMeta={'true'}
+      noEdit={'true'}
+      noToC={'true'}
+      overflow={'true'}
+      title={'目录页'}
     >
-      <Grid container spacing={2} justify={"center"}>
+      <Grid container spacing={2} justify={'center'}>
         <Grid item xs={12}>
           <Autocomplete
             value={selectedTags}
@@ -168,7 +165,7 @@ function BlogIndex(props) {
             )}
           />
         </Grid>
-        <Grid container xs={12} spacing={2} justify={"center"}>
+        <Grid container xs={12} spacing={2} justify={'center'}>
           <GridItems filteredItems={filteredItems} />
         </Grid>
       </Grid>

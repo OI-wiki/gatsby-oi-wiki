@@ -1,38 +1,38 @@
-import Button from "@material-ui/core/Button"
-import grey from "@material-ui/core/colors/grey"
-import Container from "@material-ui/core/Container"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import Dialog from "@material-ui/core/Dialog"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import Divider from "@material-ui/core/Divider"
-import ExpansionPanel from "@material-ui/core/ExpansionPanel"
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
-import Grid from "@material-ui/core/Grid"
-import IconButton from "@material-ui/core/IconButton"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Tooltip from "@material-ui/core/Tooltip"
-import Typography from "@material-ui/core/Typography"
-import React, { useState } from "react"
-import { Helmet } from "react-helmet"
-import { MdEdit, MdExpandMore } from "react-icons/md"
-import Loadable from "react-loadable"
-import BackTop from "./BackTop"
-import Footer from "./Footer"
-import Link from "./Link"
-import Meta from "./Meta"
-import NavAndDrawer from "./NavAndDrawer"
-import ToC from "./Toc"
+import Button from '@material-ui/core/Button'
+import grey from '@material-ui/core/colors/grey'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Divider from '@material-ui/core/Divider'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
+import { MdEdit, MdExpandMore } from 'react-icons/md'
+import Loadable from 'react-loadable'
+import BackTop from './BackTop'
+import Footer from './Footer'
+import Link from './Link'
+import Meta from './Meta'
+import NavAndDrawer from './NavAndDrawer'
+import ToC from './Toc'
 
 const editWarning = (
   <DialogContentText>
     <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
     <p>
       不过在开始之前，我们需要您了解并熟知
-      <Link to={"/intro/htc/"}>如何参与</Link>
+      <Link to={'/intro/htc/'}>如何参与</Link>
       里的内容，以避免在编辑时产生不必要的麻烦。
     </p>
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
@@ -40,55 +40,56 @@ const editWarning = (
 )
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    [theme.breakpoints.down("md")]: {
-      minHeight: 64,
+    [theme.breakpoints.down('md')]: {
+      minHeight: 64
     },
     minHeight: 48 + 64,
-    alignItems: "flex-start",
+    alignItems: 'flex-start'
   },
   content: {
     flexGrow: 1,
-    width: "100%",
-    overflow: "inherit",
+    width: '100%',
+    overflow: 'inherit'
   },
   main: {
     padding: theme.spacing(5),
-    [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2)
     },
-    minHeight: "100vh",
-    overflow: "inherit",
+    minHeight: '100vh',
+    overflow: 'inherit'
   },
   divider: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
   footer: {
     background: grey[200],
     color: grey[700],
     padding: theme.spacing(3),
-    [theme.breakpoints.up("lg")]: {
-      marginLeft: 250,
-    },
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: 250
+    }
   },
   container: {
-    [theme.breakpoints.up("lg")]: {
-      marginLeft: 250,
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: 250
     },
-    overflowX: "auto",
-    overflowY: "hidden",
+    overflowX: 'auto',
+    overflowY: 'hidden'
   },
   iconButton: {
-    float: "right",
-  },
+    float: 'right'
+  }
 }))
 
 const LazyComment = Loadable({
-  loader: () => import("./Comment"),
-  loading: () => <div />,
+  loader: () => import('./Comment'),
+  // eslint-disable-next-line react/display-name
+  loading: () => <div />
 })
 
-function myLayout({
+function myLayout ({
   children,
   location,
   authors,
@@ -102,14 +103,14 @@ function myLayout({
   noComment,
   noEdit,
   noToC,
-  overflow,
+  overflow
 }) {
   const classes = useStyles()
   const theme = useTheme()
-  const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
-  const displayToC = toc && toc.items && noToC !== "true"
-  const gridWidthMdUp = overflow === "true" ? 12 : 10
-  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
+  // const pageTitle = title === 'OI Wiki' ? title : `${title} - OI Wiki`
+  const displayToC = toc && toc.items && noToC !== 'true'
+  const gridWidthMdUp = overflow === 'true' ? 12 : 10
+  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   const [dialogOpen, setDialogOpen] = useState(false)
   const EditingDialog = (
     <Dialog
@@ -118,7 +119,7 @@ function myLayout({
         setDialogOpen(false)
       }}
     >
-      <DialogTitle>{"编辑前须知"}</DialogTitle>
+      <DialogTitle>{'编辑前须知'}</DialogTitle>
       <DialogContent>{editWarning}</DialogContent>
       <DialogActions>
         <Button
@@ -146,7 +147,7 @@ function myLayout({
     <>
       <CssBaseline />
       <Helmet>
-        <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
+        <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
       </Helmet>
       {EditingDialog}
       <NavAndDrawer pathname={location.pathname} />
@@ -169,7 +170,7 @@ function myLayout({
                       {title}
                     </Typography>
                   </Grid>
-                  {noEdit === "false" && (
+                  {noEdit === 'false' && (
                     <Grid item xs={1}>
                       <Tooltip title="编辑页面" placement="left" arrow>
                         <IconButton
@@ -193,9 +194,9 @@ function myLayout({
                   modifiedTime={modifiedTime}
                   noMeta={noMeta}
                 />
-                {noComment === "false" && (
-                  <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
-                    <ExpansionPanel variant={"outlined"}>
+                {noComment === 'false' && (
+                  <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                    <ExpansionPanel variant={'outlined'}>
                       <ExpansionPanelSummary
                         expandIcon={<MdExpandMore />}
                         aria-controls="comment"

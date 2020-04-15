@@ -1,24 +1,24 @@
-import grey from "@material-ui/core/colors/grey"
-import lightBlue from "@material-ui/core/colors/lightBlue"
-import Grid from "@material-ui/core/Grid"
-import Link from "@material-ui/core/Link"
+import grey from '@material-ui/core/colors/grey'
+import lightBlue from '@material-ui/core/colors/lightBlue'
+import Grid from '@material-ui/core/Grid'
+import Link from '@material-ui/core/Link'
 
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import { graphql, StaticQuery } from "gatsby"
-import React from "react"
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import { graphql, StaticQuery } from 'gatsby'
+import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   link: {
     color: grey[700],
-    "&:hover": {
-      textDecoration: "none",
-      color: lightBlue[500],
-    },
-  },
+    '&:hover': {
+      textDecoration: 'none',
+      color: lightBlue[500]
+    }
+  }
 }))
 
-export default (props) => (
+const query = (props) => (
   <StaticQuery
     query={graphql`
       query lastestCommit {
@@ -33,11 +33,11 @@ export default (props) => (
     render={(data) => <FooterContent data={data} {...props} />}
   />
 )
+export default query
 
-function FooterContent({ data }) {
+function FooterContent ({ data }) {
   const classes = useStyles()
-  const theme = useTheme()
-  let { date, hash } = data.allGitCommit.nodes[0]
+  const { date, hash } = data.allGitCommit.nodes[0]
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -47,10 +47,10 @@ function FooterContent({ data }) {
       </Grid>
       <Grid item xs={12}>
         <Typography>
-          最近更新:{" "}
+          最近更新:{' '}
           <Link
             className={classes.link}
-            href={"https://github.com/OI-wiki/OI-wiki/commits"}
+            href={'https://github.com/OI-wiki/OI-wiki/commits'}
           >
             {hash.substr(0, 7)}
           </Link>
@@ -60,13 +60,13 @@ function FooterContent({ data }) {
       <Grid item xs={12}>
         <Typography>
           联系方式：
-          <Link className={classes.link} href={"https://t.me/OIwiki"}>
+          <Link className={classes.link} href={'https://t.me/OIwiki'}>
             Telegram 群组
-          </Link>{" "}
-          /{" "}
+          </Link>{' '}
+          /{' '}
           <Link
             className={classes.link}
-            href={"https://jq.qq.com/?_wv=1027&k=5EfkM6K"}
+            href={'https://jq.qq.com/?_wv=1027&k=5EfkM6K'}
           >
             QQ 群组
           </Link>

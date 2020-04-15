@@ -1,15 +1,15 @@
-import Chip from "@material-ui/core/Chip"
-import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import Chip from '@material-ui/core/Chip'
+import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   chip: {
-    margin: theme.spacing(0.5),
-  },
+    margin: theme.spacing(0.5)
+  }
 }))
 
-function AuthorsArray({ authors }) {
-  const arr = authors && authors.split(",").map((x) => x.trim())
+function AuthorsArray ({ authors }) {
+  const arr = authors && authors.split(',').map((x) => x.trim())
   const classes = useStyles()
   return (
     <div>
@@ -20,9 +20,9 @@ function AuthorsArray({ authors }) {
             key={author}
             clickable
             className={classes.chip}
-            component={"a"}
+            component={'a'}
             variant="outlined"
-            href={"https://github.com/" + author.trim()}
+            href={'https://github.com/' + author.trim()}
           />
         ))}
     </div>

@@ -1,8 +1,8 @@
-import { graphql } from "gatsby"
-import React from "react"
-import Doc from "../components/doc"
+import { graphql } from 'gatsby'
+import React from 'react'
+import Doc from '../components/doc'
 
-export default ({ data, location }) => {
+export default function MdxDoc ({ data, location }) {
   // console.log(data)
   return <Doc data={data} location={location} />
 }

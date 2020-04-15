@@ -1,41 +1,40 @@
-import Collapse from "@material-ui/core/Collapse"
-import MuiLink from "@material-ui/core/Link"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import React, { useState } from "react"
-import { MdExpandLess, MdExpandMore } from "react-icons/md"
+import Collapse from '@material-ui/core/Collapse'
+import MuiLink from '@material-ui/core/Link'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import React, { useState } from 'react'
+import { MdExpandLess, MdExpandMore } from 'react-icons/md'
 
-import pathList from "../sidebar.yaml"
+import pathList from '../sidebar.yaml'
 
 const useStyles = makeStyles((theme) => ({
   listitem: {
     color: theme.palette.text.primary,
     lineHeight: 1.2,
     paddingLeft: (props) => props.padding,
-    ":hover": {
-      textDecoration: "none",
-    },
+    ':hover': {
+      textDecoration: 'none'
+    }
   },
   oplistitem: {
     paddingLeft: (props) => props.padding,
-    lineHeight: 1.2,
+    lineHeight: 1.2
   },
   list: {
-    width: "100%",
-    height: "100%",
-  },
+    width: '100%',
+    height: '100%'
+  }
 }))
 
-function Item(props, padding, pathname) {
+function Item (props, padding, pathname) {
   const classes = useStyles({ padding })
-  const theme = useTheme()
   const arr = Object.entries(props)[0]
-  const key = arr[0],
-    value = arr[1]
-  if (typeof value === "string") {
+  const key = arr[0]
+  const value = arr[1]
+  if (typeof value === 'string') {
     return [
       <ListItem
         button
@@ -47,13 +46,13 @@ function Item(props, padding, pathname) {
       >
         <ListItemText
           primary={
-            <Typography variant={"body2"} component={"span"}>
+            <Typography variant={'body2'} component={'span'}>
               {key}
             </Typography>
           }
         />
       </ListItem>,
-      value === pathname,
+      value === pathname
     ]
   }
   // array
@@ -65,7 +64,7 @@ function Item(props, padding, pathname) {
     false
   )
   const listItems = listItemsResult.map(([v]) => v)
-  let [open, setOpen] = useState(shouldOpen)
+  const [open, setOpen] = useState(shouldOpen)
   return [
     <div key={key}>
       <ListItem
@@ -75,7 +74,7 @@ function Item(props, padding, pathname) {
       >
         <ListItemText
           primary={
-            <Typography variant={"body2"} component={"span"}>
+            <Typography variant={'body2'} component={'span'}>
               {key}
             </Typography>
           }
@@ -86,13 +85,12 @@ function Item(props, padding, pathname) {
         <List disablePadding>{listItems}</List>
       </Collapse>
     </div>,
-    shouldOpen,
+    shouldOpen
   ]
 }
 
-export default function (props) {
+export default function Sidebar (props) {
   const classes = useStyles()
-  const theme = useTheme()
   return (
     <List className={classes.list}>
       {pathList.map((item) => Item(item, 16, props.pathname))}
