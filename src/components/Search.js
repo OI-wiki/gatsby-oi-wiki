@@ -17,6 +17,8 @@ import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 
+import scrollbarStyle from "../styles/scrollbar"
+
 const useStyles = makeStyles({})
 
 const styles = (theme) => ({
@@ -55,7 +57,7 @@ const styles = (theme) => ({
       },
     },
   },
-  resultPaper: {
+  resultPaper: scrollbarStyle(theme, {
     marginTop: "12px",
     minWidth: `calc(30vw + 1em + ${theme.spacing(4)}px)`,
     maxWidth: "50vw",
@@ -66,7 +68,7 @@ const styles = (theme) => ({
     overflowY: "auto",
     overflowX: "hidden",
     zIndex: theme.zIndex.drawer + 2,
-  },
+  }),
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -210,11 +212,11 @@ class Result extends React.Component {
             this.props.classes.search,
             open
               ? this.props.classes.searchColorWhite
-              : this.props.classes.searchColorBlack
+              : this.props.classes.searchColorBlack,
           )}
         >
           <div className={this.props.classes.searchIcon}>
-            <MdSearch />
+            <MdSearch/>
           </div>
           <InputBase
             type="search"
