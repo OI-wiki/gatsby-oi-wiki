@@ -1,9 +1,9 @@
-import throttle from "lodash/throttle"
-import { useEffect, useMemo } from "react"
+import throttle from 'lodash/throttle'
+import { useEffect, useMemo } from 'react'
 
 const noop = () => {}
 
-export default function useThrottledOnScroll(callback, delay) {
+export default function useThrottledOnScroll (callback, delay) {
   const throttledCallback = useMemo(
     () => (callback ? throttle(callback, delay) : noop),
     [callback, delay]
@@ -14,9 +14,9 @@ export default function useThrottledOnScroll(callback, delay) {
       return undefined
     }
 
-    window.addEventListener("scroll", throttledCallback)
+    window.addEventListener('scroll', throttledCallback)
     return () => {
-      window.removeEventListener("scroll", throttledCallback)
+      window.removeEventListener('scroll', throttledCallback)
       throttledCallback.cancel()
     }
   }, [throttledCallback])

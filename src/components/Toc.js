@@ -1,84 +1,84 @@
-import MuiLink from "@material-ui/core/Link"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Typography from "@material-ui/core/Typography"
-import clsx from "clsx"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import MuiLink from '@material-ui/core/Link'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import clsx from 'clsx'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import useThrottledOnScroll from "../lib/useThrottledOnScroll"
+import useThrottledOnScroll from '../lib/useThrottledOnScroll'
 
 const useStyles = makeStyles((theme) => ({
   main: {
     right: 0,
-    width: "15%",
+    width: '15%',
     flexShrink: 0,
-    position: "fixed",
-    height: "calc(100vh - 70px)",
-    overflowY: "auto",
+    position: 'fixed',
+    height: 'calc(100vh - 70px)',
+    overflowY: 'auto',
     padding: theme.spacing(2, 2, 2, 0),
-    display: "none",
-    [theme.breakpoints.up("lg")]: {
-      display: "block",
+    display: 'none',
+    [theme.breakpoints.up('lg')]: {
+      display: 'block',
       top: theme.spacing(7),
-      marginTop: theme.spacing(7),
+      marginTop: theme.spacing(7)
     },
-    [theme.breakpoints.only("md")]: {
-      display: "block",
+    [theme.breakpoints.only('md')]: {
+      display: 'block',
       top: theme.spacing(3),
-      marginTop: theme.spacing(3),
-    },
+      marginTop: theme.spacing(3)
+    }
   },
   contents: {
     marginTop: theme.spacing(2),
-    paddingLeft: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5)
   },
   ul: {
     padding: 0,
     margin: 0,
-    listStyle: "none",
+    listStyle: 'none'
   },
   item: {
     fontSize: 13,
     padding: theme.spacing(0.5, 0, 0.5, 1),
-    borderLeft: "4px solid transparent",
-    boxSizing: "content-box",
-    "&:hover": {
+    borderLeft: '4px solid transparent',
+    boxSizing: 'content-box',
+    '&:hover': {
       borderLeft: `4px solid ${
-        theme.palette.type === "light"
+        theme.palette.type === 'light'
           ? theme.palette.grey[300]
           : theme.palette.grey[900]
-      }`,
+      }`
     },
-    "&$active,&:active": {
+    '&$active,&:active': {
       borderLeft: `4px solid ${
-        theme.palette.type === "light"
+        theme.palette.type === 'light'
           ? theme.palette.grey[400]
           : theme.palette.grey[800]
-      }`,
-    },
+      }`
+    }
   },
   secondaryItem: {
-    paddingLeft: theme.spacing(2.5),
+    paddingLeft: theme.spacing(2.5)
   },
-  active: {},
+  active: {}
 }))
 
-function getIDfromURL(url) {
+function getIDfromURL (url) {
   return url.substring(1, url.length)
 }
 
-function getItems(items) {
+function getItems (items) {
   const itemsResult = []
   items.forEach((item2) => {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
-      node: document.getElementById(getIDfromURL(item2.url)),
+      node: document.getElementById(getIDfromURL(item2.url))
     })
     if (item2.items) {
       item2.items.forEach((item3) => {
         itemsResult.push({
           ...item3,
-          node: document.getElementById(getIDfromURL(item3.url)),
+          node: document.getElementById(getIDfromURL(item3.url))
         })
       })
     }
@@ -86,8 +86,7 @@ function getItems(items) {
   return itemsResult
 }
 
-export default function ToC(props) {
-  const theme = useTheme()
+export default function ToC (props) {
   const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
@@ -95,7 +94,7 @@ export default function ToC(props) {
   useEffect(() => {
     itemsClientRef.current = getItems(items)
   }, items)
-  const [activeState, setActiveState] = useState("")
+  const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
   const unsetClickedRef = useRef(null)
   const findActiveItem = useCallback(() => {
@@ -162,7 +161,7 @@ export default function ToC(props) {
   const itemLink = (item, secondary) => (
     <MuiLink
       display="block"
-      color={activeState === item.url ? "textPrimary" : "textSecondary"}
+      color={activeState === item.url ? 'textPrimary' : 'textSecondary'}
       href={`${pathname}${item.url}`}
       underline="none"
       onClick={handleClick(item.url)}
@@ -176,11 +175,11 @@ export default function ToC(props) {
     </MuiLink>
   )
   return (
-    <nav className={classes.main} aria-label={"pageTOC"}>
+    <nav className={classes.main} aria-label={'pageTOC'}>
       {items.length > 0 ? (
         <>
           <Typography gutterBottom className={classes.contents}>
-            {"目录"}
+            {'目录'}
           </Typography>
           <Typography component="ul" className={classes.ul}>
             {items.map((item2) => (

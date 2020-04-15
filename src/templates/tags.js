@@ -1,16 +1,16 @@
 // Components
-import { graphql, Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import Layout from "../components/Layout"
-import Typography from "@material-ui/core/Typography"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import ListItemText from "@material-ui/core/ListItemText"
-import BookIcon from "@material-ui/icons/Book"
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos"
-import Button from "@material-ui/core/Button"
+import { graphql } from 'gatsby'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Layout from '../components/Layout'
+import Typography from '@material-ui/core/Typography'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import BookIcon from '@material-ui/icons/Book'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import Button from '@material-ui/core/Button'
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
@@ -52,7 +52,7 @@ const Tags = ({ pageContext, data, location }) => {
 
 Tags.propTypes = {
   pageContext: PropTypes.shape({
-    tag: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired
   }),
   data: PropTypes.shape({
     allMdx: PropTypes.shape({
@@ -61,16 +61,16 @@ Tags.propTypes = {
         PropTypes.shape({
           node: PropTypes.shape({
             frontmatter: PropTypes.shape({
-              title: PropTypes.string.isRequired,
+              title: PropTypes.string.isRequired
             }),
             fields: PropTypes.shape({
-              slug: PropTypes.string.isRequired,
-            }),
-          }),
+              slug: PropTypes.string.isRequired
+            })
+          })
         }).isRequired
-      ),
-    }),
-  }),
+      )
+    })
+  })
 }
 
 export default Tags

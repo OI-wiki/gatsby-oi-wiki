@@ -1,72 +1,72 @@
-import AppBar from "@material-ui/core/AppBar"
-import Button from "@material-ui/core/Button"
-import Drawer from "@material-ui/core/Drawer"
-import Hidden from "@material-ui/core/Hidden"
-import IconButton from "@material-ui/core/IconButton"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Toolbar from "@material-ui/core/Toolbar"
-import Tooltip from "@material-ui/core/Tooltip"
-import Typography from "@material-ui/core/Typography"
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks"
-import LocalOfferIcon from "@material-ui/icons/LocalOffer"
-import SearchIcon from "@material-ui/icons/Search"
-import { Link } from "gatsby"
-import React from "react"
-import { FaGithub } from "react-icons/fa"
-import { MdMenu, MdSchool } from "react-icons/md"
+import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import LocalOfferIcon from '@material-ui/icons/LocalOffer'
+import SearchIcon from '@material-ui/icons/Search'
+import { Link } from 'gatsby'
+import React from 'react'
+import { FaGithub } from 'react-icons/fa'
+import { MdMenu, MdSchool } from 'react-icons/md'
 
-import scrollbarStyle from "../styles/scrollbar"
-import tabData from "../tabs.yaml"
-import Search from "./Search"
-import SiderContent from "./Sidebar"
-import Tabs from "./Tabs"
+import scrollbarStyle from '../styles/scrollbar'
+import tabData from '../tabs.yaml'
+import Search from './Search'
+import SiderContent from './Sidebar'
+import Tabs from './Tabs'
 
 const drawerWidth = 250
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   hiddenDrawer: {
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     background: theme.palette.background.paper,
-    color: theme.palette.text.primary,
+    color: theme.palette.text.primary
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("lg")]: {
-      display: "none",
-    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'none'
+    }
   },
   // necessary for content to be below app bar
   toolbar: {
-    [theme.breakpoints.down("md")]: {
-      minHeight: 64,
+    [theme.breakpoints.down('md')]: {
+      minHeight: 64
     },
     minHeight: 48 + 64,
-    alignItems: "flex-start",
+    alignItems: 'flex-start'
   },
   drawerPaper: scrollbarStyle(theme, {
-    width: drawerWidth,
+    width: drawerWidth
   }),
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    padding: theme.spacing(3)
+  }
 }))
 
-function ResponsiveDrawer(props) {
+function ResponsiveDrawer (props) {
   const { container, pathname } = props
   const classes = useStyles()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
-  const OIWikiGithub = "https://github.com/OI-wiki/OI-wiki"
+  const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
@@ -83,7 +83,7 @@ function ResponsiveDrawer(props) {
           >
             <MdMenu />
           </IconButton>
-          <Hidden mdDown implementation={"css"}>
+          <Hidden mdDown implementation={'css'}>
             <IconButton component={Link} color="inherit" to="/">
               <MdSchool />
             </IconButton>
@@ -97,28 +97,28 @@ function ResponsiveDrawer(props) {
           <Hidden smDown implementation="css">
             <Search />
           </Hidden>
-          <Hidden mdUp implementation={"css"}>
-            <IconButton color={"inherit"}>
+          <Hidden mdUp implementation={'css'}>
+            <IconButton color={'inherit'}>
               <SearchIcon />
             </IconButton>
           </Hidden>
           <Tooltip title="标签页" placement="bottom" arrow>
-            <IconButton component={"a"} href={"/tags"} color={"inherit"}>
+            <IconButton component={'a'} href={'/tags'} color={'inherit'}>
               <LocalOfferIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="目录页" placement="bottom" arrow>
-            <IconButton component={"a"} href={"/pages"} color={"inherit"}>
+            <IconButton component={'a'} href={'/pages'} color={'inherit'}>
               <LibraryBooksIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
-            <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
+            <IconButton component={'a'} href={OIWikiGithub} color={'inherit'}>
               <FaGithub />
             </IconButton>
           </Tooltip>
         </Toolbar>
-        <Hidden mdDown implementation={"css"}>
+        <Hidden mdDown implementation={'css'}>
           <Tabs tabs={tabData} location={pathname} />
         </Hidden>
       </AppBar>
@@ -126,14 +126,14 @@ function ResponsiveDrawer(props) {
         <Drawer
           container={container}
           variant="temporary"
-          anchor={theme.direction === "rtl" ? "right" : "left"}
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
         >
           <SiderContent {...props} />
@@ -143,7 +143,7 @@ function ResponsiveDrawer(props) {
         <Drawer
           className={classes.drawer}
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
           variant="permanent"
           open

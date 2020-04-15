@@ -1,39 +1,38 @@
-import Divider from "@material-ui/core/Divider"
-import Paper from "@material-ui/core/Paper"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import CopyrightIcon from "@material-ui/icons/Copyright"
-import EditIcon from "@material-ui/icons/Edit"
-import HistoryIcon from "@material-ui/icons/History"
-import React from "react"
+import Divider from '@material-ui/core/Divider'
+import Paper from '@material-ui/core/Paper'
+import { makeStyles } from '@material-ui/core/styles'
+import CopyrightIcon from '@material-ui/icons/Copyright'
+import EditIcon from '@material-ui/icons/Edit'
+import HistoryIcon from '@material-ui/icons/History'
+import React from 'react'
 
-import AuthorsArray from "./AuthorsArray"
-import Link from "./Link"
-import Tags from "./Tags"
+import AuthorsArray from './AuthorsArray'
+import Link from './Link'
+import Tags from './Tags'
 
 const useStyles = makeStyles((theme) => ({
   metaicon: {
-    verticalAlign: "text-top",
+    verticalAlign: 'text-top'
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   divider: {
-    marginTop: "8px",
-    marginBottom: "8px",
+    marginTop: '8px',
+    marginBottom: '8px'
   },
   meta: {
-    margin: "20px 0",
-    paddingLeft: ".5rem",
-    textDecoration: "none",
-  },
+    margin: '20px 0',
+    paddingLeft: '.5rem',
+    textDecoration: 'none'
+  }
 }))
 
-function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
-  const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
-  const historyURL = "https://github.com/OI-wiki/OI-wiki/commits/master/docs/"
+function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
+  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
+  const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
-  const theme = useTheme()
-  if (noMeta === "false") {
+  if (noMeta === 'false') {
     return (
       <Paper className={classes.paper} variant="outlined">
         <AuthorsArray authors={authors} />
@@ -49,7 +48,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           <br />
           <span>
             <EditIcon fontSize="small" className={classes.metaicon} />
-            发现错误？想一起完善？{" "}
+            发现错误？想一起完善？{' '}
             <Link href={editURL + relativePath} title="编辑此页">
               在 GitHub 上编辑此页！
             </Link>
@@ -57,13 +56,13 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           <br />
           <span>
             <CopyrightIcon fontSize="small" className={classes.metaicon} />
-            本页面的全部内容在{" "}
+            本页面的全部内容在{' '}
             <strong>
               <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
                 CC BY-SA 4.0
-              </Link>{" "}
+              </Link>{' '}
               和 <Link href="https://github.com/zTrix/sata-license">SATA</Link>
-            </strong>{" "}
+            </strong>{' '}
             协议之条款下提供，附加条款亦可能应用
           </span>
         </div>
