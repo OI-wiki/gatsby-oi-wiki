@@ -1,9 +1,8 @@
-/** @jsx jsx */
+import lightBlue from "@material-ui/core/colors/lightBlue"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { Link as GatsbyLink } from "gatsby"
 import isAbsoluteURL from "is-absolute-url"
-import { jsx } from "theme-ui"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import lightBlue from '@material-ui/core/colors/lightBlue'
+import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   link: {

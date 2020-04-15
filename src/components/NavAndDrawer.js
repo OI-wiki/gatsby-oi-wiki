@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import AppBar from "@material-ui/core/AppBar"
 import Button from "@material-ui/core/Button"
 import Drawer from "@material-ui/core/Drawer"
@@ -15,7 +14,7 @@ import { Link } from "gatsby"
 import React from "react"
 import { FaGithub } from "react-icons/fa"
 import { MdMenu, MdSchool } from "react-icons/md"
-import { jsx } from "theme-ui"
+
 import tabData from "../tabs.yaml"
 import Search from "./Search"
 import SiderContent from "./Sidebar"

@@ -1,10 +1,9 @@
-/** @jsx jsx */
 import { ExpansionPanelSummary } from "@material-ui/core"
 import blue from "@material-ui/core/colors/blue"
 import { makeStyles } from "@material-ui/core/styles"
 import EditIcon from "@material-ui/icons/Edit"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import { jsx } from "theme-ui"
+import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   expanded: {}, // DONT DELETE THIS

@@ -1,10 +1,9 @@
-/** @jsx jsx */
 import Fab from "@material-ui/core/Fab"
 import { makeStyles } from "@material-ui/core/styles"
 import Zoom from "@material-ui/core/Zoom"
 import ArrowUpward from "@material-ui/icons/ArrowUpward"
 import React, { useState } from "react"
-import { jsx } from "theme-ui"
+
 import useThrottledOnScroll from "../lib/useThrottledOnScroll"
 
 const useStyles = makeStyles((theme) => ({

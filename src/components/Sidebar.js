@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import Collapse from "@material-ui/core/Collapse"
 import MuiLink from "@material-ui/core/Link"
 import List from "@material-ui/core/List"
@@ -6,9 +5,9 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
-import { useState } from "react"
+import React, { useState } from "react"
 import { MdExpandLess, MdExpandMore } from "react-icons/md"
-import { jsx } from "theme-ui"
+
 import pathList from "../sidebar.yaml"
 
 const useStyles = makeStyles((theme) => ({

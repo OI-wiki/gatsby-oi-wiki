@@ -1,11 +1,11 @@
-/** @jsx jsx */
 import Divider from "@material-ui/core/Divider"
 import Paper from "@material-ui/core/Paper"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import HistoryIcon from "@material-ui/icons/History"
-import EditIcon from "@material-ui/icons/Edit"
 import CopyrightIcon from "@material-ui/icons/Copyright"
-import { jsx } from "theme-ui"
+import EditIcon from "@material-ui/icons/Edit"
+import HistoryIcon from "@material-ui/icons/History"
+import React from "react"
+
 import AuthorsArray from "./AuthorsArray"
 import Link from "./Link"
 import Tags from "./Tags"

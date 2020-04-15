@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import Button from "@material-ui/core/Button"
 import grey from "@material-ui/core/colors/grey"
 import Container from "@material-ui/core/Container"
@@ -21,7 +20,6 @@ import React, { useState } from "react"
 import { Helmet } from "react-helmet"
 import { MdEdit, MdExpandMore } from "react-icons/md"
 import Loadable from "react-loadable"
-import { jsx } from "theme-ui"
 import BackTop from "./BackTop"
 import Footer from "./Footer"
 import Link from "./Link"

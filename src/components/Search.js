@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import Backdrop from "@material-ui/core/Backdrop"
 import grey from "@material-ui/core/colors/grey"
 import Dialog from "@material-ui/core/Dialog"
@@ -17,7 +16,6 @@ import FindInPageIcon from "@material-ui/icons/FindInPage"
 import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
-import { jsx } from "theme-ui"
 
 const useStyles = makeStyles({})
 

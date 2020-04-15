@@ -1,19 +1,19 @@
-/** @jsx jsx */
+import grey from "@material-ui/core/colors/grey"
+import lightBlue from "@material-ui/core/colors/lightBlue"
 import Grid from "@material-ui/core/Grid"
-import Link from '@material-ui/core/Link'
-import grey from '@material-ui/core/colors/grey'
-import lightBlue from '@material-ui/core/colors/lightBlue'
+import Link from "@material-ui/core/Link"
+
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import { graphql, StaticQuery } from "gatsby"
-import { jsx } from "theme-ui"
-import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
+import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   link: {
     color: grey[700],
     "&:hover": {
       textDecoration: "none",
-      color: lightBlue[500]
+      color: lightBlue[500],
     },
   }
 }))
