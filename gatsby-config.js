@@ -50,7 +50,7 @@ module.exports = {
             resolve: `gatsby-local-autolink-headers`,
             options: {
               isIconAfterHeader: true,
-            }
+            },
           },
           {
             resolve: `gatsby-remark-vscode`,

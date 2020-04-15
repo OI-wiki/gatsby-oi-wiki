@@ -2,7 +2,6 @@ import GitalkComponent from "gitalk/dist/gitalk-component"
 import "gitalk/dist/gitalk.css"
 import React from "react"
 
-
 function Gitalk({ title }) {
   return (
     <GitalkComponent

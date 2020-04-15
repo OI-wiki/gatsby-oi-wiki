@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
   },
 }))
-export default function() {
+export default function () {
   const classes = useStyles()
   const handleClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
@@ -32,7 +32,7 @@ export default function() {
   return (
     <Zoom in={yPos > 400}>
       <Fab disableRipple className={classes.fab} onClick={handleClick}>
-        <ArrowUpward/>
+        <ArrowUpward />
       </Fab>
     </Zoom>
   )

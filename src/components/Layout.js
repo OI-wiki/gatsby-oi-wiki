@@ -85,25 +85,25 @@ const useStyles = makeStyles((theme) => ({
 
 const LazyComment = Loadable({
   loader: () => import("./Comment"),
-  loading: () => <div/>,
+  loading: () => <div />,
 })
 
 function myLayout({
-                    children,
-                    location,
-                    authors,
-                    title,
-                    description,
-                    tags,
-                    toc,
-                    relativePath,
-                    modifiedTime,
-                    noMeta,
-                    noComment,
-                    noEdit,
-                    noToC,
-                    overflow,
-                  }) {
+  children,
+  location,
+  authors,
+  title,
+  description,
+  tags,
+  toc,
+  relativePath,
+  modifiedTime,
+  noMeta,
+  noComment,
+  noEdit,
+  noToC,
+  overflow,
+}) {
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
@@ -144,15 +144,22 @@ function myLayout({
   )
   return (
     <>
-      <CssBaseline/>
+      <CssBaseline />
       <Helmet>
         <title>{`${title === "OI Wiki" ? "" : title + " - "}OI Wiki`}</title>
       </Helmet>
       {EditingDialog}
-      <NavAndDrawer pathname={location.pathname}/>
+      <NavAndDrawer pathname={location.pathname} />
       <Grid container>
-        <Grid item xs={12} sm={12} md={gridWidthMdUp} lg={gridWidthMdUp} xl={gridWidthMdUp}>
-          <div className={classes.toolbar}/>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={gridWidthMdUp}
+          lg={gridWidthMdUp}
+          xl={gridWidthMdUp}
+        >
+          <div className={classes.toolbar} />
           <div className={classes.container}>
             <main className={classes.content}>
               <div className={classes.main}>
@@ -169,13 +176,13 @@ function myLayout({
                           onClick={() => setDialogOpen(true)}
                           className={classes.iconButton}
                         >
-                          <MdEdit fontSize="medium"/>
+                          <MdEdit fontSize="medium" />
                         </IconButton>
                       </Tooltip>
                     </Grid>
                   )}
                 </Grid>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
                 <Typography variant="body1" component="div">
                   {children}
                 </Typography>
@@ -190,14 +197,16 @@ function myLayout({
                   <div style={{ width: "100%", marginTop: theme.spacing(2) }}>
                     <ExpansionPanel variant={"outlined"}>
                       <ExpansionPanelSummary
-                        expandIcon={<MdExpandMore/>}
+                        expandIcon={<MdExpandMore />}
                         aria-controls="comment"
                       >
-                        <Typography className={classes.heading}>评论</Typography>
+                        <Typography className={classes.heading}>
+                          评论
+                        </Typography>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails>
                         <Container>
-                          <LazyComment title={title}/>
+                          <LazyComment title={title} />
                         </Container>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -207,18 +216,17 @@ function myLayout({
             </main>
           </div>
         </Grid>
-        {
-          displayToC &&
+        {displayToC && (
           <Grid item xs>
-            <ToC toc={toc} pathname={location.pathname}/>
+            <ToC toc={toc} pathname={location.pathname} />
           </Grid>
-        }
+        )}
       </Grid>
-      <Divider/>
+      <Divider />
       <div className={classes.footer}>
-        <Footer/>
+        <Footer />
       </div>
-      <BackTop/>
+      <BackTop />
     </>
   )
 }

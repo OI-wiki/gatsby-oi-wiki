@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "2px",
     "&$expanded": {
       padding: "2px",
-    }
+    },
   },
   content: {
     margin: "4px",
@@ -34,14 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function({ className = null, children, ...props }) {
-
+export default function ({ className = null, children, ...props }) {
   const classes = useStyles()
 
   return (
     <ExpansionPanelSummary
       classes={classes}
-      expandIcon={<ExpandMoreIcon/>}
+      expandIcon={<ExpandMoreIcon />}
       aria-controls="expand"
       {...props}
     >

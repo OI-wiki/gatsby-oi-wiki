@@ -14,23 +14,23 @@ const useStyles = makeStyles((theme) => ({
   listitem: {
     color: theme.palette.text.primary,
     lineHeight: 1.2,
-    paddingLeft: props => props.padding,
+    paddingLeft: (props) => props.padding,
     ":hover": {
       textDecoration: "none",
     },
   },
   oplistitem: {
-    paddingLeft: props => props.padding,
-    lineHeight: 1.2
+    paddingLeft: (props) => props.padding,
+    lineHeight: 1.2,
   },
   list: {
     width: "100%",
-    height: "100%"
-  }
+    height: "100%",
+  },
 }))
 
 function Item(props, padding, pathname) {
-  const classes = useStyles({padding})
+  const classes = useStyles({ padding })
   const theme = useTheme()
   const arr = Object.entries(props)[0]
   const key = arr[0],
@@ -58,11 +58,11 @@ function Item(props, padding, pathname) {
   }
   // array
   const listItemsResult = value.map((item) =>
-    Item(item, padding + 16, pathname),
+    Item(item, padding + 16, pathname)
   )
   const shouldOpen = listItemsResult.reduce(
     (prev, [, curr]) => curr || prev,
-    false,
+    false
   )
   const listItems = listItemsResult.map(([v]) => v)
   let [open, setOpen] = useState(shouldOpen)
@@ -80,7 +80,7 @@ function Item(props, padding, pathname) {
             </Typography>
           }
         />
-        {open ? <MdExpandLess/> : <MdExpandMore/>}
+        {open ? <MdExpandLess /> : <MdExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>{listItems}</List>
@@ -90,7 +90,7 @@ function Item(props, padding, pathname) {
   ]
 }
 
-export default function(props) {
+export default function (props) {
   const classes = useStyles()
   const theme = useTheme()
   return (

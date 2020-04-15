@@ -4,7 +4,7 @@ import Doc from "../components/doc"
 
 export default ({ data, location }) => {
   // console.log(data)
-  return <Doc data={data} location={location}/>
+  return <Doc data={data} location={location} />
 }
 
 export const query = graphql`

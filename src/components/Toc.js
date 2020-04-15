@@ -116,8 +116,8 @@ export default function ToC(props) {
       if (
         item.node &&
         item.node.offsetTop <
-        document.documentElement.scrollTop +
-        document.documentElement.clientHeight / 8
+          document.documentElement.scrollTop +
+            document.documentElement.clientHeight / 8
       ) {
         active = item
         break
@@ -156,7 +156,7 @@ export default function ToC(props) {
     () => () => {
       clearTimeout(unsetClickedRef.current)
     },
-    [],
+    []
   )
 
   const itemLink = (item, secondary) => (
@@ -169,10 +169,10 @@ export default function ToC(props) {
       className={clsx(
         classes.item,
         { [classes.secondaryItem]: secondary },
-        activeState === item.url ? classes.active : undefined,
+        activeState === item.url ? classes.active : undefined
       )}
     >
-      <span dangerouslySetInnerHTML={{ __html: item.title }}/>
+      <span dangerouslySetInnerHTML={{ __html: item.title }} />
     </MuiLink>
   )
   return (
