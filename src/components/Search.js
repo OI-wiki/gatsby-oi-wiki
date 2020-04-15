@@ -17,7 +17,7 @@ import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
-import grey from '@material-ui/core/colors/grey';
+import grey from "@material-ui/core/colors/grey"
 
 const useStyles = makeStyles({})
 
@@ -68,6 +68,15 @@ const styles = (theme) => ({
     overflowY: "auto",
     overflowX: "hidden",
     zIndex: theme.zIndex.drawer + 2,
+    "&::-webkit-scrollbar": {
+      width: ".4rem",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: grey[400],
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: fade(theme.palette.primary.main, 0.44),
+    },
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
