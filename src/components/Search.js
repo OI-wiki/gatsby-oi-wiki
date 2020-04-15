@@ -124,9 +124,15 @@ function SearchResultList(props) {
         {val.map((item) => {
           /* Render article */
           return (
-            <ListItem button divider component="a" href={item.url} key={item.url}>
+            <ListItem
+              button
+              divider
+              component="a"
+              href={item.url}
+              key={item.url}
+            >
               <ListItemIcon>
-                <FindInPageIcon/>
+                <FindInPageIcon />
               </ListItemIcon>
               <ListItemText
                 primary={
@@ -185,10 +191,14 @@ class Result extends React.Component {
   handleChange(w) {
     const { ev } = this.state
 
-    let sta = [], Rsize
-    const result = fetch(`https://search.oi-wiki.org:8443/?s=${encodeURIComponent(ev)}`, {
-      // credentials: "same-origin"
-    })
+    let sta = [],
+      Rsize
+    const result = fetch(
+      `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(ev)}`,
+      {
+        // credentials: "same-origin"
+      }
+    )
       .then((response) => response.json())
       .then((result) => {
         Rsize = result.length
@@ -199,7 +209,7 @@ class Result extends React.Component {
       this.setState({
         val: val,
         searched: true,
-      }),
+      })
     )
   }
 
@@ -212,11 +222,11 @@ class Result extends React.Component {
             this.props.classes.search,
             open
               ? this.props.classes.searchColorWhite
-              : this.props.classes.searchColorBlack,
+              : this.props.classes.searchColorBlack
           )}
         >
           <div className={this.props.classes.searchIcon}>
-            <MdSearch/>
+            <MdSearch />
           </div>
           <InputBase
             type="search"
@@ -262,7 +272,7 @@ function Search(props) {
         onClick={() => setDialogOpen(true)}
         className={classes.iconButton}
       >
-        <MdSearch fontSize="medium"/>
+        <MdSearch fontSize="medium" />
       </IconButton>
       <Dialog
         open={dialogOpen}
@@ -273,7 +283,7 @@ function Search(props) {
       >
         <DialogTitle>{"搜索"}</DialogTitle>
         <DialogContent>
-          <Result classes={props.classes}/>
+          <Result classes={props.classes} />
         </DialogContent>
       </Dialog>
     </>

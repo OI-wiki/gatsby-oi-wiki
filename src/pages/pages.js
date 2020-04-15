@@ -34,7 +34,7 @@ function PageItem(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Tags tags={tags}/>
+          <Tags tags={tags} />
         </CardActions>
       </Card>
     </Grid>
@@ -61,14 +61,23 @@ function GridItems(props) {
     columnCount = 3
     return (
       <>
-        <Grid container item xs direction={"column"} spacing={2} >
-          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem key={x.id} {...x} />)}
+        <Grid container item xs direction={"column"} spacing={2}>
+          {filteredItems.map(
+            (x, idx) =>
+              idx % columnCount === 0 && <PageItem key={x.id} {...x} />
+          )}
         </Grid>
         <Grid container item xs direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem key={x.id} {...x} />)}
+          {filteredItems.map(
+            (x, idx) =>
+              idx % columnCount === 1 && <PageItem key={x.id} {...x} />
+          )}
         </Grid>
         <Grid container item xs direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 2 && <PageItem key={x.id} {...x} />)}
+          {filteredItems.map(
+            (x, idx) =>
+              idx % columnCount === 2 && <PageItem key={x.id} {...x} />
+          )}
         </Grid>
       </>
     )
@@ -77,10 +86,16 @@ function GridItems(props) {
     return (
       <>
         <Grid container item xs direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 0 && <PageItem key={x.id} {...x} />)}
+          {filteredItems.map(
+            (x, idx) =>
+              idx % columnCount === 0 && <PageItem key={x.id} {...x} />
+          )}
         </Grid>
         <Grid container item xs direction={"column"} spacing={2}>
-          {filteredItems.map((x, idx) => idx % columnCount === 1 && <PageItem key={x.id} {...x} />)}
+          {filteredItems.map(
+            (x, idx) =>
+              idx % columnCount === 1 && <PageItem key={x.id} {...x} />
+          )}
         </Grid>
       </>
     )
@@ -89,7 +104,9 @@ function GridItems(props) {
     return (
       <>
         <Grid container item direction={"column"} spacing={2}>
-          {filteredItems.map(x => <PageItem key={x.id} {...x} />)}
+          {filteredItems.map((x) => (
+            <PageItem key={x.id} {...x} />
+          ))}
         </Grid>
       </>
     )
@@ -106,7 +123,9 @@ function BlogIndex(props) {
   const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
   const [selectedTags, setSelectedTags] = useState([])
-  const filteredItems = articles.map((x) => matchTags(x.frontmatter.tags, selectedTags) && x).filter(x => x !== false)
+  const filteredItems = articles
+    .map((x) => matchTags(x.frontmatter.tags, selectedTags) && x)
+    .filter((x) => x !== false)
   return (
     <Layout
       location={location}
@@ -131,16 +150,14 @@ function BlogIndex(props) {
             renderOption={(option, { inputValue }) => {
               const matches = match(option, inputValue)
               const parts = parse(option, matches)
-              return (
-                parts.map((part, index) => (
-                  <span
-                    key={index}
-                    style={{ fontWeight: part.highlight ? 700 : 400 }}
-                  >
-                      {part.text}
-                    </span>
-                ))
-              )
+              return parts.map((part, index) => (
+                <span
+                  key={index}
+                  style={{ fontWeight: part.highlight ? 700 : 400 }}
+                >
+                  {part.text}
+                </span>
+              ))
             }}
             renderInput={(params) => (
               <TextField
@@ -152,7 +169,7 @@ function BlogIndex(props) {
           />
         </Grid>
         <Grid container xs={12} spacing={2} justify={"center"}>
-          <GridItems filteredItems={filteredItems}/>
+          <GridItems filteredItems={filteredItems} />
         </Grid>
       </Grid>
     </Layout>

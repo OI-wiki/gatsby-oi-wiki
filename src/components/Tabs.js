@@ -21,18 +21,18 @@ const useIndicatorStyles = makeStyles(() => ({
   },
 }))
 
-export default function(props) {
+export default function (props) {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
-  
+
   const { tabs, location } = props
-  const state = (() => { 
-    for(const tab in tabs) {
-      if(tabs[tab].link == '/'){
-        if(location == (tabs[tab] || { link: undefined }).link) return +tab
+  const state = (() => {
+    for (const tab in tabs) {
+      if (tabs[tab].link == "/") {
+        if (location == (tabs[tab] || { link: undefined }).link) return +tab
         else continue
       }
-      if((location || "").startsWith(tabs[tab].link)) return +tab
+      if ((location || "").startsWith(tabs[tab].link)) return +tab
     }
     return false
   })()
@@ -45,7 +45,7 @@ export default function(props) {
     <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
       {tabs.map(({ title, link }) => (
         <Tab
-          disableRipple 
+          disableRipple
           key={title}
           label={title}
           component="a"

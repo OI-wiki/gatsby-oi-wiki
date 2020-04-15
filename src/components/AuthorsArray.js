@@ -9,22 +9,22 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function AuthorsArray({ authors }) {
-  const arr = authors && authors.split(",").map(x => x.trim())
+  const arr = authors && authors.split(",").map((x) => x.trim())
   const classes = useStyles()
   return (
     <div>
       {arr &&
-      arr.map((author) => (
-        <Chip
-          label={` @${author} `}
-          key={author}
-          clickable
-          className={classes.chip}
-          component={"a"}
-          variant="outlined"
-          href={"https://github.com/" + author.trim()}
-        />
-      ))}
+        arr.map((author) => (
+          <Chip
+            label={` @${author} `}
+            key={author}
+            clickable
+            className={classes.chip}
+            component={"a"}
+            variant="outlined"
+            href={"https://github.com/" + author.trim()}
+          />
+        ))}
     </div>
   )
 }

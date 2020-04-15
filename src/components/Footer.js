@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "none",
       color: lightBlue[500],
     },
-  }
+  },
 }))
 
 export default (props) => (
@@ -47,12 +47,29 @@ function FooterContent({ data }) {
       </Grid>
       <Grid item xs={12}>
         <Typography>
-          最近更新: <Link className={classes.link} href={"https://github.com/OI-wiki/OI-wiki/commits"}>{hash.substr(0, 7)}</Link>, {date.substr(0, 10)}
+          最近更新:{" "}
+          <Link
+            className={classes.link}
+            href={"https://github.com/OI-wiki/OI-wiki/commits"}
+          >
+            {hash.substr(0, 7)}
+          </Link>
+          , {date.substr(0, 10)}
         </Typography>
       </Grid>
       <Grid item xs={12}>
         <Typography>
-          联系方式：<Link className={classes.link} href={"https://t.me/OIwiki"}>Telegram 群组</Link> / <Link className={classes.link} href={"https://jq.qq.com/?_wv=1027&k=5EfkM6K"}>QQ 群组</Link>
+          联系方式：
+          <Link className={classes.link} href={"https://t.me/OIwiki"}>
+            Telegram 群组
+          </Link>{" "}
+          /{" "}
+          <Link
+            className={classes.link}
+            href={"https://jq.qq.com/?_wv=1027&k=5EfkM6K"}
+          >
+            QQ 群组
+          </Link>
         </Typography>
       </Grid>
     </Grid>

@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const TagsPage = ({
-                    data: {
-                      allMdx: { group },
-                      site: {
-                        siteMetadata: { title },
-                      },
-                    },
-                    location,
-                  }) => {
+  data: {
+    allMdx: { group },
+    site: {
+      siteMetadata: { title },
+    },
+  },
+  location,
+}) => {
   const classes = useStyles()
   return (
     <Layout location={location} noMeta="true" title="标签页">
@@ -48,7 +48,7 @@ TagsPage.propTypes = {
         PropTypes.shape({
           fieldValue: PropTypes.string.isRequired,
           totalCount: PropTypes.number.isRequired,
-        }).isRequired,
+        }).isRequired
       ),
     }),
     site: PropTypes.shape({

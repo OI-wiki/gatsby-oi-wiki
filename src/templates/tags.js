@@ -20,7 +20,9 @@ const Tags = ({ pageContext, data, location }) => {
   return (
     <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
       <div>
-        <Typography variant="h5" component="h2">{tagHeader}</Typography>
+        <Typography variant="h5" component="h2">
+          {tagHeader}
+        </Typography>
         <List>
           {edges.map(({ node }) => {
             const { slug } = node.fields
@@ -35,7 +37,14 @@ const Tags = ({ pageContext, data, location }) => {
             )
           })}
         </List>
-        <Button variant="outlined" color="primary" startIcon={<ArrowBackIosIcon />} href="/tags">所有标签</Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<ArrowBackIosIcon />}
+          href="/tags"
+        >
+          所有标签
+        </Button>
       </div>
     </Layout>
   )
@@ -58,7 +67,7 @@ Tags.propTypes = {
               slug: PropTypes.string.isRequired,
             }),
           }),
-        }).isRequired,
+        }).isRequired
       ),
     }),
   }),

@@ -81,11 +81,11 @@ function ResponsiveDrawer(props) {
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MdMenu/>
+            <MdMenu />
           </IconButton>
           <Hidden mdDown implementation={"css"}>
             <IconButton component={Link} color="inherit" to="/">
-              <MdSchool/>
+              <MdSchool />
             </IconButton>
           </Hidden>
           <Button href="/">
@@ -93,33 +93,33 @@ function ResponsiveDrawer(props) {
               OI Wiki
             </Typography>
           </Button>
-          <div style={{ flexGrow: 1 }}/>
+          <div style={{ flexGrow: 1 }} />
           <Hidden smDown implementation="css">
-            <Search/>
+            <Search />
           </Hidden>
           <Hidden mdUp implementation={"css"}>
             <IconButton color={"inherit"}>
-              <SearchIcon/>
+              <SearchIcon />
             </IconButton>
           </Hidden>
           <Tooltip title="标签页" placement="bottom" arrow>
             <IconButton component={"a"} href={"/tags"} color={"inherit"}>
-              <LocalOfferIcon/>
+              <LocalOfferIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="目录页" placement="bottom" arrow>
             <IconButton component={"a"} href={"/pages"} color={"inherit"}>
-              <LibraryBooksIcon/>
+              <LibraryBooksIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
             <IconButton component={"a"} href={OIWikiGithub} color={"inherit"}>
-              <FaGithub/>
+              <FaGithub />
             </IconButton>
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation={"css"}>
-          <Tabs tabs={tabData} location={pathname}/>
+          <Tabs tabs={tabData} location={pathname} />
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="css">
@@ -148,7 +148,7 @@ function ResponsiveDrawer(props) {
           variant="permanent"
           open
         >
-          <div className={classes.toolbar}/>
+          <div className={classes.toolbar} />
           <SiderContent {...props} />
         </Drawer>
       </Hidden>

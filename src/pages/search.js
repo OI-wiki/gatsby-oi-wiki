@@ -16,7 +16,7 @@ function SearchPage(props) {
       title={"搜索效果页"}
     >
       <Grid container spacing={2} justify={"center"}>
-        <Search/>
+        <Search />
       </Grid>
     </Layout>
   )

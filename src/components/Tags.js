@@ -15,17 +15,17 @@ function Tags({ tags }) {
   return (
     <div>
       {arr &&
-      arr.map((tag) => (
-        <Chip
-          label={` #${tag} `}
-          href={"/tags/" + kebabCase(tag)}
-          key={`tag-${tag}`}
-          component={"a"}
-          variant="outlined"
-          clickable
-          className={classes.chip}
-        />
-      ))}
+        arr.map((tag) => (
+          <Chip
+            label={` #${tag} `}
+            href={"/tags/" + kebabCase(tag)}
+            key={`tag-${tag}`}
+            component={"a"}
+            variant="outlined"
+            clickable
+            className={classes.chip}
+          />
+        ))}
     </div>
   )
 }

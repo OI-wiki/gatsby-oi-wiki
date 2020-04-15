@@ -15,17 +15,17 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "text-top",
   },
   paper: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   divider: {
     marginTop: "8px",
-    marginBottom: "8px"
+    marginBottom: "8px",
   },
   meta: {
     margin: "20px 0",
     paddingLeft: ".5rem",
     textDecoration: "none",
-  }
+  },
 }))
 
 function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
@@ -36,9 +36,9 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
   if (noMeta === "false") {
     return (
       <Paper className={classes.paper} variant="outlined">
-        <AuthorsArray authors={authors}/>
-        <Divider className={classes.divider}/>
-        <Tags tags={tags}/>
+        <AuthorsArray authors={authors} />
+        <Divider className={classes.divider} />
+        <Tags tags={tags} />
         <div className={classes.meta}>
           <span>
             <HistoryIcon fontSize="small" className={classes.metaicon} />
@@ -46,7 +46,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
           </span>
           <span>{modifiedTime}</span>，
           <Link href={historyURL + relativePath}>更新历史</Link>
-          <br/>
+          <br />
           <span>
             <EditIcon fontSize="small" className={classes.metaicon} />
             发现错误？想一起完善？{" "}
@@ -54,7 +54,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
               在 GitHub 上编辑此页！
             </Link>
           </span>
-          <br/>
+          <br />
           <span>
             <CopyrightIcon fontSize="small" className={classes.metaicon} />
             本页面的全部内容在{" "}
@@ -69,7 +69,7 @@ function Meta({ authors, tags, relativePath, modifiedTime, noMeta }) {
         </div>
       </Paper>
     )
-  } else return <div/>
+  } else return <div />
 }
 
 export default Meta
