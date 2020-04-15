@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function Item(props, padding, pathname) {
-  const classes = useStyles(padding)
+  const classes = useStyles({padding})
   const theme = useTheme()
   const arr = Object.entries(props)[0]
   const key = arr[0],
