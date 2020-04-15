@@ -1,10 +1,9 @@
-/** @jsx jsx */
 import MuiLink from "@material-ui/core/Link"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Typography from "@material-ui/core/Typography"
 import clsx from "clsx"
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import { jsx } from "theme-ui"
+
 import useThrottledOnScroll from "../lib/useThrottledOnScroll"
 
 const useStyles = makeStyles((theme) => ({

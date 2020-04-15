@@ -1,16 +1,15 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
-import { ExpansionPanel, ExpansionPanelDetails, Container } from "@material-ui/core"
+import { Container, ExpansionPanel, ExpansionPanelDetails } from "@material-ui/core"
+import blue from "@material-ui/core/colors/blue"
 import { makeStyles } from "@material-ui/core/styles"
-import blue from '@material-ui/core/colors/blue'
+import React from "react"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "&, &:first-child, &:last-child": {
-      margin: "1.2em 0 !important"
+      margin: "1.2em 0 !important",
     },
     borderLeft: ".3rem solid",
-    borderLeftColor: blue[500]
+    borderLeftColor: blue[500],
   },
   "expanded": {
     "&, &:first-child, &:last-child": {
@@ -20,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function({ className = "", children, ...props }) {
-  
+
   const classes = useStyles()
-  
+
   const cont = children instanceof Array? children : [children]
   return <ExpansionPanel variant="outlined" classes={classes} defaultExpanded={!!className.match("open")}>
     {cont[0]}
@@ -32,5 +31,5 @@ export default function({ className = "", children, ...props }) {
       </Container>
     </ExpansionPanelDetails>
   </ExpansionPanel>
-  
+
 }

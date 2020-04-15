@@ -1,4 +1,3 @@
-/** @jsx jsx */
 import { useMediaQuery } from "@material-ui/core"
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
@@ -12,7 +11,7 @@ import match from "autosuggest-highlight/match"
 import parse from "autosuggest-highlight/parse"
 import { graphql } from "gatsby"
 import React, { useState } from "react"
-import { jsx } from "theme-ui"
+
 import Layout from "../components/Layout"
 import Link from "../components/Link"
 import Tags from "../components/Tags"

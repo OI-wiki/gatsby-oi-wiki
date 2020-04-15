@@ -1,7 +1,6 @@
-/** @jsx jsx */
 import Grid from "@material-ui/core/Grid"
 import React from "react"
-import { jsx } from "theme-ui"
+
 import Layout from "../components/Layout"
 import Search from "../components/Search"
 

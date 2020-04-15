@@ -1,11 +1,10 @@
-/** @jsx jsx */
 import Chip from "@material-ui/core/Chip"
 import { makeStyles } from "@material-ui/core/styles"
 import { graphql } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import PropTypes from "prop-types"
 import React from "react"
-import { jsx } from "theme-ui"
+
 import Layout from "../components/Layout"
 
 const useStyles = makeStyles((theme) => ({
