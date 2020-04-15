@@ -73,7 +73,7 @@ int main() {
 !!! warning "注"
     注意区分 **基数排序** 与 **桶排序**
 
-!!! note " 例题[luogu P4322\[JSOI2016\]最佳团体](https://www.luogu.org/problemnew/show/P4322)"
+!!! note "特别长的标题啊啊啊啊啊啊啊啊啊啊例题[luogu P4322\[JSOI2016\]最佳团体](https://www.luogu.org/problemnew/show/P4322)"
     题目大意：有一棵 $n+1$ 个结点的树，根为 $0$ 号结点。每个结点 $i$ 有一个价值 $p_i$ 和费用 $s_i$ 。你需要选择 $k$ 个结点 $a_1,a_2,\ldots,a_k$ （不包括 $0$ 号结点），使得
 
     $$
