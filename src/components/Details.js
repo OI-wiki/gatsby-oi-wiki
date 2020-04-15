@@ -1,7 +1,7 @@
 import {
   Container,
   ExpansionPanel,
-  ExpansionPanelDetails
+  ExpansionPanelDetails,
 } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import { makeStyles } from '@material-ui/core/styles'
@@ -10,16 +10,16 @@ import React from 'react'
 const useStyles = makeStyles((theme) => ({
   root: {
     '&, &:first-child, &:last-child': {
-      margin: '1.2em 0 !important'
+      margin: '1.2em 0 !important',
     },
     borderLeft: '.3rem solid',
-    borderLeftColor: blue[500]
+    borderLeftColor: blue[500],
   },
   expanded: {
     '&, &:first-child, &:last-child': {
-      margin: '1.2em 0 !important'
-    }
-  }
+      margin: '1.2em 0 !important',
+    },
+  },
 }))
 
 export default function Details ({ className = '', children, ...props }) {

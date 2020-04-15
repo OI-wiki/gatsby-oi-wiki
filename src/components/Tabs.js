@@ -10,15 +10,15 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '0',
     '&:hover': {
       color: '#000',
-      opacity: '1'
-    }
-  }
+      opacity: '1',
+    },
+  },
 }))
 
 const useIndicatorStyles = makeStyles(() => ({
   indicator: {
-    height: '3px'
-  }
+    height: '3px',
+  },
 }))
 
 export default function NavTabs (props) {

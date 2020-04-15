@@ -12,26 +12,26 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '36px',
     '&$expanded': {
       minHeight: '36px',
-      height: 'auto'
+      height: 'auto',
     },
-    height: 'auto'
+    height: 'auto',
   },
   expandIcon: {
     padding: '2px',
     '&$expanded': {
-      padding: '2px'
-    }
+      padding: '2px',
+    },
   },
   content: {
     margin: '4px',
     '& p': {
-      margin: '4px'
+      margin: '4px',
     },
     '&$expanded': {
-      margin: '4px'
+      margin: '4px',
     },
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 }))
 
 export default function Summary ({ className = null, children, ...props }) {
@@ -48,7 +48,7 @@ export default function Summary ({ className = null, children, ...props }) {
         style={{
           margin: '0px 10px 2px -5px',
           alignSelf: 'center',
-          color: blue[500]
+          color: blue[500],
         }}
       />
       {children}

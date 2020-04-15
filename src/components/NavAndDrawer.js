@@ -26,39 +26,39 @@ const drawerWidth = 250
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   hiddenDrawer: {
     [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     background: theme.palette.background.paper,
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   // necessary for content to be below app bar
   toolbar: {
     [theme.breakpoints.down('md')]: {
-      minHeight: 64
+      minHeight: 64,
     },
     minHeight: 48 + 64,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   drawerPaper: scrollbarStyle(theme, {
-    width: drawerWidth
+    width: drawerWidth,
   }),
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+  },
 }))
 
 function ResponsiveDrawer (props) {
@@ -130,10 +130,10 @@ function ResponsiveDrawer (props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile.
           }}
         >
           <SiderContent {...props} />
@@ -143,7 +143,7 @@ function ResponsiveDrawer (props) {
         <Drawer
           className={classes.drawer}
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           variant="permanent"
           open

@@ -41,52 +41,52 @@ const editWarning = (
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     [theme.breakpoints.down('md')]: {
-      minHeight: 64
+      minHeight: 64,
     },
     minHeight: 48 + 64,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   content: {
     flexGrow: 1,
     width: '100%',
-    overflow: 'inherit'
+    overflow: 'inherit',
   },
   main: {
     padding: theme.spacing(5),
     [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     minHeight: '100vh',
-    overflow: 'inherit'
+    overflow: 'inherit',
   },
   divider: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   footer: {
     background: grey[200],
     color: grey[700],
     padding: theme.spacing(3),
     [theme.breakpoints.up('lg')]: {
-      marginLeft: 250
-    }
+      marginLeft: 250,
+    },
   },
   container: {
     [theme.breakpoints.up('lg')]: {
-      marginLeft: 250
+      marginLeft: 250,
     },
     overflowX: 'auto',
-    overflowY: 'hidden'
+    overflowY: 'hidden',
   },
   iconButton: {
-    float: 'right'
-  }
+    float: 'right',
+  },
 }))
 
 const LazyComment = Loadable({
   loader: () => import('./Comment'),
   // eslint-disable-next-line react/display-name
-  loading: () => <div />
+  loading: () => <div />,
 })
 
 function myLayout ({
@@ -103,7 +103,7 @@ function myLayout ({
   noComment,
   noEdit,
   noToC,
-  overflow
+  overflow,
 }) {
   const classes = useStyles()
   const theme = useTheme()

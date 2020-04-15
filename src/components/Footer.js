@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
     color: grey[700],
     '&:hover': {
       textDecoration: 'none',
-      color: lightBlue[500]
-    }
-  }
+      color: lightBlue[500],
+    },
+  },
 }))
 
 const query = (props) => (

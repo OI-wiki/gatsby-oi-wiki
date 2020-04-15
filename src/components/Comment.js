@@ -13,7 +13,7 @@ function Gitalk ({ title }) {
         clientID: 'd6a911c8fba0194626d4',
         clientSecret: '867ec7e13cc99b420bd147cbb62d5cfec271ba81',
         distractionFreeMode: false,
-        pagerDirection: 'first'
+        pagerDirection: 'first',
       }}
     />
   )

@@ -16,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.2,
     paddingLeft: (props) => props.padding,
     ':hover': {
-      textDecoration: 'none'
-    }
+      textDecoration: 'none',
+    },
   },
   oplistitem: {
     paddingLeft: (props) => props.padding,
-    lineHeight: 1.2
+    lineHeight: 1.2,
   },
   list: {
     width: '100%',
-    height: '100%'
-  }
+    height: '100%',
+  },
 }))
 
 function Item (props, padding, pathname) {
@@ -52,16 +52,16 @@ function Item (props, padding, pathname) {
           }
         />
       </ListItem>,
-      value === pathname
+      value === pathname,
     ]
   }
   // array
   const listItemsResult = value.map((item) =>
-    Item(item, padding + 16, pathname)
+    Item(item, padding + 16, pathname),
   )
   const shouldOpen = listItemsResult.reduce(
     (prev, [, curr]) => curr || prev,
-    false
+    false,
   )
   const listItems = listItemsResult.map(([v]) => v)
   const [open, setOpen] = useState(shouldOpen)
@@ -85,7 +85,7 @@ function Item (props, padding, pathname) {
         <List disablePadding>{listItems}</List>
       </Collapse>
     </div>,
-    shouldOpen
+    shouldOpen,
   ]
 }
 

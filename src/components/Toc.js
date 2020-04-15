@@ -19,22 +19,22 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'block',
       top: theme.spacing(7),
-      marginTop: theme.spacing(7)
+      marginTop: theme.spacing(7),
     },
     [theme.breakpoints.only('md')]: {
       display: 'block',
       top: theme.spacing(3),
-      marginTop: theme.spacing(3)
-    }
+      marginTop: theme.spacing(3),
+    },
   },
   contents: {
     marginTop: theme.spacing(2),
-    paddingLeft: theme.spacing(1.5)
+    paddingLeft: theme.spacing(1.5),
   },
   ul: {
     padding: 0,
     margin: 0,
-    listStyle: 'none'
+    listStyle: 'none',
   },
   item: {
     fontSize: 13,
@@ -46,20 +46,20 @@ const useStyles = makeStyles((theme) => ({
         theme.palette.type === 'light'
           ? theme.palette.grey[300]
           : theme.palette.grey[900]
-      }`
+      }`,
     },
     '&$active,&:active': {
       borderLeft: `4px solid ${
         theme.palette.type === 'light'
           ? theme.palette.grey[400]
           : theme.palette.grey[800]
-      }`
-    }
+      }`,
+    },
   },
   secondaryItem: {
-    paddingLeft: theme.spacing(2.5)
+    paddingLeft: theme.spacing(2.5),
   },
-  active: {}
+  active: {},
 }))
 
 function getIDfromURL (url) {
@@ -72,13 +72,13 @@ function getItems (items) {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
-      node: document.getElementById(getIDfromURL(item2.url))
+      node: document.getElementById(getIDfromURL(item2.url)),
     })
     if (item2.items) {
       item2.items.forEach((item3) => {
         itemsResult.push({
           ...item3,
-          node: document.getElementById(getIDfromURL(item3.url))
+          node: document.getElementById(getIDfromURL(item3.url)),
         })
       })
     }
@@ -155,7 +155,7 @@ export default function ToC (props) {
     () => () => {
       clearTimeout(unsetClickedRef.current)
     },
-    []
+    [],
   )
 
   const itemLink = (item, secondary) => (
@@ -168,7 +168,7 @@ export default function ToC (props) {
       className={clsx(
         classes.item,
         { [classes.secondaryItem]: secondary },
-        activeState === item.url ? classes.active : undefined
+        activeState === item.url ? classes.active : undefined,
       )}
     >
       <span dangerouslySetInnerHTML={{ __html: item.title }} />

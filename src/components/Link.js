@@ -9,12 +9,12 @@ const useStyles = makeStyles((theme) => ({
     color: lightBlue[500],
     textDecoration: 'none',
     ':hover': {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
     '&.active': {
-      color: theme.palette.text.primary
-    }
-  }
+      color: theme.palette.text.primary,
+    },
+  },
 }))
 
 function linkFix (url) {

@@ -20,7 +20,7 @@ function PageItem (props) {
   const {
     id,
     frontmatter: { title, tags },
-    fields: { slug: link }
+    fields: { slug: link },
   } = props
   return (
     <Grid item key={id}>
@@ -61,19 +61,19 @@ function GridItems (props) {
         <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
-              idx % columnCount === 0 && <PageItem key={x.id} {...x} />
+              idx % columnCount === 0 && <PageItem key={x.id} {...x} />,
           )}
         </Grid>
         <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
-              idx % columnCount === 1 && <PageItem key={x.id} {...x} />
+              idx % columnCount === 1 && <PageItem key={x.id} {...x} />,
           )}
         </Grid>
         <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
-              idx % columnCount === 2 && <PageItem key={x.id} {...x} />
+              idx % columnCount === 2 && <PageItem key={x.id} {...x} />,
           )}
         </Grid>
       </>
@@ -85,13 +85,13 @@ function GridItems (props) {
         <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
-              idx % columnCount === 0 && <PageItem key={x.id} {...x} />
+              idx % columnCount === 0 && <PageItem key={x.id} {...x} />,
           )}
         </Grid>
         <Grid container item xs direction={'column'} spacing={2}>
           {filteredItems.map(
             (x, idx) =>
-              idx % columnCount === 1 && <PageItem key={x.id} {...x} />
+              idx % columnCount === 1 && <PageItem key={x.id} {...x} />,
           )}
         </Grid>
       </>
@@ -114,8 +114,8 @@ function BlogIndex (props) {
   const { location } = props
   const {
     data: {
-      allMdx: { edges, group }
-    }
+      allMdx: { edges, group },
+    },
   } = props
   const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)

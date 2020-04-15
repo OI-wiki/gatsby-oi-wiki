@@ -11,16 +11,16 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     background: theme.palette.background.paper,
     '&:hover': {
-      background: theme.palette.background.paper
+      background: theme.palette.background.paper,
     },
     [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(4),
-      right: theme.spacing(4)
+      right: theme.spacing(4),
     },
     bottom: theme.spacing(8),
     right: theme.spacing(8),
-    zIndex: 2
-  }
+    zIndex: 2,
+  },
 }))
 export default function BackTop () {
   const classes = useStyles()
