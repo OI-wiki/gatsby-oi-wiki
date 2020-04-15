@@ -33,7 +33,7 @@ export default function HTML (props) {
               ["$$", "$$"],
             ],
           },
-        }`
+        }`,
         }}
       />
       <script
@@ -50,5 +50,5 @@ HTML.propTypes = {
   bodyAttributes: PropTypes.object,
   preBodyComponents: PropTypes.array,
   body: PropTypes.string,
-  postBodyComponents: PropTypes.array
+  postBodyComponents: PropTypes.array,
 }

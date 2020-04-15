@@ -12,20 +12,20 @@ import Tags from './Tags'
 
 const useStyles = makeStyles((theme) => ({
   metaicon: {
-    verticalAlign: 'text-top'
+    verticalAlign: 'text-top',
   },
   paper: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   divider: {
     marginTop: '8px',
-    marginBottom: '8px'
+    marginBottom: '8px',
   },
   meta: {
     margin: '20px 0',
     paddingLeft: '.5rem',
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 }))
 
 function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {

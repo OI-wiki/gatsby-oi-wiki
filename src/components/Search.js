@@ -24,25 +24,25 @@ const useStyles = makeStyles({})
 const styles = (theme) => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   searchResultPrimary: {
     '& em': {
       fontStyle: 'normal',
       color: fade(theme.palette.primary.main, 0.95),
-      background: fade(theme.palette.primary.main, 0.08)
-    }
+      background: fade(theme.palette.primary.main, 0.08),
+    },
   },
   searchResultSecondary: {
     '& em': {
       fontStyle: 'normal',
       padding: '0 0 2px',
-      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, 0.5)}`
+      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, 0.5)}`,
       // 使用 box shadow 模拟下划线
-    }
+    },
   },
   inputRoot: {
-    color: 'inherit'
+    color: 'inherit',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -53,9 +53,9 @@ const styles = (theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '15vw',
       '&:focus': {
-        width: '30vw'
-      }
-    }
+        width: '30vw',
+      },
+    },
   },
   resultPaper: scrollbarStyle(theme, {
     marginTop: '12px',
@@ -67,10 +67,10 @@ const styles = (theme) => ({
     maxHeight: '80vh',
     overflowY: 'auto',
     overflowX: 'hidden',
-    zIndex: theme.zIndex.drawer + 2
+    zIndex: theme.zIndex.drawer + 2,
   }),
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1
+    zIndex: theme.zIndex.drawer + 1,
   },
   search: {
     position: 'relative',
@@ -82,20 +82,20 @@ const styles = (theme) => ({
     zIndex: theme.zIndex.drawer + 2,
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
-      width: 'auto'
-    }
+      width: 'auto',
+    },
   },
   searchColorBlack: {
     backgroundColor: fade(theme.palette.common.black, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.black, 0.25)
-    }
+      backgroundColor: fade(theme.palette.common.black, 0.25),
+    },
   },
   searchColorWhite: {
     backgroundColor: fade(theme.palette.common.white, 0.8),
     '&:hover': {
-      backgroundColor: theme.palette.common.white
-    }
+      backgroundColor: theme.palette.common.white,
+    },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -104,12 +104,12 @@ const styles = (theme) => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   searchMessage: {
     padding: '8px 8px 8px 20px',
-    backgroundColor: grey[100]
-  }
+    backgroundColor: grey[100],
+  },
 })
 
 function SearchResultList (props) {
@@ -140,7 +140,7 @@ function SearchResultList (props) {
                     variant="h6"
                     className={classes.searchResultPrimary}
                     dangerouslySetInnerHTML={{
-                      __html: item.title.replace(ev, `<em>${ev}</em>`)
+                      __html: item.title.replace(ev, `<em>${ev}</em>`),
                     }}
                   />
                 }
@@ -148,7 +148,7 @@ function SearchResultList (props) {
                   <div
                     className={classes.searchResultSecondary}
                     dangerouslySetInnerHTML={{
-                      __html: item.highlight ? item.highlight : ''
+                      __html: item.highlight ? item.highlight : '',
                     }}
                   />
                 }
@@ -174,7 +174,7 @@ class Result extends React.Component {
       ev: '',
       val: [],
       searched: false,
-      open: false
+      open: false,
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -182,7 +182,7 @@ class Result extends React.Component {
   update (ev) {
     clearTimeout(this.timer)
     this.setState({
-      ev: ev.target.value
+      ev: ev.target.value,
     })
     // this.timer = setTimeout(this.handleChange, 0)
     if (ev !== '') this.timer = setTimeout(this.handleChange, 500)
@@ -197,7 +197,7 @@ class Result extends React.Component {
       `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(ev)}`,
       {
         // credentials: "same-origin"
-      }
+      },
     )
       .then((response) => response.json())
       .then((result) => {
@@ -208,8 +208,8 @@ class Result extends React.Component {
     result.then((val) =>
       this.setState({
         val: val,
-        searched: true
-      })
+        searched: true,
+      }),
     )
   }
 
@@ -222,7 +222,7 @@ class Result extends React.Component {
             this.props.classes.search,
             open
               ? this.props.classes.searchColorWhite
-              : this.props.classes.searchColorBlack
+              : this.props.classes.searchColorBlack,
           )}
         >
           <div className={this.props.classes.searchIcon}>
@@ -237,7 +237,7 @@ class Result extends React.Component {
             }}
             classes={{
               root: this.props.classes.inputRoot,
-              input: this.props.classes.inputInput
+              input: this.props.classes.inputInput,
             }}
           />
           {open && (

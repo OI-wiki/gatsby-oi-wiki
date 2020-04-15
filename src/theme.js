@@ -20,30 +20,30 @@ export default {
     accent: '#FF9F1C',
     muted: '#FAFAFA',
     toc: '#484848',
-    hover: '#1890FF'
+    hover: '#1890FF',
   },
   fonts: {
     body:
       '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     heading: 'inherit',
-    monospace: 'SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace'
+    monospace: 'SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace',
   },
   fontSizes: [12, 14, 16, 18, 24, 32, 40, 48, 56, 64],
   fontWeights: {
     body: 400,
     heading: 700,
-    bold: 700
+    bold: 700,
   },
   lineHeights: {
     body: 1.5,
-    heading: 1.125
+    heading: 1.125,
   },
   textStyles: {
     heading: {
       fontFamily: 'heading',
       fontWeight: 'heading',
-      lineHeight: 'heading'
-    }
+      lineHeight: 'heading',
+    },
   },
   linkStyles: {
     nav: {
@@ -52,69 +52,69 @@ export default {
       p: '0.75rem 1.5rem',
       ':hover': {
         color: 'primary',
-        textDecoration: 'none'
+        textDecoration: 'none',
       },
       '&.active': {
         color: 'primary',
-        fontWeight: 'bold'
-      }
-    }
+        fontWeight: 'bold',
+      },
+    },
   },
   styles: {
     root: {
       fontFamily: 'body',
       fontWeight: 'body',
       lineHeight: 'body',
-      fontSize: [1, 2]
+      fontSize: [1, 2],
     },
     h1: {
       variant: 'textStyles.heading',
       fontSize: [5, 6],
       pt: '3rem',
-      mt: '-3rem'
+      mt: '-3rem',
     },
     h2: {
       variant: 'textStyles.heading',
       fontSize: [4, 5],
       pt: '3rem',
-      mt: '-1.5rem'
+      mt: '-1.5rem',
     },
     h3: {
       variant: 'textStyles.heading',
       fontSize: [3, 4],
       pt: '3rem',
-      mt: '-2rem'
+      mt: '-2rem',
     },
     h4: {
       variant: 'textStyles.heading',
       fontSize: [2, 3],
       pt: '3rem',
-      mt: '-2.5rem'
+      mt: '-2.5rem',
     },
     h5: {
       variant: 'textStyles.heading',
       fontSize: [1, 2],
       pt: '3rem',
-      mt: '-2.75rem'
+      mt: '-2.75rem',
     },
     h6: {
       variant: 'textStyles.heading',
       fontSize: [0, 1],
       pt: '3rem',
-      mt: '-3rem'
+      mt: '-3rem',
     },
     p: {
-      fontSize: [1, 2]
+      fontSize: [1, 2],
     },
     a: {
       color: 'primary',
       textDecoration: 'none',
       ':hover': {
-        textDecoration: 'none'
+        textDecoration: 'none',
       },
       '&.active': {
-        color: 'text'
-      }
+        color: 'text',
+      },
     },
     pre: {
       marginTop: '0.7rem',
@@ -125,44 +125,44 @@ export default {
       color: 'background',
       ...prism,
       code: {
-        color: 'inherit'
-      }
+        color: 'inherit',
+      },
     },
     code: {
       fontFamily: 'monospace',
-      fontSize: 'inherit'
+      fontSize: 'inherit',
     },
     table: {
       width: '100%',
       overflow: 'auto',
       borderCollapse: 'collapse',
-      borderSpacing: 0
+      borderSpacing: 0,
     },
     tr: {
-      borderTop: '1px solid gray'
+      borderTop: '1px solid gray',
     },
     th: {
       border: '1px solid',
       borderColor: alpha('text', 0.25),
-      p: '0.25em 0.5em'
+      p: '0.25em 0.5em',
     },
     td: {
       border: '1px solid',
       borderColor: alpha('text', 0.25),
-      p: '0.25em 0.5em'
+      p: '0.25em 0.5em',
     },
     blockquote: {
       pl: '.6rem',
       borderLeft: '.3rem solid rgba(0,0,0,.26)',
       color: 'rgba(0,0,0,.54)',
       margin: '1em 0',
-      boxSizing: 'inherit'
+      boxSizing: 'inherit',
     },
     img: {
-      maxWidth: '100%'
-    }
+      maxWidth: '100%',
+    },
   },
   links: {
-    color: '#fff'
-  }
+    color: '#fff',
+  },
 }

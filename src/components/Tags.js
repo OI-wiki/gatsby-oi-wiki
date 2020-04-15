@@ -5,8 +5,8 @@ import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   chip: {
-    margin: theme.spacing(0.5)
-  }
+    margin: theme.spacing(0.5),
+  },
 }))
 
 function Tags ({ tags }) {

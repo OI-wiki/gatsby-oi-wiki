@@ -9,17 +9,17 @@ import Layout from '../components/Layout'
 
 const useStyles = makeStyles((theme) => ({
   chip: {
-    margin: theme.spacing(0.5)
-  }
+    margin: theme.spacing(0.5),
+  },
 }))
 const TagsPage = ({
   data: {
     allMdx: { group },
     site: {
-      siteMetadata: { title }
-    }
+      siteMetadata: { title },
+    },
   },
-  location
+  location,
 }) => {
   const classes = useStyles()
   return (
@@ -47,16 +47,16 @@ TagsPage.propTypes = {
       group: PropTypes.arrayOf(
         PropTypes.shape({
           fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired
-        }).isRequired
-      )
+          totalCount: PropTypes.number.isRequired,
+        }).isRequired,
+      ),
     }),
     site: PropTypes.shape({
       siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired
-      })
-    })
-  })
+        title: PropTypes.string.isRequired,
+      }),
+    }),
+  }),
 }
 
 export default TagsPage
