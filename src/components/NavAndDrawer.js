@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button"
 import Drawer from "@material-ui/core/Drawer"
 import Hidden from "@material-ui/core/Hidden"
 import IconButton from "@material-ui/core/IconButton"
-import { fade, makeStyles, useTheme } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Toolbar from "@material-ui/core/Toolbar"
 import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
@@ -16,6 +16,7 @@ import React from "react"
 import { FaGithub } from "react-icons/fa"
 import { MdMenu, MdSchool } from "react-icons/md"
 import { jsx } from "theme-ui"
+import scrollbarStyle from "../styles/scrollbar"
 import tabData from "../tabs.yaml"
 import Search from "./Search"
 import SiderContent from "./Sidebar"
@@ -52,18 +53,9 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 48 + 64,
     alignItems: "flex-start",
   },
-  drawerPaper: {
+  drawerPaper: scrollbarStyle(theme, {
     width: drawerWidth,
-    "&::-webkit-scrollbar": {
-      width: ".4rem",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: theme.palette.divider,
-    },
-    "&::-webkit-scrollbar-thumb:hover": {
-      background: fade(theme.palette.primary.main, 0.44),
-    },
-  },
+  }),
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
