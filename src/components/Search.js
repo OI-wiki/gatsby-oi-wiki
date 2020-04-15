@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import Backdrop from "@material-ui/core/Backdrop"
+import grey from "@material-ui/core/colors/grey"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
@@ -17,7 +18,7 @@ import clsx from "clsx"
 import React, { useState } from "react"
 import { MdSearch } from "react-icons/md"
 import { jsx } from "theme-ui"
-import grey from "@material-ui/core/colors/grey"
+import scrollbarStyle from "../styles/scrollbar"
 
 const useStyles = makeStyles({})
 
@@ -57,7 +58,7 @@ const styles = (theme) => ({
       },
     },
   },
-  resultPaper: {
+  resultPaper: scrollbarStyle(theme, {
     marginTop: "12px",
     minWidth: `calc(30vw + 1em + ${theme.spacing(4)}px)`,
     maxWidth: "50vw",
@@ -68,16 +69,7 @@ const styles = (theme) => ({
     overflowY: "auto",
     overflowX: "hidden",
     zIndex: theme.zIndex.drawer + 2,
-    "&::-webkit-scrollbar": {
-      width: ".4rem",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: grey[400],
-    },
-    "&::-webkit-scrollbar-thumb:hover": {
-      background: fade(theme.palette.primary.main, 0.44),
-    },
-  },
+  }),
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -134,7 +126,7 @@ function SearchResultList(props) {
           return (
             <ListItem button divider component="a" href={item.url} key={item.url}>
               <ListItemIcon>
-                <FindInPageIcon />
+                <FindInPageIcon/>
               </ListItemIcon>
               <ListItemText
                 primary={
@@ -220,11 +212,11 @@ class Result extends React.Component {
             this.props.classes.search,
             open
               ? this.props.classes.searchColorWhite
-              : this.props.classes.searchColorBlack
+              : this.props.classes.searchColorBlack,
           )}
         >
           <div className={this.props.classes.searchIcon}>
-            <MdSearch />
+            <MdSearch/>
           </div>
           <InputBase
             type="search"
