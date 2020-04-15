@@ -109,7 +109,7 @@ function myLayout({
   const classes = useStyles()
   const theme = useTheme()
   const pageTitle = title === "OI Wiki" ? title : `${title} - OI Wiki`
-  const displayToC = toc && toc.items && noToC === "true"
+  const displayToC = toc && toc.items && noToC !== "true"
   const gridWidthMdUp = overflow === "true" ? 12 : 10
   const editURL = "https://github.com/OI-wiki/OI-wiki/edit/master/docs/"
   const [dialogOpen, setDialogOpen] = useState(false)
