@@ -218,6 +218,37 @@ function useDebounce (value, timeout) {
   return state
 }
 
+function useWindowDimensions () {
+  // function getWindowDimensions() {
+  //   const { innerWidth: width, innerHeight: height } = window;
+  //   return {
+  //     width,
+  //     height
+  //   };
+  // }
+
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: null,
+    height: null,
+  })
+  // const [windowDimensions, setWindowDimensions] = useState({width: window.innerWidth, height: window.innerHeight});
+
+  useEffect(() => {
+    function handleResize () {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return windowDimensions
+}
+
 function Result () {
   const [searchKey, setSearchKey] = useState('')
   const [result, setResult] = useState([])
@@ -226,6 +257,7 @@ function Result () {
   const classes = useStyles()
 
   const isFirstRun = useRef(true)
+
   useEffect(() => {
     if (searchKey !== '') {
       const result = fetch(
@@ -253,51 +285,64 @@ function Result () {
     }
   }, [debouncedKey])
 
-  return (
-    <>
-      <div
-        className={clsx(
-          classes.search,
-          open ? classes.searchColorWhite : classes.searchColorBlack,
-        )}
-      >
-        <div className={classes.searchIcon}>
-          <SearchIcon fontSize="small" />
+  const { height, width } = useWindowDimensions()
+  // console.log(`width: ${width} ~ height: ${height}`);
+
+  if (width > 1300) {
+    return (
+      <>
+        (
+        <div
+          className={clsx(
+            classes.search,
+            open ? classes.searchColorWhite : classes.searchColorBlack,
+          )}
+        >
+          <div className={classes.searchIcon}>
+            <SearchIcon fontSize="small" />
+          </div>
+          <InputBase
+            type="search"
+            placeholder="键入以开始搜索"
+            onChange={(ev) => {
+              setSearchKey(ev.target.value)
+            }}
+            onFocus={() => {
+              setOpen(true)
+            }}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+          {open && (
+            <Paper className={classes.resultPaper}>
+              <SearchResultList
+                searchKey={searchKey}
+                result={result}
+                isFirstRun={isFirstRun}
+                classes={classes}
+              />
+            </Paper>
+          )}
         </div>
-        <InputBase
-          type="search"
-          placeholder="键入以开始搜索"
-          onChange={(ev) => {
-            setSearchKey(ev.target.value)
-          }}
-          onFocus={() => {
-            setOpen(true)
-          }}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
+        <Backdrop
+          className={classes.backdrop}
+          open={open}
+          onClick={() => {
+            setOpen(false)
           }}
         />
-        {open && (
-          <Paper className={classes.resultPaper}>
-            <SearchResultList
-              searchKey={searchKey}
-              result={result}
-              isFirstRun={isFirstRun}
-              classes={classes}
-            />
-          </Paper>
-        )}
-      </div>
-      <Backdrop
-        className={classes.backdrop}
-        open={open}
-        onClick={() => {
-          setOpen(false)
-        }}
-      />
-    </>
-  )
+        )
+      </>
+    )
+  } else {
+    return (
+      <>
+    (<p>width: {width}</p>)
+      </>
+    )
+  }
 }
 
 // class Result extends React.Component {
