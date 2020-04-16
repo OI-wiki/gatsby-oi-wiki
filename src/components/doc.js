@@ -5,7 +5,7 @@ import Layout from './Layout'
 function mdx ({ data: { mdx }, location }) {
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
   const title = mdx.slug === '/' ? null : mdx.frontmatter.title
-  const description = mdx.frontmatter.description || mdx.excerpt
+  const description = mdx.frontmatter.description || mdx.excerpt || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   const authors = mdx.frontmatter.author || null
   const tags = mdx.frontmatter.tags || null
   const noMeta = mdx.frontmatter.noMeta || 'false'
