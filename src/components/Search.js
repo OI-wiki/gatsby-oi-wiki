@@ -273,7 +273,7 @@ function Search (props) {
         onClick={() => setDialogOpen(true)}
         className={classes.iconButton}
       >
-        <MdSearch fontSize="medium" />
+        <SearchIcon fontSize="small" />
       </IconButton>
       <Dialog
         open={dialogOpen}
