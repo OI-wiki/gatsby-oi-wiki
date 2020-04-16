@@ -291,7 +291,6 @@ function Result () {
   if (width > 1300) {
     return (
       <>
-        (
         <div
           className={clsx(
             classes.search,
@@ -333,175 +332,21 @@ function Result () {
             setOpen(false)
           }}
         />
-        )
       </>
     )
   } else {
     return (
       <>
-    (<p>width: {width}</p>)
+        <div
+          className={clsx(
+            classes.search,
+            open ? classes.searchColorWhite : classes.searchColorBlack,
+          )}
+        >
+
+        </div>
       </>
     )
   }
 }
-
-// class Result extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     console.log(props);
-//     this.state = {
-//       ev: "",
-//       val: [],
-//       searched: false,
-//       open: false,
-//     };
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-
-//   update(ev) {
-//     clearTimeout(this.timer);
-//     this.setState({
-//       ev: ev.target.value,
-//     });
-//     // this.timer = setTimeout(this.handleChange, 0)
-//     if (ev !== "") this.timer = setTimeout(this.handleChange, 500);
-//   }
-
-//   handleChange(w) {
-//     const { ev } = this.state;
-
-//     // const sta = []
-//     // let Rsize
-//     const result = fetch(
-//       `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(ev)}`,
-//       {
-//         // credentials: "same-origin"
-//       }
-//     )
-//       .then((response) => response.json())
-//       .then((result) => {
-//         // Rsize = result.length
-//         return result;
-//       });
-
-//     result.then((val) =>
-//       this.setState({
-//         val: val,
-//         searched: true,
-//       })
-//     );
-//   }
-
-//   updateDimensions = () => {
-//     this.setState({ width: window.innerWidth, height: window.innerHeight });
-//   };
-
-//   componentDidMount() {
-//     window.addEventListener("resize", this.updateDimensions);
-//   }
-//   componentWillUnmount() {
-//     window.removeEventListener("resize", this.updateDimensions);
-//   }
-
-//   render() {
-//     const { ev, val, searched, open, width } = this.state;
-//     // const matches = useMediaQuery(theme => theme.breakpoints.up('sm'));
-//     // console.log(matches);
-//     // console.log(width);
-//     // console.log(useScreenWidth());
-//     // const isDesktop = useMediaQuery(theme => theme.breakpoints.up('lg'), {
-//     //   defaultMatches: true,
-//     // });
-
-//     // console.log(isDesktop);
-//     return (
-//       <>
-//         <Hidden smDown implementation={"css"}>
-//           <div
-//             className={clsx(
-//               this.props.classes.search,
-//               open
-//                 ? this.props.classes.searchColorWhite
-//                 : this.props.classes.searchColorBlack
-//             )}
-//           >
-//             <div className={this.props.classes.searchIcon}>
-//               <MdSearch />
-//             </div>
-//             <InputBase
-//               type="search"
-//               placeholder="键入以开始搜索"
-//               onChange={this.update.bind(this)}
-//               onFocus={() => {
-//                 this.setState({ open: true });
-//               }}
-//               classes={{
-//                 root: this.props.classes.inputRoot,
-//                 input: this.props.classes.inputInput,
-//               }}
-//             />
-//             {open && (
-//               <Paper className={this.props.classes.resultPaper}>
-//                 <SearchResultList
-//                   ev={ev}
-//                   val={val}
-//                   searched={searched}
-//                   classes={this.props.classes}
-//                 />
-//               </Paper>
-//             )}
-//           </div>
-//           <Backdrop
-//             className={this.props.classes.backdrop}
-//             open={open}
-//             onClick={() => {
-//               this.setState({ open: false });
-//             }}
-//           />
-//         </Hidden>
-//         <Hidden smUp implementation={"css"}>
-//           <div
-//             className={clsx(
-//               this.props.classes.search,
-//               open
-//                 ? this.props.classes.searchColorWhite
-//                 : this.props.classes.searchColorBlack,
-//               this.props.classes.smallScreen
-//             )}
-//           >
-//             <IconButton onClick={() => this.setState({ open: true })}>
-//               <MdSearch />
-//             </IconButton>
-//             <Dialog
-//               open={this.state.open}
-//               onClose={() => {
-//                 this.setState({ open: false });
-//               }}
-//               fullWidth={true}
-//             >
-//               <InputBase
-//                 type="search"
-//                 placeholder="键入以开始搜索"
-//                 onChange={this.update.bind(this)}
-//                 classes={{
-//                   root: this.props.classes.inputRoot,
-//                   input: this.props.classes.inputInput,
-//                 }}
-//               />
-
-//               <SearchResultList
-//                 ev={ev}
-//                 val={val}
-//                 searched={searched}
-//                 classes={this.props.classes}
-//               />
-//             </Dialog>
-//           </div>
-//         </Hidden>
-//       </>
-//     );
-//   }
-// }
-
 export default Result
-// export default withStyles(styles)(withMediaQuery("(min-width:400px)")(Result));
