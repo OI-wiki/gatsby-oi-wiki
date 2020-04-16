@@ -343,7 +343,43 @@ function Result () {
             open ? classes.searchColorWhite : classes.searchColorBlack,
           )}
         >
-
+          <div className={classes.searchIcon} >
+            <IconButton onClick={() => setOpen(true)}>
+              <SearchIcon fontSize="small" />
+            </IconButton>
+          </div>
+          <Dialog
+            open={open}
+            onClose={() => {
+              setOpen(false)
+            }}
+            fullWidth={true}
+          >
+            <InputBase
+              type="search"
+              placeholder="键入以开始搜索"
+              onChange={(ev) => {
+                setSearchKey(ev.target.value)
+              }}
+              onFocus={() => {
+                setOpen(true)
+              }}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+            />
+            {open && (
+              <Paper className={classes.resultPaper}>
+                <SearchResultList
+                  searchKey={searchKey}
+                  result={result}
+                  isFirstRun={isFirstRun}
+                  classes={classes}
+                />
+              </Paper>
+            )}
+          </Dialog>
         </div>
       </>
     )
