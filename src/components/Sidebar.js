@@ -6,7 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
-import { MdExpandLess, MdExpandMore } from 'react-icons/md'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import pathList from '../sidebar.yaml'
 
@@ -79,7 +80,7 @@ function Item (props, padding, pathname) {
             </Typography>
           }
         />
-        {open ? <MdExpandLess /> : <MdExpandMore />}
+        {open ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List disablePadding>{listItems}</List>
