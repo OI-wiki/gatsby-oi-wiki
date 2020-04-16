@@ -170,13 +170,16 @@ function SearchResultList (props) {
                 <FindInPageIcon />
               </ListItemIcon>
               <ListItemText
-              disableTypography={true}
+                disableTypography={true}
                 primary={
                   <Typography
                     variant="h6"
                     className={classes.searchResultPrimary}
                     dangerouslySetInnerHTML={{
-                      __html: item.title.replace(searchKey, `<em>${searchKey}</em>`),
+                      __html: item.title.replace(
+                        searchKey,
+                        `<em>${searchKey}</em>`,
+                      ),
                     }}
                   />
                 }
@@ -224,27 +227,29 @@ function Result () {
 
   const isFirstRun = useRef(true)
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false
-    } else {
-      if (searchKey !== '') {
-        const result = fetch(
-          `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(searchKey)}`,
-          {
-            // credentials: "same-origin"
-          },
-        )
-          .then((response) => response.json())
-          .then((result) => {
-            // Rsize = result.length
-            return result
-          })
+    if (searchKey !== '') {
+      const result = fetch(
+        `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(searchKey)}`,
+        {
+          // credentials: "same-origin"
+        },
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          // Rsize = result.length
+          return result
+        })
 
-        result.then((val) =>
-          setResult(val))
-      } else {
-        setResult([])
-      }
+      result.then((val) => {
+        // the order is tricky here
+        // set result after set isFirstRun
+        // so when there's no result on first run
+        // the user is prompted with the notice
+        isFirstRun.current = false
+        setResult(val)
+      })
+    } else {
+      setResult([])
     }
   }, [debouncedKey])
 
@@ -253,9 +258,7 @@ function Result () {
       <div
         className={clsx(
           classes.search,
-          open
-            ? classes.searchColorWhite
-            : classes.searchColorBlack,
+          open ? classes.searchColorWhite : classes.searchColorBlack,
         )}
       >
         <div className={classes.searchIcon}>
