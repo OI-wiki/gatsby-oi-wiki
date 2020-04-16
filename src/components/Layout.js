@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
 import BackTop from './BackTop'
 import Footer from './Footer'

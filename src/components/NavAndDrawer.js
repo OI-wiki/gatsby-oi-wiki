@@ -13,7 +13,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import SearchIcon from '@material-ui/icons/Search'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@material-ui/icons/Menu'
 import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
