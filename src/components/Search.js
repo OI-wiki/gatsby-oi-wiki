@@ -170,7 +170,7 @@ function SearchResultList (props) {
                 <FindInPageIcon />
               </ListItemIcon>
               <ListItemText
-              // disableTypography={true}
+              disableTypography={true}
                 primary={
                   <Typography
                     variant="h6"
