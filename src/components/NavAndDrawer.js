@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
-import Typography from '@material-ui/core/Typography'
+import Typography from "@material-ui/core/Typography"
 import { Link } from 'gatsby'
 import React from 'react'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
