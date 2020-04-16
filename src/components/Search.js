@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import FindInPageIcon from '@material-ui/icons/FindInPage'
 import clsx from 'clsx'
 import React, { useState } from 'react'
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search'
 
 import scrollbarStyle from '../styles/scrollbar'
 
