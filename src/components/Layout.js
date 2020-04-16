@@ -148,6 +148,7 @@ function myLayout ({
       <CssBaseline />
       <Helmet>
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
+        {description ? <meta name="description" content={description} /> : ''}
       </Helmet>
       {EditingDialog}
       <NavAndDrawer pathname={location.pathname} />
