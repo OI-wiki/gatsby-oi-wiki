@@ -9,7 +9,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
-import SearchIcon from '@material-ui/icons/Search'
 import { Link } from 'gatsby'
 import React from 'react'
 import { FaGithub } from 'react-icons/fa'
@@ -94,14 +93,7 @@ function ResponsiveDrawer (props) {
             </Typography>
           </Button>
           <div style={{ flexGrow: 1 }} />
-          <Hidden smDown implementation="css">
-            <Search />
-          </Hidden>
-          <Hidden mdUp implementation={'css'}>
-            <IconButton color={'inherit'}>
-              <SearchIcon />
-            </IconButton>
-          </Hidden>
+          <Search />
           <Tooltip title="标签页" placement="bottom" arrow>
             <IconButton component={'a'} href={'/tags'} color={'inherit'}>
               <LocalOfferIcon />
