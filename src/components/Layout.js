@@ -18,7 +18,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { MdEdit, MdExpandMore } from 'react-icons/md'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
 import BackTop from './BackTop'
 import Footer from './Footer'
@@ -178,7 +179,7 @@ function myLayout ({
                           onClick={() => setDialogOpen(true)}
                           className={classes.iconButton}
                         >
-                          <MdEdit fontSize="medium" />
+                          <EditIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
                     </Grid>
@@ -199,7 +200,7 @@ function myLayout ({
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
                     <ExpansionPanel variant={'outlined'}>
                       <ExpansionPanelSummary
-                        expandIcon={<MdExpandMore />}
+                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="comment"
                       >
                         <Typography className={classes.heading}>

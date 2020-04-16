@@ -7,12 +7,13 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
-import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import { Link } from 'gatsby'
 import React from 'react'
-import { FaGithub } from 'react-icons/fa'
-import { MdMenu, MdSchool } from 'react-icons/md'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import LocalOfferIcon from '@material-ui/icons/LocalOffer'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import MenuIcon from '@material-ui/icons/Menu'
+import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
 import tabData from '../tabs.yaml'
@@ -80,11 +81,11 @@ function ResponsiveDrawer (props) {
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MdMenu />
+            <MenuIcon />
           </IconButton>
           <Hidden mdDown implementation={'css'}>
             <IconButton component={Link} color="inherit" to="/">
-              <MdSchool />
+              <SchoolIcon />
             </IconButton>
           </Hidden>
           <Button href="/">
@@ -106,7 +107,7 @@ function ResponsiveDrawer (props) {
           </Tooltip>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
             <IconButton component={'a'} href={OIWikiGithub} color={'inherit'}>
-              <FaGithub />
+              <GitHubIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>

@@ -16,8 +16,8 @@ import Typography from '@material-ui/core/Typography'
 import FindInPageIcon from '@material-ui/icons/FindInPage'
 import clsx from 'clsx'
 import React, { useState, useEffect, useRef } from 'react'
-import { MdSearch } from 'react-icons/md'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import SearchIcon from '@material-ui/icons/Search'
 
 import scrollbarStyle from '../styles/scrollbar'
 
@@ -262,7 +262,7 @@ function Result () {
         )}
       >
         <div className={classes.searchIcon}>
-          <MdSearch />
+          <SearchIcon fontSize="small" />
         </div>
         <InputBase
           type="search"
