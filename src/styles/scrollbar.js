@@ -12,6 +12,7 @@ export default (theme, otherStyles) => ({
     '&::-webkit-scrollbar-thumb:hover': {
       background: fade(theme.palette.primary.main, 0.44),
     },
+    scrollbarWidth: 'thin',
   },
   ...otherStyles,
 })
