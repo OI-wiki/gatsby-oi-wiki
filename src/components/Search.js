@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import FindInPageIcon from '@material-ui/icons/FindInPage'
 import clsx from 'clsx'
 import React, { useState } from 'react'
-import { MdSearch } from 'react-icons/md'
+import SearchIcon from '@material-ui/icons/Search'
 
 import scrollbarStyle from '../styles/scrollbar'
 
@@ -226,7 +226,7 @@ class Result extends React.Component {
           )}
         >
           <div className={this.props.classes.searchIcon}>
-            <MdSearch />
+            <SearchIcon fontSize="small" />
           </div>
           <InputBase
             type="search"
@@ -273,7 +273,7 @@ function Search (props) {
         onClick={() => setDialogOpen(true)}
         className={classes.iconButton}
       >
-        <MdSearch fontSize="medium" />
+        <SearchIcon fontSize="small" />
       </IconButton>
       <Dialog
         open={dialogOpen}
