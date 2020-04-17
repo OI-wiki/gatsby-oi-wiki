@@ -18,7 +18,7 @@ const Tags = ({ pageContext, data, location }) => {
   const tagHeader = `共 ${totalCount} 篇文章被打上了 "${tag}" 标签：`
 
   return (
-    <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
+    <Layout location={location} noMeta="true" title={`标签页 - ${tag}`} description="OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛">
       <div>
         <Typography variant="h5" component="h2">
           {tagHeader}
