@@ -113,6 +113,7 @@ function myLayout ({
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   const [dialogOpen, setDialogOpen] = useState(false)
+  const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   const EditingDialog = (
     <Dialog
       open={dialogOpen}
@@ -149,7 +150,7 @@ function myLayout ({
       <CssBaseline />
       <Helmet>
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
-        {description ? <meta name="description" content={description} /> : ''}
+        <meta name="description" content={descriptionRes} />
       </Helmet>
       {EditingDialog}
       <NavAndDrawer pathname={location.pathname} />
