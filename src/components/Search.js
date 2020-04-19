@@ -18,31 +18,9 @@ import clsx from 'clsx'
 import React, { useState, useEffect, useRef } from 'react'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SearchIcon from '@material-ui/icons/Search'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import scrollbarStyle from '../styles/scrollbar'
-
-const withMediaQuery = (...args) => (Component) => (props) => {
-  const mediaQuery = useMediaQuery(...args)
-  return <Component mediaQuery={mediaQuery} {...props} />
-}
-
-function useScreenWidth () {
-  const [width, setWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    const handler = (event) => {
-      setWidth(event.target.innerWidth)
-    }
-
-    window.addEventListener('resize', handler)
-
-    return () => {
-      window.removeEventListener('resize', handler)
-    }
-  }, [])
-
-  return width
-}
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -66,13 +44,14 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
+    // display: 'block',
+    margin: theme.spacing(1, 1, 1, 0),
+    marginLeft: `calc(1em + ${theme.spacing(4)}px)`,
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '100%',
+    // width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '15vw',
       '&:focus': {
@@ -133,17 +112,29 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px 8px 8px 20px',
     backgroundColor: grey[100],
   },
-  smallScreen: {
-    visibility: 'visible',
-    [theme.breakpoints.up('sm')]: {
-      visibility: 'hidden',
-    },
+  smallScreenSearchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    // pointerEvents: 'none',
+    color: 'inherit',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  bigScreen: {
-    visibility: 'hidden',
-    [theme.breakpoints.down('sm')]: {
-      visibility: 'visible',
-    },
+  smallScreenReturnIcon: {
+    padding: theme.spacing(1.5),
+    // padding: 0,
+    // height: '100%',
+    position: 'absolute',
+    display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+
+  },
+  dialogHeader: {
+    // display: 'flex',
+    alignItems: 'center',
   },
 }))
 
@@ -235,6 +226,7 @@ function useWindowDimensions () {
 
   useEffect(() => {
     function handleResize () {
+      console.log('updated window')
       setWindowDimensions({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -288,7 +280,8 @@ function Result () {
   const { height, width } = useWindowDimensions()
   // console.log(`width: ${width} ~ height: ${height}`);
 
-  if (width > 1300) {
+  // 600px is sm
+  if (width > 600) {
     return (
       <>
         <div
@@ -313,6 +306,7 @@ function Result () {
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
+            defaultValue={searchKey}
           />
           {open && (
             <Paper className={classes.resultPaper}>
@@ -343,9 +337,9 @@ function Result () {
             open ? classes.searchColorWhite : classes.searchColorBlack,
           )}
         >
-          <div className={classes.searchIcon} >
-            <IconButton onClick={() => setOpen(true)}>
-              <SearchIcon fontSize="small" />
+          <div className={classes.smallScreenSearchIcon} >
+            <IconButton onClick={() => { setOpen(true) }}>
+              <SearchIcon />
             </IconButton>
           </div>
           <Dialog
@@ -354,30 +348,40 @@ function Result () {
               setOpen(false)
             }}
             fullWidth={true}
+            fullScreen
+
           >
-            <InputBase
-              type="search"
-              placeholder="键入以开始搜索"
-              onChange={(ev) => {
-                setSearchKey(ev.target.value)
-              }}
-              onFocus={() => {
-                setOpen(true)
-              }}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
+            <Paper component="div" className={classes.dialogHeader}>
+
+              {/* <div > */}
+              <IconButton className={classes.smallScreenReturnIcon} onClick={() => { console.log('wtf'); setOpen(false) }} >
+                <ArrowBackIcon />
+
+              </IconButton>
+              {/* </div> */}
+              <InputBase
+                type="search"
+                placeholder="键入以开始搜索"
+                onChange={(ev) => {
+                  setSearchKey(ev.target.value)
+                }}
+                // onFocus={() => {
+                //   setOpen(true)
+                // }}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                defaultValue={searchKey}
+              />
+            </Paper>
             {open && (
-              <Paper className={classes.resultPaper}>
-                <SearchResultList
-                  searchKey={searchKey}
-                  result={result}
-                  isFirstRun={isFirstRun}
-                  classes={classes}
-                />
-              </Paper>
+              <SearchResultList
+                searchKey={searchKey}
+                result={result}
+                isFirstRun={isFirstRun}
+                classes={classes}
+              />
             )}
           </Dialog>
         </div>
