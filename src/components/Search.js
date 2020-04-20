@@ -229,7 +229,7 @@ function useWindowDimensions () {
 
   useEffect(() => {
     function handleResize () {
-      console.log('updated window')
+      // console.log('updated window')
       setWindowDimensions({
         width: window.innerWidth,
         // height: window.innerHeight,
@@ -352,7 +352,7 @@ function Result () {
           <Paper component="div" className={classes.dialogHeader}>
 
             {/* <div > */}
-            <IconButton className={classes.smallScreenReturnIcon} onClick={() => { console.log('wtf'); setOpen(false) }} >
+            <IconButton className={classes.smallScreenReturnIcon} onClick={() => { setOpen(false) }} >
               <ArrowBackIcon />
 
             </IconButton>
