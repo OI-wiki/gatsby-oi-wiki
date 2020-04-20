@@ -141,8 +141,6 @@ const useStyles = makeStyles((theme) => ({
     // height: '100%',
     position: 'absolute',
     display: 'flex',
-    paddingBottom: '0px',
-    paddingTop: '8px',
     // alignItems: 'center',
     // justifyContent: 'center',
 
