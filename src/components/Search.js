@@ -150,6 +150,9 @@ const useStyles = makeStyles((theme) => ({
   dialogHeader: {
     display: 'block',
     alignItems: 'center',
+    '-webkit-border-radius': '0',
+    '-moz-border-radius': '0',
+    'border-radius': '0',
   },
 }))
 
