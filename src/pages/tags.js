@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0.5),
   },
 }))
+function sortTags (a, b) {
+  return b.totalCount - a.totalCount
+}
 const TagsPage = ({
   data: {
     allMdx: { group },
@@ -21,6 +24,8 @@ const TagsPage = ({
   },
   location,
 }) => {
+  group.sort(sortTags)
+  //  console.log(group)
   const classes = useStyles()
   return (
     <Layout location={location} noMeta="true" title="标签页">
