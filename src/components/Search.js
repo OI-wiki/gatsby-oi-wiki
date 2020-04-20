@@ -40,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: 'inherit',
-    // display: 'block',
-    margin: theme.spacing(1, 1, 1, 0),
+    display: 'block',
+    // margin: theme.spacing(1, 1, 1, 0),
     marginLeft: `calc(1em + ${theme.spacing(4)}px)`,
   },
   inputInput: {
     // vertical padding + font size from searchIcon
-    transition: theme.transitions.create('width'),
     // width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
+      transition: theme.transitions.create('width'),
       width: '15vw',
       '&:focus': {
         width: '30vw',
@@ -131,12 +131,14 @@ const useStyles = makeStyles((theme) => ({
     // height: '100%',
     position: 'absolute',
     display: 'flex',
+    paddingBottom: '0px',
+    paddingTop: '4px',
     // alignItems: 'center',
     // justifyContent: 'center',
 
   },
   dialogHeader: {
-    // display: 'flex',
+    display: 'block',
     alignItems: 'center',
   },
 }))
