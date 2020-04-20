@@ -46,6 +46,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '2px',
     marginBottom: '2px',
   },
+  smallScreenInputRoot: {
+    color: 'inherit',
+    display: 'block',
+    // margin: theme.spacing(1, 1, 1, 0),
+    marginLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    marginTop: '6px',
+    marginBottom: '6px',
+  },
   inputInput: {
     // vertical padding + font size from searchIcon
     // width: '100%',
@@ -134,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     display: 'flex',
     paddingBottom: '0px',
-    paddingTop: '4px',
+    paddingTop: '8px',
     // alignItems: 'center',
     // justifyContent: 'center',
 
@@ -371,7 +379,7 @@ function Result () {
               //   setOpen(true)
               // }}
               classes={{
-                root: classes.inputRoot,
+                root: classes.smallScreenInputRoot,
                 input: classes.inputInput,
               }}
               defaultValue={searchKey}
