@@ -30,7 +30,7 @@
     "gatsby-plugin-mdx": "^1.1.6",
     "gatsby-plugin-offline": "^3.1.4",
     "gatsby-plugin-react-helmet": "^3.2.0",
-    "gatsby-plugin-sharp": "^2.5.4",
+    "gatsby-plugin-sharp": "^2.5.6",
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-remark-copy-linked-files": "^2.2.0",
     "gatsby-remark-images": "^3.2.2",
