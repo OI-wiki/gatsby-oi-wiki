@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     // margin: theme.spacing(1, 1, 1, 0),
     marginLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    marginTop: '2px',
+    marginBottom: '2px',
   },
   inputInput: {
     // vertical padding + font size from searchIcon
