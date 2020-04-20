@@ -57,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
       '&:focus': {
         width: '30vw',
       },
+      [`&::-webkit-search-decoration,
+       &::-webkit-search-cancel-button,
+       &::-webkit-search-results-button,
+       &::-webkit-search-results-decoration`]: {
+        display: 'none',
+      },
     },
   },
   resultPaper: scrollbarStyle(theme, {
