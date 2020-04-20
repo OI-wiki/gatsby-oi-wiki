@@ -119,9 +119,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: grey[100],
   },
   smallScreenSearchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(1.5),
     height: '100%',
-    position: 'absolute',
+    // position: 'absolute',
     // pointerEvents: 'none',
     color: 'inherit',
     display: 'flex',
@@ -337,60 +337,54 @@ function Result () {
   } else {
     return (
       <>
-        <div
-          className={clsx(
-            classes.search,
-            open ? classes.searchColorWhite : classes.searchColorBlack,
-          )}
+
+        {/* <div  > */}
+        <IconButton onClick={() => { setOpen(true) }} className={classes.smallScreenSearchIcon}>
+          <SearchIcon />
+        </IconButton>
+        {/* </div> */}
+        <Dialog
+          open={open}
+          onClose={() => {
+            setOpen(false)
+          }}
+          fullWidth={true}
+          fullScreen
+
         >
-          <div className={classes.smallScreenSearchIcon} >
-            <IconButton onClick={() => { setOpen(true) }}>
-              <SearchIcon />
+          <Paper component="div" className={classes.dialogHeader}>
+
+            {/* <div > */}
+            <IconButton className={classes.smallScreenReturnIcon} onClick={() => { console.log('wtf'); setOpen(false) }} >
+              <ArrowBackIcon />
+
             </IconButton>
-          </div>
-          <Dialog
-            open={open}
-            onClose={() => {
-              setOpen(false)
-            }}
-            fullWidth={true}
-            fullScreen
-
-          >
-            <Paper component="div" className={classes.dialogHeader}>
-
-              {/* <div > */}
-              <IconButton className={classes.smallScreenReturnIcon} onClick={() => { console.log('wtf'); setOpen(false) }} >
-                <ArrowBackIcon />
-
-              </IconButton>
-              {/* </div> */}
-              <InputBase
-                type="search"
-                placeholder="键入以开始搜索"
-                onChange={(ev) => {
-                  setSearchKey(ev.target.value)
-                }}
-                // onFocus={() => {
-                //   setOpen(true)
-                // }}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                defaultValue={searchKey}
-              />
-            </Paper>
-            {open && (
-              <SearchResultList
-                searchKey={searchKey}
-                result={result}
-                isFirstRun={isFirstRun}
-                classes={classes}
-              />
-            )}
-          </Dialog>
-        </div>
+            {/* </div> */}
+            <InputBase
+              type="search"
+              placeholder="键入以开始搜索"
+              onChange={(ev) => {
+                setSearchKey(ev.target.value)
+              }}
+              // onFocus={() => {
+              //   setOpen(true)
+              // }}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              defaultValue={searchKey}
+            />
+          </Paper>
+          {open && (
+            <SearchResultList
+              searchKey={searchKey}
+              result={result}
+              isFirstRun={isFirstRun}
+              classes={classes}
+            />
+          )}
+        </Dialog>
       </>
     )
   }
