@@ -1,9 +1,6 @@
-import Hidden from '@material-ui/core/Hidden'
 import Backdrop from '@material-ui/core/Backdrop'
 import grey from '@material-ui/core/colors/grey'
 import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import InputBase from '@material-ui/core/InputBase'
 import List from '@material-ui/core/List'
@@ -11,12 +8,11 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
-import { fade, makeStyles, withStyles } from '@material-ui/core/styles'
+import { fade, makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import FindInPageIcon from '@material-ui/icons/FindInPage'
 import clsx from 'clsx'
 import React, { useState, useEffect, useRef } from 'react'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SearchIcon from '@material-ui/icons/Search'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
@@ -236,7 +232,7 @@ function useWindowDimensions () {
       console.log('updated window')
       setWindowDimensions({
         width: window.innerWidth,
-        height: window.innerHeight,
+        // height: window.innerHeight,
       })
     }
 
@@ -284,7 +280,7 @@ function Result () {
     }
   }, [debouncedKey])
 
-  const { height, width } = useWindowDimensions()
+  const { width } = useWindowDimensions()
   // console.log(`width: ${width} ~ height: ${height}`);
 
   // 600px is sm
