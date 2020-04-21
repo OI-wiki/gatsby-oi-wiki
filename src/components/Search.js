@@ -383,6 +383,7 @@ function Result () {
                 root: classes.smallScreenInputRoot,
                 input: classes.inputInput,
               }}
+              autoFocus
               defaultValue={searchKey}
             />
           </Paper>
