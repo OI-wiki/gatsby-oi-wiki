@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     // vertical padding + font size from searchIcon
     // width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       transition: theme.transitions.create('width'),
       width: '15vw',
       '&:focus': {
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     width: '100%',
     zIndex: theme.zIndex.drawer + 2,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
