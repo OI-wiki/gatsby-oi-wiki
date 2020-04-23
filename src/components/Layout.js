@@ -1,12 +1,6 @@
-import Button from '@material-ui/core/Button'
 import grey from '@material-ui/core/colors/grey'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import Divider from '@material-ui/core/Divider'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -23,22 +17,11 @@ import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
 import BackTop from './BackTop'
 import Footer from './Footer'
-import Link from './Link'
 import Meta from './Meta'
 import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc'
+import EditWarn from './EditWarn'
 
-const editWarning = (
-  <DialogContentText>
-    <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
-    <p>
-      不过在开始之前，我们需要您了解并熟知
-      <Link to={'/intro/htc/'}>如何参与</Link>
-      里的内容，以避免在编辑时产生不必要的麻烦。
-    </p>
-    <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
-  </DialogContentText>
-)
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     [theme.breakpoints.down('md')]: {
@@ -111,40 +94,7 @@ function myLayout ({
   // const pageTitle = title === 'OI Wiki' ? title : `${title} - OI Wiki`
   const displayToC = toc && toc.items && noToC !== 'true'
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
-  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
-  const [dialogOpen, setDialogOpen] = useState(false)
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
-  const EditingDialog = (
-    <Dialog
-      open={dialogOpen}
-      onClose={() => {
-        setDialogOpen(false)
-      }}
-    >
-      <DialogTitle>{'编辑前须知'}</DialogTitle>
-      <DialogContent>{editWarning}</DialogContent>
-      <DialogActions>
-        <Button
-          onClick={() => {
-            setDialogOpen(false)
-          }}
-        >
-          取消
-        </Button>
-        <Button
-          component="a"
-          href={editURL + relativePath}
-          target="_blank"
-          rel="noopener nofollow"
-          onClick={() => {
-            setDialogOpen(false)
-          }}
-        >
-          开始编辑
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
   return (
     <>
       <CssBaseline />
@@ -152,7 +102,6 @@ function myLayout ({
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
         <meta name="description" content={descriptionRes} />
       </Helmet>
-      {EditingDialog}
       <NavAndDrawer pathname={location.pathname} />
       <Grid container>
         <Grid
@@ -176,12 +125,13 @@ function myLayout ({
                   {noEdit === 'false' && (
                     <Grid item xs={1}>
                       <Tooltip title="编辑页面" placement="left" arrow>
-                        <IconButton
-                          onClick={() => setDialogOpen(true)}
+                        <EditWarn
+                          type = "iconbutton"
+                          relativePath = {relativePath}
                           className={classes.iconButton}
                         >
                           <EditIcon fontSize="small" />
-                        </IconButton>
+                        </EditWarn>
                       </Tooltip>
                     </Grid>
                   )}
