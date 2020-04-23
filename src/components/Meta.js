@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
-  const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
   if (noMeta === 'false') {

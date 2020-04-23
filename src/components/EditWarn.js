@@ -11,16 +11,16 @@ import Link from './Link'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
 const useStyles = makeStyles((theme) => ({
-    link: {
-      color: lightBlue[500],
+  link: {
+    color: lightBlue[500],
+    textDecoration: 'none',
+    ':hover': {
       textDecoration: 'none',
-      ':hover': {
-        textDecoration: 'none',
-      },
-      '&.active': {
-        color: theme.palette.text.primary,
-      },
     },
+    '&.active': {
+      color: theme.palette.text.primary,
+    },
+  },
 }))
 
 const editWarning = (
@@ -34,7 +34,7 @@ const editWarning = (
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
   </DialogContentText>
 )
-function EditWarn ({type, relativePath, children, ...props}) {
+function EditWarn ({ type, relativePath, children, ...props }) {
   const classes = useStyles()
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -69,16 +69,16 @@ function EditWarn ({type, relativePath, children, ...props}) {
       </DialogActions>
     </Dialog>
   )
-  if (type == "iconbutton")
+  if (type == 'iconbutton') {
     return (
       <>
         {EditingDialog}
         <IconButton onClick={() => setDialogOpen(true)} {...props}>
-            {children}
+          {children}
         </IconButton>
       </>
     )
-  else if (type == "link")
+  } else if (type == 'link') {
     return (
       <>
         {EditingDialog}
@@ -87,6 +87,7 @@ function EditWarn ({type, relativePath, children, ...props}) {
         </a>
       </>
     )
+  }
 }
 
 export default EditWarn
