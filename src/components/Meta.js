@@ -9,6 +9,7 @@ import React from 'react'
 import AuthorsArray from './AuthorsArray'
 import Link from './Link'
 import Tags from './Tags'
+import EditWarn from './EditWarn'
 
 const useStyles = makeStyles((theme) => ({
   metaicon: {
@@ -49,9 +50,9 @@ function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
           <span>
             <EditIcon fontSize="small" className={classes.metaicon} />
             发现错误？想一起完善？{' '}
-            <Link href={editURL + relativePath} title="编辑此页">
+            <EditWarn type="link" color="primary" relativePath={relativePath}>
               在 GitHub 上编辑此页！
-            </Link>
+            </EditWarn>
           </span>
           <br />
           <span>
