@@ -18,7 +18,7 @@ const editWarning = (
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
   </DialogContentText>
 )
-function EditWarn ({relativePath, dialogOpen, setDialogOpen}) {
+function EditWarn ({ relativePath, dialogOpen, setDialogOpen }) {
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   return (
     <Dialog
@@ -43,7 +43,7 @@ function EditWarn ({relativePath, dialogOpen, setDialogOpen}) {
           target="_blank"
           rel="noopener nofollow"
           onClick={() => {
-           setDialogOpen(false)
+            setDialogOpen(false)
           }}
         >
           开始编辑
