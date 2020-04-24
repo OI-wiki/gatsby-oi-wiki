@@ -74,7 +74,7 @@
     }
   },
   "lint-staged": {
-    "src/*.{js,jsx,ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "node_modules/.bin/eslint --fix"
     ]
   }
