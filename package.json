@@ -38,7 +38,7 @@
     "gatsby-remark-vscode": "^2.0.3",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-source-local-git": "^0.2.2",
-    "gatsby-transformer-sharp": "^2.4.4",
+    "gatsby-transformer-sharp": "^2.5.0",
     "gitalk": "^1.6.2",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.15",
