@@ -64,7 +64,7 @@ function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
             <span>
               <EditIcon fontSize="small" className={classes.metaicon} />
               发现错误？想一起完善？{' '}
-              <a href="#" onClick={() => setDialogOpen(true)} className={classes.link}>
+              <a href="javascript:void(0)" onClick={() => setDialogOpen(true)} className={classes.link}>
                 在 GitHub 上编辑此页！
               </a>
             </span>
