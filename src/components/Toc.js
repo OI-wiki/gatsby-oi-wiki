@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import clsx from 'clsx'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-
+import smoothScrollTo from '../lib/smoothScroll'
 import useThrottledOnScroll from '../lib/useThrottledOnScroll'
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.5, 0, 0.5, 1),
     borderLeft: '4px solid transparent',
     boxSizing: 'content-box',
+    scrollBehavior: 'smooth',
     '&:hover': {
       borderLeft: `4px solid ${
         theme.palette.type === 'light'
@@ -140,7 +141,13 @@ export default function ToC (props) {
     ) {
       return
     }
+    event.preventDefault()
     // Used to disable findActiveIndex if the page scrolls due to a click
+    const targetElement = document.getElementById(
+      hash.substring(1, hash.length),
+    )
+    smoothScrollTo(targetElement.offsetTop)
+    history.pushState(null, null, hash)
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {
       clickedRef.current = false
