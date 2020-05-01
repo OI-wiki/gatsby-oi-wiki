@@ -11,8 +11,6 @@ import Link from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
 
-import lightBlue from '@material-ui/core/colors/lightBlue'
-
 const useStyles = makeStyles((theme) => ({
   metaicon: {
     verticalAlign: 'text-top',
@@ -28,16 +26,6 @@ const useStyles = makeStyles((theme) => ({
     margin: '20px 0',
     paddingLeft: '.5rem',
     textDecoration: 'none',
-  },
-  link: {
-    color: lightBlue[500],
-    textDecoration: 'none',
-    ':hover': {
-      textDecoration: 'none',
-    },
-    '&.active': {
-      color: theme.palette.text.primary,
-    },
   },
 }))
 
@@ -64,9 +52,9 @@ function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
             <span>
               <EditIcon fontSize="small" className={classes.metaicon} />
               发现错误？想一起完善？{' '}
-              <a href="javascript:void(0)" onClick={() => setDialogOpen(true)} className={classes.link}>
+              <Link to="javascript:void(0)" onClick={() => setDialogOpen(true)} className={classes.link}>
                 在 GitHub 上编辑此页！
-              </a>
+              </Link>
             </span>
             <br />
             <span>
