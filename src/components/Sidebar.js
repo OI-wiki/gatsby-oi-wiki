@@ -9,8 +9,6 @@ import React, { useState } from 'react'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import pathList from '../sidebar.yaml'
-
 const useStyles = makeStyles((theme) => ({
   listitem: {
     color: theme.palette.text.primary,
@@ -92,6 +90,7 @@ function Item (props, padding, pathname) {
 
 export default function Sidebar (props) {
   const classes = useStyles()
+  const pathList = props.pathList
   return (
     <List className={classes.list}>
       {pathList.map((item) => Item(item, 16, props.pathname))}
