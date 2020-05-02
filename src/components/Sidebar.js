@@ -90,7 +90,6 @@ function Item (props, padding, pathname) {
 
 export default function Sidebar (props) {
   const classes = useStyles()
-  console.log(props.pathname)
   const pathList = props.pathList
   return (
     <List className={classes.list}>
