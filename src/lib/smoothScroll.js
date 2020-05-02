@@ -25,7 +25,8 @@ function getDisplacement (progress) {
  * @param duration 移动动画的持续时间，用毫秒表示
  */
 function smoothScrollTo (yCoordinate, duration = 1000) {
-  const offset = yCoordinate - window.scrollY
+  const maximumCoordinate = document.body.scrollHeight - window.innerHeight
+  const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY
   const startTime = performance.now()
   const startPosition = window.scrollY
   const performAnimation = (time) => {
