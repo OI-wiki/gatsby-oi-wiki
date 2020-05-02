@@ -4,6 +4,8 @@ import Layout from './Layout'
 import { MDXProvider } from '@mdx-js/react'
 import Details from './Details'
 import Summary from './Summary'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from '../theme'
 
 function mdx ({ data: { mdx }, location }) {
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -25,24 +27,25 @@ function mdx ({ data: { mdx }, location }) {
   }
 
   return (
-    <Layout
-      location={location}
-      authors={authors}
-      title={title}
-      description={description}
-      tags={tags}
-      toc={toc}
-      relativePath={relativePath}
-      modifiedTime={modifiedTime}
-      noMeta={noMeta}
-      noComment={noComment}
-      noEdit={noEdit}
-    >
-      <MDXProvider components={myComponents}>
-
-        <MDXRenderer>{mdx.body}</MDXRenderer>
-      </MDXProvider>
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout
+        location={location}
+        authors={authors}
+        title={title}
+        description={description}
+        tags={tags}
+        toc={toc}
+        relativePath={relativePath}
+        modifiedTime={modifiedTime}
+        noMeta={noMeta}
+        noComment={noComment}
+        noEdit={noEdit}
+      >
+        <MDXProvider components={myComponents}>
+          <MDXRenderer>{mdx.body}</MDXRenderer>
+        </MDXProvider>
+      </Layout>
+    </ThemeProvider>
   )
 }
 
