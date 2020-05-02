@@ -7,6 +7,20 @@
  * \frac{1}{4} \, {\left(\sqrt{10} - 2\right)} e^{\left(-\frac{10}{3} \, x {\left(\sqrt{10} + 5\right)}\right)} -
  * \frac{1}{4} \, {\left(\sqrt{10} + 2\right)} e^{\left(\frac{10}{3} \, x {\left(\sqrt{10} - 5\right)}\right)} + 1
  * )
+ * 可使用如下 sagemath 代码计算出动画曲线：
+ * t = var('t')
+ * y = function('y')(x)
+ *
+ * k = 500        # 劲度系数 F_k = k * x
+ * stiffness = 100 # 阻力系数 F_f = stiffness * v
+ * m = 3           # 质量
+ *
+ *
+ * res = desolve(diff(y, x, 2) == (-k*(y - 1) - stiffness*diff(y, x))/m, y, ics=[0, 0, 0])
+ * res = res * 1.00283
+ * show(res)
+ * show(N(res(1)))
+ * plot(res, xmin=0)
  * */
 function getDisplacement (progress) {
   if (progress < 0) {
@@ -22,11 +36,25 @@ function getDisplacement (progress) {
 /**
  *
  * @param yCoordinate
- * @param duration 移动动画的持续时间，用毫秒表示
+ * @param duration 移动动画的持续时间，用毫秒表示, 若值为 -1，表明由距离决定
  */
-function smoothScrollTo (yCoordinate, duration = 1000) {
+function smoothScrollTo (yCoordinate, duration = -1) {
   const maximumCoordinate = document.body.scrollHeight - window.innerHeight
   const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY
+  if (duration === -1) {
+    const absOffset = Math.abs(offset)
+    if (absOffset < 600) {
+      duration = 600
+    } else if (absOffset >= 600 && absOffset <= 2000) {
+      duration = 700
+    } else if (absOffset >= 2000 && absOffset <= 5000) {
+      duration = 800
+    } else if (absOffset >= 5000 && absOffset <= 8000) {
+      duration = 1000
+    } else {
+      duration = 1300
+    }
+  }
   const startTime = performance.now()
   const startPosition = window.scrollY
   const performAnimation = (time) => {
