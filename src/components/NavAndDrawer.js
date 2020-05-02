@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
-import tabData from '../tabs.yaml'
+import pathList from '../sidebar.yaml'
 import Search from './Search'
 import SiderContent from './Sidebar'
 import Tabs from './Tabs'
@@ -61,6 +61,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+function flattenObject (ob) {
+  // https://stackoverflow.com/a/53739792
+  var toReturn = {}
+
+  for (var i in ob) {
+    if (!Object.prototype.hasOwnProperty.call(ob, i)) continue
+
+    if ((typeof ob[i]) === 'object' && ob[i] !== null) {
+      var flatObject = flattenObject(ob[i])
+      for (var x in flatObject) {
+        if (!Object.prototype.hasOwnProperty.call(flatObject, x)) continue
+
+        toReturn[i + '.' + x] = flatObject[x]
+      }
+    } else {
+      toReturn[i] = ob[i]
+    }
+  }
+  return toReturn
+}
+
+function getTabIDFromLocation (location, pathList) {
+  for (const v of Object.entries(pathList)) {
+    if (Object.values(flattenObject(v[1])).indexOf(location) > -1) return +v[0]
+  }
+  return false
+}
+
 function ResponsiveDrawer (props) {
   const { container, pathname } = props
   const classes = useStyles()
@@ -70,6 +98,7 @@ function ResponsiveDrawer (props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
+  const tabID = getTabIDFromLocation(pathname, pathList)
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -112,7 +141,7 @@ function ResponsiveDrawer (props) {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation={'css'}>
-          <Tabs tabs={tabData} location={pathname} />
+          <Tabs tabID={tabID} pathList={pathList}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="css">
@@ -129,7 +158,7 @@ function ResponsiveDrawer (props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent {...props} />
+          <SiderContent pathList={pathList} {...props} />
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -142,7 +171,7 @@ function ResponsiveDrawer (props) {
           open
         >
           <div className={classes.toolbar} />
-          <SiderContent {...props} />
+          <SiderContent pathList={tabID !== false ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
     </>
