@@ -29,7 +29,17 @@ export default function NavTabs (props) {
   const newTabs = []
   for (const curTab of pathList.values()) {
     const curTitle = Object.keys(curTab)[0]
-    const curLocation = (typeof Object.values(curTab)[0] === 'string') ? Object.values(curTab)[0] : Object.values(Object.values(curTab)[0][0])[0]
+    const curLocation = (typeof Object.values(curTab)[0] === 'string')
+      ? Object.values(curTab)[0]
+      /*
+        - 测试: /test/
+      */
+      : Object.values(Object.values(curTab)[0][0])[0]
+      /*
+        - 测试:
+          - 测试: /test/
+      */
+
     newTabs.push({ title: curTitle, link: curLocation })
   }
   const state = (() => {
