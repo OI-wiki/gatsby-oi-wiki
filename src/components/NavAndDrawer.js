@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
-import tabData from '../tabs.yaml'
+import pathList from '../sidebar.yaml'
 import Search from './Search'
 import SiderContent from './Sidebar'
 import Tabs from './Tabs'
@@ -112,7 +112,7 @@ function ResponsiveDrawer (props) {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation={'css'}>
-          <Tabs tabs={tabData} location={pathname} />
+          <Tabs pathList={pathList} location={pathname} />
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="css">
@@ -129,7 +129,7 @@ function ResponsiveDrawer (props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent {...props} />
+          <SiderContent pathList={pathList} {...props} />
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -142,7 +142,7 @@ function ResponsiveDrawer (props) {
           open
         >
           <div className={classes.toolbar} />
-          <SiderContent {...props} />
+          <SiderContent pathList={pathList} {...props} />
         </Drawer>
       </Hidden>
     </>

@@ -25,25 +25,36 @@ export default function NavTabs (props) {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
 
-  const { tabs, location } = props
+  const { pathList, location } = props
+  console.log(pathList)
+  const newTabs = []
+  for (const curTab of pathList.values()) {
+    const curTitle = Object.keys(curTab)[0]
+    const curLocation = (typeof Object.values(curTab)[0] === 'string') ? Object.values(curTab)[0] : Object.values(Object.values(curTab)[0][0])[0]
+    newTabs.push({ title: curTitle, link: curLocation })
+    console.log({ title: curTitle, link: curLocation })
+  }
+  console.log(newTabs)
   const state = (() => {
-    for (const tab in tabs) {
-      if (tabs[tab].link === '/') {
-        if (location === (tabs[tab] || { link: undefined }).link) return +tab
+    for (const tab in newTabs) {
+      console.log(tab)
+      if (newTabs[tab].link === '/') {
+        if (location === (newTabs[tab] || { link: undefined }).link) return +tab
         else continue
       }
-      if ((location || '').startsWith(tabs[tab].link)) return +tab
+      if ((location || '').startsWith(newTabs[tab].link)) return +tab
     }
     return false
   })()
 
   const [value, setValue] = React.useState(state)
+  console.log(value)
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
   return (
     <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
-      {tabs.map(({ title, link }) => (
+      {newTabs.map(({ title, link }) => (
         <Tab
           disableRipple
           key={title}
