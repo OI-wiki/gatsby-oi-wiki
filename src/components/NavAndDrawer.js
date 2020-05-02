@@ -171,7 +171,7 @@ function ResponsiveDrawer (props) {
           open
         >
           <div className={classes.toolbar} />
-          <SiderContent pathList={tabID ? [pathList[tabID]] : pathList} {...props} />
+          <SiderContent pathList={tabID !== false ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
     </>
