@@ -1,6 +1,9 @@
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Layout from './Layout'
+import { MDXProvider } from '@mdx-js/react'
+import Details from './Details'
+import Summary from './Summary'
 
 function mdx ({ data: { mdx }, location }) {
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -16,6 +19,11 @@ function mdx ({ data: { mdx }, location }) {
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
 
+  const myComponents = {
+    details: Details,
+    summary: Summary,
+  }
+
   return (
     <Layout
       location={location}
@@ -30,7 +38,10 @@ function mdx ({ data: { mdx }, location }) {
       noComment={noComment}
       noEdit={noEdit}
     >
-      <MDXRenderer>{mdx.body}</MDXRenderer>
+      <MDXProvider components={myComponents}>
+
+        <MDXRenderer>{mdx.body}</MDXRenderer>
+      </MDXProvider>
     </Layout>
   )
 }
