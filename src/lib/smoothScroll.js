@@ -3,7 +3,7 @@
  * 该动画曲线是阻尼振动模型。弹簧的劲度系数是 500，阻力系数是 100，物体质量为 3
  * @param progress - 动画的播放进度，[0, 1] 之间的实数
  * @returns - 返回物体的位移百分比，[0, 1] 之间的实数
- * 动画曲线的方程为 f(t) = 1.00283 * (
+ * 动画曲线的方程为 f(x) = 1.00283 * (
  * \frac{1}{4} \, {\left(\sqrt{10} - 2\right)} e^{\left(-\frac{10}{3} \, x {\left(\sqrt{10} + 5\right)}\right)} -
  * \frac{1}{4} \, {\left(\sqrt{10} + 2\right)} e^{\left(\frac{10}{3} \, x {\left(\sqrt{10} - 5\right)}\right)} + 1
  * )
