@@ -59,12 +59,12 @@ function smoothScrollTo (yCoordinate, duration = -1) {
   const startPosition = window.scrollY
   const el = document.querySelector('main')
 
+  window.scrollTo(0, yCoordinate)
   const performAnimation = (time) => {
     if (time - startTime > duration) {
       el.style.transform = ''
       return
     }
-    window.scrollTo(0, yCoordinate)
 
     const displacement = offset * getDisplacement((time - startTime) / duration)
     // window.scrollTo(0, startPosition + displacement)
