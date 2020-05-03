@@ -37,10 +37,16 @@ function getDisplacement (progress) {
  *
  * @param yCoordinate
  * @param duration 移动动画的持续时间，用毫秒表示, 若值为 -1，表明由距离决定
+ * @param optimizeForSmallScreen 为小屏幕使用 CSS 动画来解决性能问题
  */
-function smoothScrollTo (yCoordinate, duration = -1) {
+function smoothScrollTo (yCoordinate, duration = -1, optimizeForSmallScreen = true) {
   const maximumCoordinate = document.body.scrollHeight - window.innerHeight
   const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY
+  const isSmallScreen = window.innerWidth <= 600
+  if (isSmallScreen && optimizeForSmallScreen) {
+    window.scrollTo({ top: yCoordinate, behavior: 'smooth' })
+    return
+  }
   if (duration === -1) {
     const absOffset = Math.abs(offset)
     if (absOffset < 600) {
