@@ -1,11 +1,12 @@
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Layout from './Layout'
-import { MDXProvider } from '@mdx-js/react'
+import { theme, CustomCssBaseline } from '../theme'
 import Details from './Details'
+import Layout from './Layout'
 import Summary from './Summary'
-import { ThemeProvider } from '@material-ui/core/styles'
-import theme from '../theme'
 
 function mdx ({ data: { mdx }, location }) {
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -28,6 +29,8 @@ function mdx ({ data: { mdx }, location }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <CustomCssBaseline />
       <Layout
         location={location}
         authors={authors}

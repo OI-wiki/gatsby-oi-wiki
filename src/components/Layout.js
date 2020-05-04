@@ -1,6 +1,5 @@
 import grey from '@material-ui/core/colors/grey'
 import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -98,7 +97,6 @@ function myLayout ({
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   return (
     <>
-      <CssBaseline />
       <Helmet>
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
         <meta name="description" content={descriptionRes} />
