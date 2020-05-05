@@ -22,6 +22,7 @@ import ToC from './Toc'
 import EditWarn from './EditWarn'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { theme, CustomCssBaseline } from '../theme'
+import scrollbar from '../styles/scrollbar'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -34,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     width: '100%',
-    overflow: 'inherit',
   },
   main: {
     padding: theme.spacing(5),
@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2),
     },
     minHeight: '100vh',
-    overflow: 'inherit',
+    '& .math-display': scrollbar(theme, {
+      overflow: 'auto',
+    }),
   },
   divider: {
     marginTop: theme.spacing(2),
@@ -60,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       marginLeft: 250,
     },
-    overflowX: 'auto',
     overflowY: 'hidden',
   },
   iconButton: {

@@ -5,13 +5,14 @@ export default (theme, otherStyles) => ({
   ...{
     '&::-webkit-scrollbar': {
       width: '.4rem',
+      height: '.4rem',
     },
     '&::-webkit-scrollbar-thumb': {
       background: grey[400],
       '-webkit-border-radius': '4px',
     },
     '&::-webkit-scrollbar-thumb:hover': {
-      background: fade(theme.palette.primary.main, 0.44),
+      background: fade(theme.palette.common.black, 0.4),
     },
     scrollbarWidth: 'thin',
   },
