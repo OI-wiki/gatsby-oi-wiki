@@ -6,7 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles, useTheme, ThemeProvider } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
@@ -21,7 +21,7 @@ import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc'
 import EditWarn from './EditWarn'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { theme, CustomCssBaseline } from '../theme'
+import { theme as myTheme, CustomCssBaseline } from '../theme'
 import scrollbar from '../styles/scrollbar'
 
 const useStyles = makeStyles((theme) => ({
@@ -91,8 +91,8 @@ function myLayout ({
   noToC,
   overflow,
 }) {
+  const theme = useTheme()
   const classes = useStyles()
-  // const theme = useTheme()
   // const pageTitle = title === 'OI Wiki' ? title : `${title} - OI Wiki`
   const displayToC = toc && toc.items && noToC !== 'true'
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
@@ -100,7 +100,7 @@ function myLayout ({
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={myTheme}>
         <CssBaseline />
         <CustomCssBaseline />
         <Helmet>
