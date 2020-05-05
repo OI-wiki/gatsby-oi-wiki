@@ -1,17 +1,17 @@
-const path = require("path")
-const _ = require("lodash")
+const path = require('path')
+const _ = require('lodash')
 
-const { createFilePath } = require("gatsby-source-filesystem")
+const { createFilePath } = require('gatsby-source-filesystem')
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   // you only want to operate on `Mdx` nodes. If you had content from a
   // remote CMS you could also check to see if the parent node was a
   // `File` node here
-  if (node.internal.type === "Mdx") {
+  if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode })
     createNodeField({
       // Name of the field you are adding
-      name: "slug",
+      name: 'slug',
       // Individual MDX node
       node,
       // Generated value based on filepath with "blog" prefix. you
@@ -66,8 +66,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const docTemplate = path.resolve("src/templates/doc.js")
-  const tagTemplate = path.resolve("src/templates/tags.js")
+  const docTemplate = path.resolve('src/templates/doc.js')
+  const tagTemplate = path.resolve('src/templates/tags.js')
 
   const result = await graphql(`
     {
@@ -97,7 +97,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // handle errors
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    reporter.panicOnBuild('Error while running GraphQL query.')
     return
   }
 
