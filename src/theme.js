@@ -10,7 +10,6 @@ const theme = () => {
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
     },
-    spacing: 4,
   })
 }
 
