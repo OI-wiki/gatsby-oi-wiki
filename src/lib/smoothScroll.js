@@ -49,7 +49,7 @@ function smoothScrollTo (yCoordinate, duration = -1, optimizeForSmallScreen = tr
   }
   if (duration === -1) {
     const absOffset = Math.abs(offset)
-    duration = 300 + Math.sqrt(2 * absOffset / 0.0098)
+    duration = 300 + Math.sqrt(2 * absOffset / 0.02)
   }
   const startTime = performance.now()
   const startPosition = window.scrollY
