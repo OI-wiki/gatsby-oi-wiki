@@ -1,11 +1,18 @@
 import { createMuiTheme } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
 
-const theme = createMuiTheme({
-  palette: {
-  },
-})
+const theme = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  console.log(prefersDarkMode)
+  return createMuiTheme({
+    palette: {
+      type: prefersDarkMode ? 'dark' : 'light',
+    },
+    spacing: 4,
+  })
+}
 
 const globalStyles = withStyles((theme) => ({
   '@global': {
