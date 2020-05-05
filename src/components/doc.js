@@ -1,9 +1,6 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import { theme, CustomCssBaseline } from '../theme'
 import Details from './Details'
 import Layout from './Layout'
 import Summary from './Summary'
@@ -28,27 +25,23 @@ function mdx ({ data: { mdx }, location }) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <CustomCssBaseline />
-      <Layout
-        location={location}
-        authors={authors}
-        title={title}
-        description={description}
-        tags={tags}
-        toc={toc}
-        relativePath={relativePath}
-        modifiedTime={modifiedTime}
-        noMeta={noMeta}
-        noComment={noComment}
-        noEdit={noEdit}
-      >
-        <MDXProvider components={myComponents}>
-          <MDXRenderer>{mdx.body}</MDXRenderer>
-        </MDXProvider>
-      </Layout>
-    </ThemeProvider>
+    <Layout
+      location={location}
+      authors={authors}
+      title={title}
+      description={description}
+      tags={tags}
+      toc={toc}
+      relativePath={relativePath}
+      modifiedTime={modifiedTime}
+      noMeta={noMeta}
+      noComment={noComment}
+      noEdit={noEdit}
+    >
+      <MDXProvider components={myComponents}>
+        <MDXRenderer>{mdx.body}</MDXRenderer>
+      </MDXProvider>
+    </Layout>
   )
 }
 
