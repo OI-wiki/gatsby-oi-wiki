@@ -13,7 +13,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.50",
+    "@material-ui/lab": "^4.0.0-alpha.52",
     "@material-ui/styles": "^4.9.13",
     "@mdx-js/mdx": "^1.5.8",
     "@mdx-js/react": "^1.5.8",
