@@ -11,7 +11,3 @@
   user-select: none;
   color: red;
 }
-
-* {
-  scroll-behavior: smooth;
-}
