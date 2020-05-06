@@ -1,6 +1,7 @@
 import throttle from 'lodash/throttle'
 import { useEffect, useMemo } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
 export default function useThrottledOnScroll (callback, delay) {
