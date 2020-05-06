@@ -6,11 +6,13 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
+import { createMuiTheme } from '@material-ui/core'
 import { makeStyles, useTheme, ThemeProvider } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
@@ -21,8 +23,12 @@ import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc'
 import EditWarn from './EditWarn'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { theme as myTheme, CustomCssBaseline } from '../theme'
+import { CustomCssBaseline } from '../theme'
+import defaultSettings from '../lib/defaultSettings'
+import createPersistedState from 'use-persisted-state'
 import scrollbar from '../styles/scrollbar'
+
+const useConfig = createPersistedState('settings')
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -100,95 +106,122 @@ function myLayout ({
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   return (
     <>
-      <ThemeProvider theme={myTheme()}>
-        <CssBaseline />
-        <CustomCssBaseline />
-        <Helmet>
-          <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
-          <meta name="description" content={descriptionRes} />
-        </Helmet>
-        <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
-        <NavAndDrawer pathname={location.pathname} />
-        <Grid container>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={gridWidthMdUp}
-            lg={gridWidthMdUp}
-            xl={gridWidthMdUp}
-          >
-            <div className={classes.toolbar} />
-            <div className={classes.container}>
-              <main className={classes.content}>
-                <div className={classes.main}>
-                  <Grid container spacing={2}>
-                    <Grid item xs>
-                      <Typography variant="h4" component="h1">
-                        {title}
-                      </Typography>
-                    </Grid>
-                    {noEdit === 'false' && (
-                      <Grid item xs={1}>
-                        <Tooltip title="编辑页面" placement="left" arrow>
-                          <IconButton
-                            onClick={() => setDialogOpen(true)}
-                            className={classes.iconButton}
-                          >
-                            <EditIcon fontSize="small" />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
-                    )}
+      <Helmet>
+        <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
+        <meta name="description" content={descriptionRes} />
+      </Helmet>
+      <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
+      <NavAndDrawer pathname={location.pathname} />
+      <Grid container>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={gridWidthMdUp}
+          lg={gridWidthMdUp}
+          xl={gridWidthMdUp}
+        >
+          <div className={classes.toolbar} />
+          <div className={classes.container}>
+            <main className={classes.content}>
+              <div className={classes.main}>
+                <Grid container spacing={2}>
+                  <Grid item xs>
+                    <Typography variant="h4" component="h1">
+                      {title}
+                    </Typography>
                   </Grid>
-                  <Divider className={classes.divider} />
-                  <Typography variant="body1" component="div">
-                    {children}
-                  </Typography>
-                  <Meta
-                    authors={authors}
-                    tags={tags}
-                    relativePath={relativePath}
-                    modifiedTime={modifiedTime}
-                    noMeta={noMeta}
-                  />
-                  {noComment === 'false' && (
-                    <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                      <ExpansionPanel variant={'outlined'}>
-                        <ExpansionPanelSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="comment"
+                  {noEdit === 'false' && (
+                    <Grid item xs={1}>
+                      <Tooltip title="编辑页面" placement="left" arrow>
+                        <IconButton
+                          onClick={() => setDialogOpen(true)}
+                          className={classes.iconButton}
                         >
-                          <Typography className={classes.heading}>
-                          评论
-                          </Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                          <Container>
-                            <LazyComment title={title} />
-                          </Container>
-                        </ExpansionPanelDetails>
-                      </ExpansionPanel>
-                    </div>
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
                   )}
-                </div>
-              </main>
-            </div>
-          </Grid>
-          {displayToC && (
-            <Grid item xs>
-              <ToC toc={toc} pathname={location.pathname} />
-            </Grid>
-          )}
+                </Grid>
+                <Divider className={classes.divider} />
+                <Typography variant="body1" component="div">
+                  {children}
+                </Typography>
+                <Meta
+                  authors={authors}
+                  tags={tags}
+                  relativePath={relativePath}
+                  modifiedTime={modifiedTime}
+                  noMeta={noMeta}
+                />
+                {noComment === 'false' && (
+                  <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                    <ExpansionPanel variant={'outlined'}>
+                      <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="comment"
+                      >
+                        <Typography className={classes.heading}>
+                          评论
+                        </Typography>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <Container>
+                          <LazyComment title={title} />
+                        </Container>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                  </div>
+                )}
+              </div>
+            </main>
+          </div>
         </Grid>
-        <Divider />
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-        <BackTop />
-      </ThemeProvider>
+        {displayToC && (
+          <Grid item xs>
+            <ToC toc={toc} pathname={location.pathname} />
+          </Grid>
+        )}
+      </Grid>
+      <Divider />
+      <div className={classes.footer}>
+        <Footer />
+      </div>
+      <BackTop />
     </>
   )
 }
 
-export default myLayout
+function StyledLayout (props) {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  let enableDark
+  const [setting] = useConfig(defaultSettings)
+  if (setting.darkMode.type === 'always-on') {
+    enableDark = true
+  } else if (setting.darkMode.type === 'always-off') {
+    enableDark = false
+  } else if (setting.darkMode.type === 'user-preference') {
+    enableDark = prefersDarkMode
+  } else {
+    enableDark = prefersDarkMode // TODO: to be implemented
+  }
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: enableDark ? 'dark' : 'light',
+        },
+      }),
+    [enableDark],
+  )
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <CustomCssBaseline />
+      {myLayout(props)}
+    </ThemeProvider>
+  )
+}
+
+export default StyledLayout
