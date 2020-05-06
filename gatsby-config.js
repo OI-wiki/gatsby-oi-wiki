@@ -29,6 +29,7 @@ module.exports = {
               withWebp: true,
               tracedSVG: false,
               linkImagesToOriginal: false,
+              disableBgImageOnAlpha: true,
             },
           },
           {
