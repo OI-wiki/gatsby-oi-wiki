@@ -31,17 +31,23 @@ const globalStyles = withStyles((theme) => ({
       borderLeft: '4px solid rgba(0,0,0,.12)',
     },
     code: {
-      padding: '0.5em 0',
-      backgroundColor: 'hsla(0,0%,92.5%,.5)',
+      padding: '2px 4px',
+      'border-radius': '2px',
+      'font-size': '90%',
+      color: '#37474f',
+      backgroundColor: 'hsla(0,0%,85%,.5)',
     },
     'pre code': {
+      'font-size': '100%',
       padding: '0.2em 0',
       backgroundColor: '#1E1E1E',
     },
   },
 }))
 
-function CustomCssEl () { return null }
+function CustomCssEl () {
+  return null
+}
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
 
 export const CustomCssBaseline = globalStyles(CustomCssEl)
