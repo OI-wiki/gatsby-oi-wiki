@@ -49,26 +49,22 @@ function smoothScrollTo (yCoordinate, duration = -1, optimizeForSmallScreen = tr
   }
   if (duration === -1) {
     const absOffset = Math.abs(offset)
-    if (absOffset < 600) {
-      duration = 600
-    } else if (absOffset >= 600 && absOffset <= 2000) {
-      duration = 700
-    } else if (absOffset >= 2000 && absOffset <= 5000) {
-      duration = 800
-    } else if (absOffset >= 5000 && absOffset <= 8000) {
-      duration = 1000
-    } else {
-      duration = 1300
-    }
+    duration = 300 + Math.sqrt(2 * absOffset / 0.02)
   }
   const startTime = performance.now()
   const startPosition = window.scrollY
+  const el = document.querySelector('main')
+
+  window.scrollTo(0, yCoordinate)
   const performAnimation = (time) => {
     if (time - startTime > duration) {
+      el.style.transform = ''
       return
     }
+
     const displacement = offset * getDisplacement((time - startTime) / duration)
-    window.scrollTo(0, startPosition + displacement)
+    // window.scrollTo(0, startPosition + displacement)
+    el.style.transform = `translateY(${yCoordinate - startPosition - displacement}px)`
     requestAnimationFrame(performAnimation)
   }
   requestAnimationFrame(performAnimation)
