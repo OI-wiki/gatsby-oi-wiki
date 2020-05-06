@@ -64,14 +64,14 @@ const useStyles = makeStyles((theme) => ({
 
 function flattenObject (ob) {
   // https://stackoverflow.com/a/53739792
-  var toReturn = {}
+  const toReturn = {}
 
-  for (var i in ob) {
+  for (const i in ob) {
     if (!Object.prototype.hasOwnProperty.call(ob, i)) continue
 
     if ((typeof ob[i]) === 'object' && ob[i] !== null) {
-      var flatObject = flattenObject(ob[i])
-      for (var x in flatObject) {
+      const flatObject = flattenObject(ob[i])
+      for (const x in flatObject) {
         if (!Object.prototype.hasOwnProperty.call(flatObject, x)) continue
 
         toReturn[i + '.' + x] = flatObject[x]
