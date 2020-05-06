@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme) => ({
   expanded: {}, // DONT DELETE THIS
   root: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Summary ({ className = null, children, ...props }) {
   const classes = useStyles()
 
