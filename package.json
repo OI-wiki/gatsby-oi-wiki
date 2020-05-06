@@ -21,7 +21,7 @@
     "@theme-ui/prism": "^0.3.0",
     "classnames": "^2.2.6",
     "clsx": "^1.1.0",
-    "gatsby": "^2.20.22",
+    "gatsby": "^2.21.13",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.2",
     "gatsby-plugin-catch-links": "^2.3.1",
