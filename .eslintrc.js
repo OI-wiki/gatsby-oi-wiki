@@ -11,22 +11,23 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
-  parser: "babel-eslint",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: [
-    'react'
+    'react',
+    '@typescript-eslint'
   ],
   rules: {
     "react/prop-types": [0],
     "comma-dangle": [2, "always-multiline"]
   },
-  settings: {
+    settings: {
     react: {
       version: "detect"
     }
