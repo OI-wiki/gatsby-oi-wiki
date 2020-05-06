@@ -1,30 +1,5 @@
-import { createMuiTheme } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
-import defaultSettings from './lib/defaultSettings'
-import createPersistedState from 'use-persisted-state'
-const useConfig = createPersistedState('settings')
-
-const theme = () => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  let enableDark
-  const [setting] = useConfig(defaultSettings)
-  if (setting.darkMode.type === 'always-on') {
-    enableDark = true
-  } else if (setting.darkMode.type === 'always-off') {
-    enableDark = false
-  } else if (setting.darkMode.type === 'user-preference') {
-    enableDark = prefersDarkMode
-  } else {
-    enableDark = prefersDarkMode // TODO: to be implemented
-  }
-  return createMuiTheme({
-    palette: {
-      type: enableDark ? 'dark' : 'light',
-    },
-  })
-}
 
 const globalStyles = withStyles((theme) => ({
   '@global': {
@@ -64,4 +39,3 @@ function CustomCssEl () {
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
 
 export const CustomCssBaseline = globalStyles(CustomCssEl)
-export { theme }
