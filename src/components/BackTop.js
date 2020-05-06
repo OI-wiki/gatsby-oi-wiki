@@ -5,7 +5,7 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import React, { useState } from 'react'
 
 import useThrottledOnScroll from '../lib/useThrottledOnScroll'
-
+import smoothScrollTo from '../lib/smoothScroll'
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: 'fixed',
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BackTop () {
   const classes = useStyles()
   const handleClick = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    smoothScrollTo(0)
   }
   const [yPos, setyPos] = useState(0)
   useThrottledOnScroll(() => setyPos(window.scrollY), 166)
