@@ -30,7 +30,6 @@ function SettingsPage (props: {location: string}): unknown {
             <Select
               value={settings.darkMode.type}
               onChange={(e) => {
-                console.log(e.target.value)
                 updateSetting({
                   darkMode: {
                     type: e.target.value,
