@@ -4,7 +4,7 @@ export default interface Settings {
 }
 
 interface DarkModeSettings {
-  type: 'user-preference' | 'scheduled' | 'always-on' | 'always-disable';
+  type: 'user-preference' | 'scheduled' | 'always-on' | 'always-off';
   brightness: number;
 }
 
