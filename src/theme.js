@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 
 const theme = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  console.log(prefersDarkMode)
   return createMuiTheme({
     palette: {
       type: prefersDarkMode ? 'dark' : 'light',
