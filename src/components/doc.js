@@ -1,8 +1,8 @@
+import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
-import Layout from './Layout'
-import { MDXProvider } from '@mdx-js/react'
 import Details from './Details'
+import Layout from './Layout'
 import Summary from './Summary'
 
 function mdx ({ data: { mdx }, location }) {
@@ -39,7 +39,6 @@ function mdx ({ data: { mdx }, location }) {
       noEdit={noEdit}
     >
       <MDXProvider components={myComponents}>
-
         <MDXRenderer>{mdx.body}</MDXRenderer>
       </MDXProvider>
     </Layout>
