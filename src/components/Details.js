@@ -7,6 +7,7 @@ import blue from '@material-ui/core/colors/blue'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme) => ({
   root: {
     '&, &:first-child, &:last-child': {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Details ({ className = '', children, ...props }) {
   const classes = useStyles()
 
