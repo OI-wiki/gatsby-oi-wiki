@@ -12,7 +12,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
@@ -24,11 +23,8 @@ import ToC from './Toc'
 import EditWarn from './EditWarn'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { CustomCssBaseline } from '../theme'
-import defaultSettings from '../lib/defaultSettings'
-import createPersistedState from 'use-persisted-state'
+import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
-
-const useConfig = createPersistedState('settings')
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -194,18 +190,7 @@ function myLayout ({
 }
 
 function StyledLayout (props) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  let enableDark
-  const [setting] = useConfig(defaultSettings)
-  if (setting.darkMode.type === 'always-on') {
-    enableDark = true
-  } else if (setting.darkMode.type === 'always-off') {
-    enableDark = false
-  } else if (setting.darkMode.type === 'user-preference') {
-    enableDark = prefersDarkMode
-  } else {
-    enableDark = prefersDarkMode // TODO: to be implemented
-  }
+  const enableDark = useDarkMode()
   const theme = React.useMemo(
     () =>
       createMuiTheme({
