@@ -12,9 +12,6 @@ const globalStyles = withStyles((theme) => ({
       ':hover': {
         textDecoration: 'none',
       },
-      '&.active, &:active': {
-        color: theme.palette.primary.light,
-      },
     },
     blockquote: {
       paddingLeft: '1em',
