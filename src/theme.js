@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core'
+import grey from '@material-ui/core/colors/grey'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
@@ -36,6 +38,29 @@ const globalStyles = withStyles((theme) => ({
 function CustomCssEl () {
   return null
 }
+
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
 
 export const CustomCssBaseline = globalStyles(CustomCssEl)
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    footer: {
+      background: grey[900],
+      text: grey[300],
+    },
+  },
+})
+
+const lightTheme = createMuiTheme({
+  palette: {
+    type: 'light',
+    footer: {
+      background: grey[200],
+      text: grey[700],
+    },
+  },
+})
+
+export { lightTheme, darkTheme }

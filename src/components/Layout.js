@@ -1,30 +1,28 @@
-import grey from '@material-ui/core/colors/grey'
 import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
-import { createMuiTheme } from '@material-ui/core'
-import { makeStyles, useTheme, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
+import EditIcon from '@material-ui/icons/Edit'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import EditIcon from '@material-ui/icons/Edit'
 import Loadable from 'react-loadable'
+import useDarkMode from '../lib/useDarkMode'
+import scrollbar from '../styles/scrollbar'
+import { CustomCssBaseline, darkTheme, lightTheme } from '../theme'
 import BackTop from './BackTop'
+import EditWarn from './EditWarn'
 import Footer from './Footer'
 import Meta from './Meta'
 import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc'
-import EditWarn from './EditWarn'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { CustomCssBaseline } from '../theme'
-import useDarkMode from '../lib/useDarkMode'
-import scrollbar from '../styles/scrollbar'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -53,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   footer: {
-    background: grey[200],
-    color: grey[700],
+    background: theme.palette.footer.background,
+    color: theme.palette.footer.text,
     padding: theme.spacing(3),
     [theme.breakpoints.up('lg')]: {
       marginLeft: 250,
@@ -77,7 +75,7 @@ const LazyComment = Loadable({
   loading: () => <div />,
 })
 
-function myLayout ({
+function MyLayout ({
   children,
   location,
   authors,
@@ -191,20 +189,11 @@ function myLayout ({
 
 function StyledLayout (props) {
   const enableDark = useDarkMode()
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: enableDark ? 'dark' : 'light',
-        },
-      }),
-    [enableDark],
-  )
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <CustomCssBaseline />
-      {myLayout(props)}
+    <ThemeProvider theme={enableDark ? darkTheme : lightTheme}>
+      <CssBaseline/>
+      <CustomCssBaseline/>
+      <MyLayout {...props}/>
     </ThemeProvider>
   )
 }
