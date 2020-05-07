@@ -60,6 +60,9 @@ const lightTheme = createMuiTheme({
     search: {
       messageBackground: grey[100],
     },
+    tab: {
+      colorOnHover: '#000',
+    },
   },
 })
 
@@ -81,6 +84,9 @@ const darkTheme = createMuiTheme({
     },
     search: {
       messageBackground: grey[700],
+    },
+    tab: {
+      colorOnHover: '#fff',
     },
   },
 })

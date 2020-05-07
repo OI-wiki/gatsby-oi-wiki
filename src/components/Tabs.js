@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2.5),
     minWidth: '0',
     '&:hover': {
-      color: '#000',
+      color: theme.palette.tab.colorOnHover,
       opacity: '1',
     },
   },
