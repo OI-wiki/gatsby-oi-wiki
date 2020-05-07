@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       background: theme.palette.background.paper,
     },
+    color: theme.palette.action.active,
     [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(4),
       right: theme.spacing(4),
