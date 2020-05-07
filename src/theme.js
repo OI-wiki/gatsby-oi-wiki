@@ -25,8 +25,8 @@ const globalStyles = withStyles((theme) => ({
       padding: '2px 4px',
       'border-radius': '2px',
       'font-size': '90%',
-      color: '#37474f',
-      backgroundColor: 'hsla(0,0%,85%,.5)',
+      color: theme.palette.inlineCode.color,
+      backgroundColor: theme.palette.inlineCode.background,
     },
     'pre code': {
       'font-size': '100%',
@@ -56,6 +56,13 @@ const lightTheme = createMuiTheme({
       main: blue[50],
     },
     blockquote: 'rgba(0,0,0,.12)',
+    inlineCode: {
+      color: '#37474f',
+      background: 'hsla(0,0%,85%,.5)',
+    },
+    search: {
+      messageBackground: grey[100],
+    },
   },
 })
 
@@ -71,6 +78,13 @@ const darkTheme = createMuiTheme({
       main: grey[700],
     },
     blockquote: 'rgba(255,255,255,.12)',
+    inlineCode: {
+      color: grey[100],
+      background: 'hsla(0,0%,85%,.5)',
+    },
+    search: {
+      messageBackground: grey[700],
+    },
   },
 })
 

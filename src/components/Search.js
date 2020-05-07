@@ -1,5 +1,4 @@
 import Backdrop from '@material-ui/core/Backdrop'
-import grey from '@material-ui/core/colors/grey'
 import Dialog from '@material-ui/core/Dialog'
 import IconButton from '@material-ui/core/IconButton'
 import InputBase from '@material-ui/core/InputBase'
@@ -10,11 +9,12 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import FindInPageIcon from '@material-ui/icons/FindInPage'
-import clsx from 'clsx'
-import React, { useState, useEffect, useRef } from 'react'
-import SearchIcon from '@material-ui/icons/Search'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import FindInPageIcon from '@material-ui/icons/FindInPage'
+import SearchIcon from '@material-ui/icons/Search'
+import clsx from 'clsx'
+import React, { useEffect, useRef, useState } from 'react'
+import useDarkMode from '../lib/useDarkMode'
 
 import scrollbarStyle from '../styles/scrollbar'
 
@@ -63,13 +63,18 @@ const useStyles = makeStyles((theme) => ({
       '&:focus': {
         width: '30vw',
       },
-
     },
     [`&::-webkit-search-decoration,
        &::-webkit-search-cancel-button,
        &::-webkit-search-results-button,
        &::-webkit-search-results-decoration`]: {
       display: 'none',
+    },
+  },
+  wideInput: {
+    [theme.breakpoints.up('md')]: {
+      transition: theme.transitions.create('width'),
+      width: '30vw',
     },
   },
   resultPaper: scrollbarStyle(theme, {
@@ -123,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchMessage: {
     padding: '8px 8px 8px 20px',
-    backgroundColor: grey[100],
+    backgroundColor: theme.palette.search.messageBackground,
   },
   smallScreenSearchIcon: {
     padding: theme.spacing(1.5),
@@ -293,6 +298,7 @@ function Result () {
     }
   }, [debouncedKey])
 
+  const enableDark = useDarkMode()
   const { width } = useWindowDimensions()
   // console.log(`width: ${width} ~ height: ${height}`);
 
@@ -303,7 +309,9 @@ function Result () {
         <div
           className={clsx(
             classes.search,
-            open ? classes.searchColorWhite : classes.searchColorBlack,
+            enableDark ? classes.searchColorBlack : (
+              open ? classes.searchColorWhite : classes.searchColorBlack
+            ),
           )}
         >
           <div className={classes.searchIcon}>
@@ -319,7 +327,7 @@ function Result () {
               setOpen(true)
             }}
             classes={{
-              root: classes.inputRoot,
+              root: clsx(classes.inputRoot, searchKey && classes.wideInput),
               input: classes.inputInput,
             }}
             defaultValue={searchKey}
