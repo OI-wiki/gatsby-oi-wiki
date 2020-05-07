@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core'
+import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -18,7 +19,7 @@ const globalStyles = withStyles((theme) => ({
     blockquote: {
       paddingLeft: '1em',
       margin: '1em 3em 1em 2em',
-      borderLeft: '4px solid rgba(0,0,0,.12)',
+      borderLeft: `4px solid ${theme.palette.blockquote}`,
     },
     code: {
       padding: '2px 4px',
@@ -43,16 +44,6 @@ CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
 
 export const CustomCssBaseline = globalStyles(CustomCssEl)
 
-const darkTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    footer: {
-      background: grey[900],
-      text: grey[300],
-    },
-  },
-})
-
 const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
@@ -60,6 +51,26 @@ const lightTheme = createMuiTheme({
       background: grey[200],
       text: grey[700],
     },
+    details: {
+      border: blue[500],
+      main: blue[50],
+    },
+    blockquote: 'rgba(0,0,0,.12)',
+  },
+})
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    footer: {
+      background: grey[900],
+      text: grey[300],
+    },
+    details: {
+      border: blue[500],
+      main: grey[700],
+    },
+    blockquote: 'rgba(255,255,255,.12)',
   },
 })
 
