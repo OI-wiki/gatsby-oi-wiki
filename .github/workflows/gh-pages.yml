@@ -32,6 +32,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-dep-
 
+      - name: Cache processed images
+        uses: actions/cache@v1
+        with:
+          path: ./public/static
+          key: ${{ runner.os }}-dep-${{ hashFiles('docs/**/*.(png|jpg|jpeg|webp|svg|gif|tiff)') }}
+          restore-keys: |
+            ${{ runner.os }}-dep-
+
       - run: npm install
 
       - run: npm run build
