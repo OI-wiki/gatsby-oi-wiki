@@ -9,7 +9,7 @@ const globalStyles = withStyles((theme) => ({
     a: {
       color: theme.palette.primary.main,
       textDecoration: 'none',
-      ':hover': {
+      '&:hover': {
         textDecoration: 'none',
       },
     },
