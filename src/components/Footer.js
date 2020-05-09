@@ -1,4 +1,3 @@
-import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
@@ -11,7 +10,7 @@ import React from 'react'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme) => ({
   link: {
-    color: grey[700],
+    color: theme.palette.footer.text,
     '&:hover': {
       textDecoration: 'none',
       color: lightBlue[500],

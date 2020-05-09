@@ -13,6 +13,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
+import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
@@ -124,6 +125,11 @@ function ResponsiveDrawer (props) {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
+          <Tooltip title="设置页" placement="bottom" arrow>
+            <IconButton component={'a'} href={'/settings'} color={'inherit'}>
+              <SettingsIcon />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="标签页" placement="bottom" arrow>
             <IconButton component={'a'} href={'/tags'} color={'inherit'}>
               <LocalOfferIcon />
