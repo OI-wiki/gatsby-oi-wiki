@@ -68,10 +68,8 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 ## Tips
 
 - 先不用加入 wiki 中大量的文件，sidebar 和子文件夹均测试过已经 work 了
-- `sidebar.mdx` 的链接必须是绝对链接（以 `/` 开头）
 - Latex 中不能出现 `\left<\right>`，否则会 gg。要写成`\left\langle\right\rangle`。
 - netlify 好像会把 url 最后的 `/` 给自动去掉。检查内链用的页面：https://oi-wiki-ng.netlify.com/math/poly/newton/
-- 主题里面有 remark-emoji 和 remark-slug 但是不知道什么原因没有 work。可能我们要在 gatsby-config 里面也加一下
 - 由于插件的存在，建议直接使用 jpg/png 图片，插件会自动生成对应的 webp 图片。
 - 可以借鉴学习的设计：
   - https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU
