@@ -1,9 +1,4 @@
-import {
-  Container,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-} from '@material-ui/core'
-import blue from '@material-ui/core/colors/blue'
+import { Container, ExpansionPanel, ExpansionPanelDetails } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
@@ -14,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '1.2em 0 !important',
     },
     borderLeft: '.3rem solid',
-    borderLeftColor: blue[500],
+    borderLeftColor: theme.palette.details.border,
   },
   expanded: {
     '&, &:first-child, &:last-child': {
