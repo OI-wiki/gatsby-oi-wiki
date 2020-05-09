@@ -92,9 +92,8 @@ export default function ToC (props) {
   const items = toc.items
   const classes = useStyles()
   const itemsClientRef = useRef([])
-  useEffect(() => {
-    itemsClientRef.current = getItems(items)
-  }, items)
+  // eslint-disable-next-line
+  useEffect(() => { itemsClientRef.current = getItems(items) }, items)
   const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
   const unsetClickedRef = useRef(null)

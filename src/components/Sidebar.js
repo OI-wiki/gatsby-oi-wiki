@@ -62,8 +62,9 @@ function Item (props, padding, pathname) {
     (prev, [, curr]) => curr || prev,
     false,
   )
-  const listItems = listItemsResult.map(([v]) => v)
+  // eslint-disable-next-line
   const [open, setOpen] = useState(shouldOpen)
+  const listItems = listItemsResult.map(([v]) => v)
   return [
     <div key={key}>
       <ListItem

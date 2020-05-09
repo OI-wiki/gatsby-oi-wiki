@@ -272,9 +272,9 @@ function Result () {
   const isFirstRun = useRef(true)
 
   useEffect(() => {
-    if (searchKey !== '') {
+    if (debouncedKey !== '') {
       const result = fetch(
-        `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(searchKey)}`,
+        `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(debouncedKey)}`,
         {
           // credentials: "same-origin"
         },
