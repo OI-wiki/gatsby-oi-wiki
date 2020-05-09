@@ -1,11 +1,11 @@
 import Grid from '@material-ui/core/Grid'
 import React from 'react'
-import Layout from '../components/Layout'
 import createPersistedState from 'use-persisted-state'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import Layout from '../components/Layout'
 import defaultSettings from '../lib/defaultSettings'
 const useConfig = createPersistedState('settings')
 
