@@ -28,7 +28,7 @@ module.exports = {
   rules: {
     "react/prop-types": [0],
     "comma-dangle": [2, "always-multiline"],
-      "no-unused-vars": "off",
+    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error"
     ],
@@ -46,7 +46,6 @@ module.exports = {
   settings: {
     react: {
       version: "detect"
-      }
+    }
   }
-
 }
