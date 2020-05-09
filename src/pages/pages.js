@@ -25,7 +25,7 @@ function PageItem (props) {
   } = props
   return (
     <Grid item key={id}>
-      <Card variant={'outlined'}>
+      <Card variant="outlined">
         <CardContent>
           <Typography variant="h6" component={Link} to={link}>
             {title}
@@ -51,7 +51,7 @@ function matchTags (pageTags, selectedTags) {
 
 function Column ({ items }) {
   return (
-    <Grid container item xs direction={'column'} spacing={2}>
+    <Grid container item xs direction="column" spacing={2}>
       {items.map(
         x =>
           <PageItem key={x.id} {...x} />,
@@ -104,13 +104,13 @@ function BlogIndex (props) {
   return (
     <Layout
       location={location}
-      noMeta={'true'}
-      noEdit={'true'}
-      noToC={'true'}
-      overflow={'true'}
-      title={'目录页'}
+      noMeta="true"
+      noEdit="true"
+      noToC="true"
+      overflow="true"
+      title="目录页"
     >
-      <Grid container spacing={2} justify={'center'}>
+      <Grid container spacing={2} justify="center">
         <Grid item xs={12}>
           <Autocomplete
             value={selectedTags}
@@ -143,7 +143,7 @@ function BlogIndex (props) {
             )}
           />
         </Grid>
-        <Grid container xs={12} spacing={2} justify={'center'}>
+        <Grid container xs={12} spacing={2} justify="center">
           <GridItems filteredItems={filteredItems} />
         </Grid>
       </Grid>

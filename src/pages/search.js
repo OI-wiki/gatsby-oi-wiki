@@ -10,12 +10,12 @@ function SearchPage (props) {
   return (
     <Layout
       location={location}
-      noMeta={'true'}
-      noEdit={'true'}
-      noToC={'true'}
-      title={'搜索效果页'}
+      noMeta="true"
+      noEdit="true"
+      noToC="true"
+      title="搜索效果页"
     >
-      <Grid container spacing={2} justify={'center'}>
+      <Grid container spacing={2} justify="center">
         <Search />
       </Grid>
     </Layout>

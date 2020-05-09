@@ -35,7 +35,7 @@ const TagsPage = ({
           <Chip
             label={`${tag.fieldValue}(${tag.totalCount})`}
             variant="outlined"
-            component={'a'}
+            component="a"
             clickable
             key={tag.fieldValue}
             href={'/tags/' + kebabCase(tag.fieldValue)}

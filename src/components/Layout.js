@@ -151,7 +151,7 @@ function MyLayout ({
                 />
                 {noComment === 'false' && (
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                    <ExpansionPanel variant={'outlined'}>
+                    <ExpansionPanel variant="outlined">
                       <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="comment"
