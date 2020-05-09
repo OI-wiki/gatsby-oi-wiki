@@ -113,7 +113,7 @@ function ResponsiveDrawer (props) {
           >
             <MenuIcon />
           </IconButton>
-          <Hidden mdDown implementation={'css'}>
+          <Hidden mdDown implementation="css">
             <IconButton component={Link} color="inherit" to="/">
               <SchoolIcon />
             </IconButton>
@@ -126,27 +126,27 @@ function ResponsiveDrawer (props) {
           <div style={{ flexGrow: 1 }} />
           <Search />
           <Tooltip title="设置页" placement="bottom" arrow>
-            <IconButton component={'a'} href={'/settings'} color={'inherit'}>
+            <IconButton component="a" href="/settings" color="inherit">
               <SettingsIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="标签页" placement="bottom" arrow>
-            <IconButton component={'a'} href={'/tags'} color={'inherit'}>
+            <IconButton component="a" href="/tags" color="inherit">
               <LocalOfferIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="目录页" placement="bottom" arrow>
-            <IconButton component={'a'} href={'/pages'} color={'inherit'}>
+            <IconButton component="a" href="/pages" color="inherit">
               <LibraryBooksIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="GitHub 存储库" placement="bottom" arrow>
-            <IconButton component={'a'} href={OIWikiGithub} color={'inherit'}>
+            <IconButton component="a" href={OIWikiGithub} color="inherit">
               <GitHubIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>
-        <Hidden mdDown implementation={'css'}>
+        <Hidden mdDown implementation="css">
           <Tabs tabID={tabID} pathList={pathList}/>
         </Hidden>
       </AppBar>

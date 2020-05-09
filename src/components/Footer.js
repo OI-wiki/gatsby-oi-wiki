@@ -50,7 +50,7 @@ function FooterContent ({ data }) {
           最近更新:{' '}
           <Link
             className={classes.link}
-            href={'https://github.com/OI-wiki/OI-wiki/commits'}
+            href="https://github.com/OI-wiki/OI-wiki/commits"
           >
             {hash.substr(0, 7)}
           </Link>
@@ -60,13 +60,13 @@ function FooterContent ({ data }) {
       <Grid item xs={12}>
         <Typography>
           联系方式：
-          <Link className={classes.link} href={'https://t.me/OIwiki'}>
+          <Link className={classes.link} href="https://t.me/OIwiki">
             Telegram 群组
           </Link>{' '}
           /{' '}
           <Link
             className={classes.link}
-            href={'https://jq.qq.com/?_wv=1027&k=5EfkM6K'}
+            href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
           >
             QQ 群组
           </Link>

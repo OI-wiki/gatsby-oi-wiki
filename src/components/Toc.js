@@ -181,11 +181,11 @@ export default function ToC (props) {
     </MuiLink>
   )
   return (
-    <nav className={classes.main} aria-label={'pageTOC'}>
+    <nav className={classes.main} aria-label="pageTOC">
       {items.length > 0 ? (
         <>
           <Typography gutterBottom className={classes.contents}>
-            {'目录'}
+            目录
           </Typography>
           <Typography component="ul" className={classes.ul}>
             {items.map((item2) => (

@@ -210,7 +210,7 @@ function SearchResultList (props) {
       </List>
     </>
   ) : !isFirstRun.current ? (
-    <Typography variant={'body1'} className={classes.searchMessage}>
+    <Typography variant="body1" className={classes.searchMessage}>
       没有找到符合条件的结果
     </Typography>
   ) : (

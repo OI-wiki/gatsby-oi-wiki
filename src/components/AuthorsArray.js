@@ -20,7 +20,7 @@ function AuthorsArray ({ authors }) {
             key={author}
             clickable
             className={classes.chip}
-            component={'a'}
+            component="a"
             variant="outlined"
             href={'https://github.com/' + author.trim()}
           />

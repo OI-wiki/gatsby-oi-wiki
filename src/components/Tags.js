@@ -20,7 +20,7 @@ function Tags ({ tags }) {
             label={` #${tag} `}
             href={'/tags/' + kebabCase(tag)}
             key={`tag-${tag}`}
-            component={'a'}
+            component="a"
             variant="outlined"
             clickable
             className={classes.chip}
