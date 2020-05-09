@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
+import times from 'lodash/times'
 import { graphql } from 'gatsby'
 import React, { useState } from 'react'
 
@@ -48,66 +49,43 @@ function matchTags (pageTags, selectedTags) {
   return res.every((v) => v === true)
 }
 
+function Column ({ items }) {
+  return (
+    <Grid container item xs direction={'column'} spacing={2}>
+      {items.map(
+        x =>
+          <PageItem key={x.id} {...x} />,
+      )}
+    </Grid>
+  )
+}
+
 function GridItems (props) {
   const theme = useTheme()
   const { filteredItems } = props
-  let columnCount
-  const upXL = useMediaQuery(theme.breakpoints.up('lg'))
+  const upXL = useMediaQuery(theme.breakpoints.up('xl'))
+  const upLG = useMediaQuery(theme.breakpoints.up('lg'))
+  const upMD = useMediaQuery(theme.breakpoints.up('md'))
   const upSmall = useMediaQuery(theme.breakpoints.up('sm'))
+  let columnCount
   if (upXL) {
+    columnCount = 5
+  } else if (upLG) {
+    columnCount = 4
+  } else if (upMD) {
     columnCount = 3
-    return (
-      <>
-        <Grid container item xs direction={'column'} spacing={2}>
-          {filteredItems.map(
-            (x, idx) =>
-              idx % columnCount === 0 && <PageItem key={x.id} {...x} />,
-          )}
-        </Grid>
-        <Grid container item xs direction={'column'} spacing={2}>
-          {filteredItems.map(
-            (x, idx) =>
-              idx % columnCount === 1 && <PageItem key={x.id} {...x} />,
-          )}
-        </Grid>
-        <Grid container item xs direction={'column'} spacing={2}>
-          {filteredItems.map(
-            (x, idx) =>
-              idx % columnCount === 2 && <PageItem key={x.id} {...x} />,
-          )}
-        </Grid>
-      </>
-    )
   } else if (upSmall) {
     columnCount = 2
-    return (
-      <>
-        <Grid container item xs direction={'column'} spacing={2}>
-          {filteredItems.map(
-            (x, idx) =>
-              idx % columnCount === 0 && <PageItem key={x.id} {...x} />,
-          )}
-        </Grid>
-        <Grid container item xs direction={'column'} spacing={2}>
-          {filteredItems.map(
-            (x, idx) =>
-              idx % columnCount === 1 && <PageItem key={x.id} {...x} />,
-          )}
-        </Grid>
-      </>
-    )
   } else {
     columnCount = 1
-    return (
-      <>
-        <Grid container item direction={'column'} spacing={2}>
-          {filteredItems.map((x) => (
-            <PageItem key={x.id} {...x} />
-          ))}
-        </Grid>
-      </>
-    )
   }
+  return (
+    <>
+      {times(columnCount).map(i =>
+        <Column key={i} items={filteredItems.filter((v, idx) => idx % columnCount === i)} />,
+      )}
+    </>
+  )
 }
 
 function BlogIndex (props) {
