@@ -1,10 +1,41 @@
-# gatsby-oiwiki
+<p align="center">
+  <a href="https://ng.oi-wiki.org">
+    <img alt="OIWiki" src="./icon/oi-wiki-logo.png" width="233" />
+  </a>
+</p>
+
+<h1 align="center">
+  gatsby-oi-wiki
+</h1>
 
 正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。
 
 Demo: https://ng.oi-wiki.org/
 
 TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
+
+## 🚀 快速上手
+
+1. 建立一个 Gatsby 站点
+
+```zsh
+# 使用本项目作为 starter 建立一个新的 Gatsby 站点
+gatsby new my-wiki-starter https://github.com/OI-wiki/gatsby-oi-wiki
+```
+
+2. 开始开发
+
+```zsh
+# 进入刚才建立的文件夹并启动 develop 服务器
+cd my-wiki-starter/
+gatsby develop
+```
+
+3. 打开源代码并开始编辑！
+
+你的站点已经在 `http://localhost:8000` 运行啦！
+
+注意：你还会看到这样一个链接： `http://localhost:8000/___graphql` 。这是个可视化工具，来辅助你对数据库进行一些实验性的查询。点击 [Gatsby 教程](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql) 可以了解如何使用。
 
 ## 如何参与
 
@@ -46,7 +77,6 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 ![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_shield)
 
-
 我们适配了 Gitpod。它相当于是一个云端的 VS Code。打开 `https://gitpod.io/#https://github.com/{你的用户名}/oi-wiki-ng`，Gitpod 就会创建一个 Workspace。
 
 > 不要**重复**创建 Workspace，每一次打开 `https://gitpod.io/#https://github.com/{你的用户名}/oi-wiki-ng` 的链接都会创建一个新的 Workspace。第一次创建了之后就可以直接打开 `gitpod.io` 找回你原来的 Workspace 就行了，请节省资源。
@@ -61,11 +91,11 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 
 最后，提出你可爱的 PR~
 
-------
+---
 
 现在，你可以去 [插件列表](https://www.gatsbyjs.org/plugins/) 找有趣的功能尝试加入进来
 
-## Tips
+### Tips
 
 - 先不用加入 wiki 中大量的文件，sidebar 和子文件夹均测试过已经 work 了
 - Latex 中不能出现 `\left<\right>`，否则会 gg。要写成`\left\langle\right\rangle`。
@@ -79,6 +109,6 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 
 要加 feature 可以随时提出～
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_large)
