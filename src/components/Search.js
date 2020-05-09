@@ -26,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
   searchResultPrimary: {
     '& em': {
       fontStyle: 'normal',
-      color: fade(theme.palette.primary.main, 0.95),
-      background: fade(theme.palette.primary.main, 0.08),
+      color: theme.palette.search.highlight,
+      background: 'rgba(143,187,237,.1)',
     },
   },
   searchResultSecondary: {
     '& em': {
       fontStyle: 'normal',
       padding: '0 0 2px',
-      boxShadow: `inset 0 -2px 0 0 ${fade(theme.palette.primary.main, 0.5)}`,
+      boxShadow: 'inset 0 -2px 0 0 rgba(69,142,225,.8)',
       // 使用 box shadow 模拟下划线
     },
   },
