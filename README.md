@@ -1,4 +1,6 @@
-# 为换框架所做出的尝试（
+# gatsby-oiwiki
+
+正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。
 
 Demo: https://ng.oi-wiki.org/
 
@@ -41,7 +43,8 @@ gatsby clean #当你发现浏览的界面与预期不同时，可以尝试清理
 
 > 此方法适用于有一定的开发经验和英语基础的同学
 
-![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_shield)
+![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_shield)
 
 
 我们适配了 Gitpod。它相当于是一个云端的 VS Code。打开 `https://gitpod.io/#https://github.com/{你的用户名}/oi-wiki-ng`，Gitpod 就会创建一个 Workspace。
