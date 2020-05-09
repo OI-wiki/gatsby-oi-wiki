@@ -5,6 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     'standard'
   ],
   globals: {
@@ -25,11 +27,22 @@ module.exports = {
   ],
   rules: {
     "react/prop-types": [0],
-    "comma-dangle": [2, "always-multiline"]
+    "comma-dangle": [2, "always-multiline"],
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
-    settings: {
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true }]
+      }
+    }
+  ],
+  settings: {
     react: {
       version: "detect"
-    }
+      }
   }
+
 }

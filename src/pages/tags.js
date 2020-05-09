@@ -19,6 +19,7 @@ const TagsPage = ({
   data: {
     allMdx: { group },
     site: {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       siteMetadata: { title },
     },
   },

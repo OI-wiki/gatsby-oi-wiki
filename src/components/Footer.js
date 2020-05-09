@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import { graphql, StaticQuery } from 'gatsby'
 import React from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme) => ({
   link: {
     color: grey[700],
