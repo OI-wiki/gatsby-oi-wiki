@@ -3,7 +3,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 
 const page = (location) => (
-  <Layout location={location} noEdit="true" title="404 Not Found" noComment="false">
+  <Layout location={location} noEdit="true" title="404 - Not found" noComment="false">
     <div>
       <div>
         <h1>没有找到这个页面</h1>
