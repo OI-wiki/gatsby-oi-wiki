@@ -23,7 +23,7 @@ function mdx ({ data: { mdx }, location }) {
   const myComponents = {
     details: Details,
     summary: Summary,
-    a: Link
+    a: Link,
   }
 
   return (
