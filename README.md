@@ -1,7 +1,7 @@
 # gatsby-oiwiki
 
 ![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki?ref=badge_shield)
 
 正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。
 
@@ -90,7 +90,7 @@ npm run clean # 当你发现浏览的界面与预期不同时，可以尝试清�
 
 
 ## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FIr1d%2Foi-wiki-ng?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki?ref=badge_large)
 
 ## Deploy
 
