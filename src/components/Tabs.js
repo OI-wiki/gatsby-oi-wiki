@@ -21,7 +21,7 @@ const useIndicatorStyles = makeStyles(() => ({
   },
 }))
 
-export default function NavTabs (props) {
+function NavTabs (props) {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
 
@@ -65,3 +65,5 @@ export default function NavTabs (props) {
     </Tabs>
   )
 }
+
+export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)
