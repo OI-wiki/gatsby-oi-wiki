@@ -100,3 +100,4 @@ function Sidebar (props) {
 }
 
 export default React.memo(Sidebar, (prev, next) => prev.pathname === next.pathname)
+// 只比较 pathname，而不比较 pathList，考虑到当 pathList 不同时，pathname 也一定不同，因此这样比较可以节省计算量
