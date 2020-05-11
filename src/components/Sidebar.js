@@ -89,7 +89,7 @@ function Item (props, padding, pathname) {
   ]
 }
 
-export default function Sidebar (props) {
+function Sidebar (props) {
   const classes = useStyles()
   const pathList = props.pathList
   return (
@@ -98,3 +98,5 @@ export default function Sidebar (props) {
     </List>
   )
 }
+
+export default React.memo(Sidebar, (prev, next) => prev.pathname === next.pathname)
