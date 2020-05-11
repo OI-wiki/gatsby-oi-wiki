@@ -8,7 +8,9 @@
     "develop": "gatsby develop",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
+    "clean": "gatsby clean",
+    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
+    "preinstall": "curl -m 3 https://google.com && curl -m 3 https://google.com"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.13",
