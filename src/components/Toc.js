@@ -87,7 +87,7 @@ function getItems (items) {
   return itemsResult
 }
 
-export default function ToC (props) {
+function ToC (props) {
   const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
@@ -206,3 +206,5 @@ export default function ToC (props) {
     </nav>
   )
 }
+
+export default React.memo(ToC, (prev, next) => prev.pathname === next.pathname)
