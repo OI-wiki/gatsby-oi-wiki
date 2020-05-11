@@ -23,7 +23,7 @@ function AuthorsArray ({ authors }) {
             component="a"
             variant="outlined"
             href={'https://github.com/' + author.trim()}
-            target="_black"
+            target="_blank"
             rel="noopener noreferrer nofollow"
           />
         ))}

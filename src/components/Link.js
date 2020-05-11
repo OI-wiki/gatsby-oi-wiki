@@ -30,7 +30,7 @@ function Link ({ to = '', href = to, children, ...props }) {
   const classes = useStyles()
   if (isAbsoluteLink) {
     return (
-      <a {...props} href={href} className={classes.link} target="_black" rel="noopener noreferrer nofollow" >
+      <a {...props} href={href} className={classes.link} target="_blank" rel="noopener noreferrer nofollow" >
         {children}
       </a>
     )
