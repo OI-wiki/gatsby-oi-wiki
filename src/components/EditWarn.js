@@ -12,7 +12,7 @@ const editWarning = (
     <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
     <p>
       不过在开始之前，我们需要您了解并熟知
-      <Link to="/intro/htc/">如何参与</Link>
+      <Link to="/intro/htc/" target="_black" rel="noopener nofollow">如何参与</Link>
       里的内容，以避免在编辑时产生不必要的麻烦。
     </p>
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
@@ -41,7 +41,7 @@ function EditWarn ({ relativePath, dialogOpen, setDialogOpen }) {
           component="a"
           href={editURL + relativePath}
           target="_blank"
-          rel="noopener nofollow"
+          rel="noopener noreferrer nofollow"
           onClick={() => {
             setDialogOpen(false)
           }}
