@@ -94,9 +94,6 @@ npm run clean # 当你发现浏览的界面与预期不同时，可以尝试清�
 
 ## Deploy
 
-
-## 💫 Deploy
-
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/OI-wiki/gatsby-oi-wiki)
 
 [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/OI-wiki/gatsby-oi-wiki)
