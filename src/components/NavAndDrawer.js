@@ -150,7 +150,7 @@ function ResponsiveDrawer (props) {
           <Tabs tabID={tabID} pathList={pathList}/>
         </Hidden>
       </AppBar>
-      <Hidden lgUp implementation="css">
+      <Hidden lgUp implementation="js">
         <Drawer
           container={container}
           variant="temporary"
