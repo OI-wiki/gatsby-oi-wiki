@@ -10,7 +10,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
-    "preinstall": "curl -m 3 https://google.com && curl -m 3 https://google.com"
+    "preinstall": "curl -m 3 http://google.com && curl -m 3 https://google.com"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.13",
