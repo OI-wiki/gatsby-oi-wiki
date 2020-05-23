@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: lightBlue[500],
     textDecoration: 'none',
-    ':hover': {
+    '&:hover': {
       textDecoration: 'none',
     },
     '&.active': {
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function linkFix (url) {
-  if (/\.md/.test(url)) url = '../' + url.replace(/\.md/, '/')
-  if (/#/.test(url)) return url
+  // if (/\.md/.test(url)) url = '../' + url.replace(/\.md/, '/')
+  if (/#/.test(url)) return location.pathname + url
   if (url.split('/').slice(-1)[0] === '') return url
   return url + '/'
 }

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     lineHeight: 1.2,
     paddingLeft: (props) => props.padding,
-    ':hover': {
+    '&:hover': {
       textDecoration: 'none',
     },
   },
