@@ -4,7 +4,7 @@ import React from 'react'
 import Details from './Details'
 import Layout from './Layout'
 import Summary from './Summary'
-import Link from './Link'
+// import Link from './Link'
 
 function mdx ({ data: { mdx }, location }) {
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -23,7 +23,7 @@ function mdx ({ data: { mdx }, location }) {
   const myComponents = {
     details: Details,
     summary: Summary,
-    a: Link,
+    // a: Link,
   }
 
   return (
