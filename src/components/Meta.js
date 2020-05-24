@@ -13,7 +13,7 @@ import EditWarn from './EditWarn'
 
 const useStyles = makeStyles((theme) => ({
   metaicon: {
-    verticalAlign: 'text-top',
+    verticalAlign: 'bottom',
   },
   paper: {
     padding: theme.spacing(2),
