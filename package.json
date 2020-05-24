@@ -1,8 +1,21 @@
 {
-  "private": true,
-  "name": "demo",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "gatsby-oi-wiki",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "description": "A template for wiki.Powered by Gatsby.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OI-wiki/gatsby-oi-wiki.git"
+  },
+  "keywords": [
+    "gatsby",
+    "wiki"
+  ],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/OI-wiki/gatsby-oi-wiki/issues"
+  },
+  "homepage": "https://github.com/OI-wiki/gatsby-oi-wiki#readme",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
