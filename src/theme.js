@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core'
+import createPalette from '@material-ui/core/styles/createPalette'
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
-import { withStyles } from '@material-ui/core/styles'
+import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
 const globalStyles = withStyles((theme) => ({
@@ -40,8 +40,11 @@ function CustomCssEl () {
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
 export const CustomCssBaseline = globalStyles(CustomCssEl)
 
-const lightColor = createMuiTheme({}).palette
-const darkColor = createMuiTheme({ palette: { type: 'dark' } }).palette
+const lightColor = createPalette({ type: 'light' })
+const darkColor = createPalette({ type: 'dark' })
+const paletteKeys = [
+  'primary', 'secondary', 'text', 'background', 'action',
+  'error', 'warning', 'info', 'success', 'grey']
 
 // Workaround for material-ui color.
 function htr (hex) {
@@ -60,11 +63,16 @@ function htr (hex) {
   throw new Error('Bad Hex ' + hex)
 }
 
-function applyDefault (theme, key) {
+function applyDefaults (theme, ...keys) {
   const k = {}
-  for (const el of Object.keys(theme[key])) {
-    k[`--${key}-${el}`] = htr(theme[key][el].toString())
+  function applyDefault (key) {
+    for (const el of Object.keys(theme[key])) {
+      if (/^(#|rgba)/.test(`${theme[key][el]}`)) {
+        k[`--${key}-${el}`] = htr(theme[key][el].toString())
+      }
+    }
   }
+  keys.forEach(applyDefault)
   return k
 }
 
@@ -82,8 +90,8 @@ const lightCss = withStyles(() => ({
       '--search-bg': htr(grey[100]),
       '--search-highlight': '#174d8c',
       '--tab-hover': htr('#000'),
-      ...applyDefault(lightColor, 'text'),
-      ...applyDefault(lightColor, 'background'),
+      '--divider': htr(lightColor.divider),
+      ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
 }))
@@ -104,8 +112,8 @@ const darkCss = withStyles(() => ({
       '--search-bg': htr(grey[700]),
       '--search-highlight': '#acccf1',
       '--tab-hover': htr('#fff'),
-      ...applyDefault(darkColor, 'text'),
-      ...applyDefault(darkColor, 'background'),
+      '--divider': htr(darkColor.divider),
+      ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
 }))
@@ -121,15 +129,19 @@ function getThemeCssEl (style) {
 export const LightCssBaseline = getThemeCssEl(lightCss)
 export const DarkCssBaseline = getThemeCssEl(darkCss)
 
-function applyAdaptive (key) {
-  const k = {
-    [key]: {},
+function applyAdaptives (...keys) {
+  const rst = {}
+  function applyAdaptive (key) {
+    const k = {}
+    for (const el of Object.keys(lightColor[key])) {
+      k[el] = /^(#|rgba)/.test(`${lightColor[key][el]}`)
+        ? `rgba(var(--${key}-${el}))`
+        : lightColor[key][el]
+    }
+    rst[key] = k
   }
-  for (const el of Object.keys(lightColor[key])) {
-    k[key][el] = `rgba(var(--${key}-${el}))`
-  }
-  console.log(k)
-  return k
+  keys.forEach(applyAdaptive)
+  return rst
 }
 
 const adaptiveTheme = createMuiTheme({
@@ -137,8 +149,7 @@ const adaptiveTheme = createMuiTheme({
     primary: {
       main: 'rgba(var(--primary-color))',
     },
-    ...applyAdaptive('text'),
-    ...applyAdaptive('background'),
+    ...applyAdaptives(...paletteKeys),
     footer: {
       background: 'rgba(var(--footer-bg))',
       text: 'rgba(var(--footer-text))',
@@ -159,6 +170,7 @@ const adaptiveTheme = createMuiTheme({
     tab: {
       colorOnHover: 'rgba(var(--tab-hover))',
     },
+    divider: 'rgba(var(--divider))',
   },
 })
 
