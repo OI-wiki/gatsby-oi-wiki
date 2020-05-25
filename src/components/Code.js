@@ -1,10 +1,33 @@
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
-import FileCopyIcon from '@material-ui/icons/FileCopy'
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined'
 import Snackbar from '@material-ui/core/Snackbar'
 
 const useStyles = makeStyles(() => ({
+  copyBlock: {
+    top: '.3rem',
+    right: '.3rem',
+    width: '1.4rem',
+    height: '1.4rem',
+    borderRadius: '.1rem',
+    fontSize: '.6rem',
+    cursor: 'pointer',
+    zIndex: 1,
+    margin: 0,
+    padding: 0,
+    background: 'transparent',
+    position: 'absolute',
+    border: 0,
+  },
+  copyButton: {
+    backgroundColor: 'transparent',
+    color: 'white',
+    opacity: 0.2,
+    '&:hover': {
+      opacity: 1,
+    },
+  },
   lineWrapper: { display: 'flex' },
   lineNumber: {
     /* background: rgba(255, 255, 255, 0.1); */
@@ -72,20 +95,13 @@ export default function Code (codeBlocks) {
       }
 
       return (
-        <div
-          style={{
-            position: 'absolute',
-            right: '0.25em',
-            border: 0,
-            margin: '0.25px',
-          }}>
-          <IconButton
-            style={{ backgroundColor: 'black', color: 'white' }}
+        <div className={classes.copyBlock}>
+          <IconButton className={classes.copyButton}
             size='small'
             aria-label='copy'
             onClick={handleClick}
           >
-            <FileCopyIcon fontSize='small' />
+            <FileCopyOutlinedIcon fontSize='small' />
           </IconButton>
           <Snackbar
             anchorOrigin={{
@@ -102,15 +118,15 @@ export default function Code (codeBlocks) {
     }
     if (codeBlock && codeBlock.tokenizedLines) {
       return (
-        <div
+        <pre
           className={codeBlock.preClassName}
           style={{ position: 'relative' }}
         >
-          <CopySnackbar />
+          <CopySnackbar/>
           <code className={codeBlock.codeClassName}>
             {codeBlock.tokenizedLines.map(({ html }, i) => (
               <div className={classes.lineWrapper} key={i}>
-                <div className={classes.lineNumber}>{i}</div>
+                <div className={classes.lineNumber}>{i + 1}</div>
                 <div
                   className={classes.lineContents}
                   dangerouslySetInnerHTML={{ __html: html }}
@@ -118,7 +134,7 @@ export default function Code (codeBlocks) {
               </div>
             ))}
           </code>
-        </div>
+        </pre>
       )
     }
     return <pre {...props}/>
