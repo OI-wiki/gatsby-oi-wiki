@@ -16,7 +16,7 @@ import { Helmet } from 'react-helmet'
 import Loadable from 'react-loadable'
 import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
-import { CustomCssBaseline, darkTheme, lightTheme } from '../theme'
+import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline } from '../theme'
 import BackTop from './BackTop'
 import EditWarn from './EditWarn'
 import Footer from './Footer'
@@ -190,9 +190,10 @@ function MyLayout ({
 function StyledLayout (props) {
   const enableDark = useDarkMode()
   return (
-    <ThemeProvider theme={enableDark ? darkTheme : lightTheme}>
+    <ThemeProvider theme={adaptiveTheme}>
       <CssBaseline/>
       <CustomCssBaseline/>
+      { enableDark ? <DarkCssBaseline/> : <LightCssBaseline/> }
       <MyLayout {...props}/>
     </ThemeProvider>
   )
