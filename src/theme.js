@@ -38,59 +38,128 @@ function CustomCssEl () {
 }
 
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
-
 export const CustomCssBaseline = globalStyles(CustomCssEl)
 
-const lightTheme = createMuiTheme({
+const lightColor = createMuiTheme({}).palette
+const darkColor = createMuiTheme({ palette: { type: 'dark' } }).palette
+
+// Workaround for material-ui color.
+function htr (hex) {
+  let c
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+    c = hex.substring(1).split('')
+    if (c.length === 3) {
+      c = [c[0], c[0], c[1], c[1], c[2], c[2]]
+    }
+    c = '0x' + c.join('')
+    return [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',1'
+  }
+  if (hex.startsWith('rgba')) {
+    return hex.slice(5, -1)
+  }
+  throw new Error('Bad Hex ' + hex)
+}
+
+function applyDefault (theme, key) {
+  const k = {}
+  for (const el of Object.keys(theme[key])) {
+    k[`--${key}-${el}`] = htr(theme[key][el].toString())
+  }
+  return k
+}
+
+const lightCss = withStyles(() => ({
+  '@global': {
+    ':root': {
+      '--primary-color': htr(lightColor.primary.main),
+      '--footer-bg': htr(grey[200]),
+      '--footer-text': htr(grey[700]),
+      '--details-border': htr(blue[500]),
+      '--details-main': htr(blue[50]),
+      '--blockquote': '255, 255, 255, .12',
+      '--inline-color': '#37474f',
+      '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
+      '--search-bg': htr(grey[100]),
+      '--search-highlight': '#174d8c',
+      '--tab-hover': htr('#000'),
+      ...applyDefault(lightColor, 'text'),
+      ...applyDefault(lightColor, 'background'),
+    },
+  },
+}))
+
+const darkCss = withStyles(() => ({
+  '@global': {
+    ':root': {
+      '--primary-color': htr(darkColor.primary.main),
+      '--paper-color': htr(darkColor.background.paper),
+      '--bg-color': htr(darkColor.background.default),
+      '--footer-bg': htr(grey[900]),
+      '--footer-text': htr(grey[300]),
+      '--details-border': htr(blue[500]),
+      '--details-main': htr(blue[700]),
+      '--blockquote': '255, 255, 255, .12',
+      '--inline-color': htr(grey[100]),
+      '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
+      '--search-bg': htr(grey[700]),
+      '--search-highlight': '#acccf1',
+      '--tab-hover': htr('#fff'),
+      ...applyDefault(darkColor, 'text'),
+      ...applyDefault(darkColor, 'background'),
+    },
+  },
+}))
+
+function getThemeCssEl (style) {
+  function ThemeCssEl () {
+    return null
+  }
+  ThemeCssEl.propTypes = { classes: PropTypes.object.isRequired }
+  return style(ThemeCssEl)
+}
+
+export const LightCssBaseline = getThemeCssEl(lightCss)
+export const DarkCssBaseline = getThemeCssEl(darkCss)
+
+function applyAdaptive (key) {
+  const k = {
+    [key]: {},
+  }
+  for (const el of Object.keys(lightColor[key])) {
+    k[key][el] = `rgba(var(--${key}-${el}))`
+  }
+  console.log(k)
+  return k
+}
+
+const adaptiveTheme = createMuiTheme({
   palette: {
-    type: 'light',
+    primary: {
+      main: 'rgba(var(--primary-color))',
+    },
+    ...applyAdaptive('text'),
+    ...applyAdaptive('background'),
     footer: {
-      background: grey[200],
-      text: grey[700],
+      background: 'rgba(var(--footer-bg))',
+      text: 'rgba(var(--footer-text))',
     },
     details: {
-      border: blue[500],
-      main: blue[50],
+      border: 'rgba(var(--details-border))',
+      main: 'rgba(var(--details-main))',
     },
-    blockquote: 'rgba(0,0,0,.12)',
+    blockquote: 'rgba(var(--blockqoute))',
     inlineCode: {
-      color: '#37474f',
-      background: 'hsla(0,0%,85%,.5)',
+      color: 'rgba(var(--inline-color))',
+      background: 'var(--inline-bg-hsla)',
     },
     search: {
-      messageBackground: grey[100],
-      highlight: '#174d8c',
+      messageBackground: 'rgba(var(--search-bg))',
+      highlight: 'rgba(var(--search-highlight))',
     },
     tab: {
-      colorOnHover: '#000',
+      colorOnHover: 'rgba(var(--tab-hover))',
     },
   },
 })
 
-const darkTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    footer: {
-      background: grey[900],
-      text: grey[300],
-    },
-    details: {
-      border: blue[500],
-      main: grey[700],
-    },
-    blockquote: 'rgba(255,255,255,.12)',
-    inlineCode: {
-      color: grey[100],
-      background: 'hsla(0,0%,85%,.5)',
-    },
-    search: {
-      messageBackground: grey[700],
-      highlight: '#acccf1',
-    },
-    tab: {
-      colorOnHover: '#fff',
-    },
-  },
-})
-
-export { lightTheme, darkTheme }
+export { adaptiveTheme }
