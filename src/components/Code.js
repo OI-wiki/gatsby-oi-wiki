@@ -101,29 +101,26 @@ export default function Code (codeBlocks) {
       )
     }
     if (codeBlock && codeBlock.tokenizedLines) {
-      console.log(codeBlock.text)
       return (
-        <div>
-          <div
-            className={codeBlock.preClassName}
-            style={{ position: 'relative' }}
-          >
-            <CopySnackbar />
-            <code className={codeBlock.codeClassName}>
-              {codeBlock.tokenizedLines.map(({ html }, i) => (
-                <div className={classes.lineWrapper} key={i}>
-                  <div className={classes.lineNumber}>{i}</div>
-                  <div
-                    className={classes.lineContents}
-                    dangerouslySetInnerHTML={{ __html: html }}
-                  />
-                </div>
-              ))}
-            </code>
-          </div>
+        <div
+          className={codeBlock.preClassName}
+          style={{ position: 'relative' }}
+        >
+          <CopySnackbar />
+          <code className={codeBlock.codeClassName}>
+            {codeBlock.tokenizedLines.map(({ html }, i) => (
+              <div className={classes.lineWrapper} key={i}>
+                <div className={classes.lineNumber}>{i}</div>
+                <div
+                  className={classes.lineContents}
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              </div>
+            ))}
+          </code>
         </div>
       )
     }
-    return <pre {...props}></pre>
+    return <pre {...props}/>
   }
 }
