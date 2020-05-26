@@ -14,8 +14,6 @@ function SettingsPage (props: {location: string}): unknown {
   const [settings, setSettings] = useConfig(defaultSettings)
   const updateSetting = (newSettings): void => (setSettings({ ...defaultSettings, ...newSettings }))
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
     <Layout
       location={location}
       noMeta="true"
