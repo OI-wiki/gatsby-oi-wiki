@@ -3,8 +3,10 @@ import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined'
 import Snackbar from '@material-ui/core/Snackbar'
+import clsx from 'clsx'
+import scrollbarStyle from '../styles/scrollbar'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   copyBlock: {
     top: '.3rem',
     right: '.3rem',
@@ -40,6 +42,7 @@ const useStyles = makeStyles(() => ({
     flex: '1 0 auto',
     'white-space': 'pre',
   },
+  codeFence: scrollbarStyle(theme, {}),
 }))
 
 /*
@@ -121,7 +124,7 @@ export default function Code (codeBlocks) {
         <div style={{ position: 'relative' }}>
           <CopySnackbar/>
           <pre
-            className={codeBlock.preClassName}
+            className={clsx(codeBlock.preClassName, classes.codeFence)}
           >
             <code className={codeBlock.codeClassName}>
               {codeBlock.tokenizedLines.map(({ html }, i) => (
