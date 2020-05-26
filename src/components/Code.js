@@ -122,7 +122,6 @@ export default function Code (codeBlocks) {
           <CopySnackbar/>
           <pre
             className={codeBlock.preClassName}
-            style={{ position: 'relative' }}
           >
             <code className={codeBlock.codeClassName}>
               {codeBlock.tokenizedLines.map(({ html }, i) => (
