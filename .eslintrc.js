@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es6: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -10,47 +10,48 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:react-hooks/recommended',
-    'standard'
+    'standard',
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: [
     'react',
-    '@typescript-eslint'
+    '@typescript-eslint',
   ],
   rules: {
-    "react/prop-types": [0],
-    "comma-dangle": [2, "always-multiline"],
-    "no-unused-vars": "off",
-    "import/order": "error",
-    "@typescript-eslint/no-unused-vars": [
-      "error"
+    'react/prop-types': [0],
+    'comma-dangle': [2, 'always-multiline'],
+    'no-unused-vars': 'off',
+    'import/order': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
     ],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "react/jsx-curly-brace-presence": [2, "never"],
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': ['off'],
+    'react/jsx-curly-brace-presence': [2, 'never'],
   },
-  "overrides": [
+  overrides: [
     {
       // enable the rule specifically for TypeScript files
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true }]
-      }
-    }
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+      },
+    },
   ],
   settings: {
     react: {
-      version: "detect"
-    }
-  }
+      version: 'detect',
+    },
+  },
 }
