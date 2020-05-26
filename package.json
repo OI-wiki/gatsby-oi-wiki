@@ -51,7 +51,7 @@
     "rehype-mathjax": "^1.0.0",
     "rehype-parse": "^6.0.2",
     "remark-details": "^2.0.2",
-    "remark-math": "^2.0.0",
+    "remark-math": "^2.0.1",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
