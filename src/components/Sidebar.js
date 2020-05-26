@@ -94,7 +94,7 @@ function Sidebar (props) {
   const pathList = props.pathList
   return (
     <List className={classes.list}>
-      {pathList.map((item) => Item(item, 16, props.pathname))}
+      {pathList.map((item) => Item(item, 16, props.pathname)).map(([x]) => x)}
     </List>
   )
 }
