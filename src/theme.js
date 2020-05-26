@@ -44,10 +44,10 @@ const lightColor = createPalette({ type: 'light' })
 const darkColor = createPalette({ type: 'dark' })
 const paletteKeys = [
   'primary', 'secondary', 'text', 'background', 'action',
-  'error', 'warning', 'info', 'success', 'grey']
+  'error', 'warning', 'info', 'success']
 
 // Workaround for material-ui color.
-function htr (hex) {
+function htr (hex, alpha = '1') {
   let c
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split('')
@@ -55,7 +55,7 @@ function htr (hex) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2]]
     }
     c = '0x' + c.join('')
-    return [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',1'
+    return [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha
   }
   if (hex.startsWith('rgba')) {
     return hex.slice(5, -1)
@@ -105,7 +105,7 @@ const darkCss = withStyles(() => ({
       '--footer-bg': htr(grey[900]),
       '--footer-text': htr(grey[300]),
       '--details-border': htr(blue[500]),
-      '--details-main': htr(blue[700]),
+      '--details-main': htr(grey[700]),
       '--blockquote': '255, 255, 255, .12',
       '--inline-color': htr(grey[100]),
       '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
@@ -171,6 +171,18 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
+    getContrastText () {
+      return 'rgba(var(--text-primary))'
+    },
+  },
+  overrides: {
+    MuiChip: {
+      outlined: {
+        // Material-UI hard-coded chip border color depending on palatte type
+        // override it here as a workaround
+        border: '1px solid rgba(var(--divider))',
+      },
+    },
   },
 })
 
