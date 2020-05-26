@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
     'white-space': 'pre',
   },
-  codeFence: scrollbarStyle(theme, {}),
+  codeScrollBar: scrollbarStyle(theme, {}),
 }))
 
 /*
@@ -124,7 +124,7 @@ export default function Code (codeBlocks) {
         <div style={{ position: 'relative' }}>
           <CopySnackbar/>
           <pre
-            className={clsx(codeBlock.preClassName, classes.codeFence)}
+            className={clsx(codeBlock.preClassName, classes.codeScrollBar)}
           >
             <code className={codeBlock.codeClassName}>
               {codeBlock.tokenizedLines.map(({ html }, i) => (
