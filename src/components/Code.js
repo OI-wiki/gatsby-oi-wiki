@@ -79,8 +79,9 @@ const copyToClipboard = (str) => {
 export default function Code (codeBlocks) {
   const classes = useStyles()
   for (const i of codeBlocks) {
-    console.log(i)
     if (!i.tokenizedLines) {
+      // i has no tokenizedLines, which indicates that i is an unrecognizable language,
+      // so we simply generate tokenizedLines so as to display it without highlighting.
       i.tokenizedLines = i.text.split('\n').map(t => ({
         className: 'grvsc-line',
         html: `<span class="grvsc-line"><span class="mtk1">${t}</span></span>`,
