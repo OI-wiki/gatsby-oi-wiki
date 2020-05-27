@@ -89,7 +89,6 @@ export default function Code (codeBlocks) {
       }))
     }
   }
-  console.log(codeBlocks)
   return function codeRender (props) {
     const index = Number(props['data-index'])
     const codeBlock = codeBlocks[index]
