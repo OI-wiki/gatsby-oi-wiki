@@ -32,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
   lineWrapper: { display: 'flex' },
   lineNumber: {
-    /* background: rgba(255, 255, 255, 0.1); */
     width: '1.5rem',
-    opacity: 0.6,
+    color: '#A4A4A4',
     'text-align': 'right',
     'user-select': 'none',
   },
@@ -79,6 +78,17 @@ const copyToClipboard = (str) => {
 
 export default function Code (codeBlocks) {
   const classes = useStyles()
+  for (const i of codeBlocks) {
+    console.log(i)
+    if (!i.tokenizedLines) {
+      i.tokenizedLines = i.text.split('\n').map(t => ({
+        className: 'grvsc-line',
+        html: `<span class="grvsc-line"><span class="mtk1">${t}</span></span>`,
+        text: t,
+      }))
+    }
+  }
+  console.log(codeBlocks)
   return function codeRender (props) {
     const index = Number(props['data-index'])
     const codeBlock = codeBlocks[index]
