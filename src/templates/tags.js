@@ -15,13 +15,12 @@ import Layout from '../components/Layout'
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
-  const tagHeader = `共 ${totalCount} 篇文章被打上了 "${tag}" 标签：`
+  const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
 
   return (
     <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
       <div>
-        <Typography variant="h5" component="h2">
-          {tagHeader}
+        <Typography variant="h5" component="h2" dangerouslySetInnerHTML={{ __html: tagHeader }}>
         </Typography>
         <List>
           {edges.map(({ node }) => {
@@ -39,7 +38,6 @@ const Tags = ({ pageContext, data, location }) => {
         </List>
         <Button
           variant="outlined"
-          color="primary"
           startIcon={<ArrowBackIosIcon />}
           href="/tags"
         >
