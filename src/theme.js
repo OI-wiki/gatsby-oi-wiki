@@ -22,13 +22,13 @@ const globalStyles = withStyles((theme) => ({
       padding: '2px 4px',
       'border-radius': '2px',
       'font-size': '90%',
-      // color: theme.palette.inlineCode.color,
-      // backgroundColor: theme.palette.inlineCode.background,
+      color: theme.palette.inlineCode.color,
+      backgroundColor: theme.palette.inlineCode.background,
     },
     'pre code': {
       'font-size': '100%',
       padding: '0.2em 0',
-      // backgroundColor: '#1E1E1E',
+      backgroundColor: '#1E1E1E',
     },
   },
 }))
@@ -81,7 +81,7 @@ const darkTheme = createMuiTheme({
     blockquote: 'rgba(255,255,255,.12)',
     inlineCode: {
       color: grey[100],
-      background: 'hsla(0,0%,85%,.5)',
+      background: 'hsla(0,0%,60%,.5)',
     },
     search: {
       messageBackground: grey[700],
