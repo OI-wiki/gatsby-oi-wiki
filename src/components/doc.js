@@ -27,6 +27,7 @@ function mdx ({ data: { mdx }, location }) {
     summary: Summary,
     // a: Link,
     pre: Code(codeBlocks),
+    inlinecode: 'code',
   }
 
   return (
