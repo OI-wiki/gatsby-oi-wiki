@@ -23,21 +23,7 @@ export default function HTML (props) {
         {props.postBodyComponents}
       </body>
       <script
-        dangerouslySetInnerHTML={{
-          __html: `window.MathJax = {
-          tex: {
-            inlineMath: [
-              ["$", "$"],
-            ],
-            displayMath: [
-              ["$$", "$$"],
-            ],
-          },
-        }`,
-        }}
-      />
-      <script
-        src="https://cdn.staticfile.org/mathjax/3.0.1/es5/tex-mml-chtml.js"
+        src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-mml-chtml.js"
         id="MathJax-script"
       />
     </html>
