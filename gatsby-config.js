@@ -76,7 +76,7 @@ module.exports = {
           },
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
-        rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
+        rehypePlugins: [require('rehype-mathjax/browser'), require('rehype-details')],
         extensions: ['.mdx', '.md'],
       },
     },
