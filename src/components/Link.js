@@ -28,6 +28,13 @@ function linkFix (url) {
 function Link ({ to = '', href = to, children, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
   const classes = useStyles()
+  if (props && props.className && props.className.search('anchor') > -1) {
+    return (
+      <a {...props} href={href}>
+        {children}
+      </a>
+    )
+  }
   if (isAbsoluteLink) {
     return (
       <a {...props} href={href} className={classes.link} target="_blank" rel="noopener noreferrer nofollow" >
