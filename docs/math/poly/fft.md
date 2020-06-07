@@ -4,6 +4,14 @@ author: AndrewWayne, GavinZhengOI, ChungZH, henryrabbit, Xeonacid, sshwy, Yukima
 tags: ["math","polynomial"]
 ---
 
+## 内链测试
+
+[同级的相对目录-求逆](./inv)
+
+[父级相对目录-测试页](../../test)
+
+[父级相对目录-数学简介](../)
+
 前置知识： [复数](../complex.md) 。
 
 本文将介绍一种算法，它支持在 $O(n\log n)$ 的时间内计算两个 $n$ 度的多项式的乘法，比朴素的 $O(n^2)$ 算法更高效。由于两个整数的乘法也可以被当作多项式乘法，因此这个算法也可以用来加速大整数的乘法计算。
@@ -169,14 +177,14 @@ $$
     ```cpp
     #include <cmath>
     #include <complex>
-    
+
     typedef std::complex<double> Comp;  // STL complex
-    
+
     const Comp I(0, 1);  // i
     const int MAX_N = 1 << 20;
-    
+
     Comp tmp[MAX_N];
-    
+
     void DFT(Comp *f, int n, int rev) {  // rev=1,DFT; rev=-1,IDFT
       if (n == 1) return;
       for (int i = 0; i < n; ++i) tmp[i] = f[i];
@@ -367,7 +375,7 @@ $$
     #include <cstdio>
     #include <cstring>
     #include <iostream>
-    
+
     const double PI = acos(-1.0);
     struct Complex {
       double x, y;
@@ -430,12 +438,12 @@ $$
         }
       }
     }
-    
+
     const int MAXN = 200020;
     Complex x1[MAXN], x2[MAXN];
     char str1[MAXN / 2], str2[MAXN / 2];
     int sum[MAXN];
-    
+
     int main() {
       while (scanf("%s%s", str1, str2) == 2) {
         int len1 = strlen(str1);
@@ -473,4 +481,3 @@ $$
 ## 参考文献
 
 1.   [桃酱的算法笔记](https://zhuanlan.zhihu.com/p/41867199) .
-
