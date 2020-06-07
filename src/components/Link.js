@@ -18,17 +18,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function linkFix (url) {
-  // if (/\.md/.test(url)) url = '../' + url.replace(/\.md/, '/')
-  if (/#/.test(url)) return location.pathname + url
-  if (url.split('/').slice(-1)[0] === '') return url
-  return url + '/'
+function linkFix (url, currentPath) {
+  if (currentPath.split('/').slice(-1)[0] !== '') {
+    currentPath += '/'
+  }
+  if (/^\.\./.test(url)) {
+    url = currentPath + '../' + url
+    // ../xxx/yyy -> fullpathname/../xxx/yyy
+    // prepend full pathname for relative path
+  }
+  if (/^\./.test(url)) {
+    if (/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/.test(url)) {
+      url = currentPath + url.slice(2)
+      // ./xxx/yyy -> fullpathname/../xxx/yyy
+    } else {
+      url = currentPath + '.' + url
+      // ./xx -> fullpathname/(remove current part)xx
+    }
+    // prepend full pathname for relative path
+  }
+  if (url.split('/').slice(-1)[0] !== '' && !/#/.test(url)) {
+    url += '/' // append '/' for links, but excluding urls includes `#`.
+  }
+  return url
 }
 
-function Link ({ to = '', href = to, children, ...props }) {
+function RealLink ({ to = '', href = to, children, pathname, ...props }) {
   const isAbsoluteLink = isAbsoluteURL(href)
   const classes = useStyles()
-  if (props && props.className && props.className.search('anchor') > -1) {
+  if (props?.className?.search('anchor') > -1) {
     return (
       <a {...props} href={href}>
         {children}
@@ -43,10 +61,16 @@ function Link ({ to = '', href = to, children, ...props }) {
     )
   }
   return (
-    <GatsbyLink {...props} to={linkFix(href)} className={classes.link}>
+    <GatsbyLink {...props} to={linkFix(href, pathname)} className={classes.link}>
       {children}
     </GatsbyLink>
   )
 }
 
-export default Link
+function GetLink (location) {
+  return function Link (props) {
+    return <RealLink {...props} pathname={location.pathname} />
+  }
+}
+
+export default GetLink
