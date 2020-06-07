@@ -5,7 +5,7 @@ import Details from './Details'
 import Layout from './Layout'
 import Summary from './Summary'
 import Code from './Code'
-// import Link from './Link'
+import Link from './Link'
 
 function mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
@@ -25,11 +25,10 @@ function mdx ({ data: { mdx }, location }) {
   const myComponents = {
     details: Details,
     summary: Summary,
-    // a: Link,
+    a: Link,
     pre: Code(codeBlocks),
     inlinecode: 'code',
   }
-
   return (
     <Layout
       location={location}
