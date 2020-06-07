@@ -15,7 +15,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 ### 在本地开发
 
-准备好 Git 和 NodeJS。注意，NodeJS 版本应当大于等于10. 请勿使用 taobao 等 npm 镜像。
+准备好 Git 和 NodeJS。注意，NodeJS 版本应当大于等于12. 请勿使用 taobao 等 npm 镜像。
 
 你可能需要一些工具来解决国际互联网访问问题，**并配置`HTTP_PROXY`和`HTTPS_PROXY`两个环境变量**。
 
@@ -29,10 +29,8 @@ npm install #安装依赖
 
 #### Windows
 
-首先，在有管理员权限的终端中执行下面的代码，它可能会耗费较长的时间，请耐心等待。
-``` shell
-npm install -g windows-build-tools
-```
+首先，在安装 NodeJS 时，请确保你选择了“Install Additional Tools for Node.js”这一项，如果没有安装，可以在开始菜单里找到这一项并安装。
+
 然后克隆本项目的仓库，并安装依赖
 ```shell
 
