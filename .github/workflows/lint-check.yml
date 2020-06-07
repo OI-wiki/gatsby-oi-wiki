@@ -11,23 +11,24 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '12.17.x'
 
+      - name: Get node version
+        id: node-version
+        run: |
+          echo "::set-output name=ver::$(node --version)"
       - name: Cache dependencies
         uses: actions/cache@v1
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          key: ${{ runner.os }}-node-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Cache install
         uses: actions/cache@v1
         with:
           path: ./node_modules
-          key: ${{ runner.os }}-dep-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-dep-
+          key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
+
 
       - run: npm install
 
