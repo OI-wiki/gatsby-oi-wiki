@@ -177,14 +177,14 @@ $$
     ```cpp
     #include <cmath>
     #include <complex>
-
+    
     typedef std::complex<double> Comp;  // STL complex
-
+    
     const Comp I(0, 1);  // i
     const int MAX_N = 1 << 20;
-
+    
     Comp tmp[MAX_N];
-
+    
     void DFT(Comp *f, int n, int rev) {  // rev=1,DFT; rev=-1,IDFT
       if (n == 1) return;
       for (int i = 0; i < n; ++i) tmp[i] = f[i];
@@ -375,7 +375,7 @@ $$
     #include <cstdio>
     #include <cstring>
     #include <iostream>
-
+    
     const double PI = acos(-1.0);
     struct Complex {
       double x, y;
@@ -438,12 +438,12 @@ $$
         }
       }
     }
-
+    
     const int MAXN = 200020;
     Complex x1[MAXN], x2[MAXN];
     char str1[MAXN / 2], str2[MAXN / 2];
     int sum[MAXN];
-
+    
     int main() {
       while (scanf("%s%s", str1, str2) == 2) {
         int len1 = strlen(str1);
