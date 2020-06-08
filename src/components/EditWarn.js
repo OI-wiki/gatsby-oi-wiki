@@ -7,18 +7,18 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 import Link from './Link'
 
-const editWarning = (
+const editWarning = (MyLink) => (
   <DialogContentText>
     <p>首先，感谢您能够为 OI Wiki 做出自己的贡献。</p>
     <p>
       不过在开始之前，我们需要您了解并熟知
-      <Link to="/intro/htc/" target="_blank" rel="noopener noreferrer nofollow">如何参与</Link>
+      <MyLink to="/intro/htc/" target="_blank" rel="noopener noreferrer nofollow">如何参与</MyLink>
       里的内容，以避免在编辑时产生不必要的麻烦。
     </p>
     <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
   </DialogContentText>
 )
-function EditWarn ({ relativePath, dialogOpen, setDialogOpen }) {
+function EditWarn ({ relativePath, dialogOpen, setDialogOpen, location }) {
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
   return (
     <Dialog
@@ -28,7 +28,7 @@ function EditWarn ({ relativePath, dialogOpen, setDialogOpen }) {
       }}
     >
       <DialogTitle>编辑前须知</DialogTitle>
-      <DialogContent>{editWarning}</DialogContent>
+      <DialogContent>{editWarning(Link(location))}</DialogContent>
       <DialogActions>
         <Button
           onClick={() => {

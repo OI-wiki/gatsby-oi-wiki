@@ -29,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
+function Meta ({ authors, tags, relativePath, modifiedTime, noMeta, location }) {
   const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
+  const MyLink = Link(location)
   if (noMeta === 'false') {
     return (
       <>
@@ -47,27 +48,27 @@ function Meta ({ authors, tags, relativePath, modifiedTime, noMeta }) {
               本页面最近更新：
             </span>
             <span>{modifiedTime}</span>，
-            <Link href={historyURL + relativePath}>更新历史</Link>
+            <MyLink href={historyURL + relativePath}>更新历史</MyLink>
             <br />
             <span>
               <EditIcon fontSize="small" className={classes.metaicon} />
               发现错误？想一起完善？{' '}
-              <Link onClick={(e) => {
+              <MyLink onClick={(e) => {
                 e.preventDefault()
                 setDialogOpen(true)
               }} className={classes.link}>
                 在 GitHub 上编辑此页！
-              </Link>
+              </MyLink>
             </span>
             <br />
             <span>
               <CopyrightIcon fontSize="small" className={classes.metaicon} />
               本页面的全部内容在{' '}
               <strong>
-                <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
+                <MyLink href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
                   CC BY-SA 4.0
-                </Link>{' '}
-                和 <Link href="https://github.com/zTrix/sata-license">SATA</Link>
+                </MyLink>{' '}
+                和 <MyLink href="https://github.com/zTrix/sata-license">SATA</MyLink>
               </strong>{' '}
               协议之条款下提供，附加条款亦可能应用
             </span>
