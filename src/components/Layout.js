@@ -104,7 +104,12 @@ function MyLayout ({
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
         <meta name="description" content={descriptionRes} />
       </Helmet>
-      <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
+      <EditWarn
+        relativePath={relativePath}
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        location={location}
+      />
       <NavAndDrawer pathname={location.pathname} />
       <Grid container>
         <Grid
@@ -148,6 +153,7 @@ function MyLayout ({
                   relativePath={relativePath}
                   modifiedTime={modifiedTime}
                   noMeta={noMeta}
+                  location={location}
                 />
                 {noComment === 'false' && (
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
