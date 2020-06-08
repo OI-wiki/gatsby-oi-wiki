@@ -27,7 +27,7 @@ function PageItem (props) {
     <Grid item key={id}>
       <Card variant="outlined">
         <CardContent>
-          <Typography variant="h6" component={Link} to={link}>
+          <Typography variant="h6" component={props.linkComponent} to={link}>
             {title}
           </Typography>
         </CardContent>
@@ -49,12 +49,12 @@ function matchTags (pageTags, selectedTags) {
   return res.every((v) => v === true)
 }
 
-function Column ({ items }) {
+function Column ({ items, linkComponent }) {
   return (
     <Grid container item xs direction="column" spacing={2}>
       {items.map(
         x =>
-          <PageItem key={x.id} {...x} />,
+          <PageItem key={x.id} {...x} linkComponent={linkComponent} />,
       )}
     </Grid>
   )
@@ -82,7 +82,11 @@ function GridItems (props) {
   return (
     <>
       {times(columnCount).map(i =>
-        <Column key={i} items={filteredItems.filter((v, idx) => idx % columnCount === i)} />,
+        <Column
+          key={i}
+          items={filteredItems.filter((v, idx) => idx % columnCount === i)}
+          linkComponent={props.linkComponent}
+        />,
       )}
     </>
   )
@@ -101,6 +105,7 @@ function BlogIndex (props) {
   const filteredItems = articles
     .map((x) => matchTags(x.frontmatter.tags, selectedTags) && x)
     .filter((x) => x !== false)
+  const MyLink = Link(location)
   return (
     <Layout
       location={location}
@@ -144,7 +149,7 @@ function BlogIndex (props) {
           />
         </Grid>
         <Grid container xs={12} spacing={2} justify="center">
-          <GridItems filteredItems={filteredItems} />
+          <GridItems filteredItems={filteredItems} linkComponent={MyLink} />
         </Grid>
       </Grid>
     </Layout>
