@@ -7,6 +7,11 @@ import Summary from './Summary'
 import Code from './Code'
 import Link from './Link'
 
+function fixMathJaxCustomElement (mdxString) {
+  mdxString = mdxString.replace(/"className": ?"mjx/g, '"class": "mjx')
+  mdxString = mdxString.replace(/"className": ?"MathJax/g, '"class": "MathJax')
+  return mdxString.replace(/"className": ?"MJX/g, '"class": "MJX')
+}
 function mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -29,6 +34,7 @@ function mdx ({ data: { mdx }, location }) {
     pre: Code(codeBlocks),
     inlinecode: 'code',
   }
+
   return (
     <Layout
       location={location}
@@ -44,7 +50,7 @@ function mdx ({ data: { mdx }, location }) {
       noEdit={noEdit}
     >
       <MDXProvider components={myComponents}>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
+        <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
       </MDXProvider>
     </Layout>
   )
