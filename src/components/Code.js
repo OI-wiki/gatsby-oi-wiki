@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   lineWrapper: { display: 'flex' },
   lineNumber: {
     width: '1.5rem',
+    marginLeft: '0.5rem',
     color: '#A4A4A4',
     'text-align': 'right',
     'user-select': 'none',
