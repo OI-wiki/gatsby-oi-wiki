@@ -48,7 +48,7 @@ const Title: React.FC<Props> = (props: Props) => {
         relativePath={props.relativePath}
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
-        location={location}
+        location={props.location}
       />
       <Grid container spacing={2}>
         <Grid item xs>
