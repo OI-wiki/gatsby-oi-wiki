@@ -64,6 +64,7 @@ const lightTheme = createMuiTheme({
     tab: {
       colorOnHover: '#000',
     },
+    subTitle: 'rgba(0,0,0,.7)',
   },
 })
 
@@ -90,6 +91,7 @@ const darkTheme = createMuiTheme({
     tab: {
       colorOnHover: '#fff',
     },
+    subTitle: 'rgba(255,255,255,.7)',
   },
 })
 
