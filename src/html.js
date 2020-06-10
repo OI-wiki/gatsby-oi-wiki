@@ -23,7 +23,7 @@ export default function HTML (props) {
         {props.postBodyComponents}
       </body>
       <script
-        src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-mml-chtml.js"
+        src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js"
         id="MathJax-script"
       />
     </html>
