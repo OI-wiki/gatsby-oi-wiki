@@ -76,7 +76,7 @@ module.exports = {
           },
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
-        rehypePlugins: [[require('rehype-mathjax/chtml'), { fontURL: 'https://cdn.staticfile.org/mathjax/3.0.5/es5/output/chtml/fonts/woff-v2' }], require('rehype-details')],
+        rehypePlugins: [[require('rehype-mathjax/chtml'), { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }], require('rehype-details')],
         extensions: ['.mdx', '.md'],
       },
     },
