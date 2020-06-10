@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => createStyles({
     marginBottom: theme.spacing(2),
   },
   subText: {
-    color: 'rgba(0,0,0,.7)',
+    color: (theme.palette as unknown as { subTitle: string }).subTitle,
+    // make typescript and eslint happy
     lineHeight: 1.8,
   },
   authorLink: {
-    color: 'rgba(0,0,0,.7)',
+    color: (theme.palette as unknown as {subTitle: string}).subTitle,
     textDecoration: 'underline',
     paddingLeft: theme.spacing(1),
     display: 'inline-block',
