@@ -76,7 +76,12 @@ module.exports = {
           },
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
-        rehypePlugins: [[require('rehype-mathjax/chtml'), { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }], require('rehype-details')],
+        rehypePlugins: [
+          process.env.gatsby_executing_command === 'build'
+            ? [require('rehype-mathjax/chtml'),
+              { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
+            : require('rehype-mathjax/browser'),
+          require('rehype-details')],
         extensions: ['.mdx', '.md'],
       },
     },
