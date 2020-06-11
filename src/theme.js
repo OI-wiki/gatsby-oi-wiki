@@ -71,6 +71,20 @@ const lightTheme = createMuiTheme({
 })
 
 const darkTheme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        img: {
+          filter: 'brightness(0.8) contrast(1.2)',
+          transition: 'filter 0.2s',
+          transitionTimingFunction: 'ease',
+          '&:hover': {
+            filter: 'brightness(1) contrast(1)',
+          },
+        },
+      },
+    },
+  },
   palette: {
     type: 'dark',
     footer: {
