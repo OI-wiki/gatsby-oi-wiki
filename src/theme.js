@@ -30,6 +30,9 @@ const globalStyles = withStyles((theme) => ({
       padding: '0.2em 0',
       backgroundColor: '#1E1E1E',
     },
+    img: {
+      maxWidth: '100%',
+    },
   },
 }))
 
