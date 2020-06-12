@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core'
 import { darken } from '@material-ui/core/styles/colorManipulator'
 import Layout from '../components/Layout'
 import defaultSettings from '../lib/defaultSettings'
+import colors from '../styles/colors'
+
 const useConfig = createPersistedState('settings')
 type SettingsPageProps = {
   location: string
@@ -97,11 +99,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         <Grid item>
           导航栏颜色
           <Grid spacing={2}>
-            <ColorButton color="auto" desc="Auto"/>
-            <ColorButton color="#FFF" desc="Classical White"/>
-            <ColorButton color="#A00" desc="Lily Red"/>
-            <ColorButton color="#E91E63" desc="Margatroid Magenta"/>
-            <ColorButton color="#222" desc="Breathy Darkness"/>
+            {colors.map(props => (<ColorButton {...props} key={props.color}/>))}
           </Grid>
         </Grid>
       </Grid>
