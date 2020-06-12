@@ -97,9 +97,9 @@ function ResponsiveDrawer (props) {
   const { container, pathname } = props
   const [settings] = createPersistedState('settings')(defaultSettings)
   const theme = useTheme()
-  const navColor = settings.theme.navColor === 'auto'
-    ? theme.palette.background.paper
-    : settings.theme.navColor
+  const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
+    ? settings.theme.navColor
+    : theme.palette.background.paper // undefined or 'auto'
   const classes = useStyles({
     appBar: {
       background: navColor,
