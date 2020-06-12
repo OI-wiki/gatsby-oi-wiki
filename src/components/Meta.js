@@ -1,12 +1,9 @@
-import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
 import React, { useState } from 'react'
-
-import AuthorsArray from './AuthorsArray'
 import Link from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Meta ({ authors, tags, relativePath, modifiedTime, noMeta, location }) {
+function Meta ({ tags, relativePath, modifiedTime, noMeta, location }) {
   const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -39,8 +36,8 @@ function Meta ({ authors, tags, relativePath, modifiedTime, noMeta, location }) 
       <>
         <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
         <Paper className={classes.paper} variant="outlined">
-          <AuthorsArray authors={authors} />
-          <Divider className={classes.divider} />
+          {/* <AuthorsArray authors={authors} /> */}
+          {/* <Divider className={classes.divider} /> */}
           <Tags tags={tags} />
           <div className={classes.meta}>
             <span>
