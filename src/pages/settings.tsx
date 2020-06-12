@@ -11,13 +11,15 @@ import { darken } from '@material-ui/core/styles/colorManipulator'
 import Layout from '../components/Layout'
 import defaultSettings from '../lib/defaultSettings'
 const useConfig = createPersistedState('settings')
-
-function SettingsPage (props: {location: string}): unknown {
+type SettingsPageProps = {
+  location: string
+}
+const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
   const { location } = props
   const [settings, setSettings] = useConfig(defaultSettings)
   const updateSetting = (newSettings): void => (setSettings({ ...defaultSettings, ...settings, ...newSettings }))
-
-  function ColorButton (props: { color: string, desc: string }) : unknown {
+  type ColorButtonProp = { color: string, desc: string }
+  const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
     const background = props.color === 'auto'
       ? undefined // inherit settings
       : props.color
