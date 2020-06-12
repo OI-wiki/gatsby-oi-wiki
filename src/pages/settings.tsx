@@ -90,7 +90,6 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               }}
             >
               <MenuItem value="user-preference">跟随系统</MenuItem>
-              <MenuItem value="scheduled">定时开启</MenuItem>
               <MenuItem value="always-on">总是打开</MenuItem>
               <MenuItem value="always-off">总是关闭</MenuItem>
             </Select>
