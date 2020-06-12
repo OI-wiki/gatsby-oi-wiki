@@ -1,6 +1,7 @@
 export default interface Settings {
   darkMode: DarkModeSettings;
   animation: AnimationSettings;
+  theme: ThemeSettings;
 }
 
 interface DarkModeSettings {
@@ -10,4 +11,8 @@ interface DarkModeSettings {
 
 interface AnimationSettings {
   enable: boolean;
+}
+
+interface ThemeSettings {
+  navColor: string;
 }

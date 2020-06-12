@@ -8,6 +8,9 @@ const defaultSettings: Settings = {
   animation: {
     enable: true,
   },
+  theme: {
+    navColor: '#FFF',
+  },
 }
 
 export default defaultSettings
