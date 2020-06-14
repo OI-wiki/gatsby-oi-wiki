@@ -9,7 +9,7 @@ const defaultSettings: Settings = {
     enable: true,
   },
   theme: {
-    navColor: '#FFF',
+    navColor: 'auto',
   },
 }
 
