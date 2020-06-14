@@ -34,7 +34,7 @@ function Meta ({ tags, relativePath, modifiedTime, noMeta, location }) {
   if (noMeta === 'false') {
     return (
       <>
-        <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
+        <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} location={location} />
         <Paper className={classes.paper} variant="outlined">
           {/* <AuthorsArray authors={authors} /> */}
           {/* <Divider className={classes.divider} /> */}
@@ -53,7 +53,7 @@ function Meta ({ tags, relativePath, modifiedTime, noMeta, location }) {
               <MyLink onClick={(e) => {
                 e.preventDefault()
                 setDialogOpen(true)
-              }} className={classes.link}>
+              }} className={classes.link} to=".">
                 在 GitHub 上编辑此页！
               </MyLink>
             </span>
