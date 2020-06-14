@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
     },
     overflowY: 'hidden',
   },
+  wip: {
+    margin: `${theme.spacing(2)}px 0px`,
+  },
 }))
 
 const LazyComment = Loadable({
@@ -95,7 +98,7 @@ function MyLayout ({
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   const WIPAlert = (
-    <Alert severity="info" icon={<BuildIcon />}>
+    <Alert severity="info" icon={<BuildIcon />} className={classes.wip}>
       本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！
     </Alert>
   )
