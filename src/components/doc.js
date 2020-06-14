@@ -7,6 +7,10 @@ import Summary from './Summary'
 import Code from './Code'
 import Link from './Link'
 
+function findWIP (element) {
+  return element === 'WIP'
+}
+
 function mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -21,6 +25,7 @@ function mdx ({ data: { mdx }, location }) {
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
   const codeBlocks = mdx.childrenGrvscCodeBlock || null
+  const wordCount = mdx.wordCount.words || 0
 
   const myComponents = {
     details: Details,
@@ -29,6 +34,12 @@ function mdx ({ data: { mdx }, location }) {
     pre: Code(codeBlocks),
     inlinecode: 'code',
   }
+
+  var needWIP = false
+  if (wordCount === 0 || (tags && tags.findIndex(findWIP) > -1)) {
+    needWIP = true
+  }
+
   return (
     <Layout
       location={location}
@@ -42,6 +53,7 @@ function mdx ({ data: { mdx }, location }) {
       noMeta={noMeta}
       noComment={noComment}
       noEdit={noEdit}
+      needWIP={needWIP}
     >
       <MDXProvider components={myComponents}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
