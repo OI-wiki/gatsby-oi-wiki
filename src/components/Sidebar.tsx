@@ -135,9 +135,7 @@ const Sidebar: React.FC<PropsType> = (props) => {
   const classes = useStyles()
   const pathList = props.pathList
   const typedPathList = getTypedPathList(pathList)
-  const t1 = performance.now()
   const res = typedPathList.map((item) => Item(item, 16, props.pathname)).map(([x]) => x)
-  console.log(performance.now() - t1)
   return (
     <List className={classes.list}>
       {res}
