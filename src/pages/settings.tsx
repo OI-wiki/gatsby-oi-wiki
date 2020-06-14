@@ -52,18 +52,20 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
 
     const classes = useStyles()
     return (
-      <Button
-        classes={classes}
-        onClick={() => {
-          updateSetting({
-            theme: {
-              navColor: props.color,
-            },
-          })
-        }}
-      >
-        { props.desc }
-      </Button>
+      <Grid item>
+        <Button
+          classes={classes}
+          onClick={() => {
+            updateSetting({
+              theme: {
+                navColor: props.color,
+              },
+            })
+          }}
+        >
+          { props.desc }
+        </Button>
+      </Grid>
     )
   }
 
@@ -97,7 +99,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         </Grid>
         <Grid item>
           导航栏颜色
-          <Grid spacing={2}>
+          <Grid container>
             {colors.map(props => (<ColorButton {...props} key={props.color}/>))}
           </Grid>
         </Grid>
