@@ -7,10 +7,6 @@ import Summary from './Summary'
 import Code from './Code'
 import Link from './Link'
 
-function findWIP (element) {
-  return element === 'WIP'
-}
-
 function mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -35,10 +31,7 @@ function mdx ({ data: { mdx }, location }) {
     inlinecode: 'code',
   }
 
-  var needWIP = false
-  if (wordCount === 0 || (tags && tags.findIndex(findWIP) > -1)) {
-    needWIP = true
-  }
+  const isWIP = wordCount === 0 || tags?.findIndex(x => x === 'WIP')
 
   return (
     <Layout
@@ -53,7 +46,7 @@ function mdx ({ data: { mdx }, location }) {
       noMeta={noMeta}
       noComment={noComment}
       noEdit={noEdit}
-      needWIP={needWIP}
+      isWIP={isWIP}
     >
       <MDXProvider components={myComponents}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
