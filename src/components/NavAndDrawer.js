@@ -22,7 +22,7 @@ import scrollbarStyle from '../styles/scrollbar'
 import pathList from '../sidebar.yaml'
 import defaultSettings from '../lib/defaultSettings'
 import Search from './Search'
-import SiderContent from './Sidebar'
+import SiderContent from './Sidebar.tsx'
 import Tabs from './Tabs'
 
 const drawerWidth = 250
