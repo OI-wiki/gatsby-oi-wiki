@@ -13,13 +13,11 @@ const useStyles = makeStyles((theme) => ({
   listitem: {
     color: theme.palette.text.primary,
     lineHeight: 1.2,
-    paddingLeft: (props) => props.padding,
     '&:hover': {
       textDecoration: 'none',
     },
   },
   oplistitem: {
-    paddingLeft: (props) => props.padding,
     lineHeight: 1.2,
   },
   list: {
@@ -56,7 +54,7 @@ type PathListNode = PathListLeafNode | PathListNonLeafNode
 type TypedPathList = Array<PathListNode>
 
 function Item (node: PathListNode, padding: number, pathname: string): [React.ReactElement, boolean] {
-  const classes = useStyles({ padding })
+  const classes = useStyles()
   const name = node.name
   if (node.type === NodeType.Leaf) {
     const url = (node as PathListLeafNode).path
@@ -68,6 +66,7 @@ function Item (node: PathListNode, padding: number, pathname: string): [React.Re
         href={url}
         key={name}
         className={classes.listitem}
+        style={{ paddingLeft: `${padding}px` }}
       >
         <ListItemText
           primary={
@@ -100,6 +99,7 @@ function Item (node: PathListNode, padding: number, pathname: string): [React.Re
         button
         onClick={() => setOpen(!open)}
         className={classes.oplistitem}
+        style={{ paddingLeft: `${padding}px` }}
       >
         <ListItemText
           primary={
