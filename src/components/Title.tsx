@@ -53,7 +53,7 @@ const Title: React.FC<Props> = (props: Props) => {
       />
       <Grid container spacing={2}>
         <Grid item xs>
-          <Typography variant="h4" className={classes.boldText}>
+          <Typography variant="h4" className={classes.boldText} component="h1">
             {props.title}
           </Typography>
           {
