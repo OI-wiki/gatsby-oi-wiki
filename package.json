@@ -20,7 +20,7 @@
     "@mdx-js/react": "^1.6.5",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
-    "gatsby": "^2.23.1",
+    "gatsby": "^2.23.3",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
     "gatsby-plugin-catch-links": "^2.3.5",
