@@ -1,6 +1,6 @@
 ---
 title: "测试页"
-tags: ["animals", "Chicago", "zoos", "中文", "Chinese", "TEST"]
+tags: ["animals", "Chicago", "zoos", "中文", "Chinese", "TEST", "WIP"]
 ---
 
 [index.md](./index.md)

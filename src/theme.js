@@ -30,6 +30,9 @@ const globalStyles = withStyles((theme) => ({
       padding: '0.2em 0',
       backgroundColor: '#1E1E1E',
     },
+    img: {
+      maxWidth: '100%',
+    },
   },
 }))
 
@@ -64,10 +67,25 @@ const lightTheme = createMuiTheme({
     tab: {
       colorOnHover: '#000',
     },
+    subTitle: 'rgba(0,0,0,.7)',
   },
 })
 
 const darkTheme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        img: {
+          filter: 'brightness(0.8) contrast(1.2)',
+          transition: 'filter 0.2s',
+          transitionTimingFunction: 'ease',
+          '&:hover': {
+            filter: 'brightness(1) contrast(1)',
+          },
+        },
+      },
+    },
+  },
   palette: {
     type: 'dark',
     footer: {
@@ -90,6 +108,7 @@ const darkTheme = createMuiTheme({
     tab: {
       colorOnHover: '#fff',
     },
+    subTitle: 'rgba(255,255,255,.7)',
   },
 })
 
