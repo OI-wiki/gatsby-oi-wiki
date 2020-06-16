@@ -56,7 +56,7 @@ export default function useThrottledOnScroll (callback, delay) {
 
     window.addEventListener('scroll', throttledCallback, { passive: true })
     return () => {
-      window.removeEventListener('scroll', throttledCallback)
+      window.removeEventListener('scroll', throttledCallback, { passive: true })
       throttledCallback.cancel()
     }
   }, [throttledCallback])
