@@ -6,7 +6,7 @@ const useConfig = createPersistedState('settings')
 
 export default function useDarkMode (): boolean {
   const [setting] = useConfig(defaultSettings)
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true })
   let enableDark: boolean
   if (setting.darkMode.type === 'always-on') {
     enableDark = true
