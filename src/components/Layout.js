@@ -7,6 +7,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
+import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 import { Helmet } from 'react-helmet'
@@ -61,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
     },
     overflowY: 'hidden',
   },
+  wip: {
+    margin: `${theme.spacing(2)}px 0px`,
+  },
 }))
 
 const LazyComment = Loadable({
@@ -84,13 +89,19 @@ function MyLayout ({
   noEdit,
   noToC,
   overflow,
+  isWIP,
 }) {
   const theme = useTheme()
   const classes = useStyles()
   // const pageTitle = title === 'OI Wiki' ? title : `${title} - OI Wiki`
-  const displayToC = toc && toc.items && noToC !== 'true'
+  const displayToC = toc?.items && noToC !== 'true'
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
+  const WIPAlert = (
+    <Alert severity="info" icon={<FormatPaintIcon />} className={classes.wip}>
+      本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！
+    </Alert>
+  )
   return (
     <>
       <Helmet>
@@ -120,6 +131,7 @@ function MyLayout ({
                   relativePath={relativePath}
                 />
                 <Divider className={classes.divider} />
+                {isWIP && WIPAlert}
                 <Typography variant="body1" component="div">
                   {children}
                 </Typography>

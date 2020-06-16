@@ -11,6 +11,9 @@ export const query = graphql`
   query($id: String!) {
     mdx: mdx(id: { eq: $id }) {
       id
+      wordCount {
+        words
+      }
       fields {
         slug
       }

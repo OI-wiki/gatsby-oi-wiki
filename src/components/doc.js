@@ -21,6 +21,7 @@ function mdx ({ data: { mdx }, location }) {
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
   const codeBlocks = mdx.childrenGrvscCodeBlock || null
+  const wordCount = mdx.wordCount.words || 0
 
   const myComponents = {
     details: Details,
@@ -29,6 +30,9 @@ function mdx ({ data: { mdx }, location }) {
     pre: Code(codeBlocks),
     inlinecode: 'code',
   }
+
+  const isWIP = wordCount === 0 || tags?.findIndex(x => x === 'WIP')
+
   return (
     <Layout
       location={location}
@@ -42,6 +46,7 @@ function mdx ({ data: { mdx }, location }) {
       noMeta={noMeta}
       noComment={noComment}
       noEdit={noEdit}
+      isWIP={isWIP}
     >
       <MDXProvider components={myComponents}>
         <MDXRenderer>{mdx.body}</MDXRenderer>
