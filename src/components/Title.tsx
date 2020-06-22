@@ -7,6 +7,7 @@ type Props = {
   modifiedTime?: string,
   authors?: string,
   noEdit: string,
+  noMeta?: string,
   relativePath: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   location: any,
@@ -57,6 +58,7 @@ const Title: React.FC<Props> = (props: Props) => {
             {props.title}
           </Typography>
           {
+            props.noMeta === 'false' &&
             props.modifiedTime &&
             <Typography variant="body2" className={classes.subText}>
               本页面最后更新于: {props.modifiedTime}
