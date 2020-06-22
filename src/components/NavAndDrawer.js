@@ -42,9 +42,9 @@ const useStyles = makeStyles((theme) => ({
     background: props.appBar.background,
     color: props.appBar.color,
   }),
-  toolbar: ({
+  toolbar: {
     paddingLeft: '7.5px',
-  }),
+  },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
@@ -122,7 +122,6 @@ function ResponsiveDrawer (props) {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
