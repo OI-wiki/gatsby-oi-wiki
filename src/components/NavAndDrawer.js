@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     background: props.appBar.background,
     color: props.appBar.color,
   }),
+  toolbar: {
+    paddingLeft: '7.5px',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
@@ -49,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: {
+  placeholder: {
     [theme.breakpoints.down('md')]: {
       minHeight: 64,
     },
@@ -115,11 +118,10 @@ function ResponsiveDrawer (props) {
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
@@ -188,7 +190,7 @@ function ResponsiveDrawer (props) {
           variant="permanent"
           open
         >
-          <div className={classes.toolbar} />
+          <div className={classes.placeholder} />
           <SiderContent pathList={tabID !== false ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
