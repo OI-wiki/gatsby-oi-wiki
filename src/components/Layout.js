@@ -128,6 +128,7 @@ function MyLayout ({
                   authors={authors}
                   location={location}
                   noEdit={noEdit}
+                  noMeta={noMeta}
                   relativePath={relativePath}
                 />
                 <Divider className={classes.divider} />

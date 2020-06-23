@@ -36,8 +36,7 @@ function mdx ({ data: { mdx }, location }) {
     inlinecode: 'code',
   }
 
-  const isWIP = wordCount === 0 || tags?.findIndex(x => x === 'WIP')
-
+  const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
   return (
     <Layout
       location={location}
