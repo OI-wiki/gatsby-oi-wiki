@@ -80,7 +80,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <FormControl>
-            <InputLabel>夜间模式</InputLabel>
+            <InputLabel>暗色模式</InputLabel>
             <Select
               value={settings.darkMode.type}
               onChange={(e) => {
