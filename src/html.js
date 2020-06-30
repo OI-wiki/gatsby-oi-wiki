@@ -22,6 +22,13 @@ export default function HTML (props) {
         />
         {props.postBodyComponents}
       </body>
+      {
+        process.env.GATSBY_IS_DEV &&
+        <script
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js"
+          id="MathJax-script"
+        />
+      }
     </html>
   )
 }
