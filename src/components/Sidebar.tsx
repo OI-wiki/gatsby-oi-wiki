@@ -13,13 +13,11 @@ const useStyles = makeStyles((theme) => ({
   listitem: {
     color: theme.palette.text.primary,
     lineHeight: 1.2,
-    paddingLeft: (props) => props.padding,
     '&:hover': {
       textDecoration: 'none',
     },
   },
   oplistitem: {
-    paddingLeft: (props) => props.padding,
     lineHeight: 1.2,
   },
   list: {
@@ -28,54 +26,85 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Item (props, padding, pathname) {
-  const classes = useStyles({ padding })
-  const arr = Object.entries(props)[0]
-  const key = arr[0]
-  const value = arr[1]
-  if (typeof value === 'string') {
+enum NodeType {
+  Leaf, NonLeaf
+}
+
+type PathListType = Array<Record<string, string> | Array<PropsType>>
+
+type PropsType = {
+  pathList: PathListType,
+  pathname: string
+}
+
+interface PathListLeafNode {
+  name: string,
+  type: NodeType
+  path: string
+}
+
+interface PathListNonLeafNode {
+  name: string,
+  type: NodeType,
+  children: Array<PathListNode>
+}
+
+type PathListNode = PathListLeafNode | PathListNonLeafNode
+
+type TypedPathList = Array<PathListNode>
+
+function Item (node: PathListNode, padding: number, pathname: string): [React.ReactElement, boolean] {
+  const classes = useStyles()
+  const name = node.name
+  if (node.type === NodeType.Leaf) {
+    const url = (node as PathListLeafNode).path
     return [
       <ListItem
         button
-        selected={value === pathname}
+        selected={url === pathname}
         component={MuiLink}
-        href={value}
-        key={key}
+        href={url}
+        key={name}
         className={classes.listitem}
+        style={{ paddingLeft: `${padding}px` }}
       >
         <ListItemText
           primary={
             <Typography variant="body2" component="span">
-              {key}
+              {name}
             </Typography>
           }
         />
       </ListItem>,
-      value === pathname,
+      url === pathname,
     ]
   }
   // array
-  const listItemsResult = value.map((item) =>
+  const children = (node as PathListNonLeafNode).children
+  const listItemsResult = children.map((item) =>
     Item(item, padding + 16, pathname),
   )
-  const shouldOpen = listItemsResult.reduce(
-    (prev, [, curr]) => curr || prev,
-    false,
-  )
+
+  let shouldOpen = false
+  for (const [, i] of listItemsResult) {
+    shouldOpen = shouldOpen || i
+  }
+
   // eslint-disable-next-line
   const [open, setOpen] = useState(shouldOpen)
   const listItems = listItemsResult.map(([v]) => v)
   return [
-    <div key={key}>
+    <div key={name}>
       <ListItem
         button
         onClick={() => setOpen(!open)}
         className={classes.oplistitem}
+        style={{ paddingLeft: `${padding}px` }}
       >
         <ListItemText
           primary={
             <Typography variant="body2" component="span">
-              {key}
+              {name}
             </Typography>
           }
         />
@@ -89,12 +118,27 @@ function Item (props, padding, pathname) {
   ]
 }
 
-function Sidebar (props) {
+function getTypedPathList (pathList: PathListType): TypedPathList {
+  const resArray: TypedPathList = []
+  for (const i of pathList) {
+    const [[name, a]] = Object.entries(i)
+    if (typeof a === 'string') {
+      resArray.push({ name, path: a, type: NodeType.Leaf })
+    } else {
+      resArray.push({ name, children: getTypedPathList(a), type: NodeType.NonLeaf })
+    }
+  }
+  return resArray
+}
+
+const Sidebar: React.FC<PropsType> = (props) => {
   const classes = useStyles()
   const pathList = props.pathList
+  const typedPathList = getTypedPathList(pathList)
+  const res = typedPathList.map((item) => Item(item, 16, props.pathname)).map(([x]) => x)
   return (
     <List className={classes.list}>
-      {pathList.map((item) => Item(item, 16, props.pathname))}
+      {res}
     </List>
   )
 }

@@ -1,6 +1,6 @@
 ---
 title: 多项式除法 | 取模
-tags: ["math","polynomial"]
+tags: ["math","polynomial","WIP"]
 ---
 
 ## Description

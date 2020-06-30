@@ -9,6 +9,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import React from 'react'
+import createPersistedState from 'use-persisted-state'
+
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
@@ -18,8 +20,9 @@ import SchoolIcon from '@material-ui/icons/School'
 
 import scrollbarStyle from '../styles/scrollbar'
 import pathList from '../sidebar.yaml'
+import defaultSettings from '../lib/defaultSettings'
 import Search from './Search'
-import SiderContent from './Sidebar'
+import SiderContent from './Sidebar.tsx'
 import Tabs from './Tabs'
 
 const drawerWidth = 250
@@ -34,10 +37,13 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  appBar: {
+  appBar: (props) => ({
     zIndex: theme.zIndex.drawer + 1,
-    background: theme.palette.background.paper,
-    color: theme.palette.text.primary,
+    background: props.appBar.background,
+    color: props.appBar.color,
+  }),
+  toolbar: {
+    paddingLeft: '7.5px',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -46,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: {
+  placeholder: {
     [theme.breakpoints.down('md')]: {
       minHeight: 64,
     },
@@ -92,8 +98,17 @@ function getTabIDFromLocation (location, pathList) {
 
 function ResponsiveDrawer (props) {
   const { container, pathname } = props
-  const classes = useStyles()
+  const [settings] = createPersistedState('settings')(defaultSettings)
   const theme = useTheme()
+  const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
+    ? settings.theme.navColor
+    : theme.palette.background.paper // undefined or 'auto'
+  const classes = useStyles({
+    appBar: {
+      background: navColor,
+      color: theme.palette.getContrastText(navColor),
+    },
+  })
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
   const handleDrawerToggle = () => {
@@ -103,11 +118,10 @@ function ResponsiveDrawer (props) {
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
@@ -118,7 +132,7 @@ function ResponsiveDrawer (props) {
               <SchoolIcon />
             </IconButton>
           </Hidden>
-          <Button href="/">
+          <Button href="/" color="inherit">
             <Typography variant="h6" noWrap>
               OI Wiki
             </Typography>
@@ -176,7 +190,7 @@ function ResponsiveDrawer (props) {
           variant="permanent"
           open
         >
-          <div className={classes.toolbar} />
+          <div className={classes.placeholder} />
           <SiderContent pathList={tabID !== false ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
