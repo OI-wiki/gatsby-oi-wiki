@@ -27,7 +27,7 @@
     "gatsby-plugin-manifest": "^2.4.13",
     "gatsby-plugin-material-ui": "^2.1.9",
     "gatsby-plugin-mdx": "^1.2.17",
-    "gatsby-plugin-offline": "^3.2.12",
+    "gatsby-plugin-offline": "^3.2.13",
     "gatsby-plugin-preact": "^4.0.4",
     "gatsby-plugin-react-helmet": "^3.3.5",
     "gatsby-plugin-sharp": "^2.6.13",
