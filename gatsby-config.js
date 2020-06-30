@@ -76,7 +76,12 @@ module.exports = {
           },
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
-        rehypePlugins: [require('rehype-mathjax'), require('rehype-details')],
+        rehypePlugins: [
+          process.env.gatsby_executing_command === 'build'
+            ? [require('rehype-mathjax/chtml'),
+              { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
+            : require('rehype-mathjax/browser'),
+          require('rehype-details')],
         extensions: ['.mdx', '.md'],
       },
     },
@@ -167,6 +172,7 @@ module.exports = {
         addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
       },
     },
+    'gatsby-plugin-preact',
     // "gatsby-plugin-webpack-bundle-analyser-v2",
     // when you need to analyze bundle size, enable it
   ],

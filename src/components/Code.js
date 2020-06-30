@@ -3,8 +3,10 @@ import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined'
 import Snackbar from '@material-ui/core/Snackbar'
+import clsx from 'clsx'
+import scrollbarStyle from '../styles/scrollbar'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   copyBlock: {
     top: '.3rem',
     right: '.3rem',
@@ -30,9 +32,9 @@ const useStyles = makeStyles(() => ({
   },
   lineWrapper: { display: 'flex' },
   lineNumber: {
-    /* background: rgba(255, 255, 255, 0.1); */
     width: '1.5rem',
-    opacity: 0.6,
+    marginLeft: '0.5rem',
+    color: '#A4A4A4',
     'text-align': 'right',
     'user-select': 'none',
   },
@@ -40,6 +42,7 @@ const useStyles = makeStyles(() => ({
     flex: '1 0 auto',
     'white-space': 'pre',
   },
+  codeScrollBar: scrollbarStyle(theme, {}),
 }))
 
 /*
@@ -76,6 +79,17 @@ const copyToClipboard = (str) => {
 
 export default function Code (codeBlocks) {
   const classes = useStyles()
+  for (const i of codeBlocks) {
+    if (!i.tokenizedLines) {
+      // i has no tokenizedLines, which indicates that i is an unrecognizable language,
+      // so we simply generate tokenizedLines so as to display it without highlighting.
+      i.tokenizedLines = i.text.split('\n').map(t => ({
+        className: 'grvsc-line',
+        html: `<span class="grvsc-line"><span class="mtk1">${t}</span></span>`,
+        text: t,
+      }))
+    }
+  }
   return function codeRender (props) {
     const index = Number(props['data-index'])
     const codeBlock = codeBlocks[index]
@@ -118,23 +132,24 @@ export default function Code (codeBlocks) {
     }
     if (codeBlock && codeBlock.tokenizedLines) {
       return (
-        <pre
-          className={codeBlock.preClassName}
-          style={{ position: 'relative' }}
-        >
+        <div style={{ position: 'relative' }}>
           <CopySnackbar/>
-          <code className={codeBlock.codeClassName}>
-            {codeBlock.tokenizedLines.map(({ html }, i) => (
-              <div className={classes.lineWrapper} key={i}>
-                <div className={classes.lineNumber}>{i + 1}</div>
-                <div
-                  className={classes.lineContents}
-                  dangerouslySetInnerHTML={{ __html: html }}
-                />
-              </div>
-            ))}
-          </code>
-        </pre>
+          <pre
+            className={clsx(codeBlock.preClassName, classes.codeScrollBar)}
+          >
+            <code className={codeBlock.codeClassName}>
+              {codeBlock.tokenizedLines.map(({ html }, i) => (
+                <div className={classes.lineWrapper} key={i}>
+                  <div className={classes.lineNumber}>{i + 1}</div>
+                  <div
+                    className={classes.lineContents}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                  />
+                </div>
+              ))}
+            </code>
+          </pre>
+        </div>
       )
     }
     return <pre {...props}/>

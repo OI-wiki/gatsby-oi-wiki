@@ -4,7 +4,7 @@ const slugs = require('github-slugger')()
 const deburr = require('lodash/deburr')
 
 function concealedAnchor (conClassName, id) {
-  const nodeHtml = `<a class="${conClassName}" id="${id}"></a>`
+  const nodeHtml = `<a className="${conClassName}" id="${id}"></a>`
 
   return nodeHtml
 }
@@ -63,7 +63,7 @@ module.exports = (
         data: {
           hProperties: {
             'aria-label': `${label} permalink`,
-            class: `${className} ${isIconAfterHeader ? 'after' : 'before'}`,
+            className: `${className} ${isIconAfterHeader ? 'after' : 'before'}`,
           },
           hChildren: [
             {
