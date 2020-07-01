@@ -22,13 +22,16 @@ const globalStyles = withStyles((theme) => ({
       padding: '2px 4px',
       'border-radius': '2px',
       'font-size': '90%',
-      // color: theme.palette.inlineCode.color,
-      // backgroundColor: theme.palette.inlineCode.background,
+      color: theme.palette.inlineCode.color,
+      backgroundColor: theme.palette.inlineCode.background,
     },
     'pre code': {
       'font-size': '100%',
       padding: '0.2em 0',
-      // backgroundColor: '#1E1E1E',
+      backgroundColor: '#1E1E1E',
+    },
+    img: {
+      maxWidth: '100%',
     },
   },
 }))
@@ -91,6 +94,7 @@ const lightCss = withStyles(() => ({
       '--search-highlight': '#174d8c',
       '--tab-hover': htr('#000'),
       '--divider': htr(lightColor.divider),
+      '--subtitle-text': '0, 0, 0, .7',
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -113,6 +117,7 @@ const darkCss = withStyles(() => ({
       '--search-highlight': '#acccf1',
       '--tab-hover': htr('#fff'),
       '--divider': htr(darkColor.divider),
+      '--subtitle-text': '255, 255, 255. .7',
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -174,6 +179,7 @@ const adaptiveTheme = createMuiTheme({
     getContrastText () {
       return 'rgba(var(--text-primary))'
     },
+    subTitle: 'rgba(var(--subtitle-text))',
   },
   overrides: {
     MuiChip: {
