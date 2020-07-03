@@ -98,7 +98,7 @@ const darkTheme = createMuiTheme({
     },
     blockquote: 'rgba(255,255,255,.12)',
     inlineCode: {
-      color: grey[100],
+      color: '#37474f',
       background: 'hsla(0,0%,60%,.5)',
     },
     search: {
