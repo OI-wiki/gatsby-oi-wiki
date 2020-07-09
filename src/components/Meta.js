@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
 import React, { useState } from 'react'
 import Link from './Link'
-import Tags from './Tags'
+import Tags from './Tags.tsx'
 import EditWarn from './EditWarn'
 
 const useStyles = makeStyles((theme) => ({

@@ -15,7 +15,7 @@ import React, { useState } from 'react'
 
 import Layout from '../components/Layout'
 import Link from '../components/Link'
-import Tags from '../components/Tags'
+import Tags from '../components/Tags.tsx'
 
 function PageItem (props) {
   const {
