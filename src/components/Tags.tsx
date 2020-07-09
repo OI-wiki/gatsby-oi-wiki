@@ -9,8 +9,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Tags ({ tags }) {
-  const arr = tags
+interface Props{
+  tags: Array<string>
+}
+
+const Tags: React.FC<Props> = (props: Props) => {
+  const arr = props.tags
   const classes = useStyles()
   return (
     <div>
