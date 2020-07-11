@@ -5,7 +5,6 @@ import React from 'react'
 type Props = {
   className: string;
   children: string[] | string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [props: string]: any;
 }
 

@@ -36,8 +36,9 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': [
       'error',
     ],
-    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-function-return-type': [0],
     '@typescript-eslint/explicit-module-boundary-types': ['off'],
+    '@typescript-eslint/no-explicit-any': [0],
     'react/jsx-curly-brace-presence': [2, 'never'],
   },
   overrides: [
@@ -45,7 +46,7 @@ module.exports = {
       // enable the rule specifically for TypeScript files
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+        '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
       },
     },
   ],

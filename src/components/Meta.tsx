@@ -6,9 +6,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
 import React, { useState } from 'react'
 import Link from './Link'
-// eslint-disable-next-line
-// @ts-ignore
-import Tags from './Tags.tsx'
+import Tags from './Tags'
 import EditWarn from './EditWarn'
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface Props {
-  tags: string;
+  tags: string[];
   relativePath: string;
   modifiedTime: string;
   noMeta: string;
