@@ -185,8 +185,9 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
-    getContrastText () {
-      return 'rgba(var(--text-primary))'
+    getContrastText (color) {
+      if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
+      else return lightColor.getContrastText(color)
     },
     subTitle: 'rgba(var(--subtitle-text))',
   },
