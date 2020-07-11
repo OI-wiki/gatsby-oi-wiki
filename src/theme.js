@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core'
+import createPalette from '@material-ui/core/styles/createPalette'
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
-import { withStyles } from '@material-ui/core/styles'
+import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
 const globalStyles = withStyles((theme) => ({
@@ -41,75 +41,176 @@ function CustomCssEl () {
 }
 
 CustomCssEl.propTypes = { classes: PropTypes.object.isRequired }
-
 export const CustomCssBaseline = globalStyles(CustomCssEl)
 
-const lightTheme = createMuiTheme({
+const lightColor = createPalette({ type: 'light' })
+const darkColor = createPalette({ type: 'dark' })
+const paletteKeys = [
+  'primary', 'secondary', 'text', 'background', 'action',
+  'error', 'warning', 'info', 'success']
+
+// Workaround for material-ui color.
+function htr (hex, alpha = '1') {
+  let c
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+    c = hex.substring(1).split('')
+    if (c.length === 3) {
+      c = [c[0], c[0], c[1], c[1], c[2], c[2]]
+    }
+    c = '0x' + c.join('')
+    return [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha
+  }
+  if (hex.startsWith('rgba')) {
+    return hex.slice(5, -1)
+  }
+  throw new Error('Bad Hex ' + hex)
+}
+
+function applyDefaults (theme, ...keys) {
+  const k = {}
+  function applyDefault (key) {
+    for (const el of Object.keys(theme[key])) {
+      if (/^(#|rgba)/.test(`${theme[key][el]}`)) {
+        k[`--${key}-${el}`] = htr(theme[key][el].toString())
+      }
+    }
+  }
+  keys.forEach(applyDefault)
+  return k
+}
+
+const lightCss = {
+  '@global': {
+    '.themeLight': {
+      '--primary-color': htr(lightColor.primary.main),
+      '--footer-bg': htr(grey[200]),
+      '--footer-text': htr(grey[700]),
+      '--details-border': htr(blue[500]),
+      '--details-main': htr(blue[50]),
+      '--blockquote': '255, 255, 255, .12',
+      '--inline-color': '#37474f',
+      '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
+      '--search-bg': htr(grey[100]),
+      '--search-highlight': '#174d8c',
+      '--tab-hover': htr('#000'),
+      '--divider': htr(lightColor.divider),
+      '--subtitle-text': '0, 0, 0, .7',
+      '--alert-info-bg': htr(blue[50]),
+      ...applyDefaults(lightColor, ...paletteKeys),
+    },
+  },
+}
+
+const darkCss = {
+  '@global': {
+    '.themeDark': {
+      '--primary-color': htr(darkColor.primary.main),
+      '--paper-color': htr(darkColor.background.paper),
+      '--bg-color': htr(darkColor.background.default),
+      '--footer-bg': htr(grey[900]),
+      '--footer-text': htr(grey[300]),
+      '--details-border': htr(blue[500]),
+      '--details-main': htr(grey[700]),
+      '--blockquote': '255, 255, 255, .12',
+      '--inline-color': htr(grey[100]),
+      '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
+      '--search-bg': htr(grey[700]),
+      '--search-highlight': '#acccf1',
+      '--tab-hover': htr('#fff'),
+      '--divider': htr(darkColor.divider),
+      '--subtitle-text': '255, 255, 255. .7',
+      '--alert-info-bg': htr(grey[900]),
+      ...applyDefaults(darkColor, ...paletteKeys),
+    },
+  },
+}
+
+function getThemeCssEl (style) {
+  function ThemeCssEl () {
+    return null
+  }
+  ThemeCssEl.propTypes = { classes: PropTypes.object.isRequired }
+  return style(ThemeCssEl)
+}
+
+export const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss))
+export const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss))
+export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
+  return {
+    '@global': {
+      '.themeAuto': lightCss['@global']['.themeLight'],
+      '@media (prefers-color-scheme: dark)': {
+        '.themeAuto': darkCss['@global']['.themeDark'],
+      },
+    },
+  }
+}))
+function applyAdaptives (...keys) {
+  const rst = {}
+  function applyAdaptive (key) {
+    const k = {}
+    for (const el of Object.keys(lightColor[key])) {
+      k[el] = /^(#|rgba)/.test(`${lightColor[key][el]}`)
+        ? `rgba(var(--${key}-${el}))`
+        : lightColor[key][el]
+    }
+    rst[key] = k
+  }
+  keys.forEach(applyAdaptive)
+  return rst
+}
+
+const adaptiveTheme = createMuiTheme({
   palette: {
-    type: 'light',
+    primary: {
+      main: 'rgba(var(--primary-color))',
+    },
+    ...applyAdaptives(...paletteKeys),
     footer: {
-      background: grey[200],
-      text: grey[700],
+      background: 'rgba(var(--footer-bg))',
+      text: 'rgba(var(--footer-text))',
     },
     details: {
-      border: blue[500],
-      main: blue[50],
+      border: 'rgba(var(--details-border))',
+      main: 'rgba(var(--details-main))',
     },
-    blockquote: 'rgba(0,0,0,.12)',
+    blockquote: 'rgba(var(--blockqoute))',
     inlineCode: {
-      color: '#37474f',
-      background: 'hsla(0,0%,85%,.5)',
+      color: 'rgba(var(--inline-color))',
+      background: 'var(--inline-bg-hsla)',
     },
     search: {
-      messageBackground: grey[100],
-      highlight: '#174d8c',
+      messageBackground: 'rgba(var(--search-bg))',
+      highlight: 'rgba(var(--search-highlight))',
     },
     tab: {
-      colorOnHover: '#000',
+      colorOnHover: 'rgba(var(--tab-hover))',
     },
-    subTitle: 'rgba(0,0,0,.7)',
+    divider: 'rgba(var(--divider))',
+    getContrastText (color) {
+      if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
+      else return lightColor.getContrastText(color)
+    },
+    subTitle: 'rgba(var(--subtitle-text))',
   },
-})
-
-const darkTheme = createMuiTheme({
+  // Material-UI hard-coded and/or used color manipulator in several components
+  // override them here as a workaround
   overrides: {
-    MuiCssBaseline: {
-      '@global': {
-        img: {
-          filter: 'brightness(0.8) contrast(1.2)',
-          transition: 'filter 0.2s',
-          transitionTimingFunction: 'ease',
-          '&:hover': {
-            filter: 'brightness(1) contrast(1)',
-          },
-        },
+    MuiChip: {
+      root: {
+        color: 'rgba(var(--text-main))',
+      },
+      outlined: {
+        border: '1px solid rgba(var(--divider))',
+      },
+    },
+    MuiAlert: {
+      standardInfo: {
+        color: 'rgba(var(--text-main))',
+        backgroundColor: 'rgba(var(--alert-info-bg))',
       },
     },
   },
-  palette: {
-    type: 'dark',
-    footer: {
-      background: grey[900],
-      text: grey[300],
-    },
-    details: {
-      border: blue[500],
-      main: grey[700],
-    },
-    blockquote: 'rgba(255,255,255,.12)',
-    inlineCode: {
-      color: grey[100],
-      background: 'hsla(0,0%,60%,.5)',
-    },
-    search: {
-      messageBackground: grey[700],
-      highlight: '#acccf1',
-    },
-    tab: {
-      colorOnHover: '#fff',
-    },
-    subTitle: 'rgba(255,255,255,.7)',
-  },
 })
 
-export { lightTheme, darkTheme }
+export { adaptiveTheme }

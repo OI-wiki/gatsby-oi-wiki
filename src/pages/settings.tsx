@@ -19,7 +19,12 @@ type SettingsPageProps = {
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
   const { location } = props
   const [settings, setSettings] = useConfig(defaultSettings)
-  const updateSetting = (newSettings): void => (setSettings({ ...defaultSettings, ...settings, ...newSettings }))
+  const updateSetting = (newSettings): void => {
+    const finalSettings = { ...defaultSettings, ...settings, ...newSettings }
+    setSettings(finalSettings)
+    // eslint-disable-next-line dot-notation
+    window !== undefined && window['onthemechange'](finalSettings)
+  }
   type ColorButtonProp = { color: string, desc: string }
   const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
     const background = props.color === 'auto'
