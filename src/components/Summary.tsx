@@ -9,8 +9,7 @@ import React from 'react'
 const useStyles = makeStyles((theme) => ({
   expanded: {}, // DONT DELETE THIS
   root: {
-    // @ts-ignore
-    background: theme.palette.details.main,
+    background: (theme.palette as unknown as any).details.main,
     minHeight: '36px',
     '&$expanded': {
       minHeight: '36px',
