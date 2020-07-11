@@ -2,7 +2,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 
-const page = (location) => (
+const page: React.FC<{ location: string }> = (location) => (
   <Layout location={location} noEdit="true" title="404" noComment="false">
     <div>
       <div>

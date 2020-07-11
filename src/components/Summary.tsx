@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ExpansionPanelSummary } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import { makeStyles } from '@material-ui/core/styles'
@@ -5,10 +6,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme) => ({
   expanded: {}, // DONT DELETE THIS
   root: {
+    // @ts-ignore
     background: theme.palette.details.main,
     minHeight: '36px',
     '&$expanded': {
@@ -34,9 +35,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }))
+interface Props{
+  className: string;
+  children: string;
+  [props: string]: any;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function Summary ({ className = null, children, ...props }) {
+const Summary: React.FC<Props> = (props) => {
+  const { className = null, children, ...rest } = props
   const classes = useStyles()
 
   return (
@@ -57,3 +63,5 @@ export default function Summary ({ className = null, children, ...props }) {
     </ExpansionPanelSummary>
   )
 }
+
+export default Summary

@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import Details from './Details.tsx'
 import Layout from './Layout'
-import Summary from './Summary'
+import Summary from './Summary.tsx'
 import Code from './Code'
 import Link from './Link'
 
