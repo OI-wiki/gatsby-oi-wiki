@@ -95,6 +95,7 @@ const lightCss = {
       '--tab-hover': htr('#000'),
       '--divider': htr(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
+      '--alert-info-bg': htr(blue[50]),
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -118,6 +119,7 @@ const darkCss = {
       '--tab-hover': htr('#fff'),
       '--divider': htr(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
+      '--alert-info-bg': htr(grey[900]),
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -191,12 +193,21 @@ const adaptiveTheme = createMuiTheme({
     },
     subTitle: 'rgba(var(--subtitle-text))',
   },
+  // Material-UI hard-coded and/or used color manipulator in several components
+  // override them here as a workaround
   overrides: {
     MuiChip: {
+      root: {
+        color: 'rgba(var(--text-main))',
+      },
       outlined: {
-        // Material-UI hard-coded chip border color depending on palatte type
-        // override it here as a workaround
         border: '1px solid rgba(var(--divider))',
+      },
+    },
+    MuiAlert: {
+      standardInfo: {
+        color: 'rgba(var(--text-main))',
+        backgroundColor: 'rgba(var(--alert-info-bg))',
       },
     },
   },
