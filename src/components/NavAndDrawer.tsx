@@ -98,15 +98,19 @@ function flattenObject (ob:any) :Record<string, unknown> {
   return toReturn
 }
 
-function getTabIDFromLocation (location: string, pathList: string[]) {
+function getTabIDFromLocation (location: string, pathList: string[]): number {
   for (const v of Object.entries(pathList)) {
     if (Object.values(flattenObject(v[1])).indexOf(location) > -1) return +v[0]
   }
-  return false
+  return -1
 }
 
-function ResponsiveDrawer (props) {
-  const { container, pathname } = props
+interface drawerProps {
+  pathname: string
+}
+
+const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
+  const { pathname } = props
   const [settings] = createPersistedState('settings')(defaultSettings)
   const theme = useTheme()
   const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
@@ -120,7 +124,7 @@ function ResponsiveDrawer (props) {
   })
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen)
   }
   const tabID = getTabIDFromLocation(pathname, pathList)
@@ -170,12 +174,11 @@ function ResponsiveDrawer (props) {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation="css">
-          <Tabs tabID={tabID} pathList={pathList}/>
+          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="js">
         <Drawer
-          container={container}
           variant="temporary"
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
@@ -200,7 +203,7 @@ function ResponsiveDrawer (props) {
           open
         >
           <div className={classes.placeholder} />
-          <SiderContent pathList={tabID !== false ? [pathList[tabID]] : pathList} {...props} />
+          <SiderContent pathList={tabID !== -1 ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
     </>
