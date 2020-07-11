@@ -17,15 +17,24 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
-
 import scrollbarStyle from '../styles/scrollbar'
+// eslint-disable-next-line
+// @ts-ignore
 import pathList from '../sidebar.yaml'
 import defaultSettings from '../lib/defaultSettings'
 import Search from './Search'
-import SiderContent from './Sidebar.tsx'
+import SiderContent from './Sidebar'
 import Tabs from './Tabs'
 
 const drawerWidth = 250
+
+interface AppBar{
+  background: string;
+  color: string;
+}
+interface Props{
+  appBar: AppBar;
+}
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -37,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  appBar: (props) => ({
+  appBar: (props: Props) => ({
     zIndex: theme.zIndex.drawer + 1,
     background: props.appBar.background,
     color: props.appBar.color,
@@ -68,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function flattenObject (ob) {
+function flattenObject (ob:any) :Record<string, unknown> {
   // https://stackoverflow.com/a/53739792
   const toReturn = {}
 
@@ -89,7 +98,7 @@ function flattenObject (ob) {
   return toReturn
 }
 
-function getTabIDFromLocation (location, pathList) {
+function getTabIDFromLocation (location: string, pathList: string[]) {
   for (const v of Object.entries(pathList)) {
     if (Object.values(flattenObject(v[1])).indexOf(location) > -1) return +v[0]
   }
