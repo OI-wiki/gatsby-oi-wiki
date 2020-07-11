@@ -47,6 +47,8 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+        '@typescript-eslint/no-unused-vars': [1],
+        '@typescript-eslint/ban-ts-comment': [1],
       },
     },
   ],
