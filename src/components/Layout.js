@@ -13,9 +13,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import Loadable from 'react-loadable'
-import useDarkMode from '../lib/useDarkMode'
+// import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
-import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline } from '../theme'
+import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
 import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta'
@@ -183,12 +183,15 @@ function MyLayout ({
 }
 
 function StyledLayout (props) {
-  const enableDark = useDarkMode()
+  // const enableDark = useDarkMode()
+
   return (
     <ThemeProvider theme={adaptiveTheme}>
       <CssBaseline/>
       <CustomCssBaseline/>
-      { enableDark ? <DarkCssBaseline/> : <LightCssBaseline/> }
+      <LightCssBaseline/>
+      <DarkCssBaseline/>
+      <AutoCssBaseline/>
       <MyLayout {...props}/>
     </ThemeProvider>
   )

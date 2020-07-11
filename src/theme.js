@@ -79,9 +79,9 @@ function applyDefaults (theme, ...keys) {
   return k
 }
 
-const lightCss = withStyles(() => ({
+const lightCss = {
   '@global': {
-    ':root': {
+    '.themeLight': {
       '--primary-color': htr(lightColor.primary.main),
       '--footer-bg': htr(grey[200]),
       '--footer-text': htr(grey[700]),
@@ -98,11 +98,11 @@ const lightCss = withStyles(() => ({
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
-}))
+}
 
-const darkCss = withStyles(() => ({
+const darkCss = {
   '@global': {
-    ':root': {
+    '.themeDark': {
       '--primary-color': htr(darkColor.primary.main),
       '--paper-color': htr(darkColor.background.paper),
       '--bg-color': htr(darkColor.background.default),
@@ -121,7 +121,7 @@ const darkCss = withStyles(() => ({
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
-}))
+}
 
 function getThemeCssEl (style) {
   function ThemeCssEl () {
@@ -131,9 +131,18 @@ function getThemeCssEl (style) {
   return style(ThemeCssEl)
 }
 
-export const LightCssBaseline = getThemeCssEl(lightCss)
-export const DarkCssBaseline = getThemeCssEl(darkCss)
-
+export const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss))
+export const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss))
+export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
+  return {
+    '@global': {
+      '.themeAuto': lightCss['@global']['.themeLight'],
+      '@media (prefers-color-scheme: dark)': {
+        '.themeAuto': darkCss['@global']['.themeDark'],
+      },
+    },
+  }
+}))
 function applyAdaptives (...keys) {
   const rst = {}
   function applyAdaptive (key) {
