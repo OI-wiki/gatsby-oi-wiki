@@ -12,6 +12,11 @@ export default function HTML (props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <script src="/script.js"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `window.ga_tid = "UA-124485594-1";
+          window.ga_api = "https://margatroid.xyz/vue.min.js";`,
+        }}/>
+        <script src="https://cdn.jsdelivr.net/npm/cfga@1.0.3" async></script>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
