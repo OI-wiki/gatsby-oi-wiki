@@ -1,6 +1,22 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+const darkModeSwitch = `window.onthemechange = function (settings) {
+  const fallback = localStorage.settings &&
+    JSON.parse(localStorage.settings).darkMode.type
+  const darkOpt = settings !== undefined ? settings.darkMode.type : fallback
+  let themeClass = 'themeAuto'
+  if (darkOpt === undefined || darkOpt === 'user-preference') {
+    // themeClass = 'themeAuto'
+  } else {
+    themeClass = darkOpt === 'always-on' ? 'themeDark' : 'themeLight'
+  }
+  const docEl = document.querySelector('html')
+  docEl.classList.remove('themeLight', 'themeDark', 'themeAuto')
+  docEl.classList.add(themeClass)
+}
+
+window.onthemechange()`
 export default function HTML (props) {
   return (
     <html lang="zh-cmn-Hans" {...props.htmlAttributes}>
@@ -11,7 +27,9 @@ export default function HTML (props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <script src="/script.js"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: darkModeSwitch,
+        }} />
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
