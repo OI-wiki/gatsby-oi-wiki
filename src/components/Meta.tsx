@@ -1,5 +1,6 @@
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
+import lightBlue from '@material-ui/core/colors/lightBlue'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
@@ -24,9 +25,27 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '.5rem',
     textDecoration: 'none',
   },
+  link: {
+    color: lightBlue[500],
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+    '&.active': {
+      color: theme.palette.text.primary,
+    },
+  },
 }))
 
-function Meta ({ tags, relativePath, modifiedTime, noMeta, location }) {
+interface Props {
+  tags: string[];
+  relativePath: string;
+  modifiedTime: string;
+  noMeta: string;
+  location: string;
+}
+const Meta: React.FC<Props> = (props: Props) => {
+  const { tags, relativePath, modifiedTime, noMeta, location } = props
   const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
