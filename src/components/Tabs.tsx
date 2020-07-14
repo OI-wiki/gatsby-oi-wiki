@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2.5),
     minWidth: '0',
     '&:hover': {
+      // eslint-disable-next-line
+      //@ts-ignore
       color: theme.palette.tab.colorOnHover,
       opacity: '1',
     },
@@ -21,7 +23,12 @@ const useIndicatorStyles = makeStyles(() => ({
   },
 }))
 
-function NavTabs (props) {
+interface Props{
+  tabID: number;
+  pathList: any;
+}
+
+const NavTabs: React.FC<Props> = (props) => {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
 
@@ -47,7 +54,7 @@ function NavTabs (props) {
   })()
 
   const [value, setValue] = React.useState(state)
-  const handleChange = (event, newValue) => {
+  const handleChange: (newValue: any, event?: Record<string, unknown>) => any = function (newValue) {
     setValue(newValue)
   }
   return (
