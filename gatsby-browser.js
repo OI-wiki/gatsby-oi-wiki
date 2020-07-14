@@ -5,4 +5,5 @@ export const onRouteUpdate = () => {
     // eslint-disable-next-line no-undef
     requestIdleCallback(() => MathJax.typeset())
   }
+  window.cfga()
 }
