@@ -16,3 +16,5 @@ window.onthemechange = function (settings) {
 }
 
 window.onthemechange()
+
+// this file should be MANUALLY inserted into html.js
