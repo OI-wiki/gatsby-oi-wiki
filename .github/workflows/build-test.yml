@@ -31,9 +31,4 @@ jobs:
 
       - run: npm install
 
-      - name: Install sharp and modify config
-        run: |
-          npm i gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images gatsby-plugin-manifest
-          sed -i 's/\/\/ CI BUILD //g' gatsby-config.js
-
       - run: npm run cibuild
