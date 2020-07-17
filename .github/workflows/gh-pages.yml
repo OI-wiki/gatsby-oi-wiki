@@ -35,6 +35,11 @@ jobs:
 
       - run: npm install
 
+      - name: Install sharp and modify config
+        run: |
+          npm i gatsby-plugin-sharp gatsby-transformer-sharp
+          sed -i 's/\/\/ INSERT SHARP HERE/"gatsby-plugin-sharp",\n    "gatsby-transformer-sharp",/g' gatsby-config.js
+
       - run: npm run build
 
       - name: Deploy

@@ -16,8 +16,9 @@ module.exports = {
         path: './docs/',
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    // INSERT SHARP HERE
+    // 'gatsby-plugin-sharp',
+    // 'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
