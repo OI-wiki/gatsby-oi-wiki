@@ -17,8 +17,6 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 准备好 Git 和 NodeJS。注意，NodeJS 版本应当大于等于12. 请勿使用 taobao 等 npm 镜像。
 
-你可能需要一些工具来解决国际互联网访问问题，**并配置`HTTP_PROXY`和`HTTPS_PROXY`两个环境变量**。
-
 #### Linux
 
 ```shell
