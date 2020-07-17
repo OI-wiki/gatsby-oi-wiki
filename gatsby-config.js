@@ -16,23 +16,23 @@ module.exports = {
         path: './docs/',
       },
     },
-    // INSERT SHARP HERE
-    // 'gatsby-plugin-sharp',
-    // 'gatsby-transformer-sharp',
+    // 以 CI BUILD 开头的注释会在构建时被取消注释。
+    // CI BUILD 'gatsby-plugin-sharp',
+    // CI BUILD 'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 900,
-              withWebp: true,
-              tracedSVG: false,
-              linkImagesToOriginal: false,
-              disableBgImageOnAlpha: true,
-            },
-          },
+          // CI BUILD {
+          // CI BUILD   resolve: 'gatsby-remark-images',
+          // CI BUILD   options: {
+          // CI BUILD     maxWidth: 900,
+          // CI BUILD     withWebp: true,
+          // CI BUILD     tracedSVG: false,
+          // CI BUILD     linkImagesToOriginal: false,
+          // CI BUILD     disableBgImageOnAlpha: true,
+          // CI BUILD   },
+          // CI BUILD },
           {
             resolve: 'gatsby-remark-copy-linked-files',
             options: {
