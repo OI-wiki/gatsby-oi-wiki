@@ -95,18 +95,17 @@ module.exports = {
       },
     },
     'gatsby-plugin-catch-links',
-    // `gatsby-plugin-theme-ui`,
     'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'OI Wiki',
-        short_name: 'OI Wiki',
-        start_url: '/',
-        display: 'standalone',
-        icon: 'icon/favicon_512x512.png',
-      },
-    },
+    // CI BUILD {
+    // CI BUILD   resolve: 'gatsby-plugin-manifest',
+    // CI BUILD   options: {
+    // CI BUILD     name: 'OI Wiki',
+    // CI BUILD     short_name: 'OI Wiki',
+    // CI BUILD     start_url: '/',
+    // CI BUILD     display: 'standalone',
+    // CI BUILD     icon: 'icon/favicon_512x512.png',
+    // CI BUILD   },
+    // CI BUILD },
     {
       resolve: 'gatsby-plugin-offline',
       options: {
