@@ -9,8 +9,7 @@
     "start": "yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
-    "preinstall": "curl -m 3 http://google.com && curl -m 3 https://google.com"
+    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "dependencies": {
     "@material-ui/core": "^4.10.2",
@@ -24,7 +23,6 @@
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
     "gatsby-plugin-catch-links": "^2.3.11",
-    "gatsby-plugin-manifest": "^2.4.18",
     "gatsby-plugin-material-ui": "^2.1.9",
     "gatsby-plugin-mdx": "^1.2.22",
     "gatsby-plugin-offline": "^3.2.13",
