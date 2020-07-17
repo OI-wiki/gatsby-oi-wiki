@@ -36,4 +36,4 @@ jobs:
           npm i gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images gatsby-plugin-manifest
           sed -i 's/\/\/ CI BUILD //g' gatsby-config.js
 
-      - run: npm run build
+      - run: npm run cibuild
