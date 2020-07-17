@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "precibuild": "npm i gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images gatsby-plugin-manifest && sed -i 's/\/\/ CI BUILD //g' gatsby-config.js",
+    "precibuild": "npm i gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images gatsby-plugin-manifest && sed -i 's/\\/\\/ CI BUILD //g' gatsby-config.js",
     "cibuild": "gatsby build",
     "build": "gatsby build",
     "develop": "gatsby develop",
