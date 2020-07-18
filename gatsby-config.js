@@ -2,7 +2,10 @@ const path = require('path')
 const isProd = process.env.PRODUCTION === 'true'
 const condition = (cond, v) => cond ? [v] : []
 if (isProd && process.env.gatsby_executing_command !== 'build') {
-  console.warn('You are in procution mode')
+  console.warn('Using production configurations in non-build environment')
+}
+if (!isProd && process.env.CI === 'true') {
+  console.warn('Using development configurations in build environment')
 }
 module.exports = {
   siteMetadata: {
