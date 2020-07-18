@@ -1,5 +1,12 @@
 const path = require('path')
-
+const isProd = process.env.PRODUCTION === 'true'
+const condition = (cond, v) => cond ? [v] : []
+if (isProd && process.env.gatsby_executing_command !== 'build') {
+  console.warn('Using production configurations in non-build environment')
+}
+if (!isProd && process.env.CI === 'true') {
+  console.warn('Using development configurations in build environment')
+}
 module.exports = {
   siteMetadata: {
     title: 'OI Wiki',
@@ -16,13 +23,13 @@ module.exports = {
         path: './docs/',
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    ...condition(isProd, 'gatsby-plugin-sharp'),
+    ...condition(isProd, 'gatsby-transformer-sharp'),
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
-          {
+          ...condition(isProd, {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 900,
@@ -31,7 +38,7 @@ module.exports = {
               linkImagesToOriginal: false,
               disableBgImageOnAlpha: true,
             },
-          },
+          }),
           {
             resolve: 'gatsby-remark-copy-linked-files',
             options: {
@@ -94,9 +101,8 @@ module.exports = {
       },
     },
     'gatsby-plugin-catch-links',
-    // `gatsby-plugin-theme-ui`,
     'gatsby-plugin-react-helmet',
-    {
+    ...condition(isProd, {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'OI Wiki',
@@ -105,7 +111,7 @@ module.exports = {
         display: 'standalone',
         icon: 'icon/favicon_512x512.png',
       },
-    },
+    }),
     {
       resolve: 'gatsby-plugin-offline',
       options: {
