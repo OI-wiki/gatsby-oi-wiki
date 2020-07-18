@@ -1,5 +1,5 @@
 const path = require('path')
-const isProd = process.env.PRODUCTION === 'true'
+const isProd = process.env.PRODUCTION === 'true' || process.env.RENDER === 'true'
 const condition = (cond, v) => cond ? [v] : []
 if (isProd && process.env.gatsby_executing_command !== 'build') {
   console.warn('Using production configurations in non-build environment')
