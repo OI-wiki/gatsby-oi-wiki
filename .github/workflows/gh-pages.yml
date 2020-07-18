@@ -35,7 +35,9 @@ jobs:
 
       - run: npm install
 
-      - run: npm run cibuild
+      - run: |
+          export PRODUCTION=true
+          npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
