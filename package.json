@@ -4,8 +4,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "precibuild": "npm i gatsby-plugin-sharp gatsby-transformer-sharp gatsby-remark-images gatsby-plugin-manifest && sed -i 's/\\/\\/ CI BUILD //g' gatsby-config.js",
-    "cibuild": "gatsby build",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "yarn develop",
@@ -78,5 +76,11 @@
     "src/**/*.{js,jsx,ts,tsx}": [
       "node_modules/.bin/eslint --fix"
     ]
+  },
+  "optionalDependencies": {
+    "gatsby-plugin-manifest": "^2.4.18",
+    "gatsby-plugin-sharp": "^2.6.19",
+    "gatsby-remark-images": "^3.3.19",
+    "gatsby-transformer-sharp": "^2.5.11"
   }
 }

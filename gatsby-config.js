@@ -1,5 +1,9 @@
 const path = require('path')
-
+const isProd = process.env.PRODUCTION === 'true'
+const condition = (cond, v) => cond ? [v] : []
+if (isProd && process.env.gatsby_executing_command !== 'build') {
+  console.warn('You are in procution mode')
+}
 module.exports = {
   siteMetadata: {
     title: 'OI Wiki',
@@ -16,23 +20,22 @@ module.exports = {
         path: './docs/',
       },
     },
-    // 以 CI BUILD 开头的注释会在构建时被取消注释。
-    // CI BUILD 'gatsby-plugin-sharp',
-    // CI BUILD 'gatsby-transformer-sharp',
+    ...condition(isProd, 'gatsby-plugin-sharp'),
+    ...condition(isProd, 'gatsby-transformer-sharp'),
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
-          // CI BUILD {
-          // CI BUILD   resolve: 'gatsby-remark-images',
-          // CI BUILD   options: {
-          // CI BUILD     maxWidth: 900,
-          // CI BUILD     withWebp: true,
-          // CI BUILD     tracedSVG: false,
-          // CI BUILD     linkImagesToOriginal: false,
-          // CI BUILD     disableBgImageOnAlpha: true,
-          // CI BUILD   },
-          // CI BUILD },
+          ...condition(isProd, {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 900,
+              withWebp: true,
+              tracedSVG: false,
+              linkImagesToOriginal: false,
+              disableBgImageOnAlpha: true,
+            },
+          }),
           {
             resolve: 'gatsby-remark-copy-linked-files',
             options: {
@@ -96,16 +99,16 @@ module.exports = {
     },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
-    // CI BUILD {
-    // CI BUILD   resolve: 'gatsby-plugin-manifest',
-    // CI BUILD   options: {
-    // CI BUILD     name: 'OI Wiki',
-    // CI BUILD     short_name: 'OI Wiki',
-    // CI BUILD     start_url: '/',
-    // CI BUILD     display: 'standalone',
-    // CI BUILD     icon: 'icon/favicon_512x512.png',
-    // CI BUILD   },
-    // CI BUILD },
+    ...condition(isProd, {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'OI Wiki',
+        short_name: 'OI Wiki',
+        start_url: '/',
+        display: 'standalone',
+        icon: 'icon/favicon_512x512.png',
+      },
+    }),
     {
       resolve: 'gatsby-plugin-offline',
       options: {

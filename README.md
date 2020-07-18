@@ -20,9 +20,10 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 #### Linux
 
 ```shell
-git clone https://github.com/{你的 GitHub 用户名}/gatsby-oi-wiki.git #将仓库克隆至本地
-cd gatsby-oi-wiki #进入仓库文件夹
-npm install #安装依赖
+git clone https://github.com/{你的 GitHub 用户名}/gatsby-oi-wiki.git # 将仓库克隆至本地
+cd gatsby-oi-wiki # 进入仓库文件夹
+npm install --no-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 npm install
+
 ```
 
 #### Windows
@@ -34,7 +35,7 @@ npm install #安装依赖
 
 git clone https://github.com/{你的 GitHub 用户名}/gatsby-oi-wiki.git
 cd gatsby-oi-wiki
-npm install
+npm install --no-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 npm install
 ```
 
 
