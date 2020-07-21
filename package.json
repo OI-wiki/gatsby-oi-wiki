@@ -65,7 +65,7 @@
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.10",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
