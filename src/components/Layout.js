@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const LazyComment = Loadable({
-  loader: () => import('./CommentSystem/index.tsx'),
+  loader: () => import('./CommentSystem/index'),
   // eslint-disable-next-line react/display-name
   loading: () => <div />,
 })
