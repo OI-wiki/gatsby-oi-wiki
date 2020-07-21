@@ -12,10 +12,10 @@ import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Loadable from 'react-loadable'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
+import CommentSystem from './commentSystem/index.tsx'
 import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta.tsx'
@@ -67,12 +67,6 @@ const useStyles = makeStyles((theme) => ({
     margin: `${theme.spacing(2)}px 0px`,
   },
 }))
-
-const LazyComment = Loadable({
-  loader: () => import('./CommentSystem/index'),
-  // eslint-disable-next-line react/display-name
-  loading: () => <div />,
-})
 
 function MyLayout ({
   children,
@@ -157,7 +151,7 @@ function MyLayout ({
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails>
                         <Container>
-                          <LazyComment title={title} />
+                          <CommentSystem title={title} />
                         </Container>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
