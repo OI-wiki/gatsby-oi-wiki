@@ -96,6 +96,7 @@ const lightCss = {
       '--divider': htr(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
       '--alert-info-bg': htr(blue[50]),
+      '--clicked-reaction-button': htr('#faebd7'),
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -120,6 +121,7 @@ const darkCss = {
       '--divider': htr(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
       '--alert-info-bg': htr(grey[900]),
+      '--clicked-reaction-button': htr('#202020'),
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -192,6 +194,7 @@ const adaptiveTheme = createMuiTheme({
       else return lightColor.getContrastText(color)
     },
     subTitle: 'rgba(var(--subtitle-text))',
+    reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround
