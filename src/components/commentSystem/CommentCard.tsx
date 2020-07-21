@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(2),
   },
   commentMargin: {
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   clickedBackground: {
     background: '#faebd7',
