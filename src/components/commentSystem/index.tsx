@@ -12,16 +12,10 @@ interface Props {
 const mockData = [{
   avatarLink: 'https://avatars3.githubusercontent.com/u/25521218?s=60&v=4',
   name: 'mgt',
-  contentHTML: `<table class="d-block" data-paste-markdown-skip="">
-  <tbody class="d-block">
-    <tr class="d-block">
-      <td class="d-block comment-body markdown-body js-comment-body rgh-linkified-code">
+  contentHTML: `
           <p>可能不工作，不过 CI 大概不需要在 Windows 上跑？我也感觉这样做有一点点丑，但是 gatsby 文档中给出的 .env.production 文件，似乎并不在配置文件里面生效，于是就采用了这种方法。</p>
 <p>不知道有没有更好看的写法，印象里面有的 CI 是可以在配置里面加入环境变量的</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
 `,
   timestamp: +new Date(),
 }, {
@@ -33,8 +27,11 @@ const mockData = [{
 and who may have problems in internet connection can simply <code>npm install --no-optional</code></p>
           </div>`,
 }]
-const commentSystem: React.FC<Props> = (_props) => {
-  return mockData.map(v => <CommentCard key={+v.timestamp} {...v}/>)
+
+const CommentSystem: React.FC<Props> = (_props) => {
+  return <>
+    {mockData.map(v => <CommentCard key={+v.timestamp} {...v} />)}
+  </>
 }
 
-export default commentSystem
+export default CommentSystem
