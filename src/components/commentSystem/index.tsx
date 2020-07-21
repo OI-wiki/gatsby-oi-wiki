@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Typography, Button } from '@material-ui/core'
+import { Divider, Typography } from '@material-ui/core'
 import CommentCard from './CommentCard'
 import CommentInput from './CommentInput'
 interface Props {
@@ -31,15 +31,16 @@ and who may have problems in internet connection can simply <code>npm install --
 }]
 
 const CommentSystem: React.FC<Props> = (_props) => {
+  const commentCount = 2
   return <>
     <Typography variant="h6">
-      1 条评论
+      {`${commentCount} 条评论`}
+      <div style={{ float: 'right' }}>
+        登录
+      </div>
     </Typography>
     <Divider/>
     <CommentInput name="mgt" avatarLink="https://avatars3.githubusercontent.com/u/25521218?s=60&v=4" sendComment={(v) => { console.log(v) }} />
-    <div style={{ margin: '8px', textAlign: 'right', marginBottom: '16px' }}>
-      <Button variant="contained" color="primary" >评论</Button>
-    </div>
     {mockData.map(v => <CommentCard key={+v.timestamp} {...v} />)}
   </>
 }
