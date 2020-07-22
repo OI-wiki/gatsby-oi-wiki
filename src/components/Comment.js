@@ -1,22 +1,17 @@
-import GitalkComponent from 'gitalk/dist/gitalk-component'
-import 'gitalk/dist/gitalk.css'
 import React from 'react'
+import Comment from './commentSystem/index.tsx'
 
-function Gitalk ({ title }) {
+function CommentSystem ({ title }) {
   return (
-    <GitalkComponent
-      options={{
-        id: title,
-        owner: 'OI-wiki',
-        repo: 'gitment',
-        admin: ['24OI-bot'],
-        clientID: 'd6a911c8fba0194626d4',
-        clientSecret: '867ec7e13cc99b420bd147cbb62d5cfec271ba81',
-        distractionFreeMode: false,
-        pagerDirection: 'first',
-      }}
+    <Comment
+      id={`${title} - OI Wiki`}
+      owner="OI-wiki"
+      repo="gitment"
+      admin={ ['24OI-bot'] }
+      clientID={process.env.GATSBY_GITHUB_CLIENT_ID}
+      clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}
     />
   )
 }
 
-export default Gitalk
+export default CommentSystem

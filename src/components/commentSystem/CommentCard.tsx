@@ -61,7 +61,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       variant="outlined"
       size="small"
       startIcon={props.text}
-      className={isClicked && classes.clickedBackground}
+      className={isClicked ? classes.clickedBackground : ''}
       onClick={clickFunc}
     >
       {count}
