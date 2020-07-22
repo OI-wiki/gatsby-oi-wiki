@@ -68,6 +68,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const docTemplate = path.resolve('src/templates/doc.js')
   const tagTemplate = path.resolve('src/templates/tags.js')
+  const logTemplate = path.resolve('src/templates/changelog.js')
 
   const result = await graphql(`
     {
@@ -114,6 +115,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         id: node.id,
         previous,
         next,
+      },
+    })
+    createPage({
+      path: node.fields.slug + 'changelog/',
+      component: logTemplate,
+      context: {
+        id: node.id,
+        slug: node.fields.slug,
       },
     })
   })
