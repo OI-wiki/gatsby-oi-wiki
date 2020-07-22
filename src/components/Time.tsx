@@ -11,8 +11,8 @@ const Time: React.FC<Props> = ({ timestamp }) => {
     setRelativeMode(!relativeMode)
   }
   const now = new Date()
-  return <div style={{ cursor: 'pointer' }}
-    onClick={toggle}> {relativeMode ? timeDifference(+now, timestamp) : new Date(timestamp).toLocaleString()} </div>
+  return <span style={{ cursor: 'pointer' }}
+    onClick={toggle}> {relativeMode ? timeDifference(+now, timestamp) : new Date(timestamp).toLocaleString()} </span>
 }
 
 export default Time
