@@ -2,12 +2,14 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, makeStyles 
 import React, { useState } from 'react'
 
 import Time from '../Time'
+import { Reactions } from './types'
 
 interface Props {
   avatarLink: string,
   name: string,
   contentHTML: string,
   timestamp: number,
+  reactions: Reactions
 }
 
 const useStyles = makeStyles(theme => ({
@@ -82,8 +84,9 @@ const CommentCard: React.FC<Props> = (props) => {
         <div dangerouslySetInnerHTML={{ __html: props.contentHTML }}/>
       </CardContent>
       <CardActions>
-        <ReactionButton text="👍" sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text="👎" sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text="👍" initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text="👎" initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text="♥" initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
       </CardActions>
     </Card>)
 }
