@@ -4,7 +4,7 @@ import GithubV3 from '@vssue/api-github-v3'
 import createPersistedState from 'use-persisted-state'
 import CommentCard from './CommentCard'
 import CommentInput from './CommentInput'
-import { Comments, Issue, User } from './types'
+import { Comments, Issue, User, SingleComment } from './types'
 const useToken = createPersistedState('github-access-token')
 
 interface Props {
@@ -16,19 +16,20 @@ interface Props {
   id: string,
 }
 
-async function getComments (ghAPI: GithubV3, id: string, token?: string): Promise<Comments | null> {
+async function getComments (ghAPI: GithubV3, id: string, token?: string): Promise<[Issue, Comments] | null> {
   const issue: Issue = await ghAPI.getIssue({ accessToken: token, issueTitle: id })
   if (issue === null) {
     return null
   }
   const comments: Comments = await ghAPI.getComments({ accessToken: token, issueId: issue.id, query: { page: 0, perPage: 100 } })
-  return comments
+  return [issue, comments]
 }
 
 const CommentSystem: React.FC<Props> = (props) => {
   const [token, setToken] = useToken(null)
   const [user, setUser] = useState<User>({ username: '未登录用户', avatar: undefined, homepage: undefined })
   const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
+  const [issue, setIssue] = useState<Issue>()
   const isDisabled = user.username === '未登录用户' || !token
   const ghAPI = new GithubV3(
     {
@@ -43,9 +44,11 @@ const CommentSystem: React.FC<Props> = (props) => {
     })
   useEffect(() => {
     const asyncFunc = async (): Promise<void> => {
-      const c = await getComments(ghAPI, props.id)
-      if (c !== null) {
+      const tmp = await getComments(ghAPI, props.id, token)
+      if (tmp !== null) {
+        const [i, c] = tmp
         setComments(c)
+        setIssue(i)
       }
       if (!token) {
         const tk = await ghAPI.handleAuth()
@@ -72,7 +75,16 @@ const CommentSystem: React.FC<Props> = (props) => {
       </div>
     </Typography>
     <Divider/>
-    <CommentInput name={user.username} avatarLink={user.avatar} sendComment={(v) => { console.log(v) }} disabled={isDisabled}/>
+    <CommentInput name={user.username} avatarLink={user.avatar} disabled={isDisabled}
+      sendComment={async (v) => {
+        const res: SingleComment = await ghAPI.postComment({ accessToken: token, issueId: issue.id, content: v })
+        console.log(res)
+        const tmp = await getComments(ghAPI, props.id, token)
+        if (tmp !== null) {
+          const [, c] = tmp
+          setComments(c)
+        }
+      }} />
     {
       comments.data.map(
         ({ content, author, createdAt, reactions, id }) =>

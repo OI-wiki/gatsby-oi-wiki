@@ -4,7 +4,7 @@ import { makeStyles, Avatar, TextField, Grid, Button, Hidden } from '@material-u
 interface Props {
   avatarLink: string,
   name: string
-  sendComment: (res: string) => void,
+  sendComment: (res: string) => Promise<void>,
   disabled: boolean
 }
 
@@ -49,6 +49,7 @@ const CommentInput: React.FC<Props> = (props) => {
             placeholder="我们鼓励在讨论区讨论有意义的内容及关于文章的勘误，无意义的讨论将会被管理员删除"
             multiline
             fullWidth
+            disabled={props.disabled}
             rows={5}
             value={content}
             onChange={(e) => { setContent(e.target.value) }}
@@ -57,7 +58,18 @@ const CommentInput: React.FC<Props> = (props) => {
         </Grid>
       </Grid>
       <div className={classes.buttonDiv}>
-        <Button variant="contained" color="primary" className={classes.button} size="small" disabled={props.disabled}>评论</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          size="small"
+          disabled={props.disabled}
+          onClick={() => {
+            props.sendComment(content)
+            setContent('')
+          }}>
+          评论
+        </Button>
       </div>
     </>
   )
