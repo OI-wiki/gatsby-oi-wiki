@@ -1,6 +1,8 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, makeStyles } from '@material-ui/core'
 import React, { useState } from 'react'
-
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import Time from '../Time'
 import { Reactions } from './types'
 
@@ -39,7 +41,7 @@ const reactionButtonDefaultProps = {
   isClicked: false,
 }
 type ReactionButtonProps = {
-  text: string,
+  text: any,
   sendReaction: () => void,
 } & Partial<typeof reactionButtonDefaultProps>
 
@@ -84,9 +86,9 @@ const CommentCard: React.FC<Props> = (props) => {
         <div dangerouslySetInnerHTML={{ __html: props.contentHTML }}/>
       </CardContent>
       <CardActions>
-        <ReactionButton text="👍" initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text="👎" initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text="♥" initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<ThumbUpIcon/>} initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<ThumbDownIcon/>} initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<FavoriteIcon/>} initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
       </CardActions>
     </Card>)
 }
