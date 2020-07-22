@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
+import Red from '@material-ui/core/colors/red'
+import Amber from '@material-ui/core/colors/amber'
 import Time from '../Time'
 import { Reactions } from './types'
 
@@ -33,6 +35,12 @@ const useStyles = makeStyles(theme => ({
   },
   clickedBackground: {
     background: (theme.palette as unknown as any).reactionButtonBackground,
+  },
+  red: {
+    color: Red[500],
+  },
+  yellow: {
+    color: '#ffcf56',
   },
 }))
 
@@ -86,9 +94,9 @@ const CommentCard: React.FC<Props> = (props) => {
         <div dangerouslySetInnerHTML={{ __html: props.contentHTML }}/>
       </CardContent>
       <CardActions>
-        <ReactionButton text={<ThumbUpIcon/>} initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text={<ThumbDownIcon/>} initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text={<FavoriteIcon/>} initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<ThumbUpIcon className={classes.yellow}/>} initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<ThumbDownIcon className={classes.yellow}/>} initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton text={<FavoriteIcon className={classes.red}/>} initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
       </CardActions>
     </Card>)
 }
