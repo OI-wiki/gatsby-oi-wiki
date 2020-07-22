@@ -5,6 +5,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import Red from '@material-ui/core/colors/red'
 import Amber from '@material-ui/core/colors/amber'
+import clsx from 'clsx'
 import Time from '../Time'
 import { Reactions } from './types'
 
@@ -42,6 +43,16 @@ const useStyles = makeStyles(theme => ({
   yellow: {
     color: '#ffcf56',
   },
+  nullReactionStartIcon: {
+    marginLeft: '0px',
+    marginRight: '0px',
+  },
+  nullReaction: {
+    padding: '5px 10px',
+  },
+  reactionButton: {
+    minWidth: '0px',
+  },
 }))
 
 const reactionButtonDefaultProps = {
@@ -73,10 +84,11 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       variant="outlined"
       size="small"
       startIcon={props.text}
-      className={isClicked ? classes.clickedBackground : ''}
+      className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
+      classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon } : undefined}
     >
-      {count}
+      {count !== 0 && count}
     </Button>
   )
 }
