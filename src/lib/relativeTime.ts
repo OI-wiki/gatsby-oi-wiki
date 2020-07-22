@@ -19,7 +19,7 @@ export default function timeDifference (current: number, previous: number): stri
   } else if (elapsed < msPerMonth) {
     return `约 ${Math.round(elapsed / msPerDay)} 天前`
   } else if (elapsed < msPerYear) {
-    return `约 ${Math.round(elapsed / msPerMonth)} 月前`
+    return `约 ${Math.round(elapsed / msPerMonth)} 个月前`
   }
   return `约 ${Math.round(elapsed / msPerYear)} 年前`
 }
