@@ -4,7 +4,8 @@ import { makeStyles, Avatar, TextField, Grid, Button, Hidden } from '@material-u
 interface Props {
   avatarLink: string,
   name: string
-  sendComment: (res: string) => void
+  sendComment: (res: string) => void,
+  disabled: boolean
 }
 
 const useStyles = makeStyles(theme => ({
@@ -56,7 +57,7 @@ const CommentInput: React.FC<Props> = (props) => {
         </Grid>
       </Grid>
       <div className={classes.buttonDiv}>
-        <Button variant="contained" color="primary" className={classes.button} size="small">评论</Button>
+        <Button variant="contained" color="primary" className={classes.button} size="small" disabled={props.disabled}>评论</Button>
       </div>
     </>
   )
