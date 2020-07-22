@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
   },
   clickedBackground: {
-    background: theme.palette.reactionButtonBackground,
+    background: (theme.palette as unknown as any).reactionButtonBackground,
   },
 }))
 
