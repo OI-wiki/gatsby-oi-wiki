@@ -76,8 +76,10 @@ const CommentSystem: React.FC<Props> = (props) => {
     </Typography>
     <Divider/>
     <CommentInput name={user.username} avatarLink={user.avatar} disabled={isDisabled}
-      sendComment={async (v) => {
+      sendComment={async (v, setLoading) => {
+        setLoading(true)
         await ghAPI.postComment({ accessToken: token, issueId: issue.id, content: v })
+        setLoading(false)
         const tmp = await getComments(ghAPI, props.id, token)
         if (tmp !== null) {
           const [, c] = tmp
