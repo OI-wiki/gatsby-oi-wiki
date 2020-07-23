@@ -63,13 +63,18 @@ const useStyles = makeStyles((theme) => ({
   active: {},
 }))
 
-function getIDfromURL (url) {
+function getIDfromURL (url:string):string {
   return url.substring(1, url.length)
 }
 
-function getItems (items) {
+interface itemsResult{
+  url: string;
+  title: string;
+  node: any;
+}
+function getItems (items: Item[]):itemsResult[] {
   const itemsResult = []
-  items.forEach((item2) => {
+  items.forEach((item2: Item) => {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
@@ -87,7 +92,20 @@ function getItems (items) {
   return itemsResult
 }
 
-function ToC (props) {
+interface Item{
+  url: string,
+  title: string;
+  items?: Item[];
+}
+interface Items{
+  items: Item[];
+}
+interface Toc{
+  pathname: string;
+  toc: Items;
+}
+
+const ToC: React.FC<Toc> = (props) => {
   const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
@@ -164,7 +182,7 @@ function ToC (props) {
     [],
   )
 
-  const itemLink = (item, secondary) => (
+  const itemLink: React.FC<{ item: Item, secondary?: boolean}> = ({ item, secondary }) => (
     <MuiLink
       display="block"
       color={activeState === item.url ? 'textPrimary' : 'textSecondary'}
@@ -190,11 +208,11 @@ function ToC (props) {
           <Typography component="ul" className={classes.ul}>
             {items.map((item2) => (
               <li key={item2.title}>
-                {itemLink(item2)}
+                {itemLink({ item: item2 })}
                 {item2.items && item2.items.length > 0 ? (
                   <ul className={classes.ul}>
                     {item2.items.map((item3) => (
-                      <li key={item3.title}>{itemLink(item3, true)}</li>
+                      <li key={item3.title}>{itemLink({ item: item3, secondary: true })}</li>
                     ))}
                   </ul>
                 ) : null}
