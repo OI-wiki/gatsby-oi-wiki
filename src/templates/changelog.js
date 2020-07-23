@@ -1,26 +1,10 @@
-import git from 'simple-git'
 import React from 'react'
-import { graphql } from 'gatsby'
-
-const query = async function (prop) {
-  //  +index.md or - / + .md
-  const particalPath = prop.split('/').length() > 3 ? (prop.slice(0, -1) + '.md') : (prop + 'index.md')
-  const completePath = 'docs' + particalPath
-  const res = await git().log(['--', completePath])
-  return res
-}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext, data, location }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id, slug } = pageContext
-  console.log(slug)
-  const { edges } = data.allMdx
-  // const { node { fields { slug: partPath}} } = edges[0]
-  const partPath = edges[0].node.fields.slug
-  const log = query(partPath)
+const ChangeLog = ({ pageContext: { id, slug, log }, data, location }) => {
   return (
     <div>
+      <p>djsal</p>
       <p>{log}</p>
       {log.all.slice(0, 15).map((item, index) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,17 +24,3 @@ const ChangeLog = ({ pageContext, data, location }) => {
 }
 
 export default ChangeLog
-
-export const pageQuery = graphql`
-  query($id: String){
-      allMdx(filter: { id: {eq: $id } }) {
-          edges {
-              node {
-                  fields {
-                    slug
-                  }
-              }
-          }
-      }
-  }
-`

@@ -1,7 +1,17 @@
 const path = require('path')
 const _ = require('lodash')
-
+const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
+
+const gitQuery = async function (prop) {
+  // +index.md or - / + .md
+  const particalPath = prop.split('/').length > 3 ? (prop.slice(0, -1) + '.md') : (prop + 'index.md')
+  const completePath = 'docs' + particalPath
+  const res = await git().log(['--', completePath])
+  // lack error handle and console data
+  // console.log(res)
+  return res
+}
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   // you only want to operate on `Mdx` nodes. If you had content from a
@@ -21,47 +31,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
-
-// exports.createPages = async ({ graphql, actions, reporter }) => {
-//   // Destructure the createPage function from the actions object
-//   const { createPage } = actions
-
-//   const result = await graphql(`
-//     query {
-//       allMdx {
-//         edges {
-//           node {
-//             id
-//             fields {
-//               slug
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `)
-
-//   if (result.errors) {
-//     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
-//   }
-
-//   // Create blog post pages.
-//   const posts = result.data.allMdx.edges
-
-//   // you'll call `createPage` for each result
-//   posts.forEach(({ node }, index) => {
-//     createPage({
-//       // This is the slug you created before
-//       // (or `node.frontmatter.slug`)
-//       path: node.fields.slug,
-//       // This component will wrap our MDX content
-//       component: path.resolve(`./src/components/posts-page-layout.js`),
-//       // You can use the values in this context in
-//       // our page layout component
-//       context: { id: node.id },
-//     })
-//   })
-// }
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
@@ -108,6 +77,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   posts.forEach(({ node }, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1]
     const next = index === 0 ? null : posts[index - 1]
+    const log = gitQuery(node.fields.slug)
     createPage({
       path: node.fields.slug,
       component: docTemplate,
@@ -123,6 +93,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       context: {
         id: node.id,
         slug: node.fields.slug,
+        changelog: log,
       },
     })
   })
@@ -144,25 +115,4 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   if (result.errors) {
     reporter.panic(result.errors)
   }
-
-  // const docs = result.data.allMdx.nodes
-
-  /*
-  docs.forEach((doc, index) => {
-    // const previous = index === docs.length - 1 ? null : docs[index + 1]
-    // const next = index === 0 ? null : docs[index - 1]
-    const { slug } = doc.fields.slug
-    console.log(slug)
-
-    createPage({
-      path: slug,
-      component: DocTemplate,
-      // context: {
-      //   ...doc,
-      //   previous,
-      //   next
-      // }
-    })
-  })
-  */
 }
