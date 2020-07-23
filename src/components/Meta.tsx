@@ -64,7 +64,7 @@ const Meta: React.FC<Props> = (props: Props) => {
               本页面最近更新：
             </span>
             <span>{modifiedTime}</span>，
-            <MyLink href={historyURL + relativePath}>更新历史</MyLink>
+            <MyLink href={'/' + relativePath.slice(0, -3) + '/changelog/'}>更新历史</MyLink>
             <br />
             <span>
               <EditIcon fontSize="small" className={classes.metaicon} />

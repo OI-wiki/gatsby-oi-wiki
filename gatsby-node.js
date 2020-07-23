@@ -74,10 +74,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.postsRemark.edges
   // console.log(posts)
   // Create post detail pages
-  posts.forEach(({ node }, index) => {
+  posts.forEach(async ({ node }, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1]
     const next = index === 0 ? null : posts[index - 1]
-    const log = gitQuery(node.fields.slug)
+    const log = await gitQuery(node.fields.slug)
     createPage({
       path: node.fields.slug,
       component: docTemplate,
@@ -91,7 +91,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.fields.slug + 'changelog/',
       component: logTemplate,
       context: {
-        id: node.id,
         slug: node.fields.slug,
         changelog: log,
       },
