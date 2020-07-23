@@ -11,6 +11,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import lightBlue from '@material-ui/core/colors/lightBlue'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 
 const useStyles = makeStyles((theme) => ({
@@ -30,17 +31,19 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
+const ChangeLog = ({ pageContext: { slug }, data, location }) => {
   const classes = useStyles()
+  const { nodes: changelog } = data.allChangeLog
   return (
     <div>
       <div>anything here</div>
       <Layout location={location} noMeta="true" title="更改记录">
         <div>让我知道你的存在 okkk？？</div>
         <Timeline align="alternate">
-          {changelog.all.slice(0, 15).map((item, index) => {
+          {changelog.map((item, index) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { hash, date, message, refs, body, author_name: name, author_email: email } = item
+            // const { hash, date, message, refs, body, author_name: name, author_email: email } = item
+            const { date, author, message } = item
             return (
               <TimelineItem key={index + '#'}>
                 <TimelineOppositeContent>
@@ -55,7 +58,7 @@ const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
                 <TimelineContent>
                   <Paper elevation={3} className={classes.paper}>
                     <Typography variant="h6" component="h1">
-                      <Link href={'https://github.com/' + name}>{name}</Link>
+                      <Link href={'https://github.com/' + author}>{author}</Link>
                     </Typography>
                     <Typography>{message}</Typography>
                   </Paper>
@@ -70,3 +73,23 @@ const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
 }
 
 export default ChangeLog
+
+export const pageQuery = graphql`
+  query($slug: String) {
+    allChangeLog(filter: {filepath: {eq: $slug}}) {
+      nodes {
+        author
+        date
+        filepath
+        message
+      }
+    }
+  }
+`
+
+// const Page = () => {
+//   return (
+//     <div>空空如野</div>
+//   )
+// }
+// export default Page
