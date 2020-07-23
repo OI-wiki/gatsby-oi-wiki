@@ -20,7 +20,7 @@ import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta.tsx'
 import NavAndDrawer from './NavAndDrawer.tsx'
-import ToC from './Toc'
+import ToC from './Toc.tsx'
 import Title from './Title.tsx'
 
 const useStyles = makeStyles((theme) => ({
