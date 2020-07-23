@@ -1,12 +1,12 @@
 import React from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext: { id, slug, log }, data, location }) => {
+const ChangeLog = ({ pageContext: { id, slug, changelog }, data, location }) => {
   return (
     <div>
-      <p>djsal</p>
-      <p>{log}</p>
-      {log.all.slice(0, 15).map((item, index) => {
+      <p>djsal</p>xw
+      <p>{changelog}</p>
+      {changelog.all.slice(0, 15).map((item, index) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { hash, data, message, refs, body, author_name: name, author_email: email } = item
         return (
