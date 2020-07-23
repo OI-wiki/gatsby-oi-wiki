@@ -62,7 +62,13 @@ const CommentSystem: React.FC<Props> = (props) => {
     asyncFunc()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.clientID, props.clientSecret, props.id])
-
+  const updateComments = async (): Promise<void> => {
+    const tmp = await getComments(ghAPI, props.id, token)
+    if (tmp !== null) {
+      const [, c] = tmp
+      setComments(c)
+    }
+  }
   return <>
     <Typography variant="h6" >
       {`${comments.count} 条评论`}
@@ -80,11 +86,7 @@ const CommentSystem: React.FC<Props> = (props) => {
         setLoading(true)
         await ghAPI.postComment({ accessToken: token, issueId: issue.id, content: v })
         setLoading(false)
-        const tmp = await getComments(ghAPI, props.id, token)
-        if (tmp !== null) {
-          const [, c] = tmp
-          setComments(c)
-        }
+        updateComments()
       }} />
     {
       comments.data.map(
@@ -97,6 +99,12 @@ const CommentSystem: React.FC<Props> = (props) => {
               timestamp={+new Date(createdAt)}
               key={id}
               reactions={reactions}
+              currentUser={user.username}
+              commentID={id}
+              deleteComment={async (commentId) => {
+                const success: boolean = await ghAPI.deleteComment({ accessToken: token, commentId, issueId: issue.id })
+                updateComments()
+              }}
             />
           ))
     }

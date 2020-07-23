@@ -3,17 +3,22 @@ import React, { useState } from 'react'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 import Red from '@material-ui/core/colors/red'
 import clsx from 'clsx'
 import Time from '../Time'
 import { Reactions } from './types'
 
 interface Props {
+  currentUser: string,
+  commentID: string,
   avatarLink: string,
   name: string,
   contentHTML: string,
   timestamp: number,
-  reactions: Reactions
+  reactions: Reactions,
+  deleteComment: (commentID: string) => Promise<void>,
 }
 
 const useStyles = makeStyles(theme => ({
@@ -98,7 +103,12 @@ const CommentCard: React.FC<Props> = (props) => {
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
         avatar={<Avatar alt={props.name} src={props.avatarLink}/>}
-        title={props.name}
+        title={<>
+          {props.name} { props.currentUser === props.name &&
+            <IconButton size="small" aria-label="delete" style={{ float: 'right' }} onClick={() => { props.deleteComment(props.commentID) }}>
+              <DeleteIcon />
+            </IconButton>}
+        </>}
         classes={{ root: classes.headerRoot }}
         subheader={<Time timestamp={props.timestamp} />} />
       <CardContent classes={{ root: classes.contentRoot }}>
