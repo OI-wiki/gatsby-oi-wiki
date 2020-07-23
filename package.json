@@ -19,25 +19,25 @@
     "@mdx-js/react": "^1.6.6",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
-    "gatsby": "^2.23.21",
+    "gatsby": "^2.24.7",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-material-ui": "^2.1.9",
     "gatsby-plugin-mdx": "^1.2.22",
-    "gatsby-plugin-offline": "^3.2.13",
+    "gatsby-plugin-offline": "^3.2.19",
     "gatsby-plugin-preact": "^4.0.9",
-    "gatsby-plugin-react-helmet": "^3.3.9",
+    "gatsby-plugin-react-helmet": "^3.3.10",
     "gatsby-remark-copy-linked-files": "^2.3.11",
     "gatsby-remark-table-of-contents": "0.0.9",
     "gatsby-remark-vscode": "^3.0.1",
-    "gatsby-source-filesystem": "^2.3.18",
+    "gatsby-source-filesystem": "^2.3.20",
     "gatsby-source-local-git": "^1.0.0",
     "gitalk": "^1.6.2",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.19",
     "mdast-util-toc": "^5.0.3",
-    "preact": "^10.4.5",
+    "preact": "^10.4.6",
     "preact-render-to-string": "^5.1.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -52,8 +52,8 @@
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.4.0",
-    "@typescript-eslint/parser": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
     "autosuggest-highlight": "^3.1.1",
     "eslint": "^7.4.0",
     "eslint-config-standard": "^14.1.1",
@@ -66,7 +66,7 @@
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.10",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
@@ -79,7 +79,7 @@
     ]
   },
   "optionalDependencies": {
-    "gatsby-plugin-manifest": "^2.4.18",
+    "gatsby-plugin-manifest": "^2.4.19",
     "gatsby-plugin-sharp": "^2.6.19",
     "gatsby-remark-images": "^3.3.19",
     "gatsby-transformer-sharp": "^2.5.11"
