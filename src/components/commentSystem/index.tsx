@@ -106,7 +106,9 @@ const CommentSystem: React.FC<Props> = (props) => {
   }
   return <>
     <Typography variant="h6" >
-      <a href={issue?.link} className={classes.link}>{`${comments.count} 条评论`}</a>
+      <Tooltip title="在 GitHub 上查看">
+        <a href={issue?.link} className={classes.link}>{`${comments.count} 条评论`}</a>
+      </Tooltip>
       <Tooltip title={ isDisabled ? '登录' : '登出'}>
         <div style={{ float: 'right', cursor: 'pointer' }} onClick={() => {
           if (!token) {
@@ -135,6 +137,7 @@ const CommentSystem: React.FC<Props> = (props) => {
           (
             <CommentCard
               avatarLink={author.avatar}
+              disabled={isDisabled}
               name={author.username}
               contentHTML={content}
               time={createdAt}
