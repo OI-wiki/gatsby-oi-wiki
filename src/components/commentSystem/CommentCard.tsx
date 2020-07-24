@@ -16,7 +16,7 @@ interface Props {
   avatarLink: string,
   name: string,
   contentHTML: string,
-  timestamp: number,
+  time: number | string | Date,
   reactions: Reactions,
   deleteComment: (commentID: string) => Promise<void>,
 }
@@ -110,7 +110,7 @@ const CommentCard: React.FC<Props> = (props) => {
             </IconButton>}
         </>}
         classes={{ root: classes.headerRoot }}
-        subheader={<Time timestamp={props.timestamp} />} />
+        subheader={<Time time={props.time} />} />
       <CardContent classes={{ root: classes.contentRoot }}>
         <div dangerouslySetInnerHTML={{ __html: props.contentHTML }}/>
       </CardContent>
