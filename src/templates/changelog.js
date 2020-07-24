@@ -38,8 +38,7 @@ const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
   const classes = useStyles()
   return (
     <Layout location={location} noMeta="true" title="更改记录">
-      <Timeline align="alternate">
-        {/* .slice(0, 15) */}
+      <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { hash, date, message, refs, body, author_name: author, author_email: email } = item
