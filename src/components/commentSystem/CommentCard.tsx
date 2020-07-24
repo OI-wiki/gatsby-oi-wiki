@@ -13,6 +13,7 @@ import Time from '../Time'
 import { Reactions } from './types'
 
 interface Props {
+  disabled: boolean,
   currentUser: User,
   commentID: string | number,
   avatarLink: string,
@@ -76,6 +77,7 @@ const reactionButtonDefaultProps = {
 }
 type ReactionButtonProps = {
   text: any,
+  disabled: boolean
   currentUser: User
   addReaction: () => void,
   removeReaction: () => void,
@@ -107,7 +109,8 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       color="default"
       variant="outlined"
       size="small"
-      startIcon={props.text}
+      disabled={propsMerged.disabled}
+      startIcon={propsMerged.text}
       className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
       classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
@@ -133,7 +136,7 @@ const CommentCard: React.FC<Props> = (props) => {
         avatar={<Avatar alt={props.name} src={props.avatarLink}/>}
         title={<>
           {props.name} { props.currentUser.username === props.name &&
-            <IconButton size="small" aria-label="delete" style={{ float: 'right' }} onClick={() => { props.deleteComment(props.commentID) }}>
+            <IconButton disabled={props.disabled} size="small" aria-label="delete" style={{ float: 'right' }} onClick={() => { props.deleteComment(props.commentID) }}>
               <DeleteIcon />
             </IconButton>}
         </>}
@@ -145,6 +148,7 @@ const CommentCard: React.FC<Props> = (props) => {
       <CardActions>
         <ReactionButton
           text={<ThumbUpIcon className={classes.yellow} />}
+          disabled={props.disabled}
           currentUser={props.currentUser}
           initialCount={like.count}
           isClicked={like.viewerHasReacted}
@@ -154,6 +158,7 @@ const CommentCard: React.FC<Props> = (props) => {
         />
         <ReactionButton
           text={<ThumbDownIcon className={classes.yellow}/>}
+          disabled={props.disabled}
           currentUser={props.currentUser}
           initialCount={unlike.count}
           isClicked={unlike.viewerHasReacted}
@@ -163,6 +168,7 @@ const CommentCard: React.FC<Props> = (props) => {
         />
         <ReactionButton
           text={<FavoriteIcon className={classes.red}/>}
+          disabled={props.disabled}
           currentUser={props.currentUser}
           initialCount={heart.count}
           isClicked={heart.viewerHasReacted}
