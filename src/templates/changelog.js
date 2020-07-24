@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import Time from '../components/Time.tsx'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,7 +49,7 @@ const ChangeLog = ({ pageContext: { slug }, data, location }) => {
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
                 <Typography variant="body2" color="textSecondary">
-                  {new Date(date).toLocaleString()}
+                  <Time time={date} updateInterval={5 * 60 * 60 * 1000} defaultShowRelative={false}/>
                 </Typography>
               </TimelineOppositeContent>
               <TimelineSeparator>
