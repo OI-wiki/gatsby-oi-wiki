@@ -13,7 +13,7 @@ import Time from '../Time'
 import { Reactions } from './types'
 
 interface Props {
-  currentUser: string,
+  currentUser: User,
   commentID: string | number,
   avatarLink: string,
   name: string,
@@ -76,6 +76,7 @@ const reactionButtonDefaultProps = {
 }
 type ReactionButtonProps = {
   text: any,
+  currentUser: User
   addReaction: () => void,
   removeReaction: () => void,
   users: User[],
@@ -86,13 +87,18 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
   const propsMerged = { ...reactionButtonDefaultProps, ...props }
   const [isClicked, setIsClicked] = useState(propsMerged.isClicked)
   const [count, setCount] = useState(propsMerged.initialCount)
+  const [users, setUsers] = useState(propsMerged.users)
   const clickFunc = (): void => {
     if (isClicked) {
       setCount(count - 1)
       propsMerged.removeReaction()
+      const tmpUsers = users.filter(({ username }) => username !== propsMerged.currentUser.username)
+      setUsers(tmpUsers)
     } else {
       setCount(count + 1)
       propsMerged.addReaction()
+      const tmpUsers: User[] = [...users, propsMerged.currentUser]
+      setUsers(tmpUsers)
     }
     setIsClicked(!isClicked)
   }
@@ -108,7 +114,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
     >
       {count !== 0 && count}
       <AvatarGroup max={3} style={{ marginLeft: '4px' }}>
-        {propsMerged.users.map(({ avatar, username }) => (
+        {users.map(({ avatar, username }) => (
           <Avatar alt={username} src={avatar} key={username} className={classes.avatarSmall}/>
         ))}
       </AvatarGroup>
@@ -138,7 +144,8 @@ const CommentCard: React.FC<Props> = (props) => {
       </CardContent>
       <CardActions>
         <ReactionButton
-          text={<ThumbUpIcon className={classes.yellow}/>}
+          text={<ThumbUpIcon className={classes.yellow} />}
+          currentUser={props.currentUser}
           initialCount={like.count}
           isClicked={like.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'like') }}
@@ -147,6 +154,7 @@ const CommentCard: React.FC<Props> = (props) => {
         />
         <ReactionButton
           text={<ThumbDownIcon className={classes.yellow}/>}
+          currentUser={props.currentUser}
           initialCount={unlike.count}
           isClicked={unlike.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'unlike') }}
@@ -155,6 +163,7 @@ const CommentCard: React.FC<Props> = (props) => {
         />
         <ReactionButton
           text={<FavoriteIcon className={classes.red}/>}
+          currentUser={props.currentUser}
           initialCount={heart.count}
           isClicked={heart.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'heart') }}
