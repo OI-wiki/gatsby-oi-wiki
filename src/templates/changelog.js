@@ -22,11 +22,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   link: {
-    color: theme.palette.footer.text,
     '&:hover': {
       textDecoration: 'none',
       color: lightBlue[500],
     },
+  },
+  timeBlock: {
+    minWidth: '200px',
+    maxWidth: '200px',
   },
 }))
 
@@ -35,40 +38,36 @@ const ChangeLog = ({ pageContext: { slug }, data, location }) => {
   const classes = useStyles()
   const { nodes: changelog } = data.allChangeLog
   return (
-    <div>
-      <div>anything here</div>
-      <Layout location={location} noMeta="true" title="更改记录">
-        <div>让我知道你的存在 okkk？？</div>
-        <Timeline align="alternate">
-          {changelog.map((item, index) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            // const { hash, date, message, refs, body, author_name: name, author_email: email } = item
-            const { date, author, message } = item
-            return (
-              <TimelineItem key={index + '#'}>
-                <TimelineOppositeContent>
-                  <Typography variant="body2" color="textSecondary">
-                    {date}
+    <Layout location={location} noMeta="true" title="更改记录">
+      <Timeline>
+        {changelog.map((item, index) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          // const { hash, date, message, refs, body, author_name: name, author_email: email } = item
+          const { date, author, message } = item
+          return (
+            <TimelineItem key={index + '#'}>
+              <TimelineOppositeContent className={classes.timeBlock}>
+                <Typography variant="body2" color="textSecondary">
+                  {new Date(date).toLocaleString()}
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot variant="outlined" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Paper variant="outlined" className={classes.paper}>
+                  <Typography variant="h6" component="h1">
+                    <Link href={'https://github.com/' + author}>{author}</Link>
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot variant="outlined" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Paper elevation={3} className={classes.paper}>
-                    <Typography variant="h6" component="h1">
-                      <Link href={'https://github.com/' + author}>{author}</Link>
-                    </Typography>
-                    <Typography>{message}</Typography>
-                  </Paper>
-                </TimelineContent>
-              </TimelineItem>
-            )
-          })}
-        </Timeline>
-      </Layout>
-    </div>
+                  <Typography>{message}</Typography>
+                </Paper>
+              </TimelineContent>
+            </TimelineItem>
+          )
+        })}
+      </Timeline>
+    </Layout>
   )
 }
 
@@ -86,10 +85,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-// const Page = () => {
-//   return (
-//     <div>空空如野</div>
-//   )
-// }
-// export default Page
