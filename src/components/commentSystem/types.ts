@@ -1,3 +1,4 @@
+import { Reactions, Comment, Comments } from '@mgtd/vssue-api-github-v4/lib/types'
 interface User {
   avatar: string,
   homepage: string,
@@ -11,26 +12,5 @@ interface Issue {
   link: string
 }
 
-interface Reactions {
-  like?: number
-  unlike?: number
-  heart?: number
-}
-interface SingleComment {
-  id: string
-  content: string
-  contentRaw: string
-  author: User
-  createdAt: string
-  updatedAt: string
-  reactions?: Reactions | null
-}
-interface Comments {
-  count: number
-  page: number
-  perPage: number
-  data: Array<SingleComment>
-}
-
 // eslint-disable-next-line no-undef
-export { Comments, Issue, Reactions, User, SingleComment }
+export { Comments, Issue, Reactions, User, Comment }

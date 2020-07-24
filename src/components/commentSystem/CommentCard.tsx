@@ -12,13 +12,15 @@ import { Reactions } from './types'
 
 interface Props {
   currentUser: string,
-  commentID: string,
+  commentID: string | number,
   avatarLink: string,
   name: string,
   contentHTML: string,
   time: number | string | Date,
   reactions: Reactions,
-  deleteComment: (commentID: string) => Promise<void>,
+  deleteComment: (commentID: string | number) => Promise<void>,
+  addReaction: (commentID: string | number, reaction: 'heart' | 'unlike' | 'like') => Promise<void>,
+  removeReaction: (commentID: string | number, reaction: 'heart' | 'unlike' | 'like') => Promise<void>
 }
 
 const useStyles = makeStyles(theme => ({
@@ -57,6 +59,9 @@ const useStyles = makeStyles(theme => ({
   reactionButton: {
     minWidth: '0px',
   },
+  labelMargin: {
+    marginLeft: '1.5px',
+  },
 }))
 
 const reactionButtonDefaultProps = {
@@ -65,7 +70,8 @@ const reactionButtonDefaultProps = {
 }
 type ReactionButtonProps = {
   text: any,
-  sendReaction: () => void,
+  addReaction: () => void,
+  removeReaction: () => void
 } & Partial<typeof reactionButtonDefaultProps>
 
 const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
@@ -76,11 +82,12 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
   const clickFunc = (): void => {
     if (isClicked) {
       setCount(count - 1)
+      propsMerged.removeReaction()
     } else {
       setCount(count + 1)
+      propsMerged.addReaction()
     }
     setIsClicked(!isClicked)
-    propsMerged.sendReaction()
   }
   return (
     <Button
@@ -90,7 +97,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       startIcon={props.text}
       className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
-      classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon } : undefined}
+      classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >
       {count !== 0 && count}
     </Button>
@@ -99,6 +106,9 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
 
 const CommentCard: React.FC<Props> = (props) => {
   const classes = useStyles()
+  const like = props.reactions.find(item => item.type === 'like')
+  const unlike = props.reactions.find(item => item.type === 'unlike')
+  const heart = props.reactions.find(item => item.type === 'heart')
   return (
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
@@ -115,9 +125,27 @@ const CommentCard: React.FC<Props> = (props) => {
         <div dangerouslySetInnerHTML={{ __html: props.contentHTML }}/>
       </CardContent>
       <CardActions>
-        <ReactionButton text={<ThumbUpIcon className={classes.yellow}/>} initialCount={props.reactions.like} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text={<ThumbDownIcon className={classes.yellow}/>} initialCount={props.reactions.unlike} sendReaction={() => { console.log('noop') }}/>
-        <ReactionButton text={<FavoriteIcon className={classes.red}/>} initialCount={props.reactions.heart} sendReaction={() => { console.log('noop') }}/>
+        <ReactionButton
+          text={<ThumbUpIcon className={classes.yellow}/>}
+          initialCount={like.count}
+          isClicked={like.viewerHasReacted}
+          addReaction={() => { props.addReaction(props.commentID, 'like') }}
+          removeReaction={() => { props.removeReaction(props.commentID, 'like') }}
+        />
+        <ReactionButton
+          text={<ThumbDownIcon className={classes.yellow}/>}
+          initialCount={unlike.count}
+          isClicked={unlike.viewerHasReacted}
+          addReaction={() => { props.addReaction(props.commentID, 'unlike') }}
+          removeReaction={() => { props.removeReaction(props.commentID, 'unlike') }}
+        />
+        <ReactionButton
+          text={<FavoriteIcon className={classes.red}/>}
+          initialCount={heart.count}
+          isClicked={heart.viewerHasReacted}
+          addReaction={() => { props.addReaction(props.commentID, 'heart') }}
+          removeReaction={() => { props.removeReaction(props.commentID, 'heart') }}
+        />
       </CardActions>
     </Card>)
 }
