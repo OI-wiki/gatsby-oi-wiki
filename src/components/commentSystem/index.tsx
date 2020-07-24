@@ -147,7 +147,7 @@ const CommentSystem: React.FC<Props> = (props) => {
               currentUser={user}
               commentID={id}
               deleteComment={async (commentId) => {
-                const success: boolean = await ghAPIV3.deleteComment({ accessToken: token, commentId, issueId: issue.id })
+                const success: boolean = await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id })
                 updateComments()
               }}
               addReaction={async (commentId, reaction) => {
