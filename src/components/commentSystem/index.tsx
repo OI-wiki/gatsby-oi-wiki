@@ -5,7 +5,7 @@ import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
 import CommentCard from './CommentCard'
 import CommentInput from './CommentInput'
-import { Comments, Issue, User, Comment } from './types'
+import { Comments, Issue, User } from './types'
 const useToken = createPersistedState('github-access-token')
 
 interface Props {

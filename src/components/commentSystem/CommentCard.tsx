@@ -6,7 +6,9 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Red from '@material-ui/core/colors/red'
+import AvatarGroup from '@material-ui/lab/AvatarGroup'
 import clsx from 'clsx'
+import { User } from '@mgtd/vssue-api-github-v4/lib/types'
 import Time from '../Time'
 import { Reactions } from './types'
 
@@ -62,6 +64,10 @@ const useStyles = makeStyles(theme => ({
   labelMargin: {
     marginLeft: '1.5px',
   },
+  avatarSmall: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
 }))
 
 const reactionButtonDefaultProps = {
@@ -71,7 +77,8 @@ const reactionButtonDefaultProps = {
 type ReactionButtonProps = {
   text: any,
   addReaction: () => void,
-  removeReaction: () => void
+  removeReaction: () => void,
+  users: User[],
 } & Partial<typeof reactionButtonDefaultProps>
 
 const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
@@ -100,6 +107,11 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >
       {count !== 0 && count}
+      <AvatarGroup max={3} style={{ marginLeft: '4px' }}>
+        {propsMerged.users.map(({ avatar, username }) => (
+          <Avatar alt={username} src={avatar} key={username} className={classes.avatarSmall}/>
+        ))}
+      </AvatarGroup>
     </Button>
   )
 }
@@ -131,6 +143,7 @@ const CommentCard: React.FC<Props> = (props) => {
           isClicked={like.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'like') }}
           removeReaction={() => { props.removeReaction(props.commentID, 'like') }}
+          users={like.users}
         />
         <ReactionButton
           text={<ThumbDownIcon className={classes.yellow}/>}
@@ -138,6 +151,7 @@ const CommentCard: React.FC<Props> = (props) => {
           isClicked={unlike.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'unlike') }}
           removeReaction={() => { props.removeReaction(props.commentID, 'unlike') }}
+          users={unlike.users}
         />
         <ReactionButton
           text={<FavoriteIcon className={classes.red}/>}
@@ -145,6 +159,7 @@ const CommentCard: React.FC<Props> = (props) => {
           isClicked={heart.viewerHasReacted}
           addReaction={() => { props.addReaction(props.commentID, 'heart') }}
           removeReaction={() => { props.removeReaction(props.commentID, 'heart') }}
+          users={heart.users}
         />
       </CardActions>
     </Card>)
