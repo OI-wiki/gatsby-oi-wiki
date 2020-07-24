@@ -132,7 +132,7 @@ const CommentCard: React.FC<Props> = (props) => {
       <CardHeader
         avatar={<Avatar alt={props.name} src={props.avatarLink}/>}
         title={<>
-          {props.name} { props.currentUser === props.name &&
+          {props.name} { props.currentUser.username === props.name &&
             <IconButton size="small" aria-label="delete" style={{ float: 'right' }} onClick={() => { props.deleteComment(props.commentID) }}>
               <DeleteIcon />
             </IconButton>}
