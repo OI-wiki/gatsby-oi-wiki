@@ -17,7 +17,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@mdx-js/mdx": "^1.6.6",
     "@mdx-js/react": "^1.6.6",
-    "@mgtd/vssue-api-github-v3": "^2.4.6",
+    "@mgtd/vssue-api-github-v3": "^2.4.7",
     "@mgtd/vssue-api-github-v4": "^2.4.3",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",

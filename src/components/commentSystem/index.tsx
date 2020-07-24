@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Typography, makeStyles } from '@material-ui/core'
+import { Divider, Typography, makeStyles, Tooltip } from '@material-ui/core'
 import GithubV3 from '@mgtd/vssue-api-github-v3'
 import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
@@ -24,7 +24,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, token?: string): Promise<[Issue, Comments] | null> {
-  const issue: Issue = await ghAPIV3.getIssue({ accessToken: token, issueTitle: id })
+  let issue: Issue
+  try {
+    issue = await ghAPIV3.getIssue({ accessToken: token, issueTitle: id })
+  } catch (e) {
+    return null
+  }
   if (issue === null) {
     return null
   }
@@ -39,8 +44,9 @@ async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, to
 
 const CommentSystem: React.FC<Props> = (props) => {
   const classes = useStyles()
+  const defaultUser = { username: '未登录用户', avatar: undefined, homepage: undefined }
   const [token, setToken] = useToken(null)
-  const [user, setUser] = useState<User>({ username: '未登录用户', avatar: undefined, homepage: undefined })
+  const [user, setUser] = useState<User>(defaultUser)
   const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
   const [issue, setIssue] = useState<Issue>()
   const isDisabled = user.username === '未登录用户' || !token
@@ -68,19 +74,24 @@ const CommentSystem: React.FC<Props> = (props) => {
     })
   useEffect(() => {
     const asyncFunc = async (): Promise<void> => {
-      const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, token)
-      if (tmp !== null) {
-        const [i, c] = tmp
-        setComments(c)
-        setIssue(i)
-      }
-      if (!token) {
-        const tk = await ghAPIV3.handleAuth()
+      let tk = token
+      if (!tk) {
+        tk = await ghAPIV3.handleAuth()
         if (tk !== null) {
           setToken(tk)
         }
       }
-      const u: User = await ghAPIV3.getUser({ accessToken: token })
+      const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, tk)
+      if (tmp !== null) {
+        const [i, c] = tmp
+        setComments(c)
+        setIssue(i)
+      } else {
+        setToken(null)
+        setUser(defaultUser)
+        return
+      }
+      const u: User = await ghAPIV3.getUser({ accessToken: tk })
       setUser(u)
     }
     asyncFunc()
@@ -96,13 +107,19 @@ const CommentSystem: React.FC<Props> = (props) => {
   return <>
     <Typography variant="h6" >
       <a href={issue?.link} className={classes.link}>{`${comments.count} 条评论`}</a>
-      <div style={{ float: 'right' }} onClick={() => {
-        if (!token) {
-          ghAPIV3.redirectAuth()
-        }
-      }}>
-        {user.username}
-      </div>
+      <Tooltip title={ isDisabled ? '登录' : '登出'}>
+        <div style={{ float: 'right', cursor: 'pointer' }} onClick={() => {
+          if (!token) {
+            ghAPIV3.redirectAuth()
+          } else {
+            setToken(null)
+            setUser(defaultUser)
+          }
+        }}>
+          {user.username}
+        </div>
+      </Tooltip>
+
     </Typography>
     <Divider/>
     <CommentInput name={user.username} avatarLink={user.avatar} disabled={isDisabled}
