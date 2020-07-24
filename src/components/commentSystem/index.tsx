@@ -48,6 +48,7 @@ const CommentSystem: React.FC<Props> = (props) => {
   const [token, setToken] = useToken(null)
   const [user, setUser] = useState<User>(defaultUser)
   const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
+  const filteredComments = comments.data.filter(({ isMinimized }) => !isMinimized)
   const [issue, setIssue] = useState<Issue>()
   const isDisabled = user.username === '未登录用户' || !token
   const ghAPIV3 = new GithubV3(
@@ -107,7 +108,7 @@ const CommentSystem: React.FC<Props> = (props) => {
   return <>
     <Typography variant="h6" >
       <Tooltip title="在 GitHub 上查看">
-        <a href={issue?.link} className={classes.link}>{`${comments.count} 条评论`}</a>
+        <a href={issue?.link} className={classes.link}>{`${filteredComments.length} 条评论`}</a>
       </Tooltip>
       <Tooltip title={ isDisabled ? '登录' : '登出'}>
         <div style={{ float: 'right', cursor: 'pointer' }} onClick={() => {
@@ -132,7 +133,7 @@ const CommentSystem: React.FC<Props> = (props) => {
         updateComments()
       }} />
     {
-      comments.data.map(
+      filteredComments.map(
         ({ content, author, createdAt, reactions, id }) =>
           (
             <CommentCard
