@@ -11,7 +11,6 @@ import TimelineDot from '@material-ui/lab/TimelineDot'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import lightBlue from '@material-ui/core/colors/lightBlue'
-import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
 
@@ -35,16 +34,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext: { slug }, data, location }) => {
+const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
   const classes = useStyles()
-  const { nodes: changelog } = data.allChangeLog
   return (
     <Layout location={location} noMeta="true" title="更改记录">
-      <Timeline>
-        {changelog.map((item, index) => {
+      <Timeline align="alternate">
+        {/* .slice(0, 15) */}
+        {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          // const { hash, date, message, refs, body, author_name: name, author_email: email } = item
-          const { date, author, message } = item
+          const { hash, date, message, refs, body, author_name: author, author_email: email } = item
           return (
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
@@ -73,16 +71,3 @@ const ChangeLog = ({ pageContext: { slug }, data, location }) => {
 }
 
 export default ChangeLog
-
-export const pageQuery = graphql`
-  query($slug: String) {
-    allChangeLog(filter: {filepath: {eq: $slug}}) {
-      nodes {
-        author
-        date
-        filepath
-        message
-      }
-    }
-  }
-`
