@@ -46,10 +46,15 @@ interface Props {
 }
 const Meta: React.FC<Props> = (props: Props) => {
   const { tags, relativePath, modifiedTime, noMeta, location } = props
-  const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
+  // const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
   const MyLink = Link(location)
+  // relativePath: math/index.md -> /math/changelog/ || math/ploy/fft.md -> /math/ploy/fft/changelog/
+  // path.split aiming to distinguish that relavtivePath is math/index.md or math/ploy/fft.md
+  const targetLink = relativePath.split('/').length > 2
+    ? ('/' + relativePath.slice(0, -3) + '/changelog/') : ('/' + relativePath.slice(0, -9) + '/changelog/')
+
   if (noMeta === 'false') {
     return (
       <>
@@ -64,7 +69,9 @@ const Meta: React.FC<Props> = (props: Props) => {
               本页面最近更新：
             </span>
             <span>{modifiedTime}</span>，
-            <MyLink href={'/' + relativePath.slice(0, -3) + '/changelog/'}>更新历史</MyLink>
+            {/* relativePath: math/index.md -> /math/changelog/ || math/ploy/fft.md -> /math/ploy/fft/changelog/ */}
+            {/* path.split to judge is math/index.md or math/ploy/fft.md */}
+            <MyLink href={targetLink}>更新历史</MyLink>
             <br />
             <span>
               <EditIcon fontSize="small" className={classes.metaicon} />

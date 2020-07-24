@@ -1,48 +1,24 @@
 const path = require('path')
-const crypto = require('crypto')
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 const gitQuery = async function (prop) {
-  // +index.md or - / + .md
+  // prop: /math/ -> /math/index.md || /math/ploy/fft/ -> /math/ploy/fft.md
+  // prop.split aiming to distinguish that prop is /math/ or /math/ploy/
   const particalPath = prop.split('/').length > 3 ? (prop.slice(0, -1) + '.md') : (prop + 'index.md')
   const completePath = 'docs' + particalPath
-  const res = await git().log(['--', completePath])
-  // lack error handle and console data
-  // console.log(res)
+  // error catch
+  const res = await git().log(['-15', completePath]).catch(err => console.log(err))
   return res
 }
-exports.onCreateNode = async ({ node, actions, getNode }) => {
-  const { createNodeField, createNode } = actions
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
   // you only want to operate on `Mdx` nodes. If you had content from a
   // remote CMS you could also check to see if the parent node was a
   // `File` node here
   if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode })
-    const log = await gitQuery(value)
-    log.all.slice(0, 15).map((item, index) => {
-      const { hash, date, message, refs, body, author_name: name, author_email: email } = item
-      createNode({
-        author: name,
-        date,
-        message,
-        hash,
-        refs,
-        body,
-        email,
-        id: hash + index,
-        parent: null,
-        filepath: value,
-        internal: {
-          type: 'ChangeLog',
-          contentDigest: crypto
-            .createHash('md5')
-            .update(JSON.stringify(name))
-            .digest('hex'),
-        },
-      })
-    })
     createNodeField({
       // Name of the field you are adding
       name: 'slug',
@@ -98,10 +74,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.postsRemark.edges
   // console.log(posts)
   // Create post detail pages
-  posts.forEach(({ node }, index) => {
+  posts.forEach(async ({ node }, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1]
     const next = index === 0 ? null : posts[index - 1]
-    // const log = await gitQuery(node.fields.slug)
+    const log = await gitQuery(node.fields.slug)
     createPage({
       path: node.fields.slug,
       component: docTemplate,
@@ -116,6 +92,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: logTemplate,
       context: {
         slug: node.fields.slug,
+        changelog: log,
       },
     })
   })
