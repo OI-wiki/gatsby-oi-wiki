@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Divider, Typography } from '@material-ui/core'
+import { Divider, Typography, makeStyles } from '@material-ui/core'
 import GithubV3 from '@mgtd/vssue-api-github-v3'
 import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
@@ -17,6 +17,12 @@ interface Props {
   id: string,
 }
 
+const useStyles = makeStyles((theme) => ({
+  link: {
+    color: theme.palette.text.primary,
+  },
+}))
+
 async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, token?: string): Promise<[Issue, Comments] | null> {
   const issue: Issue = await ghAPIV3.getIssue({ accessToken: token, issueTitle: id })
   if (issue === null) {
@@ -32,6 +38,7 @@ async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, to
 }
 
 const CommentSystem: React.FC<Props> = (props) => {
+  const classes = useStyles()
   const [token, setToken] = useToken(null)
   const [user, setUser] = useState<User>({ username: '未登录用户', avatar: undefined, homepage: undefined })
   const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
@@ -88,7 +95,7 @@ const CommentSystem: React.FC<Props> = (props) => {
   }
   return <>
     <Typography variant="h6" >
-      {`${comments.count} 条评论`}
+      <a href={issue?.link} className={classes.link}>{`${comments.count} 条评论`}</a>
       <div style={{ float: 'right' }} onClick={() => {
         if (!token) {
           ghAPIV3.redirectAuth()
