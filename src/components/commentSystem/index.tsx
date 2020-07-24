@@ -96,7 +96,7 @@ const CommentSystem: React.FC<Props> = (props) => {
               avatarLink={author.avatar}
               name={author.username}
               contentHTML={content}
-              timestamp={+new Date(createdAt)}
+              time={createdAt}
               key={id}
               reactions={reactions}
               currentUser={user.username}
