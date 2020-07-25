@@ -106,6 +106,9 @@ const CommentSystem: React.FC<Props> = (props) => {
       setComments(c)
     }
   }
+  function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time))
+  }
   return <>
     <Typography variant="h6" >
       <Tooltip title="在 GitHub 上查看">
@@ -147,9 +150,11 @@ const CommentSystem: React.FC<Props> = (props) => {
               reactions={reactions}
               currentUser={user}
               commentID={id}
-              deleteComment={async (commentId) => {
-                const success: boolean = await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id })
+              deleteComment={async (commentId, setDeleteLoading) => {
+                setDeleteLoading(true)
+                await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id })
                 updateComments()
+                setDeleteLoading(false)
               }}
               addReaction={async (commentId, reaction) => {
                 await ghAPIV4.postCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id })

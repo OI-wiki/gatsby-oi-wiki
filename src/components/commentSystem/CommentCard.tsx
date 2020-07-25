@@ -69,6 +69,9 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(3),
     height: theme.spacing(3),
   },
+  floatRight: {
+    float: 'right',
+  },
 }))
 
 const reactionButtonDefaultProps = {
@@ -135,14 +138,15 @@ const CommentCard: React.FC<Props> = (props) => {
   const like = props.reactions.find(item => item.type === 'like')
   const unlike = props.reactions.find(item => item.type === 'unlike')
   const heart = props.reactions.find(item => item.type === 'heart')
+  const [deleteLoading, setDeleteLoading] = useState(false)
   return (
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
         avatar={<Avatar alt={props.name} src={props.avatarLink}/>}
         title={<>
           {props.name} { props.currentUser.username === props.name &&
-            <IconButton disabled={props.disabled} size="small" aria-label="delete" style={{ float: 'right' }} onClick={() => { props.deleteComment(props.commentID) }}>
-              <DeleteIcon />
+            <IconButton disabled={props.disabled} size="small" aria-label="delete" className={classes.floatRight} onClick={() => { props.deleteComment(props.commentID, setDeleteLoading) }}>
+              {deleteLoading ? <CircularProgress size={20}/> : <DeleteIcon fontSize="small" />}
             </IconButton>}
         </>}
         classes={{ root: classes.headerRoot }}
