@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
   const classes = useStyles()
   const { state: { title } } = location
-  console.log(title)
   return (
     <Layout location={location} noMeta="true" title={`更改记录-${title}`} >
       <div>
