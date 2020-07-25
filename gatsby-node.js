@@ -4,12 +4,7 @@ const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 const gitQuery = async function (prop) {
-  // prop: /math/ -> /math/index.md || /math/ploy/fft/ -> /math/ploy/fft.md
-  // prop.split aiming to distinguish that prop is /math/ or /math/ploy/
-  const particalPath = prop.split('/').length > 3 ? (prop.slice(0, -1) + '.md') : (prop + 'index.md')
-  const completePath = 'docs' + particalPath
-  // error catch
-  const res = await git().log(['-15', completePath]).catch(err => console.log(err))
+  const res = await git().log(['-15', prop]).catch(err => console.log(err))
   return res
 }
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -54,6 +49,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             frontmatter {
               tags
             }
+            fileAbsolutePath
           }
         }
       }
@@ -77,7 +73,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   posts.forEach(async ({ node }, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1]
     const next = index === 0 ? null : posts[index - 1]
-    const log = await gitQuery(node.fields.slug)
+    // /workspace/gatsby-oi-wiki/docs/empty.md -> docs/empty.md
+    const { fileAbsolutePath: path } = node
+    const relativePath = path.slice(path.indexOf('/docs') + 1)
+
+    // if not await the res, how to handle
+    const log = await gitQuery(relativePath)
     createPage({
       path: node.fields.slug,
       component: docTemplate,
