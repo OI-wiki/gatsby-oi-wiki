@@ -143,6 +143,7 @@ function MyLayout ({
                   modifiedTime={modifiedTime}
                   noMeta={noMeta}
                   location={location}
+                  title={title}
                 />}
                 {noComment === 'false' && (
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
