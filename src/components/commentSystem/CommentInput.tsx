@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles, Avatar, TextField, Grid, Button, Hidden } from '@material-ui/core'
+import { makeStyles, Avatar, TextField, Grid, Button, Hidden, LinearProgress } from '@material-ui/core'
 
 interface Props {
   avatarLink: string,
@@ -39,6 +39,7 @@ const CommentInput: React.FC<Props> = (props) => {
   const [loading, setLoading] = useState<boolean>(false)
   return (
     <>
+      {loading && <LinearProgress />}
       <Grid container className={classes.commentMargin} justify="space-around" spacing={2}>
         <Hidden smDown>
           <Grid item>
