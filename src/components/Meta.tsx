@@ -5,6 +5,7 @@ import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
 import React, { useState } from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import Link from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
@@ -44,15 +45,14 @@ interface Props {
   location: string;
 }
 const Meta: React.FC<Props> = (props: Props) => {
-  const { tags, relativePath, modifiedTime, location } = props
-  // const historyURL = 'https://github.com/OI-wiki/OI-wiki/commits/master/docs/'
+  const { tags, relativePath, modifiedTime, location, ...rest } = props
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
   const MyLink = Link(location)
   // relativePath: math/index.md -> /math/changelog/ || math/ploy/fft.md -> /math/ploy/fft/changelog/
   // path.split aiming to distinguish that relavtivePath is math/index.md or math/ploy/fft.md
-  const targetLink = relativePath.split('/').length > 2
-    ? ('/' + relativePath.slice(0, -3) + '/changelog/') : ('/' + relativePath.slice(0, -9) + '/changelog/')
+  // const targetLink = relativePath.split('/').length > 2
+  //  ? ('/' + relativePath.slice(0, -3) + '/changelog/') : ('/' + relativePath.slice(0, -9) + '/changelog/')
 
   return <>
     <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} location={location} />
@@ -66,9 +66,7 @@ const Meta: React.FC<Props> = (props: Props) => {
               本页面最近更新：
         </span>
         <span>{modifiedTime}</span>，
-        {/* relativePath: math/index.md -> /math/changelog/ || math/ploy/fft.md -> /math/ploy/fft/changelog/ */}
-        {/* path.split to judge is math/index.md or math/ploy/fft.md */}
-        <MyLink href={targetLink}>更新历史</MyLink>
+        <GatsbyLink to='./changelog/' className={classes.link} {...rest} state={{ ...rest }}>更新历史</GatsbyLink>
         <br />
         <span>
           <EditIcon fontSize="small" className={classes.metaicon} />
