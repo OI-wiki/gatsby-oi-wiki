@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, makeStyles } from '@material-ui/core'
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, makeStyles, CircularProgress } from '@material-ui/core'
 import React, { useState } from 'react'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
@@ -21,7 +21,7 @@ interface Props {
   contentHTML: string,
   time: number | string | Date,
   reactions: Reactions,
-  deleteComment: (commentID: string | number) => Promise<void>,
+  deleteComment: (commentID: string | number, setLoading: (loading: boolean) => void) => Promise<void>,
   addReaction: (commentID: string | number, reaction: 'heart' | 'unlike' | 'like') => Promise<void>,
   removeReaction: (commentID: string | number, reaction: 'heart' | 'unlike' | 'like') => Promise<void>
 }
@@ -79,8 +79,8 @@ type ReactionButtonProps = {
   text: any,
   disabled: boolean
   currentUser: User
-  addReaction: () => void,
-  removeReaction: () => void,
+  addReaction: () => Promise<void>,
+  removeReaction: () => Promise<void>,
   users: User[],
 } & Partial<typeof reactionButtonDefaultProps>
 
@@ -90,15 +90,20 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
   const [isClicked, setIsClicked] = useState(propsMerged.isClicked)
   const [count, setCount] = useState(propsMerged.initialCount)
   const [users, setUsers] = useState(propsMerged.users)
-  const clickFunc = (): void => {
+  const [loading, setLoading] = useState(false)
+  const clickFunc = async (): Promise<void> => {
     if (isClicked) {
       setCount(count - 1)
-      propsMerged.removeReaction()
+      setLoading(true)
+      await propsMerged.removeReaction()
+      setLoading(false)
       const tmpUsers = users.filter(({ username }) => username !== propsMerged.currentUser.username)
       setUsers(tmpUsers)
     } else {
       setCount(count + 1)
-      propsMerged.addReaction()
+      setLoading(true)
+      await propsMerged.addReaction()
+      setLoading(false)
       const tmpUsers: User[] = [...users, propsMerged.currentUser]
       setUsers(tmpUsers)
     }
@@ -109,18 +114,18 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       color="default"
       variant="outlined"
       size="small"
-      disabled={propsMerged.disabled}
+      disabled={propsMerged.disabled || loading}
       startIcon={propsMerged.text}
       className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
       classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >
-      {count !== 0 && count}
-      <AvatarGroup max={3} style={{ marginLeft: '4px' }}>
+      {loading ? <CircularProgress size={24} style={{ marginLeft: '4px', marginRight: '4px' }}/> : (count !== 0 && count)}
+      {!loading && <AvatarGroup max={3} style={{ marginLeft: '4px' }}>
         {users.map(({ avatar, username }) => (
-          <Avatar alt={username} src={avatar} key={username} className={classes.avatarSmall}/>
+          <Avatar alt={username} src={avatar} key={username} className={classes.avatarSmall} />
         ))}
-      </AvatarGroup>
+      </AvatarGroup>}
     </Button>
   )
 }
@@ -152,8 +157,8 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={props.currentUser}
           initialCount={like.count}
           isClicked={like.viewerHasReacted}
-          addReaction={() => { props.addReaction(props.commentID, 'like') }}
-          removeReaction={() => { props.removeReaction(props.commentID, 'like') }}
+          addReaction={async () => { await props.addReaction(props.commentID, 'like') }}
+          removeReaction={async () => { await props.removeReaction(props.commentID, 'like') }}
           users={like.users}
         />
         <ReactionButton
@@ -162,8 +167,8 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={props.currentUser}
           initialCount={unlike.count}
           isClicked={unlike.viewerHasReacted}
-          addReaction={() => { props.addReaction(props.commentID, 'unlike') }}
-          removeReaction={() => { props.removeReaction(props.commentID, 'unlike') }}
+          addReaction={async () => { await props.addReaction(props.commentID, 'unlike') }}
+          removeReaction={async () => { await props.removeReaction(props.commentID, 'unlike') }}
           users={unlike.users}
         />
         <ReactionButton
@@ -172,8 +177,8 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={props.currentUser}
           initialCount={heart.count}
           isClicked={heart.viewerHasReacted}
-          addReaction={() => { props.addReaction(props.commentID, 'heart') }}
-          removeReaction={() => { props.removeReaction(props.commentID, 'heart') }}
+          addReaction={async () => { await props.addReaction(props.commentID, 'heart') }}
+          removeReaction={async () => { await props.removeReaction(props.commentID, 'heart') }}
           users={heart.users}
         />
       </CardActions>
