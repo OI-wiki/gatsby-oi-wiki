@@ -47,7 +47,7 @@ const CommentSystem: React.FC<Props> = (props) => {
   const classes = useStyles()
   const defaultUser = { username: '未登录用户', avatar: undefined, homepage: undefined }
   const [token, setToken] = useToken(null)
-  const revokeToken = () => {
+  const revokeToken = (): void => {
     setToken(null)
     setUser(defaultUser)
   }
