@@ -106,9 +106,7 @@ const CommentSystem: React.FC<Props> = (props) => {
       setComments(c)
     }
   }
-  function sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time))
-  }
+
   return <>
     <Typography variant="h6" >
       <Tooltip title="在 GitHub 上查看">
@@ -133,8 +131,8 @@ const CommentSystem: React.FC<Props> = (props) => {
       sendComment={async (v, setLoading) => {
         setLoading(true)
         await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
-        setLoading(false)
         updateComments()
+        setLoading(false)
       }} />
     {
       filteredComments.map(
