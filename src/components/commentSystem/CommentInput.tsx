@@ -5,6 +5,8 @@ interface Props {
   avatarLink: string,
   name: string
   sendComment: (res: string, setLoading: (loading: boolean) => void) => Promise<void>,
+  showLogin: boolean,
+  handleLogin: () => void,
   disabled: boolean
 }
 
@@ -65,12 +67,16 @@ const CommentInput: React.FC<Props> = (props) => {
           color="primary"
           className={classes.button}
           size="small"
-          disabled={props.disabled || loading}
+          disabled={loading && props.showLogin ? false : props.disabled}
           onClick={() => {
-            props.sendComment(content, setLoading)
-            setContent('')
+            if (props.showLogin) {
+              props.handleLogin()
+            } else {
+              props.sendComment(content, setLoading)
+              setContent('')
+            }
           }}>
-          评论
+          {props.showLogin ? '登录' : '评论'}
         </Button>
       </div>
     </>

@@ -129,7 +129,14 @@ const CommentSystem: React.FC<Props> = (props) => {
 
     </Typography>
     <Divider/>
-    <CommentInput name={user.username} avatarLink={user.avatar} disabled={isDisabled}
+    <CommentInput
+      name={user.username}
+      avatarLink={user.avatar}
+      disabled={isDisabled}
+      showLogin={token === null}
+      handleLogin={() => {
+        ghAPIV3.redirectAuth()
+      }}
       sendComment={async (v, setLoading) => {
         setLoading(true)
         await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
