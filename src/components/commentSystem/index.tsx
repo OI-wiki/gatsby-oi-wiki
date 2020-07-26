@@ -23,16 +23,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, revokeToken: () => void, token?: string): Promise<[Issue, Comments] | null> {
+async function getComments (ghAPIV3: GithubV3, ghAPIV4: GithubV4, id: string, revokeToken: () => void, token?: string): Promise<[Issue, Comments] | 'noIssue' | 'invalidToken'> {
   let issue: Issue
   try {
     issue = await ghAPIV3.getIssue({ accessToken: token, issueTitle: id })
   } catch (e) {
     revokeToken()
-    return null
+    return 'invalidToken'
   }
   if (issue === null) {
-    return null
+    return 'noIssue'
   }
   let comments: Comments
   if (!token) {
@@ -53,9 +53,10 @@ const CommentSystem: React.FC<Props> = (props) => {
   }
   const [user, setUser] = useState<User>(defaultUser)
   const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
+  const [noIssue, setNoIssue] = useState(false)
   const filteredComments = comments.data.filter(({ isMinimized }) => !isMinimized)
   const [issue, setIssue] = useState<Issue>()
-  const isDisabled = user.username === '未登录用户' || !token
+  const isDisabled = user.username === '未登录用户' || !token || noIssue
   const ghAPIV3 = new GithubV3(
     {
       baseURL: 'https://github.com',
@@ -88,7 +89,9 @@ const CommentSystem: React.FC<Props> = (props) => {
         }
       }
       const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, tk)
-      if (tmp !== null) {
+      if (tmp === 'noIssue') {
+        setNoIssue(true)
+      } else if (tmp !== 'invalidToken') {
         const [i, c] = tmp
         setComments(c)
         setIssue(i)
@@ -101,12 +104,11 @@ const CommentSystem: React.FC<Props> = (props) => {
   }, [props.clientID, props.clientSecret, props.id])
   const updateComments = async (): Promise<void> => {
     const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
-    if (tmp !== null) {
+    if (tmp !== 'invalidToken' && tmp !== 'noIssue') {
       const [, c] = tmp
       setComments(c)
     }
   }
-
   return <>
     <Typography variant="h6" >
       <Tooltip title="在 GitHub 上查看">
@@ -134,8 +136,11 @@ const CommentSystem: React.FC<Props> = (props) => {
         updateComments()
         setLoading(false)
       }} />
-    {
-      filteredComments.map(
+    {noIssue
+      ? <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
+        没有找到与本页面相关联的 issue
+      </Typography>
+      : filteredComments.map(
         ({ content, author, createdAt, reactions, id }) =>
           (
             <CommentCard
