@@ -87,7 +87,7 @@ const lightCss = {
       '--footer-text': htr(grey[700]),
       '--details-border': htr(blue[500]),
       '--details-main': htr(blue[50]),
-      '--blockquote': '255, 255, 255, .12',
+      '--blockquote': '0, 0, 0, .12',
       '--inline-color': '#37474f',
       '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
       '--search-bg': htr(grey[100]),
@@ -176,7 +176,7 @@ const adaptiveTheme = createMuiTheme({
       border: 'rgba(var(--details-border))',
       main: 'rgba(var(--details-main))',
     },
-    blockquote: 'rgba(var(--blockqoute))',
+    blockquote: 'rgba(var(--blockquote))',
     inlineCode: {
       color: 'rgba(var(--inline-color))',
       background: 'var(--inline-bg-hsla)',
