@@ -139,7 +139,12 @@ const CommentSystem: React.FC<Props> = (props) => {
       }}
       sendComment={async (v, setLoading) => {
         setLoading(true)
-        await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
+        try {
+          await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
+        } catch (e) {
+          setLoading(false)
+          return
+        }
         updateComments()
         setLoading(false)
       }} />
