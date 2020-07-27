@@ -6,6 +6,7 @@ import createPersistedState from 'use-persisted-state'
 import CommentCard from './CommentCard'
 import CommentInput from './CommentInput'
 import { Comments, Issue, User } from './types'
+import { InputContentProvider } from './inputContext'
 const useToken = createPersistedState('github-access-token')
 
 interface Props {
@@ -109,7 +110,7 @@ const CommentSystem: React.FC<Props> = (props) => {
       setComments(c)
     }
   }
-  return <>
+  return <InputContentProvider>
     <Typography variant="h6" >
       <Tooltip title="在 GitHub 上查看">
         <a href={issue?.link} className={classes.link}>{`${filteredComments.length} 条评论`}</a>
@@ -153,13 +154,14 @@ const CommentSystem: React.FC<Props> = (props) => {
         没有找到与本页面相关联的 issue
       </Typography>
       : filteredComments.map(
-        ({ content, author, createdAt, reactions, id }) =>
+        ({ content, author, createdAt, reactions, id, contentRaw }) =>
           (
             <CommentCard
               avatarLink={author.avatar}
               disabled={isDisabled}
               name={author.username}
               contentHTML={content}
+              contentRaw={contentRaw}
               time={createdAt}
               key={id}
               reactions={reactions}
@@ -180,7 +182,7 @@ const CommentSystem: React.FC<Props> = (props) => {
             />
           ))
     }
-  </>
+  </InputContentProvider>
 }
 
 export default CommentSystem
