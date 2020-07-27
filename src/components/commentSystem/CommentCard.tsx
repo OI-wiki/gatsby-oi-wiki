@@ -4,6 +4,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import IconButton from '@material-ui/core/IconButton'
+import ReplyIcon from '@material-ui/icons/Reply'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Red from '@material-ui/core/colors/red'
 import AvatarGroup from '@material-ui/lab/AvatarGroup'
@@ -11,6 +12,7 @@ import clsx from 'clsx'
 import { User } from '@mgtd/vssue-api-github-v4/lib/types'
 import Time from '../Time'
 import { Reactions } from './types'
+import { useInputContentContext } from './inputContext'
 
 interface Props {
   disabled: boolean,
@@ -19,6 +21,7 @@ interface Props {
   avatarLink: string,
   name: string,
   contentHTML: string,
+  contentRaw: string
   time: number | string | Date,
   reactions: Reactions,
   deleteComment: (commentID: string | number, setLoading: (loading: boolean) => void) => Promise<void>,
@@ -139,15 +142,34 @@ const CommentCard: React.FC<Props> = (props) => {
   const unlike = props.reactions.find(item => item.type === 'unlike')
   const heart = props.reactions.find(item => item.type === 'heart')
   const [deleteLoading, setDeleteLoading] = useState(false)
+  const { setInputContent } = useInputContentContext()
   return (
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
         avatar={<Avatar alt={props.name} src={props.avatarLink}/>}
         title={<>
           {props.name} { props.currentUser.username === props.name &&
-            <IconButton disabled={props.disabled} size="small" aria-label="delete" className={classes.floatRight} onClick={() => { props.deleteComment(props.commentID, setDeleteLoading) }}>
-              {deleteLoading ? <CircularProgress size={20}/> : <DeleteIcon fontSize="small" />}
+            <IconButton
+              disabled={props.disabled}
+              size="small"
+              aria-label="delete"
+              className={classes.floatRight}
+              onClick={
+                () => { props.deleteComment(props.commentID, setDeleteLoading) }
+              }>
+              {deleteLoading
+                ? <CircularProgress size={20} />
+                : <DeleteIcon fontSize="small" />}
             </IconButton>}
+          <IconButton
+            size="small"
+            aria-label="reply"
+            className={classes.floatRight}
+            onClick={() => {
+              setInputContent(`> ${props.contentRaw}`)
+            }}>
+            <ReplyIcon fontSize="small"/>
+          </IconButton>
         </>}
         classes={{ root: classes.headerRoot }}
         subheader={<Time time={props.time} />} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles, Avatar, TextField, Grid, Button, Hidden, LinearProgress } from '@material-ui/core'
+import { useInputContentContext } from './inputContext'
 
 interface Props {
   avatarLink: string,
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 const CommentInput: React.FC<Props> = (props) => {
   const classes = useStyles()
-  const [content, setContent] = useState('')
+  const { inputContent, setInputContent } = useInputContentContext()
   const [loading, setLoading] = useState<boolean>(false)
   return (
     <>
@@ -55,8 +56,8 @@ const CommentInput: React.FC<Props> = (props) => {
             fullWidth
             disabled={props.disabled || loading}
             rows={5}
-            value={content}
-            onChange={(e) => { setContent(e.target.value) }}
+            value={inputContent}
+            onChange={(e) => { setInputContent(e.target.value) }}
             variant="outlined"
           />
         </Grid>
@@ -72,8 +73,8 @@ const CommentInput: React.FC<Props> = (props) => {
             if (props.showLogin) {
               props.handleLogin()
             } else {
-              props.sendComment(content, setLoading)
-              setContent('')
+              props.sendComment(inputContent, setLoading)
+              setInputContent('')
             }
           }}>
           {props.showLogin ? '登录' : '评论'}
