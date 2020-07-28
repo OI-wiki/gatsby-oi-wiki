@@ -36,7 +36,6 @@
     "gatsby-remark-vscode": "^3.0.1",
     "gatsby-source-filesystem": "^2.3.20",
     "gatsby-source-local-git": "^1.0.0",
-    "gitalk": "^1.6.2",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.19",
     "mdast-util-toc": "^5.0.3",
