@@ -71,6 +71,7 @@ const useStyles = makeStyles(theme => ({
   avatarSmall: {
     width: theme.spacing(3),
     height: theme.spacing(3),
+    fontSize: theme.spacing(1.5),
   },
   floatRight: {
     float: 'right',
@@ -127,9 +128,9 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       classes={ count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >
       {loading ? <CircularProgress size={24} style={{ marginLeft: '4px', marginRight: '4px' }}/> : (count !== 0 && count)}
-      {!loading && <AvatarGroup max={3} style={{ marginLeft: '4px' }}>
+      {!loading && <AvatarGroup max={3} style={{ marginLeft: '4px' }} classes={{ avatar: classes.avatarSmall }}>
         {users.map(({ avatar, username }) => (
-          <Avatar alt={username} src={avatar} key={username} className={classes.avatarSmall} />
+          <Avatar alt={username} src={avatar} key={username} />
         ))}
       </AvatarGroup>}
     </Button>
