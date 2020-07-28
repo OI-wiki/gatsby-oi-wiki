@@ -1,9 +1,9 @@
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -146,21 +146,21 @@ function MyLayout ({
                 />
                 {noComment === 'false' && (
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                    <ExpansionPanel variant="outlined">
-                      <ExpansionPanelSummary
+                    <Accordion variant="outlined">
+                      <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="comment"
                       >
                         <Typography className={classes.heading}>
                           评论
                         </Typography>
-                      </ExpansionPanelSummary>
-                      <ExpansionPanelDetails>
+                      </AccordionSummary>
+                      <AccordionDetails>
                         <Container>
                           <LazyComment title={title} />
                         </Container>
-                      </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                      </AccordionDetails>
+                    </Accordion>
                   </div>
                 )}
               </div>
