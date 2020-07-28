@@ -1,3 +1,12 @@
+---
+title: 快速沃尔什变换
+tags:
+  - math
+  - poly
+author: Ir1d, 1536375374, 1563082455, TrisolarisHD, Xeonacid, lonlyn
+
+---
+
 author: Xeonacid
 
 （本文转载自 [桃酱的算法笔记](https://zhuanlan.zhihu.com/c_1005817911142838272) ，原文戳 [链接](https://zhuanlan.zhihu.com/p/41867199) ，已获得作者授权）

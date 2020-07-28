@@ -1,3 +1,14 @@
+---
+title: 快速傅里叶变换
+tags:
+  - math
+  - poly
+author: Travis Builder, 1570354026, sshwy, 心旷神怡, XTh3G4p, 1569382489,
+  1574418421, Allenyou, Xeonacid, 1593946389, TrisolarisHD, ranwen, Chrogeek,
+  hly1204, H-J-Granger, Early, Yaoyao
+
+---
+
 author: AndrewWayne, GavinZhengOI. ChungZH, henryrabbit, Xeonacid, sshwy, Yukimaikoriya
 
 前置知识： [复数](../complex.md) 。
@@ -10,7 +21,7 @@ author: AndrewWayne, GavinZhengOI. ChungZH, henryrabbit, Xeonacid, sshwy, Yukima
 
 FFT 是一种高效实现 DFT 的算法，称为快速傅立叶变换（Fast Fourier Transform，FFT）。它对傅里叶变换的理论并没有新的发现，但是对于在计算机系统或者说数字系统中应用离散傅立叶变换，可以说是进了一大步。快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。
 
-你搜索这个关键词就已经知道这一是个数学的东西了。只想学会用很简单，但是这远远不够。所以在看这个博客之前应该先学一下 [复数](../complex.md) 的基本知识。
+在 1965 年，Cooley 和 Tukey 发表了快速傅里叶变换算法。事实上 FFT 早在这之前就被发现过了，但是在当时现代计算机并未问世，人们没有意识到 FFT 的重要性。一些调查者认为 FFT 是由 Runge 和 König 在 1924 年发现的。但事实上高斯早在 1805 年就发明了这个算法，但一直没有发表。
 
 ## 多项式的表示
 

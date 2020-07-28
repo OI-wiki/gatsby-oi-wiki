@@ -1,3 +1,13 @@
+---
+title: 多项式牛顿迭代
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1563082377, Tri-solaris, 1563082455, Ir1d, TrisolarisHD,
+  orzcyand1317, 97littleleaf11
+
+---
+
 ## 描述
 
 给定多项式 $g\left(x\right)$ ，已知有 $f\left(x\right)$ 满足：

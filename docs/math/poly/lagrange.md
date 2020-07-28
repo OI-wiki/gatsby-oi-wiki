@@ -1,3 +1,13 @@
+---
+title: 拉格朗日插值
+tags:
+  - math
+  - poly
+author: Lee Hsiau Tien, 1540561710, Ir1d, Henry-ZHR, 雷蒻, Trisolaris HD,
+  1563082455, Chrogeek, Monad, Ghastlcon, TrisolarisHD
+
+---
+
 author: Ir1d, TrisolarisHD, YanWQ-monad, x4Cx58x54
 
 !!! note "例题 [Luogu P4781【模板】拉格朗日插值](https://www.luogu.com.cn/problem/P4781)"

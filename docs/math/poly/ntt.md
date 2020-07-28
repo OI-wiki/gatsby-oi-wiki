@@ -1,3 +1,13 @@
+---
+title: 快速数论变换
+tags:
+  - math
+  - poly
+author: Travis Builder, 1534656393, 1565104390, Haoshen Zhong, GeZiyue, ouuan,
+  Xeonacid, Henry, Sshwy, TrisolarisHD
+
+---
+
 author: ChungZH, Yukimaikoriya
 
 （本文转载自 [桃酱的算法笔记](https://zhuanlan.zhihu.com/c_1005817911142838272) ，原文戳 [链接](https://zhuanlan.zhihu.com/p/41867199) ，已获得作者授权）

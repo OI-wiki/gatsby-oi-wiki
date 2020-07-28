@@ -1,3 +1,13 @@
+---
+title: 多项式多点求值|快速插值
+tags:
+  - math
+  - poly
+author: Tri-solaris, 1551454628, H-J-Granger, 1563082455, Ir1d, TrisolarisHD,
+  EntropyIncreaser, 1576844297
+
+---
+
 ## 多项式的多点求值
 
 ### 描述

@@ -1,3 +1,12 @@
+---
+title: 多项式对数函数|指数函数
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1580175928, TrisolarisHD, Marcythm, 1593946389, Ir1d, 1580176528
+
+---
+
 ## 描述
 
 给定多项式 $f(x)$ ，求模 $x^{n}$ 意义下的 $\ln{f(x)}$ 与 $\exp{f(x)}$ 。

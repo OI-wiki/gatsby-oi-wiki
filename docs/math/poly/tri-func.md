@@ -1,3 +1,12 @@
+---
+title: 多项式三角函数
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1555247357, TrisolarisHD, 1563082455, Ir1d
+
+---
+
 ## 描述
 
 给定多项式 $f\left(x\right)$ ，求模 $x^{n}$ 意义下的 $\sin{f\left(x\right)}, \cos{f\left(x\right)}$ 与 $\tan{f\left(x\right)}$ 。

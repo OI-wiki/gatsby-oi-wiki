@@ -1,3 +1,12 @@
+---
+title: 多项式部分简介
+tags:
+  - math
+  - poly
+author: TrisolarisHD, 1551454628, Tri-solaris, 1593946389, Ir1d, Shuhao Zhang
+
+---
+
 ## 前置知识
 
 FFT，多项式乘法

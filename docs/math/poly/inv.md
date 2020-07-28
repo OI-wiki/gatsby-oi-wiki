@@ -1,3 +1,12 @@
+---
+title: 多项式求逆
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1551454628, Tri-solaris, 1593946389, Ir1d, TrisolarisHD, ouuan
+
+---
+
 ## 描述
 
 给定多项式 $f\left(x\right)$ ，求 $f^{-1}\left(x\right)$ 。

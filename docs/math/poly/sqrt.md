@@ -1,3 +1,13 @@
+---
+title: 多项式开方
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1551454628, Tri-solaris, 1593946389, Ir1d, TrisolarisHD,
+  雷蒻, 1580197968, huayucaiji, ouuan
+
+---
+
 ## 描述
 
 给定多项式 $g\left(x\right)$ ，求 $f\left(x\right)$ ，满足：

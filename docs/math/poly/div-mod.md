@@ -1,3 +1,13 @@
+---
+title: 多项式除法|取模
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1555247357, TrisolarisHD, 1563082455, 97littleleaf11, Ir1d,
+  Qingchuan Zhang, 1592734654
+
+---
+
 ## 描述
 
 给定多项式 $f\left(x\right),g\left(x\right)$ ，求 $g\left(x\right)$ 除 $f\left(x\right)$ 的商 $Q\left(x\right)$ 和余数 $R\left(x\right)$ 。
