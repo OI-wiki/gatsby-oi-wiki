@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 // import Link from '@material-ui/core/Link'
 import { Link } from 'gatsby'
@@ -53,13 +53,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext: { slug, changelog }, location }) => {
+const ChangeLog = ({ pageContext: { title, changelog }, location }) => {
   const classes = useStyles()
-  // const { state: { title } } = location
-  const [title, setTitle] = useState()
-  useEffect(() => {
-    setTitle(new URLSearchParams(location.search).get('title'))
-  }, [location])
   return (
     <Layout location={location} noMeta="true" title={`更改记录 - ${title}`} >
       <div>
