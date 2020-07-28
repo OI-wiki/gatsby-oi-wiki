@@ -48,6 +48,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             id
             frontmatter {
               tags
+              title
             }
             fileAbsolutePath
           }
@@ -92,7 +93,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: node.fields.slug + 'changelog/',
       component: logTemplate,
       context: {
-        slug: node.fields.slug,
+        title: node.frontmatter.title,
         changelog: log,
       },
     })
