@@ -130,14 +130,15 @@ function MyLayout ({
                 <Typography variant="body1" component="div">
                   {children}
                 </Typography>
-                <Meta
+                {noMeta === 'false' && <Meta
                   authors={authors}
                   tags={tags}
                   relativePath={relativePath}
                   modifiedTime={modifiedTime}
                   noMeta={noMeta}
                   location={location}
-                />
+                  title={title}
+                />}
                 {noComment === 'false' && (
                   <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
                     <Accordion variant="outlined">
