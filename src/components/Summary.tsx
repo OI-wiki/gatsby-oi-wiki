@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ExpansionPanelSummary } from '@material-ui/core'
+import { AccordionSummary } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import { makeStyles } from '@material-ui/core/styles'
 import EditIcon from '@material-ui/icons/Edit'
@@ -45,7 +45,7 @@ const Summary: React.FC<Props> = (props) => {
   const classes = useStyles()
 
   return (
-    <ExpansionPanelSummary
+    <AccordionSummary
       classes={classes}
       expandIcon={<ExpandMoreIcon />}
       aria-controls="expand"
@@ -59,7 +59,7 @@ const Summary: React.FC<Props> = (props) => {
         }}
       />
       {children}
-    </ExpansionPanelSummary>
+    </AccordionSummary>
   )
 }
 
