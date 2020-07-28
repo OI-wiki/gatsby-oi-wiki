@@ -22,7 +22,7 @@
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^2.0.0",
-    "gatsby": "^2.24.7",
+    "gatsby": "^2.24.11",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
     "gatsby-plugin-catch-links": "^2.3.11",
