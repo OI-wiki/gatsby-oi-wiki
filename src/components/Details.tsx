@@ -1,4 +1,4 @@
-import { Container, ExpansionPanel, ExpansionPanelDetails } from '@material-ui/core'
+import { Container, Accordion, AccordionDetails } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
@@ -32,16 +32,16 @@ const Details: React.FC<Props> = (props: Props) => {
 
   const cont = children instanceof Array ? children : [children]
   return (
-    <ExpansionPanel
+    <Accordion
       variant="outlined"
       classes={classes}
       defaultExpanded={!!className.match('open')}
     >
       {cont[0]}
-      <ExpansionPanelDetails style={{ padding: '0' }}>
+      <AccordionDetails style={{ padding: '0' }}>
         <Container>{cont.slice(1)}</Container>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 
