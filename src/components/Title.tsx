@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles, Typography, Link, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
+import GitHubIcon from '@material-ui/icons/GitHub'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   authors?: string,
   noEdit: string,
   noMeta?: string,
+  noGithub?: string,
   relativePath: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   location: any,
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme) => createStyles({
   boldText: {
     fontWeight: 'bold',
     marginBottom: theme.spacing(2),
+    display: 'inline-block',
   },
   subText: {
     color: (theme.palette as unknown as { subTitle: string }).subTitle,
@@ -57,6 +60,14 @@ const Title: React.FC<Props> = (props: Props) => {
           <Typography variant="h4" className={classes.boldText} component="h1">
             {props.title}
           </Typography>
+          {
+            props.noGithub === 'false' &&
+            <Tooltip title="在github中查看" placement="right" arrow>
+              <IconButton component="a" href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${props.relativePath}`} color="inherit">
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          }
           {
             props.noMeta === 'false' &&
             props.modifiedTime &&

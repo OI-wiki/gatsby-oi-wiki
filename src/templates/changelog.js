@@ -35,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
       color: lightBlue[500],
     },
   },
+  hashLink: {
+    color: theme.palette.footer.text,
+    '&:hover': {
+      textDecoration: 'none',
+      color: lightBlue[500],
+    },
+  },
   timeBlock: {
     minWidth: '200px',
     maxWidth: '200px',
@@ -44,54 +51,51 @@ const useStyles = makeStyles((theme) => ({
     height: '340px',
   },
   backContainer: {
-    // position: 'absolute',
-    // bottom: '1px',
-    // display: 'flex',
-    // alignItems: 'center',
     marginTop: '30px',
   },
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChangeLog = ({ pageContext: { title, changelog }, location }) => {
+const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title={`更改记录 - ${title}`} >
-      <div>
-        <Timeline>
-          {changelog.all.map((item, index) => {
+    <Layout location={location} noMeta="true" title={`更改记录 - ${title}`} relativePath={relativePath} noGithub="false">
+      <Timeline>
+        {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { hash, date, message, refs, body, author_name: author, author_email: email } = item
-            return (
-              <TimelineItem key={index + '#'}>
-                <TimelineOppositeContent className={classes.timeBlock}>
-                  <Typography variant="body2" color="textSecondary">
-                    <Time time={date} updateInterval={5 * 60 * 60 * 1000} defaultShowRelative={false}/>
+          const { hash, date, message, refs, body, author_name: author, author_email: email } = item
+          return (
+            <TimelineItem key={index + '#'}>
+              <TimelineOppositeContent className={classes.timeBlock}>
+                <Typography variant="body2" color="textSecondary">
+                  <Time time={date} updateInterval={5 * 60 * 60 * 1000} defaultShowRelative={false}/>
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot variant="outlined" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Paper variant="outlined" className={classes.paper}>
+                  <Typography variant="h6" component="h1">
+                    <Link href={'https://github.com/' + author} className={classes.link}>{author}</Link>
+                    {' '}commited{' '}
+                    <Link href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}className={classes.hashLink}>
+                      {hash.substr(0, 7)}
+                    </Link>
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot variant="outlined" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Paper variant="outlined" className={classes.paper}>
-                    <Typography variant="h6" component="h1">
-                      <Link href={'https://github.com/' + author} className={classes.link}>{author}</Link>
-                    </Typography>
-                    <Typography>{message}</Typography>
-                  </Paper>
-                </TimelineContent>
-              </TimelineItem>
-            )
-          })}
-        </Timeline>
-        <div className={classes.backContainer}>
-          <Divider />
-          <IconButton component={Link} color="inherit" to="../" className={classes.link}>
-            <ArrowBackIos />
-          </IconButton>
-          <span style={{ verticalAlign: 'middle' }}>返回上一页</span>
-        </div>
+                  <Typography>{message}</Typography>
+                </Paper>
+              </TimelineContent>
+            </TimelineItem>
+          )
+        })}
+      </Timeline>
+      <div className={classes.backContainer}>
+        <Divider />
+        <IconButton component={Link} color="inherit" to="../" className={classes.link}>
+          <ArrowBackIos />{' '}返回上一页
+        </IconButton>
       </div>
     </Layout>
   )
