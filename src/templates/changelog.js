@@ -25,18 +25,22 @@ const useStyles = makeStyles((theme) => ({
   secondaryTail: {
     backgroundColor: theme.palette.secondary.main,
   },
+  infoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   link: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
     color: lightBlue[500],
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
       color: lightBlue[500],
     },
+    marginRight: '10px',
   },
   hashLink: {
-    color: theme.palette.footer.text,
+    margin: '0 0 0 auto',
+    color: 'inherit',
     '&:hover': {
       textDecoration: 'none',
       color: lightBlue[500],
@@ -77,13 +81,17 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               </TimelineSeparator>
               <TimelineContent>
                 <Paper variant="outlined" className={classes.paper}>
-                  <Typography variant="h6" component="h1">
-                    <Link href={'https://github.com/' + author} className={classes.link}>{author}</Link>
-                    {' '}commited{' '}
-                    <Link href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}className={classes.hashLink}>
-                      {hash.substr(0, 7)}
+                  <div className={classes.infoContainer}>
+                    <Link href={'https://github.com/' + author} className={classes.link}>
+                      <Typography variant="h6" component="h1">
+                        {author}
+                      </Typography>
                     </Link>
-                  </Typography>
+                    <Typography>commited</Typography>
+                    <Link href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}className={classes.hashLink}>
+                      <Typography>{hash.substr(0, 7)}</Typography>
+                    </Link>
+                  </div>
                   <Typography>{message}</Typography>
                 </Paper>
               </TimelineContent>
@@ -94,7 +102,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
       <div className={classes.backContainer}>
         <Divider />
         <IconButton component={Link} color="inherit" to="../" className={classes.link}>
-          <ArrowBackIos />{' '}返回上一页
+          <ArrowBackIos /><Typography>{' '}返回上一页</Typography>
         </IconButton>
       </div>
     </Layout>

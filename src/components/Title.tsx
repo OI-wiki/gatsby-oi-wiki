@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => createStyles({
     fontWeight: 'bold',
     marginBottom: theme.spacing(2),
     display: 'inline-block',
+    verticalAlign: 'middle',
+  },
+  githubLink: {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    marginBottom: theme.spacing(2),
   },
   subText: {
     color: (theme.palette as unknown as { subTitle: string }).subTitle,
@@ -62,7 +68,7 @@ const Title: React.FC<Props> = (props: Props) => {
           </Typography>
           {
             props.noGithub === 'false' &&
-            <Tooltip title="在github中查看" placement="right" arrow>
+            <Tooltip title="在github中查看历史记录" placement="right" className={classes.githubLink} arrow>
               <IconButton component="a" href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${props.relativePath}`} color="inherit">
                 <GitHubIcon />
               </IconButton>
