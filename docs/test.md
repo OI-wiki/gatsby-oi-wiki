@@ -41,7 +41,7 @@ $$
 x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}
 $$
 
-```c++
+```cpp
 //Code block
 #include <cstdio>
 
@@ -67,7 +67,7 @@ int main() {
      `2` ：询问比答案大。
 
 ??? a
-    ```c++
+    ```cpp
     #include <cstdio>
     ```
 !!! warning "注"

@@ -37,17 +37,6 @@ export const query = graphql`
           modifiedTime(formatString: "YYYY/MM/DD")
         }
       }
-      childrenGrvscCodeBlock {
-        html
-        text
-        preClassName
-        codeClassName
-        tokenizedLines {
-          className
-          html
-          text
-        }
-      }
     }
   }
 `
