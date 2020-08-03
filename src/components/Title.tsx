@@ -20,11 +20,6 @@ const useStyles = makeStyles((theme) => createStyles({
     display: 'inline-block',
     verticalAlign: 'middle',
   },
-  githubLink: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    marginBottom: theme.spacing(2),
-  },
   subText: {
     color: (theme.palette as unknown as { subTitle: string }).subTitle,
     // make typescript and eslint happy
