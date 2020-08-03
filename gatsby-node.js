@@ -95,6 +95,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       context: {
         title: node.frontmatter.title,
         changelog: log,
+        relativePath,
       },
     })
   })

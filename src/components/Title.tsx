@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme) => createStyles({
   boldText: {
     fontWeight: 'bold',
     marginBottom: theme.spacing(2),
+    display: 'inline-block',
+    verticalAlign: 'middle',
   },
   subText: {
     color: (theme.palette as unknown as { subTitle: string }).subTitle,
