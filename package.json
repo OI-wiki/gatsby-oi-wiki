@@ -33,7 +33,6 @@
     "gatsby-plugin-react-helmet": "^3.3.10",
     "gatsby-remark-copy-linked-files": "^2.3.11",
     "gatsby-remark-table-of-contents": "0.0.9",
-    "gatsby-remark-vscode": "^3.0.1",
     "gatsby-source-filesystem": "^2.3.20",
     "gatsby-source-local-git": "^1.0.0",
     "hast-util-to-text": "^2.0.0",

@@ -4,7 +4,6 @@ import React from 'react'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
-import Code from './Code'
 import Link from './Link'
 
 function fixMathJaxCustomElement (mdxString) {
@@ -25,14 +24,12 @@ function mdx ({ data: { mdx }, location }) {
   const toc = mdx.toc || null
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
-  const codeBlocks = mdx.childrenGrvscCodeBlock || null
   const wordCount = mdx.wordCount.words || 0
 
   const myComponents = {
     details: Details,
     summary: Summary,
     a: Link(location),
-    pre: Code(codeBlocks),
     inlinecode: 'code',
   }
 

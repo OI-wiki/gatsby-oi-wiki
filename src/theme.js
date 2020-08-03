@@ -25,11 +25,6 @@ const globalStyles = withStyles((theme) => ({
       color: theme.palette.inlineCode.color,
       backgroundColor: theme.palette.inlineCode.background,
     },
-    'pre code': {
-      'font-size': '100%',
-      padding: '0.2em 0',
-      backgroundColor: '#1E1E1E',
-    },
     img: {
       maxWidth: '100%',
     },
