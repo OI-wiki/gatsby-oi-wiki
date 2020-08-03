@@ -33,10 +33,18 @@ code[class*="language-"]::selection {
 }
 
 pre[class*="language-"] {
-	padding: 1em;
+	padding: .1em;
 	margin: .5em 0;
 	overflow: auto;
 	background: #1e1e1e;
+}
+
+pre[class*="language-"].line-numbers {
+	padding-left: 2.4em !important;
+}
+
+pre[class*="language-"].line-numbers .line-numbers-rows {
+	border: none !important;
 }
 
 :not(pre) > code[class*="language-"] {

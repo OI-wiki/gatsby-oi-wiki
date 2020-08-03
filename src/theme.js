@@ -30,6 +30,11 @@ const globalStyles = withStyles((theme) => ({
       padding: '0.2em 0',
       backgroundColor: '#1E1E1E',
     },
+    '.gatsby-highlight': {
+      backgroundColor: '#1E1E1E',
+      padding: '1em',
+      borderRadius: '4px',
+    },
     img: {
       maxWidth: '100%',
     },
