@@ -84,7 +84,6 @@ function MyLayout ({
   noToC,
   overflow,
   isWIP,
-  noGithub,
 }) {
   const theme = useTheme()
   const classes = useStyles()
@@ -125,7 +124,6 @@ function MyLayout ({
                   noEdit={noEdit}
                   noMeta={noMeta}
                   relativePath={relativePath}
-                  noGithub={noGithub}
                 />
                 <Divider className={classes.divider} />
                 {isWIP && WIPAlert}
