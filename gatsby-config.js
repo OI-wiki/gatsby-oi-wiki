@@ -7,6 +7,12 @@ if (isProd && process.env.gatsby_executing_command !== 'build') {
 if (!isProd && process.env.CI === 'true') {
   console.warn('Using development configurations in build environment')
 }
+
+const mathRehype = process.env.gatsby_executing_command === 'build'
+  ? [require('rehype-mathjax/chtml'),
+    { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
+  : require('rehype-mathjax/browser')
+
 module.exports = {
   siteMetadata: {
     title: 'OI Wiki',
@@ -90,11 +96,9 @@ module.exports = {
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
         rehypePlugins: [
-          process.env.gatsby_executing_command === 'build'
-            ? [require('rehype-mathjax/chtml'),
-              { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
-            : require('rehype-mathjax/browser'),
-          require('rehype-details')],
+          mathRehype,
+          require('rehype-details'),
+          require('./plugins/rehype-pseudocodejs')],
         extensions: ['.mdx', '.md'],
       },
     },

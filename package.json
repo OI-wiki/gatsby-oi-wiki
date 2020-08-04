@@ -49,6 +49,7 @@
     "rehype-details": "^1.8.0",
     "rehype-mathjax": "^2.0.0",
     "rehype-parse": "^7.0.1",
+    "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "remark-details": "^2.0.2",
     "remark-math": "^2.0.1",
     "simple-git": "^2.14.0",

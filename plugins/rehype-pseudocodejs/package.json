@@ -1,0 +1,14 @@
+{
+  "name": "rehype-pseudocodejs",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Xiaodai Dai",
+  "license": "MIT",
+  "dependencies": {
+    "hast-util-to-string": "^1.0.4",
+    "pseudocode": "^2.2.0",
+    "unist-util-visit": "^2.0.3"
+  }
+}
