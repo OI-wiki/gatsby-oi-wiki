@@ -1,3 +1,6 @@
+- blog:
+    - 博客一: /blog/one/
+    - 博客二: /blog/two/
 - 测试:
     - 测试: /test/
     - 这里什么也没有: /empty/
