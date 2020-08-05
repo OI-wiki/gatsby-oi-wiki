@@ -96,9 +96,9 @@ module.exports = {
         ],
         remarkPlugins: [require('remark-math'), require('remark-details')],
         rehypePlugins: [
-          mathRehype,
           require('rehype-details'),
-          [require('./plugins/rehype-pseudocodejs'), { mathProcessor: mathRehype }],
+          require('./plugins/rehype-pseudocodejs'),
+          mathRehype,
         ],
         extensions: ['.mdx', '.md'],
       },
