@@ -78,6 +78,7 @@ int main() {
                   $A[i]$ with $A[j]$
               \ENDIF
               \STATE exchange $A[i]$ with $A[r]$
+              \STATE $x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}$
           \ENDFOR
       \ENDPROCEDURE
       \end{algorithmic}
