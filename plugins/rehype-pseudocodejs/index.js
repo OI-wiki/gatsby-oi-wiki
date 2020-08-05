@@ -7,7 +7,6 @@ const nodeToString = require('hast-util-to-string')
 const unified = require('unified')
 const parse = require('rehype-parse')
 const pseudo = require('./rebind')
-// const refractor = require('refractor')
 
 module.exports = (options) => {
   options = options || {}
@@ -27,7 +26,7 @@ module.exports = (options) => {
       const markup = pseudo.renderToString(nodeToString(node))
       const dom = unified()
         .use(parse, { fragment: true })
-        // .use(options.mathProcessor)
+        .use(...options.mathProcessor)
         .parse(markup)
 
       node.children = dom.children

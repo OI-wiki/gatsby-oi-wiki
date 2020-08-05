@@ -10,11 +10,15 @@ function makeRenderer (data, options) {
   var lexer = new Lexer(data)
   var parser = new Parser(lexer)
   const renderer = new Renderer(parser, options)
-  // while setting 'mathjax', it does nothing but surround
-  // texts with '$'
+  
+  // override driver to post-process by rehype-mathjax
   renderer.backend = {
-    name: 'mathjax',
-    driver: {},
+    name: 'katex',
+    driver: {
+      renderToString(math) {
+        return `<span class="math math-inline">${math}</span>`
+      }
+    },
   }
 
   return renderer

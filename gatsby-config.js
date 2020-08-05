@@ -11,7 +11,7 @@ if (!isProd && process.env.CI === 'true') {
 const mathRehype = process.env.gatsby_executing_command === 'build'
   ? [require('rehype-mathjax/chtml'),
     { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
-  : require('rehype-mathjax/browser')
+  : [require('rehype-mathjax/browser')]
 
 module.exports = {
   siteMetadata: {
@@ -98,7 +98,8 @@ module.exports = {
         rehypePlugins: [
           mathRehype,
           require('rehype-details'),
-          require('./plugins/rehype-pseudocodejs')],
+          [require('./plugins/rehype-pseudocodejs'), { mathProcessor: mathRehype }],
+        ],
         extensions: ['.mdx', '.md'],
       },
     },
