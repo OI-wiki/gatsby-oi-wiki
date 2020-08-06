@@ -1,63 +1,63 @@
 - test:
-    - 测试: /test/
-    - 这里什么也没有: /empty/
-- math:
-    - 数学简介: /math/
+    - 测试: /en/test/
+    - 这里什么也没有: /en/empty/
+- math-test:
+    - 数学简介: /en/math/
     - 多项式:
-        - 多项式部分简介: /math/poly/intro/
-        - 拉格朗日插值: /math/poly/lagrange/
-        - 快速傅里叶变换: /math/poly/fft/
-        - 快速数论变换: /math/poly/ntt/
-        - 快速沃尔什变换: /math/poly/fwt/
-        - 多项式求逆: /math/poly/inv/
-        - 多项式开方: /math/poly/sqrt/
-        - 多项式除法|取模: /math/poly/div-mod/
-        - 多项式对数函数|指数函数: /math/poly/ln-exp/
-        - 多项式牛顿迭代: /math/poly/newton/
-        - 多项式多点求值|快速插值: /math/poly/multipoint-eval-interpolation/
-        - 多项式三角函数: /math/poly/tri-func/
-        - 多项式反三角函数: /math/poly/inv-tri-func/
+        - 多项式部分简介: /en/math/poly/intro/
+        - 拉格朗日插值: /en/math/poly/lagrange/
+        - 快速傅里叶变换: /en/math/poly/fft/
+        - 快速数论变换: /en/math/poly/ntt/
+        - 快速沃尔什变换: /en/math/poly/fwt/
+        - 多项式求逆: /en/math/poly/inv/
+        - 多项式开方: /en/math/poly/sqrt/
+        - 多项式除法|取模: /en/math/poly/div-mod/
+        - 多项式对数函数|指数函数: /en/math/poly/ln-exp/
+        - 多项式牛顿迭代: /en/math/poly/newton/
+        - 多项式多点求值|快速插值: /en/math/poly/multipoint-eval-interpolation/
+        - 多项式三角函数: /en/math/poly/tri-func/
+        - 多项式反三角函数: /en/math/poly/inv-tri-func/
 - jianjie:
-  - Getting Started: /
-  - OI 赛事与赛制: /intro/oi/
-  - ICPC/CCPC 赛事与赛制: /intro/icpc/
-  - 学习路线: /intro/roadmap/
-  - 学习资源: /intro/resources/
-  - 常见错误: /intro/common-mistakes/
-  - 常见技巧: /intro/common-tricks/
-  - 非传统题: /intro/non-trad/
+  - Getting Started: /en/
+  - OI 赛事与赛制: /en/intro/oi/
+  - ICPC/CCPC 赛事与赛制: /en/intro/icpc/
+  - 学习路线: /en/intro/roadmap/
+  - 学习资源: /en/intro/resources/
+  - 常见错误: /en/intro/common-mistakes/
+  - 常见技巧: /en/intro/common-tricks/
+  - 非传统题: /en/intro/non-trad/
   - 工具软件:
-    - 评测工具: /intro/judgers/
-    - WSL (Windows 10): /intro/wsl/
-    - Special Judge: /intro/spj/
+    - 评测工具: /en/intro/judgers/
+    - WSL (Windows 10): /en/intro/wsl/
+    - Special Judge: /en/intro/spj/
     - Testlib:
-      - Testlib 简介: /intro/testlib/
-      - 通用: /intro/testlib/general/
-      - Generator: /intro/testlib/generator/
-      - Validator: /intro/testlib/validator/
-      - Interactor: /intro/testlib/interactor/
-      - Checker: /intro/testlib/checker/
-    - Polygon: /intro/polygon/
-    - OJ 工具: /intro/oj-tool/
-    - LaTeX 入门: /intro/latex/
-  - Docker 部署: /intro/docker-deploy/
-  - 关于本项目: /intro/about/
-  - 如何参与: /intro/htc/
-  - F.A.Q.: /intro/faq/
-  - 致谢: /intro/thanks/
+      - Testlib 简介: /en/intro/testlib/
+      - 通用: /en/intro/testlib/general/
+      - Generator: /en/intro/testlib/generator/
+      - Validator: /en/intro/testlib/validator/
+      - Interactor: /en/intro/testlib/interactor/
+      - Checker: /en/intro/testlib/checker/
+    - Polygon: /en/intro/polygon/
+    - OJ 工具: /en/intro/oj-tool/
+    - LaTeX 入门: /en/intro/latex/
+  - Docker 部署: /en/intro/docker-deploy/
+  - 关于本项目: /en/intro/about/
+  - 如何参与: /en/intro/htc/
+  - F.A.Q.: /en/intro/faq/
+  - 致谢: /en/intro/thanks/
 - languageBasic:
-  - 语言基础简介: /lang/
+  - 语言基础简介: /en/lang/
   - 编辑工具:
-    - Vim: /lang/editor/vim/
-    - Emacs: /lang/editor/emacs/
-    - VS Code: /lang/editor/vscode/
-    - Atom: /lang/editor/atom/
-    - Eclipse: /lang/editor/eclipse/
-    - Notepad++: /lang/editor/npp/
-    - Dev-C++: /lang/editor/devcpp/
-    - Geany: /lang/editor/geany/
+    - Vim: /en/lang/editor/vim/
+    - Emacs: /en/lang/editor/emacs/
+    - VS Code: /en/lang/editor/vscode/
+    - Atom: /en/lang/editor/atom/
+    - Eclipse: /en/lang/editor/eclipse/
+    - Notepad++: /en/lang/editor/npp/
+    - Dev-C++: /en/lang/editor/devcpp/
+    - Geany: /en/lang/editor/geany/
   - C++ 基础:
-    - Hello, World!: /lang/helloworld/
+    - Hello, World!: /en/lang/helloworld/
     - C++ 语法基础: /lang/basic/
     - 变量: /lang/var/
     - 运算: /lang/op/

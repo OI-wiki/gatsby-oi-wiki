@@ -3,6 +3,7 @@ import sidebarZh from './sidebar.zh.yaml'
 import sidebarEn from './sidebar.en.yaml'
 export const languages = {
   zh: {
+    siderbarList: 'eee',
     sidebarList: sidebarZh,
     nav: {
       laguage: '中英切换',

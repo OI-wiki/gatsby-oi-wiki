@@ -78,13 +78,20 @@ const useStyles = makeStyles((theme) => ({
 function LanguageSwitchButton (): React.ReactElement {
   return (
     <LanguagesContext.Consumer>
-      {({ locale, setLocale }) => (
-        <Tooltip title="中英转换" placement="bottom" arrow>
-          <IconButton color="inherit" onClick={setLocale(locale === languages.zh ? languages.en : languages.zh)}>
-            <TranslateIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      {({ locale, setLocale }) => {
+        const language = locale === languages.zh ? 'zh' : 'en' // 要修复异步问题
+        const handleClick = (e) => {
+          setLocale(locale === languages.zh ? languages.en : languages.zh)
+          console.log('已点击')
+        }
+        return (
+          <Tooltip title="中英转换" placement="bottom" arrow>
+            <IconButton color="inherit" onClick={handleClick}>
+              <TranslateIcon />
+            </IconButton>
+          </Tooltip>
+        )
+      }}
     </LanguagesContext.Consumer>
   )
 }
@@ -138,7 +145,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen)
   }
-  const locale = useContext(LanguagesContext)
+  const { locale } = useContext(LanguagesContext)
   const tabID = getTabIDFromLocation(pathname, locale.sidebarList)
   return (
     <>
@@ -203,7 +210,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent pathList={locale.siderbarList} {...props} />
+          <SiderContent pathList={locale.sidebarList} {...props} />
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -216,7 +223,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           open
         >
           <div className={classes.placeholder} />
-          <SiderContent pathList={tabID !== -1 ? [locale.siderbarList[tabID]] : locale.siderbarList} {...props} />
+          <SiderContent pathList={tabID !== -1 ? [locale.sidebarList[tabID]] : locale.sidebarList} {...props} />
         </Drawer>
       </Hidden>
     </>
