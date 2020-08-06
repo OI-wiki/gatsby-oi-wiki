@@ -1,7 +1,8 @@
 /* eslint-disable no-throw-literal */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-// var ParseError = require('pseudocode/src/ParseError')
+// Pseudo Code! Re:Bind
+
 const Lexer = require('pseudocode/src/Lexer')
 const Parser = require('pseudocode/src/Parser')
 const Renderer = require('pseudocode/src/Renderer')

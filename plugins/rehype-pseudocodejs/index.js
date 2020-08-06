@@ -6,7 +6,7 @@ const visit = require('unist-util-visit')
 const nodeToString = require('hast-util-to-string')
 const unified = require('unified')
 const parse = require('rehype-parse')
-const pseudo = require('./rebind')
+const pseudo = require('./pcr')
 
 module.exports = (options) => {
   options = options || {}
