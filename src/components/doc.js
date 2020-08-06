@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useState } from 'react'
+import { LanguagesContext, languages } from '../languageContext'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
@@ -11,7 +12,7 @@ function fixMathJaxCustomElement (mdxString) {
   mdxString = mdxString.replace(/"className": ?"MathJax/g, '"class": "MathJax')
   return mdxString.replace(/"className": ?"MJX/g, '"class": "MJX')
 }
-function mdx ({ data: { mdx }, location }) {
+function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
   const title = mdx.slug === '/' ? null : mdx.frontmatter.title
@@ -34,26 +35,30 @@ function mdx ({ data: { mdx }, location }) {
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
+  const [locale, setLocale] = useState(languages.zh)
+  const props = { locale, setLocale }
   return (
-    <Layout
-      location={location}
-      authors={authors}
-      title={title}
-      description={description}
-      tags={tags}
-      toc={toc}
-      relativePath={relativePath}
-      modifiedTime={modifiedTime}
-      noMeta={noMeta}
-      noComment={noComment}
-      noEdit={noEdit}
-      isWIP={isWIP}
-    >
-      <MDXProvider components={myComponents}>
-        <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
-      </MDXProvider>
-    </Layout>
+    <LanguagesContext.Provider value={props}>
+      <Layout
+        location={location}
+        authors={authors}
+        title={title}
+        description={description}
+        tags={tags}
+        toc={toc}
+        relativePath={relativePath}
+        modifiedTime={modifiedTime}
+        noMeta={noMeta}
+        noComment={noComment}
+        noEdit={noEdit}
+        isWIP={isWIP}
+      >
+        <MDXProvider components={myComponents}>
+          <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
+        </MDXProvider>
+      </Layout>
+    </LanguagesContext.Provider>
   )
 }
 
-export default mdx
+export default Mdx

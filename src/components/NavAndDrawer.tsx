@@ -8,20 +8,19 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
-import React from 'react'
+import React, { useContext } from 'react'
 import createPersistedState from 'use-persisted-state'
-
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
+import TranslateIcon from '@material-ui/icons/Translate'
+import { LanguagesContext, languages } from '../languageContext'
 import scrollbarStyle from '../styles/scrollbar'
-// eslint-disable-next-line
-// @ts-ignore
-import pathList from '../sidebar.yaml'
 import defaultSettings from '../lib/defaultSettings'
+
 import Search from './Search'
 import SiderContent from './Sidebar'
 import Tabs from './Tabs'
@@ -76,7 +75,19 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }))
-
+function LanguageSwitchButton (): React.ReactElement {
+  return (
+    <LanguagesContext.Consumer>
+      {({ locale, setLocale }) => (
+        <Tooltip title="中英转换" placement="bottom" arrow>
+          <IconButton color="inherit" onClick={setLocale(locale === languages.zh ? languages.en : languages.zh)}>
+            <TranslateIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+    </LanguagesContext.Consumer>
+  )
+}
 function flattenObject (ob:any) :Record<string, unknown> {
   // https://stackoverflow.com/a/53739792
   const toReturn = {}
@@ -127,7 +138,8 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen)
   }
-  const tabID = getTabIDFromLocation(pathname, pathList)
+  const locale = useContext(LanguagesContext)
+  const tabID = getTabIDFromLocation(pathname, locale.sidebarList)
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -152,6 +164,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
+          <LanguageSwitchButton />
           <Tooltip title="设置页" placement="bottom" arrow>
             <IconButton component="a" href="/settings" color="inherit">
               <SettingsIcon />
@@ -174,7 +187,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation="css">
-          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
+          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={locale.sidebarList}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="js">
@@ -190,7 +203,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent pathList={pathList} {...props} />
+          <SiderContent pathList={locale.siderbarList} {...props} />
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -203,7 +216,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           open
         >
           <div className={classes.placeholder} />
-          <SiderContent pathList={tabID !== -1 ? [pathList[tabID]] : pathList} {...props} />
+          <SiderContent pathList={tabID !== -1 ? [locale.siderbarList[tabID]] : locale.siderbarList} {...props} />
         </Drawer>
       </Hidden>
     </>
