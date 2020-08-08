@@ -19,21 +19,22 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function linkFix (url, currentPath) {
+  console.log(currentPath)
   if (currentPath.split('/').slice(-1)[0] !== '') {
     currentPath += '/'
   }
   if (/^\.\./.test(url)) {
     url = currentPath + '../' + url
-    // ../xxx/yyy -> fullpathname/../xxx/yyy
+    // ../xxx/yyy -> fullpathname/../../xxx/yyy
     // prepend full pathname for relative path
   }
   if (/^\./.test(url)) {
     if (/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/.test(url)) {
       url = currentPath + url.slice(2)
-      // ./xxx/yyy -> fullpathname/../xxx/yyy
+      // ./xxx/yyy -> fullpathname/xxx/yyy
     } else {
       url = currentPath + '.' + url
-      // ./xx -> fullpathname/(remove current part)xx
+      // ./xx -> fullpathname/../xx
     }
     // prepend full pathname for relative path
   }
@@ -60,6 +61,7 @@ function RealLink ({ to = '', href = to, children, pathname, ...props }) {
       </a>
     )
   }
+  // {linkFix(href, pathname)}
   return (
     <GatsbyLink {...props} to={linkFix(href, pathname)} className={classes.link}>
       {children}

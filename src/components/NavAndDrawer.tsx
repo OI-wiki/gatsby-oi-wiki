@@ -7,7 +7,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import React, { useContext } from 'react'
 import createPersistedState from 'use-persisted-state'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -75,17 +75,19 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }))
-function LanguageSwitchButton (): React.ReactElement {
+function LanguageSwitchButton ({ location }): React.ReactElement {
   return (
     <LanguagesContext.Consumer>
       {({ locale, setLocale }) => {
-        const language = locale === languages.zh ? 'zh' : 'en' // 要修复异步问题
-        const handleClick = (e) => {
+        const currentLanguage = locale === languages.zh ? 'zh' : 'en'
+        const targetLanguage = locale === languages.zh ? 'en' : 'zh'
+        const handleClick = (e):void => {
           setLocale(locale === languages.zh ? languages.en : languages.zh)
-          console.log('已点击')
+          setLocale(targetLanguage)
+          navigate(location.replace(currentLanguage, targetLanguage))
         }
         return (
-          <Tooltip title="中英转换" placement="bottom" arrow>
+          <Tooltip title={locale.nav.language} placement="bottom" arrow>
             <IconButton color="inherit" onClick={handleClick}>
               <TranslateIcon />
             </IconButton>
@@ -171,23 +173,23 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
-          <LanguageSwitchButton />
-          <Tooltip title="设置页" placement="bottom" arrow>
+          <LanguageSwitchButton location={pathname} />
+          <Tooltip title={locale.nav.setting} placement="bottom" arrow>
             <IconButton component="a" href="/settings" color="inherit">
               <SettingsIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="标签页" placement="bottom" arrow>
+          <Tooltip title={locale.nav.tag} placement="bottom" arrow>
             <IconButton component="a" href="/tags" color="inherit">
               <LocalOfferIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="目录页" placement="bottom" arrow>
+          <Tooltip title={locale.nav.catalog} placement="bottom" arrow>
             <IconButton component="a" href="/pages" color="inherit">
               <LibraryBooksIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="GitHub 存储库" placement="bottom" arrow>
+          <Tooltip title={locale.nav.github} placement="bottom" arrow>
             <IconButton component="a" href={OIWikiGithub} color="inherit">
               <GitHubIcon />
             </IconButton>

@@ -4,7 +4,8 @@ import Link from '@material-ui/core/Link'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { graphql, StaticQuery } from 'gatsby'
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import { LanguagesContext } from '../languageContext'
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -39,6 +40,7 @@ function FooterContent ({ data }) {
   const classes = useStyles()
   const { date, hash } = data.allGitCommit.nodes[0]
 
+  const { locale } = useContext(LanguagesContext)
   useEffect(() => {
     // eslint-disable-next-line quotes
     const SchoolIcon = `background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><path transform='translate(0 12) scale(6)' d='M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z'/></svg>")`
@@ -57,7 +59,7 @@ function FooterContent ({ data }) {
       </Grid>
       <Grid item xs={12}>
         <Typography>
-          最近更新:{' '}
+          {locale.footer.update}{' '}
           <Link
             className={classes.link}
             href="https://github.com/OI-wiki/OI-wiki/commits"
@@ -69,16 +71,16 @@ function FooterContent ({ data }) {
       </Grid>
       <Grid item xs={12}>
         <Typography>
-          联系方式：
+          {locale.footer.contact}
           <Link className={classes.link} href="https://t.me/OIwiki">
-            Telegram 群组
+            Telegram
           </Link>{' '}
           /{' '}
           <Link
             className={classes.link}
             href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
           >
-            QQ 群组
+            QQ
           </Link>
         </Typography>
       </Grid>
