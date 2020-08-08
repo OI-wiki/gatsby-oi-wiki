@@ -78,12 +78,12 @@ const useStyles = makeStyles((theme) => ({
 function LanguageSwitchButton ({ location }): React.ReactElement {
   return (
     <LanguagesContext.Consumer>
-      {({ locale, setLocale }) => {
+      {({ locale, setLocale, setLanguage }) => {
         const currentLanguage = locale === languages.zh ? 'zh' : 'en'
         const targetLanguage = locale === languages.zh ? 'en' : 'zh'
         const handleClick = (e):void => {
           setLocale(locale === languages.zh ? languages.en : languages.zh)
-          setLocale(targetLanguage)
+          setLanguage(targetLanguage)
           navigate(location.replace(currentLanguage, targetLanguage))
         }
         return (

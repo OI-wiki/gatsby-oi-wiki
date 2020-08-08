@@ -1,7 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useState, useEffect } from 'react'
-import { LanguagesContext, languages } from '../languageContext'
+import React from 'react'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
@@ -35,40 +34,26 @@ function Mdx ({ data: { mdx }, location }) {
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
-  // context relative
-  // const localLanguage = JSON.parse(localStorage.getItem('locale'))
-  // const storageLanguage = JSON.parse(localStorage.getItem('language'))
-  const [locale, setLocale] = useState(languages.zh)
-  const [language, setLanguage] = useState('zh')
-  // use to persist context when page refresh
-  // const [locale, setLocale] = useState(localLanguage || languages.zh)
-  // const [language, setLanguage] = useState(storageLanguage || 'zh')
-  useEffect(() => {
-    localStorage.setItem('locale', JSON.stringify(locale))
-    localStorage.setItem('language', JSON.stringify(language))
-  }, [locale, language])
-  const props = { locale, setLocale, language, setLanguage }
+
   return (
-    <LanguagesContext.Provider value={props}>
-      <Layout
-        location={location}
-        authors={authors}
-        title={title}
-        description={description}
-        tags={tags}
-        toc={toc}
-        relativePath={relativePath}
-        modifiedTime={modifiedTime}
-        noMeta={noMeta}
-        noComment={noComment}
-        noEdit={noEdit}
-        isWIP={isWIP}
-      >
-        <MDXProvider components={myComponents}>
-          <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
-        </MDXProvider>
-      </Layout>
-    </LanguagesContext.Provider>
+    <Layout
+      location={location}
+      authors={authors}
+      title={title}
+      description={description}
+      tags={tags}
+      toc={toc}
+      relativePath={relativePath}
+      modifiedTime={modifiedTime}
+      noMeta={noMeta}
+      noComment={noComment}
+      noEdit={noEdit}
+      isWIP={isWIP}
+    >
+      <MDXProvider components={myComponents}>
+        <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
+      </MDXProvider>
+    </Layout>
   )
 }
 

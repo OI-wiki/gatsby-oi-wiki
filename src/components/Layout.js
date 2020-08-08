@@ -10,8 +10,9 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { LanguagesContext, languages } from '../languageContext'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
@@ -180,15 +181,30 @@ function MyLayout ({
 function StyledLayout (props) {
   // const enableDark = useDarkMode()
 
+  // context relative
+  const localLanguage = JSON.parse(localStorage.getItem('locale'))
+  const storageLanguage = JSON.parse(localStorage.getItem('language'))
+  // const [locale, setLocale] = useState(languages.zh)
+  // const [language, setLanguage] = useState('zh')
+  // use to persist context when page refresh
+  const [locale, setLocale] = useState(localLanguage || languages.zh)
+  const [language, setLanguage] = useState(storageLanguage || 'zh')
+  useEffect(() => {
+    localStorage.setItem('locale', JSON.stringify(locale))
+    localStorage.setItem('language', JSON.stringify(language))
+  }, [locale, language])
+  const contextProps = { locale, setLocale, language, setLanguage }
   return (
-    <ThemeProvider theme={adaptiveTheme}>
-      <CssBaseline/>
-      <CustomCssBaseline/>
-      <LightCssBaseline/>
-      <DarkCssBaseline/>
-      <AutoCssBaseline/>
-      <MyLayout {...props}/>
-    </ThemeProvider>
+    <LanguagesContext.Provider value={contextProps}>
+      <ThemeProvider theme={adaptiveTheme}>
+        <CssBaseline/>
+        <CustomCssBaseline/>
+        <LightCssBaseline/>
+        <DarkCssBaseline/>
+        <AutoCssBaseline/>
+        <MyLayout {...props}/>
+      </ThemeProvider>
+    </LanguagesContext.Provider>
   )
 }
 
