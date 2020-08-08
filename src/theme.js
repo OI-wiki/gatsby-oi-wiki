@@ -23,16 +23,6 @@ const globalStyles = withStyles((theme) => ({
       padding: '1em',
       borderRadius: '4px',
     },
-    // override a few pseudocodejs css here
-    '.ps-root': {
-      '& .ps-algorithm': {
-        borderTop: `3px solid ${theme.palette.text.secondary} !important`,
-        borderBottom: `2px solid  ${theme.palette.text.secondary} !important`,
-      },
-      '& .ps-algorithm.with-caption>.ps-line:first-child': {
-        borderBottom: `2px solid ${theme.palette.text.secondary} !important`,
-      },
-    },
     img: {
       maxWidth: '100%',
     },
