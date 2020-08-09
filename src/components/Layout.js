@@ -182,17 +182,21 @@ function StyledLayout (props) {
   // const enableDark = useDarkMode()
 
   // context relative
-  const localLanguage = JSON.parse(localStorage.getItem('locale'))
-  const storageLanguage = JSON.parse(localStorage.getItem('language'))
   // const [locale, setLocale] = useState(languages.zh)
   // const [language, setLanguage] = useState('zh')
   // use to persist context when page refresh
-  const [locale, setLocale] = useState(localLanguage || languages.zh)
+  // const [locale, setLocale] = useState(localLanguage || languages.zh)
+  const storageLanguage = JSON.parse(localStorage.getItem('language'))
+  let localInit = languages.zh
+  if (storageLanguage && storageLanguage === 'en') {
+    localInit = languages.en
+  }
+  const [locale, setLocale] = useState(localInit)
+  console.log(locale)
   const [language, setLanguage] = useState(storageLanguage || 'zh')
   useEffect(() => {
-    localStorage.setItem('locale', JSON.stringify(locale))
     localStorage.setItem('language', JSON.stringify(language))
-  }, [locale, language])
+  }, [language])
   const contextProps = { locale, setLocale, language, setLanguage }
   return (
     <LanguagesContext.Provider value={contextProps}>

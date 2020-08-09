@@ -1,7 +1,7 @@
 - test:
     - 测试: /en/test/
     - 这里什么也没有: /en/empty/
-- math-test:
+- maths:
     - 数学简介: /en/math/
     - 多项式:
         - 多项式部分简介: /en/math/poly/intro/
