@@ -10,9 +10,9 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-import { LanguagesContext, languages } from '../languageContext'
+import { LanguageProvider } from '../languageContext'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
@@ -180,26 +180,8 @@ function MyLayout ({
 
 function StyledLayout (props) {
   // const enableDark = useDarkMode()
-
-  // context relative
-  // const [locale, setLocale] = useState(languages.zh)
-  // const [language, setLanguage] = useState('zh')
-  // use to persist context when page refresh
-  // const [locale, setLocale] = useState(localLanguage || languages.zh)
-  const storageLanguage = JSON.parse(localStorage.getItem('language'))
-  let localInit = languages.zh
-  if (storageLanguage && storageLanguage === 'en') {
-    localInit = languages.en
-  }
-  const [locale, setLocale] = useState(localInit)
-  console.log(locale)
-  const [language, setLanguage] = useState(storageLanguage || 'zh')
-  useEffect(() => {
-    localStorage.setItem('language', JSON.stringify(language))
-  }, [language])
-  const contextProps = { locale, setLocale, language, setLanguage }
   return (
-    <LanguagesContext.Provider value={contextProps}>
+    <LanguageProvider>
       <ThemeProvider theme={adaptiveTheme}>
         <CssBaseline/>
         <CustomCssBaseline/>
@@ -208,7 +190,7 @@ function StyledLayout (props) {
         <AutoCssBaseline/>
         <MyLayout {...props}/>
       </ThemeProvider>
-    </LanguagesContext.Provider>
+    </LanguageProvider>
   )
 }
 

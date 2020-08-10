@@ -78,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
 function LanguageSwitchButton ({ location }): React.ReactElement {
   return (
     <LanguagesContext.Consumer>
-      {({ locale, setLocale, setLanguage }) => {
-        const currentLanguage = locale === languages.zh ? 'zh' : 'en'
-        const targetLanguage = locale === languages.zh ? 'en' : 'zh'
+      {({ locale, setLocale, setLanguage, language }) => {
+        const currentLanguage = language
+        const targetLanguage = language === 'zh' ? 'en' : 'zh'
         const handleClick = (e):void => {
           setLocale(locale === languages.zh ? languages.en : languages.zh)
           setLanguage(targetLanguage)
@@ -147,8 +147,11 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen)
   }
+
   const { locale } = useContext(LanguagesContext)
+  // console.log(locale)
   const tabID = getTabIDFromLocation(pathname, locale.sidebarList)
+  // console.log(tabID)
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>

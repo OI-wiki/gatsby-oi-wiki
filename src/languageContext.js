@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import sidebarZh from './sidebar.zh.yaml'
 import sidebarEn from './sidebar.en.yaml'
 export const languages = {
@@ -43,3 +43,27 @@ export const languages = {
 export const LanguagesContext = React.createContext(
   languages.zh, // 默认值
 )
+export const LanguageProvider = (props) => {
+  // const [locale, setLocale] = useState(languages.zh)
+  // const [language, setLanguage] = useState('zh')
+  // useEffect(() => {
+  const storageLanguage = JSON.parse(localStorage.getItem('language'))
+  let localInit = languages.zh
+  if (storageLanguage && storageLanguage === 'en') {
+    localInit = languages.en
+  }
+  // setLocale(localInit)
+  // setLanguage(storageLanguage || 'zh')
+  // }, [])
+  const [locale, setLocale] = useState(localInit)
+  const [language, setLanguage] = useState(storageLanguage || 'zh')
+  useEffect(() => {
+    localStorage.setItem('language', JSON.stringify(language))
+  }, [language, locale])
+  const contextProps = { locale, setLocale, language, setLanguage }
+  return (
+    <LanguagesContext.Provider value={contextProps}>
+      {props.children}
+    </LanguagesContext.Provider>
+  )
+}
