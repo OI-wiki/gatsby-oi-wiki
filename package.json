@@ -27,7 +27,7 @@
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-material-ui": "^2.1.10",
-    "gatsby-plugin-mdx": "^1.2.30",
+    "gatsby-plugin-mdx": "^1.2.34",
     "gatsby-plugin-offline": "^3.2.19",
     "gatsby-plugin-preact": "^4.0.9",
     "gatsby-plugin-react-helmet": "^3.3.10",
