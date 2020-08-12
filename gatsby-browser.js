@@ -11,7 +11,11 @@ export const onRouteUpdate = () => {
   window.cfga()
 }
 export const wrapRootElement = ({ element }) => {
-  <LanguageProvider>
-    {element}
-  </LanguageProvider>
+  if (process.env.GATSBY_IS_DEV) {
+    return (
+      <LanguageProvider>
+        {element}
+      </LanguageProvider>
+    )
+  }
 }
