@@ -11,34 +11,29 @@ import BookIcon from '@material-ui/icons/Book'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Button from '@material-ui/core/Button'
 import Layout from '../components/Layout'
-
+// import { LanguagesContext } from '../languageContext'
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
   const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
 
-  // const obj = useContext(LanguagesContext)
-  // console.log(obj)
-  // const language = JSON.parse(localStorage.getItem('language'))
+  // error
+  // const { language } = useContext(LanguagesContext)
   // console.log(language)
+  // const language = JSON.parse(localStorage.getItem('language'))
   return (
     <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
       <div>
         <Typography variant="h5" component="h2" dangerouslySetInnerHTML={{ __html: tagHeader }}>
         </Typography>
         <List>
-          {/* 为什么filter把所有的都遍历掉了？？ */}
-          {/* filter(
+          {/* .filter(
             ({ node }) => {
-              console.log(node.fields.slug.slice(1, 3) === language)
-              console.log(node.fields.slug.slice(1, 3))
               return (node.fields.slug.slice(1, 3) === language)
-            }). */}
+            }) */}
           {edges.map(
             ({ node }) => {
               const { slug } = node.fields
-              // console.log(slug.slice(1, 3))
-              // console.log(slug.slice(1, 3) === 'en')
               const { title } = node.frontmatter
               return (
                 <ListItem button divider component="a" href={slug} key={slug}>

@@ -75,5 +75,5 @@ const NavTabs: React.FC<Props> = (props) => {
 
 // export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)
 // /math/ page 中英切换时tabID不变
-// 去掉是因为对于setting页面 中英切换时 pathname 和 tabid都不会变 导致 siderbar和tabs都不会重新渲染
+// 去掉是因为对于setting页面 中英切换时tabid不会变 导致tabs都不会重新渲染
 export default NavTabs

@@ -80,11 +80,19 @@ function LanguageSwitchButton ({ location }): React.ReactElement {
     <LanguagesContext.Consumer>
       {({ locale, setLocale, setLanguage, language }) => {
         const currentLanguage = language
+        // console.log('current' + language)
         const targetLanguage = language === 'zh' ? 'en' : 'zh'
-        const handleClick = (e):void => {
+        // console.log('target' + targetLanguage)
+        const handleClick = async (e):Promise<void> => {
+          try {
+            localStorage.setItem('language', JSON.stringify(targetLanguage))
+          } catch (e) {
+            console.log(e)
+          }
           setLocale(locale === languages.zh ? languages.en : languages.zh)
-          setLanguage(targetLanguage)
-          navigate(location.replace(currentLanguage, targetLanguage))
+          await setLanguage(targetLanguage)
+          // console.log('after setstate language' + language)
+          await navigate(location.replace(currentLanguage, targetLanguage))
         }
         return (
           <Tooltip title={locale.nav.language} placement="bottom" arrow>
@@ -148,7 +156,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     setMobileOpen(!mobileOpen)
   }
 
-  const { locale } = useContext(LanguagesContext)
+  const { locale, language } = useContext(LanguagesContext)
   // console.log(locale)
   const tabID = getTabIDFromLocation(pathname, locale.sidebarList)
   // console.log(tabID)
