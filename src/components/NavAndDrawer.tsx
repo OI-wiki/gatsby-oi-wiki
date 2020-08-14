@@ -207,7 +207,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation="css">
-          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={locale.sidebarList}/>
+          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={locale.sidebarList} lang={language}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="js">
@@ -223,7 +223,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent pathList={locale.sidebarList} {...props} />
+          <SiderContent pathList={locale.sidebarList} {...props} lang={language}/>
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -236,7 +236,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           open
         >
           <div className={classes.placeholder} />
-          <SiderContent pathList={tabID !== -1 ? [locale.sidebarList[tabID]] : locale.sidebarList} {...props} />
+          <SiderContent pathList={tabID !== -1 ? [locale.sidebarList[tabID]] : locale.sidebarList} {...props} lang={language}/>
         </Drawer>
       </Hidden>
     </>

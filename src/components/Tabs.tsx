@@ -26,6 +26,7 @@ const useIndicatorStyles = makeStyles(() => ({
 interface Props{
   tabID: number;
   pathList: any;
+  lang: string;
 }
 
 const NavTabs: React.FC<Props> = (props) => {
@@ -53,6 +54,7 @@ const NavTabs: React.FC<Props> = (props) => {
     return tabID
   })()
 
+  // const { language } = React.useContext(LanguagesContext)
   const [value, setValue] = React.useState(state)
   const handleChange: (newValue: any, event?: Record<string, unknown>) => void = function (newValue) {
     setValue(newValue)
@@ -73,7 +75,4 @@ const NavTabs: React.FC<Props> = (props) => {
   )
 }
 
-// export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)
-// /math/ page 中英切换时tabID不变
-// 去掉是因为对于setting页面 中英切换时tabid不会变 导致tabs都不会重新渲染
-export default NavTabs
+export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID && prev.lang === next.lang)
