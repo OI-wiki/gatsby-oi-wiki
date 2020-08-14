@@ -18,18 +18,6 @@ const globalStyles = withStyles((theme) => ({
       margin: '1em 3em 1em 2em',
       borderLeft: `4px solid ${theme.palette.blockquote}`,
     },
-    // code: {
-    //   padding: '2px 4px',
-    //   borderRadius: '2px',
-    //   fontSize: '90%',
-    //   color: theme.palette.inlineCode.color,
-    //   backgroundColor: theme.palette.inlineCode.background,
-    // },
-    // 'pre code': {
-    //   fontSize: '100%',
-    //   padding: '0.2em 0',
-    //   backgroundColor: '#1E1E1E',
-    // },
     '.gatsby-highlight': {
       backgroundColor: '#1E1E1E',
       padding: '1em',
@@ -118,8 +106,6 @@ const darkCss = {
       '--details-border': htr(blue[500]),
       '--details-main': htr(grey[700]),
       '--blockquote': '255, 255, 255, .12',
-      // '--inline-color': htr(grey[100]),
-      // '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
       '--search-bg': htr(grey[700]),
       '--search-highlight': '#acccf1',
       '--tab-hover': htr('#fff'),
@@ -182,10 +168,6 @@ const adaptiveTheme = createMuiTheme({
       main: 'rgba(var(--details-main))',
     },
     blockquote: 'rgba(var(--blockquote))',
-    // inlineCode: {
-    //   color: 'rgba(var(--inline-color))',
-    //   background: 'var(--inline-bg-hsla)',
-    // },
     search: {
       messageBackground: 'rgba(var(--search-bg))',
       highlight: 'rgba(var(--search-highlight))',

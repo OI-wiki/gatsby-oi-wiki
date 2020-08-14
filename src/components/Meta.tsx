@@ -49,11 +49,6 @@ const Meta: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
   const MyLink = Link(location)
-  // relativePath: math/index.md -> /math/changelog/ || math/ploy/fft.md -> /math/ploy/fft/changelog/
-  // path.split aiming to distinguish that relavtivePath is math/index.md or math/ploy/fft.md
-  // const targetLink = relativePath.split('/').length > 2
-  //  ? ('/' + relativePath.slice(0, -3) + '/changelog/') : ('/' + relativePath.slice(0, -9) + '/changelog/')
-
   return <>
     <EditWarn relativePath={relativePath} dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} location={location} />
     <Paper className={classes.paper} variant="outlined">
