@@ -1,6 +1,6 @@
 - blog:
-    - 博客一: /blog/one/
-    - 博客二: /blog/two/
+    - 博客一: /zh/blog/one/
+    - 博客二: /zh/blog/two/
 - 测试:
     - 测试: /zh/test/
     - 这里什么也没有: /zh/empty/

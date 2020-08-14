@@ -146,5 +146,4 @@ const Sidebar: React.FC<PropsType> = (props) => {
 
 export default React.memo(Sidebar, (prev, next) => prev.pathname === next.pathname && prev.lang === next.lang)
 // 只比较 pathname，而不比较 pathList，考虑到当 pathList 不同时，pathname 也一定不同，因此这样比较可以节省计算量
-// 去掉是因为对于setting页面 中英切换时 pathname 不变 导致 siderbar不会重新渲染
-// export default Sidebar
+// 添加lang参数比较是因为对于setting页面 中英切换时 pathname 不变 导致 siderbar不会重新渲染
