@@ -39,7 +39,7 @@
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.20",
     "mdast-util-toc": "^5.0.3",
-    "preact": "^10.4.6",
+    "preact": "^10.4.7",
     "preact-render-to-string": "^5.1.10",
     "prismjs": "^1.21.0",
     "react": "^16.13.1",
