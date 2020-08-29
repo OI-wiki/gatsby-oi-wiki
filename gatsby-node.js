@@ -118,3 +118,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic(result.errors)
   }
 }
+
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        'global.GENTLY': false,
+      }),
+    ],
+  })
+}
