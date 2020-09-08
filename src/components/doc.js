@@ -11,7 +11,7 @@ function fixMathJaxCustomElement (mdxString) {
   mdxString = mdxString.replace(/"className": ?"MathJax/g, '"class": "MathJax')
   return mdxString.replace(/"className": ?"MJX/g, '"class": "MJX')
 }
-function mdx ({ data: { mdx }, location }) {
+function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
   const title = mdx.slug === '/' ? null : mdx.frontmatter.title
@@ -34,6 +34,7 @@ function mdx ({ data: { mdx }, location }) {
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
+
   return (
     <Layout
       location={location}
@@ -56,4 +57,4 @@ function mdx ({ data: { mdx }, location }) {
   )
 }
 
-export default mdx
+export default Mdx

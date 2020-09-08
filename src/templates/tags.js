@@ -1,7 +1,7 @@
 // Components
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
 import Typography from '@material-ui/core/Typography'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -11,30 +11,42 @@ import BookIcon from '@material-ui/icons/Book'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Button from '@material-ui/core/Button'
 import Layout from '../components/Layout'
-
+import { LanguagesContext } from '../languageContext'
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
   const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
 
+  // error
+  const { language } = useContext(LanguagesContext)
+  // console.log(language)
+  // const language = JSON.parse(localStorage.getItem('language'))
   return (
     <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
       <div>
         <Typography variant="h5" component="h2" dangerouslySetInnerHTML={{ __html: tagHeader }}>
         </Typography>
         <List>
-          {edges.map(({ node }) => {
-            const { slug } = node.fields
-            const { title } = node.frontmatter
-            return (
-              <ListItem button divider component="a" href={slug} key={slug}>
-                <ListItemIcon>
-                  <BookIcon />
-                </ListItemIcon>
-                <ListItemText primary={title} />
-              </ListItem>
-            )
-          })}
+          {/* .filter(
+            ({ node }) => {
+              return (node.fields.slug.slice(1, 3) === language)
+            }) */}
+          {edges.filter(
+            ({ node }) => {
+              return (node.fields.slug.slice(1, 3) === language)
+            }).map(
+            ({ node }) => {
+              const { slug } = node.fields
+              const { title } = node.frontmatter
+              return (
+                <ListItem button divider component="a" href={slug} key={slug}>
+                  <ListItemIcon>
+                    <BookIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={title} />
+                </ListItem>
+              )
+            })}
         </List>
         <Button
           variant="outlined"

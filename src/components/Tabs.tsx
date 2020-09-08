@@ -26,6 +26,7 @@ const useIndicatorStyles = makeStyles(() => ({
 interface Props{
   tabID: number;
   pathList: any;
+  lang: string;
 }
 
 const NavTabs: React.FC<Props> = (props) => {
@@ -53,6 +54,7 @@ const NavTabs: React.FC<Props> = (props) => {
     return tabID
   })()
 
+  // const { language } = React.useContext(LanguagesContext)
   const [value, setValue] = React.useState(state)
   const handleChange: (newValue: any, event?: Record<string, unknown>) => void = function (newValue) {
     setValue(newValue)
@@ -73,4 +75,4 @@ const NavTabs: React.FC<Props> = (props) => {
   )
 }
 
-export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)
+export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID && prev.lang === next.lang)

@@ -7,21 +7,20 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
-import { Link } from 'gatsby'
-import React from 'react'
+import { Link, navigate } from 'gatsby'
+import React, { useContext } from 'react'
 import createPersistedState from 'use-persisted-state'
-
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
+import TranslateIcon from '@material-ui/icons/Translate'
+import { LanguagesContext, languages } from '../languageContext'
 import scrollbarStyle from '../styles/scrollbar'
-// eslint-disable-next-line
-// @ts-ignore
-import pathList from '../sidebar.yaml'
 import defaultSettings from '../lib/defaultSettings'
+
 import Search from './Search'
 import SiderContent from './Sidebar'
 import Tabs from './Tabs'
@@ -76,7 +75,36 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }))
-
+function LanguageSwitchButton ({ location }): React.ReactElement {
+  return (
+    <LanguagesContext.Consumer>
+      {({ locale, setLocale, setLanguage, language }) => {
+        const currentLanguage = language
+        // console.log('current' + language)
+        const targetLanguage = language === 'zh' ? 'en' : 'zh'
+        // console.log('target' + targetLanguage)
+        const handleClick = async (e):Promise<void> => {
+          try {
+            localStorage.setItem('language', JSON.stringify(targetLanguage))
+          } catch (e) {
+            console.log(e)
+          }
+          setLocale(locale === languages.zh ? languages.en : languages.zh)
+          await setLanguage(targetLanguage)
+          // console.log('after setstate language' + language)
+          await navigate(location.replace(currentLanguage, targetLanguage))
+        }
+        return (
+          <Tooltip title={locale.nav.language} placement="bottom" arrow>
+            <IconButton color="inherit" onClick={handleClick}>
+              <TranslateIcon />
+            </IconButton>
+          </Tooltip>
+        )
+      }}
+    </LanguagesContext.Consumer>
+  )
+}
 function flattenObject (ob:any) :Record<string, unknown> {
   // https://stackoverflow.com/a/53739792
   const toReturn = {}
@@ -127,7 +155,11 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen)
   }
-  const tabID = getTabIDFromLocation(pathname, pathList)
+
+  const { locale, language } = useContext(LanguagesContext)
+  // console.log(locale)
+  const tabID = getTabIDFromLocation(pathname, locale.sidebarList)
+  // console.log(tabID)
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -152,29 +184,30 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
-          <Tooltip title="设置页" placement="bottom" arrow>
+          <LanguageSwitchButton location={pathname} />
+          <Tooltip title={locale.nav.setting} placement="bottom" arrow>
             <IconButton component="a" href="/settings" color="inherit">
               <SettingsIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="标签页" placement="bottom" arrow>
+          <Tooltip title={locale.nav.tag} placement="bottom" arrow>
             <IconButton component="a" href="/tags" color="inherit">
               <LocalOfferIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="目录页" placement="bottom" arrow>
+          <Tooltip title={locale.nav.catalog} placement="bottom" arrow>
             <IconButton component="a" href="/pages" color="inherit">
               <LibraryBooksIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="GitHub 存储库" placement="bottom" arrow>
+          <Tooltip title={locale.nav.github} placement="bottom" arrow>
             <IconButton component="a" href={OIWikiGithub} color="inherit">
               <GitHubIcon />
             </IconButton>
           </Tooltip>
         </Toolbar>
         <Hidden mdDown implementation="css">
-          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
+          <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={locale.sidebarList} lang={language}/>
         </Hidden>
       </AppBar>
       <Hidden lgUp implementation="js">
@@ -190,7 +223,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          <SiderContent pathList={pathList} {...props} />
+          <SiderContent pathList={locale.sidebarList} {...props} lang={language}/>
         </Drawer>
       </Hidden>
       <Hidden mdDown implementation="css">
@@ -203,7 +236,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           open
         >
           <div className={classes.placeholder} />
-          <SiderContent pathList={tabID !== -1 ? [pathList[tabID]] : pathList} {...props} />
+          <SiderContent pathList={tabID !== -1 ? [locale.sidebarList[tabID]] : locale.sidebarList} {...props} lang={language}/>
         </Drawer>
       </Hidden>
     </>

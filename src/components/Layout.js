@@ -12,6 +12,7 @@ import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 import { Helmet } from 'react-helmet'
+// import { LanguageProvider } from '../languageContext'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
@@ -179,8 +180,8 @@ function MyLayout ({
 
 function StyledLayout (props) {
   // const enableDark = useDarkMode()
-
   return (
+    // <LanguageProvider>
     <ThemeProvider theme={adaptiveTheme}>
       <CssBaseline/>
       <CustomCssBaseline/>
@@ -189,6 +190,7 @@ function StyledLayout (props) {
       <AutoCssBaseline/>
       <MyLayout {...props}/>
     </ThemeProvider>
+    //  </LanguageProvider>
   )
 }
 
