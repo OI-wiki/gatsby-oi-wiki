@@ -34,7 +34,7 @@
     "gatsby-remark-copy-linked-files": "^2.3.12",
     "gatsby-remark-prismjs": "^3.5.11",
     "gatsby-remark-table-of-contents": "0.1.1",
-    "gatsby-source-filesystem": "^2.3.24",
+    "gatsby-source-filesystem": "^2.3.28",
     "gatsby-source-local-git": "^1.1.1",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.20",
