@@ -86,36 +86,46 @@ code span.shiki-line:before {
   user-select: none;
 }
 
-pre.shiki,
-code.shiki {
-	color: #d4d4d4;
-	font-size: 13px;
-	text-shadow: none;
-	font-family: 'Fira Code', 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	-moz-tab-size: 2;
-	-o-tab-size: 2;
-	tab-size: 2;
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
+pre.shiki {
+  overflow: auto;
+  color: #d4d4d4;
+  font-size: 13px;
+  text-shadow: none;
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
 pre.shiki::selection,
 code.shiki::selection {
-	text-shadow: none;
-	background: #b3d4fc;
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+pre::-webkit-scrollbar {
+  width: .4rem;
+  height: .4rem;
+}
+
+pre::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(255,255,255,.25);
 }
 
 @media print {
-	pre.shiki,
-	pre.shiki {
-		text-shadow: none;
-	}
+  code.shiki,
+  pre.shiki {
+  text-shadow: none;
+  }
 }
 /* code block end */
