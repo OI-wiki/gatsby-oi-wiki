@@ -86,6 +86,6 @@
     "gatsby-plugin-manifest": "^2.4.27",
     "gatsby-plugin-sharp": "^2.6.32",
     "gatsby-remark-images": "^3.3.26",
-    "gatsby-transformer-sharp": "^2.5.13"
+    "gatsby-transformer-sharp": "^2.5.14"
   }
 }
