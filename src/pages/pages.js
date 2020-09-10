@@ -11,8 +11,8 @@ import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
 import times from 'lodash/times'
 import { graphql } from 'gatsby'
-import React, { useState } from 'react'
-// import { LanguagesContext } from '../languageContext'
+import React, { useState, useContext } from 'react'
+import { LanguagesContext } from '../languageContext'
 import Layout from '../components/Layout'
 import Link from '../components/Link'
 import Tags from '../components/Tags.tsx'
@@ -100,10 +100,10 @@ function BlogIndex (props) {
     },
   } = props
   // filter to get specific-language info
-  // const { language } = useContext(LanguagesContext)
-  // const filteredEdges = edges.filter((x) => x.node.fields.slug.slice(1, 3) === language)
-  // const articles = filteredEdges.map((x) => x.node)
-  const articles = edges.map((x) => x.node)
+  const { language } = useContext(LanguagesContext)
+  const filteredEdges = edges.filter((x) => x.node.fields.slug.slice(1, 3) === language)
+  const articles = filteredEdges.map((x) => x.node)
+  // const articles = edges.map((x) => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
   const [selectedTags, setSelectedTags] = useState([])
   const filteredItems = articles
