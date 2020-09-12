@@ -5,6 +5,7 @@ import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
 import Link from './Link'
+import SEO from './Seo'
 
 function fixMathJaxCustomElement (mdxString) {
   mdxString = mdxString.replace(/"className": ?"mjx/g, '"class": "mjx')
@@ -49,6 +50,7 @@ function mdx ({ data: { mdx }, location }) {
       noEdit={noEdit}
       isWIP={isWIP}
     >
+      <SEO title={title} description={description} author={authors} tags={tags} article />
       <MDXProvider components={myComponents}>
         <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
       </MDXProvider>

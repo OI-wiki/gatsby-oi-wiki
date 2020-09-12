@@ -19,6 +19,7 @@
     "@mdx-js/react": "^1.6.16",
     "@mgtd/vssue-api-github-v3": "^2.4.8",
     "@mgtd/vssue-api-github-v4": "^2.4.5",
+    "@types/react-helmet": "^6.1.0",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^2.0.0",
