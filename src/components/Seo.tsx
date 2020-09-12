@@ -48,7 +48,7 @@ const SEO: React.FC<Props> = (props: Props) => {
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {(article ? true : null) && <meta property="og:type" content="article" />}
-      {(article ? true : null) && <meta property="og:article:tags" content={seo.tags} /> }
+      {(article ? true : null) && <meta property="og:article:tag" content={seo.tags} /> }
       {(article ? true : null) && <meta property="og:article:author" content={seo.author}/>}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
