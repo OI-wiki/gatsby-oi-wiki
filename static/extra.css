@@ -66,3 +66,66 @@
   text-indent: 0;
 }
 /* pseudocode.js end */
+/* code block start */
+pre.shiki {
+  counter-reset: shiki-line-number;
+}
+
+code span.shiki-line:before {
+  counter-increment: shiki-line-number;
+  content: counter(shiki-line-number);
+  color: #888;
+  margin-right: 1em;
+  text-align: right;
+  min-width: 2em;
+  display: inline-block;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+pre.shiki {
+  overflow: auto;
+  color: #d4d4d4;
+  font-size: 13px;
+  text-shadow: none;
+  font-family: 'Fira Code', 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre.shiki::selection,
+code.shiki::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+pre::-webkit-scrollbar {
+  width: .4rem;
+  height: .4rem;
+}
+
+pre::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(255,255,255,.25);
+}
+
+@media print {
+  code.shiki,
+  pre.shiki {
+  text-shadow: none;
+  }
+}
+/* code block end */
