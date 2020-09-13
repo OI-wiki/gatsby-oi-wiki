@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
@@ -28,6 +29,7 @@ const SEO: React.FC<Props> = (props: Props) => {
     defaultTitle,
     defaultDescription,
     siteUrl,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     defaultAuthor,
   } = site.siteMetadata
 
@@ -36,8 +38,8 @@ const SEO: React.FC<Props> = (props: Props) => {
     description: description || defaultDescription,
     image: `${siteUrl}${image}`,
     url: `${siteUrl}${pathname}`,
-    author: author || defaultAuthor,
-    tags: tags && tags.join(','),
+    author: author && author.split(','),
+    tags: tags,
   }
 
   return (
@@ -47,9 +49,9 @@ const SEO: React.FC<Props> = (props: Props) => {
 
       {seo.url && <meta property="og:url" content={seo.url} />}
 
-      {(article ? true : null) && <meta property="og:type" content="article" />}
-      {(article ? true : null) && <meta property="og:article:tags" content={seo.tags} /> }
-      {(article ? true : null) && <meta property="og:article:author" content={seo.author}/>}
+      {article && <meta property="og:type" content="article" />}
+      {seo.tags && seo.tags.map((tag) => <meta property="og:article:tag" content={tag} />)}
+      {seo.author && seo.author.map((author) => <meta property="og:article:author" content={author} />)}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
 
