@@ -26,6 +26,8 @@ function mdx ({ data: { mdx }, location }) {
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
   const wordCount = mdx.wordCount.words || 0
+  const datePublished = mdx.parent.birthTime || ''
+  const dateModified = mdx.parent.changeTime || ''
 
   const myComponents = {
     details: Details,
@@ -50,7 +52,14 @@ function mdx ({ data: { mdx }, location }) {
       noEdit={noEdit}
       isWIP={isWIP}
     >
-      <SEO title={title} description={description} author={authors} tags={tags} article />
+      <SEO
+        title={title}
+        description={description}
+        author={authors}
+        tags={tags}
+        dateModified={dateModified}
+        datePublished={datePublished}
+        article />
       <MDXProvider components={myComponents}>
         <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
       </MDXProvider>

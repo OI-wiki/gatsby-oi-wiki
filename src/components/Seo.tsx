@@ -11,6 +11,8 @@ interface Props {
   article: boolean;
   author: string;
   tags: string[];
+  dateModified: string;
+  datePublished: string;
 }
 
 const SEO: React.FC<Props> = (props: Props) => {
@@ -21,6 +23,8 @@ const SEO: React.FC<Props> = (props: Props) => {
     article = false,
     author = null,
     tags = null,
+    dateModified,
+    datePublished,
   } = props
   const { pathname } = useLocation()
   const { site } = useStaticQuery(query)
@@ -42,6 +46,14 @@ const SEO: React.FC<Props> = (props: Props) => {
     tags: tags,
   }
 
+  const schemaMarkUp = {
+    headline: seo.title,
+    image: [''],
+    datePublished: datePublished,
+    dateModified: dateModified,
+  }
+  schemaMarkUp['@context'] = 'https://schema.org'
+  schemaMarkUp['@type'] = 'Article'
   return (
     <Helmet title={seo.title}>
       <meta name="description" content={seo.description} />
@@ -70,6 +82,7 @@ const SEO: React.FC<Props> = (props: Props) => {
       )}
 
       {seo.image && <meta name="twitter:image" content={seo.image} />}
+      {schemaMarkUp && <script type="application/ld+json">{JSON.stringify(schemaMarkUp, null, 2)}</script>}
     </Helmet>
   )
 }
