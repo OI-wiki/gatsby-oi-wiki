@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
       margin: '1.2em 0 !important',
     },
   },
+  container: {
+    width: '100%',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
 }))
 
 const Details: React.FC<Props> = (props: Props) => {
@@ -39,7 +44,7 @@ const Details: React.FC<Props> = (props: Props) => {
     >
       {cont[0]}
       <AccordionDetails style={{ padding: '0' }}>
-        <Container>{cont.slice(1)}</Container>
+        <div className={classes.container}>{cont.slice(1)}</div>
       </AccordionDetails>
     </Accordion>
   )
