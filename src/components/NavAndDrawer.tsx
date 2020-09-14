@@ -135,15 +135,15 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null)
 
-  const handleClick = (event) => {
+  const handleClick = (event): void => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null)
   }
 
-  const SmallScreenMenu = () => <Menu
+  const SmallScreenMenu: React.FC<void> = () => <Menu
     anchorEl={anchorEl}
     open={Boolean(anchorEl)}
     onClose={handleClose}
