@@ -9,6 +9,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import React from 'react'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import createPersistedState from 'use-persisted-state'
 
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -17,6 +19,8 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { ListItemIcon } from '@material-ui/core'
 import scrollbarStyle from '../styles/scrollbar'
 // eslint-disable-next-line
 // @ts-ignore
@@ -75,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  iconItem: {
+    minWidth: theme.spacing(5),
+  },
 }))
 
 function flattenObject (ob:any) :Record<string, unknown> {
@@ -128,6 +135,45 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     setMobileOpen(!mobileOpen)
   }
   const tabID = getTabIDFromLocation(pathname, pathList)
+
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event): void => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = (): void => {
+    setAnchorEl(null)
+  }
+
+  const SmallScreenMenu: React.FC<unknown> = () => <Menu
+    anchorEl={anchorEl}
+    open={Boolean(anchorEl)}
+    onClose={handleClose}
+  >
+    <MenuItem component="a" href="/settings">
+      <ListItemIcon classes={{ root: classes.iconItem }}>
+        <SettingsIcon fontSize="small" />
+      </ListItemIcon>
+    设置
+    </MenuItem>
+    <MenuItem component="a" href="/tags">
+      <ListItemIcon classes={{ root: classes.iconItem }}>
+        <LocalOfferIcon fontSize="small" />
+      </ListItemIcon>
+    标签
+    </MenuItem>
+    <MenuItem component="a" href="/pages">
+      <ListItemIcon classes={{ root: classes.iconItem }}>
+        <LibraryBooksIcon fontSize="small" />
+      </ListItemIcon>
+    目录</MenuItem>
+    <MenuItem component="a" href={OIWikiGithub}>
+      <ListItemIcon classes={{ root: classes.iconItem }}>
+        <GitHubIcon fontSize="small" />
+      </ListItemIcon>
+    GitHub</MenuItem>
+  </Menu>
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -152,26 +198,34 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
-          <Tooltip title="设置页" placement="bottom" arrow>
-            <IconButton component="a" href="/settings" color="inherit">
-              <SettingsIcon />
+          <Hidden smDown implementation="css">
+            <Tooltip title="设置页" placement="bottom" arrow>
+              <IconButton component="a" href="/settings" color="inherit">
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="标签页" placement="bottom" arrow>
+              <IconButton component="a" href="/tags" color="inherit">
+                <LocalOfferIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="目录页" placement="bottom" arrow>
+              <IconButton component="a" href="/pages" color="inherit">
+                <LibraryBooksIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="GitHub 存储库" placement="bottom" arrow>
+              <IconButton component="a" href={OIWikiGithub} color="inherit">
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          </Hidden>
+          <Hidden mdUp implementation="js">
+            <IconButton color="inherit" onClick={handleClick}>
+              <MoreVertIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="标签页" placement="bottom" arrow>
-            <IconButton component="a" href="/tags" color="inherit">
-              <LocalOfferIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="目录页" placement="bottom" arrow>
-            <IconButton component="a" href="/pages" color="inherit">
-              <LibraryBooksIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="GitHub 存储库" placement="bottom" arrow>
-            <IconButton component="a" href={OIWikiGithub} color="inherit">
-              <GitHubIcon />
-            </IconButton>
-          </Tooltip>
+            <SmallScreenMenu/>
+          </Hidden>
         </Toolbar>
         <Hidden mdDown implementation="css">
           <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
