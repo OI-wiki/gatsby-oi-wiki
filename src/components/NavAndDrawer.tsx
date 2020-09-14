@@ -9,6 +9,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import React from 'react'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import createPersistedState from 'use-persisted-state'
 
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -17,6 +19,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 import scrollbarStyle from '../styles/scrollbar'
 // eslint-disable-next-line
 // @ts-ignore
@@ -128,6 +131,27 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     setMobileOpen(!mobileOpen)
   }
   const tabID = getTabIDFromLocation(pathname, pathList)
+
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const SmallScreenMenu = () => <Menu
+    anchorEl={anchorEl}
+    open={Boolean(anchorEl)}
+    onClose={handleClose}
+  >
+    <MenuItem component="a" href="/settings">设置页</MenuItem>
+    <MenuItem component="a" href="/tags">标签页</MenuItem>
+    <MenuItem component="a" href="/pages">目录页</MenuItem>
+    <MenuItem component="a" href={OIWikiGithub}>GitHub 存储库</MenuItem>
+  </Menu>
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -152,26 +176,34 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           </Button>
           <div style={{ flexGrow: 1 }} />
           <Search />
-          <Tooltip title="设置页" placement="bottom" arrow>
-            <IconButton component="a" href="/settings" color="inherit">
-              <SettingsIcon />
+          <Hidden smDown implementation="css">
+            <Tooltip title="设置页" placement="bottom" arrow>
+              <IconButton component="a" href="/settings" color="inherit">
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="标签页" placement="bottom" arrow>
+              <IconButton component="a" href="/tags" color="inherit">
+                <LocalOfferIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="目录页" placement="bottom" arrow>
+              <IconButton component="a" href="/pages" color="inherit">
+                <LibraryBooksIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="GitHub 存储库" placement="bottom" arrow>
+              <IconButton component="a" href={OIWikiGithub} color="inherit">
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          </Hidden>
+          <Hidden mdUp implementation="js">
+            <IconButton color="inherit" onClick={handleClick}>
+              <MoreVertIcon />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="标签页" placement="bottom" arrow>
-            <IconButton component="a" href="/tags" color="inherit">
-              <LocalOfferIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="目录页" placement="bottom" arrow>
-            <IconButton component="a" href="/pages" color="inherit">
-              <LibraryBooksIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="GitHub 存储库" placement="bottom" arrow>
-            <IconButton component="a" href={OIWikiGithub} color="inherit">
-              <GitHubIcon />
-            </IconButton>
-          </Tooltip>
+            <SmallScreenMenu/>
+          </Hidden>
         </Toolbar>
         <Hidden mdDown implementation="css">
           <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
