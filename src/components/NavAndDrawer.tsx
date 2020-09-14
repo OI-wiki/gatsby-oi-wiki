@@ -20,6 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { ListItemIcon } from '@material-ui/core'
 import scrollbarStyle from '../styles/scrollbar'
 // eslint-disable-next-line
 // @ts-ignore
@@ -147,10 +148,28 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     open={Boolean(anchorEl)}
     onClose={handleClose}
   >
-    <MenuItem component="a" href="/settings">设置页</MenuItem>
-    <MenuItem component="a" href="/tags">标签页</MenuItem>
-    <MenuItem component="a" href="/pages">目录页</MenuItem>
-    <MenuItem component="a" href={OIWikiGithub}>GitHub 存储库</MenuItem>
+    <MenuItem component="a" href="/settings">
+      <ListItemIcon>
+        <SettingsIcon fontSize="small" />
+      </ListItemIcon>
+    设置
+    </MenuItem>
+    <MenuItem component="a" href="/tags">
+      <ListItemIcon>
+        <LocalOfferIcon fontSize="small" />
+      </ListItemIcon>
+    标签
+    </MenuItem>
+    <MenuItem component="a" href="/pages">
+      <ListItemIcon>
+        <LibraryBooksIcon fontSize="small" />
+      </ListItemIcon>
+    目录</MenuItem>
+    <MenuItem component="a" href={OIWikiGithub}>
+      <ListItemIcon>
+        <GitHubIcon fontSize="small" />
+      </ListItemIcon>
+    GitHub</MenuItem>
   </Menu>
   return (
     <>
