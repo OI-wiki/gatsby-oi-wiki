@@ -9,8 +9,10 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import Red from '@material-ui/core/colors/red'
 import AvatarGroup from '@material-ui/lab/AvatarGroup'
 import clsx from 'clsx'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { User } from '@mgtd/vssue-api-github-v4/lib/types'
 import Time from '../Time'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Reactions } from './types'
 import { useInputContentContext } from './inputContext'
 

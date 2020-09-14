@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Settings from '../types/settings'
 
 const defaultSettings: Settings = {

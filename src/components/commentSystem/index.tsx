@@ -5,6 +5,7 @@ import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
 import CommentCard from './CommentCard'
 import CommentInput from './CommentInput'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Comments, Issue, User } from './types'
 import { InputContentProvider } from './inputContext'
 const useToken = createPersistedState('github-access-token')
