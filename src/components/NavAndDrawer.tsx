@@ -79,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  iconItem: {
+    minWidth: theme.spacing(5),
+  },
 }))
 
 function flattenObject (ob:any) :Record<string, unknown> {
@@ -143,30 +146,30 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     setAnchorEl(null)
   }
 
-  const SmallScreenMenu: React.FC<void> = () => <Menu
+  const SmallScreenMenu: React.FC<unknown> = () => <Menu
     anchorEl={anchorEl}
     open={Boolean(anchorEl)}
     onClose={handleClose}
   >
     <MenuItem component="a" href="/settings">
-      <ListItemIcon>
+      <ListItemIcon classes={{ root: classes.iconItem }}>
         <SettingsIcon fontSize="small" />
       </ListItemIcon>
     设置
     </MenuItem>
     <MenuItem component="a" href="/tags">
-      <ListItemIcon>
+      <ListItemIcon classes={{ root: classes.iconItem }}>
         <LocalOfferIcon fontSize="small" />
       </ListItemIcon>
     标签
     </MenuItem>
     <MenuItem component="a" href="/pages">
-      <ListItemIcon>
+      <ListItemIcon classes={{ root: classes.iconItem }}>
         <LibraryBooksIcon fontSize="small" />
       </ListItemIcon>
     目录</MenuItem>
     <MenuItem component="a" href={OIWikiGithub}>
-      <ListItemIcon>
+      <ListItemIcon classes={{ root: classes.iconItem }}>
         <GitHubIcon fontSize="small" />
       </ListItemIcon>
     GitHub</MenuItem>
