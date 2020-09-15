@@ -26,7 +26,7 @@
     "gatsby": "^2.24.54",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
-    "gatsby-plugin-catch-links": "^2.3.11",
+    "gatsby-plugin-catch-links": "^2.3.12",
     "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-mdx": "^1.2.38",
     "gatsby-plugin-offline": "^3.2.27",
