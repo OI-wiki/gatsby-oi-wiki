@@ -22,7 +22,7 @@
     "@mgtd/vssue-api-github-v4": "^2.4.5",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
-    "constate": "^3.0.0",
+    "constate": "^3.0.1",
     "gatsby": "^2.24.54",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.5",
