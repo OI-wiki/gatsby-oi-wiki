@@ -40,7 +40,8 @@ const SEO: React.FC<Props> = (props: Props) => {
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    image: `${siteUrl}${image}`,
+    // image: `${siteUrl}${image}`,
+    image: 'https://cdn.jsdelivr.net/npm/oicdn@0.0.2/wordArt.webp',
     url: `${siteUrl}${pathname}`,
     author: author && author.split(','),
     tags: tags,
@@ -48,7 +49,7 @@ const SEO: React.FC<Props> = (props: Props) => {
 
   const schemaMarkUp = {
     headline: seo.title,
-    image: [''],
+    image: ['https://cdn.jsdelivr.net/npm/oicdn@0.0.2/wordArt.webp'],
     datePublished: datePublished,
     dateModified: dateModified,
   }
