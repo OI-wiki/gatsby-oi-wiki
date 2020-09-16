@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
@@ -52,9 +51,26 @@ const SEO: React.FC<Props> = (props: Props) => {
     image: ['https://cdn.jsdelivr.net/npm/oicdn@0.0.2/wordArt.webp'],
     datePublished: datePublished,
     dateModified: dateModified,
+    mainEntityOfPage: seo.url,
+    author: {
+      name: author,
+    },
+    publisher: {
+      name: 'OI WIKI',
+      logo: {
+        url: 'https://cdn.jsdelivr.net/npm/oicdn@0.0.2/wordArt.webp',
+      },
+    },
   }
   schemaMarkUp['@context'] = 'https://schema.org'
   schemaMarkUp['@type'] = 'Article'
+  schemaMarkUp.author['@type'] = 'Person'
+  schemaMarkUp.publisher['@type'] = 'Organization'
+  schemaMarkUp.publisher.logo['@type'] = 'ImageObject'
+
+  const generateKey = (pre:number):string => {
+    return `${pre}_${new Date().getTime()}`
+  }
   return (
     <Helmet title={seo.title}>
       <meta name="description" content={seo.description} />
@@ -63,8 +79,8 @@ const SEO: React.FC<Props> = (props: Props) => {
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {article && <meta property="og:type" content="article" />}
-      {seo.tags && seo.tags.map((tag) => <meta property="og:article:tag" content={tag} />)}
-      {seo.author && seo.author.map((author) => <meta property="og:article:author" content={author} />)}
+      {seo.tags && seo.tags.map((tag, i) => <meta key={generateKey(i)} property="og:article:tag" content={tag} />)}
+      {seo.author && seo.author.map((author, i) => <meta key={generateKey(i)} property="og:article:author" content={author} />)}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
 
