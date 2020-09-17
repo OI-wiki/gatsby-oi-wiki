@@ -18,6 +18,7 @@ const SEO: React.FC<Props> = (props: Props) => {
   const {
     title = null,
     description = null,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     image = null,
     article = false,
     author = null,
@@ -56,7 +57,7 @@ const SEO: React.FC<Props> = (props: Props) => {
       name: author,
     },
     publisher: {
-      name: 'OI WIKI',
+      name: 'OI Wiki',
       logo: {
         url: 'https://cdn.jsdelivr.net/npm/oicdn@0.0.2/wordArt.webp',
       },

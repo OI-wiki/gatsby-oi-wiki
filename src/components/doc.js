@@ -55,7 +55,7 @@ function mdx ({ data: { mdx }, location }) {
       <SEO
         title={title}
         description={description}
-        author={authors}
+        author={authors || 'OI Wiki'}
         tags={tags}
         dateModified={dateModified}
         datePublished={datePublished}
