@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 250,
     },
   },
+  toc: {
+    zIndex: -1,
+  },
   container: {
     [theme.breakpoints.up('lg')]: {
       marginLeft: 250,
@@ -163,7 +166,7 @@ function MyLayout ({
           </div>
         </Grid>
         {displayToC && (
-          <Grid item xs>
+          <Grid item xs className={classes.toc}>
             <ToC toc={toc} pathname={location.pathname} />
           </Grid>
         )}
