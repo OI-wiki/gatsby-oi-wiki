@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { findAll } from 'highlight-words-core'
 import Details from './Details.tsx'
 import Layout from './Layout'
@@ -27,12 +27,23 @@ function Mdx ({ data: { mdx }, location }) {
   const modifiedTime = mdx.parent.modifiedTime || ''
   const wordCount = mdx.wordCount.words || 0
 
+  const [searchKey, setSearchKey] = useState('')
+  useEffect(() => {
+    console.log(location.state.searchKey)
+    if (location.state.searchKey) {
+      setSearchKey(location.state.searchKey)
+      setIsHighlight(true)
+      setTimeout(() => setIsHighlight(false), 5000)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const MyH1 = props => {
     // console.log(highLight)
-    if (!highLight) { return <h2 {...props} /> }
+    if (!isHighlight) { return <h2 {...props} /> }
     const { children } = props
     const textToHighlight = children[0]
-    const searchWords = ['前置']
+    const searchWords = [searchKey]
 
     const chunks = findAll({
       searchWords,
@@ -63,12 +74,9 @@ function Mdx ({ data: { mdx }, location }) {
     inlinecode: 'code',
     h2: MyH1,
   }
-  // const [highLight, setHighLight] = useState(true)
-  const highLight = true
+  const [isHighlight, setIsHighlight] = useState(false)
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
   return (
-    // 这个onclick之后再改改
-    // <div onClick={() => setHighLight(false)}>
     <Layout
       location={location}
       authors={authors}
@@ -87,7 +95,6 @@ function Mdx ({ data: { mdx }, location }) {
         <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
       </MDXProvider>
     </Layout>
-    // </div>
   )
 }
 
