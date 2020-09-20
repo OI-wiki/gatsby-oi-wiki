@@ -69,8 +69,8 @@ const SEO: React.FC<Props> = (props: Props) => {
   schemaMarkUp.publisher['@type'] = 'Organization'
   schemaMarkUp.publisher.logo['@type'] = 'ImageObject'
 
-  const generateKey = (pre:number):string => {
-    return `${pre}_${new Date().getTime()}`
+  const generateKey = (pre:string, id:number):string => {
+    return `${pre}_${id}`
   }
   return (
     <Helmet title={seo.title}>
@@ -80,8 +80,8 @@ const SEO: React.FC<Props> = (props: Props) => {
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {article && <meta property="og:type" content="article" />}
-      {seo.tags && seo.tags.map((tag, i) => <meta key={generateKey(i)} property="og:article:tag" content={tag} />)}
-      {seo.author && seo.author.map((author, i) => <meta key={generateKey(i)} property="og:article:author" content={author} />)}
+      {seo.tags && seo.tags.map((tag, i) => <meta key={generateKey('tags', i)} property="og:article:tag" content={tag} />)}
+      {seo.author && seo.author.map((author, i) => <meta key={generateKey('author', i)} property="og:article:author" content={author} />)}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
 
