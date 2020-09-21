@@ -69,9 +69,6 @@ const SEO: React.FC<Props> = (props: Props) => {
   schemaMarkUp.publisher['@type'] = 'Organization'
   schemaMarkUp.publisher.logo['@type'] = 'ImageObject'
 
-  const generateKey = (pre:string, id:number):string => {
-    return `${pre}_${id}`
-  }
   return (
     <Helmet >
       <meta name="description" content={seo.description} />
