@@ -20,7 +20,6 @@
     "@mgtd/remark-shiki": "^1.0.10",
     "@mgtd/vssue-api-github-v3": "^2.4.8",
     "@mgtd/vssue-api-github-v4": "^2.4.5",
-    "@types/react-helmet": "^6.1.0",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.0.0",
@@ -56,6 +55,7 @@
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.10.1",
     "autosuggest-highlight": "^3.1.1",

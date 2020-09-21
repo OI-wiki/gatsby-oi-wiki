@@ -73,15 +73,15 @@ const SEO: React.FC<Props> = (props: Props) => {
     return `${pre}_${id}`
   }
   return (
-    <Helmet title={seo.title}>
+    <Helmet >
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
       {seo.url && <meta property="og:url" content={seo.url} />}
 
       {article && <meta property="og:type" content="article" />}
-      {seo.tags && seo.tags.map((tag, i) => <meta key={generateKey('tags', i)} property="og:article:tag" content={tag} />)}
-      {seo.author && seo.author.map((author, i) => <meta key={generateKey('author', i)} property="og:article:author" content={author} />)}
+      {seo.tags && seo.tags.map((tag) => <meta key={tag} property="og:article:tag" content={tag} />)}
+      {seo.author && seo.author.map((author) => <meta key={author} property="og:article:author" content={author} />)}
 
       {seo.title && <meta property="og:title" content={seo.title} />}
 
