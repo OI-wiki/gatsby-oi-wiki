@@ -35,6 +35,8 @@ export const query = graphql`
         ... on File {
           relativePath
           modifiedTime(formatString: "YYYY/MM/DD")
+          birthTime(formatString: "")
+          changeTime(formatString: "")
         }
       }
     }

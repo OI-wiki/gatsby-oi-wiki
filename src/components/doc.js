@@ -5,6 +5,7 @@ import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
 import Link from './Link'
+import SEO from './Seo'
 
 function fixMathJaxCustomElement (mdxString) {
   mdxString = mdxString.replace(/"className": ?"mjx/g, '"class": "mjx')
@@ -25,6 +26,8 @@ function mdx ({ data: { mdx }, location }) {
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
   const wordCount = mdx.wordCount.words || 0
+  const datePublished = mdx.parent.birthTime || ''
+  const dateModified = mdx.parent.changeTime || ''
 
   const myComponents = {
     details: Details,
@@ -49,6 +52,14 @@ function mdx ({ data: { mdx }, location }) {
       noEdit={noEdit}
       isWIP={isWIP}
     >
+      <SEO
+        title={title}
+        description={description}
+        author={authors || 'OI Wiki'}
+        tags={tags}
+        dateModified={dateModified}
+        datePublished={datePublished}
+        article />
       <MDXProvider components={myComponents}>
         <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
       </MDXProvider>
