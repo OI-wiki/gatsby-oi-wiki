@@ -45,11 +45,15 @@ function Mdx ({ data: { mdx }, location }) {
   }
   useEffect(() => {
     if (location.state.searchKey) {
+      highlightNode('h1', true)
       highlightNode('h2', true)
+      highlightNode('h3', true)
       highlightNode('p', true)
       setTimeout(
         () => {
+          highlightNode('h1', false)
           highlightNode('h2', false)
+          highlightNode('h3', false)
           highlightNode('p', false)
         }, 5000)
     }
@@ -61,7 +65,6 @@ function Mdx ({ data: { mdx }, location }) {
     summary: Summary,
     a: Link(location),
     inlinecode: 'code',
-    // h2: MyH2,
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
