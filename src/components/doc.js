@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useState, useEffect } from 'react'
-import { findAll } from 'highlight-words-core'
+import React, { useEffect } from 'react'
+import Mark from 'mark.js'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
@@ -27,54 +27,43 @@ function Mdx ({ data: { mdx }, location }) {
   const modifiedTime = mdx.parent.modifiedTime || ''
   const wordCount = mdx.wordCount.words || 0
 
-  const [searchKey, setSearchKey] = useState('')
+  const highlightNode = (tagName, isHighlight) => {
+    const mainNodes = document.getElementsByTagName('main')
+    const nodes = mainNodes[0].getElementsByTagName(tagName)
+    const children = [...nodes]
+    if (isHighlight) {
+      children.forEach((node) => {
+        const instance = new Mark(node)
+        instance.mark(location.state.searchKey)
+      })
+    } else {
+      children.forEach((node) => {
+        const instance = new Mark(node)
+        instance.unmark(location.state.searchKey)
+      })
+    }
+  }
   useEffect(() => {
-    console.log(location.state.searchKey)
     if (location.state.searchKey) {
-      setSearchKey(location.state.searchKey)
-      setIsHighlight(true)
-      setTimeout(() => setIsHighlight(false), 5000)
+      highlightNode('h2', true)
+      highlightNode('p', true)
+      setTimeout(
+        () => {
+          highlightNode('h2', false)
+          highlightNode('p', false)
+        }, 5000)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const MyH1 = props => {
-    // console.log(highLight)
-    if (!isHighlight) { return <h2 {...props} /> }
-    const { children } = props
-    const textToHighlight = children[0]
-    const searchWords = [searchKey]
-
-    const chunks = findAll({
-      searchWords,
-      textToHighlight,
-    })
-
-    const highlightedText = chunks
-      .map(chunk => {
-        const { end, highlight, start } = chunk
-        const text = textToHighlight.substr(start, end - start)
-        if (highlight) {
-          return (<mark>{text}</mark>)
-        } else {
-          return (<span>{text}</span>)
-        }
-      })
-      .reduce((pre, cur) => [pre, '', cur])
-
-    return (
-      <h2>{highlightedText}{children[1]}{children[2]}</h2>
-    )
-  }
 
   const myComponents = {
     details: Details,
     summary: Summary,
     a: Link(location),
     inlinecode: 'code',
-    h2: MyH1,
+    // h2: MyH2,
   }
-  const [isHighlight, setIsHighlight] = useState(false)
+
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
   return (
     <Layout
