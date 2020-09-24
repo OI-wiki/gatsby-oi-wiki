@@ -57,9 +57,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 250,
     },
   },
-  toc: {
-    zIndex: -1,
-  },
   container: {
     [theme.breakpoints.up('lg')]: {
       marginLeft: 250,
