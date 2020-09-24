@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     width: '15%',
     flexShrink: 0,
     position: 'fixed',
-    height: 'calc(100vh - 70px)',
+    height: 'calc(100vh - 240px)',
     overflowY: 'auto',
     padding: theme.spacing(2, 2, 2, 0),
     display: 'none',
@@ -35,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     listStyle: 'none',
-    maxHeight: 'calc(100vh-180px)',
-    overflowY: 'auto',
   },
   item: {
     fontSize: 13,
