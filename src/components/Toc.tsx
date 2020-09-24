@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     listStyle: 'none',
-    maxHeight: '350px',
+    maxHeight: 'calc(100vh-180px)',
     overflowY: 'scroll',
   },
   item: {
