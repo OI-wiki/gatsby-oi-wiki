@@ -34,12 +34,20 @@ function Mdx ({ data: { mdx }, location }) {
     if (isHighlight) {
       children.forEach((node) => {
         const instance = new Mark(node)
-        instance.mark(location.state.searchKey)
+        instance.mark(
+          location.state.searchKey,
+          {
+            exclude: ['span'],
+          })
       })
     } else {
       children.forEach((node) => {
         const instance = new Mark(node)
-        instance.unmark(location.state.searchKey)
+        instance.unmark(
+          location.state.searchKey,
+          {
+            exclude: ['span'],
+          })
       })
     }
   }
