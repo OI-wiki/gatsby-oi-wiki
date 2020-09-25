@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useEffect } from 'react'
+import Mark from 'mark.js'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
@@ -12,7 +13,7 @@ function fixMathJaxCustomElement (mdxString) {
   mdxString = mdxString.replace(/"className": ?"MathJax/g, '"class": "MathJax')
   return mdxString.replace(/"className": ?"MJX/g, '"class": "MJX')
 }
-function mdx ({ data: { mdx }, location }) {
+function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
   const title = mdx.slug === '/' ? null : mdx.frontmatter.title
@@ -28,6 +29,47 @@ function mdx ({ data: { mdx }, location }) {
   const wordCount = mdx.wordCount.words || 0
   const datePublished = mdx.parent.birthTime || ''
   const dateModified = mdx.parent.changeTime || ''
+
+  const highlightNode = (tagName, isHighlight) => {
+    const mainNodes = document.getElementsByTagName('main')
+    const nodes = mainNodes[0].getElementsByTagName(tagName)
+    const children = [...nodes]
+    if (isHighlight) {
+      children.forEach((node) => {
+        const instance = new Mark(node)
+        instance.mark(
+          location.state.searchKey,
+          {
+            exclude: ['span'],
+          })
+      })
+    } else {
+      children.forEach((node) => {
+        const instance = new Mark(node)
+        instance.unmark(
+          location.state.searchKey,
+          {
+            exclude: ['span'],
+          })
+      })
+    }
+  }
+  useEffect(() => {
+    if (location.state.searchKey) {
+      highlightNode('h1', true)
+      highlightNode('h2', true)
+      highlightNode('h3', true)
+      highlightNode('p', true)
+      setTimeout(
+        () => {
+          highlightNode('h1', false)
+          highlightNode('h2', false)
+          highlightNode('h3', false)
+          highlightNode('p', false)
+        }, 5000)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const myComponents = {
     details: Details,
@@ -67,4 +109,4 @@ function mdx ({ data: { mdx }, location }) {
   )
 }
 
-export default mdx
+export default Mdx
