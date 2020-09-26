@@ -14,6 +14,7 @@ import FindInPageIcon from '@material-ui/icons/FindInPage'
 import SearchIcon from '@material-ui/icons/Search'
 import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'gatsby'
 import useDarkMode from '../lib/useDarkMode'
 
 import scrollbarStyle from '../styles/scrollbar'
@@ -174,8 +175,9 @@ function SearchResultList (props) {
             <ListItem
               button
               divider
-              component="a"
-              href={item.url}
+              component={Link}
+              to={item.url}
+              state={{ searchKey: searchKey }}
               key={item.url}
             >
               <ListItemIcon>
