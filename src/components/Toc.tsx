@@ -11,9 +11,13 @@ const useStyles = makeStyles((theme) => ({
   main: scrollbarStyle(theme, {
     right: 0,
     width: '15%',
+    // set a fontSize that not inherit from body(0.875rem)
+    // to make scrollbar's width adapt to toc's fontSize
+    // 13px/16px = 0.8125
+    fontSize: '0.8125rem',
     flexShrink: 0,
     position: 'fixed',
-    height: 'calc(100vh - 240px)',
+    height: 'calc(100vh - 284px)',
     overflowY: 'auto',
     padding: theme.spacing(2, 2, 2, 0),
     display: 'none',

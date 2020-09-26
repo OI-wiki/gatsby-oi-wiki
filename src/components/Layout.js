@@ -163,7 +163,7 @@ function MyLayout ({
           </div>
         </Grid>
         {displayToC && (
-          <Grid item xs className={classes.toc}>
+          <Grid item xs >
             <ToC toc={toc} pathname={location.pathname} />
           </Grid>
         )}

@@ -4,8 +4,9 @@ import { fade } from '@material-ui/core/styles'
 export default (theme, otherStyles) => ({
   ...{
     '&::-webkit-scrollbar': {
-      width: '.4rem',
-      height: '.4rem',
+      // width relative to self font-size
+      width: '.4em',
+      height: '.4em',
     },
     '&::-webkit-scrollbar-thumb': {
       background: grey[400],
