@@ -1,3 +1,5 @@
+const path = require('path')
+
 const isProd = process.env.PRODUCTION === 'true' || process.env.RENDER === 'true'
 const condition = (cond, v) => cond ? [v] : []
 if (isProd && process.env.gatsby_executing_command !== 'build') {
@@ -25,7 +27,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: './docs/',
-        path: './docs/',
+        path: path.resolve('./docs/'),
       },
     },
     ...condition(isProd, 'gatsby-plugin-sharp'),
