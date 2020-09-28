@@ -3,10 +3,19 @@ import AV from 'leancloud-storage'
 import RcRate from 'rc-rate'
 import 'rc-rate/assets/index.css'
 import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core/styles'
 
 const queryRate = new AV.Query('Rates')
 var PID = 0
 var queryCount = 0; var queryData = null
+
+const useStyles = makeStyles(() => ({
+  rateBar: {
+    fontSize: '25px !important',
+    textAlign: 'center',
+    display: 'block !important',
+  },
+}))
 
 function change (newValue) {
   console.log('*')
@@ -47,6 +56,7 @@ function loginOrLogout () {
 }
 
 function Rate ({ pid }) {
+  const classes = useStyles()
   const appId = 'ndFz7SM4piNM35obq15NGD1E-MdYXbMMI'; const appKey = 'UscWyv1U65BHXOx6JUTvOKaD'
   PID = pid
   const [rateNum, setRateNum] = useState(5)
@@ -68,7 +78,8 @@ function Rate ({ pid }) {
   }, [])
   return (
     <>
-      <RcRate value={rateNum} onChange={change} />
+      <RcRate value={rateNum} onChange={change} className={classes.rateBar} />
+      <br />
       <Button onClick={loginOrLogout}>LOGIN/LOGOUT</Button>
     </>
   )
