@@ -15,7 +15,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "@mdx-js/mdx": "^1.6.16",
+    "@mdx-js/mdx": "^1.6.18",
     "@mdx-js/react": "^1.6.18",
     "@mgtd/remark-shiki": "^1.0.10",
     "@mgtd/vssue-api-github-v3": "^2.4.8",
