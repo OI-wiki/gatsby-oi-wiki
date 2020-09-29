@@ -162,6 +162,7 @@ module.exports = {
       },
     },
     'gatsby-plugin-preact',
+    'gatsby-plugin-uninline-styles',
     // "gatsby-plugin-webpack-bundle-analyser-v2",
     // when you need to analyze bundle size, enable it
   ],
