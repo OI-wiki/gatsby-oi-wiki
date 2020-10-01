@@ -94,7 +94,7 @@ module.exports = {
         short_name: 'OI Wiki',
         start_url: '/',
         display: 'standalone',
-        icon: 'icon/favicon_512x512.png',
+        icon: require.resolve('./icon/favicon_512x512.png'),
       },
     }),
     {
