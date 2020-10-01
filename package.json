@@ -4,6 +4,7 @@
   "scripts": {
     "develop": "yarn workspace example develop",
     "build": "yarn workspace example build && cp -r example/public public",
-    "clean": "yarn workspace example clean && rm -rf public .cache"
+    "clean": "yarn workspace example clean && rm -rf public .cache",
+    "lint": "yarn workspace gatsby-theme-oi-wiki lint --fix src/**/*.{js,jsx,ts,tsx}"
   }
 }

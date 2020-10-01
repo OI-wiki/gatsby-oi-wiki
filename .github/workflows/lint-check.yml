@@ -32,4 +32,4 @@ jobs:
 
       - run: yarn install
 
-      - run: npx eslint gatsby-theme-oi-wiki/src/
+      - run: yarn lint
