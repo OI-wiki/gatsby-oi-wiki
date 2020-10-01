@@ -1,6 +1,9 @@
 {
   "private": true,
-  "workspaces": ["gatsby-theme-oi-wiki", "example"],
+  "workspaces": [
+    "gatsby-theme-oi-wiki",
+    "example"
+  ],
   "scripts": {
     "develop": "yarn workspace example develop",
     "build": "yarn workspace example build && cp -r example/public public",
