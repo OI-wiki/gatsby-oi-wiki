@@ -7,8 +7,8 @@ export default (theme, otherStyles, width) => {
     scrollbarWidth = {
       '&::-webkit-scrollbar': {
         // width relative to self font-size
-        width: width,
-        height: width,
+        width: `${width}rem`,
+        height: `${width}rem`,
       },
     }
   } else {

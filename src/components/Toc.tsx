@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
       top: theme.spacing(3),
       marginTop: theme.spacing(3),
     },
-  }, '0.33rem'),
+  }, 0.33),
   contents: {
     marginTop: theme.spacing(2),
     paddingLeft: theme.spacing(1.5),
