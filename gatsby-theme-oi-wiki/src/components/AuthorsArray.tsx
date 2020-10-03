@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const AuthorsArray: React.FC<{ authors: string }> = ({ authors }) => {
+const AuthorsArray: React.FC<{authors: string }> = ({ authors }) => {
   const arr = authors && authors.split(',').map((x) => x.trim())
   const classes = useStyles()
   return (

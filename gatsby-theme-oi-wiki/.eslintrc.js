@@ -6,9 +6,6 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
     'plugin:react-hooks/recommended',
     'standard',
   ],
@@ -32,7 +29,6 @@ module.exports = {
     'react/prop-types': [0],
     'comma-dangle': [2, 'always-multiline'],
     'no-unused-vars': 'off',
-    'import/order': 'error',
     '@typescript-eslint/no-unused-vars': [
       'error',
     ],

@@ -30,6 +30,6 @@ jobs:
           key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
 
 
-      - run: npm install
+      - run: yarn install
 
-      - run: npx eslint src/
+      - run: yarn lint

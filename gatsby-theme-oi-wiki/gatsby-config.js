@@ -1,3 +1,5 @@
+const path = require('path')
+
 const isProd = process.env.PRODUCTION === 'true' || process.env.RENDER === 'true'
 const condition = (cond, v) => cond ? [v] : []
 if (isProd && process.env.gatsby_executing_command !== 'build') {
@@ -25,7 +27,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: './docs/',
-        path: './docs/',
+        path: path.resolve('./docs/'),
       },
     },
     ...condition(isProd, 'gatsby-plugin-sharp'),
@@ -92,7 +94,7 @@ module.exports = {
         short_name: 'OI Wiki',
         start_url: '/',
         display: 'standalone',
-        icon: 'icon/favicon_512x512.png',
+        icon: require.resolve('./icon/favicon_512x512.png'),
       },
     }),
     {
@@ -161,7 +163,7 @@ module.exports = {
         addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
       },
     },
-    'gatsby-plugin-preact',
+    // 'gatsby-plugin-preact',
     // "gatsby-plugin-webpack-bundle-analyser-v2",
     // when you need to analyze bundle size, enable it
   ],
