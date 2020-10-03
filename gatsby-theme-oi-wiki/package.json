@@ -9,8 +9,7 @@
     "develop": "gatsby develop",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -63,26 +62,13 @@
     "autosuggest-highlight": "^3.1.1",
     "eslint": "^7.9.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.2",
     "eslint-plugin-standard": "^4.0.1",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.12",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
     "typescript": "^4.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "node_modules/.bin/eslint --fix"
-    ]
   },
   "optionalDependencies": {
     "gatsby-plugin-manifest": "^2.4.30",
