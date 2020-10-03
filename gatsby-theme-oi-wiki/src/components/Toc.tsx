@@ -5,14 +5,15 @@ import clsx from 'clsx'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import smoothScrollTo from '../lib/smoothScroll'
 import useThrottledOnScroll from '../lib/useThrottledOnScroll'
+import scrollbarStyle from '../styles/scrollbar'
 
 const useStyles = makeStyles((theme) => ({
-  main: {
+  main: scrollbarStyle(theme, {
     right: 0,
     width: '15%',
     flexShrink: 0,
     position: 'fixed',
-    height: 'calc(100vh - 70px)',
+    height: 'calc(100vh - 284px)',
     overflowY: 'auto',
     padding: theme.spacing(2, 2, 2, 0),
     display: 'none',
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
       top: theme.spacing(3),
       marginTop: theme.spacing(3),
     },
-  },
+  }, 0.33),
   contents: {
     marginTop: theme.spacing(2),
     paddingLeft: theme.spacing(1.5),
