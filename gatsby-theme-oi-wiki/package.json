@@ -71,7 +71,7 @@
     "typescript": "^4.0.2"
   },
   "optionalDependencies": {
-    "gatsby-plugin-manifest": "^2.4.30",
+    "gatsby-plugin-manifest": "^2.4.33",
     "gatsby-plugin-sharp": "^2.6.36",
     "gatsby-remark-images": "^3.3.30",
     "gatsby-transformer-sharp": "^2.5.15"
