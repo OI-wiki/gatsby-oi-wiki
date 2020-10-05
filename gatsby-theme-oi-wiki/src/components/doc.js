@@ -55,7 +55,7 @@ function Mdx ({ data: { mdx }, location }) {
     }
   }
   useEffect(() => {
-    if (location.state.searchKey) {
+    if (location?.state?.searchKey) {
       highlightNode('h1', true)
       highlightNode('h2', true)
       highlightNode('h3', true)

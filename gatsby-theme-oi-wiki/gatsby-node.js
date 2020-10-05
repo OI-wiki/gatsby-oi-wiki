@@ -30,9 +30,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const docTemplate = path.resolve('src/templates/doc.js')
-  const tagTemplate = path.resolve('src/templates/tags.js')
-  const logTemplate = path.resolve('src/templates/changelog.js')
+  const docTemplate = require.resolve('./src/templates/doc.js')
+  const tagTemplate = require.resolve('./src/templates/tags.js')
+  const logTemplate = require.resolve('./src/templates/changelog.js')
 
   const result = await graphql(`
     {
