@@ -22,7 +22,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 ```shell
 git clone https://github.com/{你的 GitHub 用户名}/gatsby-oi-wiki.git # 将仓库克隆至本地
 cd gatsby-oi-wiki # 进入仓库文件夹
-npm install --no-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 npm install
+yarn install --ignore-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 yarn install
 
 ```
 
@@ -35,7 +35,7 @@ npm install --no-optional # 安装依赖，如果你可以解决国际联网问�
 
 git clone https://github.com/{你的 GitHub 用户名}/gatsby-oi-wiki.git
 cd gatsby-oi-wiki
-npm install --no-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 npm install
+yarn install --ignore-optional # 安装依赖，如果你可以解决国际联网问题，可以使用 yarn install
 ```
 
 
@@ -43,12 +43,10 @@ npm install --no-optional # 安装依赖，如果你可以解决国际联网问�
 
 ```shell
 # 开发环境
-npm run develop # 运行开发服务器
-# 构建静态页
-npm run build # 构建项目并生成静态文件
-npm run serve # 为刚刚生成的文件运行本地服务器
+yarn develop # 运行开发服务器
+yarn build # 构建项目并生成静态文件
 # 清除缓存
-npm run clean # 当你发现浏览的界面与预期不同时，可以尝试清理缓存
+yarn clean # 当你发现浏览的界面与预期不同时，可以尝试清理缓存
               # Gatsby的缓存存放在两个目录中：public 目录存储静态页面文件，.cache 目录存储临时文件
               # 你也可以通过手动删除这两个文件夹达到清理效果
 ```
@@ -61,7 +59,7 @@ npm run clean # 当你发现浏览的界面与预期不同时，可以尝试清�
 
 > 不要**重复**创建 Workspace，每一次打开 `https://gitpod.io/#https://github.com/{你的用户名}/gatsby-oi-wiki` 的链接都会创建一个新的 Workspace。第一次创建了之后就可以直接打开 `gitpod.io` 找回你原来的 Workspace 就行了，请节省资源。
 
-然后，它会自动执行 `npm install` 和 `npm run develop` 的命令，右下角弹出一个 **A service is available on port 8000** 的窗口，点击 **Open Browser** 就可以打开预览了。
+然后，它会自动执行 `yarn install` 和 `yarn develop` 的命令，右下角弹出一个 **A service is available on port 8000** 的窗口，点击 **Open Browser** 就可以打开预览了。
 
 > 你还可以在底栏的 **Open Ports** 菜单选择 **Make Public** 让大家都能看到预览页面。
 
