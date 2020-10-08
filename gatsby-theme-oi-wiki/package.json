@@ -40,7 +40,7 @@
     "lodash": "^4.17.20",
     "mark.js": "^8.11.1",
     "mdast-util-toc": "^5.0.3",
-    "preact": "^10.4.8",
+    "preact": "^10.5.4",
     "preact-render-to-string": "^5.1.10",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
