@@ -33,7 +33,7 @@ module.exports = {
     ...condition(isProd, 'gatsby-plugin-sharp'),
     ...condition(isProd, 'gatsby-transformer-sharp'),
     {
-      resolve: 'gatsby-plugin-mdx',
+      resolve: 'gatsby-transformer-remark-rehype',
       options: {
         gatsbyRemarkPlugins: [
           ...condition(isProd, {
