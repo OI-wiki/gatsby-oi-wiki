@@ -12,7 +12,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   // you only want to operate on `Mdx` nodes. If you had content from a
   // remote CMS you could also check to see if the parent node was a
   // `File` node here
-  if (node.internal.type === 'Mdx') {
+  if (node.internal.type === 'MarkdownRemark') {
     const value = createFilePath({ node, getNode })
     createNodeField({
       // Name of the field you are adding
@@ -36,7 +36,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const result = await graphql(`
     {
-      postsRemark: allMdx(
+      postsRemark: allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___title] }
         limit: 2000
       ) {
@@ -54,7 +54,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-      tagsGroup: allMdx(limit: 2000) {
+      tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: frontmatter___tags) {
           fieldValue
         }

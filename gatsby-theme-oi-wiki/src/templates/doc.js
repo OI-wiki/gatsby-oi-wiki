@@ -9,7 +9,7 @@ export default function MdxDoc ({ data, location }) {
 
 export const query = graphql`
   query($id: String!) {
-    mdx: mdx(id: { eq: $id }) {
+    mdx: markdownRemark(id: { eq: $id }) {
       id
       wordCount {
         words
@@ -18,7 +18,7 @@ export const query = graphql`
         slug
       }
       excerpt
-      body
+      body: html
       headings {
         value
       }

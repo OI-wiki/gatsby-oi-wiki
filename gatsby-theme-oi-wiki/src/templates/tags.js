@@ -53,7 +53,7 @@ Tags.propTypes = {
     tag: PropTypes.string.isRequired,
   }),
   data: PropTypes.shape({
-    allMdx: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
       totalCount: PropTypes.number.isRequired,
       edges: PropTypes.arrayOf(
         PropTypes.shape({
@@ -75,7 +75,7 @@ export default Tags
 
 export const pageQuery = graphql`
   query($tag: String) {
-    allMdx(
+    allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___title], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }

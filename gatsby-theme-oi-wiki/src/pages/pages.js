@@ -96,7 +96,7 @@ function BlogIndex (props) {
   const { location } = props
   const {
     data: {
-      allMdx: { edges, group },
+      allMarkdownRemark: { edges, group },
     },
   } = props
   const articles = edges.map((x) => x.node)
@@ -158,7 +158,7 @@ function BlogIndex (props) {
 
 export const pageQuery = graphql`
   query blogIndex {
-    allMdx {
+    allMarkdownRemark {
       edges {
         node {
           id

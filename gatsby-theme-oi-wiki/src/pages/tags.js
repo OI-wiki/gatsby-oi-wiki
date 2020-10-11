@@ -17,7 +17,7 @@ function sortTags (a, b) {
 }
 const TagsPage = ({
   data: {
-    allMdx: { group },
+    allMarkdownRemark: { group },
     site: {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       siteMetadata: { title },
@@ -74,7 +74,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(limit: 2000) {
+    allMarkdownRemark(limit: 2000) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

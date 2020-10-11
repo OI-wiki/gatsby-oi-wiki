@@ -103,7 +103,8 @@ function Mdx ({ data: { mdx }, location }) {
         datePublished={datePublished}
         article />
       <MDXProvider components={myComponents}>
-        <MDXRenderer>{fixMathJaxCustomElement(mdx.body)}</MDXRenderer>
+        <div dangerouslySetInnerHTML={{ __html: fixMathJaxCustomElement(mdx.body) }}>
+        </div>
       </MDXProvider>
     </Layout>
   )
