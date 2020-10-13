@@ -1774,6 +1774,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@prefresh/babel-plugin@^0.2.0":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@prefresh/babel-plugin/-/babel-plugin-0.2.2.tgz#b921f0a1350a9daa9106518378a4e5a49211e6f6"
+  integrity sha512-NDPMsDs5QncSdOX7zsATwypf1IWtYvOX23X3t4DOcZsVErRABqdlUTZ2RAf4KfOAIjSZhR9p0Htchqp8rQr14Q==
+
 "@prefresh/core@^0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-0.8.1.tgz#d4f15d9e3ee9c16bf420405e2b422774e807a594"
@@ -1784,7 +1789,7 @@
   resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-0.3.1.tgz#f9e1a5e1fa4bc02989980733950e60520f0f9869"
   integrity sha512-9kLzPWN4teeiKuc+Rle3SF/hyx5lzo35X4rHr+kQXnJT+BaEb1ymDWIHGkv85xjnw8+l6I1r1H7JB4BHOMJfmg==
 
-"@prefresh/webpack@^1.1.0":
+"@prefresh/webpack@^1.0.2":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@prefresh/webpack/-/webpack-1.1.0.tgz#a36fd072ef1d5cd88ced8df89d7ae62bdbddf71b"
   integrity sha512-a3JG2maH3bacDobb4WywVTuqvAyBxJ7dRNSG2Ywv1AytAdgpgNZKJpR4xUTzPTwPGpRkfNOOf4mODqoOZ7W0Sw==
@@ -7255,12 +7260,13 @@ gatsby-plugin-page-creator@^2.3.32:
     graphql "^14.7.0"
     lodash "^4.17.20"
 
-gatsby-plugin-preact@^4.0.12:
-  version "4.0.13"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-4.0.13.tgz#cb78cec62dd6894c24ae727176bbc7ddaab608fb"
-  integrity sha512-RMTAC6UF8Gp29yFrpAXdt0PKCO6jHqmPRGa3n3cVKR43o9+xxaiVIs+8nhlVGqqhv7p6zS11V2rbt7Fle/fFFQ==
+gatsby-plugin-preact@^4.0.15:
+  version "4.0.15"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-4.0.15.tgz#dcda953d95cf852a6b6518cda779a10a7152fe73"
+  integrity sha512-bnqKFDPAxzKyNkrDbYdm45jOlCy/279Cgo2BpuMs15iNsxhtHNSONFrG+ayip7q9ZTx0Lzu7LXkGyYnmTpYHCQ==
   dependencies:
-    "@prefresh/webpack" "^1.1.0"
+    "@prefresh/babel-plugin" "^0.2.0"
+    "@prefresh/webpack" "^1.0.2"
 
 gatsby-plugin-react-helmet@^3.3.11:
   version "3.3.12"
