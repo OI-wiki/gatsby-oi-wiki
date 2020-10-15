@@ -103,7 +103,11 @@ const CommentSystem: React.FC<Props> = (props) => {
       const u: User = await ghAPIV3.getUser({ accessToken: tk })
       setUser(u)
     }
-    asyncFunc()
+
+    asyncFunc().catch(reject => {
+      console.log(reject)
+    })
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.clientID, props.clientSecret, props.id])
   const updateComments = async (): Promise<void> => {
