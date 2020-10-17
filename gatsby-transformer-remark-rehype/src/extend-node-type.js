@@ -113,6 +113,8 @@ module.exports = (
         heading: null,
         maxDepth: 6,
       },
+      remarkPlugins = [],
+      rehypePlugins = [],
     } = pluginOptions
     const tocOptions = tableOfContents
     const remarkOptions = {
@@ -139,6 +141,15 @@ module.exports = (
             remark = remark.use(parserPlugin)
           }
         }
+      }
+    }
+
+    for (let plugin of pluginOptions.remarkPlugins) {
+      if (_.isArray(plugin)) {
+        const [parser, options] = plugin
+        remark = remark.use(parser, options)
+      } else {
+        remark = remark.use(plugin)
       }
     }
 
@@ -341,10 +352,22 @@ module.exports = (
     }
 
     function markdownASTToHTMLAst(ast) {
-      return toHAST(ast, {
+      let hast = unified()
+
+      for (let plugin of pluginOptions.rehypePlugins) {
+        if (_.isArray(plugin)) {
+          const [parser, options] = plugin
+          hast = hast.use(parser, options)
+        } else {
+          hast = hast.use(plugin)
+        }
+      }
+
+      // whoops! 
+      return hast.runSync(toHAST(ast, {
         allowDangerousHTML: true,
         handlers: { code: codeHandler },
-      })
+      }))
     }
 
     async function getHTMLAst(markdownNode) {

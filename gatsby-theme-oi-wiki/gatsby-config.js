@@ -35,7 +35,7 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
-        gatsbyRemarkPlugins: [
+        plugins: [
           ...condition(isProd, {
             resolve: 'gatsby-remark-images',
             options: {
