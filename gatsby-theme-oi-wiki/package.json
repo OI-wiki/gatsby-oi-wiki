@@ -23,18 +23,18 @@
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.0.1",
-    "gatsby": "^2.24.67",
+    "gatsby": "^2.24.74",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.6",
-    "gatsby-plugin-catch-links": "^2.3.14",
+    "gatsby-plugin-catch-links": "^2.3.15",
     "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-mdx": "^1.2.43",
     "gatsby-plugin-offline": "^3.2.30",
-    "gatsby-plugin-preact": "^4.0.12",
+    "gatsby-plugin-preact": "^4.0.15",
     "gatsby-plugin-react-helmet": "^3.3.11",
     "gatsby-remark-copy-linked-files": "^2.3.18",
     "gatsby-remark-table-of-contents": "0.1.1",
-    "gatsby-source-filesystem": "^2.3.32",
+    "gatsby-source-filesystem": "^2.3.34",
     "gatsby-source-local-git": "^1.1.1",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.20",
@@ -52,7 +52,7 @@
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "remark-details": "^2.0.2",
     "remark-math": "^3.0.1",
-    "simple-git": "^2.20.1",
+    "simple-git": "^2.21.0",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^3.10.1",
     "autosuggest-highlight": "^3.1.1",
-    "eslint": "^7.9.0",
+    "eslint": "^7.11.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -71,9 +71,9 @@
     "typescript": "^4.0.2"
   },
   "optionalDependencies": {
-    "gatsby-plugin-manifest": "^2.4.33",
+    "gatsby-plugin-manifest": "^2.4.34",
     "gatsby-plugin-sharp": "^2.6.38",
     "gatsby-remark-images": "^3.3.32",
-    "gatsby-transformer-sharp": "^2.5.15"
+    "gatsby-transformer-sharp": "^2.5.17"
   }
 }
