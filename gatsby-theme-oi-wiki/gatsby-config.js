@@ -133,7 +133,7 @@ module.exports = {
         // 1 query for each data type
         query: `
         {
-          allMdx {
+          allMarkdownRemark {
             edges {
               node {
                 id
@@ -148,7 +148,7 @@ module.exports = {
           // Each data type can be mapped to a predefined sitemap
           // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
           // The default sitemap - if none is passed - will be pages
-          allMdx: {
+          allMarkdownRemark: {
             sitemap: 'documents',
           },
         },

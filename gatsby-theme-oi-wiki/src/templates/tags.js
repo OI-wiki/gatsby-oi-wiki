@@ -14,7 +14,7 @@ import Layout from '../components/Layout'
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
-  const { edges, totalCount } = data.allMdx
+  const { edges, totalCount } = data.allMarkdownRemark
   const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
 
   return (
