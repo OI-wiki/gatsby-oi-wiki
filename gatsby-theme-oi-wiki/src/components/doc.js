@@ -1,5 +1,4 @@
-import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import MDRenderer from '../lib/MDRenderer'
 import React, { useEffect } from 'react'
 import Mark from 'mark.js'
 import Details from './Details.tsx'
@@ -8,11 +7,6 @@ import Summary from './Summary.tsx'
 import Link from './Link'
 import SEO from './Seo'
 
-function fixMathJaxCustomElement (mdxString) {
-  mdxString = mdxString.replace(/"className": ?"mjx/g, '"class": "mjx')
-  mdxString = mdxString.replace(/"className": ?"MathJax/g, '"class": "MathJax')
-  return mdxString.replace(/"className": ?"MJX/g, '"class": "MJX')
-}
 function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
@@ -102,10 +96,7 @@ function Mdx ({ data: { mdx }, location }) {
         dateModified={dateModified}
         datePublished={datePublished}
         article />
-      <MDXProvider components={myComponents}>
-        <div dangerouslySetInnerHTML={{ __html: fixMathJaxCustomElement(mdx.body) }}>
-        </div>
-      </MDXProvider>
+      <MDRenderer components={myComponents} htmlAst={mdx.htmlAst} />
     </Layout>
   )
 }

@@ -23,6 +23,8 @@ const {
 const codeHandler = require(`./code-handler`)
 const { getHeadingID } = require(`./utils/get-heading-id`)
 const { timeToRead } = require(`./utils/time-to-read`)
+const detab = require('detab')
+const u = require('unist-builder')
 
 let fileNodes
 let pluginsCacheStr = ``
@@ -36,8 +38,7 @@ const htmlAstCacheKey = node =>
 const headingsCacheKey = node =>
   `transformer-remark-markdown-headings-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const tableOfContentsCacheKey = (node, appliedTocOptions) =>
-  `transformer-remark-markdown-toc-${
-    node.internal.contentDigest
+  `transformer-remark-markdown-toc-${node.internal.contentDigest
   }-${pluginsCacheStr}-${JSON.stringify(
     appliedTocOptions
   )}-${pathPrefixCacheStr}`
@@ -144,7 +145,7 @@ module.exports = (
       }
     }
 
-    for (let plugin of pluginOptions.remarkPlugins) {
+    for (let plugin of remarkPlugins) {
       if (_.isArray(plugin)) {
         const [parser, options] = plugin
         remark = remark.use(parser, options)
@@ -216,8 +217,8 @@ module.exports = (
         const defaultFunction = _.isFunction(requiredPlugin)
           ? requiredPlugin
           : _.isFunction(requiredPlugin.default)
-          ? requiredPlugin.default
-          : undefined
+            ? requiredPlugin.default
+            : undefined
 
         if (defaultFunction) {
           return defaultFunction(
@@ -351,10 +352,68 @@ module.exports = (
       }
     }
 
+    const hastHandlers = {
+      // `inlineCode` gets passed as `code` by the HAST transform.
+      // This makes sure it ends up being `inlineCode`
+      inlineCode(h, node) {
+        return Object.assign({}, node, {
+          type: 'element',
+          tagName: 'inlineCode',
+          properties: {},
+          children: [
+            {
+              type: 'text',
+              value: node.value
+            }
+          ]
+        })
+      },
+      code(h, node) {
+        const value = node.value ? detab(node.value + '\n') : ''
+        const lang = node.lang
+        const props = {}
+
+        if (lang) {
+          props.className = ['language-' + lang]
+        }
+
+        // MDAST sets `node.meta` to `null` instead of `undefined` if
+        // not present, which React doesn't like.
+        props.metastring = node.meta || undefined
+
+        const meta =
+          node.meta &&
+          node.meta.split(' ').reduce((acc, cur) => {
+            if (cur.split('=').length > 1) {
+              const t = cur.split('=')
+              acc[t[0]] = t[1]
+              return acc
+            }
+
+            acc[cur] = true
+            return acc
+          }, {})
+
+        if (meta) {
+          Object.keys(meta).forEach(key => {
+            const isClassKey = key === 'class' || key === 'className'
+            if (props.className && isClassKey) {
+              props.className.push(meta[key])
+            } else {
+              props[key] = meta[key]
+            }
+          })
+        }
+
+        return h(node.position, 'pre', [
+          h(node, 'code', props, [u('text', value)])
+        ])
+      },
+    }
+
     function markdownASTToHTMLAst(ast) {
       let hast = unified()
-
-      for (let plugin of pluginOptions.rehypePlugins) {
+      for (let plugin of rehypePlugins) {
         if (_.isArray(plugin)) {
           const [parser, options] = plugin
           hast = hast.use(parser, options)
@@ -366,7 +425,7 @@ module.exports = (
       // whoops! 
       return hast.runSync(toHAST(ast, {
         allowDangerousHTML: true,
-        handlers: { code: codeHandler },
+        handlers: hastHandlers,
       }))
     }
 

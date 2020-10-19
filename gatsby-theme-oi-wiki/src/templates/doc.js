@@ -19,6 +19,7 @@ export const query = graphql`
       }
       excerpt
       body: html
+      htmlAst
       headings {
         value
       }
