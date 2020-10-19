@@ -107,7 +107,7 @@ export function convertStyle (styleStr) {
   return style
 }
 
-export function mapAttribute (attrs = {}, preserveAttributes) {
+export function mapAttribute (tagName, attrs = {}, preserveAttributes) {
   return Object.keys(attrs).reduce((result, attr) => {
     // ignore inline event attribute
     if (/^on.*/.test(attr)) {
@@ -137,8 +137,12 @@ export function mapAttribute (attrs = {}, preserveAttributes) {
       // if there's an attribute called style, this means that the value must be exists
       // even if it's an empty string
       result[name] = convertStyle(attrs.style)
-    } else if (name === 'className')  {
-      result[name] = attrs.className.join(' ')
+    } else if (name === 'className') {
+      // React treats MathJAX elements as HTML custom tags
+      // Thus its className will keep as is in the final DOM.
+      // Rename it to `class` here
+      const attrName = tagName.startsWith('mjx-') ? 'class' : 'className'
+      result[attrName] = attrs.className.join(' ')
     } else {
       const value = attrs[attr]
       // Convert attribute value to boolean attribute if needed
@@ -159,7 +163,7 @@ export default function reactiveHast (ast, components, index = 1) {
     return ast.value
   }
 
-  const props = { key: index.toString(), ...mapAttribute(ast.properties, []) }
+  const props = { key: index.toString(), ...mapAttribute(ast.tagName, ast.properties, []) }
 
   const tag = components[ast.tagName] ?? ast.tagName
 
