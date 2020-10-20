@@ -72,7 +72,7 @@
   },
   "optionalDependencies": {
     "gatsby-plugin-manifest": "^2.4.34",
-    "gatsby-plugin-sharp": "^2.6.38",
+    "gatsby-plugin-sharp": "^2.6.43",
     "gatsby-remark-images": "^3.3.32",
     "gatsby-transformer-sharp": "^2.5.17"
   }
