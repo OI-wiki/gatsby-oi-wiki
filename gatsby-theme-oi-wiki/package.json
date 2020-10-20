@@ -29,7 +29,7 @@
     "gatsby-plugin-catch-links": "^2.3.15",
     "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-mdx": "^1.2.43",
-    "gatsby-plugin-offline": "^3.2.30",
+    "gatsby-plugin-offline": "^3.2.34",
     "gatsby-plugin-preact": "^4.0.15",
     "gatsby-plugin-react-helmet": "^3.3.11",
     "gatsby-remark-copy-linked-files": "^2.3.18",
