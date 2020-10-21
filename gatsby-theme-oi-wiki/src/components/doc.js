@@ -69,6 +69,7 @@ function Mdx ({ data: { mdx }, location }) {
     details: Details,
     summary: Summary,
     a: Link(location),
+    inlineCode: 'code',
     inlinecode: 'code',
   }
 
