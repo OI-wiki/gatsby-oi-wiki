@@ -11,7 +11,7 @@
   "dependencies": {
     "gatsby": "^2.24.84",
     "gatsby-theme-oi-wiki": "*",
-    "react": "^16.13.1",
+    "react": "^17.0.0",
     "react-dom": "^16.13.1"
   }
 }
