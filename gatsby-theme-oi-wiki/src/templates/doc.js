@@ -30,7 +30,7 @@ export const query = graphql`
         noComment
         description
       }
-      toc: tableOfContents
+      toc: tocObject
       parent {
         ... on File {
           relativePath

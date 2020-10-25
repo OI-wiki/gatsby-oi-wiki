@@ -25,6 +25,7 @@ const { getHeadingID } = require(`./utils/get-heading-id`)
 const { timeToRead } = require(`./utils/time-to-read`)
 const detab = require('detab')
 const u = require('unist-builder')
+const getToc = require('./utils/get-table-of-content')
 
 let fileNodes
 let pluginsCacheStr = ``
@@ -39,6 +40,11 @@ const headingsCacheKey = node =>
   `transformer-remark-markdown-headings-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const tableOfContentsCacheKey = (node, appliedTocOptions) =>
   `transformer-remark-markdown-toc-${node.internal.contentDigest
+  }-${pluginsCacheStr}-${JSON.stringify(
+    appliedTocOptions
+  )}-${pathPrefixCacheStr}`
+const tocObjectCacheKey = (node, appliedTocOptions) =>
+  `transformer-remark-markdown-tocObject-${node.internal.contentDigest
   }-${pluginsCacheStr}-${JSON.stringify(
     appliedTocOptions
   )}-${pathPrefixCacheStr}`
@@ -349,6 +355,24 @@ module.exports = (
         }
         cache.set(tableOfContentsCacheKey(markdownNode, appliedTocOptions), toc)
         return toc
+      }
+    }
+
+    async function getTocObject(markdownNode, gqlTocOptions) {
+      const cachedToc = await cache.get(
+        tocObjectCacheKey(markdownNode, gqlTocOptions)
+      )
+
+      if (cachedToc) {
+        return cachedToc
+      } else {
+        const ast = await getAST(markdownNode)
+        const tocAst = mdastToToc(ast, gqlTocOptions)
+
+        const obj = getToc(tocAst.map, {})
+
+        cache.set(tocObjectCacheKey(markdownNode, gqlTocOptions), obj)
+        return obj
       }
     }
 
@@ -723,6 +747,14 @@ module.exports = (
         resolve(markdownNode, args) {
           return getTableOfContents(markdownNode, args)
         },
+      },
+      tocObject: {
+        type: `JSON`,
+        // todo: fill in args
+        args: {},
+        resolve(markdownNode, args) {
+          return getTocObject(markdownNode, args)
+        }
       },
       // TODO add support for non-latin languages https://github.com/wooorm/remark/issues/251#issuecomment-296731071
       wordCount: {
