@@ -1,10 +1,17 @@
-# 多项式求逆
+---
+title: 多项式求逆
+tags:
+  - math
+  - poly
+author: H-J-Granger, 1551454628, Tri-solaris, 1593946389, Ir1d, TrisolarisHD, ouuan
 
-## Description
+---
+
+## 描述
 
 给定多项式 $f\left(x\right)$ ，求 $f^{-1}\left(x\right)$ 。
 
-## Methods
+## 解法
 
 ### 倍增法
 
@@ -49,7 +56,7 @@ $$
 
 参见 [ **Newton's Method** ](./newton.md#newtons-method) .
 
-## Code
+## 代码
 
 ??? "多项式求逆"
     ```cpp
@@ -81,6 +88,6 @@ $$
     }
     ```
 
-## Examples
+## 例题
 
-1.  有标号简单无向连通图计数： [「POJ 1737」Connected Graph](http://poj.org/problem?id=1737) 
+1. 有标号简单无向连通图计数： [「POJ 1737」Connected Graph](http://poj.org/problem?id=1737) 

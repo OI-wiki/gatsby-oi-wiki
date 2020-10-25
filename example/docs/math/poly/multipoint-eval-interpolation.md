@@ -1,11 +1,16 @@
 ---
-title: 多项式多点求值 | 快速插值
-tags: ["math","polynomial"]
+title: 多项式多点求值|快速插值
+tags:
+  - math
+  - poly
+author: Tri-solaris, 1551454628, H-J-Granger, 1563082455, Ir1d, TrisolarisHD,
+  EntropyIncreaser, 1576844297
+
 ---
 
 ## 多项式的多点求值
 
-### Description
+### 描述
 
 给出一个多项式 $f\left(x\right)$ 和 $n$ 个点 $x_{1},x_{2},...,x_{n}$ ，求
 
@@ -13,7 +18,7 @@ $$
 f\left(x_{1}\right),f\left(x_{2}\right),...,f\left(x_{n}\right)
 $$
 
-### Method
+### 解法
 
 考虑使用分治来将问题规模减半。
 
@@ -52,7 +57,7 @@ $$
 
 ## 多项式的快速插值
 
-### Description
+### 描述
 
 给出一个 $n+1$ 个点的集合
 
@@ -62,7 +67,7 @@ $$
 
 求一个 $n$ 次多项式 $f\left(x\right)$ 使得其满足 $\forall\left(x,y\right)\in X:f\left(x\right)=y$ 。
 
-### Method
+### 解法
 
 考虑拉格朗日插值公式
 
