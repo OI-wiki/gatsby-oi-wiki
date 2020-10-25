@@ -163,6 +163,10 @@ export default function reactiveHast (ast, components, index = 1) {
     return ast.value
   }
 
+  if (ast.type === 'comment') {
+    return <></>
+  }
+
   const props = { key: index.toString(), ...mapAttribute(ast.tagName, ast.properties, []) }
 
   const tag = components[ast.tagName] ?? ast.tagName
