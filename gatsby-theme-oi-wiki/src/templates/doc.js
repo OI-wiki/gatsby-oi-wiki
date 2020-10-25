@@ -18,7 +18,6 @@ export const query = graphql`
         slug
       }
       excerpt
-      body: html
       htmlAst
       headings {
         value
