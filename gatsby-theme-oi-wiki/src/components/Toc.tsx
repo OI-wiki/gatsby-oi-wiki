@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function getIDfromURL (url:string):string {
-  return url.substring(1, url.length)
+  return url?.substring(1, url.length)
 }
 
 interface itemsResult{

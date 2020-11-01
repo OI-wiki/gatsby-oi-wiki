@@ -4,7 +4,6 @@ const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 const toHAST = require(`mdast-util-to-hast`)
 const hastToHTML = require(`hast-util-to-html`)
-const mdastToToc = require(`mdast-util-toc`)
 const mdastToString = require(`mdast-util-to-string`)
 const Promise = require(`bluebird`)
 const unified = require(`unified`)
@@ -20,12 +19,11 @@ const {
   cloneTreeUntil,
   findLastTextNode,
 } = require(`./hast-processing`)
-const codeHandler = require(`./code-handler`)
 const { getHeadingID } = require(`./utils/get-heading-id`)
 const { timeToRead } = require(`./utils/time-to-read`)
 const detab = require('detab')
 const u = require('unist-builder')
-const getToc = require('./utils/get-table-of-content')
+const genToc = require('./utils/gen-toc')
 
 let fileNodes
 let pluginsCacheStr = ``
@@ -366,11 +364,7 @@ module.exports = (
       if (cachedToc) {
         return cachedToc
       } else {
-        const ast = await getAST(markdownNode)
-        const tocAst = mdastToToc(ast, gqlTocOptions)
-
-        const obj = getToc(tocAst.map, {})
-
+        const obj = genToc(markdownNode)
         cache.set(tocObjectCacheKey(markdownNode, gqlTocOptions), obj)
         return obj
       }
