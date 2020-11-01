@@ -197,8 +197,7 @@ module.exports = (
             allowDangerousHTML: true,
           }),
       }
-
-      const markdownAST = remark.parse(string)
+      let markdownAST = remark.parse(string)
 
       if (basePath) {
         // Ensure relative links include `pathPrefix`
@@ -247,6 +246,7 @@ module.exports = (
         }
       })
 
+      markdownAST = await remark.run(markdownAST)
       return markdownAST
     }
 
