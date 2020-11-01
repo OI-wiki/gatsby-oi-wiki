@@ -13490,10 +13490,10 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-details@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/rehype-details/-/rehype-details-1.8.0.tgz#8177895768515ee8ff403a6602357d545ba65e6a"
-  integrity sha512-nnctNo5BES1R/0KDKwafkmRNUscF+tp/p09hA2Na2u1ldG3kfgYGjS/HA3AaPheIxuo35Z8qCJsSJDvwi4zTSQ==
+rehype-details@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.npm.taobao.org/rehype-details/download/rehype-details-1.9.0.tgz#d4ddeb8626bf3a9798197c67a588279a3a5b4648"
+  integrity sha1-1N3rhia/OpeYGXxnpYgnmjpbRkg=
   dependencies:
     rehype-stringify "^6.0.1"
     remark-parse "^7.0.2"
