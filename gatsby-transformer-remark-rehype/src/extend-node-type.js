@@ -13,7 +13,7 @@ const stringify = require(`remark-stringify`)
 const english = require(`retext-english`)
 const remark2retext = require(`remark-retext`)
 const stripPosition = require(`unist-util-remove-position`)
-const hastReparseRaw = require(`hast-util-raw`)
+const reparseRaw = require(`rehype-raw`)
 const prune = require(`underscore.string/prune`)
 const {
   getConcatenatedValue,
@@ -436,7 +436,7 @@ module.exports = (
     }
 
     function markdownASTToHTMLAst(ast) {
-      let hast = unified()
+      let hast = unified().use(reparseRaw)
       for (let plugin of rehypePlugins) {
         if (_.isArray(plugin)) {
           const [parser, options] = plugin
@@ -445,12 +445,11 @@ module.exports = (
           hast = hast.use(plugin)
         }
       }
-
       // whoops! 
-      return hast.runSync(toHAST(ast, {
+      return stripPosition(hast.runSync(toHAST(ast, {
         allowDangerousHTML: true,
         handlers: hastHandlers,
-      }))
+      })))
     }
 
     async function getHTMLAst(markdownNode) {
@@ -649,10 +648,12 @@ module.exports = (
       htmlAst: {
         type: `JSON`,
         resolve(markdownNode) {
-          return getHTMLAst(markdownNode).then(ast => {
-            const strippedAst = stripPosition(_.clone(ast), true)
-            return hastReparseRaw(strippedAst)
-          })
+          return getHTMLAst(markdownNode)
+
+          // return getHTMLAst(markdownNode).then(ast => {
+          //  const strippedAst = stripPosition(_.clone(ast), true)
+          //  return hastReparseRaw(strippedAst)
+          // })
         },
       },
       excerpt: {
@@ -701,10 +702,10 @@ module.exports = (
                 excerptSeparator: pluginOptions.excerpt_separator,
               })
             )
-            .then(ast => {
-              const strippedAst = stripPosition(_.clone(ast), true)
-              return hastReparseRaw(strippedAst)
-            })
+            // .then(ast => {
+            //   const strippedAst = stripPosition(_.clone(ast), true)
+            //   return hastReparseRaw(strippedAst)
+            // })
         },
       },
       headings: {
