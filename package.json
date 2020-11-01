@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": [
     "gatsby-theme-oi-wiki",
+    "gatsby-transformer-remark-rehype",
     "example"
   ],
   "scripts": {
