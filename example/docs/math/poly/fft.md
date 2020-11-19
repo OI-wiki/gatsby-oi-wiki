@@ -177,14 +177,14 @@ $$
     ```cpp
     #include <cmath>
     #include <complex>
-    
+
     typedef std::complex<double> Comp;  // STL complex
-    
+
     const Comp I(0, 1);  // i
     const int MAX_N = 1 << 20;
-    
+
     Comp tmp[MAX_N];
-    
+
     void DFT(Comp *f, int n, int rev) {  // rev=1,DFT; rev=-1,IDFT
       if (n == 1) return;
       for (int i = 0; i < n; ++i) tmp[i] = f[i];
@@ -251,8 +251,7 @@ $$
 这一步 IDFT（傅里叶反变换）的作用我说的已经很清楚啦，就是把上一步获得的目标多项式的点值形式转换成系数形式。但是似乎并不简单呢……但是，我们把单位复根代入多项式之后，就是下面这个样子（矩阵表示方程组）
 
 $$
-\begin{bmatrix}y_0 \\ y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{n-1} \end{bmatrix}
-=
+\begin{bmatrix}y_0 \\ y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{n-1} \end{bmatrix}=
 \begin{bmatrix}1 & 1 & 1 & 1 & \cdots & 1 \\
 1 & \omega_n^1 & \omega_n^2 & \omega_n^3 & \cdots & \omega_n^{n-1} \\
 1 & \omega_n^2 & \omega_n^4 & \omega_n^6 & \cdots & \omega_n^{2(n-1)} \\
@@ -375,7 +374,7 @@ $$
     #include <cstdio>
     #include <cstring>
     #include <iostream>
-    
+
     const double PI = acos(-1.0);
     struct Complex {
       double x, y;
@@ -438,12 +437,12 @@ $$
         }
       }
     }
-    
+
     const int MAXN = 200020;
     Complex x1[MAXN], x2[MAXN];
     char str1[MAXN / 2], str2[MAXN / 2];
     int sum[MAXN];
-    
+
     int main() {
       while (scanf("%s%s", str1, str2) == 2) {
         int len1 = strlen(str1);
