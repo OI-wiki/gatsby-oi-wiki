@@ -1,14 +1,41 @@
 
 const unified = require('unified')
-const remark = require('remark-parse')
-const squeeze = require('remark-squeeze-paragraphs')
-const getToc = require('./get-table-of-content')
-const mdastToToc = require(`mdast-util-toc`)
 
-module.exports = function genToc(markdownNode) {
-    const compiler = unified().use(remark).use(squeeze)
-    const mdast = compiler.parse(markdownNode.internal.content)
-    const toc = mdastToToc(mdast, { maxDepth: 6 })
+const toString = require('mdast-util-to-string')
+const map = require('unist-util-map')
+const slugs = require('github-slugger')()
+const _ = require('lodash')
+// const deburr = require('lodash/deburr')
 
-    return getToc(toc.map, {})
+const isheading = /^h[1-6]$/
+function toc(ast) {  
+  
+  slugs.reset()
+
+  function visit(node) {
+    if(node.type !== 'element') return undefined
+    
+    const level = isheading.exec(node.tagName)
+    if (level) {
+      const str = toString(node)
+      const slug = slugs.slug(str, false)
+      let items = []
+      // todo
+      if (node.children) items = node.children.flatMap(e => visit(e)).filter(e => e !== undefined)
+      const o = {
+        url: `#${slug}`,
+        title: str,
+        items: items
+      }
+      return o
+    } else {
+      // todo
+    }
+  }
+
+  return { items: ast.children.map(e => visit(e)) }
+}
+
+module.exports = function genToc(hast) {
+  return toc(hast)
 }

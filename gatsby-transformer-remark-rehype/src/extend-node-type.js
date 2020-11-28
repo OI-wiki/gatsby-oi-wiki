@@ -36,11 +36,6 @@ const htmlAstCacheKey = node =>
   `transformer-remark-markdown-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const headingsCacheKey = node =>
   `transformer-remark-markdown-headings-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
-const tableOfContentsCacheKey = (node, appliedTocOptions) =>
-  `transformer-remark-markdown-toc-${node.internal.contentDigest
-  }-${pluginsCacheStr}-${JSON.stringify(
-    appliedTocOptions
-  )}-${pathPrefixCacheStr}`
 const tocObjectCacheKey = (node, appliedTocOptions) =>
   `transformer-remark-markdown-tocObject-${node.internal.contentDigest
   }-${pluginsCacheStr}-${JSON.stringify(
@@ -114,14 +109,9 @@ module.exports = (
       footnotes = true,
       gfm = true,
       pedantic = true,
-      tableOfContents = {
-        heading: null,
-        maxDepth: 6,
-      },
       remarkPlugins = [],
       rehypePlugins = [],
     } = pluginOptions
-    const tocOptions = tableOfContents
     const remarkOptions = {
       commonmark,
       footnotes,
@@ -299,63 +289,6 @@ module.exports = (
       }
     }
 
-    async function getTableOfContents(markdownNode, gqlTocOptions) {
-      // fetch defaults
-      let appliedTocOptions = { ...tocOptions, ...gqlTocOptions }
-      // get cached toc
-      const cachedToc = await cache.get(
-        tableOfContentsCacheKey(markdownNode, appliedTocOptions)
-      )
-      if (cachedToc) {
-        return cachedToc
-      } else {
-        const ast = await getAST(markdownNode)
-        const tocAst = mdastToToc(ast, appliedTocOptions)
-
-        let toc
-        if (tocAst.map) {
-          const addSlugToUrl = function (node) {
-            if (node.url) {
-              if (
-                _.get(markdownNode, appliedTocOptions.pathToSlugField) ===
-                undefined
-              ) {
-                console.warn(
-                  `Skipping TableOfContents. Field '${appliedTocOptions.pathToSlugField}' missing from markdown node`
-                )
-                return null
-              }
-              node.url = [
-                basePath,
-                _.get(markdownNode, appliedTocOptions.pathToSlugField),
-                node.url,
-              ]
-                .join(`/`)
-                .replace(/\/\//g, `/`)
-            }
-            if (node.children) {
-              node.children = node.children
-                .map(node => addSlugToUrl(node))
-                .filter(Boolean)
-            }
-
-            return node
-          }
-          if (appliedTocOptions.absolute) {
-            tocAst.map = addSlugToUrl(tocAst.map)
-          }
-
-          toc = hastToHTML(toHAST(tocAst.map, { allowDangerousHTML: true }), {
-            allowDangerousHTML: true,
-          })
-        } else {
-          toc = ``
-        }
-        cache.set(tableOfContentsCacheKey(markdownNode, appliedTocOptions), toc)
-        return toc
-      }
-    }
-
     async function getTocObject(markdownNode, gqlTocOptions) {
       const cachedToc = await cache.get(
         tocObjectCacheKey(markdownNode, gqlTocOptions)
@@ -364,7 +297,7 @@ module.exports = (
       if (cachedToc) {
         return cachedToc
       } else {
-        const obj = genToc(markdownNode)
+        const obj = genToc(await getHTMLAst(markdownNode))
         cache.set(tocObjectCacheKey(markdownNode, gqlTocOptions), obj)
         return obj
       }
@@ -721,26 +654,6 @@ module.exports = (
         type: `Int`,
         resolve(markdownNode) {
           return getHTML(markdownNode).then(timeToRead)
-        },
-      },
-      tableOfContents: {
-        type: `String`,
-        args: {
-          // TODO:(v3) set default value to false
-          absolute: {
-            type: `Boolean`,
-            defaultValue: true,
-          },
-          // TODO:(v3) set default value to empty string
-          pathToSlugField: {
-            type: `String`,
-            defaultValue: `fields.slug`,
-          },
-          maxDepth: `Int`,
-          heading: `String`,
-        },
-        resolve(markdownNode, args) {
-          return getTableOfContents(markdownNode, args)
         },
       },
       tocObject: {
