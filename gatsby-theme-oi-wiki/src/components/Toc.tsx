@@ -76,6 +76,11 @@ interface itemsResult{
 }
 function getItems (items: Item[]):itemsResult[] {
   const itemsResult = []
+  let minLevel = 5
+  items.forEach(i => {
+    minLevel = Math.min(minLevel, i.level)
+  })
+  items.forEach(i => { i.level = i.level - minLevel + 1 })
   items.forEach((item2: Item) => {
     itemsResult.push({
       url: item2.url,
@@ -115,7 +120,7 @@ const ToC: React.FC<Toc> = (props) => {
   const classes = useStyles()
   const itemsClientRef = useRef([])
   // eslint-disable-next-line
-  useEffect(() => { itemsClientRef.current = getItems(items) }, items)
+  itemsClientRef.current = getItems(items)
   const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
   const unsetClickedRef = useRef(null)
