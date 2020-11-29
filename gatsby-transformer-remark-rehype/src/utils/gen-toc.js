@@ -2,7 +2,7 @@
 const unified = require('unified')
 
 const toString = require('mdast-util-to-string')
-const map = require('unist-util-map')
+const visit = require('unist-util-visit')
 const slugs = require('github-slugger')()
 const _ = require('lodash')
 // const deburr = require('lodash/deburr')
@@ -11,29 +11,24 @@ const isheading = /^h[1-6]$/
 function toc(ast) {  
   
   slugs.reset()
+  const items = []
+  visit(ast, 'element', visitor)
 
-  function visit(node) {
-    if(node.type !== 'element') return undefined
-    
+  function visitor(node) {
     const level = isheading.exec(node.tagName)
     if (level) {
       const str = toString(node)
       const slug = slugs.slug(str, false)
-      let items = []
-      // todo
-      if (node.children) items = node.children.flatMap(e => visit(e)).filter(e => e !== undefined)
-      const o = {
+      
+      items.push({
         url: `#${slug}`,
         title: str,
-        items: items
-      }
-      return o
-    } else {
-      // todo
+        level: parseInt(level[0].substring(1)),
+      })
     }
   }
 
-  return { items: ast.children.map(e => visit(e)) }
+  return { items }
 }
 
 module.exports = function genToc(hast) {

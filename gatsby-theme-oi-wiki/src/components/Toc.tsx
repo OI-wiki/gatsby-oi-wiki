@@ -71,6 +71,7 @@ function getIDfromURL (url:string):string {
 interface itemsResult{
   url: string;
   title: string;
+  level: number;
   node: any;
 }
 function getItems (items: Item[]):itemsResult[] {
@@ -79,6 +80,7 @@ function getItems (items: Item[]):itemsResult[] {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
+      level: item2.level,
       node: document.getElementById(getIDfromURL(item2.url)),
     })
     if (item2.items) {
@@ -97,6 +99,7 @@ interface Item{
   url: string,
   title: string;
   items?: Item[];
+  level: number;
 }
 interface Items{
   items: Item[];
@@ -208,16 +211,10 @@ const ToC: React.FC<Toc> = (props) => {
           </Typography>
           <Typography component="ul" className={classes.ul}>
             {items.map((item2) => (
-              <li key={item2.title}>
-                {itemLink({ item: item2 })}
-                {item2.items && item2.items.length > 0 ? (
-                  <ul className={classes.ul}>
-                    {item2.items.map((item3) => (
-                      <li key={item3.title}>{itemLink({ item: item3, secondary: true })}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </li>
+              item2.level <= 2
+                ? <li key={item2.title}>
+                  {itemLink({ item: item2, secondary: item2.level !== 1 })}
+                </li> : null
             ))}
           </Typography>
         </>
