@@ -7064,7 +7064,7 @@ gatsby-plugin-catch-links@^2.3.15:
     "@babel/runtime" "^7.12.5"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-manifest@^2.4.34:
+gatsby-plugin-manifest@^2.4.35:
   version "2.7.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.7.0.tgz#44526226e8d0a2f80c2a81e5a5c7e9a03963a890"
   integrity sha512-6EG4Qth11C9ZLwgxQFl5TKAjtLAPoeteF68f+CWimv45wNxZausDbppFJgpOBmmPDucPiA62GSq30JT8icDJOQ==
@@ -7126,7 +7126,7 @@ gatsby-plugin-mdx@^1.2.43:
     unist-util-remove "^1.0.3"
     unist-util-visit "^1.4.1"
 
-gatsby-plugin-offline@^3.2.30:
+gatsby-plugin-offline@^3.2.36:
   version "3.5.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-offline/-/gatsby-plugin-offline-3.5.0.tgz#92de9fa56f1cd564205dbd8139afa3226903997f"
   integrity sha512-MP44mQscG7V6r4WbgbO1r2e1bW9w5dnIWsZFFvqskbt/udDG5DJsilKd3JdOybtdbV0SIwIBlD7C+iVq0VHzlA==
@@ -7153,7 +7153,7 @@ gatsby-plugin-page-creator@^2.5.0:
     graphql "^14.7.0"
     lodash "^4.17.20"
 
-gatsby-plugin-preact@^4.0.15:
+gatsby-plugin-preact@^4.0.16:
   version "4.2.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-preact/-/gatsby-plugin-preact-4.2.0.tgz#bc2f3643f80d59b331a5158fa35d1b2b39714f05"
   integrity sha512-D9LlJEv26gnvI5THsjyHhw8VFV+ebkvwEoI8NNOqzocO9W3t8f2f2dMZnqzUuB9pRCE4F1b94kcaWqzZgeVdaQ==
@@ -7168,7 +7168,7 @@ gatsby-plugin-react-helmet@^3.3.11:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-gatsby-plugin-sharp@^2.6.38:
+gatsby-plugin-sharp@^2.6.43:
   version "2.9.1"
   resolved "https://registry.npmjs.org/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.9.1.tgz#74556f75858a5d7271cb83418a9b116f0a3f0289"
   integrity sha512-Z96HoUk0gsP/6Ats5FF0na1YDECqUFSBUuFJBs0sZpSnNVmvozK4el+lBIB67eAQlHrSe55PqW/lqrq3zSXqMg==
@@ -7330,7 +7330,7 @@ gatsby-remark-table-of-contents@0.1.1:
     js-yaml "^3.13.1"
     mdast-util-toc "^4.2.0"
 
-gatsby-source-filesystem@^2.3.34:
+gatsby-source-filesystem@^2.3.35:
   version "2.6.1"
   resolved "https://registry.npmjs.org/gatsby-source-filesystem/-/gatsby-source-filesystem-2.6.1.tgz#28529fadbcbdd61a4257c8561200bfc1a8d5556c"
   integrity sha512-XQvQewST3uH8bDjyLMv5srqc0Hh1eIzVkPLMXpcWoszlUX/MSCdY8+boZjLAx8YK0O65MLCr66sV9qFDBldjAw==
@@ -7390,7 +7390,7 @@ gatsby-transformer-sharp@^2.5.17:
     semver "^7.3.2"
     sharp "^0.26.3"
 
-gatsby@^2.24.74:
+gatsby@^2.24.84:
   version "2.27.4"
   resolved "https://registry.npmjs.org/gatsby/-/gatsby-2.27.4.tgz#560d9e7f20c809e4c754f801ba2715a26c498eb4"
   integrity sha512-gpgKkb2/tP4E06F/0SJ+iH+rg0rkSH9d2u8v+RAwm96Z6idwMitGu6pgjhRquNtZdhsM1wghVmQt4P5MM0a1yg==
