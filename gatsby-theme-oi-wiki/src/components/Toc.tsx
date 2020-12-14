@@ -76,21 +76,17 @@ interface itemsResult{
 }
 function getItems (items: Item[]):itemsResult[] {
   const itemsResult = []
+  let minLevel = 5
+  items.forEach(i => {
+    minLevel = Math.min(minLevel, i.level)
+  })
+  items.forEach(i => { i.level = i.level - minLevel + 1 })
   items.forEach((item2: Item) => {
     itemsResult.push({
       url: item2.url,
       title: item2.title,
       level: item2.level,
-      node: document.getElementById(getIDfromURL(item2.url)),
     })
-    if (item2.items) {
-      item2.items.forEach((item3) => {
-        itemsResult.push({
-          ...item3,
-          node: document.getElementById(getIDfromURL(item3.url)),
-        })
-      })
-    }
   })
   return itemsResult
 }
@@ -115,7 +111,12 @@ const ToC: React.FC<Toc> = (props) => {
   const classes = useStyles()
   const itemsClientRef = useRef([])
   // eslint-disable-next-line
-  useEffect(() => { itemsClientRef.current = getItems(items) }, items)
+  itemsClientRef.current = getItems(items)
+  useEffect(() => {
+    itemsClientRef.current =
+      itemsClientRef.current.map(
+        i => { i.node = document.getElementById(getIDfromURL(i.url)) })
+  }, [items])
   const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
   const unsetClickedRef = useRef(null)
