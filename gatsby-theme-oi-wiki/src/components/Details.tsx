@@ -8,7 +8,7 @@ type Props = {
   [props: string]: any;
 }
 
-const useStyles = makeStyles((theme) => ({
+const getDetailsClasses = makeStyles((theme) => ({
   root: {
     '&, &:first-child, &:last-child': {
       margin: '1.2em 0 !important',
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
       margin: '1.2em 0 !important',
     },
   },
+}))
+
+const useStyles = makeStyles(theme => ({
   container: {
     width: '100%',
     marginLeft: theme.spacing(2),
@@ -33,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
 const Details: React.FC<Props> = (props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { className = '', children, ...rest } = props
+  const detailsClasses = getDetailsClasses()
   const classes = useStyles()
-
   const cont = children instanceof Array ? children : [children]
   return (
     <Accordion
       variant="outlined"
-      classes={classes}
+      classes={detailsClasses}
       defaultExpanded={!!className.match('open')}
     >
       {cont[0]}

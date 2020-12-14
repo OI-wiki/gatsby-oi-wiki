@@ -135,7 +135,6 @@ function MyLayout ({
                   tags={tags}
                   relativePath={relativePath}
                   modifiedTime={modifiedTime}
-                  noMeta={noMeta}
                   location={location}
                   title={title}
                 />}
