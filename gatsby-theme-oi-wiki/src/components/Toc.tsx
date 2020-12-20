@@ -109,13 +109,15 @@ const ToC: React.FC<Toc> = (props) => {
   const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
-  const itemsClientRef = useRef([])
+  const itemsClientRef = useRef(getItems(items))
   // eslint-disable-next-line
-  itemsClientRef.current = getItems(items)
   useEffect(() => {
     itemsClientRef.current =
       itemsClientRef.current.map(
-        i => { i.node = document.getElementById(getIDfromURL(i.url)) })
+        i => {
+          i.node = document.getElementById(getIDfromURL(i.url))
+          return i
+        })
   }, [items])
   const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
@@ -134,7 +136,6 @@ const ToC: React.FC<Toc> = (props) => {
       }
 
       const item = itemsClientRef.current[i]
-
       if (
         item.node &&
         item.node.offsetTop <
