@@ -32,7 +32,7 @@
     "gatsby-plugin-preact": "^4.0.16",
     "gatsby-plugin-react-helmet": "^3.3.11",
     "gatsby-remark-copy-linked-files": "^2.3.18",
-    "gatsby-source-filesystem": "^2.3.35",
+    "gatsby-source-filesystem": "^2.8.0",
     "gatsby-source-local-git": "^1.1.1",
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "hast-util-to-text": "^2.0.0",
