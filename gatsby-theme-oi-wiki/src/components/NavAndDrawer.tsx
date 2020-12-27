@@ -150,6 +150,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
     anchorEl={anchorEl}
     open={Boolean(anchorEl)}
     onClose={handleClose}
+    disableScrollLock={true}
   >
     <MenuItem component="a" href="/settings">
       <ListItemIcon classes={{ root: classes.iconItem }}>
@@ -264,4 +265,4 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   )
 }
 
-export default ResponsiveDrawer
+export default React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
