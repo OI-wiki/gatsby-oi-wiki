@@ -29,7 +29,7 @@
     "gatsby-plugin-offline": "^3.7.0",
     "gatsby-plugin-react-helmet": "^3.7.0",
     "gatsby-remark-copy-linked-files": "^2.7.0",
-    "gatsby-source-filesystem": "^2.8.0",
+    "gatsby-source-filesystem": "^2.8.1",
     "gatsby-source-local-git": "^1.1.1",
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "hast-util-to-text": "^2.0.0",
