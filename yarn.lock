@@ -12609,10 +12609,10 @@ rehype-stringify@^6.0.1:
     hast-util-to-html "^6.0.0"
     xtend "^4.0.0"
 
-remark-details@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/remark-details/-/remark-details-2.0.2.tgz#8961175ebaaab4aee3bb5e7ad60e5a453792b259"
-  integrity sha512-4BPiu/AJfOqNqsKClZ4+EeCa1/rxaBWRrJC6MUbr34uLRop8/BA1H9peVt4dBc+O55oyemYrKSOmaXULLdKIjw==
+remark-details@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/remark-details/-/remark-details-3.0.0.tgz#5f2ac597d03f42460d20fefed0df8dcfc58e9ae7"
+  integrity sha512-C8G5yT8KRoVKcC6ouqAYVpHKLy94zZlBlXev+9MvzcOEvATAct8/JgCkYxzMnhPGgKbcs85Ubl+T6foyS8IfaQ==
   dependencies:
     rehype-stringify "^6.0.1"
     remark-rehype "^5.0.0"
