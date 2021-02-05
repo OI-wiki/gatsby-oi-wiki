@@ -129,3 +129,8 @@ pre::-webkit-scrollbar-thumb {
   }
 }
 /* code block end */
+
+main img {
+  display: block;
+  margin: 0 auto;
+}
