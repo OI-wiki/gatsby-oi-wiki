@@ -174,4 +174,4 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   )
 }
 
-export default ResponsiveDrawer
+export default React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
