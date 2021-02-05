@@ -1,10 +1,6 @@
-import Collapse from '@material-ui/core/Collapse'
-import MuiLink from '@material-ui/core/Link'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import { Collapse, Link as MuiLink, List, ListItem, ListItemText, Typography } from '@material-ui/core'
+
 import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import React, { useState } from 'react'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'

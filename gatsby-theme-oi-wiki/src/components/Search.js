@@ -1,17 +1,19 @@
-import Backdrop from '@material-ui/core/Backdrop'
-import Dialog from '@material-ui/core/Dialog'
-import IconButton from '@material-ui/core/IconButton'
-import InputBase from '@material-ui/core/InputBase'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import Paper from '@material-ui/core/Paper'
+import {
+  Backdrop, 
+  Dialog, 
+  IconButton, 
+  InputBase,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Typography
+} from '@material-ui/core'
+
 import { fade, makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import FindInPageIcon from '@material-ui/icons/FindInPage'
-import SearchIcon from '@material-ui/icons/Search'
+import { ArrowBack as ArrowBackIcon, FindInPage as FindInPageIcon, Search as SearchIcon } from '@material-ui/icons'
+
 import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'gatsby'
@@ -216,8 +218,8 @@ function SearchResultList (props) {
       没有找到符合条件的结果
     </Typography>
   ) : (
-    ''
-  )
+        ''
+      )
 }
 
 function useDebounce (value, timeout) {
