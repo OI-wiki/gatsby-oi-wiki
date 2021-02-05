@@ -1,16 +1,20 @@
-import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
-import Drawer from '@material-ui/core/Drawer'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import Tooltip from '@material-ui/core/Tooltip'
-import Typography from '@material-ui/core/Typography'
+import {
+  AppBar,
+  Button,
+  Drawer,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Tooltip,
+  Typography,
+  Menu,
+  MenuItem,
+  ListItemIcon
+} from '@material-ui/core'
+
+import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import createPersistedState from 'use-persisted-state'
 
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -20,72 +24,23 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { ListItemIcon } from '@material-ui/core'
-import scrollbarStyle from '../styles/scrollbar'
 // eslint-disable-next-line
 // @ts-ignore
-import pathList from '../sidebar.yaml'
-import defaultSettings from '../lib/defaultSettings'
-import Search from './Search'
-import SiderContent from './Sidebar'
-import Tabs from './Tabs'
+import pathList from '../../sidebar.yaml'
+import defaultSettings from '../../lib/defaultSettings'
+import Search from '../Search'
+import SiderContent from '../Sidebar'
+import Tabs from '../Tabs'
+import { useStyles } from './styles'
 
-const drawerWidth = 250
-
-interface AppBar{
-  background: string;
-  color: string;
-}
-interface Props{
-  appBar: AppBar;
-}
-
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  hiddenDrawer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  appBar: (props: Props) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    background: props.appBar.background,
-    color: props.appBar.color,
-  }),
-  toolbar: {
-    paddingLeft: '7.5px',
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    },
-  },
-  // necessary for content to be below app bar
-  placeholder: {
-    [theme.breakpoints.down('md')]: {
-      minHeight: 64,
-    },
-    minHeight: 48 + 64,
-    alignItems: 'flex-start',
-  },
-  drawerPaper: scrollbarStyle(theme, {
-    width: drawerWidth,
-  }),
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  iconItem: {
-    minWidth: theme.spacing(5),
-  },
-}))
-
-function flattenObject (ob:any) :Record<string, unknown> {
-  // https://stackoverflow.com/a/53739792
+/**
+ * To flatten JS object (keys and values) to a single depth object
+ * Ref: https://stackoverflow.com/a/53739792
+ *
+ * @param {*} ob
+ * @return {*}  {Record<string, unknown>}
+ */
+export function flattenObject(ob: any): Record<string, unknown> {
   const toReturn = {}
 
   for (const i in ob) {
@@ -114,6 +69,14 @@ function getTabIDFromLocation (location: string, pathList: string[]): number {
 
 interface drawerProps {
   pathname: string
+}
+
+interface AppBar{
+  background: string;
+  color: string;
+}
+interface Props{
+  appBar: AppBar;
 }
 
 const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
@@ -174,6 +137,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
       </ListItemIcon>
     GitHub</MenuItem>
   </Menu>
+
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
