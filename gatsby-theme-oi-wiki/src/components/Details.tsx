@@ -28,8 +28,6 @@ const getDetailsClasses = makeStyles((theme) => ({
 const useStyles = makeStyles(theme => ({
   container: {
     width: '100%',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
   },
 }))
 
