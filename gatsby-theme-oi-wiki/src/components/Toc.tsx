@@ -127,7 +127,7 @@ const ToC: React.FC<Toc> = (props) => {
       return
     }
 
-    let active
+    let active: any
     for (let i = itemsClientRef.current.length - 1; i >= 0; i -= 1) {
       // No hash if we're near the top of the page
       if (document.documentElement.scrollTop < 200) {

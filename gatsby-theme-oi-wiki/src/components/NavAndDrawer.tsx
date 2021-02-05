@@ -29,6 +29,7 @@ import defaultSettings from '../lib/defaultSettings'
 import Search from './Search'
 import SiderContent from './Sidebar'
 import Tabs from './Tabs'
+import SmallScreenMenu from './SmallScreenMenu'
 
 const drawerWidth = 250
 
@@ -136,45 +137,6 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   }
   const tabID = getTabIDFromLocation(pathname, pathList)
 
-  const [anchorEl, setAnchorEl] = React.useState(null)
-
-  const handleClick = (event): void => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = (): void => {
-    setAnchorEl(null)
-  }
-
-  const SmallScreenMenu: React.FC<unknown> = () => <Menu
-    anchorEl={anchorEl}
-    open={Boolean(anchorEl)}
-    onClose={handleClose}
-    disableScrollLock={true}
-  >
-    <MenuItem component="a" href="/settings">
-      <ListItemIcon classes={{ root: classes.iconItem }}>
-        <SettingsIcon fontSize="small" />
-      </ListItemIcon>
-    设置
-    </MenuItem>
-    <MenuItem component="a" href="/tags">
-      <ListItemIcon classes={{ root: classes.iconItem }}>
-        <LocalOfferIcon fontSize="small" />
-      </ListItemIcon>
-    标签
-    </MenuItem>
-    <MenuItem component="a" href="/pages">
-      <ListItemIcon classes={{ root: classes.iconItem }}>
-        <LibraryBooksIcon fontSize="small" />
-      </ListItemIcon>
-    目录</MenuItem>
-    <MenuItem component="a" href={OIWikiGithub}>
-      <ListItemIcon classes={{ root: classes.iconItem }}>
-        <GitHubIcon fontSize="small" />
-      </ListItemIcon>
-    GitHub</MenuItem>
-  </Menu>
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
@@ -221,12 +183,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
               </IconButton>
             </Tooltip>
           </Hidden>
-          <Hidden mdUp implementation="js">
-            <IconButton color="inherit" onClick={handleClick}>
-              <MoreVertIcon />
-            </IconButton>
-            <SmallScreenMenu/>
-          </Hidden>
+          <SmallScreenMenu/>
         </Toolbar>
         <Hidden mdDown implementation="css">
           <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>

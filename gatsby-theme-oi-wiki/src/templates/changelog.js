@@ -1,19 +1,20 @@
-import React from 'react'
+import { 
+  Timeline, 
+  TimelineItem, 
+  TimelineConnector, 
+  TimelineSeparator, 
+  TimelineContent,
+  TimelineOppositeContent,
+  TimelineDot
+} from '@material-ui/lab'
+import { Divider, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'gatsby'
-import Timeline from '@material-ui/lab/Timeline'
-import TimelineItem from '@material-ui/lab/TimelineItem'
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator'
-import TimelineConnector from '@material-ui/lab/TimelineConnector'
-import TimelineContent from '@material-ui/lab/TimelineContent'
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent'
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import Button from '@material-ui/core/Button'
-import { Divider } from '@material-ui/core'
-import TimelineDot from '@material-ui/lab/TimelineDot'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import lightBlue from '@material-ui/core/colors/lightBlue'
+
+import React from 'react'
+import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
 
