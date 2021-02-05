@@ -35,8 +35,7 @@ const SmallScreenMenu: React.FC<unknown> = function (props) {
   }, [])
 
   return (
-    <Hidden mdUp implementation="css">
-
+    <Hidden mdUp implementation="js">
       <IconButton color="inherit" onClick={(e) => handleClick(e)} disableRipple disableFocusRipple>
         <MoreVertIcon />
       </IconButton>
