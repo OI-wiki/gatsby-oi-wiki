@@ -22,7 +22,7 @@ import CommentSystem from './Comment'
 import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta.tsx'
-import NavAndDrawer from './NavAndDrawer.tsx'
+import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc.tsx'
 import Title from './Title.tsx'
 

@@ -1,16 +1,17 @@
-import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
-import Drawer from '@material-ui/core/Drawer'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import Tooltip from '@material-ui/core/Tooltip'
-import Typography from '@material-ui/core/Typography'
+import {
+  AppBar, 
+  Button,
+  Drawer,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@material-ui/core'
+
+import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import createPersistedState from 'use-persisted-state'
 
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -19,74 +20,25 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import SchoolIcon from '@material-ui/icons/School'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { ListItemIcon } from '@material-ui/core'
-import scrollbarStyle from '../styles/scrollbar'
 // eslint-disable-next-line
 // @ts-ignore
-import pathList from '../sidebar.yaml'
-import defaultSettings from '../lib/defaultSettings'
-import Search from './Search'
-import SiderContent from './Sidebar'
-import Tabs from './Tabs'
-import SmallScreenMenu from './SmallScreenMenu'
+import pathList from '../../sidebar.yaml'
+import defaultSettings from '../../lib/defaultSettings'
+import Search from '../Search'
+import SiderContent from '../Sidebar'
+import Tabs from '../Tabs'
+import SmallScreenMenu from '../SmallScreenMenu'
 
-const drawerWidth = 250
+import { useStyles } from './styles'
 
-interface AppBar{
-  background: string;
-  color: string;
-}
-interface Props{
-  appBar: AppBar;
-}
-
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  hiddenDrawer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  appBar: (props: Props) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    background: props.appBar.background,
-    color: props.appBar.color,
-  }),
-  toolbar: {
-    paddingLeft: '7.5px',
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    },
-  },
-  // necessary for content to be below app bar
-  placeholder: {
-    [theme.breakpoints.down('md')]: {
-      minHeight: 64,
-    },
-    minHeight: 48 + 64,
-    alignItems: 'flex-start',
-  },
-  drawerPaper: scrollbarStyle(theme, {
-    width: drawerWidth,
-  }),
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  iconItem: {
-    minWidth: theme.spacing(5),
-  },
-}))
-
+/**
+ * Flatten JS object (keys and values) to a single depth object
+ * (ref: https://stackoverflow.com/a/53739792)
+ *
+ * @param {*} ob
+ * @return {*}  {Record<string, unknown>}
+ */
 function flattenObject (ob:any) :Record<string, unknown> {
-  // https://stackoverflow.com/a/53739792
   const toReturn = {}
 
   for (const i in ob) {
