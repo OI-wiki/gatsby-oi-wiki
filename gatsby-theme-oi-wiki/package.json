@@ -27,7 +27,7 @@
     "gatsby-plugin-advanced-sitemap": "^1.5.6",
     "gatsby-plugin-catch-links": "^2.9.0",
     "gatsby-plugin-material-ui": "^2.1.10",
-    "gatsby-plugin-offline": "^3.7.1",
+    "gatsby-plugin-offline": "^3.9.0",
     "gatsby-plugin-react-helmet": "^3.7.0",
     "gatsby-remark-copy-linked-files": "^2.9.0",
     "gatsby-source-filesystem": "^2.8.0",
@@ -66,7 +66,7 @@
   "optionalDependencies": {
     "gatsby-plugin-manifest": "^2.9.1",
     "gatsby-plugin-sharp": "^2.13.4",
-    "gatsby-remark-images": "^3.8.1",
+    "gatsby-remark-images": "^3.10.0",
     "gatsby-transformer-sharp": "^2.9.0"
   }
 }

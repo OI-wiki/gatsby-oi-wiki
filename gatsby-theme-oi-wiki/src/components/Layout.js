@@ -1,12 +1,15 @@
-import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
-import Accordion from '@material-ui/core/Accordion'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
-import Grid from '@material-ui/core/Grid'
+import { 
+  Container, 
+  CssBaseline, 
+  Divider, 
+  Accordion, 
+  AccordionDetails, 
+  AccordionSummary, 
+  Grid, 
+  Typography 
+} from '@material-ui/core'
+
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'

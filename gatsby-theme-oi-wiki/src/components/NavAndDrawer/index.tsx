@@ -184,12 +184,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
               </IconButton>
             </Tooltip>
           </Hidden>
-          <Hidden mdUp implementation="js">
-            <IconButton color="inherit" onClick={handleClick}>
-              <MoreVertIcon />
-            </IconButton>
-            <SmallScreenMenu/>
-          </Hidden>
+          <SmallScreenMenu/>
         </Toolbar>
         <Hidden mdDown implementation="css">
           <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
