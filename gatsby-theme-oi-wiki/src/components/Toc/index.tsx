@@ -1,108 +1,38 @@
-import MuiLink from '@material-ui/core/Link'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import { Link as MuiLink, Typography } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import smoothScrollTo from '../lib/smoothScroll'
-import useThrottledOnScroll from '../lib/useThrottledOnScroll'
-import scrollbarStyle from '../styles/scrollbar'
-
-const useStyles = makeStyles((theme) => ({
-  main: scrollbarStyle(theme, {
-    right: 0,
-    width: '15%',
-    flexShrink: 0,
-    position: 'fixed',
-    height: 'calc(100vh - 284px)',
-    overflowY: 'auto',
-    padding: theme.spacing(2, 2, 2, 0),
-    display: 'none',
-    [theme.breakpoints.up('lg')]: {
-      display: 'block',
-      top: theme.spacing(7),
-      marginTop: theme.spacing(7),
-    },
-    [theme.breakpoints.only('md')]: {
-      display: 'block',
-      top: theme.spacing(3),
-      marginTop: theme.spacing(3),
-    },
-  }, 0.33),
-  contents: {
-    marginTop: theme.spacing(2),
-    paddingLeft: theme.spacing(1.5),
-  },
-  ul: {
-    padding: 0,
-    margin: 0,
-    listStyle: 'none',
-  },
-  item: {
-    fontSize: 13,
-    padding: theme.spacing(0.5, 0, 0.5, 1),
-    borderLeft: '4px solid transparent',
-    boxSizing: 'content-box',
-    scrollBehavior: 'smooth',
-    '&:hover': {
-      borderLeft: `4px solid ${
-        theme.palette.type === 'light'
-          ? theme.palette.grey[300]
-          : theme.palette.grey[900]
-      }`,
-    },
-    '&$active,&:active': {
-      borderLeft: `4px solid ${
-        theme.palette.type === 'light'
-          ? theme.palette.grey[400]
-          : theme.palette.grey[800]
-      }`,
-    },
-  },
-  secondaryItem: {
-    paddingLeft: theme.spacing(2.5),
-  },
-  active: {},
-}))
+import smoothScrollTo from '../../lib/smoothScroll'
+import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
+import { useStyles } from './styles'
 
 function getIDfromURL (url:string):string {
   return url?.substring(1, url.length)
+}
+
+function getItems(items: Item[]): itemsResult[] {
+  const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5);
+  items.forEach(i => { i.level = i.level - minLevel + 1 })
+  const itemsResult = items.map((i): itemsResult => ({...i}));
+  return itemsResult
 }
 
 interface itemsResult{
   url: string;
   title: string;
   level: number;
-  node: any;
+  node?: any;
 }
-function getItems (items: Item[]):itemsResult[] {
-  const itemsResult = []
-  let minLevel = 5
-  items.forEach(i => {
-    minLevel = Math.min(minLevel, i.level)
-  })
-  items.forEach(i => { i.level = i.level - minLevel + 1 })
-  items.forEach((item2: Item) => {
-    itemsResult.push({
-      url: item2.url,
-      title: item2.title,
-      level: item2.level,
-    })
-  })
-  return itemsResult
-}
-
 interface Item{
   url: string,
   title: string;
   items?: Item[];
   level: number;
 }
-interface Items{
-  items: Item[];
-}
 interface Toc{
   pathname: string;
-  toc: Items;
+  toc: {
+    items: Item[];
+  }
 }
 
 const ToC: React.FC<Toc> = (props) => {
