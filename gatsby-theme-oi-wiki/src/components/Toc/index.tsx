@@ -42,12 +42,9 @@ const ToC: React.FC<Toc> = (props) => {
   const itemsClientRef = useRef(getItems(items))
   // eslint-disable-next-line
   useEffect(() => {
-    itemsClientRef.current =
-      itemsClientRef.current.map(
-        i => {
-          i.node = document.getElementById(getIDfromURL(i.url))
-          return i
-        })
+    itemsClientRef.current = itemsClientRef.current.map(i => ({
+      ...i, node: document.getElementById(getIDfromURL(i.url))
+    }))
   }, [items])
   const [activeState, setActiveState] = useState('')
   const clickedRef = useRef(false)
@@ -57,25 +54,11 @@ const ToC: React.FC<Toc> = (props) => {
       return
     }
 
-    let active: any
-    for (let i = itemsClientRef.current.length - 1; i >= 0; i -= 1) {
-      // No hash if we're near the top of the page
-      if (document.documentElement.scrollTop < 200) {
-        active = { url: null }
-        break
-      }
-
-      const item = itemsClientRef.current[i]
-      if (
-        item.node &&
-        item.node.offsetTop <
-          document.documentElement.scrollTop +
-            document.documentElement.clientHeight / 8
-      ) {
-        active = item
-        break
-      }
-    }
+    let active: any = document.documentElement.scrollTop < 200 ?
+      {url: null} // No hash if we're near the top of the page
+      : itemsClientRef.current.find(item =>
+        item.node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8
+      )
 
     if (active && activeState !== active.url) {
       setActiveState(active.url)
@@ -83,17 +66,6 @@ const ToC: React.FC<Toc> = (props) => {
   }, [activeState])
   useThrottledOnScroll(findActiveItem, 166)
   const handleClick = (hash) => (event) => {
-    // Ignore click for new tab/new window behavior
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 || // ignore everything but left-click
-      event.metaKey ||
-      event.ctrlKey ||
-      event.altKey ||
-      event.shiftKey
-    ) {
-      return
-    }
     event.preventDefault()
     // Used to disable findActiveIndex if the page scrolls due to a click
     const targetElement = document.getElementById(
