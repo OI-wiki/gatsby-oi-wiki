@@ -2,7 +2,17 @@ import { useEffect, useMemo } from 'react'
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {}
 
-// from underscore.js
+/**
+ * Creates and returns a new, throttled version of the passed function, 
+ * that, when invoked repeatedly, will only actually call the original 
+ * function at most once per every wait milliseconds.
+ * (from underscore.js)
+ *
+ * @param {*} func
+ * @param {*} wait
+ * @param {*} options
+ * @return {*} 
+ */
 function throttle (func, wait, options) {
   let timeout, context, args, result
   let previous = 0

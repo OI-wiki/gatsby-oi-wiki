@@ -1,3 +1,11 @@
+/**
+ * Create human readable time difference
+ *
+ * @export
+ * @param {number} current in milliseconds
+ * @param {number} previous in milliseconds
+ * @return {string}  string
+ */
 export default function timeDifference (current: number, previous: number): string {
   const msPerMinute = 60 * 1000
   const msPerHour = msPerMinute * 60
