@@ -53,10 +53,33 @@ const attributeMap = {
   viewbox: 'viewBox',
 }
 
+
+/**
+ * convert camel case to hypen
+ * 
+ * example: 
+ * - colorProfile -> color-profile
+ *
+ * @param {*} str
+ * @return {*} 
+ */
+function camelCaseToHypen (str) {
+  return str.replace(/[A-Z]/g, (match) => {
+    return '-' + match.toLowerCase();
+  })
+}
+
+/**
+ * convert hypen and colon to camel case
+ * 
+ * example: 
+ * - color-profile -> colorProfile
+ * - xlink:role -> xlinkRole
+ *
+ * @param {*} str
+ * @return {*} 
+ */
 function hypenColonToCamelCase (str) {
-  // convert hypen and colon to camel case
-  // color-profile -> colorProfile
-  // xlink:role -> xlinkRole
   return str.replace(/(-|:)(.)/g, (match, symbol, char) => {
     return char.toUpperCase()
   })
@@ -107,28 +130,36 @@ export function convertStyle (styleStr) {
   return style
 }
 
-export function mapAttribute (tagName, attrs = {}, preserveAttributes) {
+function mapAttribute (tagName, attrs = {}, preserveAttributes) {
   return Object.keys(attrs).reduce((result, attr) => {
     // ignore inline event attribute
     if (/^on.*/.test(attr)) {
       return result
     }
 
+    // Allow preserving non-standard attribute, e.g: `ng-if`
+    function isPreserved(att){
+      return preserveAttributes.filter(at => {
+        if (at instanceof RegExp) {
+          return at.test(att)
+        }
+        return at === att
+      }).length ? true : false
+    }
+
     // Convert attribute to camelCase except data-* and aria-* attribute
     // https://facebook.github.io/react/docs/dom-elements.html
     let attributeName = attr
     if (!/^(data|aria)-/.test(attr)) {
-      // Allow preserving non-standard attribute, e.g: `ng-if`
-      const preserved = preserveAttributes.filter(at => {
-        if (at instanceof RegExp) {
-          return at.test(attr)
-        }
-
-        return at === attr
-      })
-
-      if (preserved.length === 0) {
+      if (isPreserved(attr) === false) {
         attributeName = hypenColonToCamelCase(attr)
+      }
+    }
+
+    // Convert camelCase data and aria attribute to hypen case
+    if(/^(data|aria)[A-Z]/.test(attr)) {
+      if (isPreserved(attr) === false) {
+        attributeName = camelCaseToHypen(attr)
       }
     }
 
