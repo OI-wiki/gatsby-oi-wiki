@@ -13,52 +13,28 @@ import useDarkMode from '../../lib/useDarkMode'
 
 import { useStyles } from './styles'
 import { SearchResultList } from './ResultList';
+import { useDebounce, useWindowDimensions } from './hooks'
 
-function useDebounce (value, timeout) {
-  const [state, setState] = useState(value)
-
-  useEffect(() => {
-    const handler = setTimeout(() => setState(value), timeout)
-
-    return () => clearTimeout(handler)
-  }, [value, timeout])
-
-  return state
+/**
+ * 从 API 获取搜索数据
+ *
+ * @param {string} str
+ * @return {Promise} 返回一个 Promise 对象
+ */
+function fetchResult (str) {
+  return fetch(
+    `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(str)}`,
+    {
+      // credentials: "same-origin"
+    },
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      return result
+    })
 }
 
-function useWindowDimensions () {
-  // function getWindowDimensions() {
-  //   const { innerWidth: width, innerHeight: height } = window;
-  //   return {
-  //     width,
-  //     height
-  //   };
-  // }
-
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: null,
-    height: null,
-  })
-  // const [windowDimensions, setWindowDimensions] = useState({width: window.innerWidth, height: window.innerHeight});
-
-  useEffect(() => {
-    function handleResize () {
-      // console.log('updated window')
-      setWindowDimensions({
-        width: window.innerWidth,
-        // height: window.innerHeight,
-      })
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  return windowDimensions
-}
-
-function Result () {
+function Search () {
   const [searchKey, setSearchKey] = useState('')
   const [result, setResult] = useState([])
   const [open, setOpen] = useState(false)
@@ -67,21 +43,12 @@ function Result () {
 
   const isFirstRun = useRef(true)
 
+  const enableDark = useDarkMode()
+  const { width } = useWindowDimensions()
+
   useEffect(() => {
     if (debouncedKey !== '') {
-      const result = fetch(
-        `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(debouncedKey)}`,
-        {
-          // credentials: "same-origin"
-        },
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          // Rsize = result.length
-          return result
-        })
-
-      result.then((val) => {
+      fetchResult(debouncedKey).then((val) => {
         // the order is tricky here
         // set result after set isFirstRun
         // so when there's no result on first run
@@ -94,8 +61,6 @@ function Result () {
     }
   }, [debouncedKey])
 
-  const enableDark = useDarkMode()
-  const { width } = useWindowDimensions()
   // console.log(`width: ${width} ~ height: ${height}`);
 
   // 600px is sm
@@ -196,4 +161,4 @@ function Result () {
     )
   }
 }
-export default Result
+export default Search
