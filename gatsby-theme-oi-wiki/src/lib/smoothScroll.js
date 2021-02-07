@@ -53,7 +53,7 @@ function smoothScrollTo (yCoordinate, duration = -1, optimizeForSmallScreen = tr
   }
   const startTime = performance.now()
   const startPosition = window.scrollY
-  const el = document.querySelector('main')
+  const el = document.querySelector('.maincontentdiv')
 
   window.scrollTo(0, yCoordinate)
   const performAnimation = (time) => {
