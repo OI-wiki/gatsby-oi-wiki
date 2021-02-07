@@ -14,12 +14,15 @@ import { Link } from 'gatsby'
 import React from 'react'
 import createPersistedState from 'use-persisted-state'
 
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
-import LocalOfferIcon from '@material-ui/icons/LocalOffer'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import MenuIcon from '@material-ui/icons/Menu'
-import SettingsIcon from '@material-ui/icons/Settings'
-import SchoolIcon from '@material-ui/icons/School'
+import {
+  LibraryBooks as LibraryBooksIcon,
+  LocalOffer as LocalOfferIcon,
+  GitHub as GitHubIcon,
+  Menu as MenuIcon,
+  Settings as SettingsIcon,
+  School as SchoolIcon,
+} from '@material-ui/icons'
+
 // eslint-disable-next-line
 // @ts-ignore
 import pathList from '../../sidebar.yaml'
@@ -63,6 +66,16 @@ function getTabIDFromLocation (location: string, pathList: string[]): number {
     if (Object.values(flattenObject(v[1])).indexOf(location) > -1) return +v[0]
   }
   return -1
+}
+
+function DrawerBtn ({ title, href, Icon }) {
+  return (
+    <Tooltip title={title} placement="bottom" arrow>
+      <IconButton component="a" href={href} color="inherit">
+        <Icon />
+      </IconButton>
+    </Tooltip>
+  )
 }
 
 interface drawerProps {
@@ -114,26 +127,10 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           <div style={{ flexGrow: 1 }} />
           <Search />
           <Hidden smDown implementation="css">
-            <Tooltip title="设置页" placement="bottom" arrow>
-              <IconButton component="a" href="/settings" color="inherit">
-                <SettingsIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="标签页" placement="bottom" arrow>
-              <IconButton component="a" href="/tags" color="inherit">
-                <LocalOfferIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="目录页" placement="bottom" arrow>
-              <IconButton component="a" href="/pages" color="inherit">
-                <LibraryBooksIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="GitHub 存储库" placement="bottom" arrow>
-              <IconButton component="a" href={OIWikiGithub} color="inherit">
-                <GitHubIcon />
-              </IconButton>
-            </Tooltip>
+            <DrawerBtn title="设置页" href="/settings" Icon={SettingsIcon} />
+            <DrawerBtn title="标签页" href="/tags" Icon={LocalOfferIcon} />
+            <DrawerBtn title="目录页" href="/pages" Icon={LibraryBooksIcon} />
+            <DrawerBtn title="GitHub 存储库" href={OIWikiGithub} Icon={GitHubIcon} />
           </Hidden>
           <SmallScreenMenu/>
         </Toolbar>
@@ -147,9 +144,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
+          classes={{ paper: classes.drawerPaper, }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -160,9 +155,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
       <Hidden mdDown implementation="css">
         <Drawer
           className={classes.drawer}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
+          classes={{ paper: classes.drawerPaper, }}
           variant="permanent"
           open
         >
