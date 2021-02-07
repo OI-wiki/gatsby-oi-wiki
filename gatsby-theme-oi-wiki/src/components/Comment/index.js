@@ -1,5 +1,5 @@
 import React from 'react'
-import Comment from './commentSystem/index.tsx'
+import Comment from './Comment'
 
 function CommentSystem ({ title }) {
   return (
