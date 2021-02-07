@@ -41,7 +41,7 @@ const CommentComponent: React.FC<Props> = (props) => {
   const filteredComments = comments.data.filter(({isMinimized}) => !isMinimized)
   const [issue, setIssue] = useState<Issue>()
   const [createIssueLoading, setCreateIssueLoading] = useState(false)
-  const isDisabled = user.username === '未登录用户' || !token || noIssue
+  const authorized = user.username !== '未登录用户' && token && !noIssue
   const isAdmin = props.admin.indexOf(user.username) >= 0
   const ghAPIV3 = new GithubV3({
     baseURL: 'https://github.com',
@@ -129,7 +129,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         <Tooltip title="在 GitHub 上查看">
           <a href={issue?.link} className={classes.link}>{`${filteredComments.length} 条评论`}</a>
         </Tooltip>
-        <Tooltip title={isDisabled ? '登录' : '登出'}>
+        <Tooltip title={authorized ? '登出' : '登录'}>
           <div
             style={{float: 'right', cursor: 'pointer'}}
             onClick={() => {
@@ -149,7 +149,7 @@ const CommentComponent: React.FC<Props> = (props) => {
       <CommentInput
         name={user.username}
         avatarLink={user.avatar}
-        disabled={isDisabled}
+        authorized={authorized}
         showLogin={token === null}
         handleLogin={() => {
           ghAPIV3.redirectAuth()
@@ -166,35 +166,33 @@ const CommentComponent: React.FC<Props> = (props) => {
           setLoading(false)
         }}
       />
-      {noIssue
-        ? <NoIssueComponent />
-        : filteredComments.map(
-          ({content, author, createdAt, reactions, id, contentRaw}) => (
-            <CommentCard
-              avatarLink={author.avatar}
-              disabled={isDisabled}
-              name={author.username}
-              contentHTML={content}
-              contentRaw={contentRaw}
-              time={createdAt}
-              key={id}
-              reactions={reactions}
-              currentUser={user}
-              commentID={id}
-              deleteComment={async (commentId, setDeleteLoading) => {
-                setDeleteLoading(true)
-                await ghAPIV4.deleteComment({accessToken: token, commentId, issueId: issue.id})
-                updateComments()
-                setDeleteLoading(false)
-              }}
-              addReaction={async (commentId, reaction) => {
-                await ghAPIV4.postCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
-              }}
-              removeReaction={async (commentId, reaction) => {
-                await ghAPIV4.deleteCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
-              }}
-            />
-          ))
+      {noIssue ? <NoIssueComponent />
+        : filteredComments.map(({content, author, createdAt, reactions, id, contentRaw}) => (
+          <CommentCard
+            avatarLink={author.avatar}
+            disabled={!authorized}
+            name={author.username}
+            contentHTML={content}
+            contentRaw={contentRaw}
+            time={createdAt}
+            key={id}
+            reactions={reactions}
+            currentUser={user}
+            commentID={id}
+            deleteComment={async (commentId, setDeleteLoading) => {
+              setDeleteLoading(true)
+              await ghAPIV4.deleteComment({accessToken: token, commentId, issueId: issue.id})
+              updateComments()
+              setDeleteLoading(false)
+            }}
+            addReaction={async (commentId, reaction) => {
+              await ghAPIV4.postCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
+            }}
+            removeReaction={async (commentId, reaction) => {
+              await ghAPIV4.deleteCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
+            }}
+          />
+        ))
       }
     </InputContentProvider>
   )

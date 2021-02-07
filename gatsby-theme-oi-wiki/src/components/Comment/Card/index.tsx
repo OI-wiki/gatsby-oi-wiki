@@ -41,25 +41,26 @@ interface Props {
 
 
 const CommentCard: React.FC<Props> = (props) => {
+  const { name, time, disabled, currentUser, reactions, commentID } = props
   const classes = useStyles()
-  const like = props.reactions.find(item => item.type === 'like')
-  const unlike = props.reactions.find(item => item.type === 'unlike')
-  const heart = props.reactions.find(item => item.type === 'heart')
+  const like = reactions.find(item => item.type === 'like')
+  const unlike = reactions.find(item => item.type === 'unlike')
+  const heart = reactions.find(item => item.type === 'heart')
   const [deleteLoading, setDeleteLoading] = useState(false)
   const {setInputContent} = useInputContentContext()
   return (
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
-        avatar={<Avatar alt={props.name} src={props.avatarLink} />}
+        avatar={<Avatar alt={name} src={props.avatarLink} />}
         title={<>
-          {props.name} { props.currentUser.username === props.name &&
+          {props.name} { currentUser.username === props.name &&
             <IconButton
-              disabled={props.disabled}
+              disabled={disabled}
               size="small"
               aria-label="delete"
               className={classes.floatRight}
               onClick={
-                () => {props.deleteComment(props.commentID, setDeleteLoading)}
+                () => {props.deleteComment(commentID, setDeleteLoading)}
               }>
               {deleteLoading
                 ? <CircularProgress size={20} />
@@ -76,39 +77,39 @@ const CommentCard: React.FC<Props> = (props) => {
           </IconButton>
         </>}
         classes={{root: classes.headerRoot}}
-        subheader={<Time time={props.time} />} />
+        subheader={<Time time={time} />} />
       <CardContent classes={{root: classes.contentRoot}}>
         <div dangerouslySetInnerHTML={{__html: props.contentHTML}} />
       </CardContent>
       <CardActions>
         <ReactionButton
           text={<ThumbUpIcon className={classes.yellow} />}
-          disabled={props.disabled}
-          currentUser={props.currentUser}
+          disabled={disabled}
+          currentUser={currentUser}
           initialCount={like.count}
           isClicked={like.viewerHasReacted}
-          addReaction={async () => {await props.addReaction(props.commentID, 'like')}}
-          removeReaction={async () => {await props.removeReaction(props.commentID, 'like')}}
+          addReaction={async () => {await props.addReaction(commentID, 'like')}}
+          removeReaction={async () => {await props.removeReaction(commentID, 'like')}}
           users={like.users}
         />
         <ReactionButton
           text={<ThumbDownIcon className={classes.yellow} />}
-          disabled={props.disabled}
-          currentUser={props.currentUser}
+          disabled={disabled}
+          currentUser={currentUser}
           initialCount={unlike.count}
           isClicked={unlike.viewerHasReacted}
-          addReaction={async () => {await props.addReaction(props.commentID, 'unlike')}}
-          removeReaction={async () => {await props.removeReaction(props.commentID, 'unlike')}}
+          addReaction={async () => {await props.addReaction(commentID, 'unlike')}}
+          removeReaction={async () => {await props.removeReaction(commentID, 'unlike')}}
           users={unlike.users}
         />
         <ReactionButton
           text={<FavoriteIcon className={classes.red} />}
-          disabled={props.disabled}
-          currentUser={props.currentUser}
+          disabled={disabled}
+          currentUser={currentUser}
           initialCount={heart.count}
           isClicked={heart.viewerHasReacted}
-          addReaction={async () => {await props.addReaction(props.commentID, 'heart')}}
-          removeReaction={async () => {await props.removeReaction(props.commentID, 'heart')}}
+          addReaction={async () => {await props.addReaction(commentID, 'heart')}}
+          removeReaction={async () => {await props.removeReaction(commentID, 'heart')}}
           users={heart.users}
         />
       </CardActions>
