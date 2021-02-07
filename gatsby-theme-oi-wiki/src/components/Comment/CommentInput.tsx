@@ -8,7 +8,7 @@ interface Props {
   sendComment: (res: string, setLoading: (loading: boolean) => void) => Promise<void>,
   showLogin: boolean,
   handleLogin: () => void,
-  disabled: boolean
+  authorized: boolean,
 }
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +54,7 @@ const CommentInput: React.FC<Props> = (props) => {
             placeholder="我们鼓励在讨论区讨论有意义的内容及关于文章的勘误，无意义的讨论将会被管理员删除"
             multiline
             fullWidth
-            disabled={props.disabled || loading}
+            disabled={!props.authorized || loading}
             rows={5}
             value={inputContent}
             onChange={(e) => { setInputContent(e.target.value) }}
@@ -68,7 +68,7 @@ const CommentInput: React.FC<Props> = (props) => {
           color="primary"
           className={classes.button}
           size="small"
-          disabled={loading && props.showLogin ? false : props.disabled}
+          // disabled={loading && props.showLogin ? false : !props.authorized}
           onClick={() => {
             if (props.showLogin) {
               props.handleLogin()
