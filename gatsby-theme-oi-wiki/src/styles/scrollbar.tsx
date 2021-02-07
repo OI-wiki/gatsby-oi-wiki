@@ -1,7 +1,8 @@
 import grey from '@material-ui/core/colors/grey'
 import { fade } from '@material-ui/core/styles'
+import { CSSProperties } from '@material-ui/core/styles/withStyles'
 
-export default (theme, otherStyles, width) => {
+export default (theme, otherStyles, width?): CSSProperties => {
   let scrollbarWidth
   if (width) {
     scrollbarWidth = {

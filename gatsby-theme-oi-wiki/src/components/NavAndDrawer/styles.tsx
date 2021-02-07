@@ -3,12 +3,11 @@ import scrollbarStyle from '../../styles/scrollbar'
 
 const drawerWidth = 250
 
-interface AppBar{
-  background: string;
-  color: string;
-}
 interface Props{
-  appBar: AppBar;
+  appBar: {
+    background: string;
+    color: string;
+  }
 }
 
 export const useStyles = makeStyles((theme) => ({
