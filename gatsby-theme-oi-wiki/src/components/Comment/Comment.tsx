@@ -51,7 +51,7 @@ const CommentComponent: React.FC<Props> = (props) => {
     clientId: props.clientID,
     clientSecret: props.clientSecret,
     state: '123',
-    proxy: url => `https://cors-anywhere.herokuapp.com/${url}`,
+    proxy: url => `https://cors-anywhere.mgt.workers.dev/?${url}`,
   })
   const ghAPIV4 = new GithubV4({
     baseURL: 'https://github.com',
@@ -61,7 +61,7 @@ const CommentComponent: React.FC<Props> = (props) => {
     clientId: props.clientID,
     clientSecret: props.clientSecret,
     state: '123',
-    proxy: url => `https://cors-anywhere.herokuapp.com/${url}`,
+    proxy: url => `https://cors-anywhere.mgt.workers.dev/?${url}`,
   })
   useEffect(() => {
     const asyncFunc = async (): Promise<void> => {
