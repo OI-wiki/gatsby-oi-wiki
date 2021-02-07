@@ -1,6 +1,6 @@
 import { Link as MuiLink, Typography } from '@material-ui/core'
 import clsx from 'clsx'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import smoothScrollTo from '../../lib/smoothScroll'
 import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 import { useStyles } from './styles'
