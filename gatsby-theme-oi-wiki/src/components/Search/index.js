@@ -3,82 +3,16 @@ import {
   Dialog, 
   IconButton, 
   InputBase,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Paper,
-  Typography
 } from '@material-ui/core'
-
-import { ArrowBack as ArrowBackIcon, FindInPage as FindInPageIcon, Search as SearchIcon } from '@material-ui/icons'
+import { ArrowBack as ArrowBackIcon, Search as SearchIcon } from '@material-ui/icons'
 
 import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'gatsby'
 import useDarkMode from '../../lib/useDarkMode'
 
 import { useStyles } from './styles'
-
-function SearchResultList (props) {
-  const { result, isFirstRun, searchKey, classes } = props
-  const resultCount = result.length
-  return resultCount !== 0 ? (
-    <>
-      <Typography variant="body1" className={classes.searchMessage}>
-        共找到 {resultCount} 条搜索结果：
-      </Typography>
-      <List>
-        {result.map((item) => {
-          /* Render article */
-          return (
-            <ListItem
-              button
-              divider
-              component={Link}
-              to={item.url}
-              state={{ searchKey: searchKey }}
-              key={item.url}
-            >
-              <ListItemIcon>
-                <FindInPageIcon />
-              </ListItemIcon>
-              <ListItemText
-                disableTypography={true}
-                primary={
-                  <Typography
-                    variant="h6"
-                    className={classes.searchResultPrimary}
-                    dangerouslySetInnerHTML={{
-                      __html: item.title.replace(
-                        searchKey,
-                        `<em>${searchKey}</em>`,
-                      ),
-                    }}
-                  />
-                }
-                secondary={
-                  <div
-                    className={classes.searchResultSecondary}
-                    dangerouslySetInnerHTML={{
-                      __html: item.highlight ? item.highlight : '',
-                    }}
-                  />
-                }
-              />
-            </ListItem>
-          )
-        })}
-      </List>
-    </>
-  ) : !isFirstRun.current ? (
-    <Typography variant="body1" className={classes.searchMessage}>
-      没有找到符合条件的结果
-    </Typography>
-  ) : (
-        ''
-      )
-}
+import { SearchResultList } from './ResultList';
 
 function useDebounce (value, timeout) {
   const [state, setState] = useState(value)
@@ -217,12 +151,9 @@ function Result () {
   } else {
     return (
       <>
-
-        {/* <div  > */}
         <IconButton onClick={() => { setOpen(true) }} className={classes.smallScreenSearchIcon}>
           <SearchIcon />
         </IconButton>
-        {/* </div> */}
         <Dialog
           open={open}
           onClose={() => {
@@ -230,16 +161,11 @@ function Result () {
           }}
           fullWidth={true}
           fullScreen
-
         >
           <Paper component="div" className={classes.dialogHeader}>
-
-            {/* <div > */}
             <IconButton className={classes.smallScreenReturnIcon} onClick={() => { setOpen(false) }} >
               <ArrowBackIcon />
-
             </IconButton>
-            {/* </div> */}
             <InputBase
               type="search"
               placeholder="键入以开始搜索"
