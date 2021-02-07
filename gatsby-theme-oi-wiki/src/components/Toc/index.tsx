@@ -1,6 +1,6 @@
 import { Link as MuiLink, Typography } from '@material-ui/core'
 import clsx from 'clsx'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import smoothScrollTo from '../../lib/smoothScroll'
 import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 import { useStyles } from './styles'
@@ -11,8 +11,7 @@ function getIDfromURL (url:string):string {
 
 function getItems(items: Item[]): itemsResult[] {
   const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5);
-  items.forEach(i => { i.level = i.level - minLevel + 1 })
-  const itemsResult = items.map((i): itemsResult => ({...i}));
+  const itemsResult = items.map((i): itemsResult => ({...i, level: i.level - minLevel + 1}));
   return itemsResult
 }
 
@@ -108,13 +107,13 @@ const ToC: React.FC<Toc> = (props) => {
   )
   return (
     <nav className={classes.main} aria-label="pageTOC">
-      {items.length > 0 ? (
+      {itemsClientRef.current.length > 0 ? (
         <>
           <Typography gutterBottom className={classes.contents}>
             目录
           </Typography>
           <Typography component="ul" className={classes.ul}>
-            {items.map((item2) => (
+            {itemsClientRef.current.map((item2) => (
               item2.level <= 2
                 ? <li key={item2.title}>
                   {itemLink({ item: item2, secondary: item2.level !== 1 })}
