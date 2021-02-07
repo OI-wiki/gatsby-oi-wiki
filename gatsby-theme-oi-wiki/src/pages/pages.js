@@ -148,8 +148,10 @@ function BlogIndex (props) {
             )}
           />
         </Grid>
-        <Grid container xs={12} spacing={2} justify="center">
-          <GridItems filteredItems={filteredItems} linkComponent={MyLink} />
+        <Grid item xs={12}>
+          <Grid container spacing={2} justify="center">
+            <GridItems filteredItems={filteredItems} linkComponent={MyLink} />
+          </Grid>
         </Grid>
       </Grid>
     </Layout>
