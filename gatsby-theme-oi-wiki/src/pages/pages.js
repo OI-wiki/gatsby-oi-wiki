@@ -1,11 +1,14 @@
-import { useMediaQuery } from '@material-ui/core'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Grid from '@material-ui/core/Grid'
+import {
+  useMediaQuery,
+  TextField,
+  Typography,
+  CardActions,
+  CardContent,
+  Card,
+  Grid
+} from '@material-ui/core'
+
 import { useTheme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
@@ -52,10 +55,7 @@ function matchTags (pageTags, selectedTags) {
 function Column ({ items, linkComponent }) {
   return (
     <Grid container item xs direction="column" spacing={2}>
-      {items.map(
-        x =>
-          <PageItem key={x.id} {...x} linkComponent={linkComponent} />,
-      )}
+      {items.map(x => <PageItem key={x.id} {...x} linkComponent={linkComponent} />)}
     </Grid>
   )
 }
@@ -67,18 +67,8 @@ function GridItems (props) {
   const upLG = useMediaQuery(theme.breakpoints.up('lg'))
   const upMD = useMediaQuery(theme.breakpoints.up('md'))
   const upSmall = useMediaQuery(theme.breakpoints.up('sm'))
-  let columnCount
-  if (upXL) {
-    columnCount = 5
-  } else if (upLG) {
-    columnCount = 4
-  } else if (upMD) {
-    columnCount = 3
-  } else if (upSmall) {
-    columnCount = 2
-  } else {
-    columnCount = 1
-  }
+  const columnCount = upXL ? 5 : upLG ? 4 : upMD ? 3 : upSmall ? 2 : 1
+
   return (
     <>
       {times(columnCount).map(i =>
@@ -93,19 +83,20 @@ function GridItems (props) {
 }
 
 function BlogIndex (props) {
-  const { location } = props
   const {
+    location,
     data: {
       allMarkdownRemark: { edges, group },
     },
   } = props
-  const articles = edges.map((x) => x.node)
+  const articles = edges.map(x => x.node)
   const tags = group.map(({ fieldValue }) => fieldValue)
   const [selectedTags, setSelectedTags] = useState([])
   const filteredItems = articles
     .map((x) => matchTags(x.frontmatter.tags, selectedTags) && x)
     .filter((x) => x !== false)
   const MyLink = Link(location)
+
   return (
     <Layout
       location={location}
