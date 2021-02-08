@@ -1,6 +1,9 @@
 import reactiveHast from './reactive-hast'
+import React from 'react'
 
-export default function MDRenderer ({ components, htmlAst }) {
+function MDRenderer ({ components, htmlAst }) {
   const comps = components ?? {}
   return reactiveHast({ ...htmlAst, tagName: 'div' }, comps)
 }
+
+export default React.memo(MDRenderer, () => true)

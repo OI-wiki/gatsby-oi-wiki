@@ -1,15 +1,12 @@
 // Components
+import { Typography, List, ListItem, ListItemIcon, ListItemText, Button } from '@material-ui/core'
+
+import BookIcon from '@material-ui/icons/Book'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import BookIcon from '@material-ui/icons/Book'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import Button from '@material-ui/core/Button'
 import Layout from '../components/Layout'
 
 const Tags = ({ pageContext, data, location }) => {

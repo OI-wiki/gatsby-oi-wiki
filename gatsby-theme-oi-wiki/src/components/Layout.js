@@ -1,12 +1,15 @@
-import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
-import Accordion from '@material-ui/core/Accordion'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
-import Grid from '@material-ui/core/Grid'
+import { 
+  Container, 
+  CssBaseline, 
+  Divider, 
+  Accordion, 
+  AccordionDetails, 
+  AccordionSummary, 
+  Grid, 
+  Typography 
+} from '@material-ui/core'
+
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -18,10 +21,10 @@ import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, Au
 import CommentSystem from './Comment'
 import BackTop from './BackTop'
 import Footer from './Footer'
-import Meta from './Meta.tsx'
-import NavAndDrawer from './NavAndDrawer.tsx'
-import ToC from './Toc.tsx'
-import Title from './Title.tsx'
+import Meta from './Meta'
+import NavAndDrawer from './NavAndDrawer'
+import ToC from './Toc'
+import Title from './Title'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -103,74 +106,76 @@ function MyLayout ({
         <meta name="description" content={descriptionRes} />
       </Helmet>
       <NavAndDrawer pathname={location.pathname} />
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={gridWidthMdUp}
-          lg={gridWidthMdUp}
-          xl={gridWidthMdUp}
-        >
-          <div className={classes.toolbar} />
-          <div className={classes.container}>
-            <main className={classes.content}>
-              <div className={classes.main}>
-                <Title
-                  title={title}
-                  modifiedTime={modifiedTime}
-                  authors={authors}
-                  location={location}
-                  noEdit={noEdit}
-                  noMeta={noMeta}
-                  relativePath={relativePath}
-                />
-                <Divider className={classes.divider} />
-                {isWIP && WIPAlert}
-                <Typography variant="body1" component="div">
-                  {children}
-                </Typography>
-                {noMeta === 'false' && <Meta
-                  authors={authors}
-                  tags={tags}
-                  relativePath={relativePath}
-                  modifiedTime={modifiedTime}
-                  location={location}
-                  title={title}
-                />}
-                {noComment === 'false' && (
-                  <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                    <Accordion variant="outlined">
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="comment"
-                      >
-                        <Typography className={classes.heading}>
-                          评论
+      <div className="maincontentdiv">
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={gridWidthMdUp}
+            lg={gridWidthMdUp}
+            xl={gridWidthMdUp}
+          >
+            <div className={classes.toolbar} />
+            <div className={classes.container}>
+              <main className={classes.content}>
+                <div className={classes.main}>
+                  <Title
+                    title={title}
+                    modifiedTime={modifiedTime}
+                    authors={authors}
+                    location={location}
+                    noEdit={noEdit}
+                    noMeta={noMeta}
+                    relativePath={relativePath}
+                  />
+                  <Divider className={classes.divider} />
+                  {isWIP && WIPAlert}
+                  <Typography variant="body1" component="div">
+                    {children}
+                  </Typography>
+                  {noMeta === 'false' && <Meta
+                    authors={authors}
+                    tags={tags}
+                    relativePath={relativePath}
+                    modifiedTime={modifiedTime}
+                    location={location}
+                    title={title}
+                  />}
+                  {noComment === 'false' && (
+                    <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                      <Accordion variant="outlined">
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="comment"
+                        >
+                          <Typography className={classes.heading}>
+                            评论
                         </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Container>
-                          <CommentSystem title={title} />
-                        </Container>
-                      </AccordionDetails>
-                    </Accordion>
-                  </div>
-                )}
-              </div>
-            </main>
-          </div>
-        </Grid>
-        {displayToC && (
-          <Grid item xs >
-            <ToC toc={toc} pathname={location.pathname} />
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Container>
+                            <CommentSystem title={title} />
+                          </Container>
+                        </AccordionDetails>
+                      </Accordion>
+                    </div>
+                  )}
+                </div>
+              </main>
+            </div>
           </Grid>
-        )}
-      </Grid>
-      <Divider />
-      <div className={classes.footer}>
-        <Footer />
+        </Grid>
+        <Divider />
+        <div className={classes.footer}>
+          <Footer />
+        </div>
       </div>
+      {displayToC && (
+        <Grid item xs >
+          <ToC toc={toc} pathname={location.pathname} />
+        </Grid>
+      )}
       <BackTop />
     </>
   )
@@ -181,12 +186,12 @@ function StyledLayout (props) {
 
   return (
     <ThemeProvider theme={adaptiveTheme}>
-      <CssBaseline/>
-      <CustomCssBaseline/>
-      <LightCssBaseline/>
-      <DarkCssBaseline/>
-      <AutoCssBaseline/>
-      <MyLayout {...props}/>
+      <CssBaseline />
+      <CustomCssBaseline />
+      <LightCssBaseline />
+      <DarkCssBaseline />
+      <AutoCssBaseline />
+      <MyLayout {...props} />
     </ThemeProvider>
   )
 }
