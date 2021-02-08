@@ -1696,6 +1696,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@polka/url@^1.0.0-next.9":
+  version "1.0.0-next.11"
+  resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
+  integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
+
 "@reach/router@^1.3.4":
   version "1.3.4"
   resolved "https://registry.npmjs.org/@reach/router/-/router-1.3.4.tgz#d2574b19370a70c80480ed91f3da840136d10f8c"
@@ -6378,11 +6383,6 @@ filesize@3.5.11:
   resolved "https://registry.npmjs.org/filesize/-/filesize-3.5.11.tgz#1919326749433bb3cf77368bd158caabcc19e9ee"
   integrity sha512-ZH7loueKBoDb7yG9esn1U+fgq7BzlzW6NRi5/rMdxIZ05dj7GFD/Xc5rq2CDt5Yq86CyfSYVyx4242QQNZbx1g==
 
-filesize@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.npmjs.org/filesize/-/filesize-6.1.0.tgz#e81bdaa780e2451d714d71c0d7a4f3238d37ad00"
-  integrity sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg==
-
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/fill-range/-/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"
@@ -6901,13 +6901,13 @@ gatsby-plugin-utils@^0.9.0:
   dependencies:
     joi "^17.2.1"
 
-gatsby-plugin-webpack-bundle-analyser-v2@^1.1.12:
-  version "1.1.18"
-  resolved "https://registry.npmjs.org/gatsby-plugin-webpack-bundle-analyser-v2/-/gatsby-plugin-webpack-bundle-analyser-v2-1.1.18.tgz#d3b9cf2f8228ca36c781489af22117834927e368"
-  integrity sha512-dtFZy4O4Fh6HV1WeeVbHkHUVgP3bsiGhSZIKfmWxZvvmfGZV+UQxh7+tpfCsZWjqkHxcm18ttcgQ3Ln+DGCbIg==
+gatsby-plugin-webpack-bundle-analyser-v2@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-webpack-bundle-analyser-v2/-/gatsby-plugin-webpack-bundle-analyser-v2-1.1.20.tgz#cc2c56b0af0aeb15c40a3c4a4a4b0eacc5186ea3"
+  integrity sha512-QGSq5II6sPUgQ1Dh0n7zQZlNXXIt4o+PtZW9nYFV6kpyDB8rmre5An5/cBYKsIWsQVjzYqkFl3BOUbdlIsBixw==
   dependencies:
     "@babel/runtime" "^7.12.5"
-    webpack-bundle-analyzer "^4.2.0"
+    webpack-bundle-analyzer "^4.4.0"
 
 gatsby-react-router-scroll@^3.4.0:
   version "3.4.0"
@@ -10148,6 +10148,11 @@ mime@^2.0.3, mime@^2.4.4, mime@^2.4.6:
   version "2.4.6"
   resolved "https://registry.npmjs.org/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
+
+mime@^2.3.1:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.0.tgz#2b4af934401779806ee98026bb42e8c1ae1876b1"
+  integrity sha512-ft3WayFSFUVBuJj7BMLKAQcSlItKtfjsKDDsii3rqFDAZ7t11zRe8ASw/GlmivGwVUYtwkQrxiGGpL6gFvB0ag==
 
 mimic-fn@^1.0.0:
   version "1.2.0"
@@ -13467,6 +13472,15 @@ single-trailing-newline@^1.0.0:
   dependencies:
     detect-newline "^1.0.3"
 
+sirv@^1.0.7:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/sirv/-/sirv-1.0.11.tgz#81c19a29202048507d6ec0d8ba8910fda52eb5a4"
+  integrity sha512-SR36i3/LSWja7AJNRBz4fF/Xjpn7lQFI30tZ434dIy+bitLYSP+ZEenHg36i23V2SGEz+kqjksg0uOGZ5LPiqg==
+  dependencies:
+    "@polka/url" "^1.0.0-next.9"
+    mime "^2.3.1"
+    totalist "^1.0.0"
+
 sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
@@ -14570,6 +14584,11 @@ token-types@^2.0.0:
     "@tokenizer/token" "^0.1.0"
     ieee754 "^1.1.13"
 
+totalist@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/totalist/-/totalist-1.1.0.tgz#a4d65a3e546517701e3e5c37a47a70ac97fe56df"
+  integrity sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==
+
 tough-cookie@^2.3.3, tough-cookie@~2.5.0:
   version "2.5.0"
   resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.5.0.tgz#cd9fb2a0aa1d5a12b473bd9fb96fa3dcff65ade2"
@@ -15409,20 +15428,19 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
-webpack-bundle-analyzer@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/webpack-bundle-analyzer/-/webpack-bundle-analyzer-4.2.0.tgz#f19ed40e1767ab35cad78c517529596e885bf64a"
-  integrity sha512-gmjpdL/AJeGAftSzA+bjIPiChUffjBelcH2+3woCUiRpQfuwrTJuWRyZuqegiwBAroMJp7gIwcJaGeol039zbQ==
+webpack-bundle-analyzer@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-4.4.0.tgz#74013106e7e2b07cbd64f3a5ae847f7e814802c7"
+  integrity sha512-9DhNa+aXpqdHk8LkLPTBU/dMfl84Y+WE2+KnfI6rSpNRNVKa0VGLjPd2pjFubDeqnWmulFggxmWBxhfJXZnR0g==
   dependencies:
     acorn "^8.0.4"
     acorn-walk "^8.0.0"
     chalk "^4.1.0"
     commander "^6.2.0"
-    express "^4.17.1"
-    filesize "^6.1.0"
     gzip-size "^6.0.0"
     lodash "^4.17.20"
     opener "^1.5.2"
+    sirv "^1.0.7"
     ws "^7.3.1"
 
 webpack-dev-middleware@^3.7.2:
