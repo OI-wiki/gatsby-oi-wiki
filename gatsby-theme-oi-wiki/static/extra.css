@@ -76,6 +76,7 @@ code span.shiki-line:before {
   content: counter(shiki-line-number);
   color: #888;
   margin-right: 1em;
+  margin-left: -8px;
   text-align: right;
   min-width: 2em;
   display: inline-block;
