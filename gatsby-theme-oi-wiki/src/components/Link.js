@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
  * @param {*} isIndex 当前页面是不是 index（index.md）
  */
 function linkFix (link, path, isIndex) {
-  console.log('linkFix', link, path, isIndex)
   link = link.replace(/\.(md|markdown|mdtext|mdx)/g,'/')
   if(isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
