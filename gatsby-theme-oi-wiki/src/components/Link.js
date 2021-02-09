@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
  * - link: `../a/b/c`, path: `/x/y/`, isIndex: `true`
  * - return: `/x/y/../a/b/c` (`/x/a/b/c/`)
  *
+ * 实际上不需要当前页面的 path
+ * 
  * @param {*} link 要修复的相对路径
- * @param {*} path 当前页面的路径
  * @param {*} isIndex 当前页面是不是 index（index.md）
  */
-function linkFix (link, path, isIndex) {
+function linkFix (link, isIndex) {
   link = link.replace(/\.(md|markdown|mdtext|mdx)/g,'/')
   if(isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
@@ -59,7 +60,7 @@ function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }
     )
   }
   return (
-    <GatsbyLink {...props} to={linkFix(href, pathname, isIndex)} className={classes.link}>
+    <GatsbyLink {...props} to={linkFix(href, isIndex)} className={classes.link}>
       {children}
     </GatsbyLink>
   )
