@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
  * @param {*} isIndex 当前页面是不是 index（index.md）
  */
 function linkFix (link, isIndex) {
+  if(/^\//.test(link)) return link // absolute path
   link = link.replace(/\.(md|markdown|mdtext|mdx)/g,'/')
   if(isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
@@ -43,7 +44,7 @@ function linkFix (link, isIndex) {
   return link 
 }
 
-function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }) {
+function RealLink ({ to = '', href = to, children, isIndex, ...props }) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
     return (
