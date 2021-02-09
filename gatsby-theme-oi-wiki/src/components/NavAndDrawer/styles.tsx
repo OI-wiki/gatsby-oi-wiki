@@ -15,6 +15,9 @@ export const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
   },
+  drawerPaper: scrollbarStyle(theme, {
+    width: drawerWidth,
+  }),
   hiddenDrawer: {
     [theme.breakpoints.down('md')]: {
       display: 'none',
@@ -42,14 +45,15 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 48 + 64,
     alignItems: 'flex-start',
   },
-  drawerPaper: scrollbarStyle(theme, {
-    width: drawerWidth,
-  }),
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
   iconItem: {
     minWidth: theme.spacing(5),
+  },
+  navBtn: {
+    padding: 0,
+    margin: 12,
   },
 }))
