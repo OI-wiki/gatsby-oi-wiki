@@ -1,9 +1,10 @@
-import { Collapse, Link as MuiLink, List, ListItem, ListItemText, Typography } from '@material-ui/core'
+import { Collapse, List, ListItem, ListItemText, Typography } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
 import React, { useState } from 'react'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Link } from 'gatsby'
 
 const useStyles = makeStyles((theme) => ({
   listitem: {
@@ -55,23 +56,22 @@ function Item (node: PathListNode, padding: number, pathname: string): [React.Re
   if (node.type === NodeType.Leaf) {
     const url = (node as PathListLeafNode).path
     return [
-      <ListItem
-        button
-        selected={url === pathname}
-        component={MuiLink}
-        href={url}
-        key={name}
-        className={classes.listitem}
-        style={{ paddingLeft: `${padding}px` }}
-      >
-        <ListItemText
-          primary={
-            <Typography variant="body2" component="span">
-              {name}
-            </Typography>
-          }
-        />
-      </ListItem>,
+      <Link key={name} to={url}>
+        <ListItem
+          button
+          selected={url === pathname}
+          className={classes.listitem}
+          style={{ paddingLeft: `${padding}px` }}
+        >
+          <ListItemText
+            primary={
+              <Typography variant="body2" component="span">
+                {name}
+              </Typography>
+            }
+          />
+        </ListItem>
+      </Link>,
       url === pathname,
     ]
   }
