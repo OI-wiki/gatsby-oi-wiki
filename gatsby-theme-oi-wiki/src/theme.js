@@ -20,7 +20,7 @@ const globalStyles = withStyles((theme) => ({
     },
     '.gatsby-highlight': {
       backgroundColor: '#1E1E1E',
-      padding: '2px 16px',
+      padding: '2px 4px',
       borderRadius: '4px',
     },
     img: {
