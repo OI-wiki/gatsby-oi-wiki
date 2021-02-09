@@ -23,6 +23,7 @@ function Mdx ({ data: { mdx }, location }) {
   const wordCount = mdx.wordCount.words || 0
   const datePublished = mdx.parent.birthTime || ''
   const dateModified = mdx.parent.changeTime || ''
+  const isIndex = mdx.fields.isIndex
 
   const highlightNode = (tagName, isHighlight) => {
     const mainNodes = document.getElementsByTagName('main')
@@ -68,7 +69,7 @@ function Mdx ({ data: { mdx }, location }) {
   const myComponents = {
     details: Details,
     summary: Summary,
-    a: Link(location),
+    a: Link(location, isIndex),
     inlineCode: 'code',
     inlinecode: 'code',
   }

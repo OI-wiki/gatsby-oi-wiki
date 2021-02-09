@@ -18,33 +18,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function linkFix (url, currentPath) {
-  if (currentPath.split('/').slice(-1)[0] !== '') {
-    currentPath += '/'
+/**
+ * 修复相对路径的页面链接
+ * 
+ * Example 1:
+ * - link: `../a/b/c`, path: `/x/y/`, isIndex: `false`
+ * - return: `/x/y/../../a/b/c` (`/a/b/c/`)
+ * 
+ * Example 2:
+ * - link: `../a/b/c`, path: `/x/y/`, isIndex: `true`
+ * - return: `/x/y/../a/b/c` (`/x/a/b/c/`)
+ *
+ * @param {*} link 要修复的相对路径
+ * @param {*} path 当前页面的路径
+ * @param {*} isIndex 当前页面是不是 index（index.md）
+ */
+function linkFix (link, path, isIndex) {
+  console.log('linkFix', link, path, isIndex)
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g,'/')
+  if(isIndex === false) link = '../' + link
+  if (/[^/]$/.test(link) && !/#/.test(link)) {
+    link += '/' // append '/' for links, but excluding urls includes `#`.
   }
-  if (/^\.\./.test(url)) {
-    url = currentPath + '../' + url
-    // ../xxx/yyy -> fullpathname/../xxx/yyy
-    // prepend full pathname for relative path
-  }
-  if (/^\./.test(url)) {
-    if (/[a-zA-Z0-9]+\/[a-zA-Z0-9]+/.test(url)) {
-      url = currentPath + url.slice(2)
-      // ./xxx/yyy -> fullpathname/../xxx/yyy
-    } else {
-      url = currentPath + '.' + url
-      // ./xx -> fullpathname/(remove current part)xx
-    }
-    // prepend full pathname for relative path
-  }
-  if (url.split('/').slice(-1)[0] !== '' && !/#/.test(url)) {
-    url += '/' // append '/' for links, but excluding urls includes `#`.
-  }
-  return url
+  return link 
 }
 
-function RealLink ({ to = '', href = to, children, pathname, ...props }) {
-  const isAbsoluteLink = isAbsoluteURL(href)
+function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
     return (
@@ -53,7 +52,7 @@ function RealLink ({ to = '', href = to, children, pathname, ...props }) {
       </a>
     )
   }
-  if (isAbsoluteLink) {
+  if (isAbsoluteURL(href)) {
     return (
       <a {...props} href={href} className={classes.link} target="_blank" rel="noopener noreferrer nofollow" >
         {children}
@@ -61,16 +60,16 @@ function RealLink ({ to = '', href = to, children, pathname, ...props }) {
     )
   }
   return (
-    <GatsbyLink {...props} to={linkFix(href, pathname)} className={classes.link}>
+    <GatsbyLink {...props} to={linkFix(href, pathname, isIndex)} className={classes.link}>
       {children}
     </GatsbyLink>
   )
 }
 
-function GetLink (location) {
+function LinkGetter (location, isIndex = false) {
   return function Link (props) {
-    return <RealLink {...props} pathname={location.pathname} />
+    return <RealLink {...props} pathname={location.pathname} isIndex={isIndex} />
   }
 }
 
-export default GetLink
+export default LinkGetter 

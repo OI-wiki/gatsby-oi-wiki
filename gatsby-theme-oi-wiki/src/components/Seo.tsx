@@ -82,9 +82,7 @@ const SEO: React.FC<Props> = (props: Props) => {
 
       {seo.title && <meta property="og:title" content={seo.title} />}
 
-      {seo.description && (
-        <meta property="og:description" content={seo.description} />
-      )}
+      {seo.description && <meta property="og:description" content={seo.description} />}
 
       {seo.image && <meta property="og:image" content={seo.image} />}
 
