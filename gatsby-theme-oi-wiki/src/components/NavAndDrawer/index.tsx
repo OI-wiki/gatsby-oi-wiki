@@ -69,9 +69,15 @@ function getTabIDFromLocation (location: string, pathList: string[]): number {
 }
 
 function DrawerBtn ({ title, href, Icon }) {
+  const classes = useStyles({
+    appBar: {
+      background: '',
+      color: '',
+    },
+  })
   return (
     <Tooltip title={title} placement="bottom" arrow>
-      <IconButton component="a" href={href} color="inherit">
+      <IconButton component="a" href={href} color="inherit" className={classes.navBtn} >
         <Icon />
       </IconButton>
     </Tooltip>
