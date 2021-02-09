@@ -1,4 +1,3 @@
-const path = require('path')
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
@@ -15,14 +14,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === 'MarkdownRemark') {
     const value = createFilePath({ node, getNode })
     createNodeField({
-      // Name of the field you are adding
-      name: 'slug',
-      // Individual MDX node
-      node,
+      name: 'slug', // Name of the field you are adding
+      node: node, // Individual MDX node
       // Generated value based on filepath with "blog" prefix. you
       // don't need a separating "/" before the value because
       // createFilePath returns a path with the leading "/".
       value: `${value}`,
+    })
+    createNodeField({ // whether it is a index.md
+      name: 'isIndex',
+      node: node,
+      value: /index\.(md|markdown|mdx|mdtext)$/.test(node.fileAbsolutePath),
     })
   }
 }

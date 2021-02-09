@@ -68,7 +68,15 @@ module.exports = {
             },
           },
         ],
-        remarkPlugins: [require('remark-math'), require('remark-details'), [require('@mgtd/remark-shiki'), { semantic: false, theme: 'dark_plus', skipInline: true }]],
+        remarkPlugins: [
+          require('remark-math'), 
+          require('remark-details'), 
+          [require('@mgtd/remark-shiki'), {
+            semantic: false,
+            theme: 'dark_plus',
+            skipInline: true
+          }]
+        ],
         rehypePlugins: [
           require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
