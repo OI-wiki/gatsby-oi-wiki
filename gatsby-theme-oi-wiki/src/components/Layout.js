@@ -1,12 +1,12 @@
-import { 
-  Container, 
-  CssBaseline, 
-  Divider, 
-  Accordion, 
-  AccordionDetails, 
-  AccordionSummary, 
-  Grid, 
-  Typography 
+import {
+  Container,
+  CssBaseline,
+  Divider,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Grid,
+  Typography,
 } from '@material-ui/core'
 
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
@@ -151,7 +151,7 @@ function MyLayout ({
                         >
                           <Typography className={classes.heading}>
                             评论
-                        </Typography>
+                          </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                           <Container>

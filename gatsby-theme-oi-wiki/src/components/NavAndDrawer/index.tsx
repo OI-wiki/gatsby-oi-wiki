@@ -1,5 +1,5 @@
 import {
-  AppBar, 
+  AppBar,
   Button,
   Drawer,
   Hidden,
@@ -144,7 +144,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          classes={{ paper: classes.drawerPaper, }}
+          classes={{ paper: classes.drawerPaper }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -155,7 +155,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
       <Hidden mdDown implementation="css">
         <Drawer
           className={classes.drawer}
-          classes={{ paper: classes.drawerPaper, }}
+          classes={{ paper: classes.drawerPaper }}
           variant="permanent"
           open
         >

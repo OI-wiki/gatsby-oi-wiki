@@ -3,7 +3,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography
+  Typography,
 } from '@material-ui/core'
 import { Link } from 'gatsby'
 import React from 'react'
@@ -65,6 +65,6 @@ export function SearchResultList (props) {
       没有找到符合条件的结果
     </Typography>
   ) : (
-        ''
-      )
+    ''
+  )
 }

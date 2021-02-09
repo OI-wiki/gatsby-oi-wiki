@@ -20,28 +20,28 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * 修复相对路径的页面链接
- * 
+ *
  * Example 1:
  * - link: `../a/b/c`, path: `/x/y/`, isIndex: `false`
  * - return: `/x/y/../../a/b/c` (`/a/b/c/`)
- * 
+ *
  * Example 2:
  * - link: `../a/b/c`, path: `/x/y/`, isIndex: `true`
  * - return: `/x/y/../a/b/c` (`/x/a/b/c/`)
  *
  * 实际上不需要当前页面的 path
- * 
+ *
  * @param {*} link 要修复的相对路径
  * @param {*} isIndex 当前页面是不是 index（index.md）
  */
 function linkFix (link, isIndex) {
-  if(/^\//.test(link)) return link // absolute path
-  link = link.replace(/\.(md|markdown|mdtext|mdx)/g,'/')
-  if(isIndex === false) link = '../' + link
+  if (/^\//.test(link)) return link // absolute path
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/')
+  if (isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
     link += '/' // append '/' for links, but excluding urls includes `#`.
   }
-  return link 
+  return link
 }
 
 function RealLink ({ to = '', href = to, children, isIndex, ...props }) {
@@ -73,4 +73,4 @@ function LinkGetter (location, isIndex = false) {
   }
 }
 
-export default LinkGetter 
+export default LinkGetter
