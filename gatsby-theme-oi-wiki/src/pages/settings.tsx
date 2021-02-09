@@ -17,7 +17,7 @@ import colors from '../styles/colors'
 const useConfig = createPersistedState('settings')
 
 type Props = {
-  background: any
+  background: any,
 }
 const useStyles = makeStyles((theme) => ({
   root: (props: Props) => ({
@@ -34,12 +34,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }),
   label: {
-    margin: '0 .4em',
     lineHeight: '1.2em',
     textAlign: 'left',
     justifyContent: 'left',
     position: 'absolute',
-    bottom: '.2em',
+    bottom: '.4em',
+    left: '.3em',
+    width: 'calc(100% - .6em)'
   },
 }))
 
@@ -65,7 +66,7 @@ const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
     : props.color
 
   const classes = useStyles({
-    background: background
+    background: background,
   })
   return (
     <Grid item>
