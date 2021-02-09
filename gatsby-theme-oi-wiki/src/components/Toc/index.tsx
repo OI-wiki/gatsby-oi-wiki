@@ -9,9 +9,9 @@ function getIDfromURL (url:string):string {
   return url?.substring(1, url.length)
 }
 
-function getItems(items: Item[]): itemsResult[] {
-  const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5);
-  const itemsResult = items.map((i): itemsResult => ({...i, level: i.level - minLevel + 1}));
+function getItems (items: Item[]): itemsResult[] {
+  const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5)
+  const itemsResult = items.map((i): itemsResult => ({ ...i, level: i.level - minLevel + 1 }))
   return itemsResult
 }
 
@@ -42,7 +42,7 @@ const ToC: React.FC<Toc> = (props) => {
   // eslint-disable-next-line
   useEffect(() => {
     itemsClientRef.current = itemsClientRef.current.map(i => ({
-      ...i, node: document.getElementById(getIDfromURL(i.url))
+      ...i, node: document.getElementById(getIDfromURL(i.url)),
     }))
   }, [items])
   const [activeState, setActiveState] = useState('')
@@ -53,10 +53,10 @@ const ToC: React.FC<Toc> = (props) => {
       return
     }
 
-    let active: any = document.documentElement.scrollTop < 200 ?
-      {url: null} // No hash if we're near the top of the page
+    const active: any = document.documentElement.scrollTop < 200
+      ? { url: null } // No hash if we're near the top of the page
       : itemsClientRef.current.find(item =>
-        item.node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8
+        item.node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8,
       )
 
     if (active && activeState !== active.url) {

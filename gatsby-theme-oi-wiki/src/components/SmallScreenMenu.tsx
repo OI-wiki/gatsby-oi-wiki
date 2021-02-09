@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
-import {Menu, MenuItem, IconButton, Hidden, ListItemIcon} from '@material-ui/core'
+import { Menu, MenuItem, IconButton, Hidden, ListItemIcon } from '@material-ui/core'
 
 import SettingsIcon from '@material-ui/icons/Settings'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
@@ -47,28 +47,28 @@ const SmallScreenMenu: React.FC<unknown> = function (props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         // TransitionComponent={({children}) => children}
-        TransitionProps={{timeout: 0}}
-        classes={{list: classes.sideMenu}}
+        TransitionProps={{ timeout: 0 }}
+        classes={{ list: classes.sideMenu }}
       >
         <MenuItem component="a" href="/settings">
-          <ListItemIcon classes={{root: classes.iconItem}}>
+          <ListItemIcon classes={{ root: classes.iconItem }}>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>
     设置
         </MenuItem>
         <MenuItem component="a" href="/tags">
-          <ListItemIcon classes={{root: classes.iconItem}}>
+          <ListItemIcon classes={{ root: classes.iconItem }}>
             <LocalOfferIcon fontSize="small" />
           </ListItemIcon>
     标签
         </MenuItem>
         <MenuItem component="a" href="/pages">
-          <ListItemIcon classes={{root: classes.iconItem}}>
+          <ListItemIcon classes={{ root: classes.iconItem }}>
             <LibraryBooksIcon fontSize="small" />
           </ListItemIcon>
     目录</MenuItem>
         <MenuItem component="a" href={OIWikiGithub}>
-          <ListItemIcon classes={{root: classes.iconItem}}>
+          <ListItemIcon classes={{ root: classes.iconItem }}>
             <GitHubIcon fontSize="small" />
           </ListItemIcon>
     GitHub</MenuItem>

@@ -1,11 +1,11 @@
-import { 
-  Timeline, 
-  TimelineItem, 
-  TimelineConnector, 
-  TimelineSeparator, 
+import {
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineSeparator,
   TimelineContent,
   TimelineOppositeContent,
-  TimelineDot
+  TimelineDot,
 } from '@material-ui/lab'
 import { Divider, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'

@@ -1,7 +1,7 @@
 import {
-  Backdrop, 
-  Dialog, 
-  IconButton, 
+  Backdrop,
+  Dialog,
+  IconButton,
   InputBase,
   Paper,
 } from '@material-ui/core'
@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useDarkMode from '../../lib/useDarkMode'
 
 import { useStyles } from './styles'
-import { SearchResultList } from './ResultList';
+import { SearchResultList } from './ResultList'
 import { useDebounce, useWindowDimensions } from './hooks'
 
 /**
