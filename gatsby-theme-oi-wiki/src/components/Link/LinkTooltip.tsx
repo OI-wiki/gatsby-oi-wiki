@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 import { useDidUpdateEffect } from './utils'
 
@@ -45,7 +45,7 @@ const LinkTooltip : React.FC<Props> = function (props: Props) {
       }}
       content={content}
       status={status}
-      closeDelay={500}
+      closeDelay={300}
     >
       {children}
     </ToolCard>
