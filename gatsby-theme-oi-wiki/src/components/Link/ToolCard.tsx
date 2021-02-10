@@ -94,7 +94,6 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             left: 0,
             width: '400px',
             maxHeight: '320px',
-            minHeight: '64px',
             overflowY: 'auto',
           }}
           ref={poperRef}
@@ -119,9 +118,7 @@ const ToolCard : React.FC<Props> = function (props: Props) {
           }
           {
             status === 'error' &&
-            <CardContent>
               <Alert severity="error">无法获取页面预览</Alert>
-            </CardContent>
           }
         </Card>
       </Fade>
