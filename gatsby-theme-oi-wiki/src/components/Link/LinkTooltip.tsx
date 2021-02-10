@@ -40,12 +40,13 @@ const LinkTooltip : React.FC<Props> = function (props: Props) {
 
   return (
     <ToolCard
-      onOpen={() => {
+      onHover={() => {
         setOpen(true)
       }}
       content={content}
       status={status}
       closeDelay={300}
+      openDelay={200}
     >
       {children}
     </ToolCard>

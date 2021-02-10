@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { getElementViewPosition, Position } from './utils'
+import { getElementSize, getElementViewPosition, Position, Size } from './utils'
 import {
   Card,
   CardContent,
@@ -7,67 +7,98 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core'
-
 import { Alert } from '@material-ui/lab'
-
 import { PreviewData, FetchStatus } from './LinkTooltip'
+
+function useDelay (onOpen: () => void, onClose: () => void, openDelay: number, closeDelay: number) : [() => void, () => void] {
+  let closeHandle, openHandle
+  function open () : void {
+    if (closeHandle) { // 正在准备close，则不让它close
+      clearTimeout(closeHandle)
+      closeHandle = null
+    }
+    if (!openHandle) { // 如果之前没有 open 时间就创建一个
+      openHandle = setTimeout(() => {
+        onOpen()
+        openHandle = null
+      }, openDelay)
+    }
+  }
+  function close () : void {
+    if (closeHandle) { // 之前的 close 事件需要被清除
+      clearTimeout(closeHandle)
+      closeHandle = null
+    }
+    closeHandle = setTimeout(() => {
+      onClose()
+      closeHandle = null
+    }, closeDelay)
+  }
+  return [open, close]
+}
+
+type PositionAndSize = {
+  pos: Position,
+  size: Size,
+}
+function adjustElementPosition (element: HTMLElement, {pos, size}: PositionAndSize) : void {
+  const viewport = {
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
+  }
+  function setLower (): void {
+    element.style.removeProperty('bottom')
+    element.style.setProperty('top', '2em')
+  }
+  function setUpper (): void {
+    element.style.removeProperty('top')
+    element.style.setProperty('bottom', '2em')
+  }
+  function setHorizonal (): void { // 控制横坐标
+    element.style.removeProperty('right')
+    let offset = 0;
+    offset = Math.max(offset, -pos.x + 12) // 不能超过屏幕左边
+    offset = Math.min(offset, -pos.x + Math.max(0, viewport.width - size.width) - 12) // 不能超过屏幕右边
+    element.style.setProperty('left', `${offset}px`)
+  }
+  if(pos.y < viewport.height / 2) { // 位于上半部分
+    setLower()
+  } else {
+    setUpper()
+  }
+  setHorizonal()
+}
 
 type Props = {
   children: any,
   content: PreviewData,
   status: FetchStatus,
   onOpen?: () => void,
+  onHover?: () => void, // 不会延迟执行
+  openDelay?: number,
   closeDelay?: number,
 }
-
-function useDelayHover (onHover: () => void, onUnhover: () => void, delayUnhover: number) : [() => void, () => void] {
-  let closeHandle
-  function hover () : void {
-    if (closeHandle) clearTimeout(closeHandle)
-    onHover()
-  }
-  function unhover () : void {
-    if (closeHandle) clearTimeout(closeHandle)
-    closeHandle = setTimeout(onUnhover, delayUnhover)
-  }
-  return [hover, unhover]
-}
-
-function adjustElementPosition (element: HTMLElement, pos: Position) : void {
-  console.log('adj', element, pos)
-  function checkOverflowTop () : void {
-    if (pos.y - pos.height < 20) { // 到顶端的距离 < 80
-      element.style.removeProperty('bottom')
-      element.style.setProperty('top', '2em')
-    }
-  }
-  const viewportWidth = document.documentElement.offsetWidth
-  function checkOverflowRight () : void {
-    if (pos.x + pos.width + 5 > viewportWidth) { // 到右端的距离 < 5
-      element.style.removeProperty('left')
-      element.style.setProperty('right', '0')
-    }
-  }
-  checkOverflowTop()
-  checkOverflowRight()
-}
-
 const ToolCard : React.FC<Props> = function (props: Props) {
   const { children, content, status } = props
   const closeDelay = props.closeDelay || 0
+  const openDelay = props.openDelay || 0
   const [open, setOpen] = useState(false)
   const poperRef = useRef(null)
-  const [onOpen, onClose] = useDelayHover(() => {
+  const [onOpen, onClose] = useDelay(() => {
     setOpen(true)
-    props.onOpen()
-  }, () => setOpen(false), closeDelay)
+    props.onOpen && props.onOpen()
+  }, () => setOpen(false), openDelay, closeDelay)
   const position = useRef(null)
 
   useEffect(() => {
     if (open) {
-      const p = getElementViewPosition(poperRef.current)
-      position.current = p
-      adjustElementPosition(poperRef.current, p)
+      const data: PositionAndSize = {
+        pos: getElementViewPosition(poperRef.current.parentElement),
+        size: getElementSize(poperRef.current)
+      }
+      console.log(data)
+      position.current = data
+      adjustElementPosition(poperRef.current, data)
     }
   }, [open, content])
 
@@ -78,10 +109,9 @@ const ToolCard : React.FC<Props> = function (props: Props) {
       }}
       onMouseEnter={() => {
         onOpen()
+        props.onHover && props.onHover()
       }}
-      onMouseLeave={() => {
-        onClose()
-      }}
+      onMouseLeave={() => onClose()}
     >
       <Fade in={open}>
         <Card
@@ -93,6 +123,7 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             bottom: '2em',
             left: 0,
             width: '400px',
+            maxWidth: `${document.documentElement.clientWidth-24}px`,
             maxHeight: '320px',
             overflowY: 'auto',
           }}
