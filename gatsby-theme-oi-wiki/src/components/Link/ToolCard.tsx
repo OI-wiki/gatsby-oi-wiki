@@ -1,5 +1,5 @@
-import React, {useState, useRef, useEffect} from 'react'
-import {getElementViewPosition, Position} from './utils';
+import React, { useState, useRef, useEffect } from 'react'
+import { getElementViewPosition, Position } from './utils'
 
 type Props = {
   children: any,
@@ -8,30 +8,30 @@ type Props = {
   closeDelay?: number,
 }
 
-function useDelayHover(onHover: Function, onUnhover: Function, delayUnhover: number) {
-  let closeHandle;
-  function hover() {
+function useDelayHover (onHover: Function, onUnhover: Function, delayUnhover: number) {
+  let closeHandle
+  function hover () {
     if (closeHandle) clearTimeout(closeHandle)
     onHover()
   }
-  function unhover() {
+  function unhover () {
     if (closeHandle) clearTimeout(closeHandle)
     closeHandle = setTimeout(onUnhover, delayUnhover)
   }
   return [hover, unhover]
 }
 
-function adjustElementPosition(element: HTMLElement, pos: Position) {
+function adjustElementPosition (element: HTMLElement, pos: Position) {
   console.log('adj', element, pos)
-  function checkOverflowTop() {
-    if(pos.y - pos.height < 20) { // 到顶端的距离 < 80
+  function checkOverflowTop () {
+    if (pos.y - pos.height < 20) { // 到顶端的距离 < 80
       element.style.removeProperty('bottom')
       element.style.setProperty('top', '2em')
     }
   }
   const viewportWidth = document.documentElement.offsetWidth
-  function checkOverflowRight() {
-    if(pos.x + pos.width + 5 > viewportWidth) { // 到右端的距离 < 5
+  function checkOverflowRight () {
+    if (pos.x + pos.width + 5 > viewportWidth) { // 到右端的距离 < 5
       element.style.removeProperty('left')
       element.style.setProperty('right', '0')
     }
@@ -40,8 +40,8 @@ function adjustElementPosition(element: HTMLElement, pos: Position) {
   checkOverflowRight()
 }
 
-export default function ToolCard(props: Props) {
-  const {children, content} = props
+export default function ToolCard (props: Props) {
+  const { children, content } = props
   const closeDelay = props.closeDelay || 0
   const [open, setOpen] = useState(false)
   const poperRef = useRef(null)
@@ -53,8 +53,8 @@ export default function ToolCard(props: Props) {
 
   useEffect(() => {
     if (open) {
-      const p = getElementViewPosition(poperRef.current);
-      position.current = p;
+      const p = getElementViewPosition(poperRef.current)
+      position.current = p
       adjustElementPosition(poperRef.current, p)
     }
   }, [open, content])

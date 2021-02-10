@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 
 type Data = {
   html: string,
   title: string,
 }
-function contentRender(data: Data): string {
+function contentRender (data: Data): string {
   return `<p><strong>${data.title}</strong></p>${data.html}`
 }
-async function getExcerpt(url) {
+async function getExcerpt (url) {
   console.log('fetching', url)
   const res = await fetch(url).then(res => res.json())
   return contentRender(res)
@@ -19,8 +19,8 @@ type Props = {
   children: any,
 }
 
-function LinkTooltip(props: Props) {
-  const {url, children} = props;
+function LinkTooltip (props: Props) {
+  const { url, children } = props
   const [content, setContent] = useState('获取中……')
   const [status, setStatus] = useState('nofetch')
 
@@ -32,7 +32,7 @@ function LinkTooltip(props: Props) {
         setContent(data)
         setStatus('hasdata')
       }).catch(e => {
-        console.error(e);
+        console.error(e)
         setStatus('nofetch') // 获取失败
       })
     }
@@ -41,7 +41,7 @@ function LinkTooltip(props: Props) {
   return (
     <ToolCard
       onOpen={onOpen}
-      content={<span style={{display: 'block'}} dangerouslySetInnerHTML={{__html: content}}></span>}
+      content={<span style={{ display: 'block' }} dangerouslySetInnerHTML={{ __html: content }}></span>}
       closeDelay={500}
     >
       {children}
