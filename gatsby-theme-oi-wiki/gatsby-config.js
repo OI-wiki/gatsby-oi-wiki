@@ -49,10 +49,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-copy-linked-files',
             options: {
-              // By default, `.md` is specified
-              // ignoreFileExtensions: ['.md']
-              // These files will not be copied
-              ignoreFileExtensions: ['.md'],
+              ignoreFileExtensions: ['md'],
             },
           },
           /** {
