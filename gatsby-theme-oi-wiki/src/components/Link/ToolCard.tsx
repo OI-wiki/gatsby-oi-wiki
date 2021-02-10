@@ -42,6 +42,7 @@ type PositionAndSize = {
   size: Size,
 }
 function adjustElementPosition (element: HTMLElement, {pos, size}: PositionAndSize) : void {
+  if(!element) return
   const viewport = {
     width: document.documentElement.clientWidth,
     height: document.documentElement.clientHeight,
@@ -97,7 +98,7 @@ const ToolCard : React.FC<Props> = function (props: Props) {
         pos: getElementViewPosition(poperRef.current.parentElement),
         size: getElementSize(poperRef.current)
       }
-      console.log(data)
+      // console.log(data)
       position.current = data
       adjustElementPosition(poperRef.current, data)
     }
