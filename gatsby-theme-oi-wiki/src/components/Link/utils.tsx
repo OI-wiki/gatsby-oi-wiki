@@ -17,31 +17,33 @@ export type Position = {
 export function getElementViewPosition(element): Position {
   console.log('geE', element)
   //计算x坐标
-  var actualLeft = element.offsetLeft;
-  var current = element.offsetParent;
+  let actualLeft = element.offsetLeft;
+  let current = element.offsetParent;
+  let elementScrollLeft;
   while (current !== null) {
     actualLeft += (current.offsetLeft + current.clientLeft);
     current = current.offsetParent;
   }
   if (document.compatMode == "BackCompat") {
-    var elementScrollLeft = document.body.scrollLeft;
+    elementScrollLeft = document.body.scrollLeft;
   } else {
-    var elementScrollLeft = document.documentElement.scrollLeft;
+    elementScrollLeft = document.documentElement.scrollLeft;
   }
-  var left = actualLeft - elementScrollLeft;
+  let left = actualLeft - elementScrollLeft;
   //计算y坐标
-  var actualTop = element.offsetTop;
-  var current = element.offsetParent;
+  let actualTop = element.offsetTop;
+  current = element.offsetParent;
+  let elementScrollTop;
   while (current !== null) {
     actualTop += (current.offsetTop + current.clientTop);
     current = current.offsetParent;
   }
   if (document.compatMode == "BackCompat") {
-    var elementScrollTop = document.body.scrollTop;
+    elementScrollTop = document.body.scrollTop;
   } else {
-    var elementScrollTop = document.documentElement.scrollTop;
+    elementScrollTop = document.documentElement.scrollTop;
   }
-  var right = actualTop - elementScrollTop;
+  let right = actualTop - elementScrollTop;
   return {
     x: left,
     y: right,
