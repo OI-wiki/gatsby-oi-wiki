@@ -10,7 +10,7 @@ export type Position = {
  * (https://www.hangge.com/blog/cache/detail_2260.html)
  *
  * @export
- * @param {*} el 
+ * @param {*} el
  * @return {Position}
  */
 export function getElementViewPosition (el: any): Position {
@@ -53,7 +53,7 @@ export type Size = {
   height: number,
 }
 
-export function getElementSize(el: HTMLElement): Size {
+export function getElementSize (el: HTMLElement): Size {
   return {
     width: el.offsetWidth,
     height: el.offsetHeight,

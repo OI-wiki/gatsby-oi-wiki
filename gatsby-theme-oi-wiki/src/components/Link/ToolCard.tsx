@@ -41,8 +41,8 @@ type PositionAndSize = {
   pos: Position,
   size: Size,
 }
-function adjustElementPosition (element: HTMLElement, {pos, size}: PositionAndSize) : void {
-  if(!element) return
+function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAndSize) : void {
+  if (!element) return
   const viewport = {
     width: document.documentElement.clientWidth,
     height: document.documentElement.clientHeight,
@@ -57,18 +57,18 @@ function adjustElementPosition (element: HTMLElement, {pos, size}: PositionAndSi
   }
   function setHorizonal (): void { // 控制横坐标
     element.style.removeProperty('right')
-    let offset = 0;
+    let offset = 0
     offset = Math.max(offset, -pos.x + 12) // 不能超过屏幕左边
     offset = Math.min(offset, -pos.x + Math.max(0, viewport.width - size.width) - 12) // 不能超过屏幕右边
     element.style.setProperty('left', `${offset}px`)
   }
-  if(pos.y < viewport.height / 2) { // 位于上半部分
+  if (pos.y < viewport.height / 2) { // 位于上半部分
     setLower()
   } else {
     setUpper()
   }
   setHorizonal()
-  element.style.setProperty('max-width',`${viewport.width-24}px`)
+  element.style.setProperty('max-width', `${viewport.width - 24}px`)
 }
 
 type Props = {
@@ -96,7 +96,7 @@ const ToolCard : React.FC<Props> = function (props: Props) {
     if (open) {
       const data: PositionAndSize = {
         pos: getElementViewPosition(poperRef.current.parentElement),
-        size: getElementSize(poperRef.current)
+        size: getElementSize(poperRef.current),
       }
       // console.log(data)
       position.current = data
