@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 
 export type Position = {
   x: number,
@@ -50,4 +51,12 @@ export function getElementViewPosition (element): Position {
     width: element.offsetWidth,
     height: element.offsetHeight,
   }
+}
+
+export function useDidUpdateEffect (fn, inputs): void {
+  const didMountRef = useRef(false)
+
+  useEffect(() => {
+    if (didMountRef.current) { fn() } else { didMountRef.current = true }
+  }, inputs)
 }

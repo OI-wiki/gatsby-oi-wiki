@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ToolCard from './ToolCard'
+import { useDidUpdateEffect } from './utils'
 
 export interface PreviewData {
   html: string,
@@ -17,28 +18,33 @@ type Props = {
   children: any,
 }
 
+export type FetchStatus = 'error' | 'fetching' | 'fetched' | 'not_fetched'
+
 const LinkTooltip : React.FC<Props> = function (props: Props) {
   const { url, children } = props
   const [content, setContent] = useState<PreviewData>(null)
-  const [status, setStatus] = useState('nofetch')
-
-  const onOpen = () : void => {
-    if (status === 'nofetch') {
+  const [status, setStatus] = useState<FetchStatus>('not_fetched')
+  const [open, setOpen] = useState<boolean>()
+  useDidUpdateEffect(() => {
+    if (status === 'not_fetched') {
       setStatus('fetching') // 防止重复获取
       getExcerpt(url).then(data => {
         setContent(data)
-        setStatus('hasdata')
+        setStatus('fetched')
       }).catch(e => {
         console.error(e)
-        setStatus('nofetch') // 获取失败
+        setStatus('error') // 获取失败
       })
     }
-  }
+  }, [open])
 
   return (
     <ToolCard
-      onOpen={onOpen}
+      onOpen={() => {
+        setOpen(true)
+      }}
       content={content}
+      status={status}
       closeDelay={500}
     >
       {children}

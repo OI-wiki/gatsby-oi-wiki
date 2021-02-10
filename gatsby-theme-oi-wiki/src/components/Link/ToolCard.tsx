@@ -5,13 +5,17 @@ import {
   CardContent,
   Fade,
   Typography,
+  CircularProgress,
 } from '@material-ui/core'
 
-import { PreviewData } from './LinkTooltip'
+import { Alert } from '@material-ui/lab'
+
+import { PreviewData, FetchStatus } from './LinkTooltip'
 
 type Props = {
   children: any,
   content: PreviewData,
+  status: FetchStatus,
   onOpen?: () => void,
   closeDelay?: number,
 }
@@ -49,7 +53,7 @@ function adjustElementPosition (element: HTMLElement, pos: Position) : void {
 }
 
 const ToolCard : React.FC<Props> = function (props: Props) {
-  const { children, content } = props
+  const { children, content, status } = props
   const closeDelay = props.closeDelay || 0
   const [open, setOpen] = useState(false)
   const poperRef = useRef(null)
@@ -88,20 +92,35 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             zIndex: 9999,
             bottom: '2em',
             left: 0,
-            width: 400,
-            maxHeight: 300,
+            width: '400px',
+            maxHeight: '320px',
+            minHeight: '64px',
             overflowY: 'auto',
           }}
           ref={poperRef}
         >
-          {content &&
+          {
+            (status === 'fetching' || status === 'not_fetched') &&
+            <CardContent style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }} >
+              <CircularProgress></CircularProgress>
+            </CardContent>
+          }
+          {status === 'fetched' &&
             <CardContent>
               <Typography variant="h6">
                 {content.title}
               </Typography>
-              <Typography variant="body2">
-                <div dangerouslySetInnerHTML={{ __html: content.html }} />
-              </Typography>
+              <div dangerouslySetInnerHTML={{ __html: content.html }} />
+            </CardContent>
+          }
+          {
+            status === 'error' &&
+            <CardContent>
+              <Alert severity="error">无法获取页面预览</Alert>
             </CardContent>
           }
         </Card>
