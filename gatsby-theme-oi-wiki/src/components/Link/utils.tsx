@@ -24,7 +24,7 @@ export function getElementViewPosition(element): Position {
     actualLeft += (current.offsetLeft + current.clientLeft);
     current = current.offsetParent;
   }
-  if (document.compatMode == "BackCompat") {
+  if (document.compatMode === "BackCompat") {
     elementScrollLeft = document.body.scrollLeft;
   } else {
     elementScrollLeft = document.documentElement.scrollLeft;
@@ -38,7 +38,7 @@ export function getElementViewPosition(element): Position {
     actualTop += (current.offsetTop + current.clientTop);
     current = current.offsetParent;
   }
-  if (document.compatMode == "BackCompat") {
+  if (document.compatMode === "BackCompat") {
     elementScrollTop = document.body.scrollTop;
   } else {
     elementScrollTop = document.documentElement.scrollTop;
