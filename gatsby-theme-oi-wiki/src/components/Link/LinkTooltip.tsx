@@ -5,10 +5,10 @@ type Data = {
   html: string,
   title: string,
 }
-function contentRender (data: Data): string {
+function contentRender (data: Data) : string {
   return `<p><strong>${data.title}</strong></p>${data.html}`
 }
-async function getExcerpt (url) {
+async function getExcerpt (url) : Promise<string> {
   console.log('fetching', url)
   const res = await fetch(url).then(res => res.json())
   return contentRender(res)
@@ -19,12 +19,12 @@ type Props = {
   children: any,
 }
 
-function LinkTooltip (props: Props) {
+const LinkTooltip : React.FC<Props> = function (props: Props) {
   const { url, children } = props
   const [content, setContent] = useState('获取中……')
   const [status, setStatus] = useState('nofetch')
 
-  const onOpen = () => {
+  const onOpen = () : void => {
     if (status === 'nofetch') {
       setStatus('fetching') // 防止重复获取
       getExcerpt(url).then(data => {
