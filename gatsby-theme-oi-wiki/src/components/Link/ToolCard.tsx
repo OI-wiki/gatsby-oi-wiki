@@ -11,27 +11,31 @@ import { Alert } from '@material-ui/lab'
 import { PreviewData, FetchStatus } from './LinkTooltip'
 
 function useDelay (onOpen: () => void, onClose: () => void, openDelay: number, closeDelay: number) : [() => void, () => void] {
-  let closeHandle, openHandle
+  const closeHandle = useRef(null), openHandle = useRef(null)
   function open () : void {
-    if (closeHandle) { // 正在准备close，则不让它close
-      clearTimeout(closeHandle)
-      closeHandle = null
+    if (closeHandle.current) { // 正在准备close，则不让它close
+      clearTimeout(closeHandle.current)
+      closeHandle.current = null
     }
-    if (!openHandle) { // 如果之前没有 open 时间就创建一个
-      openHandle = setTimeout(() => {
+    if (!openHandle.current) { // 如果之前没有 open 时间就创建一个
+      openHandle.current = setTimeout(() => {
         onOpen()
-        openHandle = null
+        openHandle.current = null
       }, openDelay)
     }
   }
   function close () : void {
     if (closeHandle) { // 之前的 close 事件需要被清除
-      clearTimeout(closeHandle)
-      closeHandle = null
+      clearTimeout(closeHandle.current)
+      closeHandle.current = null
     }
-    closeHandle = setTimeout(() => {
+    if(openHandle.current){ // 鼠标快进快出，则不显示
+      clearTimeout(openHandle.current)
+      openHandle.current = null
+    }
+    closeHandle.current = setTimeout(() => {
       onClose()
-      closeHandle = null
+      closeHandle.current = null
     }, closeDelay)
   }
   return [open, close]
@@ -89,7 +93,9 @@ const ToolCard : React.FC<Props> = function (props: Props) {
   const [onOpen, onClose] = useDelay(() => {
     setOpen(true)
     props.onOpen && props.onOpen()
-  }, () => setOpen(false), openDelay, closeDelay)
+  }, () => {
+    setOpen(false)
+  }, openDelay, closeDelay)
   const position = useRef(null)
 
   useEffect(() => {
@@ -98,7 +104,6 @@ const ToolCard : React.FC<Props> = function (props: Props) {
         pos: getElementViewPosition(poperRef.current.parentElement),
         size: getElementSize(poperRef.current),
       }
-      // console.log(data)
       position.current = data
       adjustElementPosition(poperRef.current, data)
     }
