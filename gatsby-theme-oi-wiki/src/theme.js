@@ -1,6 +1,7 @@
 import createPalette from '@material-ui/core/styles/createPalette'
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
+import red from '@material-ui/core/colors/red'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
@@ -89,6 +90,7 @@ const lightCss = {
       '--divider': htr(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
       '--alert-info-bg': htr(blue[50]),
+      '--alert-error-bg': htr(red[50]),
       '--clicked-reaction-button': htr('#faebd7'),
       ...applyDefaults(lightColor, ...paletteKeys),
     },
@@ -112,6 +114,7 @@ const darkCss = {
       '--divider': htr(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
       '--alert-info-bg': htr(grey[900]),
+      '--alert-error-bg': htr(grey[900]),
       '--clicked-reaction-button': htr('#202020'),
       ...applyDefaults(darkColor, ...paletteKeys),
     },
@@ -198,6 +201,13 @@ const adaptiveTheme = createMuiTheme({
       standardInfo: {
         color: 'rgba(var(--text-main))',
         backgroundColor: 'rgba(var(--alert-info-bg))',
+      },
+      standardError: {
+        color: 'rgba(var(--text-main))',
+        backgroundColor: 'rgba(var(--alert-error-bg))',
+        '& $icon': {
+          color: 'rgba(var(--error-main))',
+        },
       },
     },
   },
