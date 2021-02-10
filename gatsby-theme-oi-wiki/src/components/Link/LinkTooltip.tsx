@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
 
-type Data = {
+export interface PreviewData {
   html: string,
   title: string,
 }
-function contentRender (data: Data) : string {
-  return `<p><strong>${data.title}</strong></p>${data.html}`
-}
-async function getExcerpt (url) : Promise<string> {
+
+async function getExcerpt (url) : Promise<PreviewData> {
   console.log('fetching', url)
   const res = await fetch(url).then(res => res.json())
-  return contentRender(res)
+  return res
 }
 
 type Props = {
@@ -21,14 +19,13 @@ type Props = {
 
 const LinkTooltip : React.FC<Props> = function (props: Props) {
   const { url, children } = props
-  const [content, setContent] = useState('获取中……')
+  const [content, setContent] = useState<PreviewData>(null)
   const [status, setStatus] = useState('nofetch')
 
   const onOpen = () : void => {
     if (status === 'nofetch') {
       setStatus('fetching') // 防止重复获取
       getExcerpt(url).then(data => {
-        console.log('data', data)
         setContent(data)
         setStatus('hasdata')
       }).catch(e => {
@@ -41,7 +38,7 @@ const LinkTooltip : React.FC<Props> = function (props: Props) {
   return (
     <ToolCard
       onOpen={onOpen}
-      content={<span style={{ display: 'block' }} dangerouslySetInnerHTML={{ __html: content }}></span>}
+      content={content}
       closeDelay={500}
     >
       {children}

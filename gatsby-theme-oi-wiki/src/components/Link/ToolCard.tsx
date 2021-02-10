@@ -1,9 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { getElementViewPosition, Position } from './utils'
+import {
+  Card,
+  CardContent,
+  Fade,
+  Typography,
+} from '@material-ui/core'
+
+import { PreviewData } from './LinkTooltip'
 
 type Props = {
   children: any,
-  content: JSX.Element | string,
+  content: PreviewData,
   onOpen?: () => void,
   closeDelay?: number,
 }
@@ -71,25 +79,33 @@ const ToolCard : React.FC<Props> = function (props: Props) {
         onClose()
       }}
     >
-      <span
-        className="toolcard"
-        style={{
-          display: open ? 'block' : 'none',
-          position: 'absolute',
-          background: '#fff',
-          border: '1px black solid',
-          zIndex: 9999,
-          bottom: '2em',
-          left: 0,
-          width: 400,
-          maxHeight: 300,
-          overflowY: 'auto',
-          padding: 12,
-        }}
-        ref={poperRef}
-      >
-        {content}
-      </span>
+      <Fade in={open}>
+        <Card
+          className="toolcard"
+          elevation={3}
+          style={{
+            position: 'absolute',
+            zIndex: 9999,
+            bottom: '2em',
+            left: 0,
+            width: 400,
+            maxHeight: 300,
+            overflowY: 'auto',
+          }}
+          ref={poperRef}
+        >
+          {content &&
+            <CardContent>
+              <Typography variant="h6">
+                {content.title}
+              </Typography>
+              <Typography variant="body2">
+                <div dangerouslySetInnerHTML={{ __html: content.html }} />
+              </Typography>
+            </CardContent>
+          }
+        </Card>
+      </Fade>
       {children}
     </span>
   )
