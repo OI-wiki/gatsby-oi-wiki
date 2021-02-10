@@ -67,6 +67,7 @@ function adjustElementPosition (element: HTMLElement, {pos, size}: PositionAndSi
     setUpper()
   }
   setHorizonal()
+  element.style.setProperty('max-width',`${viewport.width-24}px`)
 }
 
 type Props = {
@@ -123,7 +124,6 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             bottom: '2em',
             left: 0,
             width: '400px',
-            maxWidth: `${document.documentElement.clientWidth-24}px`,
             maxHeight: '320px',
             overflowY: 'auto',
           }}
