@@ -108,7 +108,7 @@ module.exports = {
         precachePages: [],
         workboxConfig: {
           importWorkboxFrom: 'local',
-          globPatterns: ['page-data/**', '*.js'],
+          globPatterns: ['*.js'],
           runtimeCaching: [
             {
               urlPattern: /(\.js$|\.css$)/, // js and css
