@@ -46,7 +46,7 @@ const LinkTooltip : React.FC<Props> = function (props: Props) {
       content={content}
       status={status}
       closeDelay={300}
-      openDelay={200}
+      openDelay={500}
     >
       {children}
     </ToolCard>
