@@ -54,7 +54,7 @@ const NavTabs: React.FC<Props> = (props) => {
   })()
 
   const [value, setValue] = React.useState(state)
-  const handleChange = function (event, newValue) {
+  const handleChange = function (event, newValue) : void {
     setValue(newValue)
   }
   return (

@@ -4,6 +4,8 @@ import { Link as GatsbyLink } from 'gatsby'
 // eslint-disable-next-line
 import isAbsoluteURL from 'is-absolute-url'
 import React from 'react'
+import LinkTooltip from './LinkTooltip'
+import path from 'path'
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
  */
 function linkFix (link, isIndex) {
   if (/^\//.test(link)) return link // absolute path
-  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/')
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace('index','')
   if (isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
     link += '/' // append '/' for links, but excluding urls includes `#`.
@@ -44,14 +46,20 @@ function linkFix (link, isIndex) {
   return link
 }
 
-function RealLink ({ to = '', href = to, children, isIndex, ...props }) {
+function getAPIURL(link, pathname, isIndex) {
+  if (/[^/]$/.test(pathname)) pathname += '/'
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace(/#(.*?)$/,'')
+  if (/^[^/]/.test(link)) {
+    if (isIndex === false) link = '../' + link
+    link = path.resolve(pathname, link)
+  }
+  return `https://api.mgt.moe/preview?path=${link}`
+}
+
+function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
-    return (
-      <a {...props} href={href}>
-        {children}
-      </a>
-    )
+    return <a {...props} href={href}>{children}</a>
   }
   if (isAbsoluteURL(href)) {
     return (
@@ -61,9 +69,11 @@ function RealLink ({ to = '', href = to, children, isIndex, ...props }) {
     )
   }
   return (
-    <GatsbyLink {...props} to={linkFix(href, isIndex)} className={classes.link}>
-      {children}
-    </GatsbyLink>
+    <LinkTooltip url={getAPIURL(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
+      <GatsbyLink {...props} to={linkFix(href, isIndex)} className={classes.link}>
+        {children}
+      </GatsbyLink>
+    </LinkTooltip>
   )
 }
 

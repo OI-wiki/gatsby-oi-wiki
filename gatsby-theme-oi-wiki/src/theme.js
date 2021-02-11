@@ -1,6 +1,7 @@
 import createPalette from '@material-ui/core/styles/createPalette'
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
+import red from '@material-ui/core/colors/red'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
@@ -89,7 +90,9 @@ const lightCss = {
       '--divider': htr(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
       '--alert-info-bg': htr(blue[50]),
+      '--alert-error-bg': htr(red[50]),
       '--clicked-reaction-button': htr('#faebd7'),
+      '--fade-background': 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -112,7 +115,9 @@ const darkCss = {
       '--divider': htr(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
       '--alert-info-bg': htr(grey[900]),
+      '--alert-error-bg': htr(grey[900]),
       '--clicked-reaction-button': htr('#202020'),
+      '--fade-background': 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 66, 66, 1) 50%)',
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -182,6 +187,7 @@ const adaptiveTheme = createMuiTheme({
     },
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
+    fadeTextBackground: 'var(--fade-background)',
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround
@@ -198,6 +204,13 @@ const adaptiveTheme = createMuiTheme({
       standardInfo: {
         color: 'rgba(var(--text-main))',
         backgroundColor: 'rgba(var(--alert-info-bg))',
+      },
+      standardError: {
+        color: 'rgba(var(--text-main))',
+        backgroundColor: 'rgba(var(--alert-error-bg))',
+        '& $icon': {
+          color: 'rgba(var(--error-main))',
+        },
       },
     },
   },

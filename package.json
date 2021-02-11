@@ -8,7 +8,8 @@
     "develop": "yarn workspace example develop",
     "build": "yarn workspace example build && cp -r example/public public",
     "clean": "yarn workspace example clean && rm -rf public .cache",
-    "lint": "yarn workspace gatsby-theme-oi-wiki eslint --fix src/**/*.{js,jsx,ts,tsx}"
+    "lint": "yarn workspace gatsby-theme-oi-wiki eslint --fix src/**/*.{js,jsx,ts,tsx}",
+    "cl-dev": "yarn workspace example clean && rm -rf public .cache && yarn workspace example develop"
   },
   "lint-staged": {
     "gatsby-theme-oi-wiki/src/**/*.{js,jsx,ts,tsx}": [

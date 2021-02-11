@@ -73,14 +73,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.postsRemark.edges
   // console.log(posts)
   // Create post detail pages
-  posts.forEach(async ({ node }, index) => {
+
+  for (const index in posts) {
+    const { node } = posts[index]
+
     const previous = index === posts.length - 1 ? null : posts[index + 1]
     const next = index === 0 ? null : posts[index - 1]
     // /workspace/gatsby-oi-wiki/docs/empty.md -> docs/empty.md
     const { fileAbsolutePath: path } = node
     const relativePath = path.slice(path.indexOf('/docs') + 1)
 
-    // if not await the res, how to handle
     const log = await gitQuery(relativePath)
     createPage({
       path: node.fields.slug,
@@ -100,7 +102,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         relativePath,
       },
     })
-  })
+  }
 
   // Extract tag data from query
   const tags = result.data.tagsGroup.group

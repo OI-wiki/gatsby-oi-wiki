@@ -1,6 +1,6 @@
 const path = require('path')
 
-const isProd = process.env.PRODUCTION === 'true' || process.env.RENDER === 'true'
+const isProd = false && (process.env.PRODUCTION === 'true' || process.env.RENDER === 'true')
 const condition = (cond, v) => cond ? [v] : []
 if (isProd && process.env.gatsby_executing_command !== 'build') {
   console.warn('Using production configurations in non-build environment')
@@ -49,10 +49,7 @@ module.exports = {
           {
             resolve: 'gatsby-remark-copy-linked-files',
             options: {
-              // By default, `.md` is specified
-              // ignoreFileExtensions: ['.md']
-              // These files will not be copied
-              ignoreFileExtensions: ['.md'],
+              ignoreFileExtensions: ['md'],
             },
           },
           /** {
