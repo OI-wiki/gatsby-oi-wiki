@@ -53,7 +53,9 @@ function getAPIURL(link, pathname, isIndex) {
   }
   return `https://api.mgt.moe/preview?path=${link}`
 }
-
+function isRef(link) {
+  return /^#/.test(link)
+}
 function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
@@ -64,6 +66,13 @@ function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }
       <a {...props} href={href} className={classes.link} target="_blank" rel="noopener noreferrer nofollow" >
         {children}
       </a>
+    )
+  }
+  if (isRef(href)) {
+    return (
+      <GatsbyLink {...props} to={href} className={classes.link}>
+        {children}
+      </GatsbyLink>
     )
   }
   return (

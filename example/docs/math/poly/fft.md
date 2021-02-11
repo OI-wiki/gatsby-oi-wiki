@@ -4,6 +4,8 @@ author: AndrewWayne, GavinZhengOI, ChungZH, henryrabbit, Xeonacid, sshwy, Yukima
 tags: ["math","polynomial"]
 ---
 
+针不戳 [^ref1]
+
 ## 内链测试
 
 [同级的相对目录-求逆](./inv)
@@ -482,3 +484,5 @@ $$
 ## 参考文献
 
 1.   [桃酱的算法笔记](https://zhuanlan.zhihu.com/p/41867199) .
+
+[^ref1]: 针不戳
