@@ -62,28 +62,30 @@ const Meta: React.FC<Props> = (props: Props) => {
         <Typography gutterBottom>
           <span>
             <EditIcon fontSize="small" className={classes.metaicon} />
-              发现错误？想一起完善？{' '}
-            <MyLink onClick={(e) => {
-              e.preventDefault()
-              setDialogOpen(true)
-            }} className={classes.link} to=".">
-              在 GitHub 上编辑此页！
-          </MyLink>
+            {'发现错误？想一起完善？ '}
+            <GatsbyLink
+              onClick={(e) => {
+                e.preventDefault()
+                setDialogOpen(true)
+              }}
+              className={classes.link} to="."
+            >
+              {'在 GitHub 上编辑此页！'}
+            </GatsbyLink>
           </span>
         </Typography>
 
         <Typography>
           <span>
             <CopyrightIcon fontSize="small" className={classes.metaicon} />
-              本页面的全部内容在{' '}
+            {'本页面的全部内容在 '}
             <strong>
-              <MyLink href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">
-                CC BY-SA 4.0
-            </MyLink>{' '}
-                和 <MyLink href="https://github.com/zTrix/sata-license">SATA</MyLink>
-            </strong>{' '}
-              协议之条款下提供，附加条款亦可能应用
-        </span>
+              <MyLink href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</MyLink>
+              {' 和 '}
+              <MyLink href="https://github.com/zTrix/sata-license">SATA</MyLink>
+            </strong>
+            {' 协议之条款下提供，附加条款亦可能应用'}
+          </span>
         </Typography>
       </div>
     </Paper>
