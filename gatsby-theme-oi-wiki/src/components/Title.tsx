@@ -44,7 +44,14 @@ const Title: React.FC<Props> = (props: Props) => {
   const Author: React.FC<{name: string}> = ({name}) => {
     const trimedName = name.trim()
     return (
-      <Link href={`https://github.com/${trimedName}`} className={classes.authorLink}>{`@${trimedName}`}</Link>
+      <Link
+        href={`https://github.com/${trimedName}`}
+        target="_blank"
+        rel="noreferrer noopener"
+        className={classes.authorLink}
+      >
+        {`@${trimedName}`}
+      </Link>
     )
   }
 

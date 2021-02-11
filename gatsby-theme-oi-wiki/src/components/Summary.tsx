@@ -41,7 +41,7 @@ interface Props{
 }
 
 const Summary: React.FC<Props> = (props) => {
-  const { className = null, children, ...rest } = props
+  const { className = null, children } = props
   const classes = useStyles()
 
   return (
