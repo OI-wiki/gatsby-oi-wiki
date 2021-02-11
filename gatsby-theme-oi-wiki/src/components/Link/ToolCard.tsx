@@ -100,9 +100,9 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             zIndex: 9999,
             bottom: '2em',
             left: 0,
-            width: '400px',
-            maxHeight: '320px',
-            overflowY: 'auto',
+            width: '320px',
+            maxHeight: '400px',
+            overflowY: 'hidden',
           }}
           ref={poperRef}
         >
