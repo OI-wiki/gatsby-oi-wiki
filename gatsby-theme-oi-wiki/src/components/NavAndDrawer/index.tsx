@@ -13,7 +13,9 @@ import { Link } from 'gatsby'
 import React from 'react'
 import createPersistedState from 'use-persisted-state'
 
-import { Menu as MenuIcon, School as SchoolIcon, } from '@material-ui/icons'
+import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
+
+import trimTrailingSlash from '../../lib/trailingSlash'
 
 // eslint-disable-next-line
 // @ts-ignore
@@ -25,12 +27,13 @@ import Tabs from '../Tabs'
 import SmallScreenMenu from '../SmallScreenMenu'
 
 import { useStyles } from './styles'
-import {flattenObject} from './utils'
+import { flattenObject } from './utils'
 import NavBtnGroup from './NavBtnGroup'
 
 function getTabIDFromLocation (location: string, pathList: string[]): number {
+  const locationTrimmed = trimTrailingSlash(location)
   for (const v of Object.entries(pathList)) {
-    if (Object.values(flattenObject(v[1])).indexOf(location) > -1) return +v[0]
+    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v)).indexOf(locationTrimmed) > -1) return +v[0]
   }
   return -1
 }

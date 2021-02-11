@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { Link } from 'gatsby'
+import trimTrailingSlash from '../lib/trailingSlash'
 
 const useStyles = makeStyles((theme) => ({
   listitem: {
@@ -59,7 +60,7 @@ function Item (node: PathListNode, padding: number, pathname: string): [React.Re
       <Link key={name} to={url}>
         <ListItem
           button
-          selected={url === pathname}
+          selected={trimTrailingSlash(url) === trimTrailingSlash(pathname)}
           className={classes.listitem}
           style={{ paddingLeft: `${padding}px` }}
         >
@@ -72,7 +73,7 @@ function Item (node: PathListNode, padding: number, pathname: string): [React.Re
           />
         </ListItem>
       </Link>,
-      url === pathname,
+      trimTrailingSlash(url) === trimTrailingSlash(pathname),
     ]
   }
   // array
