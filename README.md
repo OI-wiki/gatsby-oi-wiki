@@ -5,7 +5,7 @@
 
 正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。
 
-Demo：https://ng.oi-wiki.org/
+Demo：https://next.oi-wiki.org/
 
 TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
