@@ -149,7 +149,7 @@ function MyLayout ({
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="comment"
                         >
-                          <Typography className={classes.heading}>
+                          <Typography>
                             评论
                           </Typography>
                         </AccordionSummary>
