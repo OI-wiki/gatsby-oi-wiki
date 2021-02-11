@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ToolCard from './ToolCard'
-import { useDidUpdateEffect } from './utils'
+import { useDidUpdateEffect } from './hooks'
 
 export interface PreviewData {
   html: string,

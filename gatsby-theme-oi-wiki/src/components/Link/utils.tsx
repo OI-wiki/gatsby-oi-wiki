@@ -1,5 +1,3 @@
-import { useRef, useEffect } from 'react'
-
 export type Position = {
   x: number,
   y: number,
@@ -60,10 +58,3 @@ export function getElementSize (el: HTMLElement): Size {
   }
 }
 
-export function useDidUpdateEffect (fn, inputs): void {
-  const didMountRef = useRef(false)
-
-  useEffect(() => {
-    if (didMountRef.current) { fn() } else { didMountRef.current = true }
-  }, inputs)
-}
