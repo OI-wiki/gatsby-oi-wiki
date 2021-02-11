@@ -1,4 +1,3 @@
-import lightBlue from '@material-ui/core/colors/lightBlue'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link as GatsbyLink } from 'gatsby'
 // eslint-disable-next-line
