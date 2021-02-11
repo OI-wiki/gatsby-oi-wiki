@@ -14,8 +14,9 @@ async function getExcerpt (url) : Promise<PreviewData> {
 }
 
 type Props = {
-  url: string,
+  url: string, // api url
   children: any,
+  to: string, // link
 }
 
 export type FetchStatus = 'error' | 'fetching' | 'fetched' | 'not_fetched'
@@ -44,6 +45,7 @@ const LinkTooltip : React.FC<Props> = function (props: Props) {
         setOpen(true)
       }}
       content={content}
+      to={props.to}
       status={status}
       closeDelay={200}
       openDelay={500}

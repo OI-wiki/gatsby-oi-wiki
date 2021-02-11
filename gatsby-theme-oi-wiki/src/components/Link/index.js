@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
  */
 function linkFix (link, isIndex) {
   if (/^\//.test(link)) return link // absolute path
-  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/')
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace('index','')
   if (isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
     link += '/' // append '/' for links, but excluding urls includes `#`.
@@ -69,7 +69,7 @@ function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }
     )
   }
   return (
-    <LinkTooltip url={getAPIURL(href, pathname, isIndex)}>
+    <LinkTooltip url={getAPIURL(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
       <GatsbyLink {...props} to={linkFix(href, isIndex)} className={classes.link}>
         {children}
       </GatsbyLink>

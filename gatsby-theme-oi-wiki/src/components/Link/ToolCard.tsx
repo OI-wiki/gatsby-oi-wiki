@@ -10,6 +10,7 @@ import {
 import { Alert } from '@material-ui/lab'
 import { PreviewData, FetchStatus } from './LinkTooltip'
 import { useDelay } from './hooks'
+import { Link as GatsbyLink } from 'gatsby'
 const lines = 4
 const lineHeight = 1.5
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ type Props = {
   onHover?: () => void, // 不会延迟执行
   openDelay?: number,
   closeDelay?: number,
+  to: string,
 }
 const ToolCard: React.FC<Props> = function (props: Props) {
   const classes = useStyles()
@@ -110,7 +112,7 @@ const ToolCard: React.FC<Props> = function (props: Props) {
       }}
       onMouseLeave={() => onClose()}
     >
-      <Fade in={open}>
+      <GatsbyLink to={props.to}><Fade in={open}>
         <Card
           className="toolcard"
           elevation={3}
@@ -148,7 +150,7 @@ const ToolCard: React.FC<Props> = function (props: Props) {
               <Alert severity="error">无法获取页面预览</Alert>
           }
         </Card>
-      </Fade>
+      </Fade></GatsbyLink>
       {children}
     </span>
   )
