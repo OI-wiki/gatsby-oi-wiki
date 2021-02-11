@@ -188,6 +188,10 @@ const adaptiveTheme = createMuiTheme({
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',
+    link: {
+      default: '#576ad4',
+      hover: '#03a9f4',
+    }
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround

@@ -1,6 +1,5 @@
 import { Link, Typography } from '@material-ui/core'
 
-import lightBlue from '@material-ui/core/colors/lightBlue'
 import { makeStyles } from '@material-ui/core/styles'
 import { graphql, StaticQuery } from 'gatsby'
 import React, { useEffect } from 'react'
@@ -10,27 +9,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.footer.text,
     '&:hover': {
       textDecoration: 'none',
-      color: lightBlue[500],
+      color: theme.palette.link.hover,
     },
+    transition: `color ${250}ms ease-in-out`,
   },
 }))
-
-const query = (props) => (
-  <StaticQuery
-    query={graphql`
-      query lastestCommit {
-        allGitCommit(limit: 1) {
-          nodes {
-            hash
-            date
-          }
-        }
-      }
-    `}
-    render={(data) => <FooterContent data={data} {...props} />}
-  />
-)
-export default query
 
 let easteregg = false
 
@@ -68,8 +51,7 @@ function FooterContent ({ data }) {
         联系方式：
           <Link className={classes.link} href="https://t.me/OIwiki" target="_blank" rel="noreferrer noopener">
           Telegram 群组
-          </Link>{' '}
-          /{' '}
+          </Link>{' / '}
         <Link
           className={classes.link}
           href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
@@ -77,8 +59,25 @@ function FooterContent ({ data }) {
           rel="noreferrer noopener"
         >
           QQ 群组
-          </Link>
+        </Link>
       </Typography>
     </>
   )
 }
+
+const query = (props) => (
+  <StaticQuery
+    query={graphql`
+      query lastestCommit {
+        allGitCommit(limit: 1) {
+          nodes {
+            hash
+            date
+          }
+        }
+      }
+    `}
+    render={(data) => <FooterContent data={data} {...props} />}
+  />
+)
+export default query

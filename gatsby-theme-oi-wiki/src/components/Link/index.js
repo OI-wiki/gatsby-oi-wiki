@@ -1,4 +1,3 @@
-import lightBlue from '@material-ui/core/colors/lightBlue'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link as GatsbyLink } from 'gatsby'
 // eslint-disable-next-line
@@ -9,14 +8,13 @@ import path from 'path'
 
 const useStyles = makeStyles((theme) => ({
   link: {
-    color: lightBlue[500],
+    color: theme.palette.link.default,
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
+      color: theme.palette.link.hover,
     },
-    '&.active': {
-      color: theme.palette.text.primary,
-    },
+    transition: `color ${250}ms ease-in-out`,
   },
 }))
 
