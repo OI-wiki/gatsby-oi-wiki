@@ -9,7 +9,8 @@ export function useDidUpdateEffect (fn, inputs): void {
 }
 
 export function useDelay (onOpen: () => void, onClose: () => void, openDelay: number, closeDelay: number) : [() => void, () => void] {
-  const closeHandle = useRef(null), openHandle = useRef(null)
+  const closeHandle = useRef(null)
+  const openHandle = useRef(null)
   function open () : void {
     if (closeHandle.current) { // 正在准备close，则不让它close
       clearTimeout(closeHandle.current)
@@ -27,7 +28,7 @@ export function useDelay (onOpen: () => void, onClose: () => void, openDelay: nu
       clearTimeout(closeHandle.current)
       closeHandle.current = null
     }
-    if(openHandle.current){ // 鼠标快进快出，则不显示
+    if (openHandle.current) { // 鼠标快进快出，则不显示
       clearTimeout(openHandle.current)
       openHandle.current = null
     }
