@@ -1,4 +1,4 @@
-import { Grid, Link, Typography } from '@material-ui/core'
+import { Link, Typography } from '@material-ui/core'
 
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import { makeStyles } from '@material-ui/core/styles'
@@ -48,43 +48,37 @@ function FooterContent ({ data }) {
   })
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography>
-          Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
+    <>
+      <Typography gutterBottom>
+        Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
         </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography>
-          最近更新:{' '}
-          <Link
-            className={classes.link}
-            href="https://github.com/OI-wiki/OI-wiki/commits"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {hash.substr(0, 7)}
-          </Link>
+      <Typography gutterBottom>
+        最近更新:{' '}
+        <Link
+          className={classes.link}
+          href="https://github.com/OI-wiki/OI-wiki/commits"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          {hash.substr(0, 7)}
+        </Link>
           , {date.substr(0, 10)}
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography>
-          联系方式：
+      </Typography>
+      <Typography>
+        联系方式：
           <Link className={classes.link} href="https://t.me/OIwiki" target="_blank" rel="noreferrer noopener">
-            Telegram 群组
+          Telegram 群组
           </Link>{' '}
           /{' '}
-          <Link
-            className={classes.link}
-            href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            QQ 群组
+        <Link
+          className={classes.link}
+          href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          QQ 群组
           </Link>
-        </Typography>
-      </Grid>
-    </Grid>
+      </Typography>
+    </>
   )
 }
