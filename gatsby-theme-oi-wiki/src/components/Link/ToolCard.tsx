@@ -4,14 +4,32 @@ import {
   Card,
   CardContent,
   Fade,
-  Typography,
   CircularProgress,
+  makeStyles,
 } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { PreviewData, FetchStatus } from './LinkTooltip'
-import {useDelay} from './hooks'
-
-
+import { useDelay } from './hooks'
+const lines = 4
+const lineHeight = 1.5
+const useStyles = makeStyles((theme) => ({
+  fade: {
+    lineHeight: `${lineHeight}em`,
+    height: `${lineHeight * lines}em`,
+    overflow: 'hidden',
+    position: 'relative',
+    '&:after': {
+      content: '""',
+      textAlign: 'right',
+      position: 'absolute',
+      bottom: 0,
+      right: 0,
+      width: '30%',
+      height: '1.5em',
+      background: theme.palette.fadeTextBackground,
+    },
+  },
+}))
 type PositionAndSize = {
   pos: Position,
   size: Size,
@@ -55,7 +73,8 @@ type Props = {
   openDelay?: number,
   closeDelay?: number,
 }
-const ToolCard : React.FC<Props> = function (props: Props) {
+const ToolCard: React.FC<Props> = function (props: Props) {
+  const classes = useStyles()
   const { children, content, status } = props
   const closeDelay = props.closeDelay || 0
   const openDelay = props.openDelay || 0
@@ -98,12 +117,9 @@ const ToolCard : React.FC<Props> = function (props: Props) {
           style={{
             position: 'absolute',
             zIndex: 9999,
+            width: '320px',
             bottom: '2em',
             left: 0,
-            width: '320px',
-            maxHeight: '400px',
-            overflowY: 'hidden',
-            textOverflow: 'ellipsis',
           }}
           ref={poperRef}
         >
@@ -119,10 +135,12 @@ const ToolCard : React.FC<Props> = function (props: Props) {
           }
           {status === 'fetched' &&
             <CardContent>
-              <Typography variant="h6">
-                {content.title}
-              </Typography>
-              <div dangerouslySetInnerHTML={{ __html: content.html }} />
+              <div className={classes.fade}>
+                <strong>
+                  {content.title + ' '}
+                </strong>
+                {content.text}
+              </div>
             </CardContent>
           }
           {

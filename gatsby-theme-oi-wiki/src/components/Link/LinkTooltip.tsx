@@ -3,7 +3,7 @@ import ToolCard from './ToolCard'
 import { useDidUpdateEffect } from './hooks'
 
 export interface PreviewData {
-  html: string,
+  text: string,
   title: string,
 }
 

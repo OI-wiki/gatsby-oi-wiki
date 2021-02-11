@@ -57,4 +57,3 @@ export function getElementSize (el: HTMLElement): Size {
     height: el.offsetHeight,
   }
 }
-
