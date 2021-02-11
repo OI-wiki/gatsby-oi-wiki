@@ -52,8 +52,4 @@ export const useStyles = makeStyles((theme) => ({
   iconItem: {
     minWidth: theme.spacing(5),
   },
-  navBtn: {
-    padding: 0,
-    margin: 12,
-  },
 }))
