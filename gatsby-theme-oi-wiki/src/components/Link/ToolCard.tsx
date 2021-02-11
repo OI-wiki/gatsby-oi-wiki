@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       right: 0,
       width: '30%',
       height: '1.5em',
-      background: theme.palette.fadeTextBackground,
+      background: (theme.palette as any).fadeTextBackground,
     },
   },
 }))
