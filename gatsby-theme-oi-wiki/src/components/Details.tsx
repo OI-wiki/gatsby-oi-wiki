@@ -17,6 +17,7 @@ const getDetailsClasses = makeStyles((theme) => ({
     // eslint-disable-next-line
     // @ts-ignore
     borderLeftColor: theme.palette.details.border,
+    boxShadow: theme.shadows[1],
   },
   expanded: {
     '&, &:first-child, &:last-child': {
