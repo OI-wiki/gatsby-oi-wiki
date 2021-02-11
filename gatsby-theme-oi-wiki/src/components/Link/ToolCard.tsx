@@ -103,6 +103,7 @@ const ToolCard : React.FC<Props> = function (props: Props) {
             width: '320px',
             maxHeight: '400px',
             overflowY: 'hidden',
+            textOverflow: 'ellipsis',
           }}
           ref={poperRef}
         >
