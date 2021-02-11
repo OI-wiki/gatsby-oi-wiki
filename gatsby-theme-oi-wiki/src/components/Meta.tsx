@@ -1,5 +1,4 @@
 import {Paper, Typography, makeStyles} from '@material-ui/core'
-import lightBlue from '@material-ui/core/colors/lightBlue'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
 import HistoryIcon from '@material-ui/icons/History'
@@ -9,7 +8,7 @@ import Link from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   metaicon: {
     verticalAlign: 'sub',
   },
@@ -22,14 +21,16 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
   },
   link: {
-    color: lightBlue[500],
+    color: theme.palette.link.default,
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
+      color: theme.palette.link.hover,
     },
     '&.active': {
       color: theme.palette.text.primary,
     },
+    transition: `color ${250}ms ease-in-out`,
   },
 }))
 
