@@ -71,7 +71,6 @@ function Mdx ({ data: { mdx }, location }) {
     summary: Summary,
     a: Link(location, isIndex),
     inlineCode: 'code',
-    inlinecode: 'code',
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
