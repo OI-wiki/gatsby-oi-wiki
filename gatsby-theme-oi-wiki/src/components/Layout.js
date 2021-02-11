@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       marginLeft: 250,
     },
-    overflowY: 'hidden',
+    overflow: 'hidden',
   },
   wip: {
     margin: `${theme.spacing(2)}px 0px`,
