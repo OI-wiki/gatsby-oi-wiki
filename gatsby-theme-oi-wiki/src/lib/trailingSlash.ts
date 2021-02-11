@@ -1,3 +1,3 @@
-export default function trimTrailingSlash(str: string): string {
-  return str.replace(/\/$/, '')
+export default function trimTrailingSlash(str?: string): string {
+  return str?.replace(/\/$/, '')
 }
