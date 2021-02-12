@@ -84,7 +84,7 @@ const Meta: React.FC<Props> = (props: Props) => {
           <Typography gutterBottom>
             <span>
               <GroupIcon fontSize="small" className={classes.metaicon} />
-              {' 贡献者: '}
+              {' 贡献者：'}
             </span>
             {unique(props.authors.split(',').sort()).map(name => <Author key={name} name={name} />)}
           </Typography>
