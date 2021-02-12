@@ -123,7 +123,7 @@ const ToC: React.FC<Toc> = (props) => {
           <Typography component="ul" className={classes.ul}>
             {itemsClientRef.current.map((item2) => (
               item2.level <= 2
-                ? <li key={item2.title}>
+                ? <li key={item2.url + item2.title}>
                   {itemLink({ item: item2, secondary: item2.level !== 1 })}
                 </li> : null
             ))}
