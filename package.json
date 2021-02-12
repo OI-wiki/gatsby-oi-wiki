@@ -5,6 +5,7 @@
     "example"
   ],
   "scripts": {
+    "dev": "yarn workspace example develop",
     "develop": "yarn workspace example develop",
     "build": "yarn workspace example build && cp -r example/public public",
     "clean": "yarn workspace example clean && rm -rf public .cache",
