@@ -1,4 +1,4 @@
-import { Link as MuiLink, Typography } from '@material-ui/core'
+import { Link as MuiLink, Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import clsx from 'clsx'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import smoothScrollTo from '../../lib/smoothScroll'
@@ -38,6 +38,12 @@ const ToC: React.FC<Toc> = (props) => {
   const { toc, pathname } = props
   const items = toc.items
   const classes = useStyles()
+  const theme = useTheme()
+
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
+  const tabHeight = isMdDown ? 64 : 112
+  const scrollPadding = 24
+
   const itemsClientRef = useRef(getItems(items))
   // eslint-disable-next-line
   useEffect(() => {
@@ -72,7 +78,7 @@ const ToC: React.FC<Toc> = (props) => {
     const targetElement = document.getElementById(
       hash.substring(1, hash.length),
     )
-    smoothScrollTo((targetElement?.offsetParent as any)?.offsetTop)
+    smoothScrollTo((targetElement?.offsetParent as any)?.offsetTop - tabHeight - scrollPadding)
     history.pushState(null, null, hash)
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {
