@@ -60,9 +60,8 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
     <Layout location={location} noMeta="true" title={`更改记录 - ${title}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { hash, date, message, refs, body, author_name: author, author_email: email } = item
-          console.log(refs, body, email)
           return (
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
