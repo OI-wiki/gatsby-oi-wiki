@@ -16,7 +16,7 @@ import EditWarn from './EditWarn'
  * @return {Array<T>}
  */
 const unique = function <T>(a: Array<T>): Array<T> {
-  return a.filter((val, i, arr) => i == 0 || arr[i - 1] !== val)
+  return a.filter((val, i, arr) => i === 0 || arr[i - 1] !== val)
 }
 
 const useStyles = makeStyles((theme: any) => ({
