@@ -5,6 +5,7 @@ import isAbsoluteURL from 'is-absolute-url'
 import React from 'react'
 import LinkTooltip from './LinkTooltip'
 import path from 'path'
+import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -56,28 +57,28 @@ function getAPIURL(link, pathname, isIndex) {
 function isRef(link) {
   return /^#/.test(link)
 }
-function RealLink ({ to = '', href = to, children, pathname, isIndex, ...props }) {
+function RealLink ({ to = '', href = to, children, pathname, isIndex, className, ...props }) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
     return <a {...props} href={href}>{children}</a>
   }
   if (isAbsoluteURL(href)) {
     return (
-      <a {...props} href={href} className={classes.link} target="_blank" rel="noopener noreferrer nofollow" >
+      <a {...props} href={href} className={clsx(className, classes.link)} target="_blank" rel="noopener noreferrer nofollow" >
         {children}
       </a>
     )
   }
   if (isRef(href)) {
     return (
-      <GatsbyLink {...props} to={href} className={classes.link}>
+      <GatsbyLink {...props} to={href} className={clsx(className, classes.link)}>
         {children}
       </GatsbyLink>
     )
   }
   return (
     <LinkTooltip url={getAPIURL(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
-      <GatsbyLink {...props} to={linkFix(href, isIndex)} className={classes.link}>
+      <GatsbyLink {...props} to={linkFix(href, isIndex)} className={clsx(className, classes.link)}>
         {children}
       </GatsbyLink>
     </LinkTooltip>
