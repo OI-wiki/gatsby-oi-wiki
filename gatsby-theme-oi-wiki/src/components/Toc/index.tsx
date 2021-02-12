@@ -52,12 +52,15 @@ const ToC: React.FC<Toc> = (props) => {
     if (clickedRef.current) {
       return
     }
-
     const active: any = document.documentElement.scrollTop < 200
       ? { url: null } // No hash if we're near the top of the page
-      : itemsClientRef.current.find(item =>
-        item.node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8,
-      )
+      : ((arr: itemsResult[]) => {
+        for(let i = arr.length - 1; i>=0; i--){
+          if(arr[i].node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8)
+            return arr[i]
+        }
+        return { url: null }
+      })(itemsClientRef.current)
 
     if (active && activeState !== active.url) {
       setActiveState(active.url)
