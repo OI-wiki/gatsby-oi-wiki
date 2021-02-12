@@ -68,7 +68,6 @@ function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAnd
   } else {
     setUpper()
   }
-  console.log(pos, linkWidth, viewport)
   if(pos.x + linkWidth / 2 < viewport.width / 2){
     setRight()
   } else {
