@@ -93,7 +93,7 @@ const lightCss = {
       '--inline-color': '#37474f',
       '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
       '--search-bg': htr(grey[100]),
-      '--search-highlight': '#174d8c',
+      '--search-highlight': htr('#174d8c'),
       '--tab-hover': htr('#000'),
       '--divider': htr(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
@@ -101,6 +101,8 @@ const lightCss = {
       '--alert-error-bg': htr(red[50]),
       '--clicked-reaction-button': htr('#faebd7'),
       '--fade-background': 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
+      '--link-default': htr('#576ad4'),
+      '--link-hover': htr('#03a9f4'),
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -118,7 +120,7 @@ const darkCss = {
       '--details-main': htr(grey[700]),
       '--blockquote': '255, 255, 255, .12',
       '--search-bg': htr(grey[700]),
-      '--search-highlight': '#acccf1',
+      '--search-highlight': htr('#acccf1'),
       '--tab-hover': htr('#fff'),
       '--divider': htr(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
@@ -126,6 +128,8 @@ const darkCss = {
       '--alert-error-bg': htr(grey[900]),
       '--clicked-reaction-button': htr('#202020'),
       '--fade-background': 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 66, 66, 1) 50%)',
+      '--link-default': htr('#20baff'),
+      '--link-hover': htr('#52ebff'),
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -197,8 +201,8 @@ const adaptiveTheme = createMuiTheme({
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',
     link: {
-      default: '#576ad4',
-      hover: '#03a9f4',
+      default: 'rgba(var(--link-default))',
+      hover: 'rgba(var(--link-hover))',
     }
   },
   // Material-UI hard-coded and/or used color manipulator in several components
@@ -206,7 +210,7 @@ const adaptiveTheme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        color: 'rgba(var(--text-main))',
+        color: 'rgba(var(--text-primary))',
       },
       outlined: {
         border: '1px solid rgba(var(--divider))',
@@ -214,15 +218,12 @@ const adaptiveTheme = createMuiTheme({
     },
     MuiAlert: {
       standardInfo: {
-        color: 'rgba(var(--text-main))',
+        color: 'rgba(var(--text-primary))',
         backgroundColor: 'rgba(var(--alert-info-bg))',
       },
       standardError: {
-        color: 'rgba(var(--text-main))',
+        color: 'rgba(var(--text-primary))',
         backgroundColor: 'rgba(var(--alert-error-bg))',
-        '& $icon': {
-          color: 'rgba(var(--error-main))',
-        },
       },
     },
   },
