@@ -1,11 +1,11 @@
 import {
   Grid,
-  InputLabel,
   Button,
-  MenuItem,
   makeStyles,
-  Select,
-  FormControl
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from '@material-ui/core'
 import {darken} from '@material-ui/core/styles/colorManipulator'
 import React from 'react'
@@ -106,8 +106,9 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <FormControl>
-            <InputLabel>暗色模式</InputLabel>
-            <Select
+            暗色模式
+            <RadioGroup
+              name="theme-mode"
               value={settings.darkMode.type}
               onChange={(e) => {
                 updateSetting({
@@ -117,10 +118,10 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                 })
               }}
             >
-              <MenuItem value="user-preference">跟随系统</MenuItem>
-              <MenuItem value="always-on">总是打开</MenuItem>
-              <MenuItem value="always-off">总是关闭</MenuItem>
-            </Select>
+              <FormControlLabel value="user-preference" control={<Radio />} label="跟随系统" />
+              <FormControlLabel value="always-on" control={<Radio />} label="总是打开" />
+              <FormControlLabel value="always-off" control={<Radio />} label="总是关闭" />
+            </RadioGroup>
           </FormControl>
         </Grid>
         <Grid item>
