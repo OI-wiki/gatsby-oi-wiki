@@ -140,5 +140,9 @@ main img {
 }
 
 .footnotes p {
-  display: inline-block;
+  display: inline;
+}
+
+.footnotes ol {
+  line-height: 2em;
 }
