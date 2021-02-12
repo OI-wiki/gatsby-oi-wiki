@@ -138,3 +138,7 @@ main img {
   display: block;
   margin: 0 auto;
 }
+
+.footnotes p {
+  display: inline-block;
+}
