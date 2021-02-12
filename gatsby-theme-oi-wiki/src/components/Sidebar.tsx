@@ -14,9 +14,13 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       textDecoration: 'none',
     },
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   oplistitem: {
     lineHeight: 1.2,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   list: {
     width: '100%',
