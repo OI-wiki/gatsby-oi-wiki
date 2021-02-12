@@ -55,9 +55,8 @@ const ToC: React.FC<Toc> = (props) => {
     const active: any = document.documentElement.scrollTop < 200
       ? { url: null } // No hash if we're near the top of the page
       : ((arr: itemsResult[]) => {
-        for(let i = arr.length - 1; i>=0; i--){
-          if(arr[i].node?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8)
-            return arr[i]
+        for (let i = arr.length - 1; i >= 0; i--) {
+          if (arr[i].node?.offsetParent?.offsetTop < document.documentElement.scrollTop + document.documentElement.clientHeight / 8) { return arr[i] }
         }
         return { url: null }
       })(itemsClientRef.current)
@@ -73,7 +72,7 @@ const ToC: React.FC<Toc> = (props) => {
     const targetElement = document.getElementById(
       hash.substring(1, hash.length),
     )
-    smoothScrollTo(targetElement.offsetTop)
+    smoothScrollTo((targetElement?.offsetParent as any)?.offsetTop)
     history.pushState(null, null, hash)
     clickedRef.current = true
     unsetClickedRef.current = setTimeout(() => {
