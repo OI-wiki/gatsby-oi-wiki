@@ -144,7 +144,7 @@ function MyLayout ({
                   />}
                   {noComment === 'false' && (
                     <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                      <Accordion variant="outlined">
+                      <Accordion variant="outlined" defaultExpanded>
                         <AccordionSummary
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="comment"
