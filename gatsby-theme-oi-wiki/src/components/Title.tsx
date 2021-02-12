@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { makeStyles, Typography, Link, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
+import { makeStyles, Typography, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
+import LinkGetter from './Link'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
 type Props = {
@@ -27,9 +28,12 @@ const useStyles = makeStyles((theme) => createStyles({
   },
   authorLink: {
     color: (theme.palette as unknown as {subTitle: string}).subTitle,
-    textDecoration: 'underline',
+    // textDecoration: 'underline',
     paddingLeft: theme.spacing(1),
     display: 'inline-block',
+    // '&:hover': {
+    //   textDecoration: 'underline',
+    // },
   },
   iconButton: {
     float: 'right',
@@ -41,6 +45,7 @@ const useStyles = makeStyles((theme) => createStyles({
 const Title: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
+  const Link = LinkGetter(props.location)
   const Author: React.FC<{name: string}> = ({ name }) => {
     const trimedName = name.trim()
     return (
