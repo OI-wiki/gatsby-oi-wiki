@@ -14,9 +14,10 @@ import Button from '@material-ui/core/Button'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link as GatsbyLink } from 'gatsby'
 import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
+import LinkGetter from '../components/Link'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,14 +30,6 @@ const useStyles = makeStyles((theme) => ({
   infoContainer: {
     display: 'flex',
     alignItems: 'center',
-  },
-  link: {
-    color: lightBlue[500],
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-      color: lightBlue[500],
-    },
   },
   hashLink: {
     margin: '0 0 0 auto',
@@ -62,12 +55,15 @@ const useStyles = makeStyles((theme) => ({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
+  const Link = LinkGetter(location)
   return (
     <Layout location={location} noMeta="true" title={`更改记录 - ${title}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          // @ts-ignore
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars 
           const { hash, date, message, refs, body, author_name: author, author_email: email } = item
+          console.log(refs, body, email)
           return (
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
@@ -82,17 +78,17 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               <TimelineContent>
                 <Paper variant="outlined" className={classes.paper}>
                   <div className={classes.infoContainer}>
-                    <a href={'https://github.com/' + author} className={classes.link}>
+                    <Link href={`https://github.com/${author}`}>
                       <Typography variant="h6" component="h6">
                         {author}
                       </Typography>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}
                       className={classes.hashLink}
                     >
                       <Typography>{hash.substr(0, 7)}</Typography>
-                    </a>
+                    </Link>
                   </div>
                   <Typography>{message}</Typography>
                 </Paper>
@@ -113,14 +109,14 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               <Typography variant="h6" component="h6">
                 ...
               </Typography>
-              在 <a className={classes.link} href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</a> 上查看完整历史
+              在 <Link href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</Link> 上查看完整历史
             </Paper>
           </TimelineContent>
         </TimelineItem>
       </Timeline>
       <div className={classes.backContainer}>
         <Divider />
-        <Button component={Link} style={{ marginTop: '8px' }} size="large" color="inherit" to="../" startIcon={<ArrowBackIos />}>
+        <Button component={GatsbyLink} style={{ marginTop: '8px' }} size="large" color="inherit" to="../" startIcon={<ArrowBackIos />}>
           返回
         </Button>
       </div>
