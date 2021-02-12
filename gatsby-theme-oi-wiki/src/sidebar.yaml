@@ -5,6 +5,7 @@
     - 测试: /test/
     - 这里什么也没有: /empty/
 - 数学:
+    - MST: /mst/
     - 数学简介: /math/
     - 多项式:
         - 多项式部分简介: /math/poly/intro/
