@@ -32,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
  *
  * 实际上不需要当前页面的 path
  *
- * @param {*} link 要修复的相对路径
- * @param {*} isIndex 当前页面是不是 index（index.md）
+ * @param {string} link 要修复的相对路径
+ * @param {boolean} isIndex 当前页面是不是 index（index.md）
+ * @returns {string}
  */
 function linkFix (link, isIndex) {
   if (/^\//.test(link)) return link // absolute path
