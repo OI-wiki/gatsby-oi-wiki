@@ -1,9 +1,9 @@
-import {Paper, Typography, makeStyles} from '@material-ui/core'
+import { Paper, Typography, makeStyles } from '@material-ui/core'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
-import {Group as GroupIcon, History as HistoryIcon} from '@material-ui/icons'
-import React, {useState} from 'react'
-import {Link as GatsbyLink} from 'gatsby'
+import { Group as GroupIcon, History as HistoryIcon } from '@material-ui/icons'
+import React, { useState } from 'react'
+import { Link as GatsbyLink } from 'gatsby'
 import LinkGetter from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
@@ -15,7 +15,7 @@ import EditWarn from './EditWarn'
  * @param {Array<T>} a
  * @return {Array<T>}
  */
-const unique = function <T>(a: Array<T>): Array<T> {
+const unique = function <T> (a: Array<T>): Array<T> {
   return a.filter((val, i, arr) => i === 0 || arr[i - 1] !== val)
 }
 
@@ -62,12 +62,12 @@ interface Props {
   authors?: string;
 }
 const Meta: React.FC<Props> = (props: Props) => {
-  const {tags, relativePath, modifiedTime, location, ...rest} = props
+  const { tags, relativePath, modifiedTime, location, ...rest } = props
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
   const Link = LinkGetter(props.location)
 
-  const Author: React.FC<{name: string}> = ({name}) => {
+  const Author: React.FC<{name: string}> = ({ name }) => {
     const trimedName = name.trim()
     return (
       <Link href={`https://github.com/${trimedName}`} className={classes.authorLink}>
@@ -81,7 +81,7 @@ const Meta: React.FC<Props> = (props: Props) => {
       <Tags tags={tags} />
       <div className={classes.meta}>
         {props.authors &&
-          <Typography className={classes.subText}>
+          <Typography gutterBottom>
             <span>
               <GroupIcon fontSize="small" className={classes.metaicon} />
               {' 贡献者: '}
@@ -95,7 +95,7 @@ const Meta: React.FC<Props> = (props: Props) => {
             {' 本页面最近更新：'}
           </span>
           <span>{modifiedTime}</span>，
-        <GatsbyLink to='./changelog/' className={classes.link} {...rest} state={{...rest}}>更新历史</GatsbyLink>
+          <GatsbyLink to='./changelog/' className={classes.link} {...rest} state={{ ...rest }}>更新历史</GatsbyLink>
         </Typography>
 
         <Typography gutterBottom>
@@ -109,7 +109,7 @@ const Meta: React.FC<Props> = (props: Props) => {
               }}
               className={classes.link} to="."
             >
-              {'在 GitHub 上编辑此页！'}
+              在 GitHub 上编辑此页！
             </GatsbyLink>
           </span>
         </Typography>
