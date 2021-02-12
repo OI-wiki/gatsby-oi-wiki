@@ -41,6 +41,7 @@ function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAnd
     width: document.documentElement.clientWidth,
     height: document.documentElement.clientHeight,
   }
+  const linkWidth = element.parentElement?.parentElement?.offsetWidth || 0
   function setLower (): void {
     element.style.removeProperty('bottom')
     element.style.setProperty('top', '2em')
@@ -49,19 +50,29 @@ function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAnd
     element.style.removeProperty('top')
     element.style.setProperty('bottom', '2em')
   }
-  function setHorizonal (): void { // 控制横坐标
+  function setRight (): void { // 控制横坐标
     element.style.removeProperty('right')
     let offset = 0
     offset = Math.max(offset, -pos.x + 12) // 不能超过屏幕左边
     offset = Math.min(offset, -pos.x + Math.max(0, viewport.width - size.width) - 12) // 不能超过屏幕右边
     element.style.setProperty('left', `${offset}px`)
   }
+  function setLeft (): void { // 控制横坐标
+    element.style.removeProperty('left')
+    let offset = 0
+    offset = Math.min(offset, pos.x+linkWidth - size.width-12) // 不能超过屏幕左边
+    element.style.setProperty('right', `${offset}px`)
+  }
   if (pos.y < viewport.height / 2) { // 位于上半部分
     setLower()
   } else {
     setUpper()
   }
-  setHorizonal()
+  if(pos.x + linkWidth / 2 < viewport.width / 2){
+    setRight()
+  } else {
+    setLeft()
+  }
   element.style.setProperty('max-width', `${viewport.width - 24}px`)
 }
 
@@ -105,6 +116,7 @@ const ToolCard: React.FC<Props> = function (props: Props) {
     <span
       style={{
         position: 'relative',
+        display: 'inline-block',
       }}
       onMouseEnter={() => {
         onOpen()
