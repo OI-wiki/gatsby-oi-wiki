@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {makeStyles, Typography, Link, createStyles, Grid, Tooltip, IconButton, Hidden} from '@material-ui/core'
+import React, { useState } from 'react'
+import { makeStyles, Typography, Link, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
 type Props = {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => createStyles({
 const Title: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
-  const Author: React.FC<{name: string}> = ({name}) => {
+  const Author: React.FC<{name: string}> = ({ name }) => {
     const trimedName = name.trim()
     return (
       <Link
@@ -78,7 +78,7 @@ const Title: React.FC<Props> = (props: Props) => {
           {
             props.authors &&
             <Typography variant="body2" className={classes.subText}>
-              作者: {props.authors.split(',').map(name => <Author key={name} name={name} />)}
+              贡献者: {props.authors.split(',').map(name => <Author key={name} name={name} />)}
             </Typography>
           }
         </Grid>
