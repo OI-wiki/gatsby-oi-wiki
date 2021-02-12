@@ -70,7 +70,7 @@ module.exports = {
           require('remark-details'),
           [require('@mgtd/remark-shiki'), {
             semantic: false,
-            theme: 'dark_plus',
+            theme: 'dark-plus',
             skipInline: true,
           }],
         ],

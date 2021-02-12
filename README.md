@@ -15,7 +15,7 @@ TG 群：https://t.me/joinchat/GaEGzhcWGl8-1CSjdhi9kA
 
 ### 在本地开发
 
-准备好 Git 和 NodeJS。注意，NodeJS 版本应当大于等于12. 请勿使用 taobao 等 npm 镜像。
+准备好 Git 和 NodeJS。注意，NodeJS 版本应当大于等于 14. 请勿使用 taobao 等 npm 镜像。
 
 #### Linux
 
