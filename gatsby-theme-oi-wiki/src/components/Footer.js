@@ -36,7 +36,7 @@ function FooterContent ({ data }) {
         Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
         </Typography>
       <Typography gutterBottom>
-        最近更新:{' '}
+        {'最近更新： '}
         <Link
           className={classes.link}
           href="https://github.com/OI-wiki/OI-wiki/commits"
@@ -48,17 +48,17 @@ function FooterContent ({ data }) {
           , {date.substr(0, 10)}
       </Typography>
       <Typography>
-        联系方式：
-          <Link className={classes.link} href="https://t.me/OIwiki" target="_blank" rel="noreferrer noopener">
-          Telegram 群组
-          </Link>{' / '}
+        {'联系方式：'}
+        <Link className={classes.link} href="https://t.me/OIwiki" target="_blank" rel="noreferrer noopener">
+          {'Telegram 群组'}
+        </Link>{' / '}
         <Link
           className={classes.link}
           href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
           target="_blank"
           rel="noreferrer noopener"
         >
-          QQ 群组
+          {'QQ 群组'}
         </Link>
       </Typography>
     </>
