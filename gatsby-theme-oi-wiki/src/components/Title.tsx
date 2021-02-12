@@ -5,8 +5,6 @@ import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
 type Props = {
   title: string,
-  modifiedTime?: string,
-  authors?: string,
   noEdit: string,
   noMeta?: string,
   relativePath: string,
@@ -17,7 +15,6 @@ type Props = {
 const useStyles = makeStyles((theme) => createStyles({
   boldText: {
     fontWeight: 'bold',
-    marginBottom: theme.spacing(2),
     display: 'inline-block',
     verticalAlign: 'middle',
   },
@@ -50,13 +47,6 @@ const Title: React.FC<Props> = (props: Props) => {
           <Typography variant="h4" className={classes.boldText} component="h1">
             {props.title}
           </Typography>
-          {
-            props.noMeta === 'false' &&
-            props.modifiedTime &&
-            <Typography variant="body2" className={classes.subText}>
-              本页面最后更新于: {props.modifiedTime}
-            </Typography>
-          }
         </Grid>
         <Grid item xs={1}>
           {

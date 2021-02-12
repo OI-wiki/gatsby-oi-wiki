@@ -122,8 +122,6 @@ function MyLayout ({
                 <div className={classes.main}>
                   <Title
                     title={title}
-                    modifiedTime={modifiedTime}
-                    authors={authors}
                     location={location}
                     noEdit={noEdit}
                     noMeta={noMeta}
