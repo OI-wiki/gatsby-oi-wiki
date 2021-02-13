@@ -6,15 +6,14 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  FormGroup,
+  Checkbox,
 } from '@material-ui/core'
 import {darken} from '@material-ui/core/styles/colorManipulator'
 import React from 'react'
-import createPersistedState from 'use-persisted-state'
 import Layout from '../components/Layout'
-import defaultSettings from '../lib/defaultSettings'
 import colors from '../styles/colors'
-
-const useConfig = createPersistedState('settings')
+import { useSetting, Settings } from '../lib/useSetting'
 
 type Props = {
   background: any,
@@ -43,17 +42,6 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(100% - .6em)'
   },
 }))
-
-const useSetting = (defaultSettings) => {
-  const [settings, setSettings] = useConfig(defaultSettings)
-  const updateSetting = (newSettings): void => {
-    const finalSettings = {...defaultSettings, ...settings, ...newSettings}
-    setSettings(finalSettings)
-    // eslint-disable-next-line dot-notation
-    window !== undefined && window['onthemechange'](finalSettings)
-  }
-  return [settings, updateSetting];
-}
 
 type ColorButtonProp = {
   color: string,
@@ -85,7 +73,7 @@ type SettingsPageProps = {
 }
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
   const {location} = props
-  const [settings, updateSetting] = useSetting(defaultSettings)
+  const [settings, updateSetting] = useSetting()
 
   const onBtnClick = (cprops) => {
     updateSetting({
@@ -113,7 +101,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               onChange={(e) => {
                 updateSetting({
                   darkMode: {
-                    type: e.target.value,
+                    type: (e.target.value as unknown as ('user-preference' | 'always-on' | 'always-off')),
                   },
                 })
               }}
@@ -122,6 +110,28 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               <FormControlLabel value="always-on" control={<Radio />} label="总是打开" />
               <FormControlLabel value="always-off" control={<Radio />} label="总是关闭" />
             </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <FormControl>
+            动画
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={settings.animation.smoothScroll}
+                    onChange={(e) => {
+                      updateSetting({
+                        animation: {
+                          smoothScroll: e.target.checked
+                        },
+                      })
+                    }
+                    } name="gilad"
+                  />
+                }
+                label="使用平滑滚动"
+              />
+            </FormGroup>
           </FormControl>
         </Grid>
         <Grid item>
