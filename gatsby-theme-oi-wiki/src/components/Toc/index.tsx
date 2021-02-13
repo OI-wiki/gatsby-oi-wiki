@@ -44,7 +44,7 @@ function Tocize(items: Item[]): Node[] {
     if (level === 0) {
       data.push(newNode)
     } else {
-      curNode[level - 1]?.children.push(newNode)
+      if(curNode[level - 1]) curNode[level - 1].children.push(newNode)
       newNode.parent = curNode[level - 1]
     }
   })
