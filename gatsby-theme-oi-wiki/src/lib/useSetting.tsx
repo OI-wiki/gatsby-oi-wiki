@@ -1,22 +1,16 @@
 import usePersistedState from 'use-persisted-state'
 
 export interface Settings {
-  darkMode: DarkModeSettings;
-  animation: AnimationSettings;
-  theme: ThemeSettings;
-}
-
-interface DarkModeSettings {
-  type: 'user-preference' | 'always-on' | 'always-off';
-  brightness: number;
-}
-
-interface AnimationSettings {
-  smoothScroll: boolean,
-}
-
-interface ThemeSettings {
-  navColor: string;
+  darkMode: {
+    type: 'user-preference' | 'always-on' | 'always-off';
+    brightness: number;
+  }
+  animation: {
+    smoothScroll: boolean;
+  }
+  theme: {
+    navColor: string;
+  }
 }
 
 const defaultSettings: Settings = {
@@ -33,11 +27,10 @@ const defaultSettings: Settings = {
 }
 
 // https://stackoverflow.com/questions/41980195/recursive-partialt-in-typescript
+// 第一个回答会让 linter unhappy, 所以魔改了一下
 type RecursivePartial<T> = {
   [P in keyof T]?:
-    T[P] extends (infer U)[] ? RecursivePartial<U>[] :
-    T[P] extends object ? RecursivePartial<T[P]> :
-    T[P];
+    T[P] extends (infer U)[] ? RecursivePartial<U>[] : RecursivePartial<T[P]>
 };
 
 export const useSetting = (): [Settings, (s: RecursivePartial<Settings>) => void] => {
