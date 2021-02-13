@@ -67,8 +67,8 @@ function Mdx ({ data: { mdx }, location }) {
   }, [])
 
 
-  function LinkGetter (){
-    return function (props) {
+  function LinkGetter () {
+    return function TooltipLink (props) {
       return <SmartLink {...props} pathname={location.pathname} isIndex={isIndex} tooltip />
     }
   }

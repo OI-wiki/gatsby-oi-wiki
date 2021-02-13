@@ -106,7 +106,9 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               <Typography variant="h6" component="h6">
                 ...
               </Typography>
-              在 <SmartLink href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</SmartLink>
+              {'在 '}
+              <SmartLink href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</SmartLink>
+              {' 上查看完整历史'}
             </Paper>
           </TimelineContent>
         </TimelineItem>
