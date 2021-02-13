@@ -90,7 +90,9 @@ const ToC: React.FC<Toc> = (props) => {
     if (activeState !== hash) {
       setActiveState(hash)
     }
-  } : () => () => {}
+  } : () => () => {
+    // do nothing
+  }
 
   useEffect(
     () => () => {
