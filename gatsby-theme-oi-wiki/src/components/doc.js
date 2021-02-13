@@ -4,7 +4,7 @@ import Mark from 'mark.js'
 import Details from './Details.tsx'
 import Layout from './Layout'
 import Summary from './Summary.tsx'
-import Link from './Link'
+import { SmartLink } from './Link'
 import SEO from './Seo'
 
 function Mdx ({ data: { mdx }, location }) {
@@ -66,10 +66,17 @@ function Mdx ({ data: { mdx }, location }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
+  function LinkGetter () {
+    return function TooltipLink (props) {
+      return <SmartLink {...props} pathname={location.pathname} isIndex={isIndex} tooltip />
+    }
+  }
+
   const myComponents = {
     details: Details,
     summary: Summary,
-    a: Link(location, isIndex),
+    a: LinkGetter(),
     inlineCode: 'code',
     inlinecode: 'code',
   }

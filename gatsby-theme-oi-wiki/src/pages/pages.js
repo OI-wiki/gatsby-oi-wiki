@@ -17,7 +17,7 @@ import { graphql } from 'gatsby'
 import React, { useState } from 'react'
 
 import Layout from '../components/Layout'
-import Link from '../components/Link'
+import { SmartLink } from '../components/Link'
 import Tags from '../components/Tags.tsx'
 
 function PageItem (props) {
@@ -95,7 +95,6 @@ function BlogIndex (props) {
   const filteredItems = articles
     .map((x) => matchTags(x.frontmatter.tags, selectedTags) && x)
     .filter((x) => x !== false)
-  const MyLink = Link(location)
 
   return (
     <Layout
@@ -141,7 +140,7 @@ function BlogIndex (props) {
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={2} justify="center">
-            <GridItems filteredItems={filteredItems} linkComponent={MyLink} />
+            <GridItems filteredItems={filteredItems} linkComponent={SmartLink} />
           </Grid>
         </Grid>
       </Grid>
