@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import smoothScrollTo from '../../lib/smoothScroll'
 import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 import { useStyles } from './styles'
+import { useSetting } from '../../lib/useSetting'
 
 function getIDfromURL (url:string):string {
   return url?.substring(1, url.length)
@@ -39,6 +40,7 @@ const ToC: React.FC<Toc> = (props) => {
   const items = toc.items
   const classes = useStyles()
   const theme = useTheme()
+  const [settings] = useSetting()
 
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
   const tabHeight = isMdDown ? 64 : 112
@@ -72,7 +74,7 @@ const ToC: React.FC<Toc> = (props) => {
     }
   }, [activeState])
   useThrottledOnScroll(findActiveItem, 166)
-  const handleClick = (hash) => (event) => {
+  const handleClick = settings.animation.smoothScroll ? (hash) => (event) => {
     event.preventDefault()
     // Used to disable findActiveIndex if the page scrolls due to a click
     const targetElement = document.getElementById(
@@ -88,6 +90,8 @@ const ToC: React.FC<Toc> = (props) => {
     if (activeState !== hash) {
       setActiveState(hash)
     }
+  } : () => () => {
+    // do nothing
   }
 
   useEffect(

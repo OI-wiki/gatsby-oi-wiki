@@ -11,7 +11,6 @@ import {
 import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
-import createPersistedState from 'use-persisted-state'
 
 import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
 
@@ -20,7 +19,6 @@ import trimTrailingSlash from '../../lib/trailingSlash'
 // eslint-disable-next-line
 // @ts-ignore
 import pathList from '../../sidebar.yaml'
-import defaultSettings from '../../lib/defaultSettings'
 import Search from '../Search'
 import SiderContent from '../Sidebar'
 import Tabs from '../Tabs'
@@ -29,6 +27,7 @@ import SmallScreenMenu from '../SmallScreenMenu'
 import { useStyles } from './styles'
 import { flattenObject } from './utils'
 import NavBtnGroup from './NavBtnGroup'
+import { useSetting } from '../../lib/useSetting'
 
 function getTabIDFromLocation (location: string, pathList: string[]): number {
   const locationTrimmed = trimTrailingSlash(location)
@@ -44,7 +43,7 @@ interface drawerProps {
 
 const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const { pathname } = props
-  const [settings] = createPersistedState('settings')(defaultSettings)
+  const [settings] = useSetting()
   const theme = useTheme()
   const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
     ? settings.theme.navColor
