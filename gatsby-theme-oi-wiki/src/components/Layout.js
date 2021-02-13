@@ -1,10 +1,6 @@
 import {
-  Container,
   CssBaseline,
   Divider,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Grid,
   Typography,
 } from '@material-ui/core'
@@ -12,13 +8,12 @@ import {
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import { CustomCssBaseline, adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline } from '../theme'
-import CommentSystem from './Comment'
+import Comment from './Comment'
 import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta'
@@ -142,21 +137,7 @@ function MyLayout ({
                   />}
                   {noComment === 'false' && (
                     <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                      <Accordion variant="outlined" defaultExpanded>
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="comment"
-                        >
-                          <Typography>
-                            评论
-                          </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Container>
-                            <CommentSystem title={title} />
-                          </Container>
-                        </AccordionDetails>
-                      </Accordion>
+                      <Comment title={title} />
                     </div>
                   )}
                 </div>
