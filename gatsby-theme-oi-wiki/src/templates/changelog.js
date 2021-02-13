@@ -17,7 +17,7 @@ import React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
-import LinkGetter from '../components/Link'
+import { SmartLink } from '../components/Link'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
-  const Link = LinkGetter(location)
   return (
     <Layout location={location} noMeta="true" title={`更改记录 - ${title}`}>
       <Timeline>
@@ -76,17 +75,17 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               <TimelineContent>
                 <Paper variant="outlined" className={classes.paper}>
                   <div className={classes.infoContainer}>
-                    <Link href={`https://github.com/${author}`}>
+                    <SmartLink href={`https://github.com/${author}`}>
                       <Typography variant="h6" component="h6">
                         {author}
                       </Typography>
-                    </Link>
-                    <Link
+                    </SmartLink>
+                    <SmartLink
                       href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}
                       className={classes.hashLink}
                     >
                       <Typography>{hash.substr(0, 7)}</Typography>
-                    </Link>
+                    </SmartLink>
                   </div>
                   <Typography>{message}</Typography>
                 </Paper>
@@ -107,7 +106,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
               <Typography variant="h6" component="h6">
                 ...
               </Typography>
-              在 <Link href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</Link> 上查看完整历史
+              在 <SmartLink href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</SmartLink>
             </Paper>
           </TimelineContent>
         </TimelineItem>

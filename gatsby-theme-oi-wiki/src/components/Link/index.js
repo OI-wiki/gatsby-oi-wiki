@@ -7,18 +7,6 @@ import LinkTooltip from './LinkTooltip'
 import path from 'path'
 import clsx from 'clsx'
 
-const useStyles = makeStyles((theme) => ({
-  link: {
-    color: theme.palette.link.default,
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-      color: theme.palette.link.hover,
-    },
-    transition: `color ${250}ms ease-in-out`,
-  },
-}))
-
 /**
  * 修复相对路径的页面链接
  *
@@ -58,7 +46,44 @@ function getAPIURL(link, pathname, isIndex) {
 function isRef(link) {
   return /^#/.test(link)
 }
-function RealLink ({ to = '', href = to, children, pathname, isIndex, className, ...props }) {
+
+const useStyles = makeStyles((theme) => ({
+  link: {
+    color: theme.palette.link.default,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+      color: theme.palette.link.hover,
+    },
+    transition: `color ${250}ms ease-in-out`,
+  },
+}))
+
+/**
+ * 智能链接
+ * 
+ * - 如果是目录则使用原生 a 标签
+ * - 如果是 URL 就设为外链
+ * - 如果是 markdown 引用（纯哈希）则使用引用
+ * - 如果是 path 则根据 tooltip 属性决定是否启用 Tooltip
+ *
+ * @param {object} props.to 指向的链接
+ * @param {object} props.href to 的别名
+ * @param {object} props.tooltip 是否对站内链接启用 Tooltip 预览，如果为 true 则必须给出 pathname
+ * @param {object} props.isIndex 用于 markdown 内链的修复, 设置为 true 可以避免相关影响
+ * @param {object} props.pathname 当前页面的 path，用于获取 Tooltip API URL
+ * @return {JSX.Element}
+ */
+function SmartLink ({
+  to = '',
+  href = to,
+  className,
+  children,
+  tooltip = false,
+  pathname = null,
+  isIndex = true,
+  ...props
+}) {
   const classes = useStyles()
   if (props?.className?.search('anchor') > -1) {
     return <a {...props} href={href}>{children}</a>
@@ -77,19 +102,23 @@ function RealLink ({ to = '', href = to, children, pathname, isIndex, className,
       </GatsbyLink>
     )
   }
-  return (
-    <LinkTooltip url={getAPIURL(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
+  if (tooltip) {
+    return (
+      <LinkTooltip url={getAPIURL(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
+        <GatsbyLink {...props} to={linkFix(href, isIndex)} className={clsx(className, classes.link)}>
+          {children}
+        </GatsbyLink>
+      </LinkTooltip>
+    )
+  } else {
+    return (
       <GatsbyLink {...props} to={linkFix(href, isIndex)} className={clsx(className, classes.link)}>
         {children}
       </GatsbyLink>
-    </LinkTooltip>
-  )
-}
-
-function LinkGetter (location, isIndex = false) {
-  return function Link (props) {
-    return <RealLink {...props} pathname={location.pathname} isIndex={isIndex} />
+    )
   }
 }
 
-export default LinkGetter
+export {
+  SmartLink,
+}

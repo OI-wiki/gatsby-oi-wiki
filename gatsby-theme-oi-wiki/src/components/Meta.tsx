@@ -3,8 +3,7 @@ import CopyrightIcon from '@material-ui/icons/Copyright'
 import EditIcon from '@material-ui/icons/Edit'
 import { Group as GroupIcon, History as HistoryIcon } from '@material-ui/icons'
 import React, { useState } from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import LinkGetter from './Link'
+import { SmartLink } from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
 
@@ -65,14 +64,13 @@ const Meta: React.FC<Props> = (props: Props) => {
   const { tags, relativePath, modifiedTime, location, ...rest } = props
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
-  const Link = LinkGetter(props.location)
 
   const Author: React.FC<{name: string}> = ({ name }) => {
     const trimedName = name.trim()
     return (
-      <Link href={`https://github.com/${trimedName}`} className={classes.authorLink}>
+      <SmartLink href={`https://github.com/${trimedName}`} className={classes.authorLink}>
         {`@${trimedName}`}
-      </Link>
+      </SmartLink>
     )
   }
   return <>
@@ -95,14 +93,14 @@ const Meta: React.FC<Props> = (props: Props) => {
             {' 本页面最近更新：'}
           </span>
           <span>{modifiedTime}</span>，
-          <GatsbyLink to='./changelog/' className={classes.link} {...rest} state={{ ...rest }}>更新历史</GatsbyLink>
+          <SmartLink to='./changelog/' className={classes.link} {...rest} state={{ ...rest }}>更新历史</SmartLink>
         </Typography>
 
         <Typography gutterBottom>
           <span>
             <EditIcon fontSize="small" className={classes.metaicon} />
             {' 发现错误？想一起完善？ '}
-            <GatsbyLink
+            <SmartLink
               onClick={(e) => {
                 e.preventDefault()
                 setDialogOpen(true)
@@ -110,7 +108,7 @@ const Meta: React.FC<Props> = (props: Props) => {
               className={classes.link} to="."
             >
               在 GitHub 上编辑此页！
-            </GatsbyLink>
+            </SmartLink>
           </span>
         </Typography>
 
@@ -119,9 +117,9 @@ const Meta: React.FC<Props> = (props: Props) => {
             <CopyrightIcon fontSize="small" className={classes.metaicon} />
             {' 本页面的全部内容在 '}
             <strong>
-              <Link href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</Link>
+              <SmartLink href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</SmartLink>
               {' 和 '}
-              <Link href="https://github.com/zTrix/sata-license">SATA</Link>
+              <SmartLink href="https://github.com/zTrix/sata-license">SATA</SmartLink>
             </strong>
             {' 协议之条款下提供，附加条款亦可能应用'}
           </span>

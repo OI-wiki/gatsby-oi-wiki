@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { makeStyles, Typography, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
-import LinkGetter from './Link'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
 type Props = {
