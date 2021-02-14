@@ -29,6 +29,10 @@ const globalStyles = withStyles((theme) => ({
       boxShadow: '0 2px 4px rgba(var(--divider))',
       filter: 'var(--highlight-filter)',
     },
+    '.gatsby-highlight code': {
+      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
+
+    },
     img: {
       maxWidth: '100%',
     },
