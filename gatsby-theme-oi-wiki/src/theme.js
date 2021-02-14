@@ -22,9 +22,12 @@ const globalStyles = withStyles((theme) => ({
       borderLeft: `4px solid ${theme.palette.blockquote}`,
     },
     '.gatsby-highlight': {
-      backgroundColor: '#1E1E1E',
+      backgroundColor: '#FFF',
       padding: '2px 16px',
+      margin: '8px 0',
       borderRadius: '4px',
+      boxShadow: '0 2px 4px rgba(var(--divider))',
+      filter: 'var(--highlight-filter)',
     },
     img: {
       maxWidth: '100%',
@@ -103,6 +106,7 @@ const lightCss = {
       '--fade-background': 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
       '--link-default': htr('#576ad4'),
       '--link-hover': htr('#03a9f4'),
+      '--highlight-filter': '',
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -130,6 +134,7 @@ const darkCss = {
       '--fade-background': 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 66, 66, 1) 50%)',
       '--link-default': htr('#20baff'),
       '--link-hover': htr('#52ebff'),
+      '--highlight-filter': 'invert(98%) hue-rotate(180deg)',
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -203,7 +208,7 @@ const adaptiveTheme = createMuiTheme({
     link: {
       default: 'rgba(var(--link-default))',
       hover: 'rgba(var(--link-hover))',
-    }
+    },
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround
