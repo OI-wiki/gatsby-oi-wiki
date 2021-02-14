@@ -75,11 +75,13 @@ const colors: Array<{desc: string, color: string}> = [
 
 export interface LabeledPaletteColor extends SimplePaletteColorOptions {
   desc: string;
+  id: string
 }
 
-const paletteColors: Array<LabeledPaletteColor> = colors.map(c => ({
+const paletteColors: Array<LabeledPaletteColor> = colors.map((c,i) => ({
   ...createPaletteColor(c.color, 0.2),
   desc: c.desc,
+  id: i.toString(),
 }))
 
 export default paletteColors

@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 
 import globalStyles from './global'
 
+import paletteColors from '../styles/colors'
+
 function CustomCssEl () {
   return null
 }
@@ -34,12 +36,10 @@ function applyDefaults (theme, ...keys) {
 }
 
 function hexToRgbaParam(color, alpha = 1) {
-  if(/^rgba\(.*\)$/.test(color)){
-    return color.match(/^rgba\((.*)\)$/)[1]
-  }
-  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)){
-    return hexToRgb(color).trim().match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
-  }
+  if(color === 'auto') return color
+  if(/^rgba\(.*\)$/.test(color)) return color.match(/^rgba\((.*)\)$/)[1]
+  if(/^rgb\(.*\)$/.test(color)) return color.match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)) return hexToRgb(color).trim().match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
   throw new Error('Bad Hex ' + color)
 }
 
@@ -120,6 +120,20 @@ export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
     },
   }
 }))
+
+export const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() => {
+  return paletteColors.reduce((obj, c) => {
+    if(c.id === '0') return obj // auto
+    obj['@global']['.secondaryColor' + c.id] = {
+      '--secondary-light': hexToRgbaParam(c.light),
+      '--secondary-dark': hexToRgbaParam(c.dark),
+      '--secondary-main': hexToRgbaParam(c.main),
+      '--secondary-contrast-text': hexToRgbaParam(c.contrastText),
+    }
+    return obj
+  }, { '@global' : {} })
+}))
+
 function applyAdaptives (...keys) {
   const rst = {}
   function applyAdaptive (key) {
@@ -141,6 +155,12 @@ const adaptiveTheme = createMuiTheme({
       main: 'rgba(var(--primary-color))',
     },
     ...applyAdaptives(...paletteKeys),
+    secondary: {
+      light: 'rgba(var(--secondary-light))',
+      dark: 'rgba(var(--secondary-dark))',
+      main: 'rgba(var(--secondary-main))',
+      contrastText: 'rgba(var(--secondary-contrast-text))',
+    },
     footer: {
       background: 'rgba(var(--footer-bg))',
       text: 'rgba(var(--footer-text))',

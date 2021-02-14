@@ -11,6 +11,7 @@ export interface Settings {
   }
   theme: {
     primary: LabeledPaletteColor|null; // null: auto
+    secondary: string; // id
   }
 }
 
@@ -23,7 +24,8 @@ const defaultSettings: Settings = {
     smoothScroll: true,
   },
   theme: {
-    primary: null
+    primary: null,
+    secondary: '3', // Margatriod Magenta
   },
 }
 

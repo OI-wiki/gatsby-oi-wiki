@@ -64,10 +64,19 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
   const { location } = props
   const [settings, updateSetting] = useSetting()
 
-  const onBtnClick = (c: LabeledPaletteColor) => {
+  const onNavColorBtnClick = (c: LabeledPaletteColor) => {
     updateSetting({
       theme: {
         primary: c.main === 'auto' ? null : c,
+      },
+    })
+  }
+
+  const onSecondaryColorBtnClick = (c: LabeledPaletteColor) => {
+    if(c.main === 'auto') throw new Error('invalid color')
+    updateSetting({
+      theme: {
+        secondary: c.id,
       },
     })
   }
@@ -126,7 +135,13 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         <Grid item>
           导航栏颜色
           <Grid container>
-            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onBtnClick} />))}
+            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onNavColorBtnClick} />))}
+          </Grid>
+        </Grid>
+        <Grid item>
+          强调色
+          <Grid container>
+            {colors.map(c => c.id !== '0' && (<ColorButton data={c} key={c.main} onClick={onSecondaryColorBtnClick} />))}
           </Grid>
         </Grid>
       </Grid>

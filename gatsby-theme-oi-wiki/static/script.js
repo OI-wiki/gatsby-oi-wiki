@@ -21,4 +21,3 @@ export default function () {
 
   window.onthemechange()
 }
-// this file should be MANUALLY inserted into html.js
