@@ -25,7 +25,9 @@ const globalStyles = withStyles((theme) => ({
       background: '#1E1E1E',
       padding: '2px 16px',
       borderRadius: '4px',
-      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New",monospace',
+    },
+    '.gatsby-highlight code': {
+      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
 
     },
     img: {
