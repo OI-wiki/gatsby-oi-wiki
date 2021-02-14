@@ -7,9 +7,9 @@ import {
   FormControlLabel,
   Radio,
   FormGroup,
-  Checkbox,
+  Switch,
 } from '@material-ui/core'
-import {darken} from '@material-ui/core/styles/colorManipulator'
+import { darken } from '@material-ui/core/styles/colorManipulator'
 import React from 'react'
 import Layout from '../components/Layout'
 import colors from '../styles/colors'
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: '.4em',
     left: '.3em',
-    width: 'calc(100% - .6em)'
+    width: 'calc(100% - .6em)',
   },
 }))
 
@@ -72,7 +72,7 @@ type SettingsPageProps = {
   location: string
 }
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
-  const {location} = props
+  const { location } = props
   const [settings, updateSetting] = useSetting()
 
   const onBtnClick = (cprops) => {
@@ -118,11 +118,11 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
             <FormGroup>
               <FormControlLabel
                 control={
-                  <Checkbox checked={settings.animation.smoothScroll}
+                  <Switch checked={settings.animation.smoothScroll}
                     onChange={(e) => {
                       updateSetting({
                         animation: {
-                          smoothScroll: e.target.checked
+                          smoothScroll: e.target.checked,
                         },
                       })
                     }
