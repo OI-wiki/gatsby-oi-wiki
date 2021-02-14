@@ -89,7 +89,6 @@ code span.shiki-line:before {
 
 pre.shiki {
   overflow: auto;
-  color: #d4d4d4;
   font-size: 13px;
   text-shadow: none;
   direction: ltr;
