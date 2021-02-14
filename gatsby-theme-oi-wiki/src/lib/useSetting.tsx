@@ -37,10 +37,10 @@ export const useSetting = (): [Settings, (s: RecursivePartial<Settings>) => void
   const [settings, setSettings] = usePersistedState('settings')(defaultSettings)
 
   const updateSetting = (newSettings: RecursivePartial<Settings>): void => {
-    const finalSettings = {...defaultSettings, ...settings, ...newSettings}
+    const finalSettings = { ...defaultSettings, ...settings, ...newSettings }
     setSettings(finalSettings)
     // eslint-disable-next-line dot-notation
     window !== undefined && window['onthemechange'](finalSettings)
   }
-  return [settings, updateSetting];
+  return [settings, updateSetting]
 }

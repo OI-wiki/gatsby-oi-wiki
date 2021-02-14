@@ -22,9 +22,13 @@ const globalStyles = withStyles((theme) => ({
       borderLeft: `4px solid ${theme.palette.blockquote}`,
     },
     '.gatsby-highlight': {
-      backgroundColor: '#1E1E1E',
+      background: '#1E1E1E',
       padding: '2px 16px',
       borderRadius: '4px',
+    },
+    '.gatsby-highlight code': {
+      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
+
     },
     img: {
       maxWidth: '100%',
@@ -203,7 +207,7 @@ const adaptiveTheme = createMuiTheme({
     link: {
       default: 'rgba(var(--link-default))',
       hover: 'rgba(var(--link-hover))',
-    }
+    },
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround

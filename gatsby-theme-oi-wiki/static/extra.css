@@ -106,9 +106,6 @@ pre.shiki {
   hyphens: none;
 }
 
-pre.shiki code {
-  font-family: 'Menlo','Monaco','Consolas',"Andale Mono","Ubuntu Mono","Courier New",monospace !important;
-}
 
 pre.shiki::selection,
 code.shiki::selection {
