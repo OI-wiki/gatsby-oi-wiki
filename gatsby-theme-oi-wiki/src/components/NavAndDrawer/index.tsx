@@ -32,7 +32,7 @@ import { useSetting } from '../../lib/useSetting'
 function getTabIDFromLocation (location: string, pathList: string[]): number {
   const locationTrimmed = trimTrailingSlash(location)
   for (const v of Object.entries(pathList)) {
-    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v)).indexOf(locationTrimmed) > -1) return +v[0]
+    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0]
   }
   return -1
 }
@@ -45,13 +45,13 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const { pathname } = props
   const [settings] = useSetting()
   const theme = useTheme()
-  const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
-    ? settings.theme.navColor
-    : theme.palette.background.paper // undefined or 'auto'
+  const [ navColor, textColor ] = settings.theme.primary ? 
+    [settings.theme.primary.main, settings.theme.primary.contrastText]
+    : [theme.palette.background.paper, 'rgba(var(--text-primary))']
   const classes = useStyles({
     appBar: {
       background: navColor,
-      color: theme.palette.getContrastText(navColor),
+      color: textColor
     },
   })
   const [mobileOpen, setMobileOpen] = React.useState(false)

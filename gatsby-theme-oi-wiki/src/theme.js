@@ -202,10 +202,10 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
-    getContrastText (color) {
+    /*getContrastText (color) {
       if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
       else return lightColor.getContrastText(color)
-    },
+    },*/
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',

@@ -1,4 +1,5 @@
 import usePersistedState from 'use-persisted-state'
+import { LabeledPaletteColor } from '../styles/colors'
 
 export interface Settings {
   darkMode: {
@@ -9,7 +10,7 @@ export interface Settings {
     smoothScroll: boolean;
   }
   theme: {
-    navColor: string;
+    primary: LabeledPaletteColor|null; // null: auto
   }
 }
 
@@ -22,7 +23,7 @@ const defaultSettings: Settings = {
     smoothScroll: true,
   },
   theme: {
-    navColor: 'auto',
+    primary: null
   },
 }
 

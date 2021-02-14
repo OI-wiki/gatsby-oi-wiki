@@ -9,19 +9,15 @@ import {
   FormGroup,
   Switch,
 } from '@material-ui/core'
-import { darken } from '@material-ui/core/styles/colorManipulator'
 import React from 'react'
 import Layout from '../components/Layout'
-import colors from '../styles/colors'
-import { useSetting, Settings } from '../lib/useSetting'
+import colors, { LabeledPaletteColor }  from '../styles/colors'
+import { useSetting } from '../lib/useSetting'
 
-type Props = {
-  background: any,
-}
 const useStyles = makeStyles((theme) => ({
-  root: (props: Props) => ({
-    background: props.background,
-    color: theme.palette.getContrastText(props.background || theme.palette.background.default),
+  root: (props: LabeledPaletteColor) => ({
+    background: props ? props.main : undefined,
+    color: props ? props.contrastText : theme.palette.background.default,
     margin: '1em 1.2em 1em 0',
     padding: 0,
     width: '8em',
@@ -29,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     border: '.1em solid',
     borderColor: theme.palette.divider,
     '&:hover': {
-      background: props.background ? darken(props.background, 0.2) : undefined,
+      background: props ? props.dark : undefined,
     },
   }),
   label: {
@@ -43,26 +39,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-type ColorButtonProp = {
-  color: string,
-  desc: string,
-  onClick?: {(props: ColorButtonProp): any}
+interface ColorButtonProp {
+  data: LabeledPaletteColor
+  onClick?: (props: LabeledPaletteColor) => any
 }
 const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
-  const background = props.color === 'auto'
-    ? undefined // inherit settings
-    : props.color
-
-  const classes = useStyles({
-    background: background,
-  })
+  const classes = useStyles(props.data.main === 'auto' ? undefined : props.data)
   return (
     <Grid item>
       <Button
         classes={classes}
-        onClick={() => props.onClick(props)}
+        onClick={() => props.onClick(props.data)}
       >
-        {props.desc}
+        {props.data.desc}
       </Button>
     </Grid>
   )
@@ -75,10 +64,10 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
   const { location } = props
   const [settings, updateSetting] = useSetting()
 
-  const onBtnClick = (cprops) => {
+  const onBtnClick = (c: LabeledPaletteColor) => {
     updateSetting({
       theme: {
-        navColor: cprops.color,
+        primary: c.main === 'auto' ? null : c,
       },
     })
   }
@@ -137,7 +126,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         <Grid item>
           导航栏颜色
           <Grid container>
-            {colors.map(props => (<ColorButton {...props} key={props.color} onClick={onBtnClick} />))}
+            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onBtnClick} />))}
           </Grid>
         </Grid>
       </Grid>
