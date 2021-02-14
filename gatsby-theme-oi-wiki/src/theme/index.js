@@ -5,45 +5,7 @@ import red from '@material-ui/core/colors/red'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
-const globalStyles = withStyles((theme) => ({
-  '@global': {
-    a: {
-      color: theme.palette.primary.main,
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'none',
-      },
-    },
-    blockquote: {
-      margin: 0,
-      padding: '1px 0 1px 1.2em',
-      // paddingLeft: '1em',
-      // margin: '1em 3em 1em 2em',
-      borderLeft: `4px solid ${theme.palette.blockquote}`,
-    },
-    '.gatsby-highlight': {
-      backgroundColor: '#FFF',
-      padding: '2px 16px',
-      margin: '8px 0',
-      borderRadius: '4px',
-      boxShadow: '0 2px 4px rgba(var(--divider))',
-      filter: 'var(--highlight-filter)',
-    },
-    '.gatsby-highlight code': {
-      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
-
-    },
-    img: {
-      maxWidth: '100%',
-    },
-    ol: {
-      paddingInlineStart: 30,
-    },
-    ul: {
-      paddingInlineStart: 30,
-    },
-  },
-}))
+import globalStyles from './global'
 
 function CustomCssEl () {
   return null
@@ -155,6 +117,7 @@ function getThemeCssEl (style) {
 export const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss))
 export const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss))
 export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
+  // console.log('lightCss', lightCss)
   return {
     '@global': {
       '.themeAuto': lightCss['@global']['.themeLight'],
