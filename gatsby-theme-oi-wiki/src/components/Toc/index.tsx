@@ -1,5 +1,4 @@
-import { Link as MuiLink, Typography, useTheme, useMediaQuery } from '@material-ui/core'
-import clsx from 'clsx'
+import { Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import smoothScrollTo from '../../lib/smoothScroll'
 import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
@@ -9,7 +8,7 @@ import { useSetting } from '../../lib/useSetting'
 import Toc, { Node } from './Toc'
 
 function getIDfromHash (url:string):string {
-  return url?.replace(/^#/,'')
+  return url?.replace(/^#/, '')
 }
 
 interface Item{
@@ -25,7 +24,7 @@ interface Toc{
   }
 }
 
-function Tocize(items: Item[]): Node[] {
+function Tocize (items: Item[]): Node[] {
   const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5)
   const curNode = [null, null, null, null, null, null]
   const data = []
@@ -44,17 +43,17 @@ function Tocize(items: Item[]): Node[] {
     if (level === 0) {
       data.push(newNode)
     } else {
-      if(curNode[level - 1]) curNode[level - 1].children.push(newNode)
+      if (curNode[level - 1]) curNode[level - 1].children.push(newNode)
       newNode.parent = curNode[level - 1]
     }
   })
   return data
 }
 
-function bindHTMLElement(toc: Node[]): void {
+function bindHTMLElement (toc: Node[]): void {
   toc.forEach((i, idx, arr) => {
-    if(i.element === null) arr[idx].element = document.getElementById(getIDfromHash(i.url))
-    if(i.children) bindHTMLElement(i.children)
+    if (i.element === null) arr[idx].element = document.getElementById(getIDfromHash(i.url))
+    if (i.children) bindHTMLElement(i.children)
   })
 }
 
@@ -80,8 +79,8 @@ const ToC: React.FC<Toc> = (props) => {
   }, [items])
 
   const nodeSetActive = (node: Node|null, val: boolean): void => {
-    for(let u = node; u !== null; u = u.parent) u.active = val ? 'expanded' : 'collapse'
-    if(val && node) node.active = 'active'
+    for (let u = node; u !== null; u = u.parent) u.active = val ? 'expanded' : 'collapse'
+    if (val && node) node.active = 'active'
   }
   const updateActive = (state: Node|null) => {
     nodeSetActive(activeState, false)
@@ -91,17 +90,17 @@ const ToC: React.FC<Toc> = (props) => {
 
   const newFindActiveItem = useCallback(() => {
     if (clickedRef.current) return
-    function filter(u: Node): boolean {
+    function filter (u: Node): boolean {
       // console.log(tabHeight + scrollPadding, document.documentElement.clientHeight / 8)
       return u.element?.offsetParent?.offsetTop <
         document.documentElement.scrollTop + document.documentElement.clientHeight / 8 + 50
     }
     function findActive (toc: Node[]): Node|null {
-      if(!toc) return null
-      for(let i = toc.length - 1; i>=0; i--) {
-        if(filter(toc[i])) {
+      if (!toc) return null
+      for (let i = toc.length - 1; i >= 0; i--) {
+        if (filter(toc[i])) {
           const z = findActive(toc[i].children)
-          if(z) return z
+          if (z) return z
           else return toc[i]
         }
       }
@@ -150,7 +149,7 @@ const ToC: React.FC<Toc> = (props) => {
       {newItems.current.length > 0 ? (
         <>
           <Typography gutterBottom className={classes.contents}>
-            {'目录'}
+            目录
           </Typography>
           <Toc data={newItems.current} onClick={handleClick} />
         </>

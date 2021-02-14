@@ -1,6 +1,6 @@
 import { Link as MuiLink } from '@material-ui/core'
 import clsx from 'clsx'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 interface Node {
@@ -37,14 +37,14 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px 0 0 0',
   },
   link: {
-    borderLeft: `4px solid transparent`,
+    borderLeft: '4px solid transparent',
   },
   active: {
-    borderLeft: `4px solid ${theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800] }`,
+    borderLeft: `4px solid ${theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[800]}`,
   },
 }))
 
-function TocItem(props: Props): JSX.Element {
+function TocItem (props: Props): JSX.Element {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -58,29 +58,29 @@ function TocItem(props: Props): JSX.Element {
         onClick && onClick(data)(e)
       }}
       style={{
-        paddingLeft: `${data.level+1}em`,
+        paddingLeft: `${data.level + 1}em`,
       }}
-      className={clsx(classes.link, data.active === 'active' && classes.active )}
+      className={clsx(classes.link, data.active === 'active' && classes.active)}
     >
       <span dangerouslySetInnerHTML={{ __html: data.title }} />
     </MuiLink>
   )
 }
 
-function TocComponent(props: Props): JSX.Element {
+function TocComponent (props: Props): JSX.Element {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
     <li className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
-      {data.children && (<ul className={clsx(classes.ul, data.active === 'collapse' && classes.collapse )}>{
+      {data.children && (<ul className={clsx(classes.ul, data.active === 'collapse' && classes.collapse)}>{
         data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
       }</ul>)}
     </li>
   )
 }
 
-function Toc(props: TocProps): JSX.Element {
+function Toc (props: TocProps): JSX.Element {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -92,5 +92,5 @@ function Toc(props: TocProps): JSX.Element {
 
 export default Toc
 export {
-  Node
+  Node,
 }
