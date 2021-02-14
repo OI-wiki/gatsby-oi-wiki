@@ -7,10 +7,10 @@ interface Node {
   url: string;
   title: string;
   level: number;
-  active: boolean;
-  element?: any;
-  children?: Array<Node>;
+  active: 'active' | 'expanded' | 'collapse'
+  children: Array<Node>;
   parent: Node|null;
+  element?: any;
 }
 
 interface Props {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     transition: `all ${400}ms ease-in-out`,
     maxHeight: 600,
   },
-  notActiveUl: {
+  collapse: {
     maxHeight: 0,
   },
   li: {
@@ -51,7 +51,7 @@ function TocItem(props: Props): JSX.Element {
     <MuiLink
       {...restProps}
       display="block"
-      color={data.active ? 'textPrimary' : 'textSecondary'}
+      color={data.active !== 'collapse' ? 'textPrimary' : 'textSecondary'}
       href={data.url}
       underline="none"
       onClick={(e) => {
@@ -60,7 +60,7 @@ function TocItem(props: Props): JSX.Element {
       style={{
         paddingLeft: `${data.level+1}em`,
       }}
-      className={clsx(classes.link, data.active && classes.active )}
+      className={clsx(classes.link, data.active === 'active' && classes.active )}
     >
       <span dangerouslySetInnerHTML={{ __html: data.title }} />
     </MuiLink>
@@ -73,7 +73,7 @@ function TocComponent(props: Props): JSX.Element {
   return (
     <li className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
-      {data.children && (<ul className={clsx(classes.ul, !data.active && classes.notActiveUl )}>{
+      {data.children && (<ul className={clsx(classes.ul, data.active === 'collapse' && classes.collapse )}>{
         data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
       }</ul>)}
     </li>

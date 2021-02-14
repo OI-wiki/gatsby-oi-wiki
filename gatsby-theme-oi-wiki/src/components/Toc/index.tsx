@@ -31,12 +31,12 @@ function Tocize(items: Item[]): Node[] {
   const data = []
   items.forEach((item) => {
     const level = item.level - minLevel
-    const newNode = {
+    const newNode: Node = {
       url: item.url,
       title: item.title,
       level: level,
       children: [],
-      active: false,
+      active: 'collapse',
       element: null,
       parent: null,
     }
@@ -80,7 +80,8 @@ const ToC: React.FC<Toc> = (props) => {
   }, [items])
 
   const nodeSetActive = (node: Node|null, val: boolean): void => {
-    for(let u = node; u !== null; u = u.parent) u.active = val
+    for(let u = node; u !== null; u = u.parent) u.active = val ? 'expanded' : 'collapse'
+    if(val && node) node.active = 'active'
   }
   const updateActive = (state: Node|null) => {
     nodeSetActive(activeState, false)

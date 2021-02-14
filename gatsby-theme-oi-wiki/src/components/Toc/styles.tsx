@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '17%',
     flexShrink: 0,
     position: 'fixed',
-    height: 'calc(100vh - 284px)',
+    height: 'calc(100vh - 250px)',
     overflowY: 'auto',
     padding: theme.spacing(2, 2, 2, 0),
     display: 'none',
