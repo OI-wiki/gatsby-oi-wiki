@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
   searchResultPrimary: {
     '& em': {
       fontStyle: 'normal',
-      color: theme.palette.search.highlight,
+      color: theme.palette.secondary.main,
       background: 'rgba(143,187,237,.1)',
     },
   },
@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     '& em': {
       fontStyle: 'normal',
       padding: '0 0 2px',
-      boxShadow: 'inset 0 -2px 0 0 rgba(69,142,225,.8)',
+      boxShadow: `inset 0 -2px 0 0 ${theme.palette.secondary.main}`,
       // 使用 box shadow 模拟下划线
     },
   },
