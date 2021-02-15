@@ -22,6 +22,7 @@
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.0.1",
+    "deepmerge": "^4.2.2",
     "gatsby": "^2.32.3",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.5.6",

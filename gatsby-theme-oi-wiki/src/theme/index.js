@@ -2,48 +2,12 @@ import createPalette from '@material-ui/core/styles/createPalette'
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
-import { createMuiTheme, withStyles } from '@material-ui/core/styles'
+import { createMuiTheme, withStyles, hexToRgb } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
-const globalStyles = withStyles((theme) => ({
-  '@global': {
-    a: {
-      color: theme.palette.primary.main,
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'none',
-      },
-    },
-    blockquote: {
-      margin: 0,
-      padding: '1px 0 1px 1.2em',
-      // paddingLeft: '1em',
-      // margin: '1em 3em 1em 2em',
-      borderLeft: `4px solid ${theme.palette.blockquote}`,
-    },
-    '.gatsby-highlight': {
-      backgroundColor: '#FFF',
-      padding: '2px 16px',
-      margin: '8px 0',
-      borderRadius: '4px',
-      boxShadow: '0 2px 4px rgba(var(--divider))',
-      filter: 'var(--highlight-filter)',
-    },
-    '.gatsby-highlight code': {
-      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
+import globalStyles from './global'
 
-    },
-    img: {
-      maxWidth: '100%',
-    },
-    ol: {
-      paddingInlineStart: 30,
-    },
-    ul: {
-      paddingInlineStart: 30,
-    },
-  },
-}))
+import paletteColors from '../styles/colors'
 
 function CustomCssEl () {
   return null
@@ -58,29 +22,12 @@ const paletteKeys = [
   'primary', 'secondary', 'text', 'background', 'action',
   'error', 'warning', 'info', 'success']
 
-// Workaround for material-ui color.
-function htr (hex, alpha = '1') {
-  let c
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-    c = hex.substring(1).split('')
-    if (c.length === 3) {
-      c = [c[0], c[0], c[1], c[1], c[2], c[2]]
-    }
-    c = '0x' + c.join('')
-    return [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha
-  }
-  if (hex.startsWith('rgba')) {
-    return hex.slice(5, -1)
-  }
-  throw new Error('Bad Hex ' + hex)
-}
-
 function applyDefaults (theme, ...keys) {
   const k = {}
   function applyDefault (key) {
     for (const el of Object.keys(theme[key])) {
       if (/^(#|rgba)/.test(`${theme[key][el]}`)) {
-        k[`--${key}-${el}`] = htr(theme[key][el].toString())
+        k[`--${key}-${el}`] = hexToRgbaParam(theme[key][el].toString())
       }
     }
   }
@@ -88,28 +35,36 @@ function applyDefaults (theme, ...keys) {
   return k
 }
 
+function hexToRgbaParam(color, alpha = 1) {
+  if(color === 'auto') return color
+  if(/^rgba\(.*\)$/.test(color)) return color.match(/^rgba\((.*)\)$/)[1]
+  if(/^rgb\(.*\)$/.test(color)) return color.match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)) return hexToRgb(color).trim().match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
+  throw new Error('Bad Hex ' + color)
+}
+
 const lightCss = {
   '@global': {
     '.themeLight': {
-      '--primary-color': htr(lightColor.primary.main),
-      '--footer-bg': htr(grey[200]),
-      '--footer-text': htr(grey[700]),
-      '--details-border': htr(blue[500]),
-      '--details-main': htr(blue[50]),
+      '--primary-color': hexToRgbaParam(lightColor.primary.main),
+      '--footer-bg': hexToRgbaParam(grey[200]),
+      '--footer-text': hexToRgbaParam(grey[700]),
+      '--details-border': hexToRgbaParam(blue[500]),
+      '--details-main': hexToRgbaParam(blue[50]),
       '--blockquote': '0, 0, 0, .12',
       '--inline-color': '#37474f',
       '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
-      '--search-bg': htr(grey[100]),
-      '--search-highlight': htr('#174d8c'),
-      '--tab-hover': htr('#000'),
-      '--divider': htr(lightColor.divider),
+      '--search-bg': hexToRgbaParam(grey[100]),
+      '--search-highlight': hexToRgbaParam('#174d8c'),
+      '--tab-hover': hexToRgbaParam('#000'),
+      '--divider': hexToRgbaParam(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
-      '--alert-info-bg': htr(blue[50]),
-      '--alert-error-bg': htr(red[50]),
-      '--clicked-reaction-button': htr('#faebd7'),
+      '--alert-info-bg': hexToRgbaParam(blue[50]),
+      '--alert-error-bg': hexToRgbaParam(red[50]),
+      '--clicked-reaction-button': hexToRgbaParam('#faebd7'),
       '--fade-background': 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
-      '--link-default': htr('#576ad4'),
-      '--link-hover': htr('#03a9f4'),
+      '--link-default': hexToRgbaParam('#576ad4'),
+      '--link-hover': hexToRgbaParam('#03a9f4'),
       '--highlight-filter': '',
       ...applyDefaults(lightColor, ...paletteKeys),
     },
@@ -119,25 +74,25 @@ const lightCss = {
 const darkCss = {
   '@global': {
     '.themeDark': {
-      '--primary-color': htr(darkColor.primary.main),
-      '--paper-color': htr(darkColor.background.paper),
-      '--bg-color': htr(darkColor.background.default),
-      '--footer-bg': htr(grey[900]),
-      '--footer-text': htr(grey[300]),
-      '--details-border': htr(blue[500]),
-      '--details-main': htr(grey[700]),
+      '--primary-color': hexToRgbaParam(darkColor.primary.main),
+      '--paper-color': hexToRgbaParam(darkColor.background.paper),
+      '--bg-color': hexToRgbaParam(darkColor.background.default),
+      '--footer-bg': hexToRgbaParam(grey[900]),
+      '--footer-text': hexToRgbaParam(grey[300]),
+      '--details-border': hexToRgbaParam(blue[500]),
+      '--details-main': hexToRgbaParam(grey[700]),
       '--blockquote': '255, 255, 255, .12',
-      '--search-bg': htr(grey[700]),
-      '--search-highlight': htr('#acccf1'),
-      '--tab-hover': htr('#fff'),
-      '--divider': htr(darkColor.divider),
+      '--search-bg': hexToRgbaParam(grey[700]),
+      '--search-highlight': hexToRgbaParam('#acccf1'),
+      '--tab-hover': hexToRgbaParam('#fff'),
+      '--divider': hexToRgbaParam(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
-      '--alert-info-bg': htr(grey[900]),
-      '--alert-error-bg': htr(grey[900]),
-      '--clicked-reaction-button': htr('#202020'),
+      '--alert-info-bg': hexToRgbaParam(grey[900]),
+      '--alert-error-bg': hexToRgbaParam(grey[900]),
+      '--clicked-reaction-button': hexToRgbaParam('#202020'),
       '--fade-background': 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 66, 66, 1) 50%)',
-      '--link-default': htr('#20baff'),
-      '--link-hover': htr('#52ebff'),
+      '--link-default': hexToRgbaParam('#20baff'),
+      '--link-hover': hexToRgbaParam('#52ebff'),
       '--highlight-filter': 'invert(98%) hue-rotate(180deg)',
       ...applyDefaults(darkColor, ...paletteKeys),
     },
@@ -155,6 +110,7 @@ function getThemeCssEl (style) {
 export const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss))
 export const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss))
 export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
+  // console.log('lightCss', lightCss)
   return {
     '@global': {
       '.themeAuto': lightCss['@global']['.themeLight'],
@@ -164,6 +120,20 @@ export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
     },
   }
 }))
+
+export const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() => {
+  return paletteColors.reduce((obj, c) => {
+    if(c.id === '0') return obj // auto
+    obj['@global']['.secondaryColor' + c.id] = {
+      '--secondary-light': hexToRgbaParam(c.light),
+      '--secondary-dark': hexToRgbaParam(c.dark),
+      '--secondary-main': hexToRgbaParam(c.main),
+      '--secondary-contrast-text': hexToRgbaParam(c.contrastText),
+    }
+    return obj
+  }, { '@global' : {} })
+}))
+
 function applyAdaptives (...keys) {
   const rst = {}
   function applyAdaptive (key) {
@@ -185,6 +155,12 @@ const adaptiveTheme = createMuiTheme({
       main: 'rgba(var(--primary-color))',
     },
     ...applyAdaptives(...paletteKeys),
+    secondary: {
+      light: 'rgba(var(--secondary-light))',
+      dark: 'rgba(var(--secondary-dark))',
+      main: 'rgba(var(--secondary-main))',
+      contrastText: 'rgba(var(--secondary-contrast-text))',
+    },
     footer: {
       background: 'rgba(var(--footer-bg))',
       text: 'rgba(var(--footer-text))',
@@ -202,10 +178,10 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
-    getContrastText (color) {
+    /*getContrastText (color) {
       if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
       else return lightColor.getContrastText(color)
-    },
+    },*/
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',

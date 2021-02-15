@@ -1,4 +1,6 @@
 import usePersistedState from 'use-persisted-state'
+import { LabeledPaletteColor } from '../styles/colors'
+import merge from 'deepmerge'
 
 export interface Settings {
   darkMode: {
@@ -9,7 +11,8 @@ export interface Settings {
     smoothScroll: boolean;
   }
   theme: {
-    navColor: string;
+    primary: LabeledPaletteColor|null; // null: auto
+    secondary: string; // id
   }
 }
 
@@ -22,7 +25,8 @@ const defaultSettings: Settings = {
     smoothScroll: true,
   },
   theme: {
-    navColor: 'auto',
+    primary: null,
+    secondary: '3', // Margatriod Magenta
   },
 }
 
@@ -37,7 +41,7 @@ export const useSetting = (): [Settings, (s: RecursivePartial<Settings>) => void
   const [settings, setSettings] = usePersistedState('settings')(defaultSettings)
 
   const updateSetting = (newSettings: RecursivePartial<Settings>): void => {
-    const finalSettings = { ...defaultSettings, ...settings, ...newSettings }
+    const finalSettings = merge.all([defaultSettings, settings, newSettings])
     setSettings(finalSettings)
     // eslint-disable-next-line dot-notation
     window !== undefined && window['onthemechange'](finalSettings)
