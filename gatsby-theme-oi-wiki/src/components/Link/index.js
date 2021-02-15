@@ -49,11 +49,11 @@ function isRef (link) {
 
 const useStyles = makeStyles((theme) => ({
   link: {
-    color: theme.palette.link.default,
+    color: theme.palette.secondary.main,
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
-      color: theme.palette.link.hover,
+      color: theme.palette.secondary.light,
     },
     transition: `color ${250}ms ease-in-out`,
   },

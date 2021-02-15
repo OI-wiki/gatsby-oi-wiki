@@ -30,18 +30,6 @@ const useStyles = makeStyles((theme: any) => ({
     paddingLeft: '.5rem',
     textDecoration: 'none',
   },
-  link: {
-    color: theme.palette.link.default,
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-      color: theme.palette.link.hover,
-    },
-    '&.active': {
-      color: theme.palette.text.primary,
-    },
-    transition: `color ${250}ms ease-in-out`,
-  },
   subText: {
     // make typescript and eslint happy
     lineHeight: 1.8,
@@ -93,7 +81,7 @@ const Meta: React.FC<Props> = (props: Props) => {
             {' 本页面最近更新：'}
           </span>
           <span>{modifiedTime}</span>，
-          <SmartLink to='./changelog/' className={classes.link} {...rest} state={{ ...rest }}>更新历史</SmartLink>
+          <SmartLink to='./changelog/' {...rest} state={{ ...rest }}>更新历史</SmartLink>
         </Typography>
 
         <Typography gutterBottom>
@@ -105,7 +93,7 @@ const Meta: React.FC<Props> = (props: Props) => {
                 e.preventDefault()
                 setDialogOpen(true)
               }}
-              className={classes.link} to="."
+              to="."
             >
               在 GitHub 上编辑此页！
             </SmartLink>
