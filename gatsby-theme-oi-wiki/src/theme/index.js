@@ -35,17 +35,17 @@ function applyDefaults (theme, ...keys) {
   return k
 }
 
-function hexToRgbaParam(color, alpha = 1) {
-  if(color === 'auto') return color
-  if(/^rgba\(.*\)$/.test(color)) return color.match(/^rgba\((.*)\)$/)[1]
-  if(/^rgb\(.*\)$/.test(color)) return color.match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
-  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)) return hexToRgb(color).trim().match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
+function hexToRgbaParam (color, alpha = 1) {
+  if (color === 'auto') return color
+  if (/^rgba\(.*\)$/.test(color)) return color.match(/^rgba\((.*)\)$/)[1]
+  if (/^rgb\(.*\)$/.test(color)) return color.match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
+  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(color)) return hexToRgb(color).trim().match(/^rgb\((.*)\)$/)[1] + `, ${alpha}`
   throw new Error('Bad Hex ' + color)
 }
 
 const lightCss = {
   '@global': {
-    '.themeLight': {
+    'html[data-theme=light]': {
       '--primary-color': hexToRgbaParam(lightColor.primary.main),
       '--footer-bg': hexToRgbaParam(grey[200]),
       '--footer-text': hexToRgbaParam(grey[700]),
@@ -73,7 +73,7 @@ const lightCss = {
 
 const darkCss = {
   '@global': {
-    '.themeDark': {
+    'html[data-theme=dark]': {
       '--primary-color': hexToRgbaParam(darkColor.primary.main),
       '--paper-color': hexToRgbaParam(darkColor.background.paper),
       '--bg-color': hexToRgbaParam(darkColor.background.default),
@@ -113,9 +113,9 @@ export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
   // console.log('lightCss', lightCss)
   return {
     '@global': {
-      '.themeAuto': lightCss['@global']['.themeLight'],
+      'html[data-theme=auto]': lightCss['@global']['html[data-theme=light]'],
       '@media (prefers-color-scheme: dark)': {
-        '.themeAuto': darkCss['@global']['.themeDark'],
+        'html[data-theme=auto]': darkCss['@global']['html[data-theme=dark]'],
       },
     },
   }
@@ -123,15 +123,15 @@ export const AutoCssBaseline = getThemeCssEl(withStyles(() => {
 
 export const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() => {
   return paletteColors.reduce((obj, c) => {
-    if(c.id === '0') return obj // auto
-    obj['@global']['.secondaryColor' + c.id] = {
+    if (c.id === '0') return obj // auto
+    obj['@global'][`html[data-secondary-color='${c.id}']`] = {
       '--secondary-light': hexToRgbaParam(c.light),
       '--secondary-dark': hexToRgbaParam(c.dark),
       '--secondary-main': hexToRgbaParam(c.main),
       '--secondary-contrast-text': hexToRgbaParam(c.contrastText),
     }
     return obj
-  }, { '@global' : {} })
+  }, { '@global': {} })
 }))
 
 function applyAdaptives (...keys) {
@@ -178,10 +178,10 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
-    /*getContrastText (color) {
+    /* getContrastText (color) {
       if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
       else return lightColor.getContrastText(color)
-    },*/
+    }, */
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',
