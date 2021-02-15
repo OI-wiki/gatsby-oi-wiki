@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import React from 'react'
 import Layout from '../components/Layout'
-import colors, { LabeledPaletteColor }  from '../styles/colors'
+import colors, { LabeledPaletteColor } from '../styles/colors'
 import { useSetting } from '../lib/useSetting'
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +73,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
   }
 
   const onSecondaryColorBtnClick = (c: LabeledPaletteColor) => {
-    if(c.main === 'auto') throw new Error('invalid color')
+    if (c.main === 'auto') throw new Error('invalid color')
     updateSetting({
       theme: {
         secondary: c.id,

@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core'
 import {
   ExpandMore as ExpandMoreIcon,
-  Forum as ForumIcon
+  Forum as ForumIcon,
 } from '@material-ui/icons'
 import React from 'react'
 import Comment from './Comment'
@@ -29,7 +29,7 @@ function CommentSystem ({ title }) {
         'StudyingFather',
         'ouuan',
         'sshwy',
-        'Marcythm'
+        'Marcythm',
       ]}
       clientID={process.env.GATSBY_GITHUB_CLIENT_ID}
       clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET}

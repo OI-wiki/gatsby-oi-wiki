@@ -45,13 +45,13 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const { pathname } = props
   const [settings] = useSetting()
   const theme = useTheme()
-  const [ navColor, textColor ] = settings.theme.primary ? 
-    [settings.theme.primary.main, settings.theme.primary.contrastText]
+  const [navColor, textColor] = settings.theme.primary
+    ? [settings.theme.primary.main, settings.theme.primary.contrastText]
     : [theme.palette.background.paper, 'rgba(var(--text-primary))']
   const classes = useStyles({
     appBar: {
       background: navColor,
-      color: textColor
+      color: textColor,
     },
   })
   const [mobileOpen, setMobileOpen] = React.useState(false)

@@ -30,7 +30,7 @@ function FooterContent ({ data }) {
     <>
       <Typography gutterBottom>
         Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
-        </Typography>
+      </Typography>
       <Typography gutterBottom>
         {'最近更新： '}
         <SmartLink className={classes.link} href="https://github.com/OI-wiki/OI-wiki/commits">
@@ -39,12 +39,12 @@ function FooterContent ({ data }) {
           , {date.substr(0, 10)}
       </Typography>
       <Typography>
-        {'联系方式：'}
+        联系方式：
         <SmartLink className={classes.link} href="https://t.me/OIwiki">
-          {'Telegram 群组'}
+          Telegram 群组
         </SmartLink>{' / '}
         <SmartLink className={classes.link} href="https://jq.qq.com/?_wv=1027&k=5EfkM6K">
-          {'QQ 群组'}
+          QQ 群组
         </SmartLink>
       </Typography>
     </>

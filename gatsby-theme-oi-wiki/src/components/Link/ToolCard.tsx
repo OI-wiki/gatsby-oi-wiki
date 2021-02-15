@@ -60,7 +60,7 @@ function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAnd
   function setLeft (): void { // 控制横坐标
     element.style.removeProperty('left')
     let offset = 0
-    offset = Math.min(offset, pos.x+linkWidth - size.width-12) // 不能超过屏幕左边
+    offset = Math.min(offset, pos.x + linkWidth - size.width - 12) // 不能超过屏幕左边
     element.style.setProperty('right', `${offset}px`)
   }
   if (pos.y < viewport.height / 2) { // 位于上半部分
@@ -68,7 +68,7 @@ function adjustElementPosition (element: HTMLElement, { pos, size }: PositionAnd
   } else {
     setUpper()
   }
-  if(pos.x + linkWidth / 2 < viewport.width / 2){
+  if (pos.x + linkWidth / 2 < viewport.width / 2) {
     setRight()
   } else {
     setLeft()

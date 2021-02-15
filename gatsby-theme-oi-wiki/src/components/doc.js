@@ -66,7 +66,6 @@ function Mdx ({ data: { mdx }, location }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
   function LinkGetter () {
     return function TooltipLink (props) {
       return <SmartLink {...props} pathname={location.pathname} isIndex={isIndex} tooltip />

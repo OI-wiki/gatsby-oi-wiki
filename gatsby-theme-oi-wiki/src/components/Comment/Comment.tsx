@@ -1,13 +1,13 @@
-import {Divider, Typography, makeStyles, Tooltip, Button, CircularProgress} from '@material-ui/core'
-import React, {useState, useEffect} from 'react'
+import { Divider, Typography, makeStyles, Tooltip, Button, CircularProgress } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
 import GithubV3 from '@mgtd/vssue-api-github-v3'
 import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
 import CommentCard from './Card'
 import CommentInput from './CommentInput'
-import {Comments, Issue, User} from './types'
-import {InputContentProvider} from './inputContext'
-import {getComments} from './api'
+import { Comments, Issue, User } from './types'
+import { InputContentProvider } from './inputContext'
+import { getComments } from './api'
 
 const useToken = createPersistedState('github-access-token')
 
@@ -26,19 +26,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-
 const CommentComponent: React.FC<Props> = (props) => {
   const classes = useStyles()
-  const defaultUser = {username: '未登录用户', avatar: undefined, homepage: undefined}
+  const defaultUser = { username: '未登录用户', avatar: undefined, homepage: undefined }
   const [token, setToken] = useToken(null)
   const revokeToken = (): void => {
     setToken(null)
     setUser(defaultUser)
   }
   const [user, setUser] = useState<User>(defaultUser)
-  const [comments, setComments] = useState<Comments>({count: 0, page: 0, perPage: 0, data: []})
+  const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
   const [noIssue, setNoIssue] = useState(false)
-  const filteredComments = comments.data.filter(({isMinimized}) => !isMinimized)
+  const filteredComments = comments.data.filter(({ isMinimized }) => !isMinimized)
   const [issue, setIssue] = useState<Issue>()
   const [createIssueLoading, setCreateIssueLoading] = useState(false)
   const authorized = user.username !== '未登录用户' && token && !noIssue
@@ -80,7 +79,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         setComments(c)
         setIssue(i)
       }
-      const u: User = await ghAPIV3.getUser({accessToken: tk})
+      const u: User = await ghAPIV3.getUser({ accessToken: tk })
       setUser(u)
     }
 
@@ -99,11 +98,11 @@ const CommentComponent: React.FC<Props> = (props) => {
   }
   const NoIssueComponent = (): React.ReactElement => {
     return isAdmin
-      ? <Typography variant="body1" style={{padding: '24px', textAlign: 'center'}}>
+      ? <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
         <Button variant="outlined" color="primary" disabled={createIssueLoading}
           onClick={async () => {
             setCreateIssueLoading(true)
-            await ghAPIV4.postIssue({accessToken: token, title: props.id, content: location.href})
+            await ghAPIV4.postIssue({ accessToken: token, title: props.id, content: location.href })
             // sleep 1s, 直接查询会返回无结果，迷惑
             await new Promise(resolve => setTimeout(resolve, 1000))
             const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
@@ -116,10 +115,10 @@ const CommentComponent: React.FC<Props> = (props) => {
             }
           }}>
           为本页面创建 Issue
-          {createIssueLoading && <CircularProgress size={20} style={{marginLeft: '4px'}} />}
+          {createIssueLoading && <CircularProgress size={20} style={{ marginLeft: '4px' }} />}
         </Button>
       </Typography>
-      : <Typography variant="body1" style={{padding: '24px', textAlign: 'center'}}>
+      : <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
         没有找到与本页面相关联的 issue
       </Typography>
   }
@@ -131,7 +130,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         </Tooltip>
         <Tooltip title={authorized ? '登出' : '登录'}>
           <div
-            style={{float: 'right', cursor: 'pointer'}}
+            style={{ float: 'right', cursor: 'pointer' }}
             onClick={() => {
               if (!token) {
                 ghAPIV3.redirectAuth()
@@ -157,7 +156,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         sendComment={async (v, setLoading) => {
           setLoading(true)
           try {
-            await ghAPIV3.postComment({accessToken: token, issueId: issue.id, content: v})
+            await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
           } catch (e) {
             setLoading(false)
             return
@@ -167,7 +166,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         }}
       />
       {noIssue ? <NoIssueComponent />
-        : filteredComments.map(({content, author, createdAt, reactions, id, contentRaw}) => (
+        : filteredComments.map(({ content, author, createdAt, reactions, id, contentRaw }) => (
           <CommentCard
             avatarLink={author.avatar}
             disabled={!authorized}
@@ -181,15 +180,15 @@ const CommentComponent: React.FC<Props> = (props) => {
             commentID={id}
             deleteComment={async (commentId, setDeleteLoading) => {
               setDeleteLoading(true)
-              await ghAPIV4.deleteComment({accessToken: token, commentId, issueId: issue.id})
+              await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id })
               updateComments()
               setDeleteLoading(false)
             }}
             addReaction={async (commentId, reaction) => {
-              await ghAPIV4.postCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
+              await ghAPIV4.postCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id })
             }}
             removeReaction={async (commentId, reaction) => {
-              await ghAPIV4.deleteCommentReaction({accessToken: token, commentId, reaction, issueId: issue.id})
+              await ghAPIV4.deleteCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id })
             }}
           />
         ))
