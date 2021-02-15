@@ -1,11 +1,12 @@
 export default function () {
   'use strict'
   window.onthemechange = function (settings) {
-    const fallback = localStorage.settings &&
-      JSON.parse(localStorage.settings).darkMode.type
+    const fallback = localStorage.settings && JSON.parse(localStorage.settings).darkMode.type
     const darkOpt = settings !== undefined ? settings.darkMode.type : fallback
+    const secondaryColorId = settings && settings.theme && settings.theme.secondary ? settings.theme.secondary : '3'
+    const monoFont = settings && settings.theme && settings.theme.fallbackMonoFont
+    const monoFontClass = monoFont ? 'fallbackMonoFont' : 'useMonoFont'
     let themeClass = 'themeAuto'
-    let secondaryColorId = settings && settings.theme && settings.theme.secondary ? settings.theme.secondary : '3'
     if (darkOpt === undefined || darkOpt === 'user-preference') {
       // themeClass = 'themeAuto'
     } else {
@@ -15,8 +16,7 @@ export default function () {
 
     docEl.className = ""
     // docEl.classList.remove('themeLight', 'themeDark', 'themeAuto')
-    docEl.classList.add(themeClass)
-    docEl.classList.add('secondaryColor' + secondaryColorId)
+    docEl.classList.add(themeClass, 'secondaryColor' + secondaryColorId, monoFontClass)
   }
 
   window.onthemechange()

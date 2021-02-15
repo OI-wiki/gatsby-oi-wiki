@@ -124,10 +124,32 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                         },
                       })
                     }
-                    } name="gilad"
+                    } name="animation-smooth-scroll"
                   />
                 }
                 label="使用平滑滚动"
+              />
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <FormControl>
+            等宽字体
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch checked={settings.theme.fallbackMonoFont}
+                    onChange={(e) => {
+                      updateSetting({
+                        theme: {
+                          fallbackMonoFont: e.target.checked,
+                        },
+                      })
+                    }
+                    } name="monofont"
+                  />
+                }
+                label="使用浏览器默认字体"
               />
             </FormGroup>
           </FormControl>

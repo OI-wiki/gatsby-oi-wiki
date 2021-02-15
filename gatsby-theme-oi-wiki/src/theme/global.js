@@ -25,8 +25,13 @@ const globalStyles = withStyles((theme) => ({
       filter: 'var(--highlight-filter)',
     },
     '.gatsby-highlight code': {
-      fontFamily: '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
-
+      fontFamily: 'var(--code-block-font)',
+    },
+    '.useMonoFont':{
+      '--code-block-font': '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
+    },
+    '.fallbackMonoFont':{
+      '--code-block-font': 'monospace',
     },
     img: {
       maxWidth: '100%',

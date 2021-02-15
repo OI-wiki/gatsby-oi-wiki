@@ -13,6 +13,7 @@ export interface Settings {
   theme: {
     primary: LabeledPaletteColor|null; // null: auto
     secondary: string; // id
+    fallbackMonoFont: boolean
   }
 }
 
@@ -27,6 +28,7 @@ const defaultSettings: Settings = {
   theme: {
     primary: null,
     secondary: '3', // Margatriod Magenta
+    fallbackMonoFont: false,
   },
 }
 
