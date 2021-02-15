@@ -55,7 +55,7 @@ const lightCss = {
       '--inline-color': '#37474f',
       '--inline-bg-hsla': 'hsla(0,0%,85%,.5)',
       '--search-bg': hexToRgbaParam(grey[100]),
-      '--search-highlight': hexToRgbaParam('#174d8c'),
+      // '--search-highlight': hexToRgbaParam('#174d8c'),
       '--tab-hover': hexToRgbaParam('#000'),
       '--divider': hexToRgbaParam(lightColor.divider),
       '--subtitle-text': '0, 0, 0, .7',
@@ -83,7 +83,7 @@ const darkCss = {
       '--details-main': hexToRgbaParam(grey[700]),
       '--blockquote': '255, 255, 255, .12',
       '--search-bg': hexToRgbaParam(grey[700]),
-      '--search-highlight': hexToRgbaParam('#acccf1'),
+      // '--search-highlight': hexToRgbaParam('#acccf1'),
       '--tab-hover': hexToRgbaParam('#fff'),
       '--divider': hexToRgbaParam(darkColor.divider),
       '--subtitle-text': '255, 255, 255. .7',
@@ -172,7 +172,7 @@ const adaptiveTheme = createMuiTheme({
     blockquote: 'rgba(var(--blockquote))',
     search: {
       messageBackground: 'rgba(var(--search-bg))',
-      highlight: 'rgba(var(--search-highlight))',
+      // highlight: 'rgba(var(--search-highlight))',
     },
     tab: {
       colorOnHover: 'rgba(var(--tab-hover))',
