@@ -26,7 +26,7 @@ interface Props{
 const EditWarn: React.FC<Props> = (props: Props) => {
   const { relativePath, dialogOpen, setDialogOpen, location } = props
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
-  
+
   return (
     <Dialog
       open={dialogOpen}

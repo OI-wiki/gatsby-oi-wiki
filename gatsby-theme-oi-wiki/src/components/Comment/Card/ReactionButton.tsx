@@ -26,7 +26,7 @@ type ReactionButtonProps = {
 
 const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
   const classes = useStyles()
-  const propsMerged = {...reactionButtonDefaultProps, ...props}
+  const propsMerged = { ...reactionButtonDefaultProps, ...props }
   const [isClicked, setIsClicked] = useState(propsMerged.isClicked)
   const [count, setCount] = useState(propsMerged.initialCount)
   const [users, setUsers] = useState(propsMerged.users)
@@ -37,7 +37,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       setLoading(true)
       await propsMerged.removeReaction()
       setLoading(false)
-      const tmpUsers = users.filter(({username}) => username !== propsMerged.currentUser.username)
+      const tmpUsers = users.filter(({ username }) => username !== propsMerged.currentUser.username)
       setUsers(tmpUsers)
     } else {
       setCount(count + 1)
@@ -58,11 +58,11 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       startIcon={propsMerged.text}
       className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
-      classes={count === 0 ? {startIcon: classes.nullReactionStartIcon, label: classes.labelMargin} : undefined}
+      classes={count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >
-      {loading ? <CircularProgress size={24} style={{marginLeft: '4px', marginRight: '4px'}} /> : (count !== 0 && count)}
-      {!loading && <AvatarGroup max={3} style={{marginLeft: '4px'}} classes={{avatar: classes.avatarSmall}}>
-        {users.map(({avatar, username}) => (
+      {loading ? <CircularProgress size={24} style={{ marginLeft: '4px', marginRight: '4px' }} /> : (count !== 0 && count)}
+      {!loading && <AvatarGroup max={3} style={{ marginLeft: '4px' }} classes={{ avatar: classes.avatarSmall }}>
+        {users.map(({ avatar, username }) => (
           <Avatar alt={username} src={avatar} key={username} />
         ))}
       </AvatarGroup>}

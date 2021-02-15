@@ -1,5 +1,5 @@
 import React from 'react'
-import {Tooltip, IconButton, makeStyles} from "@material-ui/core"
+import { Tooltip, IconButton, makeStyles } from '@material-ui/core'
 
 import {
   LibraryBooks as LibraryBooksIcon,
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 })
 
-function NavBtn({title, href, Icon, ...restProps}) {
+function NavBtn ({ title, href, Icon, ...restProps }) {
   const classes = useStyles()
   return (
     <Tooltip title={title} placement="bottom" arrow>
@@ -28,7 +28,7 @@ function NavBtn({title, href, Icon, ...restProps}) {
 
 const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
 
-export default function NavBtnGroup() {
+export default function NavBtnGroup () {
   return (
     <>
       <NavBtn title="设置页" href="/settings" Icon={SettingsIcon} />
