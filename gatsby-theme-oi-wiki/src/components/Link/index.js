@@ -26,7 +26,7 @@ import clsx from 'clsx'
  */
 function linkFix (link, isIndex) {
   if (/^\//.test(link)) return link // absolute path
-  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace('index','')
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace('index', '')
   if (isIndex === false) link = '../' + link
   if (/[^/]$/.test(link) && !/#/.test(link)) {
     link += '/' // append '/' for links, but excluding urls includes `#`.
@@ -34,16 +34,16 @@ function linkFix (link, isIndex) {
   return link
 }
 
-function getAPIURL(link, pathname, isIndex) {
+function getAPIURL (link, pathname, isIndex) {
   if (/[^/]$/.test(pathname)) pathname += '/'
-  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace(/#(.*?)$/,'')
+  link = link.replace(/\.(md|markdown|mdtext|mdx)/g, '/').replace(/#(.*?)$/, '')
   if (/^[^/]/.test(link)) {
     if (isIndex === false) link = '../' + link
     link = path.resolve(pathname, link)
   }
   return `https://api.mgt.moe/preview?path=${link}`
 }
-function isRef(link) {
+function isRef (link) {
   return /^#/.test(link)
 }
 
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * 智能链接
- * 
+ *
  * - 如果是目录则使用原生 a 标签
  * - 如果是 URL 就设为外链
  * - 如果是 markdown 引用（纯哈希）则使用引用

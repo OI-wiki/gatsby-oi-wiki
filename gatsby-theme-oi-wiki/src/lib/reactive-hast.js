@@ -53,31 +53,30 @@ const attributeMap = {
   viewbox: 'viewBox',
 }
 
-
 /**
  * convert camel case to hypen
- * 
- * example: 
+ *
+ * example:
  * - colorProfile -> color-profile
  *
  * @param {*} str
- * @return {*} 
+ * @return {*}
  */
 function camelCaseToHypen (str) {
   return str.replace(/[A-Z]/g, (match) => {
-    return '-' + match.toLowerCase();
+    return '-' + match.toLowerCase()
   })
 }
 
 /**
  * convert hypen and colon to camel case
- * 
- * example: 
+ *
+ * example:
  * - color-profile -> colorProfile
  * - xlink:role -> xlinkRole
  *
  * @param {*} str
- * @return {*} 
+ * @return {*}
  */
 function hypenColonToCamelCase (str) {
   return str.replace(/(-|:)(.)/g, (match, symbol, char) => {
@@ -138,13 +137,13 @@ function mapAttribute (tagName, attrs = {}, preserveAttributes) {
     }
 
     // Allow preserving non-standard attribute, e.g: `ng-if`
-    function isPreserved(att){
-      return preserveAttributes.filter(at => {
+    function isPreserved (att) {
+      return !!preserveAttributes.filter(at => {
         if (at instanceof RegExp) {
           return at.test(att)
         }
         return at === att
-      }).length ? true : false
+      }).length
     }
 
     // Convert attribute to camelCase except data-* and aria-* attribute
@@ -157,7 +156,7 @@ function mapAttribute (tagName, attrs = {}, preserveAttributes) {
     }
 
     // Convert camelCase data and aria attribute to hypen case
-    if(/^(data|aria)[A-Z]/.test(attr)) {
+    if (/^(data|aria)[A-Z]/.test(attr)) {
       if (isPreserved(attr) === false) {
         attributeName = camelCaseToHypen(attr)
       }
