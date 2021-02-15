@@ -3,11 +3,13 @@ import { withStyles } from '@material-ui/core/styles'
 const globalStyles = withStyles((theme) => ({
   '@global': {
     a: {
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
       textDecoration: 'none',
       '&:hover': {
+        color: theme.palette.secondary.light,
         textDecoration: 'none',
       },
+      transition: `color ${250}ms ease-in-out`,
     },
     blockquote: {
       margin: 0,
