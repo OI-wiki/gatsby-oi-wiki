@@ -27,10 +27,10 @@ const globalStyles = withStyles((theme) => ({
     '.gatsby-highlight code': {
       fontFamily: 'var(--code-block-font)',
     },
-    '.useMonoFont':{
-      '--code-block-font': '"Fira Mono", \'Menlo\',\'Monaco\',\'Consolas\',"Andale Mono","Ubuntu Mono","Courier New", "Hack", "Fira Code", "Jetbrains Mono",monospace',
+    html: {
+      '--code-block-font': '"Fira Mono", "Menlo", "Monaco", "Consolas", "Andale Mono", "Ubuntu Mono", "Courier New", "Hack", "Fira Code", "Jetbrains Mono", monospace',
     },
-    '.fallbackMonoFont':{
+    'html[data-monofont=fallback]': {
       '--code-block-font': 'monospace',
     },
     img: {
