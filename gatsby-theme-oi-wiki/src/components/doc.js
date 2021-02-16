@@ -6,6 +6,7 @@ import Layout from './Layout'
 import Summary from './Summary.tsx'
 import { SmartLink } from './Link'
 import SEO from './Seo'
+import clsx from 'clsx'
 
 function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
@@ -72,12 +73,18 @@ function Mdx ({ data: { mdx }, location }) {
     }
   }
 
+  function InlineCode ({ className, children, ...props }) {
+    return (
+      <code {...props} className={clsx(className, 'inline-code')}>{children}</code>
+    )
+  }
+
   const myComponents = {
     details: Details,
     summary: Summary,
     a: LinkGetter(),
-    inlineCode: 'code',
-    inlinecode: 'code',
+    inlineCode: InlineCode,
+    inlinecode: InlineCode,
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)

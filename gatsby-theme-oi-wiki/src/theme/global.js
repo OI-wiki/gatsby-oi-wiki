@@ -44,6 +44,18 @@ const globalStyles = withStyles((theme) => ({
     ul: {
       paddingInlineStart: 30,
     },
+    '.inline-code': {
+      color: 'rgba(var(--inline-code-color))',
+      backgroundColor: 'rgba(var(--inline-code-background))',
+      margin: '0 .09412em',
+      padding: '0.2em 0.3em 0.04353em',
+      borderRadius: '.1rem',
+      wordBreak: 'break-word',
+      '-webkit-box-decoration-break': 'clone',
+      'box-decoration-break': 'clone',
+      fontSize: '90%',
+      fontFamily: "var(--code-block-font)",
+    },
   },
 }))
 

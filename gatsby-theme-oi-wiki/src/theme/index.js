@@ -66,6 +66,8 @@ const lightCss = {
       '--link-default': hexToRgbaParam('#576ad4'),
       '--link-hover': hexToRgbaParam('#03a9f4'),
       '--highlight-filter': '',
+      '--inline-code-color': hexToRgbaParam('#37474f'),
+      '--inline-code-background': '236, 236, 236, .5',
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -94,6 +96,8 @@ const darkCss = {
       '--link-default': hexToRgbaParam('#20baff'),
       '--link-hover': hexToRgbaParam('#52ebff'),
       '--highlight-filter': 'invert(98%) hue-rotate(180deg)',
+      '--inline-code-color': hexToRgbaParam('#c4c4c4'),
+      '--inline-code-background': hexToRgbaParam('#424242'),
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
@@ -178,17 +182,17 @@ const adaptiveTheme = createMuiTheme({
       colorOnHover: 'rgba(var(--tab-hover))',
     },
     divider: 'rgba(var(--divider))',
-    /* getContrastText (color) {
-      if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
-      else return lightColor.getContrastText(color)
-    }, */
+    // getContrastText (color) {
+    //   if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
+    //   else return lightColor.getContrastText(color)
+    // },
     subTitle: 'rgba(var(--subtitle-text))',
     reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
     fadeTextBackground: 'var(--fade-background)',
-    link: {
-      default: 'rgba(var(--link-default))',
-      hover: 'rgba(var(--link-hover))',
-    },
+    // link: {
+    //   default: 'rgba(var(--link-default))',
+    //   hover: 'rgba(var(--link-hover))',
+    // },
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround
@@ -209,6 +213,11 @@ const adaptiveTheme = createMuiTheme({
       standardError: {
         color: 'rgba(var(--text-primary))',
         backgroundColor: 'rgba(var(--alert-error-bg))',
+      },
+    },
+    MuiIconButton: {
+      root: {
+        transition: `background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color ${250}ms ease-in-out`,
       },
     },
   },
