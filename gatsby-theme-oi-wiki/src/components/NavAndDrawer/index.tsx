@@ -14,6 +14,8 @@ import React from 'react'
 
 import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
 
+import clsx from 'clsx'
+
 import trimTrailingSlash from '../../lib/trailingSlash'
 
 // eslint-disable-next-line
@@ -110,11 +112,10 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
       <Hidden mdDown implementation="css">
         <Drawer
           className={classes.drawer}
-          classes={{ paper: classes.drawerPaper }}
+          classes={{ paper: clsx(classes.drawerPaper, classes.placeholderMargin) }}
           variant="permanent"
           open
         >
-          <div className={classes.placeholder} />
           <SiderContent pathList={tabID !== -1 ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>
