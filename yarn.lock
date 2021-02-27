@@ -13383,10 +13383,10 @@ simple-get@^4.0.0:
     once "^1.3.1"
     simple-concat "^1.0.0"
 
-simple-git@^2.15.0, simple-git@^2.34.2:
-  version "2.34.2"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.34.2.tgz#da26e5bd681787a751e2ea039d23bcd8d4b32a18"
-  integrity sha512-/EX4FtcpAj5L/Bs5zgaBGYDrnkrKflFVNppNLH9VXpIjZBLHx5cZ6/mOYJCoKXKlLRuk3iTvzrIsHo7v42zWHg==
+simple-git@^2.15.0, simple-git@^2.35.1:
+  version "2.35.1"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.35.1.tgz#d97dbc224c68b06b53c312d92f8cd915c3a181bf"
+  integrity sha512-Y5/hXf5ivfMziWRNGhVsbiG+1h4CkTW2qVC3dRidLuSZYAPFbLCPP1d7rgiL40lgRPhPTBuhVzNJAV9glWstEg==
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     "@kwsites/promise-deferred" "^1.1.1"
