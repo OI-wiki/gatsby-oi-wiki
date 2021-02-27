@@ -12576,10 +12576,10 @@ rehype-details@^1.9.0:
     unified "^8.4.2"
     vfile-reporter "^6.0.0"
 
-rehype-mathjax@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/rehype-mathjax/-/rehype-mathjax-3.0.0.tgz#33c0588eb23b89b32c94b2e6a4fa2196b19621c4"
-  integrity sha512-X16pvKHm/P9q0z5UK4gMxihj73V1o9AxjlFV5xPz2aCembCUIBbS95/5qfd9el0+HQtwf9MgY3F1rYvLQeceTg==
+rehype-mathjax@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/rehype-mathjax/-/rehype-mathjax-3.1.0.tgz#d0282243bf68f3f18dd63a062e0f8c45662ecc26"
+  integrity sha512-Pmz92Y56lBFmDjFc9nIdrKu1xzKSBYevcwKiKiG7b5JJg74q1E62nRSbPEm37vXaXn7Bn25iRsWcP39bJKkMxg==
   dependencies:
     "@types/mathjax" "^0.0.36"
     hast-util-from-dom "^3.0.0"

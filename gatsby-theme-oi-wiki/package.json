@@ -45,7 +45,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "rehype-details": "^1.9.0",
-    "rehype-mathjax": "^3.0.0",
+    "rehype-mathjax": "^3.1.0",
     "rehype-parse": "^7.0.1",
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "remark-details": "^3.0.0",
