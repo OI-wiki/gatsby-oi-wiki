@@ -7060,10 +7060,10 @@ gatsby-transformer-sharp@^2.9.0:
     semver "^7.3.4"
     sharp "^0.27.0"
 
-gatsby@^2.32.3:
-  version "2.32.3"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.3.tgz#af4c12e676c9e0cdbc69c29508af2384da462c11"
-  integrity sha512-6l1ktlIbj6dRDnAPi+dh/tAEx7FdEYm55RwM3aiFEpwNIHeevG+Jw1RZhIpwUmhkGBwaOjr559KJYf7dYuXk3w==
+gatsby@^2.32.4:
+  version "2.32.4"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.4.tgz#2bfb7cc587c1ec7fda70e57ca2893ce5bbc6a4e9"
+  integrity sha512-Jpqp8pwQJab6fpGdB3OmJk3UXqPvmYHH6YugF9CYfsTyJXy3yoOSxJ6hMzZeZxEnxeJ5RnJlGRyMEZJtpmy3ZQ==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/core" "^7.12.3"
@@ -7202,7 +7202,6 @@ gatsby@^2.32.3:
     string-similarity "^1.2.2"
     strip-ansi "^5.2.0"
     style-loader "^0.23.1"
-    terminal-link "^2.1.1"
     terser-webpack-plugin "^2.3.8"
     tmp "^0.2.1"
     "true-case-path" "^2.2.1"
@@ -10127,12 +10126,7 @@ mime@1.6.0, mime@^1.3.4:
   resolved "https://registry.npmjs.org/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@^2.0.3, mime@^2.4.4, mime@^2.4.6:
-  version "2.4.6"
-  resolved "https://registry.npmjs.org/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
-  integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
-
-mime@^2.3.1:
+mime@^2.0.3, mime@^2.3.1, mime@^2.4.4, mime@^2.4.6:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.0.tgz#2b4af934401779806ee98026bb42e8c1ae1876b1"
   integrity sha512-ft3WayFSFUVBuJj7BMLKAQcSlItKtfjsKDDsii3rqFDAZ7t11zRe8ASw/GlmivGwVUYtwkQrxiGGpL6gFvB0ag==
@@ -14181,14 +14175,6 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-supports-hyperlinks@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/supports-hyperlinks/-/supports-hyperlinks-2.1.0.tgz#f663df252af5f37c5d49bbd7eeefa9e0b9e59e47"
-  integrity sha512-zoE5/e+dnEijk6ASB6/qrK+oYdm2do1hjoLWrqUC/8WEIW1gbxFcKuBof7sW8ArN6e+AYvsE8HBGiVRWL/F5CA==
-  dependencies:
-    has-flag "^4.0.0"
-    supports-color "^7.0.0"
-
 svgo@1.3.2, svgo@^1.0.0:
   version "1.3.2"
   resolved "https://registry.npmjs.org/svgo/-/svgo-1.3.2.tgz#b6dc511c063346c9e415b81e43401145b96d4167"
@@ -14302,14 +14288,6 @@ term-size@^2.1.0:
   version "2.2.1"
   resolved "https://registry.npmjs.org/term-size/-/term-size-2.2.1.tgz#2a6a54840432c2fb6320fea0f415531e90189f54"
   integrity sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==
-
-terminal-link@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"
-  integrity sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==
-  dependencies:
-    ansi-escapes "^4.2.1"
-    supports-hyperlinks "^2.0.0"
 
 terser-webpack-plugin@^1.4.3:
   version "1.4.5"
