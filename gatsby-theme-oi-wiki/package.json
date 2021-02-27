@@ -38,7 +38,7 @@
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "gatsby-transformer-sharp": "^2.12",
     "hast-util-to-text": "^2.0.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "mark.js": "^8.11.1",
     "mdast-util-toc": "^5.0.3",
     "react": "^17.0.1",
