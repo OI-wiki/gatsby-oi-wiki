@@ -23,7 +23,7 @@
     "clsx": "^1.1.1",
     "constate": "^3.0.1",
     "deepmerge": "^4.2.2",
-    "gatsby": "^2.32.4",
+    "gatsby": "^2.32.8",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
     "gatsby-plugin-advanced-sitemap": "^1.6.0",
     "gatsby-plugin-catch-links": "^2.10.0",
