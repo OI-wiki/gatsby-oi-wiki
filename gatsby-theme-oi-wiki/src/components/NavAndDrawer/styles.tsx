@@ -38,12 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  placeholder: {
+  placeholderMargin: {
     [theme.breakpoints.down('md')]: {
-      minHeight: 64,
+      marginTop: 64,
+      maxHeight: `calc(100% - ${64 + 8}px)`,
     },
-    minHeight: 48 + 64,
-    alignItems: 'flex-start',
+    marginTop: 48 + 64,
+    maxHeight: `calc(100% - ${48 + 64 + 8}px)`,
   },
   content: {
     flexGrow: 1,

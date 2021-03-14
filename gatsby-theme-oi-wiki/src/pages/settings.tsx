@@ -1,28 +1,23 @@
 import {
   Grid,
-  InputLabel,
   Button,
-  MenuItem,
   makeStyles,
-  Select,
-  FormControl
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormGroup,
+  Switch,
 } from '@material-ui/core'
-import {darken} from '@material-ui/core/styles/colorManipulator'
 import React from 'react'
-import createPersistedState from 'use-persisted-state'
 import Layout from '../components/Layout'
-import defaultSettings from '../lib/defaultSettings'
-import colors from '../styles/colors'
+import colors, { LabeledPaletteColor } from '../styles/colors'
+import { useSetting } from '../lib/useSetting'
 
-const useConfig = createPersistedState('settings')
-
-type Props = {
-  background: any,
-}
 const useStyles = makeStyles((theme) => ({
-  root: (props: Props) => ({
-    background: props.background,
-    color: theme.palette.getContrastText(props.background || theme.palette.background.default),
+  root: (props: LabeledPaletteColor) => ({
+    background: props ? props.main : undefined,
+    color: props ? props.contrastText : theme.palette.background.default,
     margin: '1em 1.2em 1em 0',
     padding: 0,
     width: '8em',
@@ -30,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     border: '.1em solid',
     borderColor: theme.palette.divider,
     '&:hover': {
-      background: props.background ? darken(props.background, 0.2) : undefined,
+      background: props ? props.dark : undefined,
     },
   }),
   label: {
@@ -40,41 +35,23 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: '.4em',
     left: '.3em',
-    width: 'calc(100% - .6em)'
+    width: 'calc(100% - .6em)',
   },
 }))
 
-const useSetting = (defaultSettings) => {
-  const [settings, setSettings] = useConfig(defaultSettings)
-  const updateSetting = (newSettings): void => {
-    const finalSettings = {...defaultSettings, ...settings, ...newSettings}
-    setSettings(finalSettings)
-    // eslint-disable-next-line dot-notation
-    window !== undefined && window['onthemechange'](finalSettings)
-  }
-  return [settings, updateSetting];
-}
-
-type ColorButtonProp = {
-  color: string,
-  desc: string,
-  onClick?: {(props: ColorButtonProp): any}
+interface ColorButtonProp {
+  data: LabeledPaletteColor
+  onClick?: (props: LabeledPaletteColor) => any
 }
 const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
-  const background = props.color === 'auto'
-    ? undefined // inherit settings
-    : props.color
-
-  const classes = useStyles({
-    background: background,
-  })
+  const classes = useStyles(props.data.main === 'auto' ? undefined : props.data)
   return (
     <Grid item>
       <Button
         classes={classes}
-        onClick={() => props.onClick(props)}
+        onClick={() => props.onClick(props.data)}
       >
-        {props.desc}
+        {props.data.desc}
       </Button>
     </Grid>
   )
@@ -84,13 +61,22 @@ type SettingsPageProps = {
   location: string
 }
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
-  const {location} = props
-  const [settings, updateSetting] = useSetting(defaultSettings)
+  const { location } = props
+  const [settings, updateSetting] = useSetting()
 
-  const onBtnClick = (cprops) => {
+  const onNavColorBtnClick = (c: LabeledPaletteColor) => {
     updateSetting({
       theme: {
-        navColor: cprops.color,
+        primary: c.main === 'auto' ? null : c,
+      },
+    })
+  }
+
+  const onSecondaryColorBtnClick = (c: LabeledPaletteColor) => {
+    if (c.main === 'auto') throw new Error('invalid color')
+    updateSetting({
+      theme: {
+        secondary: c.id,
       },
     })
   }
@@ -106,27 +92,78 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <FormControl>
-            <InputLabel>暗色模式</InputLabel>
-            <Select
+            暗色模式
+            <RadioGroup
+              name="theme-mode"
               value={settings.darkMode.type}
               onChange={(e) => {
                 updateSetting({
                   darkMode: {
-                    type: e.target.value,
+                    type: (e.target.value as unknown as ('user-preference' | 'always-on' | 'always-off')),
                   },
                 })
               }}
             >
-              <MenuItem value="user-preference">跟随系统</MenuItem>
-              <MenuItem value="always-on">总是打开</MenuItem>
-              <MenuItem value="always-off">总是关闭</MenuItem>
-            </Select>
+              <FormControlLabel value="user-preference" control={<Radio />} label="跟随系统" />
+              <FormControlLabel value="always-on" control={<Radio />} label="总是打开" />
+              <FormControlLabel value="always-off" control={<Radio />} label="总是关闭" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <FormControl>
+            动画
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch checked={settings.animation.smoothScroll}
+                    onChange={(e) => {
+                      updateSetting({
+                        animation: {
+                          smoothScroll: e.target.checked,
+                        },
+                      })
+                    }
+                    } name="animation-smooth-scroll"
+                  />
+                }
+                label="使用平滑滚动"
+              />
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item>
+          <FormControl>
+            等宽字体
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch checked={settings.theme.fallbackMonoFont}
+                    onChange={(e) => {
+                      updateSetting({
+                        theme: {
+                          fallbackMonoFont: e.target.checked,
+                        },
+                      })
+                    }
+                    } name="monofont"
+                  />
+                }
+                label="使用浏览器默认字体"
+              />
+            </FormGroup>
           </FormControl>
         </Grid>
         <Grid item>
           导航栏颜色
           <Grid container>
-            {colors.map(props => (<ColorButton {...props} key={props.color} onClick={onBtnClick} />))}
+            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onNavColorBtnClick} />))}
+          </Grid>
+        </Grid>
+        <Grid item>
+          强调色
+          <Grid container>
+            {colors.map(c => c.id !== '0' && (<ColorButton data={c} key={c.main} onClick={onSecondaryColorBtnClick} />))}
           </Grid>
         </Grid>
       </Grid>

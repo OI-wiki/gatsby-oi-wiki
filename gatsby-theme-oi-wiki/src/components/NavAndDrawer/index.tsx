@@ -11,16 +11,16 @@ import {
 import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
-import createPersistedState from 'use-persisted-state'
 
 import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
+
+import clsx from 'clsx'
 
 import trimTrailingSlash from '../../lib/trailingSlash'
 
 // eslint-disable-next-line
 // @ts-ignore
 import pathList from '../../sidebar.yaml'
-import defaultSettings from '../../lib/defaultSettings'
 import Search from '../Search'
 import SiderContent from '../Sidebar'
 import Tabs from '../Tabs'
@@ -29,11 +29,12 @@ import SmallScreenMenu from '../SmallScreenMenu'
 import { useStyles } from './styles'
 import { flattenObject } from './utils'
 import NavBtnGroup from './NavBtnGroup'
+import { useSetting } from '../../lib/useSetting'
 
 function getTabIDFromLocation (location: string, pathList: string[]): number {
   const locationTrimmed = trimTrailingSlash(location)
   for (const v of Object.entries(pathList)) {
-    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v)).indexOf(locationTrimmed) > -1) return +v[0]
+    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0]
   }
   return -1
 }
@@ -44,15 +45,15 @@ interface drawerProps {
 
 const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const { pathname } = props
-  const [settings] = createPersistedState('settings')(defaultSettings)
+  const [settings] = useSetting()
   const theme = useTheme()
-  const navColor = settings?.theme?.navColor !== 'auto' && typeof settings?.theme?.navColor !== 'undefined'
-    ? settings.theme.navColor
-    : theme.palette.background.paper // undefined or 'auto'
+  const [navColor, textColor] = settings.theme.primary
+    ? [settings.theme.primary.main, settings.theme.primary.contrastText]
+    : [theme.palette.background.paper, 'rgba(var(--text-primary))']
   const classes = useStyles({
     appBar: {
       background: navColor,
-      color: theme.palette.getContrastText(navColor),
+      color: textColor,
     },
   })
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -111,11 +112,10 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
       <Hidden mdDown implementation="css">
         <Drawer
           className={classes.drawer}
-          classes={{ paper: classes.drawerPaper }}
+          classes={{ paper: clsx(classes.drawerPaper, classes.placeholderMargin) }}
           variant="permanent"
           open
         >
-          <div className={classes.placeholder} />
           <SiderContent pathList={tabID !== -1 ? [pathList[tabID]] : pathList} {...props} />
         </Drawer>
       </Hidden>

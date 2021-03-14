@@ -1,17 +1,13 @@
-import { Link, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { graphql, StaticQuery } from 'gatsby'
 import React, { useEffect } from 'react'
+import { SmartLink } from './Link'
 
 const useStyles = makeStyles((theme) => ({
   link: {
     color: theme.palette.footer.text,
-    '&:hover': {
-      textDecoration: 'none',
-      color: theme.palette.link.hover,
-    },
-    transition: `color ${250}ms ease-in-out`,
   },
 }))
 
@@ -34,32 +30,22 @@ function FooterContent ({ data }) {
     <>
       <Typography gutterBottom>
         Copyright © 2016 - {date.substr(0, 4)} OI Wiki Team
-        </Typography>
+      </Typography>
       <Typography gutterBottom>
-        最近更新:{' '}
-        <Link
-          className={classes.link}
-          href="https://github.com/OI-wiki/OI-wiki/commits"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        {'最近更新： '}
+        <SmartLink className={classes.link} href="https://github.com/OI-wiki/OI-wiki/commits">
           {hash.substr(0, 7)}
-        </Link>
+        </SmartLink>
           , {date.substr(0, 10)}
       </Typography>
       <Typography>
         联系方式：
-          <Link className={classes.link} href="https://t.me/OIwiki" target="_blank" rel="noreferrer noopener">
+        <SmartLink className={classes.link} href="https://t.me/OIwiki">
           Telegram 群组
-          </Link>{' / '}
-        <Link
-          className={classes.link}
-          href="https://jq.qq.com/?_wv=1027&k=5EfkM6K"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        </SmartLink>{' / '}
+        <SmartLink className={classes.link} href="https://jq.qq.com/?_wv=1027&k=5EfkM6K">
           QQ 群组
-        </Link>
+        </SmartLink>
       </Typography>
     </>
   )

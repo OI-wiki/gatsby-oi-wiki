@@ -89,7 +89,6 @@ code span.shiki-line:before {
 
 pre.shiki {
   overflow: auto;
-  color: #d4d4d4;
   font-size: 13px;
   text-shadow: none;
   direction: ltr;
@@ -106,9 +105,6 @@ pre.shiki {
   hyphens: none;
 }
 
-pre.shiki code {
-  font-family: 'Menlo','Monaco','Consolas',"Andale Mono","Ubuntu Mono","Courier New",monospace !important;
-}
 
 pre.shiki::selection,
 code.shiki::selection {
@@ -140,5 +136,9 @@ main img {
 }
 
 .footnotes p {
-  display: inline-block;
+  display: inline;
+}
+
+.footnotes ol {
+  line-height: 2em;
 }

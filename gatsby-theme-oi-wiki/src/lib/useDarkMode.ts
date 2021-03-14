@@ -1,11 +1,8 @@
-import createPersistedState from 'use-persisted-state'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import defaultSettings from './defaultSettings'
-
-const useConfig = createPersistedState('settings')
+import { useSetting } from './useSetting'
 
 export default function useDarkMode (): boolean {
-  const [setting] = useConfig(defaultSettings)
+  const [setting] = useSetting()
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true })
   // noSsr: when it is false(by default), preact is enabled and user prefers dark mode,
   // useMediaQuery will return twice. Firstly false, then true. That leads to flicker whenever the route changes.
