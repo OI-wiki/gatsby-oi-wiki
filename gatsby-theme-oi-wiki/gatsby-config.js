@@ -15,12 +15,6 @@ const mathRehype = process.env.gatsby_executing_command === 'build'
   : [require('rehype-mathjax/browser')]
 
 module.exports = {
-  siteMetadata: {
-    title: 'OI Wiki',
-    description: 'Guide for OI',
-    author: 'OI Wiki Team',
-    siteUrl: 'https://ng.oi-wiki.org',
-  },
   plugins: [
     'gatsby-source-local-git',
     {
