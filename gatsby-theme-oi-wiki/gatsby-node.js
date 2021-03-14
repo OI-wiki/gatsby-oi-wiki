@@ -1,6 +1,8 @@
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
+const path = require('path')
+const { CreateSitemap, CreateIndexSitemap, CreateSitemapStylesheet } = require('sitemap-manager')
 
 const gitQuery = async function (prop) {
   const res = await git().log(['-15', prop]).catch(err => console.log(err))
@@ -121,4 +123,73 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   if (result.errors) {
     reporter.panic(result.errors)
   }
+}
+
+exports.onPostBuild = async ({ graphql, reporter, pathPrefix }) => {
+  var queryResult = await graphql(`{
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+    postsQuery:allMarkdownRemark {
+      edges {
+        node {
+          id
+          fields{
+            slug
+          }
+        }
+      }
+    }
+    tagsQuery:allMarkdownRemark(limit: 2000) {
+      group(field: frontmatter___tags) {
+        fieldValue
+      }
+    }
+  }`)
+  if (queryResult.errors) {
+    reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors)
+  }
+  queryResult = queryResult.data
+  const siteURL = queryResult.site.siteMetadata.siteUrl
+  CreateSitemap(
+    path.resolve('./public/sitemap-articles.xml'),
+    pathPrefix,
+    siteURL,
+    queryResult.postsQuery.edges,
+    (data) => { return data.node.fields.slug },
+  )
+  CreateSitemap(
+    path.resolve('./public/sitemap-logs.xml'),
+    pathPrefix,
+    siteURL,
+    queryResult.postsQuery.edges,
+    (data) => { return data.node.fields.slug + 'changelog/' },
+  )
+  CreateSitemap(
+    path.resolve('./public/sitemap-tags.xml'),
+    pathPrefix,
+    siteURL,
+    queryResult.tagsQuery.group,
+    (data) => { return `/tags/${data.fieldValue}/` },
+  )
+  CreateSitemap(
+    path.resolve('./public/sitemap-pages.xml'),
+    pathPrefix,
+    siteURL,
+    ['/pages/', '/settings/'],
+    (data) => { return data },
+  )
+  CreateIndexSitemap(
+    path.resolve('./public/sitemap.xml'),
+    pathPrefix,
+    siteURL,
+    ['sitemap-pages.xml', 'sitemap-articles.xml', 'sitemap-logs.xml', 'sitemap-tags.xml'],
+  )
+  CreateSitemapStylesheet(
+    path.resolve('./public/sitemap.xsl'),
+    pathPrefix,
+    siteURL,
+  )
 }

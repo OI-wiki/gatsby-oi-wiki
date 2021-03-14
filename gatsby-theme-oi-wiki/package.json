@@ -50,6 +50,7 @@
     "remark-details": "^3.0.0",
     "remark-math": "^3.0.1",
     "simple-git": "^2.34.2",
+    "sitemap-manager": "^1.1.1",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
