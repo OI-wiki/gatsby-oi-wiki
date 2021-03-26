@@ -30,7 +30,7 @@
     "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-offline": "^3.10.2",
     "gatsby-plugin-react-helmet": "^4.1.0",
-    "gatsby-plugin-sharp": "^2.14",
+    "gatsby-plugin-sharp": "^3.1",
     "gatsby-remark-copy-linked-files": "^2.10.0",
     "gatsby-remark-images": "^4.1",
     "gatsby-source-filesystem": "^3.1.0",
@@ -69,7 +69,7 @@
   },
   "optionalDependencies": {
     "gatsby-plugin-manifest": "^3.1.0",
-    "gatsby-plugin-sharp": "^2.13.4",
+    "gatsby-plugin-sharp": "^3.1.2",
     "gatsby-remark-images": "^4.1.1",
     "gatsby-transformer-sharp": "^3.1.0"
   }
