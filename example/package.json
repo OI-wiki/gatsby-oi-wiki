@@ -9,7 +9,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "gatsby": "^2.32.4",
+    "gatsby": "^3.1.2",
     "gatsby-theme-oi-wiki": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
