@@ -21,7 +21,7 @@
     "autosuggest-highlight": "^3.1.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
-    "constate": "^3.0.1",
+    "constate": "^3.2.0",
     "deepmerge": "^4.2.2",
     "gatsby": "^2.32.4",
     "gatsby-local-autolink-headers": "file:plugins/gatsby-local-autolink-headers",
