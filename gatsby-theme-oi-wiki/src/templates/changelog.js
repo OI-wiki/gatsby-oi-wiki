@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title={`更改记录 - ${title}`}>
+    <Layout location={location} noMeta="true" title={`更新历史 - ${title}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -81,7 +81,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                       </Typography>
                     </SmartLink>
                     <SmartLink
-                      href={`https://github.com/OI-wiki/gatsby-oi-wiki/commit/${hash}`}
+                      href={`https://github.com/OI-wiki/OI-wiki/commit/${hash}`}
                       className={classes.hashLink}
                     >
                       <Typography>{hash.substr(0, 7)}</Typography>
@@ -107,7 +107,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                 ...
               </Typography>
               {'在 '}
-              <SmartLink href={`https://github.com/OI-wiki/gatsby-oi-wiki/commits/master/${relativePath}`}>GitHub</SmartLink>
+              <SmartLink href={`https://github.com/OI-wiki/OI-wiki/commits/master/${relativePath}`}>GitHub</SmartLink>
               {' 上查看完整历史'}
             </Paper>
           </TimelineContent>
