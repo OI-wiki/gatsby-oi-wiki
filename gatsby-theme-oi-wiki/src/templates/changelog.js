@@ -81,7 +81,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                       </Typography>
                     </SmartLink>
                     <SmartLink
-                      href={`https://github.com/OI-wiki/OI-wiki/commit/${hash}`}
+                      href={`https://github.com/OI-wiki/OI-wiki/commit/${hash}/${relativePath}`}
                       className={classes.hashLink}
                     >
                       <Typography>{hash.substr(0, 7)}</Typography>
