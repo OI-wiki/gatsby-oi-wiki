@@ -12,6 +12,6 @@
     "gatsby": "^3.2.1",
     "gatsby-theme-oi-wiki": "*",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.2"
   }
 }
