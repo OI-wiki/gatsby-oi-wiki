@@ -1,4 +1,7 @@
 {
+  "name": "gatsby-oi-wiki",
+  "version": "0.0.0",
+  "description": "The under-development rendering gatsby theme for OI Wiki",
   "private": true,
   "workspaces": [
     "gatsby-theme-oi-wiki",
@@ -21,5 +24,7 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "repository": "https://github.com/OI-wiki/gatsby-oi-wiki",
+  "license": "MIT"
 }
