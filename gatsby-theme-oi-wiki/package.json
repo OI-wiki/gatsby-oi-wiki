@@ -51,7 +51,7 @@
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "remark-details": "^3.0.0",
     "remark-math": "^3.0.1",
-    "simple-git": "^2.36.2",
+    "simple-git": "^2.38.0",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
