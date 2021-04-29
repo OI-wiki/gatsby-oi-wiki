@@ -6417,18 +6417,18 @@ gatsby-plugin-react-helmet@^4.1.0:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-gatsby-plugin-sharp@^3.1.2:
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/gatsby-plugin-sharp/-/gatsby-plugin-sharp-3.2.1.tgz#6c150484b9d07ccdf24adf86b92f5e3a23597bd4"
-  integrity sha512-ZAEiDehEz7VRgykQSVwg0ESu9c+rA2BUfi6+VCi2ppemRezXm+jGUkSTo+WUhjiPmEhQq+IIOOWe4lpslJoZRg==
+gatsby-plugin-sharp@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-3.3.1.tgz#103c967ba23789a522ffedbb42920f181834e6b0"
+  integrity sha512-mwY9L/9PiLQuNmKNAx2H1OaMHYqBhePxa80yI4gW3RzUl4gsKIDLS+UonmQVogVg+LFhaEMwZ8tiQ6tM+8RZjg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     async "^3.2.0"
     bluebird "^3.7.2"
     filenamify "^4.2.0"
     fs-extra "^9.1.0"
-    gatsby-core-utils "^2.2.0"
-    gatsby-telemetry "^2.2.0"
+    gatsby-core-utils "^2.3.0"
+    gatsby-telemetry "^2.3.0"
     got "^10.7.0"
     imagemin "^7.0.1"
     imagemin-mozjpeg "^9.0.0"
@@ -6439,7 +6439,7 @@ gatsby-plugin-sharp@^3.1.2:
     probe-image-size "^6.0.0"
     progress "^2.0.3"
     semver "^7.3.4"
-    sharp "^0.27.0"
+    sharp "^0.28.0"
     svgo "1.3.2"
     uuid "3.4.0"
 
@@ -11364,6 +11364,26 @@ prebuild-install@^6.0.1, prebuild-install@^6.1.1:
   version "6.1.1"
   resolved "https://registry.npmjs.org/prebuild-install/-/prebuild-install-6.1.1.tgz#6754fa6c0d55eced7f9e14408ff9e4cba6f097b4"
   integrity sha512-M+cKwofFlHa5VpTWub7GLg5RLcunYIcLqtY5pKcls/u7xaAb8FrXZ520qY8rkpYy5xw90tYCyMO0MP5ggzR3Sw==
+  dependencies:
+    detect-libc "^1.0.3"
+    expand-template "^2.0.3"
+    github-from-package "0.0.0"
+    minimist "^1.2.3"
+    mkdirp-classic "^0.5.3"
+    napi-build-utils "^1.0.1"
+    node-abi "^2.21.0"
+    noop-logger "^0.1.1"
+    npmlog "^4.0.1"
+    pump "^3.0.0"
+    rc "^1.2.7"
+    simple-get "^3.0.3"
+    tar-fs "^2.0.0"
+    tunnel-agent "^0.6.0"
+
+prebuild-install@^6.1.1:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-6.1.2.tgz#6ce5fc5978feba5d3cbffedca0682b136a0b5bff"
+  integrity sha512-PzYWIKZeP+967WuKYXlTOhYBgGOvTRSfaKI89XnfJ0ansRAH7hDU45X+K+FZeI1Wb/7p/NnuctPH3g0IqKUuSQ==
   dependencies:
     detect-libc "^1.0.3"
     expand-template "^2.0.3"
