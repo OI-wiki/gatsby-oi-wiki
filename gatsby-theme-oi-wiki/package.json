@@ -36,7 +36,7 @@
     "gatsby-source-filesystem": "^3.1.0",
     "gatsby-source-local-git": "^1.2.2",
     "gatsby-transformer-remark-rehype": "^1.0.3",
-    "gatsby-transformer-sharp": "^3.1",
+    "gatsby-transformer-sharp": "^3.4",
     "hast-util-to-text": "^2.0.0",
     "lodash": "^4.17.21",
     "mark.js": "^8.11.1",
@@ -72,6 +72,6 @@
     "gatsby-plugin-manifest": "^3.1.0",
     "gatsby-plugin-sharp": "^3.1.2",
     "gatsby-remark-images": "^4.1.1",
-    "gatsby-transformer-sharp": "^3.1.0"
+    "gatsby-transformer-sharp": "^3.4.0"
   }
 }
