@@ -2057,6 +2057,11 @@
     "@types/node" "*"
     safe-buffer "*"
 
+"@types/repeat-string@^1.0.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@types/repeat-string/-/repeat-string-1.6.0.tgz#79fa5c9e9b5fad3247b497ca67b021f78cacfdf2"
+  integrity sha512-Nwr4xMZBJKzluvdF9QPKjqFi8EpR63jk0mQPBEXB/+kevUPBftRQrbt24m+NkRh0C9ftrNIqnnsDw9iyQv/j7g==
+
 "@types/responselike@*":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@types/responselike/-/responselike-1.0.0.tgz#251f4fe7d154d2bad125abe1b429b23afd262e29"
@@ -7478,6 +7483,14 @@ hast-util-is-element@^1.0.0:
   resolved "https://registry.npmjs.org/hast-util-is-element/-/hast-util-is-element-1.1.0.tgz#3b3ed5159a2707c6137b48637fbfe068e175a425"
   integrity sha512-oUmNua0bFbdrD/ELDSSEadRVtWZOf3iF6Lbv81naqsIV99RnSCieTbWuWCY8BAeEfKJTKl0gRdokv+dELutHGQ==
 
+hast-util-is-element@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-is-element/-/hast-util-is-element-2.0.1.tgz#eb8f6db6d06950dc4b99f17d79dea6aa2368f4fe"
+  integrity sha512-j317G/4HBy5g0rstOJpgJTFt55+oIj3bY2NtfLRi0vPPEWGYZUFwZhh7MvWczA5ue0w5K5QflNXKZXk0SgrV4A==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    "@types/unist" "^2.0.0"
+
 hast-util-parse-selector@^2.0.0, hast-util-parse-selector@^2.2.0:
   version "2.2.5"
   resolved "https://registry.npmjs.org/hast-util-parse-selector/-/hast-util-parse-selector-2.2.5.tgz#d57c23f4da16ae3c63b3b6ca4616683313499c3a"
@@ -7578,6 +7591,17 @@ hast-util-to-text@^2.0.0:
     hast-util-is-element "^1.0.0"
     repeat-string "^1.0.0"
     unist-util-find-after "^3.0.0"
+
+hast-util-to-text@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hast-util-to-text/-/hast-util-to-text-3.0.0.tgz#50b985beda7d4e8b6d9463fd91cb08132fc3c62c"
+  integrity sha512-N+Y06wCTyc9HSzleL+yexRf6h/lgnCSvjD0r7e/v8cgAIXKQYx1SLR9MITbSvDMVVSr+VSFKAYLU9zvAY+VVDA==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    "@types/repeat-string" "^1.0.0"
+    hast-util-is-element "^2.0.0"
+    repeat-string "^1.0.0"
+    unist-util-find-after "^4.0.0"
 
 hast-util-whitespace@^1.0.0:
   version "1.0.4"
@@ -14183,6 +14207,14 @@ unist-util-find-after@^3.0.0:
   dependencies:
     unist-util-is "^4.0.0"
 
+unist-util-find-after@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-find-after/-/unist-util-find-after-4.0.0.tgz#1101cebf5fed88ae3c6f3fa676e86fd5772a4f32"
+  integrity sha512-gfpsxKQde7atVF30n5Gff2fQhAc4/HTOV4CvkXpTg9wRfQhZWdXitpyXHWB6YcYgnsxLx+4gGHeVjCTAAp9sjw==
+  dependencies:
+    "@types/unist" "^2.0.0"
+    unist-util-is "^5.0.0"
+
 unist-util-generated@^1.1.0:
   version "1.1.6"
   resolved "https://registry.npmjs.org/unist-util-generated/-/unist-util-generated-1.1.6.tgz#5ab51f689e2992a472beb1b35f2ce7ff2f324d4b"
@@ -14202,6 +14234,11 @@ unist-util-is@^4.0.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/unist-util-is/-/unist-util-is-4.1.0.tgz#976e5f462a7a5de73d94b706bac1b90671b57797"
   integrity sha512-ZOQSsnce92GrxSqlnEEseX0gi7GH9zTJZ0p9dtu87WRb/37mMPO2Ilx1s/t9vBHrFhbgweUwb+t7cIn5dxPhZg==
+
+unist-util-is@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-5.0.0.tgz#c71eddea34aa7009d54f671a6fafb3779b8035d3"
+  integrity sha512-G4p13DhfdUNmlnJxd0uy5Skx1FG58LSDhX8h1xgpeSq0omOQ4ZN5BO54ToFlNX55NDTbRHMdwTOJXqAieInSEA==
 
 unist-util-modify-children@^2.0.0:
   version "2.0.0"
