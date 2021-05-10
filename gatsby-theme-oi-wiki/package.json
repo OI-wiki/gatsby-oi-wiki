@@ -40,7 +40,7 @@
     "hast-util-to-text": "^3.0.0",
     "lodash": "^4.17.21",
     "mark.js": "^8.11.1",
-    "mdast-util-toc": "^5.0.3",
+    "mdast-util-toc": "^6.0.0",
     "path-browserify": "^1.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.2",
