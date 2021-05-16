@@ -7,7 +7,6 @@ import Summary from './Summary.tsx'
 import { SmartLink } from './Link'
 import SEO from './Seo'
 import clsx from 'clsx'
-import { Helmet } from 'react-helmet'
 
 function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
@@ -112,9 +111,6 @@ function Mdx ({ data: { mdx }, location }) {
         dateModified={dateModified}
         datePublished={datePublished}
         article />
-      <Helmet>
-        <meta name="color-scheme" content="dark light"/>
-      </Helmet>
       <MDRenderer components={myComponents} htmlAst={mdx.htmlAst} />
     </Layout>
   )

@@ -105,6 +105,7 @@ function MyLayout ({
     <>
       <Helmet>
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
+        <meta name="color-scheme" content="dark light"/>
         <meta name="description" content={descriptionRes} />
       </Helmet>
       <NavAndDrawer pathname={location.pathname} />
