@@ -45,7 +45,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-transition-group": "^4.4.1",
+    "react-transition-group": "^4.4.2",
     "rehype-details": "^1.9.0",
     "rehype-mathjax": "^3.1.0",
     "rehype-parse": "^7.0.1",
