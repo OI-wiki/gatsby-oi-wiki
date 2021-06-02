@@ -6347,7 +6347,7 @@ gatsby-core-utils@^1.3.23:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^2.3.0, gatsby-core-utils@^2.4.0, gatsby-core-utils@^2.5.0, gatsby-core-utils@^2.6.0:
+gatsby-core-utils@^2.4.0, gatsby-core-utils@^2.5.0, gatsby-core-utils@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.6.0.tgz#4653995f3640b56fe218a20da6458cfe0bffcdfb"
   integrity sha512-d8a/iblc3wIrLEOWTUcoK5uYE2DrvlQmeulx6DK3NY49KD8jet8ozB6T5GA1CftsvowWeO6aaDnoWDbTxIxTRA==
@@ -6446,14 +6446,14 @@ gatsby-plugin-material-ui@^3.0.1:
     clean-css "^5.1.1"
     postcss "^8.0.5"
 
-gatsby-plugin-offline@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-4.3.0.tgz#2b7420ff649f74f61e5ea2a6c29155df032647ef"
-  integrity sha512-rrzCvGXzquBjkzxdCmRWLhC/QW7lX0PKv2Se9cznkavTGNRe0kHpHKeSMPYitEFCOk0y+zu4mvFoZR7ZfPHwDw==
+gatsby-plugin-offline@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-4.6.0.tgz#d6f0ad301a16fbb8d219ab82bc7147afb914c51b"
+  integrity sha512-NEhO7jONqQXVhLssaHsfnu9Qeix9ncIEDGsGoDg4XcxmP0yHgLhXC7aUpAuodmZhx6+4UtiCAAkyZQqMDjOCZA==
   dependencies:
     "@babel/runtime" "^7.12.5"
-    cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^2.3.0"
+    cheerio "^1.0.0-rc.9"
+    gatsby-core-utils "^2.6.0"
     glob "^7.1.6"
     idb-keyval "^3.2.0"
     lodash "^4.17.21"
