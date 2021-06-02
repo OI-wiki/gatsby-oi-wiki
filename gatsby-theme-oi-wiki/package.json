@@ -33,7 +33,7 @@
     "gatsby-plugin-sharp": "^3.6",
     "gatsby-remark-copy-linked-files": "^4.3.0",
     "gatsby-remark-images": "^5.1",
-    "gatsby-source-filesystem": "^3.5.0",
+    "gatsby-source-filesystem": "^3.6.0",
     "gatsby-source-local-git": "^1.2.2",
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "gatsby-transformer-sharp": "^3.6",
