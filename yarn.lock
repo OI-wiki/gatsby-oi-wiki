@@ -3635,7 +3635,7 @@ cheerio-select@^1.4.0:
     domhandler "^4.2.0"
     domutils "^2.6.0"
 
-cheerio@^1.0.0-rc.3, cheerio@^1.0.0-rc.9:
+cheerio@^1.0.0-rc.9:
   version "1.0.0-rc.9"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.9.tgz#a3ae6b7ce7af80675302ff836f628e7cb786a67f"
   integrity sha512-QF6XVdrLONO6DXRF5iaolY+odmhj2CLj+xzNod7INPWMi/x9X4SOylH0S/vaPpX+AUU6t04s34SQNh7DbkuCng==
@@ -6347,7 +6347,7 @@ gatsby-core-utils@^1.3.23:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^2.4.0, gatsby-core-utils@^2.6.0:
+gatsby-core-utils@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.6.0.tgz#4653995f3640b56fe218a20da6458cfe0bffcdfb"
   integrity sha512-d8a/iblc3wIrLEOWTUcoK5uYE2DrvlQmeulx6DK3NY49KD8jet8ozB6T5GA1CftsvowWeO6aaDnoWDbTxIxTRA==
@@ -6620,15 +6620,15 @@ gatsby-remark-copy-linked-files@^4.3.0:
     probe-image-size "^6.0.0"
     unist-util-visit "^2.0.3"
 
-gatsby-remark-images@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-5.1.0.tgz#e6c556dd91fd256b25eab3460c73e03c76c4e92a"
-  integrity sha512-N17TTJw6LN1zLgpEfHffotzMuM3kAayUPDkfpCRJ6zxUseRUdDI8bpKfcdCuhd1Y0QjQLNkrIKFMIWwMQGBxRA==
+gatsby-remark-images@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-5.3.0.tgz#06736580accb8b53bcca89d631840b568fac9737"
+  integrity sha512-AeTZrkbynn65+ZMzqKrSml/17VeRBe6bChHzwciVi8YIJMyLDLekpslYo4VrXR1YsR9WwcdWIlLEf3Lhb2UXyg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     chalk "^4.1.0"
-    cheerio "^1.0.0-rc.3"
-    gatsby-core-utils "^2.4.0"
+    cheerio "^1.0.0-rc.9"
+    gatsby-core-utils "^2.6.0"
     is-relative-url "^3.0.0"
     lodash "^4.17.21"
     mdast-util-definitions "^4.0.0"
