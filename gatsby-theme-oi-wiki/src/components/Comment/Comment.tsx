@@ -165,7 +165,8 @@ const CommentComponent: React.FC<Props> = (props) => {
           setLoading(false)
         }}
       />
-      {noIssue ? <NoIssueComponent />
+      {noIssue
+        ? <NoIssueComponent />
         : filteredComments.map(({ content, author, createdAt, reactions, id, contentRaw }) => (
           <CommentCard
             avatarLink={author.avatar}

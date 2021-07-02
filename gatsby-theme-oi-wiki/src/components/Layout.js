@@ -10,6 +10,7 @@ import Alert from '@material-ui/lab/Alert'
 import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { CSSTransition } from 'react-transition-group'
 // import useDarkMode from '../lib/useDarkMode'
 import scrollbar from '../styles/scrollbar'
 import {
@@ -27,6 +28,7 @@ import Meta from './Meta'
 import NavAndDrawer from './NavAndDrawer'
 import ToC from './Toc'
 import Title from './Title'
+import '../styles/transition.css'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -105,6 +107,7 @@ function MyLayout ({
     <>
       <Helmet>
         <title>{`${title === 'OI Wiki' ? '' : title + ' - '}OI Wiki`}</title>
+        <meta name="color-scheme" content="dark light" />
         <meta name="description" content={descriptionRes} />
       </Helmet>
       <NavAndDrawer pathname={location.pathname} />
@@ -119,37 +122,44 @@ function MyLayout ({
             xl={gridWidthMdUp}
           >
             <div className={classes.toolbar} />
-            <div className={classes.container}>
-              <main className={classes.content}>
-                <div className={classes.main}>
-                  <Title
-                    title={title}
-                    location={location}
-                    noEdit={noEdit}
-                    noMeta={noMeta}
-                    relativePath={relativePath}
-                  />
-                  <Divider className={classes.divider} />
-                  {isWIP && WIPAlert}
-                  <Typography variant="body1" component="div">
-                    {children}
-                  </Typography>
-                  {noMeta === 'false' && <Meta
-                    authors={authors}
-                    tags={tags}
-                    relativePath={relativePath}
-                    modifiedTime={modifiedTime}
-                    location={location}
-                    title={title}
-                  />}
-                  {noComment === 'false' && (
-                    <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                      <Comment title={title} />
-                    </div>
-                  )}
-                </div>
-              </main>
-            </div>
+            <CSSTransition
+              in
+              appear
+              timeout={600}
+              classNames="fade"
+            >
+              <div className={classes.container}>
+                <main className={classes.content}>
+                  <div className={classes.main}>
+                    <Title
+                      title={title}
+                      location={location}
+                      noEdit={noEdit}
+                      noMeta={noMeta}
+                      relativePath={relativePath}
+                    />
+                    <Divider className={classes.divider} />
+                    {isWIP && WIPAlert}
+                    <Typography variant="body1" component="div">
+                      {children}
+                    </Typography>
+                    {noMeta === 'false' && <Meta
+                      authors={authors}
+                      tags={tags}
+                      relativePath={relativePath}
+                      modifiedTime={modifiedTime}
+                      location={location}
+                      title={title}
+                    />}
+                    {noComment === 'false' && (
+                      <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                        <Comment title={title} />
+                      </div>
+                    )}
+                  </div>
+                </main>
+              </div>
+            </CSSTransition>
           </Grid>
         </Grid>
         <Divider />

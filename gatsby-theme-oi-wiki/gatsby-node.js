@@ -4,6 +4,19 @@ const { createFilePath } = require('gatsby-source-filesystem')
 const path = require('path')
 const { CreateSitemap, CreateIndexSitemap, CreateSitemapStylesheet } = require('sitemap-manager')
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+       alias: {
+          path: require.resolve("path-browserify")
+       },
+       fallback: {
+         fs: false,
+       }
+    }
+  })
+}
+
 const gitQuery = async function (prop) {
   const res = await git().log(['-15', prop]).catch(err => console.log(err))
   return res

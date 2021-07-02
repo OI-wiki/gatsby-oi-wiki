@@ -54,7 +54,7 @@ const globalStyles = withStyles((theme) => ({
       '-webkit-box-decoration-break': 'clone',
       'box-decoration-break': 'clone',
       fontSize: '90%',
-      fontFamily: "var(--code-block-font)",
+      fontFamily: 'var(--code-block-font)',
     },
   },
 }))
