@@ -6625,12 +6625,12 @@ gatsby-plugin-advanced-sitemap@^2.0.0:
     moment "2.29.1"
     xml "^1.0.1"
 
-gatsby-plugin-catch-links@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-3.6.0.tgz#c2162b110e19b33d26f554cdadcdedbd760c7242"
-  integrity sha512-8vYBZAwA/i1WWmSjvksyXkb37KHRJqpiNrlbOIvh//k+qJnCqzqz42C/w4lLVzz7yxO6n0zaZbR2oZXtrvA8eQ==
+gatsby-plugin-catch-links@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-3.8.0.tgz#c507e51e05fb266b28203bb840befc799a1850c7"
+  integrity sha512-SjgNG27IJ6mU/TkMVrvkuZtCS5NJql/rDJ4JN0WGX3eN4n+vwR3YDLeeIFpfVouSYUFfoqIdhcbHI4QBDk9rvw==
   dependencies:
-    "@babel/runtime" "^7.12.5"
+    "@babel/runtime" "^7.14.0"
     escape-string-regexp "^1.0.5"
 
 gatsby-plugin-manifest@^3.6.0:
