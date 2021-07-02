@@ -70,9 +70,11 @@ function Search () {
         <div
           className={clsx(
             classes.search,
-            enableDark ? classes.searchColorBlack : (
-              open ? classes.searchColorWhite : classes.searchColorBlack
-            ),
+            enableDark
+              ? classes.searchColorBlack
+              : (
+                  open ? classes.searchColorWhite : classes.searchColorBlack
+                ),
           )}
         >
           <div className={classes.searchIcon}>
