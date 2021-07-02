@@ -12,7 +12,8 @@ import { FindInPage as FindInPageIcon } from '@material-ui/icons'
 export function SearchResultList (props) {
   const { result, isFirstRun, searchKey, classes } = props
   const resultCount = result.length
-  return resultCount !== 0 ? (
+  return resultCount !== 0
+    ? (
     <>
       <Typography variant="body1" className={classes.searchMessage}>
         共找到 {resultCount} 条搜索结果：
@@ -60,11 +61,14 @@ export function SearchResultList (props) {
         })}
       </List>
     </>
-  ) : !isFirstRun.current ? (
+      )
+    : !isFirstRun.current
+        ? (
     <Typography variant="body1" className={classes.searchMessage}>
       没有找到符合条件的结果
     </Typography>
-  ) : (
-    ''
-  )
+          )
+        : (
+            ''
+          )
 }

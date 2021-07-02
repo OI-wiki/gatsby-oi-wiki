@@ -146,14 +146,16 @@ const ToC: React.FC<Toc> = (props) => {
 
   return (
     <nav className={classes.main} aria-label="pageTOC">
-      {newItems.current.length > 0 ? (
+      {newItems.current.length > 0
+        ? (
         <>
           <Typography gutterBottom className={classes.contents}>
             目录
           </Typography>
           <Toc data={newItems.current} onClick={handleClick} />
         </>
-      ) : null}
+          )
+        : null}
     </nav>
   )
 }
