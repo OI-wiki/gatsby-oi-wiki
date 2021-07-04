@@ -31,7 +31,11 @@ export const query = graphql`
         noComment
         description
       }
-      toc: tocObject
+      headings {
+        depth
+        id
+        value
+      }
       parent {
         ... on File {
           relativePath

@@ -5,6 +5,8 @@ import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 import { useStyles } from './styles'
 import { useSetting } from '../../lib/useSetting'
 
+import slug from 'github-slugger'
+
 import Toc, { Node } from './Toc'
 
 function getIDfromHash (url:string):string {
@@ -12,27 +14,27 @@ function getIDfromHash (url:string):string {
 }
 
 interface Item{
-  url: string,
-  title: string;
-  items?: Item[];
-  level: number;
+  value: string;
+  depth: number;
 }
 interface Toc{
   pathname: string;
-  toc: {
-    items: Item[];
-  }
+  toc: Item[];
 }
 
 function Tocize (items: Item[]): Node[] {
-  const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5)
+  const minLevel = items.reduce((v, i) => Math.min(v, i.depth), 5)
   const curNode = [null, null, null, null, null, null]
   const data = []
+  const slugs = new slug()
+  slugs.reset()
+
   items.forEach((item) => {
-    const level = item.level - minLevel
+    const level = item.depth - minLevel
+    const title = item.value.replace(/<[^>]*>?/gm, '')
     const newNode: Node = {
-      url: item.url,
-      title: item.title,
+      url: `#${slugs.slug(title)}`,
+      title: title,
       level: level,
       children: [],
       status: 'collapse',
@@ -47,6 +49,7 @@ function Tocize (items: Item[]): Node[] {
       newNode.parent = curNode[level - 1]
     }
   })
+  console.log(data)
   return data
 }
 
@@ -59,7 +62,7 @@ function bindHTMLElement (toc: Node[]): void {
 
 const ToC: React.FC<Toc> = (props) => {
   const { toc, pathname } = props
-  const items = toc.items
+  const items = toc
   const classes = useStyles()
   const theme = useTheme()
   const [settings] = useSetting()

@@ -82,7 +82,7 @@ function MyLayout ({
   title,
   description,
   tags,
-  toc,
+  headings,
   relativePath,
   modifiedTime,
   noMeta,
@@ -95,7 +95,7 @@ function MyLayout ({
   const theme = useTheme()
   const classes = useStyles()
   // const pageTitle = title === 'OI Wiki' ? title : `${title} - OI Wiki`
-  const displayToC = toc?.items && noToC !== 'true'
+  const displayToC = headings && noToC !== 'true'
   const gridWidthMdUp = overflow === 'true' ? 12 : 10
   const descriptionRes = description || 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
   const WIPAlert = (
@@ -169,7 +169,7 @@ function MyLayout ({
       </div>
       {displayToC && (
         <Grid item xs >
-          <ToC toc={toc} pathname={location.pathname} />
+          <ToC toc={headings} pathname={location.pathname} />
         </Grid>
       )}
       <BackTop />

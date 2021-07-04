@@ -67,7 +67,7 @@ module.exports = {
         ],
         remarkPlugins: [
           require('remark-math'),
-          require('remark-details'),
+          // require('remark-details'),
           [require('@mgtd/remark-shiki'), {
             semantic: false,
             theme: 'light-plus',
@@ -79,7 +79,7 @@ module.exports = {
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
         ],
-        extensions: ['.mdx', '.md'],
+        // extensions: ['.mdx', '.md'],
       },
     },
     {

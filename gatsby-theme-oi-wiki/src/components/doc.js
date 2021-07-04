@@ -18,7 +18,7 @@ function Mdx ({ data: { mdx }, location }) {
   const noMeta = mdx.frontmatter.noMeta || 'false'
   const noComment = mdx.frontmatter.noComment || 'false'
   const noEdit = mdx.frontmatter.noEdit || 'false'
-  const toc = mdx.toc || null
+  const headings = mdx.headings || null
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
   const wordCount = mdx.wordCount.words || 0
@@ -95,7 +95,7 @@ function Mdx ({ data: { mdx }, location }) {
       title={title}
       description={description}
       tags={tags}
-      toc={toc}
+      headings={headings}
       relativePath={relativePath}
       modifiedTime={modifiedTime}
       noMeta={noMeta}
