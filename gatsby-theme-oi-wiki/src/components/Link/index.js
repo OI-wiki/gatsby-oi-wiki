@@ -88,6 +88,12 @@ function SmartLink ({
   if (props?.className?.search('anchor') > -1) {
     return <a {...props} href={href}>{children}</a>
   }
+
+  // in case Link is constructed wrongly
+  if (typeof href !== 'string') {
+    href = ''
+  }
+
   if (isAbsoluteURL(href)) {
     return (
       <a {...props} href={href} className={clsx(className, classes.link)} target="_blank" rel="noopener noreferrer nofollow" >
