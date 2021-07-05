@@ -5,7 +5,7 @@ import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 import { useStyles } from './styles'
 import { useSetting } from '../../lib/useSetting'
 
-import slug from 'github-slugger'
+import Slug from 'github-slugger'
 
 import Toc, { Node } from './Toc'
 
@@ -26,7 +26,7 @@ function Tocize (items: Item[]): Node[] {
   const minLevel = items.reduce((v, i) => Math.min(v, i.depth), 5)
   const curNode = [null, null, null, null, null, null]
   const data = []
-  const slugs = new slug()
+  const slugs = new Slug()
   slugs.reset()
 
   items.forEach((item) => {
@@ -49,7 +49,7 @@ function Tocize (items: Item[]): Node[] {
       newNode.parent = curNode[level - 1]
     }
   })
-  console.log(data)
+
   return data
 }
 
@@ -85,7 +85,7 @@ const ToC: React.FC<Toc> = (props) => {
     for (let u = node; u !== null; u = u.parent) u.status = val ? 'expanded' : 'collapse'
     if (val && node) node.status = 'active'
   }
-  const updateActive = (state: Node|null) => {
+  const updateActive = (state: Node|null) : void => {
     nodeSetActive(activeState, false)
     nodeSetActive(state, true)
     setActiveState(state)
