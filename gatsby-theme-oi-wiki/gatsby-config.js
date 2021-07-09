@@ -1,10 +1,26 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const fs = require('fs')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PRODUCTION = process.env.PRODUCTION === 'true' || process.env.NODE_ENV === 'production'
 const IS_PROD = IS_PRODUCTION || process.env.RENDER === 'true'
+// 暂时就放这儿了，主要是提供网站写 options 时的一个配置参考
+const SITE_CONFIG = {
+  site: {
+    title: 'OI Wiki',
+    description: 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛',
+    author: 'OI Wiki Team',
+    siteUrl: 'https://ng.oi-wiki.org',
+  },
+  manifest: {
+    name: 'OI Wiki',
+    short_name: 'OI Wiki',
+    start_url: '/',
+    display: 'standalone',
+    icon: require.resolve('./icon/favicon_512x512.png'),
+  },
+  docPath: './docs',
+}
 
 /**
  * 根据条件生成配置，需要展开
@@ -28,24 +44,15 @@ const mathRehype = IS_PRODUCTION
 
 /**
  * 处理站点配置
- * @param {string|{site: Object, manifest: Object, docPath: string}} config 可以提供完整的配置，也可以直接传入 yaml 路径（参考 config 目录）
+ * @param {{site: Object, manifest: Object, docPath: string}} config 请参考这里上方的 SITE_CONFIG
  * @param {boolean} needOriginConfig 是否需要本主题中提供的原始配置
  */
 module.exports = ({ config, needOriginConfig = true }) => {
-  let siteConfig, yaml
-
-  if (typeof config === 'string') {
-    yaml = require('js-yaml')
-    config = yaml.load(fs.readFileSync(config, 'utf-8'))
-  }
-
-  if (needOriginConfig) {
-    if (!yaml) yaml = require('js-yaml')
-    const merge = require('deepmerge')
-    const SITE_CONFIG = yaml.load(fs.readFileSync(path.resolve(__dirname, './config/site.yaml'), 'utf-8'))
-    siteConfig = merge(SITE_CONFIG, config)
+  let siteConfig
+  if (needOriginConfig && config) {
+    siteConfig = require('deepmerge')(SITE_CONFIG, config)
   } else {
-    siteConfig = config
+    siteConfig = config || SITE_CONFIG
   }
 
   return ({
