@@ -9,4 +9,4 @@ node_modules
 yarn-error.log
 .vscode
 
-/example/src/__generated__/
+/gatsby-theme-oi-wiki/src/__generated__/

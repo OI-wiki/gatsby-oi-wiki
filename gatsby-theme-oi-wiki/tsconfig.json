@@ -18,7 +18,7 @@
   "include": ["src"],
   "plugins": [{
     "name": "ts-graphql-plugin",
-    "schema": "../example/src/__generated__/gatsby-schema.graphql",
+    "schema": "src/__generated__/gatsby-schema.graphql",
     "tag": "graphql"
   }]
 }

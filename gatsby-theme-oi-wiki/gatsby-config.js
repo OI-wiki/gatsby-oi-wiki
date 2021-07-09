@@ -136,13 +136,13 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-typegen',
       options: {
-        outputPath: 'src/__generated__/gatsby-types.d.ts',
+        outputPath: path.resolve(__dirname, 'src/__generated__/gatsby-types.d.ts'),
         emitSchema: {
-          'src/__generated__/gatsby-schema.graphql': true,
-          'src/__generated__/gatsby-introspection.json': true,
+          [path.resolve(__dirname, 'src/__generated__/gatsby-schema.graphql')]: true,
+          [path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json')]: true,
         },
         emitPluginDocuments: {
-          'src/__generated__/gatsby-plugin-documents.graphql': true,
+          [path.resolve(__dirname, 'src/__generated__/gatsby-plugin-documents.graphql')]: true,
         },
       },
     },
