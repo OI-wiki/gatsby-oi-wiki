@@ -4198,10 +4198,10 @@ console-stream@^0.1.1:
   resolved "https://registry.npmjs.org/console-stream/-/console-stream-0.1.1.tgz#a095fe07b20465955f2fafd28b5d72bccd949d44"
   integrity sha1-oJX+B7IEZZVfL6/Si11yvM2UnUQ=
 
-constate@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmjs.org/constate/-/constate-3.2.0.tgz#6034e7b775ca0e58137274f87c25196e8932f685"
-  integrity sha512-hP7sj9jt+KwVRoFlzaJuv3kBvchE9hNMAYJEH1weKZYD7+UAWRSo7oXARrfhipVLP3XZxIkmD+E9zXU+5RYKCQ==
+constate@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/constate/-/constate-3.3.0.tgz#3961f552ab1bec2a9d0d56c9bc1d6bcde407357b"
+  integrity sha512-mRjWH2J4D3Rq6XAuEhoGUkBWrBLUNbiYr/Rp4M/MEEp+LN0vctQS3EAw/6bxlnDy59T+UrAEU9Tg136Dfp6ytg==
 
 contains-path@^0.1.0:
   version "0.1.0"
