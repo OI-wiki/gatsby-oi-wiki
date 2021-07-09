@@ -12,11 +12,6 @@
     "lint": "yarn workspace gatsby-theme-oi-wiki eslint --fix src/**/*.{js,jsx,ts,tsx}",
     "cl-dev": "yarn workspace example clean && rm -rf public .cache && yarn workspace example develop"
   },
-  "lint-staged": {
-    "gatsby-theme-oi-wiki/src/**/*.{js,jsx,ts,tsx}": [
-      "node_modules/.bin/eslint --fix"
-    ]
-  },
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
