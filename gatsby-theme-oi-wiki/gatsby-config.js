@@ -170,6 +170,7 @@ module.exports = ({ config, needOriginConfig = true }) => {
           emitSchema: {
             [path.resolve(__dirname, 'src/__generated__/gatsby-schema.graphql')]: true,
             [path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json')]: true,
+            'src/__generated__/gatsby-schema.graphql': true,
           },
           emitPluginDocuments: {
             [path.resolve(__dirname, 'src/__generated__/gatsby-plugin-documents.graphql')]: true,

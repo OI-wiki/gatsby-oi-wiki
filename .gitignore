@@ -10,3 +10,4 @@ yarn-error.log
 .vscode
 
 /gatsby-theme-oi-wiki/src/__generated__/
+/example/src/__generated__/
