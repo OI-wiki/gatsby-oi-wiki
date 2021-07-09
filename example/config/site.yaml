@@ -1,0 +1,12 @@
+#  站点配置
+site:
+  title: &site_name '测试'
+  description: '测试描述'
+
+#  Manifest 配置
+manifest:
+  name: *site_name
+  short_name: *site_name
+
+#  DOC 路径配置
+docPath: './docs'

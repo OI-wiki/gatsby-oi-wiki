@@ -1,0 +1,17 @@
+#  站点配置
+site:
+  title: &site_name 'OI Wiki'
+  description: 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛'
+  author: 'OI Wiki Team'
+  siteUrl: 'https://ng.oi-wiki.org'
+
+#  Manifest 配置
+manifest:
+  name: *site_name
+  short_name: *site_name
+  start_url: '/'
+  display: 'standalone'
+  icon: './static/icon/favicon_512x512.png'
+
+#  DOC 路径配置
+docPath: './docs'

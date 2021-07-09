@@ -9,8 +9,7 @@
     "develop": "gatsby develop",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "prepare": "npx husky install"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -41,6 +40,7 @@
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "gatsby-transformer-sharp": "^3.6",
     "hast-util-to-text": "^3.0.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mark.js": "^8.11.1",
     "mdast-util-toc": "^6.0.0",
