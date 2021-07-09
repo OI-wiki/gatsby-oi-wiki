@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
 const isProd = false && (process.env.PRODUCTION === 'true' || process.env.RENDER === 'true')
@@ -11,7 +12,7 @@ if (!isProd && process.env.CI === 'true') {
 
 const mathRehype = process.env.gatsby_executing_command === 'build'
   ? [require('rehype-mathjax/chtml'),
-    { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
+      { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
   : [require('rehype-mathjax/browser')]
 
 module.exports = {

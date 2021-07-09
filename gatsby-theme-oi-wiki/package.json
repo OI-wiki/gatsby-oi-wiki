@@ -9,7 +9,8 @@
     "develop": "gatsby develop",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "prepare": "npx husky install"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -31,6 +32,8 @@
     "gatsby-plugin-offline": "^4.8.0",
     "gatsby-plugin-react-helmet": "^4.8.0",
     "gatsby-plugin-sharp": "^3.8",
+    "gatsby-plugin-ts": "^3.0.0",
+    "gatsby-plugin-typegen": "^2.2.4",
     "gatsby-remark-copy-linked-files": "^4.5.0",
     "gatsby-remark-images": "^5.3",
     "gatsby-source-filesystem": "^3.6.0",
@@ -61,13 +64,15 @@
     "@typescript-eslint/parser": "^3.10.1",
     "eslint": "^7.29.0",
     "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-graphql": "^4.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.1.2",
     "eslint-plugin-standard": "^5.0.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
-    "typescript": "^4.3.2"
+    "ts-graphql-plugin": "^2.1.3",
+    "typescript": "^4.3.5"
   },
   "optionalDependencies": {
     "gatsby-plugin-manifest": "^3.6.0",
