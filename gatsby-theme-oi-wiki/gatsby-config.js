@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const fs = require('fs')
-const merge = require('deepmerge')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PRODUCTION = process.env.PRODUCTION === 'true' || process.env.NODE_ENV === 'production'
@@ -42,6 +41,7 @@ module.exports = ({ config, needOriginConfig = true }) => {
 
   if (needOriginConfig) {
     if (!yaml) yaml = require('js-yaml')
+    const merge = require('deepmerge')
     const SITE_CONFIG = yaml.load(fs.readFileSync(path.resolve(__dirname, './config/site.yaml'), 'utf-8'))
     siteConfig = merge(SITE_CONFIG, config)
   } else {
