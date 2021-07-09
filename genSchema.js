@@ -20,22 +20,16 @@ async function build (program) {
     pid: process.pid,
   })
 
-  const buildActivity = reporter.phantomActivity('build')
-  buildActivity.start()
-
-  const buildSpan = buildActivity.span
-  buildSpan.setTag('directory', program.directory)
-
   const { workerPool } = await bootstrap({
-    program: program,
-    parentSpan: buildSpan,
+   program: program,
+   parentSpan: {},
   })
 
-  buildSpan.finish()
   workerPool.end()
-  buildActivity.end()
 
   // explicitly exit as gatsby still monitors somewhere
+  // workaround: wait 1000ms to ensure introspection is written
+  await new Promise(resolve => setTimeout(resolve, 1000))
   process.exit(0)
 }
 
