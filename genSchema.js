@@ -9,8 +9,15 @@ const fsExtra = require('fs-extra')
 const reporter = require('gatsby-cli/lib/reporter')
 const redux = require('gatsby-cli/lib/reporter/redux')
 const { updateSiteMetadata } = require('gatsby-core-utils')
-const { bootstrap } = require('gatsby/dist/bootstrap')
 const path = require('path')
+const { globalTracer } = require("opentracing")
+const {
+  initialize,
+  customizeSchema,
+  buildSchema,
+  sourceNodes,
+  postBootstrap,
+} = require('gatsby/dist/services')
 
 async function build (program) {
   await updateSiteMetadata({
@@ -20,16 +27,29 @@ async function build (program) {
     pid: process.pid,
   })
 
-  const { workerPool } = await bootstrap({
-   program: program,
-   parentSpan: {},
-  })
+  const bootstrapContext = {
+    program,
+    parentSpan: 'Span {}',
+    shouldRunCreatePagesStatefully: true,
+  }
 
-  workerPool.end()
+  const context = {
+    ...bootstrapContext,
+    ...(await initialize(bootstrapContext)),
+  }
+
+  await customizeSchema(context)
+
+  await sourceNodes(context)
+
+  await buildSchema(context)
+
+  await postBootstrap(context)
 
   // explicitly exit as gatsby still monitors somewhere
   // workaround: wait 1000ms to ensure introspection is written
   await new Promise(resolve => setTimeout(resolve, 1000))
+
   process.exit(0)
 }
 
