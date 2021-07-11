@@ -2,8 +2,9 @@
 const path = require('path')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
-const IS_PRODUCTION = process.env.PRODUCTION === 'true' || process.env.NODE_ENV === 'production'
-const IS_PROD = IS_PRODUCTION || process.env.RENDER === 'true'
+const IS_PROD = process.env.PRODUCTION === 'true' ||
+                process.env.NODE_ENV === 'production' ||
+                process.env.RENDER === 'true'
 
 /**
  * 根据条件生成配置，需要展开
@@ -21,7 +22,7 @@ if (IS_PROD && !IS_EXEC_BUILD) {
 }
 
 const fontURL = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2'
-const mathRehype = IS_PRODUCTION
+const mathRehype = IS_EXEC_BUILD
   ? [require('rehype-mathjax/chtml'), { fontURL }]
   : [require('rehype-mathjax/browser')]
 

@@ -40,7 +40,6 @@
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "gatsby-transformer-sharp": "^3.9",
     "hast-util-to-text": "^3.0.0",
-    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mark.js": "^8.11.1",
     "mdast-util-toc": "^6.0.0",
