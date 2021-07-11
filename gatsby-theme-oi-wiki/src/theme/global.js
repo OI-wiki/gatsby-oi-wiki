@@ -37,6 +37,7 @@ const globalStyles = withStyles((theme) => ({
     },
     img: {
       maxWidth: '100%',
+      filter: 'var(--image-filter)',
     },
     ol: {
       paddingInlineStart: 30,
