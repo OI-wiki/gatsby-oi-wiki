@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+
 module.exports = {
   env: {
     browser: true,
@@ -24,6 +27,7 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'graphql',
   ],
   rules: {
     'react/prop-types': [0],
@@ -36,6 +40,11 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': ['off'],
     '@typescript-eslint/no-explicit-any': [0],
     'react/jsx-curly-brace-presence': [2, 'never'],
+    'graphql/template-strings': ['error', {
+      env: 'relay',
+      tagName: 'graphql',
+      schemaJsonFilepath: path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json'),
+    }],
   },
   overrides: [
     {

@@ -27,7 +27,7 @@ const SEO: React.FC<Props> = (props: Props) => {
     datePublished,
   } = props
   const { pathname } = useLocation()
-  const { site } = useStaticQuery(query)
+  const { site } = useStaticQuery<GatsbyTypes.SEOQuery>(query)
 
   const {
     defaultTitle,
