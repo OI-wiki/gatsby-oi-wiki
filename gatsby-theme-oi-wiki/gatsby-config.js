@@ -1,42 +1,58 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
-const isProd = process.env.PRODUCTION === 'true' || process.env.RENDER === 'true'
-const condition = (cond, v) => cond ? [v] : []
-if (isProd && process.env.gatsby_executing_command !== 'build') {
+const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
+const IS_PROD = process.env.PRODUCTION === 'true' ||
+                process.env.NODE_ENV === 'production' ||
+                process.env.RENDER === 'true'
+
+/**
+ * 根据条件生成配置，需要展开
+ * @param cond boolean 条件
+ * @param v any 配置
+ * @returns {[v]} 返回 [v] 或 []
+ */
+const needPlugin = (cond, v) => (cond ? [v] : [])
+
+// 提供一些警告
+if (IS_PROD && !IS_EXEC_BUILD) {
   console.warn('Using production configurations in non-build environment')
-}
-if (!isProd && process.env.CI === 'true') {
+} else if (!IS_PROD && process.env.CI === 'true') {
   console.warn('Using development configurations in build environment')
 }
 
-const mathRehype = process.env.gatsby_executing_command === 'build'
-  ? [require('rehype-mathjax/chtml'),
-    { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2' }]
+const fontURL = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2'
+const mathRehype = IS_EXEC_BUILD
+  ? [require('rehype-mathjax/chtml'), { fontURL }]
   : [require('rehype-mathjax/browser')]
 
 module.exports = {
   siteMetadata: {
     title: 'OI Wiki',
-    description: 'Guide for OI',
+    description: 'OI Wiki 是一个编程竞赛知识整合站点，提供有趣又实用的编程竞赛知识以及其他有帮助的内容，帮助广大编程竞赛爱好者更快更深入地学习编程竞赛',
     author: 'OI Wiki Team',
     siteUrl: 'https://ng.oi-wiki.org',
   },
   plugins: [
-    'gatsby-source-local-git',
+    {
+      resolve: 'gatsby-source-local-git',
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: './docs/',
-        path: path.resolve('./docs/'),
+        name: './docs',
+        path: path.resolve('./docs'),
       },
     },
-    ...condition(isProd, 'gatsby-plugin-sharp'),
-    ...condition(isProd, 'gatsby-transformer-sharp'),
+    ...needPlugin(IS_PROD, 'gatsby-plugin-sharp'),
+    {
+      resolve: 'gatsby-transformer-sharp',
+    },
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
-          ...condition(isProd, {
+          ...needPlugin(IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 900,
@@ -53,11 +69,11 @@ module.exports = {
             },
           },
           /** {
-            resolve: `gatsby-remark-autolink-headers`,
-            options: {
-              isIconAfterHeader: true,
-            },
-          }, */
+              resolve: `gatsby-remark-autolink-headers`,
+              options: {
+                isIconAfterHeader: true,
+              },
+            }, */
           {
             resolve: 'gatsby-local-autolink-headers',
             options: {
@@ -90,9 +106,13 @@ module.exports = {
         },
       },
     },
-    'gatsby-plugin-catch-links',
-    'gatsby-plugin-react-helmet',
-    ...condition(isProd, {
+    {
+      resolve: 'gatsby-plugin-catch-links',
+    },
+    {
+      resolve: 'gatsby-plugin-react-helmet',
+    },
+    ...needPlugin(IS_PROD, {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'OI Wiki',
@@ -132,6 +152,35 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-typegen',
+      options: {
+        outputPath: path.resolve(__dirname, 'src/__generated__/gatsby-types.d.ts'),
+        emitSchema: {
+          [path.resolve(__dirname, 'src/__generated__/gatsby-schema.graphql')]: true,
+          [path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json')]: true,
+          'src/__generated__/gatsby-schema.graphql': true,
+        },
+        emitPluginDocuments: {
+          [path.resolve(__dirname, 'src/__generated__/gatsby-plugin-documents.graphql')]: true,
+        },
+      },
+    },
+    // {
+    //   resolve: 'gatsby-plugin-ts',
+    //   options: {
+    //     tsloader: {
+    //       loglevel: 'warn',
+    //     },
+    //     forktscheckerplugin: {
+    //       eslint: true,
+    //     },
+    //     filename: 'types/graphql-types.ts',
+    //     codegen: true,
+    //     codegendelay: 250,
+    //     alwayscheck: false,
+    //   },
+    // },
     // {
     //   resolve: 'gatsby-plugin-advanced-sitemap',
     //   options: {

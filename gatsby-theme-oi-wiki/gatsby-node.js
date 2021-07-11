@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
-       alias: {
-          path: require.resolve("path-browserify")
-       },
-       fallback: {
-         fs: false,
-       }
-    }
+      alias: {
+        path: require.resolve('path-browserify'),
+      },
+      fallback: {
+        fs: false,
+      },
+    },
   })
 }
 const gitQuery = async function (prop) {

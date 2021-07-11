@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-
 const React = require('react')
 const script = require('./static/script')
 
