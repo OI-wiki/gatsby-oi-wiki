@@ -10,7 +10,6 @@ const reporter = require('gatsby-cli/lib/reporter')
 const redux = require('gatsby-cli/lib/reporter/redux')
 const { updateSiteMetadata } = require('gatsby-core-utils')
 const path = require('path')
-const { globalTracer } = require("opentracing")
 const {
   initialize,
   customizeSchema,
