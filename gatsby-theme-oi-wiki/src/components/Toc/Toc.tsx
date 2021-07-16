@@ -2,23 +2,24 @@ import { Link as MuiLink } from '@material-ui/core'
 import clsx from 'clsx'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { Nullable, OnClickHandler } from '../../types/common'
 
 interface Node {
   url: string;
   title: string;
   level: number;
   status: 'active' | 'expanded' | 'collapse'
-  children: Array<Node>;
-  parent: Node|null;
+  children: Node[];
+  parent: Nullable<Node>;
   element?: any;
 }
 
 interface Props {
-  onClick?: (item: Node) => (event: any) => void;
+  onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Node;
 }
-interface TocProps {
-  onClick?: (item: Node) => (event: any) => void;
+export interface TocListProps {
+  onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Array<Node>
 }
 
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function TocItem (props: Props): JSX.Element {
+const TocItem: React.FC<Props> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -67,7 +68,7 @@ function TocItem (props: Props): JSX.Element {
   )
 }
 
-function TocComponent (props: Props): JSX.Element {
+const TocComponent: React.FC<Props> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -80,7 +81,7 @@ function TocComponent (props: Props): JSX.Element {
   )
 }
 
-function Toc (props: TocProps): JSX.Element {
+const TocList : React.FC<TocListProps> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -90,7 +91,7 @@ function Toc (props: TocProps): JSX.Element {
   )
 }
 
-export default Toc
+export default TocList
 export {
   Node,
 }

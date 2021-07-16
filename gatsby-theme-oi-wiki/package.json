@@ -3,7 +3,7 @@
   "name": "gatsby-theme-oi-wiki",
   "version": "0.0.1",
   "license": "MIT",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
