@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useDarkMode from '../../lib/useDarkMode'
 
 import { useStyles } from './styles'
-import { SearchResultList } from './ResultList'
+import SearchResultList from './ResultList'
 import { useDebounce, useWindowDimensions } from './hooks'
 
 /**
@@ -150,4 +150,4 @@ const Search: React.FC = () => {
   }
 }
 
-export { Search }
+export default Search

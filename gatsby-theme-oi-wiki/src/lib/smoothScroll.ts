@@ -26,13 +26,16 @@ export type SmoothScrollToType = ((yCoordinate: number, duration?: number, optim
  * show(N(res(1)))
  * plot(res, xmin=0)
  * */
-const getDisplacement = (progress: number):number => {
+const getDisplacement = (progress: number): number => {
   if (progress < 0) return 0
 
-  const f = (t: number): number => 1 + 0.25 * (
-    1.1622776601683795 * Math.exp((-10 / 3) * t * 8.16227766016838) -
-    5.16227766016838 * Math.exp((10 / 3) * t * -1.8377223398316205)
-  )
+  function f (t: number): number {
+    return 1 + 0.25 * (
+      1.1622776601683795 * Math.exp((-10 / 3) * t * 8.16227766016838) -
+      5.16227766016838 * Math.exp((10 / 3) * t * -1.8377223398316205)
+    )
+  }
+
   return f(progress) * 1.00283
 }
 
@@ -42,7 +45,7 @@ const getDisplacement = (progress: number):number => {
  * @param duration 移动动画的持续时间，用毫秒表示, 若值为 -1，表明由距离决定
  * @param optimizeForSmallScreen 为小屏幕使用 CSS 动画来解决性能问题
  */
-const smoothScrollTo : SmoothScrollToType = (yCoordinate, duration = -1, optimizeForSmallScreen = true) => {
+const smoothScrollTo: SmoothScrollToType = (yCoordinate, duration = -1, optimizeForSmallScreen = true) => {
   const maximumCoordinate = document.body.scrollHeight - window.innerHeight
   const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY
   const isSmallScreen = window.innerWidth <= 600
@@ -64,7 +67,7 @@ const smoothScrollTo : SmoothScrollToType = (yCoordinate, duration = -1, optimiz
   if (!el) throw new Error('.maincontentdiv 缺失')
 
   window.scrollTo(0, yCoordinate)
-  const performAnimation = (time: number):void => {
+  const performAnimation = (time: number): void => {
     if (time - startTime > duration) {
       el.style.transform = ''
       return
@@ -79,4 +82,4 @@ const smoothScrollTo : SmoothScrollToType = (yCoordinate, duration = -1, optimiz
   requestAnimationFrame(performAnimation)
 }
 
-export { smoothScrollTo }
+export default smoothScrollTo

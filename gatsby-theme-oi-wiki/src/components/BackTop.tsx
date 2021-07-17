@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Zoom from '@material-ui/core/Zoom'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import React, { useState } from 'react'
-import { useThrottledOnScroll } from '../lib/useThrottledOnScroll'
-import { smoothScrollTo } from '../lib/smoothScroll'
+import useThrottledOnScroll from '../lib/useThrottledOnScroll'
+import smoothScrollTo from '../lib/smoothScroll'
 import { OnClickHandler } from '../types/common'
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const BackTop:React.FC = () => {
+const BackTop: React.FC = () => {
   const classes = useStyles()
   const handleClick: OnClickHandler<HTMLButtonElement> = () => {
     smoothScrollTo(0)
@@ -35,10 +35,10 @@ const BackTop:React.FC = () => {
   return (
     <Zoom in={yPos > 400}>
       <Fab disableRipple className={classes.fab} onClick={handleClick}>
-        <ArrowUpward />
+        <ArrowUpward/>
       </Fab>
     </Zoom>
   )
 }
 
-export { BackTop }
+export default BackTop

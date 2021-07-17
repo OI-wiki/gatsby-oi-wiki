@@ -5,8 +5,8 @@ import { useStyles } from './styles'
 import { useSetting } from '../../lib/useSetting'
 import TocList, { Node, TocListProps } from './Toc'
 import { Nullable } from '../../types/common'
-import { smoothScrollTo } from '../../lib/smoothScroll'
-import { useThrottledOnScroll } from '../../lib/useThrottledOnScroll'
+import smoothScrollTo from '../../lib/smoothScroll'
+import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 
 export interface TocItem {
   url: string,
@@ -61,7 +61,7 @@ const bindHTMLElement = (toc: Node[]): void => {
   })
 }
 
-const Toc: React.FC<TocProps> = (props) => {
+const TocEl: React.FC<TocProps> = (props) => {
   const { toc } = props
   const items = toc.items
   const classes = useStyles()
@@ -159,6 +159,6 @@ const Toc: React.FC<TocProps> = (props) => {
   )
 }
 
-const TocMemo = React.memo(Toc, (prev, next) => prev.pathname === next.pathname)
+const Toc = React.memo(TocEl, (prev, next) => prev.pathname === next.pathname)
 
-export { TocMemo as Toc }
+export default Toc

@@ -25,7 +25,7 @@ const NO_SLASH_EXPR = /[^/]$/
  *
  * 实际上不需要当前页面的 path
  */
-const linkFix = (link:string, isIndex: boolean): string => {
+const linkFix = (link: string, isIndex: boolean): string => {
   if (/^\//.test(link)) return link // absolute path
 
   let newLink = link.replace(MD_EXPR, '/').replace('index', '')
@@ -62,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
 
 // FIXME: 直接继承 GatsbyLinkProps 时存在属性缺失问题，暂时这么处理
 type NeedExtendGatsbyLinkProps = 'onClick' | 'state' | 'activeClassName' | 'activeStyle' | 'partiallyActive' | 'replace'
-export interface SmartLinkProps<T = any> extends Pick<GatsbyLinkProps<T>, NeedExtendGatsbyLinkProps>{
+
+export interface SmartLinkProps<T = any> extends Pick<GatsbyLinkProps<T>, NeedExtendGatsbyLinkProps> {
   // 指向的链接
   to?: string;
   // to 的别名，两者同时存在时优先使用 href
@@ -85,7 +86,7 @@ export interface SmartLinkProps<T = any> extends Pick<GatsbyLinkProps<T>, NeedEx
  * - 如果是 markdown 引用（纯哈希）则使用引用
  * - 如果是 path 则根据 tooltip 属性决定是否启用 Tooltip
  */
-const SmartLink:React.FC<SmartLinkProps> = (props) => {
+const SmartLink: React.FC<SmartLinkProps> = (props) => {
   const classes = useStyles()
   const { href = props?.to || '', tooltip = false, isIndex = true, className, pathname, children } = props
   const linkProps = omit(props, ['tooltip', 'isIndex', 'pathname', 'className'])
@@ -95,7 +96,7 @@ const SmartLink:React.FC<SmartLinkProps> = (props) => {
     return <a {...linkProps} href={href}>{children}</a>
   } else if (isAbsoluteURL(href)) {
     return (
-      <a {...linkProps} href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow" >
+      <a {...linkProps} href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
         {children}
       </a>
     )
@@ -125,6 +126,4 @@ const SmartLink:React.FC<SmartLinkProps> = (props) => {
   }
 }
 
-export {
-  SmartLink,
-}
+export { SmartLink }

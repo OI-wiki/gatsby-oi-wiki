@@ -10,7 +10,6 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { isStrFalse, isStrTrue, pick } from '../utils/common'
 import { StrBool } from '../types/common'
 import { SiteSiteMetadata } from '../types/graphql-types'
-import { BackTop } from './BackTop'
 import {
   adaptiveTheme,
   AutoCssBaseline,
@@ -19,13 +18,14 @@ import {
   LightCssBaseline,
   SecondaryColorCssBaseline,
 } from '../theme'
-import { Comment } from './Comment'
-import { Footer } from './Footer'
-import { Title } from './Title'
-import { Toc, TocObj } from './Toc'
-import { Meta } from './Meta'
 import { scrollbarStyle } from '../styles/scrollbar'
-import { NavAndDrawer } from './NavAndDrawer'
+import Comment from './Comment'
+import Toc, { TocObj } from './Toc'
+import BackTop from './BackTop'
+import Footer from './Footer'
+import Meta from './Meta'
+import Title from './Title'
+import NavAndDrawer from './NavAndDrawer'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

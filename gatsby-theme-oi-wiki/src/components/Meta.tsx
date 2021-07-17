@@ -107,4 +107,4 @@ const Meta: React.FC<MetaProps> = (props) => {
   </>
 }
 
-export { Meta }
+export default Meta

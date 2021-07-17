@@ -198,4 +198,4 @@ const CommentComponent: React.FC<Props> = (props) => {
   )
 }
 
-export { CommentComponent }
+export default CommentComponent

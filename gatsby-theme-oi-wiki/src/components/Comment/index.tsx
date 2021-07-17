@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary, Container, makeStyles, Typography } from '@material-ui/core'
 import { ExpandMore as ExpandMoreIcon, Forum as ForumIcon } from '@material-ui/icons'
 import React from 'react'
-import { CommentComponent } from './Comment'
+import CommentComponent from './Comment'
 
 export interface CommentSystemProps {
   title: string
@@ -56,4 +56,4 @@ const Comment: React.FC<CommentComponentProps> = ({ title }) => {
   )
 }
 
-export { Comment }
+export default Comment

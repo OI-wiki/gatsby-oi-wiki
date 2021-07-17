@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { noopNull, throttle } from '../utils/common'
-import { AnyFunc } from '../types/common'
 
-const useThrottledOnScroll = (callback: AnyFunc, delay: number): void => {
+const useThrottledOnScroll = (callback: (...agrs: any) => any, delay: number): void => {
   const throttledCallback = useMemo(
     () => (callback ? throttle(callback, delay) : noopNull),
     [callback, delay],
@@ -21,4 +20,4 @@ const useThrottledOnScroll = (callback: AnyFunc, delay: number): void => {
   }, [throttledCallback])
 }
 
-export { useThrottledOnScroll }
+export default useThrottledOnScroll

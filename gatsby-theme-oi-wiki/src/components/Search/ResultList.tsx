@@ -71,4 +71,4 @@ const SearchResultList: React.FC<SearchResultListProps> = props => {
       </Typography>))
 }
 
-export { SearchResultList }
+export default SearchResultList

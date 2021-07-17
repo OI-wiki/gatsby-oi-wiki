@@ -1,5 +1,4 @@
 import { AppBar, Button, Drawer, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
-
 import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
@@ -11,12 +10,11 @@ import pathList from '../../sidebar.yaml'
 import SiderContent from '../Sidebar'
 import Tabs from '../Tabs'
 import SmallScreenMenu from '../SmallScreenMenu'
-
 import { useStyles } from './styles'
 import { flattenObject } from './utils'
-import NavBtnGroup from './NavBtnGroup'
 import { useSetting } from '../../lib/useSetting'
-import { Search } from '../Search'
+import NavBtnGroup from './NavBtnGroup'
+import Search from '../Search'
 
 const getTabIDFromLocation = (location: string, pathList: string[]): number => {
   const locationTrimmed = trimTrailingSlash(location)
@@ -110,6 +108,6 @@ const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = (props) => {
   )
 }
 
-const NavAndDrawerMemo = React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
+const NavAndDrawer = React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
 
-export { NavAndDrawerMemo as NavAndDrawer }
+export default NavAndDrawer

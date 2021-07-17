@@ -18,6 +18,7 @@ interface Props {
   onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Node;
 }
+
 export interface TocListProps {
   onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Array<Node>
@@ -63,7 +64,7 @@ const TocItem: React.FC<Props> = (props) => {
       }}
       className={clsx(classes.link, data.status === 'active' && classes.active)}
     >
-      <span dangerouslySetInnerHTML={{ __html: data.title }} />
+      <span dangerouslySetInnerHTML={{ __html: data.title }}/>
     </MuiLink>
   )
 }
@@ -75,23 +76,21 @@ const TocComponent: React.FC<Props> = (props) => {
     <li className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
       {data.children && (<ul className={clsx(classes.ul, data.status === 'collapse' && classes.collapse)}>{
-        data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
+        data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
       }</ul>)}
     </li>
   )
 }
 
-const TocList : React.FC<TocListProps> = (props) => {
+const TocList: React.FC<TocListProps> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
     <ul className={classes.ul}>{
-      data.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
+      data.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
     }</ul>
   )
 }
 
 export default TocList
-export {
-  Node,
-}
+export { Node }

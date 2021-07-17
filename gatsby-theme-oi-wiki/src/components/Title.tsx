@@ -69,4 +69,4 @@ const Title: React.FC<TitleProps> = (props) => {
   )
 }
 
-export { Title }
+export default Title
