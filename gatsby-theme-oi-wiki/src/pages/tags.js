@@ -4,17 +4,18 @@ import { graphql } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import PropTypes from 'prop-types'
 import React from 'react'
-
-import Layout from '../components/Layout'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
   chip: {
     margin: theme.spacing(0.5),
   },
 }))
+
 function sortTags (a, b) {
   return b.totalCount - a.totalCount
 }
+
 const TagsPage = ({
   data: {
     allMarkdownRemark: { group },
@@ -29,7 +30,7 @@ const TagsPage = ({
   //  console.log(group)
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title="标签页">
+    <StyledLayout location={location} noMeta="true" title="标签页">
       <div>
         {group.map((tag) => (
           <Chip
@@ -43,7 +44,7 @@ const TagsPage = ({
           />
         ))}
       </div>
-    </Layout>
+    </StyledLayout>
   )
 }
 

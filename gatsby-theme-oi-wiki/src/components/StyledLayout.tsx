@@ -6,9 +6,6 @@ import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
-
-import { isStrFalse, isStrTrue, pick } from '../utils/common'
-import { StrBool } from '../types/common'
 import { SiteSiteMetadata } from '../types/graphql-types'
 import {
   adaptiveTheme,
@@ -23,9 +20,10 @@ import Comment from './Comment'
 import Toc, { TocObj } from './Toc'
 import BackTop from './BackTop'
 import Footer from './Footer'
-import Meta from './Meta'
+import Meta, { MetaProps } from './Meta'
 import Title from './Title'
 import NavAndDrawer from './NavAndDrawer'
+import { RequiredNonNull } from '../types/common'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -72,24 +70,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface MyLayoutProps {
-  title: string;
-  description: string;
-  authors: string;
-  tags: string[];
-  location: Location;
-  relativePath: string;
-  modifiedTime: string;
-  toc: TocObj;
-  noMeta: StrBool;
-  noComment: StrBool;
-  noEdit: StrBool;
-  noToC: StrBool;
-  overflow: StrBool;
-  isWIP: boolean;
+interface MyLayoutProps extends Partial<MetaProps> {
+  description?: string;
+  toc?: TocObj;
+  noMeta?: boolean;
+  noComment?: boolean;
+  noEdit?: boolean;
+  noToc?: boolean;
+  overflow?: boolean;
+  isWIP?: boolean;
 }
 
 const MyLayout: React.FC<MyLayoutProps> = (props) => {
+  const theme = useTheme()
+  const classes = useStyles()
   const data = useStaticQuery<GatsbyTypes.SiteDescQuery>(graphql`
     query SiteDesc {
       site {
@@ -100,18 +94,30 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
       }
     }`)
 
-  const theme = useTheme()
-  const classes = useStyles()
-  const titleMetaProps = pick(props, ['title', 'location', 'relativePath'])
-  const metaProps = pick(props, ['tags', 'modifiedTime', 'authors'])
-  const { children, title, description, toc, noMeta, noComment, noEdit, noToC, overflow, isWIP, location } = props
+  const { description: siteDesc, title: siteTitle } = data?.site?.siteMetadata as RequiredNonNull<SiteSiteMetadata>
 
-  // TODO: 临时的解决方案，考虑修改 graphql 的架构，使不生成 Maybe
-  const { description: siteDesc, title: siteTitle } = data?.site?.siteMetadata as SiteSiteMetadata
+  const {
+    title = '',
+    description = '',
+    authors = '',
+    relativePath = '',
+    modifiedTime = '',
+    tags = [],
+    toc = null,
+    noMeta = false,
+    noComment = false,
+    noEdit = false,
+    noToc = !props.toc?.items,
+    overflow = false,
+    isWIP = false,
+    location = window.location,
+    children,
+  } = props
+  const titleMetaProps = { title, location, relativePath }
+  const metaProps = { tags, modifiedTime, authors }
 
-  const displayToC = toc?.items && !isStrTrue(noToC)
-  const gridWidthMdUp = isStrTrue(overflow) ? 12 : 10
-  const descriptionRes = description || siteDesc
+  const gridWidthMdUp = overflow ? 12 : 10
+  const desc = description || siteDesc
 
   // TODO: 是否需要模板化
   const WIPAlert = (
@@ -124,7 +130,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
       <Helmet>
         <title>{`${(!title || title === siteTitle) ? '' : `${title} - `}${siteTitle}`}</title>
         <meta name="color-scheme" content="dark light"/>
-        <meta name="description" content={descriptionRes as string}/>
+        <meta name="description" content={desc}/>
       </Helmet>
       <NavAndDrawer pathname={location?.pathname}/>
       <div className="maincontentdiv">
@@ -147,8 +153,8 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
                   <Typography variant="body1" component="div">
                     {children}
                   </Typography>
-                  {isStrFalse(noMeta) && <Meta {...titleMetaProps} {...metaProps} />}
-                  {isStrFalse(noComment) && <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                  {!noMeta && <Meta {...titleMetaProps} {...metaProps} />}
+                  {!noComment && <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
                     <Comment title={title}/>
                   </div>}
                 </div>
@@ -161,7 +167,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
           <Footer/>
         </div>
       </div>
-      {displayToC && <Grid item xs>
+      {!noToc && toc?.items && <Grid item xs>
         <Toc toc={toc} pathname={location.pathname}/>
       </Grid>}
       <BackTop/>

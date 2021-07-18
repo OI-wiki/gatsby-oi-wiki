@@ -1,24 +1,49 @@
 {
   "compilerOptions": {
-    "target": "esnext", // 编译生成的目标 es 版本
-    "module": "esnext", // 编译生成的目标模块系统
-    "lib": ["dom", "es2015", "es2017"], // 配置需要包含的运行环境的类型定义
-    "jsx": "react", // 配置 .tsx 文件的输出模式
-    "strict": true, // 开启严格模式
-    "esModuleInterop": true, // 兼容 CommonJS 和 ES Module
-    "moduleResolution": "node", // 配置模块的解析规则,支持 node 模块解析规则
-    "noUnusedLocals": true, // 报告未使用的局部变量的错误
-    "noUnusedParameters": true, // 报告有关函数中未使用参数的错误
-    "experimentalDecorators": true, // 启用装饰器
-    "emitDecoratorMetadata": true, // 支持装饰器上生成元数据,用来进行反射之类的操作
+    "target": "esnext",
+    // 编译生成的目标 es 版本
+    "module": "esnext",
+    // 编译生成的目标模块系统
+    "lib": [
+      "dom",
+      "es2015",
+      "es2017",
+      "DOM.Iterable"
+    ],
+    // 配置需要包含的运行环境的类型定义
+    "jsx": "react",
+    // 配置 .tsx 文件的输出模式
+    "strict": true,
+    // 开启严格模式
+    "esModuleInterop": true,
+    // 兼容 CommonJS 和 ES Module
+    "moduleResolution": "node",
+    // 配置模块的解析规则,支持 node 模块解析规则
+    "noUnusedLocals": true,
+    // 报告未使用的局部变量的错误
+    "noUnusedParameters": true,
+    // 报告有关函数中未使用参数的错误
+    "experimentalDecorators": true,
+    // 启用装饰器
+    "emitDecoratorMetadata": true,
+    // 支持装饰器上生成元数据,用来进行反射之类的操作
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strictNullChecks": true
   },
-  "exclude": ["./node_modules", "./public", "./.cache"],
-  "include": ["src"],
-  "plugins": [{
-    "name": "ts-graphql-plugin",
-    "schema": "src/__generated__/gatsby-schema.graphql",
-    "tag": "graphql"
-  }]
+  "exclude": [
+    "./node_modules",
+    "./public",
+    "./.cache"
+  ],
+  "include": [
+    "src"
+  ],
+  "plugins": [
+    {
+      "name": "ts-graphql-plugin",
+      "schema": "src/__generated__/gatsby-schema.graphql",
+      "tag": "graphql"
+    }
+  ]
 }

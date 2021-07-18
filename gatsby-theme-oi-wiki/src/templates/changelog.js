@@ -1,11 +1,11 @@
 import {
   Timeline,
-  TimelineItem,
   TimelineConnector,
-  TimelineSeparator,
   TimelineContent,
-  TimelineOppositeContent,
   TimelineDot,
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator,
 } from '@material-ui/lab'
 import { Divider, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -15,9 +15,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
 import { SmartLink } from '../components/Link'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title={`更新历史 - ${title}`}>
+    <StyledLayout location={location} noMeta={true} title={`更新历史 - ${title}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -69,8 +69,8 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                 </Typography>
               </TimelineOppositeContent>
               <TimelineSeparator>
-                <TimelineDot variant="outlined" />
-                <TimelineConnector />
+                <TimelineDot variant="outlined"/>
+                <TimelineConnector/>
               </TimelineSeparator>
               <TimelineContent>
                 <Paper variant="outlined" className={classes.paper}>
@@ -98,8 +98,8 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
             ...
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot variant="outlined" />
-            <TimelineConnector />
+            <TimelineDot variant="outlined"/>
+            <TimelineConnector/>
           </TimelineSeparator>
           <TimelineContent>
             <Paper variant="outlined" className={classes.paper}>
@@ -114,12 +114,13 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
         </TimelineItem>
       </Timeline>
       <div className={classes.backContainer}>
-        <Divider />
-        <Button component={GatsbyLink} style={{ marginTop: '8px' }} size="large" color="inherit" to="../" startIcon={<ArrowBackIos />}>
+        <Divider/>
+        <Button component={GatsbyLink} style={{ marginTop: '8px' }} size="large" color="inherit" to="../"
+                startIcon={<ArrowBackIos/>}>
           返回
         </Button>
       </div>
-    </Layout>
+    </StyledLayout>
   )
 }
 

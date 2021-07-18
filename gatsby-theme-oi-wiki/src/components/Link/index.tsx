@@ -6,8 +6,6 @@ import LinkTooltip from './LinkTooltip'
 import path from 'path'
 import clsx from 'clsx'
 import { GatsbyLinkProps } from 'gatsby-link'
-import { StrBool } from '../../types/common'
-import { omit } from '../../utils/common'
 
 const MD_EXPR = /\.(md|markdown|mdtext|mdx)/g
 const NO_SLASH_EXPR = /[^/]$/
@@ -60,21 +58,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-// FIXME: 直接继承 GatsbyLinkProps 时存在属性缺失问题，暂时这么处理
-type NeedExtendGatsbyLinkProps = 'onClick' | 'state' | 'activeClassName' | 'activeStyle' | 'partiallyActive' | 'replace'
-
-export interface SmartLinkProps<T = any> extends Pick<GatsbyLinkProps<T>, NeedExtendGatsbyLinkProps> {
-  // 指向的链接
+export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> {
+  /** 指向的链接 */
   to?: string;
-  // to 的别名，两者同时存在时优先使用 href
+  /** to 的别名，两者同时存在时优先使用 href */
   href?: string;
-  // 类名
+  /** 类名 */
   className?: string;
-  // 是否对站内链接启用 Tooltip 预览，如果为 true 则必须给出 pathname
-  tooltip?: StrBool;
-  // 当前页面的 path，用于获取 Tooltip API URL
+  /** 是否对站内链接启用 Tooltip 预览，如果为 true 则必须给出 pathname */
+  tooltip?: boolean;
+  /** 当前页面的 path，用于获取 Tooltip API URL */
   pathname?: string;
-  // 用于 markdown 内链的修复, 设置为 true 可以避免相关影响
+  /** 用于 markdown 内链的修复, 设置为 true 可以避免相关影响 */
   isIndex?: boolean;
 }
 
@@ -89,20 +84,19 @@ export interface SmartLinkProps<T = any> extends Pick<GatsbyLinkProps<T>, NeedEx
 const SmartLink: React.FC<SmartLinkProps> = (props) => {
   const classes = useStyles()
   const { href = props?.to || '', tooltip = false, isIndex = true, className, pathname, children } = props
-  const linkProps = omit(props, ['tooltip', 'isIndex', 'pathname', 'className'])
   const classList = clsx(className, classes.link)
 
   if (className && className.search('anchor') > -1) {
-    return <a {...linkProps} href={href}>{children}</a>
+    return <a href={href}>{children}</a>
   } else if (isAbsoluteURL(href)) {
     return (
-      <a {...linkProps} href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
+      <a href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
         {children}
       </a>
     )
   } else if (isRef(href)) {
     return (
-      <GatsbyLink {...linkProps} to={href} className={classList}>
+      <GatsbyLink to={href} className={classList}>
         {children}
       </GatsbyLink>
     )
@@ -112,14 +106,14 @@ const SmartLink: React.FC<SmartLinkProps> = (props) => {
     }
     return (
       <LinkTooltip url={getAPILink(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
-        <GatsbyLink {...linkProps} to={linkFix(href, isIndex)} className={classList}>
+        <GatsbyLink to={linkFix(href, isIndex)} className={classList}>
           {children}
         </GatsbyLink>
       </LinkTooltip>
     )
   } else {
     return (
-      <GatsbyLink {...linkProps} to={linkFix(href, isIndex)} className={classList}>
+      <GatsbyLink to={linkFix(href, isIndex)} className={classList}>
         {children}
       </GatsbyLink>
     )

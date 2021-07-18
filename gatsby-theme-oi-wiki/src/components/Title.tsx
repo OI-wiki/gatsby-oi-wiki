@@ -2,13 +2,11 @@ import React, { useState } from 'react'
 import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
-import { isStrFalse } from '../utils/common'
-import { StrBool } from '../types/common'
 
 export interface TitleProps {
   title: string,
-  noEdit: StrBool,
-  noMeta?: string,
+  noEdit: boolean,
+  noMeta?: boolean,
   relativePath: string,
   location: Location,
 }
@@ -50,7 +48,7 @@ const Title: React.FC<TitleProps> = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={1}>
-          {isStrFalse(noEdit) &&
+          {!noEdit &&
           <Hidden xsDown implementation="css">
             <Tooltip title="编辑页面" placement="left" arrow>
               <IconButton
