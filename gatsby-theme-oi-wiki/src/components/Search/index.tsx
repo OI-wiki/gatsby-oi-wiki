@@ -18,8 +18,7 @@ const fetchResult = (str: string): Promise<any> => fetch(
   {
     // credentials: "same-origin"
   },
-)
-  .then((response) => response.json())
+).then((response) => response.json())
 
 const Search: React.FC = () => {
   const [searchKey, setSearchKey] = useState('')
