@@ -68,7 +68,6 @@ const applyAdaptive: ApplyAdaptiveType = (...keys) => {
 
 const getThemeCssEl: GetThemeCSSElType = (style) => style(noopNull)
 
-// FIXME: 修起来比较麻烦，不得已用 any
 export const CustomCssBaseline = globalStyles(noopNull as any)
 
 const lightColor = createPalette({ type: 'light' })

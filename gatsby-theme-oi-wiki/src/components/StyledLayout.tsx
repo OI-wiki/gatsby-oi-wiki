@@ -119,7 +119,6 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
   const gridWidthMdUp = overflow ? 12 : 10
   const desc = description || siteDesc
 
-  // TODO: 是否需要模板化
   const WIPAlert = (
     <Alert severity="info" icon={<FormatPaintIcon/>} className={classes.wip}>
       本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！

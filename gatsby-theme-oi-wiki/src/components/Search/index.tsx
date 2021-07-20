@@ -12,7 +12,6 @@ import { useDebounce, useWindowDimensions } from './hooks'
 /**
  * 从 API 获取搜索数据
  * @param str 要搜索的内容
- * TODO: 补全此处的类型
  */
 const fetchResult = (str: string): Promise<any> => fetch(
   `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(str)}`,
