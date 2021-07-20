@@ -25,9 +25,7 @@
     // 报告有关函数中未使用参数的错误
     "experimentalDecorators": true,
     // 启用装饰器
-    "emitDecoratorMetadata": true,
-    // 支持装饰器上生成元数据,用来进行反射之类的操作
-    "noEmit": true,
+    "emitDecoratorMetadata": false,
     "skipLibCheck": true,
     "strictNullChecks": true
   },

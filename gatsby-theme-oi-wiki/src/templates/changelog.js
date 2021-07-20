@@ -42,6 +42,19 @@ const useStyles = makeStyles((theme) => ({
   timeBlock: {
     minWidth: '200px',
     maxWidth: '200px',
+    paddingTop: '4px',
+    [theme.breakpoints.down('sm')]: {
+      order: 1,
+      textAlign: 'left',
+      verticalAlign: 'top',
+    },
+  },
+  timeContent: {
+    [theme.breakpoints.down('sm')]: {
+      order: 2,
+      marginTop: '20px',
+      marginLeft: '-200px',
+    },
   },
   logContainer: {
     position: 'relative',
@@ -56,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <StyledLayout location={location} noMeta={true} title={`更新历史 - ${title}`}>
+    <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -72,7 +85,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                 <TimelineDot variant="outlined"/>
                 <TimelineConnector/>
               </TimelineSeparator>
-              <TimelineContent>
+              <TimelineContent className={classes.timeContent}>
                 <Paper variant="outlined" className={classes.paper}>
                   <div className={classes.infoContainer}>
                     <SmartLink href={`https://github.com/${author}`}>
@@ -101,7 +114,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
             <TimelineDot variant="outlined"/>
             <TimelineConnector/>
           </TimelineSeparator>
-          <TimelineContent>
+          <TimelineContent className={classes.timeContent}>
             <Paper variant="outlined" className={classes.paper}>
               <Typography variant="h6" component="h6">
                 ...
