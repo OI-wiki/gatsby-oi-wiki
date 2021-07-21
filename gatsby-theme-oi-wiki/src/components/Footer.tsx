@@ -1,9 +1,8 @@
-import {Typography} from '@material-ui/core'
-
-import {makeStyles} from '@material-ui/core/styles'
-import {graphql, useStaticQuery} from 'gatsby'
-import React, {useEffect} from 'react'
-import {SmartLink} from './Link'
+import { Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { useEffect } from 'react'
+import { SmartLink } from './Link'
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -26,7 +25,7 @@ const Footer: React.FC = () => {
     }
   `)
 
-  const {date, hash} = data.allGitCommit.nodes[0]
+  const { date, hash } = data.allGitCommit.nodes[0]
   const hashFrag = hash?.substr(0, 7)
   const dateStr = date?.toString()
 

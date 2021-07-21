@@ -33,6 +33,7 @@ module.exports = {
     'graphql',
   ],
   rules: {
+    'object-curly-spacing': ['error', 'always'],
     'react/prop-types': [0],
     'comma-dangle': [2, 'always-multiline'],
     'no-unused-vars': 'off',
