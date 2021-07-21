@@ -1,12 +1,4 @@
-import {
-  useMediaQuery,
-  TextField,
-  Typography,
-  CardActions,
-  CardContent,
-  Card,
-  Grid,
-} from '@material-ui/core'
+import { Card, CardActions, CardContent, Grid, TextField, Typography, useMediaQuery } from '@material-ui/core'
 
 import { useTheme } from '@material-ui/core/styles'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -16,9 +8,9 @@ import times from 'lodash/times'
 import { graphql } from 'gatsby'
 import React, { useState } from 'react'
 
-import Layout from '../components/Layout'
 import { SmartLink } from '../components/Link'
 import Tags from '../components/Tags.tsx'
+import StyledLayout from '../components/StyledLayout'
 
 function PageItem (props) {
   const {
@@ -35,7 +27,7 @@ function PageItem (props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Tags tags={tags} />
+          <Tags tags={tags}/>
         </CardActions>
       </Card>
     </Grid>
@@ -55,7 +47,7 @@ function matchTags (pageTags, selectedTags) {
 function Column ({ items, linkComponent }) {
   return (
     <Grid container item xs direction="column" spacing={2}>
-      {items.map(x => <PageItem key={x.id} {...x} linkComponent={linkComponent} />)}
+      {items.map(x => <PageItem key={x.id} {...x} linkComponent={linkComponent}/>)}
     </Grid>
   )
 }
@@ -97,12 +89,12 @@ function BlogIndex (props) {
     .filter((x) => x !== false)
 
   return (
-    <Layout
+    <StyledLayout
       location={location}
-      noMeta="true"
-      noEdit="true"
-      noToC="true"
-      overflow="true"
+      noMeta={true}
+      noEdit={true}
+      noToc={true}
+      overflow={true}
       title="目录页"
     >
       <Grid container spacing={2} justify="center">
@@ -140,11 +132,11 @@ function BlogIndex (props) {
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={2} justify="center">
-            <GridItems filteredItems={filteredItems} linkComponent={SmartLink} />
+            <GridItems filteredItems={filteredItems} linkComponent={SmartLink}/>
           </Grid>
         </Grid>
       </Grid>
-    </Layout>
+    </StyledLayout>
   )
 }
 

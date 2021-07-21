@@ -2,11 +2,11 @@ import MDRenderer from '../lib/MDRenderer'
 import React, { useEffect } from 'react'
 import Mark from 'mark.js'
 import Details from './Details.tsx'
-import Layout from './Layout'
 import Summary from './Summary.tsx'
 import { SmartLink } from './Link'
 import SEO from './Seo'
 import clsx from 'clsx'
+import StyledLayout from './StyledLayout'
 
 function Mdx ({ data: { mdx }, location }) {
   // console.log(mdx);
@@ -15,9 +15,9 @@ function Mdx ({ data: { mdx }, location }) {
   const description = mdx.frontmatter.description || mdx.excerpt
   const authors = mdx.frontmatter.author || null
   const tags = mdx.frontmatter.tags || null
-  const noMeta = mdx.frontmatter.noMeta || 'false'
-  const noComment = mdx.frontmatter.noComment || 'false'
-  const noEdit = mdx.frontmatter.noEdit || 'false'
+  const noMeta = mdx.frontmatter.noMeta === 'true' || false
+  const noComment = mdx.frontmatter.noComment === 'true' || false
+  const noEdit = mdx.frontmatter.noEdit === 'true' || false
   const toc = mdx.toc || null
   const relativePath = mdx.parent.relativePath || ''
   const modifiedTime = mdx.parent.modifiedTime || ''
@@ -30,25 +30,14 @@ function Mdx ({ data: { mdx }, location }) {
     const mainNodes = document.getElementsByTagName('main')
     const nodes = mainNodes[0].getElementsByTagName(tagName)
     const children = [...nodes]
-    if (isHighlight) {
-      children.forEach((node) => {
-        const instance = new Mark(node)
-        instance.mark(
-          location.state.searchKey,
-          {
-            exclude: ['span'],
-          })
-      })
-    } else {
-      children.forEach((node) => {
-        const instance = new Mark(node)
-        instance.unmark(
-          location.state.searchKey,
-          {
-            exclude: ['span'],
-          })
-      })
-    }
+    children.forEach((node) => {
+      const instance = new Mark(node)
+      instance[isHighlight ? 'mark' : 'unmark'](
+        location.state.searchKey,
+        {
+          exclude: ['span'],
+        })
+    })
   }
   useEffect(() => {
     if (location?.state?.searchKey) {
@@ -64,19 +53,16 @@ function Mdx ({ data: { mdx }, location }) {
           highlightNode('p', false)
         }, 5000)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function LinkGetter () {
     return function TooltipLink (props) {
-      return <SmartLink {...props} pathname={location.pathname} isIndex={isIndex} tooltip />
+      return <SmartLink {...props} pathname={location.pathname} isIndex={isIndex} tooltip={true}/>
     }
   }
 
   function InlineCode ({ className, children, ...props }) {
-    return (
-      <code {...props} className={clsx(className, 'inline-code')}>{children}</code>
-    )
+    return <code {...props} className={clsx(className, 'inline-code')}>{children}</code>
   }
 
   const myComponents = {
@@ -89,7 +75,7 @@ function Mdx ({ data: { mdx }, location }) {
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
   return (
-    <Layout
+    <StyledLayout
       location={location}
       authors={authors}
       title={title}
@@ -110,9 +96,9 @@ function Mdx ({ data: { mdx }, location }) {
         tags={tags}
         dateModified={dateModified}
         datePublished={datePublished}
-        article />
-      <MDRenderer components={myComponents} htmlAst={mdx.htmlAst} />
-    </Layout>
+        article/>
+      <MDRenderer components={myComponents} htmlAst={mdx.htmlAst}/>
+    </StyledLayout>
   )
 }
 

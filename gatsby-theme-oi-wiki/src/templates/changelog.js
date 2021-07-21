@@ -15,9 +15,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
 import { SmartLink } from '../components/Link'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title={`更新历史${title ? ` - ${title}` : ''}`}>
+    <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -133,7 +133,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
           返回
         </Button>
       </div>
-    </Layout>
+    </StyledLayout>
   )
 }
 

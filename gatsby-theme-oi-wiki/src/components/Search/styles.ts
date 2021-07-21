@@ -1,5 +1,5 @@
-import { fade, makeStyles } from '@material-ui/core/styles'
-import scrollbarStyle from '../../styles/scrollbar'
+import { alpha, makeStyles } from '@material-ui/core/styles'
+import { scrollbarStyle } from '../../styles/scrollbar'
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -89,13 +89,13 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   searchColorBlack: {
-    backgroundColor: fade(theme.palette.common.black, 0.15),
+    backgroundColor: alpha(theme.palette.common.black, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.black, 0.25),
+      backgroundColor: alpha(theme.palette.common.black, 0.25),
     },
   },
   searchColorWhite: {
-    backgroundColor: fade(theme.palette.common.white, 0.8),
+    backgroundColor: alpha(theme.palette.common.white, 0.8),
     '&:hover': {
       backgroundColor: theme.palette.common.white,
     },

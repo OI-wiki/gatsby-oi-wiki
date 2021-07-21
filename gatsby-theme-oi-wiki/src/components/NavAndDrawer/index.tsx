@@ -1,37 +1,22 @@
-import {
-  AppBar,
-  Button,
-  Drawer,
-  Hidden,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@material-ui/core'
-
+import { AppBar, Button, Drawer, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles'
 import { Link } from 'gatsby'
 import React from 'react'
-
 import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
-
 import clsx from 'clsx'
 
 import trimTrailingSlash from '../../lib/trailingSlash'
-
-// eslint-disable-next-line
-// @ts-ignore
 import pathList from '../../sidebar.yaml'
-import Search from '../Search'
 import SiderContent from '../Sidebar'
 import Tabs from '../Tabs'
 import SmallScreenMenu from '../SmallScreenMenu'
-
 import { useStyles } from './styles'
 import { flattenObject } from './utils'
-import NavBtnGroup from './NavBtnGroup'
 import { useSetting } from '../../lib/useSetting'
+import NavBtnGroup from './NavBtnGroup'
+import Search from '../Search'
 
-function getTabIDFromLocation (location: string, pathList: string[]): number {
+const getTabIDFromLocation = (location: string, pathList: string[]): number => {
   const locationTrimmed = trimTrailingSlash(location)
   for (const v of Object.entries(pathList)) {
     if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0]
@@ -39,11 +24,11 @@ function getTabIDFromLocation (location: string, pathList: string[]): number {
   return -1
 }
 
-interface drawerProps {
+interface ResponsiveDrawerProps {
   pathname: string
 }
 
-const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
+const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = (props) => {
   const { pathname } = props
   const [settings] = useSetting()
   const theme = useTheme()
@@ -53,7 +38,7 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   const classes = useStyles({
     appBar: {
       background: navColor,
-      color: textColor,
+      color: textColor as string,
     },
   })
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -72,11 +57,11 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
           <Hidden mdDown implementation="css">
             <IconButton component={Link} color="inherit" to="/">
-              <SchoolIcon />
+              <SchoolIcon/>
             </IconButton>
           </Hidden>
           <Button href="/" color="inherit">
@@ -84,12 +69,12 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
               OI Wiki
             </Typography>
           </Button>
-          <div style={{ flexGrow: 1 }} />
-          <Search />
+          <div style={{ flexGrow: 1 }}/>
+          <Search/>
           <Hidden smDown implementation="css">
-            <NavBtnGroup />
+            <NavBtnGroup/>
           </Hidden>
-          <SmallScreenMenu />
+          <SmallScreenMenu/>
         </Toolbar>
         <Hidden mdDown implementation="css">
           <Tabs tabID={tabID >= 0 ? tabID : 0} pathList={pathList}/>
@@ -123,4 +108,6 @@ const ResponsiveDrawer: React.FC<drawerProps> = (props) => {
   )
 }
 
-export default React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
+const NavAndDrawer = React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
+
+export default NavAndDrawer
