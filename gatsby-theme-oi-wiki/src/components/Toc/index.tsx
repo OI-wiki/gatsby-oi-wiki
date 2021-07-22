@@ -34,8 +34,8 @@ const TocConverter = (items: TocItem[]): Node[] => {
   items.forEach((item) => {
     const level = item.level - minLevel
     const newNode: Node = {
-      url: item.url,
-      title: item.title,
+      url: item.url.replace(/ref\d+$/, ''),
+      title: item.title.replace(/ref\d+$/, ''),
       level: level,
       children: [],
       status: 'collapse',
@@ -118,29 +118,36 @@ const TocEl: React.FC<TocProps> = (props) => {
   useThrottledOnScroll(newFindActiveItem, 166)
 
   const handleClick: TocListProps['onClick'] = (item) => (event) => {
-    const hash = item.url
-    if (settings.animation.smoothScroll) {
-      event.preventDefault()
+    event.preventDefault()
 
-      // Used to disable findActiveIndex if the page scrolls due to a click
-      const targetElement = document.getElementById(hash.substring(1, hash.length))
-      smoothScrollTo((targetElement?.offsetParent as any)?.offsetTop - tabHeight - scrollPadding)
-      history.pushState(null, '', hash)
-      clickedRef.current = true
-      unsetClickedRef.current = setTimeout(() => {
-        clickedRef.current = false
-      }, 1000)
+    const hash = item.url
+    const anchorId = hash.substring(1, hash.length)
+    // Used to disable findActiveIndex if the page scrolls due to a click
+    const targetElement = document.getElementById(anchorId)
+    const yDis = (targetElement?.getBoundingClientRect().top as number) + window?.pageYOffset - tabHeight - scrollPadding
+
+    if (settings.animation.smoothScroll) {
+      smoothScrollTo(yDis)
+    } else {
+      window?.scrollTo(0, yDis)
     }
 
+    history.pushState(null, '', hash)
+    clickedRef.current = true
+    unsetClickedRef.current = setTimeout(() => {
+      clickedRef.current = false
+    }, 1000)
+
     if (activeState?.url !== hash) {
-      // console.log('after click:', item)
       updateActive(item)
     }
   }
 
   useEffect(
     () => {
-      clearTimeout(unsetClickedRef.current as never as number)
+      return () => {
+        clearTimeout(unsetClickedRef.current as never as number)
+      }
     },
     [],
   )
