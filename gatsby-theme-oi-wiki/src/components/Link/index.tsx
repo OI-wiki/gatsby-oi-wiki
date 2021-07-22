@@ -6,6 +6,10 @@ import LinkTooltip from './LinkTooltip'
 import path from 'path'
 import clsx from 'clsx'
 import { GatsbyLinkProps } from 'gatsby-link'
+import smoothScrollTo from "../../lib/smoothScroll";
+import { useSetting } from "../../lib/useSetting";
+import { useMediaQuery, useTheme } from "@material-ui/core";
+import { OnClickHandler } from "../../types/common";
 
 const MD_EXPR = /\.(md|markdown|mdtext|mdx)/g
 const NO_SLASH_EXPR = /[^/]$/
@@ -82,38 +86,55 @@ export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> 
  * - 如果是 path 则根据 tooltip 属性决定是否启用 Tooltip
  */
 const SmartLink: React.FC<SmartLinkProps> = (props) => {
+  const theme = useTheme()
   const classes = useStyles()
-  const { href = props?.to || '', tooltip = false, isIndex = true, className, pathname, children } = props
+  const { href = props?.to || '', tooltip = false, isIndex = true, className, pathname, children, ...others } = props
   const classList = clsx(className, classes.link)
+  const [settings] = useSetting()
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
 
   if (className && className.search('anchor') > -1) {
-    return <a href={href}>{children}</a>
+    return <a {...others} href={href}>{children}</a>
   } else if (isAbsoluteURL(href)) {
     return (
-      <a href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
+      <a {...others} href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
         {children}
       </a>
     )
   } else if (isRef(href)) {
+    const tabHeight = isMdDown ? 64 : 112
+    const scrollPadding = 24
+
+    const onClick: OnClickHandler = (e) => {
+      e.preventDefault()
+
+      const target = document.getElementById(href.substring(1, href.length))
+      const yDis = (target?.getBoundingClientRect().top as number) + window?.pageYOffset - tabHeight - scrollPadding
+
+      if (settings.animation.smoothScroll) {
+        smoothScrollTo(yDis)
+      } else {
+        window?.scrollTo(0, yDis)
+      }
+    }
+
     return (
-      <GatsbyLink to={href} className={classList}>
+      <GatsbyLink {...others as any} to={href} className={classList} onClick={onClick}>
         {children}
       </GatsbyLink>
     )
   } else if (tooltip) {
-    if (!pathname) {
-      throw new Error('tooltip 为 true 时必须给出 pathname')
-    }
+    if (!pathname) throw new Error('tooltip 为 true 时必须给出 pathname')
     return (
       <LinkTooltip url={getAPILink(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
-        <GatsbyLink to={linkFix(href, isIndex)} className={classList}>
+        <GatsbyLink {...others as any} to={linkFix(href, isIndex)} className={classList}>
           {children}
         </GatsbyLink>
       </LinkTooltip>
     )
   } else {
     return (
-      <GatsbyLink to={linkFix(href, isIndex)} className={classList}>
+      <GatsbyLink {...others as any} to={linkFix(href, isIndex)} className={classList}>
         {children}
       </GatsbyLink>
     )
