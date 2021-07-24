@@ -4,14 +4,16 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Nullable, OnClickHandler } from '../../types/common'
 
-interface Node {
+export interface Node {
   url: string;
   title: string;
   level: number;
   status: 'active' | 'expanded' | 'collapse'
   children: Node[];
   parent: Nullable<Node>;
-  element?: any;
+  element: Nullable<HTMLElement>;
+  selfElement: Nullable<HTMLElement>
+  index: number;
 }
 
 interface Props {
@@ -73,11 +75,12 @@ const TocComponent: React.FC<Props> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
-    <li className={clsx(classes.li)}>
+    <li id={`toc-${data.url}`} className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
-      {data.children && (<ul className={clsx(classes.ul, data.status === 'collapse' && classes.collapse)}>{
+      {data.children.length > 0 &&
+      <ul className={clsx(classes.ul, data.status === 'collapse' && classes.collapse)}>{
         data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
-      }</ul>)}
+      }</ul>}
     </li>
   )
 }
@@ -93,4 +96,3 @@ const TocList: React.FC<TocListProps> = (props) => {
 }
 
 export default TocList
-export { Node }
