@@ -24,30 +24,35 @@ export interface TocProps {
   toc: TocObj;
 }
 
-const getIDFromHash = (url: string): string => url?.replace(/^#/, '')
+const getIDFromHash = (url: string): string => url.substring(1, url.length)
 
 const TocConverter = (items: TocItem[]): Node[] => {
   const minLevel = items.reduce((v, i) => Math.min(v, i.level), 5)
   const curNode: Nullable<Node>[] = Array.from({ length: 6 }, () => null)
   const data: Node[] = []
+  const REF_EXPR = /ref\d+$/
+  let index: number
 
   items.forEach((item) => {
     const level = item.level - minLevel
+    index = level > 0 ? (curNode[level - 1]?.children.length || 0) : data.length
     const newNode: Node = {
-      url: item.url.replace(/ref\d+$/, ''),
-      title: item.title.replace(/ref\d+$/, ''),
-      level: level,
+      url: item.url.replace(REF_EXPR, ''),
+      title: item.title.replace(REF_EXPR, ''),
+      level,
+      index,
       children: [],
       status: 'collapse',
       element: null,
       parent: null,
+      selfElement: null,
     }
     curNode[level] = newNode
 
     if (level === 0) {
       data.push(newNode)
     } else {
-      if (curNode[level - 1]) (curNode[level - 1] as Node).children.push(newNode)
+      if (curNode[level - 1]) curNode[level - 1]?.children.push(newNode)
       newNode.parent = curNode[level - 1]
     }
   })
@@ -57,6 +62,7 @@ const TocConverter = (items: TocItem[]): Node[] => {
 const bindHTMLElement = (toc: Node[]): void => {
   toc.forEach((i, idx, arr) => {
     if (i.element === null) arr[idx].element = document.getElementById(getIDFromHash(i.url))
+    if (i.selfElement === null) arr[idx].selfElement = document.getElementById(`toc-${i.url}`)
     if (i.children) bindHTMLElement(i.children)
   })
 }
@@ -76,6 +82,8 @@ const TocEl: React.FC<TocProps> = (props) => {
   const clickedRef = useRef(false)
   const unsetClickedRef = useRef<ReturnType<typeof setTimeout>>()
   const [activeState, setActiveState] = useState<Nullable<Node>>(null)
+  const lstScrollTopRef = useRef(0)
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     bindHTMLElement(newItems.current)
@@ -86,45 +94,81 @@ const TocEl: React.FC<TocProps> = (props) => {
     if (val && node) node.status = 'active'
   }
 
-  const updateActive = useCallback((state: Node): void => {
+  const updateActive = useCallback((state: Nullable<Node>): void => {
+    if (activeState?.url === state?.url) return
+
     nodeSetActive(activeState, false)
     nodeSetActive(state, true)
     setActiveState(state)
   }, [activeState])
 
-  const newFindActiveItem = useCallback(() => {
+  const getNextItem = useCallback((node: Node): Nullable<Node> => {
+    const parent = node.parent
+    const nextIdx = node.index + 1
+    if (parent === null) return newItems.current.length > nextIdx ? newItems.current[nextIdx] : null
+    else return parent.children.length > nextIdx ? parent.children[nextIdx] : getNextItem(parent)
+  }, [])
+
+  const getLstChild = useCallback((node: Nullable<Node>): Nullable<Node> =>
+    (node && node.children.length > 0) ? getLstChild(node.children[node.children.length - 1]) : node, [])
+
+  const getPrevItem = useCallback((node: Node): Nullable<Node> => {
+    const parent = node.parent
+    const prevIdx = node.index - 1
+    return prevIdx >= 0
+      ? getLstChild((parent === null ? newItems.current : parent.children)[prevIdx])
+      : parent
+  }, [getLstChild])
+
+  const activeTocOnScroll = useCallback((): void => {
     if (clickedRef.current) return
 
-    const filter = (u: Node): boolean =>
-      u.element?.offsetParent?.offsetTop <
-      (document.documentElement.scrollTop + document.documentElement.clientHeight / 8 + 50)
+    const TO_TOP_DIS = tabHeight + scrollPadding + 20
+    const pageScrollTop = window?.pageYOffset || document.documentElement.scrollTop
+    let node: Nullable<Node> = activeState || newItems.current[0]
 
-    const findActive = (toc: Node[]): Nullable<Node> => {
-      if (toc) {
-        for (let i = toc.length - 1; i >= 0; i--) {
-          if (filter(toc[i])) return findActive(toc[i].children) || toc[i]
+    // down dir
+    if (pageScrollTop > lstScrollTopRef.current) {
+      let minDisNode = node
+      while (node) {
+        if (node.element && (node.element.getBoundingClientRect().top > TO_TOP_DIS + 20)) {
+          break
+        } else {
+          if (node !== minDisNode) minDisNode = node
+          node = node.children.length > 0 ? node.children[0] : getNextItem(node)
         }
       }
-      return null
+      node = minDisNode
+    } else {
+      while (node) {
+        // node may have no ele which caused by error id
+        if (!node.element || node.element.getBoundingClientRect().top <= TO_TOP_DIS) {
+          break
+        } else {
+          node = getPrevItem(node)
+        }
+      }
     }
 
-    const active = document.documentElement.scrollTop < 200 ? null : findActive(newItems.current)
+    if (activeState !== node) {
+      updateActive(node)
 
-    if (!(activeState?.url === active?.url)) {
-      updateActive(active as Node)
+      // scroll the toc
+      const behavior = settings.animation.smoothScroll ? 'smooth' : 'auto'
+      if (node?.selfElement) node.selfElement.scrollIntoView({ behavior })
+      else navRef.current?.scrollTo({ top: 0, behavior })
     }
-  }, [activeState?.url, updateActive])
 
-  useThrottledOnScroll(newFindActiveItem, 166)
+    lstScrollTopRef.current = pageScrollTop
+  }, [activeState, getNextItem, getPrevItem, settings.animation.smoothScroll, tabHeight, updateActive])
+
+  useThrottledOnScroll(activeTocOnScroll, 100)
 
   const handleClick: TocListProps['onClick'] = (item) => (event) => {
     event.preventDefault()
 
     const hash = item.url
-    const anchorId = hash.substring(1, hash.length)
-    // Used to disable findActiveIndex if the page scrolls due to a click
-    const targetElement = document.getElementById(anchorId)
-    const yDis = (targetElement?.getBoundingClientRect().top as number) + window?.pageYOffset - tabHeight - scrollPadding
+    const yDis = (item.element?.getBoundingClientRect().top || 0) + window?.pageYOffset - tabHeight - scrollPadding
 
     if (settings.animation.smoothScroll) {
       smoothScrollTo(yDis)
@@ -134,9 +178,12 @@ const TocEl: React.FC<TocProps> = (props) => {
 
     history.pushState(null, '', hash)
     clickedRef.current = true
+
+    // clear last unfinished timeout
+    if (unsetClickedRef.current) clearTimeout(unsetClickedRef.current)
     unsetClickedRef.current = setTimeout(() => {
       clickedRef.current = false
-    }, 1000)
+    }, 100)
 
     if (activeState?.url !== hash) {
       updateActive(item)
@@ -153,7 +200,7 @@ const TocEl: React.FC<TocProps> = (props) => {
   )
 
   return (
-    <nav className={classes.main} aria-label="pageTOC">
+    <nav ref={navRef} className={classes.main} aria-label="pageTOC">
       {newItems.current.length > 0 &&
       <>
         <Typography gutterBottom className={classes.contents}>
