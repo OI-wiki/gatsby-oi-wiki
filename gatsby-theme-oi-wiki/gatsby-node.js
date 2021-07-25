@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
 const path = require('path')
-const { CreateSitemap, CreateIndexSitemap, CreateSitemapStylesheet } = require('sitemap-manager')
+const { SitemapManager } = require('sitemap-manager')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -138,8 +139,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 }
 
-exports.onPostBuild = async ({ graphql, reporter, pathPrefix }) => {
-  var queryResult = await graphql(`{
+exports.onPostBuild = async ({ graphql, reporter }) => {
+  let queryResult = await graphql(`{
     site {
       siteMetadata {
         siteUrl
@@ -151,6 +152,11 @@ exports.onPostBuild = async ({ graphql, reporter, pathPrefix }) => {
           id
           fields{
             slug
+          }
+          parent {
+            ... on File {
+              modifiedTime
+            }
           }
         }
       }
@@ -165,44 +171,30 @@ exports.onPostBuild = async ({ graphql, reporter, pathPrefix }) => {
     reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors)
   }
   queryResult = queryResult.data
-  const siteURL = queryResult.site.siteMetadata.siteUrl
-  CreateSitemap(
-    path.resolve('./public/sitemap-articles.xml'),
-    pathPrefix,
-    siteURL,
-    queryResult.postsQuery.edges,
-    (data) => { return data.node.fields.slug },
-  )
-  CreateSitemap(
-    path.resolve('./public/sitemap-logs.xml'),
-    pathPrefix,
-    siteURL,
-    queryResult.postsQuery.edges,
-    (data) => { return data.node.fields.slug + 'changelog/' },
-  )
-  CreateSitemap(
-    path.resolve('./public/sitemap-tags.xml'),
-    pathPrefix,
-    siteURL,
-    queryResult.tagsQuery.group,
-    (data) => { return `/tags/${data.fieldValue}/` },
-  )
-  CreateSitemap(
-    path.resolve('./public/sitemap-pages.xml'),
-    pathPrefix,
-    siteURL,
-    ['/pages/', '/settings/'],
-    (data) => { return data },
-  )
-  CreateIndexSitemap(
-    path.resolve('./public/sitemap.xml'),
-    pathPrefix,
-    siteURL,
-    ['sitemap-pages.xml', 'sitemap-articles.xml', 'sitemap-logs.xml', 'sitemap-tags.xml'],
-  )
-  CreateSitemapStylesheet(
-    path.resolve('./public/sitemap.xsl'),
-    pathPrefix,
-    siteURL,
-  )
+  const siteUrl = queryResult.site.siteMetadata.siteUrl
+
+  const MySitemap = new SitemapManager({ siteURL: siteUrl })
+  queryResult.postsQuery.edges.forEach(({ node }) => {
+    MySitemap.addUrl('articles', [{
+      loc: new URL(node.fields.slug, siteUrl).toString(),
+      lastmod: node.parent.modifiedTime,
+    }])
+    MySitemap.addUrl('logs', [{
+      loc: new URL(node.fields.slug + 'changelog/', siteUrl).toString(),
+      lastmod: node.parent.modifiedTime,
+    }])
+  })
+  queryResult.tagsQuery.group.forEach(({ fieldValue }) => {
+    MySitemap.addUrl('tags', [{
+      loc: new URL(`/tags/${_.kebabCase(fieldValue)}/`, siteUrl).toString(),
+      lastmod: new Date(),
+    }])
+  })
+  MySitemap.addUrl('pages', [
+    { loc: new URL('/pages/', siteUrl).toString() },
+    { loc: new URL('/settins/', siteUrl).toString() },
+  ])
+  await MySitemap.finish().catch((e) => {
+    reporter.error(e)
+  })
 }
