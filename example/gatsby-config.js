@@ -7,8 +7,8 @@ module.exports = {
   },
   plugins: [
     {
-        resolve: "gatsby-theme-oi-wiki",
-        options: {},
+      resolve: "gatsby-theme-oi-wiki",
+      options: {},
     }
   ]
 }
