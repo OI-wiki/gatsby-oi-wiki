@@ -192,7 +192,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
   })
   MySitemap.addUrl('pages', [
     { loc: new URL('/pages/', siteUrl).toString() },
-    { loc: new URL('/settins/', siteUrl).toString() },
+    { loc: new URL('/settings/', siteUrl).toString() },
   ])
   await MySitemap.finish().catch((e) => {
     reporter.error(e)
