@@ -11,8 +11,10 @@ export interface Settings {
     smoothScroll: boolean;
   }
   theme: {
-    primary: LabeledPaletteColor|null; // null: auto
-    secondary: string; // id
+    /** null: auto */
+    primary: LabeledPaletteColor | null;
+    /** id */
+    secondary: string;
     fallbackMonoFont: boolean
   }
 }
@@ -35,17 +37,15 @@ const defaultSettings: Settings = {
 // https://stackoverflow.com/questions/41980195/recursive-partialt-in-typescript
 // 第一个回答会让 linter unhappy, 所以魔改了一下
 type RecursivePartial<T> = {
-  [P in keyof T]?:
-    T[P] extends (infer U)[] ? RecursivePartial<U>[] : RecursivePartial<T[P]>
+  [P in keyof T]?: T[P] extends (infer U)[] ? RecursivePartial<U>[] : RecursivePartial<T[P]>
 };
 
 export const useSetting = (): [Settings, (s: RecursivePartial<Settings>) => void] => {
   const [settings, setSettings] = usePersistedState('settings')(defaultSettings)
 
   const updateSetting = (newSettings: RecursivePartial<Settings>): void => {
-    const finalSettings = merge.all([defaultSettings, settings, newSettings])
+    const finalSettings = merge.all([defaultSettings, settings, newSettings]) as Settings
     setSettings(finalSettings)
-    // eslint-disable-next-line dot-notation
     window !== undefined && window['onthemechange'](finalSettings)
   }
   return [settings, updateSetting]
