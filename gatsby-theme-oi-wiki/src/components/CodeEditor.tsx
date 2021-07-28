@@ -1,8 +1,10 @@
+// FIXME: Not compatible with Gatsby SSR build
+
 import { makeStyles, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import Ace from 'react-ace'
 import type { IAceEditorProps } from 'react-ace'
-import { langModeMap, LangType } from '../lib/codeLang'
+import { langModeMap, LangType } from '../lib/play/codeLang'
 import useDarkMode from '../lib/useDarkMode'
 
 // add language to support here

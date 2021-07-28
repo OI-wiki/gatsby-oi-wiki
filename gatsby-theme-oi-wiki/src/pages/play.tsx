@@ -1,18 +1,23 @@
 import {
   Button,
+  CircularProgress,
   FormControl,
   Grid,
   InputLabel,
   makeStyles,
   MenuItem,
   Select,
+  Typography,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
 import type { PageProps } from 'gatsby'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import CodeEditor from '../components/CodeEditor'
 import Layout from '../components/Layout'
-import { langList, LangType } from '../lib/codeLang'
+import { langList } from '../lib/play/codeLang'
+import type { LangType } from '../lib/play/codeLang'
+import { useRunner } from '../lib/play/useRunner'
+import type { RunnerApiResponseData } from '../lib/play/useRunner'
 
 const useStyles = makeStyles({
   langSelect: {
@@ -21,7 +26,25 @@ const useStyles = makeStyles({
   editor: {
     minHeight: '250px',
   },
+  progress: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    marginLeft: -14,
+    marginTop: -14,
+  },
 })
+
+// mock runner api
+if (process.env.NODE_ENV === 'development') {
+  Promise.all([
+    import('msw'),
+    import('../lib/play/mockRunnerHandler'),
+  ]).then(([{ setupWorker }, { handlers }]) => {
+    const worker = setupWorker(...handlers)
+    worker.start()
+  })
+}
 
 export default function Playground ({
   location,
@@ -32,6 +55,16 @@ export default function Playground ({
   const [code, setCode] = useState('')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
+
+  const [runInfo, setRunInfo] = useState('')
+
+  const runCodeCb = useCallback((data: RunnerApiResponseData) => {
+    setRunInfo(data.info)
+  }, [])
+  const { sendRunnerReq, waiting } = useRunner(
+    { input, output, code, lang },
+    runCodeCb,
+  )
 
   return (
     <Layout location={location} title="Playground">
@@ -61,9 +94,15 @@ export default function Playground ({
             variant="contained"
             color="secondary"
             startIcon={<PlayArrow />}
+            onClick={sendRunnerReq}
+            disabled={waiting}
           >
             运行
+            {waiting && <CircularProgress className={classes.progress} color="secondary" size={28} />}
           </Button>
+        </Grid>
+        <Grid item>
+          <Typography>{runInfo}</Typography>
         </Grid>
       </Grid>
       <Grid container spacing={3} alignItems="stretch">

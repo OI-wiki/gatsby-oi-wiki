@@ -20,6 +20,7 @@
     "@mgtd/vssue-api-github-v4": "^2.4.5",
     "ace-builds": "^1.4.12",
     "autosuggest-highlight": "^3.1.1",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.3.0",
@@ -72,6 +73,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "eslint-plugin-standard": "^5.0.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
+    "msw": "^0.33.0",
     "ts-graphql-plugin": "^2.1.3",
     "typescript": "^4.3.5"
   },
@@ -80,5 +82,8 @@
     "gatsby-plugin-sharp": "^3.8.0",
     "gatsby-remark-images": "^5.6.0",
     "gatsby-transformer-sharp": "^3.9.0"
+  },
+  "msw": {
+    "workerDirectory": "static"
   }
 }
