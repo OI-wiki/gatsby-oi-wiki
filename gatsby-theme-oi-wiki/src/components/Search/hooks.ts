@@ -35,15 +35,15 @@ const useWindowDimensions = (): WindowDimensions => {
   useEffect(() => {
     const handleResize = (): void => {
       setWindowDimensions({
-        ...windowDimensions,
         width: window.innerWidth,
+        height: window.innerHeight,
       })
     }
 
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [windowDimensions])
+  }, [])
 
   return windowDimensions
 }
