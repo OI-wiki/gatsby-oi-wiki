@@ -20,8 +20,11 @@ export interface SearchResultListProps {
 const SearchResultList: React.FC<SearchResultListProps> = props => {
   const { result, isFirstRun, searchKey, classes } = props
   const resultCount = result.length
-  return resultCount !== 0
-    ? (<>
+  return resultCount === 0
+    ? (isFirstRun.current
+      ? <></>
+      : <Typography variant="body1" className={classes.searchMessage}>没有找到符合条件的结果</Typography>)
+    : (<>
       <Typography variant="body1" className={classes.searchMessage}>
         共找到 {resultCount} 条搜索结果：
       </Typography>
@@ -64,11 +67,6 @@ const SearchResultList: React.FC<SearchResultListProps> = props => {
           </ListItem>)}
       </List>
     </>)
-    : (isFirstRun.current
-        ? <></>
-        : (<Typography variant="body1" className={classes.searchMessage}>
-        没有找到符合条件的结果
-      </Typography>))
 }
 
 export default SearchResultList
