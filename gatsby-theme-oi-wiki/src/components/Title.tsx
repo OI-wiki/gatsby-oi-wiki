@@ -62,7 +62,6 @@ const Title: React.FC<TitleProps> = (props) => {
           }
         </Grid>
       </Grid>
-
     </>
   )
 }

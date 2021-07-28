@@ -2,8 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { graphql, useStaticQuery } from 'gatsby'
-import { RequiredNonNull } from '../types/common'
 import { Article, WithContext } from 'schema-dts'
+import { DeepRequiredNonNull } from '../types/common'
 
 interface SEOProps {
   title: string;
@@ -29,7 +29,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
         }
       }
     }
-  `) as RequiredNonNull<GatsbyTypes.SEOQuery>
+  `) as DeepRequiredNonNull<GatsbyTypes.SEOQuery>
 
   const {
     title = null,
@@ -40,7 +40,6 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
     dateModified,
     datePublished,
   } = props
-
 
   const seo = {
     title: title || siteMetadata.defaultTitle,
@@ -72,7 +71,6 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
       },
     },
   }
-
 
   return (
     <Helmet>
