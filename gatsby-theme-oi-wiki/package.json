@@ -54,6 +54,7 @@
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "remark-details": "^3.0.0",
     "remark-math": "^3.0.1",
+    "sitemap-manager": "^2.0.1",
     "simple-git": "^2.41.1",
     "use-persisted-state": "^0.3.0"
   },
