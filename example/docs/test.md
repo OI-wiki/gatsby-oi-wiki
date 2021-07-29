@@ -143,5 +143,13 @@ int main() {
 
 
 ```cpp
+/* clang-format whatever */
 --8<-- "docs/test_code.cpp"
+```
+
+```markdown
+/* clang-format off */
+--8<-- "docs/test_md.md"
+**snip 2**
+--8<-- "docs/test_md.md"
 ```
