@@ -134,3 +134,14 @@ int main() {
 - B
 - C
 - D
+
+### 题解
+
+// todo: md snippets  
+
+--8<-- "docs/test_md.md"
+
+
+```cpp
+--8<-- "docs/test_code.cpp"
+```
