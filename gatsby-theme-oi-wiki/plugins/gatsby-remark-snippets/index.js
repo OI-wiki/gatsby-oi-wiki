@@ -14,7 +14,7 @@ function resolvePath (snip) {
 }
 
 module.exports = async ({ markdownAST, files, reporter, loadNodeContent }, pluginOptions) => {
-    let task
+    let allTasks = []
     visit(markdownAST, "code", (node) => {
         const contents = node.value.split("\n")
         const tasks = []
@@ -35,16 +35,16 @@ module.exports = async ({ markdownAST, files, reporter, loadNodeContent }, plugi
                 }))
             }
         }
-        task = new Promise(resolve => {
+        allTasks.push(new Promise(resolve => {
             Promise.all(tasks).then(o => {
                 o.forEach(e => contents[e[0]] = e[1])
                 node.value = contents.join("\n")
                 resolve()
             })
-        })
+        }))
     })
 
-    await task
+    await Promise.all(allTasks)
 
     visit(markdownAST, "paragraph", (node) => {
         if (node?.children?.[0]?.value?.trim().startsWith(SNIPPET_TOKEN)) {
