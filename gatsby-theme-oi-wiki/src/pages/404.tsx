@@ -1,4 +1,3 @@
-// Components
 import React from 'react'
 import StyledLayout from '../components/StyledLayout'
 

@@ -58,6 +58,7 @@
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
+    "@types/autosuggest-highlight": "^3.1.1",
     "@types/mark.js": "^8.11.6",
     "@types/react-helmet": "^6.1.1",
     "@types/use-persisted-state": "^0.3.0",
