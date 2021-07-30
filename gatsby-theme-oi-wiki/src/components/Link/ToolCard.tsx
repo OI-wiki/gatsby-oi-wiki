@@ -113,8 +113,8 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
       }
     }
 
-    element.style.setProperty('right', right ? `${right}px` : 'auto')
-    element.style.setProperty('left', left ? `${left}px` : 'auto')
+    element.style.setProperty('right', typeof right === 'undefined' ? 'auto' : `${right}px`)
+    element.style.setProperty('left', typeof left === 'undefined' ? 'auto' : `${left}px`)
     element.classList.toggle(classes.aboveMedian, pos.y > viewport.height / 2)
 
   }, [classes.aboveMedian, rootRef])
