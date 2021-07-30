@@ -1,7 +1,5 @@
 'use strict'
 
-const visit = require('unist-util-visit')
-
 const SNIPPET_TOKEN = "--8<-- "
 
 function resolvePath (snip) {
@@ -13,50 +11,20 @@ function resolvePath (snip) {
     return str.replace(/^docs\//, "")
 }
 
-module.exports = async ({ markdownAST, files, reporter, loadNodeContent }, pluginOptions) => {
-    let allTasks = []
-    visit(markdownAST, "code", (node) => {
-        const contents = node.value.split("\n")
-        const tasks = []
-        for (const i in contents) {
-            const val = contents[i].trim()
-            if (val.startsWith(SNIPPET_TOKEN)) {
-                const path = resolvePath(val)
-                const v = files.filter(e => e.relativePath == path)[0]
-                if (v == undefined) {
-                    reporter.warn(`snippet: no such file ${path} to include`)
-                    continue
-                }
-
-                tasks.push(new Promise(resolve => {
-                    loadNodeContent(v).then(r => {
-                        resolve([i, r])
-                    })
-                }))
-            }
-        }
-        allTasks.push(new Promise(resolve => {
-            Promise.all(tasks).then(o => {
-                o.forEach(e => contents[e[0]] = e[1])
-                node.value = contents.join("\n")
-                resolve()
-            })
-        }))
-    })
-
-    await Promise.all(allTasks)
-
-    visit(markdownAST, "paragraph", (node) => {
-        if (node?.children?.[0]?.value?.trim().startsWith(SNIPPET_TOKEN)) {
-            const path = resolvePath(node?.children?.[0]?.value?.trim())
-            const v = files.filter(e => e.relativePath == path)[0]
-            if (v == undefined) {
+module.exports = {}
+module.exports.mutateSource = async function({ markdownNode, files, loadNodeContent }) {
+    const contents = markdownNode.internal.content.split("\n")
+    for (const i in contents) {
+        const val = contents[i].trim()
+        if (val.startsWith(SNIPPET_TOKEN)) {
+            const path = resolvePath(val)
+            const fileNode = files.filter(e => e.relativePath == path)[0]
+            if (fileNode == undefined) {
                 reporter.warn(`snippet: no such file ${path} to include`)
+                continue
             }
-
-            // todo
+            contents[i] = await loadNodeContent(fileNode)
         }
-    })
-    
-    return markdownAST
+    }
+    markdownNode.internal.content = contents.join("\n")
 }

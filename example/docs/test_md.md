@@ -1,5 +1,3 @@
-# don't waste time on polyfilling pythonic features.
+##### don't waste time on polyfilling pythonic features.
 
-```python
-import antigravity
-```
+$$ a^2 + b^2 = c^2 $$

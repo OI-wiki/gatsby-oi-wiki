@@ -135,21 +135,14 @@ int main() {
 - C
 - D
 
-### 题解
+### Snippets
 
-// todo: md snippets  
-
---8<-- "docs/test_md.md"
-
+--8<-- "docs/test_md.md" 
 
 ```cpp
 /* clang-format whatever */
 --8<-- "docs/test_code.cpp"
-```
 
-```markdown
-/* clang-format off */
---8<-- "docs/test_md.md"
-**snip 2**
---8<-- "docs/test_md.md"
+/* snip #2 */
+--8<-- "docs/test_code.cpp"
 ```
