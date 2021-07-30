@@ -8,7 +8,7 @@ import SEO from './Seo'
 import clsx from 'clsx'
 import StyledLayout from './StyledLayout'
 
-function Mdx ({ data: { mdx }, location }) {
+function Mdx ({ data: { mdx }, pageContext: { lastModified }, location }) {
   // console.log(mdx);
   // const headingTitle = mdx.headings[0] && mdx.headings[0].value
   const title = mdx.slug === '/' ? null : mdx.frontmatter.title
@@ -20,7 +20,7 @@ function Mdx ({ data: { mdx }, location }) {
   const noEdit = mdx.frontmatter.noEdit === 'true' || false
   const toc = mdx.toc || null
   const relativePath = mdx.parent.relativePath || ''
-  const modifiedTime = mdx.parent.modifiedTime || ''
+  const modifiedTime = lastModified || ''
   const wordCount = mdx.wordCount.words || 0
   const datePublished = mdx.parent.birthTime || ''
   const dateModified = mdx.parent.changeTime || ''
