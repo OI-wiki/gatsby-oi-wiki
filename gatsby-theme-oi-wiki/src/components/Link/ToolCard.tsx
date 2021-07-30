@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Alert } from '@material-ui/lab'
+import React, { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CircularProgress, Fade, makeStyles } from '@material-ui/core'
 import { Link as GatsbyLink } from 'gatsby'
 
@@ -7,12 +6,16 @@ import { FetchStatus, PreviewData } from './LinkTooltip'
 import { useDelay } from './hooks'
 import { getElementSize, getElementViewPosition, Position, Size } from './utils'
 import { Nullable } from '../../types/common'
-import clsx from 'clsx'
+import { Alert } from '@material-ui/lab'
 
 const lines = 4
 const lineHeight = 1.5
 const cardDis = '2rem'
 const useStyles = makeStyles((theme) => ({
+  container: {
+    position: 'relative',
+    display: 'inline-block',
+  },
   fade: {
     lineHeight: `${lineHeight}em`,
     height: `${lineHeight * lines}em`,
@@ -30,34 +33,28 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolCard: {
-    display: 'inline-block',
     position: 'absolute',
     zIndex: 9999,
     width: '320px',
     left: 0,
     top: cardDis,
+    maxWidth: 'calc(100vw - 40px)',
   },
   aboveMedian: {
     top: 'initial',
     bottom: cardDis,
-  },
-  cardContent: {
-    display: 'flex',
   },
   fetching: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-
-
 }))
 
 interface PositionAndSize {
   pos: Position,
   size: Size,
 }
-
 
 export interface ToolCardProps {
   content: Nullable<PreviewData>,
@@ -72,60 +69,55 @@ export interface ToolCardProps {
 
 const ToolCard: React.FC<ToolCardProps> = (props) => {
   const classes = useStyles()
-  const { children, content, status, closeDelay = 0, openDelay = 0, onHover } = props
+  const { children, content, status, closeDelay = 0, openDelay = 0, onHover, to } = props
   const [open, setOpen] = useState(false)
-
+  const rootRef = createRef<HTMLDivElement>()
   const popperRef = useRef<HTMLElement>()
-  const position = useRef<Nullable<PositionAndSize>>(null)
   const [onOpen, onClose] = useDelay(() => {
     setOpen(true)
     props.onOpen?.()
-    onHover?.()
   }, () => {
     setOpen(false)
   }, openDelay, closeDelay)
 
   const adjustElementPosition = useCallback((element: HTMLElement, { pos, size }: PositionAndSize): void => {
-    if (!element) return
+    if (!element || !rootRef.current) return
 
     const viewport = {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
+      width: window?.innerWidth || document.documentElement.clientWidth,
+      height: window?.innerHeight || document.documentElement.clientHeight,
+    }
+    const betterDis = 20
+
+    let left, right
+
+    // On the left half of the screen
+    if (pos.x < viewport.width / 2) {
+      const cardRightX = pos.x + size.width
+      const toRight = viewport.width - cardRightX
+      if (toRight >= 0) {
+        left = 0
+      } else {
+        const gap = pos.x + toRight
+        left = (gap >= 0 ? toRight : gap) - betterDis
+      }
+    } else {
+      const { width } = getElementSize(rootRef.current)
+      const rootRightX = pos.x + width
+      const toLeft = rootRightX - size.width
+      if (toLeft >= 0) {
+        right = 0
+      } else {
+        const gap = viewport.width + toLeft
+        right = (gap >= 0 ? toLeft : gap) - betterDis
+      }
     }
 
-    const linkWidth = element.parentElement?.parentElement?.offsetWidth || 0
-
-    // 控制横坐标
-    function setRight(): void {
-      element.style.removeProperty('right')
-      let offset = 0
-      // 不能超过屏幕左边
-      offset = Math.max(offset, -pos.x + 12)
-      // 不能超过屏幕右边
-      offset = Math.min(offset, -pos.x + Math.max(0, viewport.width - size.width) - 12)
-      element.style.setProperty('left', `${offset}px`)
-    }
-
-    // 控制横坐标
-    function setLeft(): void {
-      element.style.removeProperty('left')
-      let offset = 0
-      // 不能超过屏幕左边
-      offset = Math.min(offset, pos.x + linkWidth - size.width - 12)
-      element.style.setProperty('right', `${offset}px`)
-    }
-
+    element.style.setProperty('right', right ? `${right}px` : 'auto')
+    element.style.setProperty('left', left ? `${left}px` : 'auto')
     element.classList.toggle(classes.aboveMedian, pos.y > viewport.height / 2)
 
-    // 位于左半部分
-    if (pos.x + linkWidth / 2 < viewport.width / 2) {
-      setRight()
-    } else {
-      setLeft()
-    }
-
-    element.style.setProperty('max-width', `${viewport.width - 24}px`)
-  }, [classes.aboveMedian])
+  }, [classes.aboveMedian, rootRef])
 
   useEffect(() => {
     if (open && popperRef.current) {
@@ -133,51 +125,49 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
         pos: getElementViewPosition(popperRef.current.parentElement as HTMLElement),
         size: getElementSize(popperRef.current),
       }
-      position.current = data
       adjustElementPosition(popperRef.current, data)
     }
-  }, [open, content, popperRef, adjustElementPosition])
+  }, [open, content, popperRef, adjustElementPosition, rootRef])
 
-  return <span
-    style={{
-      position: 'relative',
-      display: 'inline-block',
-    }}
-    onMouseEnter={onOpen}
-    onMouseLeave={onClose}
-  >
-      <GatsbyLink to={props.to}>
+  return (
+    <div
+      className={classes.container}
+      onMouseEnter={() => {
+        onOpen()
+        onHover?.()
+      }}
+      onMouseLeave={onClose}
+      ref={rootRef}
+    >
+      <GatsbyLink to={to}>
         <Fade in={open}>
           <Card
-            component='span'
             className={classes.toolCard}
             elevation={3}
             ref={popperRef}
           >
             {(() => {
-              switch (status) {
-                case 'not_fetched':
-                case 'fetching':
-                  return <CardContent component='span' className={clsx(classes.fetching, classes.cardContent)}>
-                    <CircularProgress/>
-                  </CardContent>
-                case 'fetched':
-                  return <CardContent component='span' className={classes.cardContent}>
-                    <span className={classes.fade}>
-                      <strong>{content?.title + ' '}</strong>
-                      {content?.text}
-                    </span>
-                  </CardContent>
-                case 'error':
-                default:
-                  return <Alert severity="error">无法获取页面预览</Alert>
+              if (status === 'not_fetched' || status === 'fetching') {
+                return <CardContent className={classes.fetching}>
+                  <CircularProgress/>
+                </CardContent>
+              } else if (status === 'fetched') {
+                return <CardContent>
+                  <span className={classes.fade}>
+                    <strong>{content?.title + ' '}</strong>
+                    {content?.text}
+                  </span>
+                </CardContent>
+              } else {
+                return <Alert severity="error">无法获取页面预览</Alert>
               }
             })()}
           </Card>
         </Fade>
       </GatsbyLink>
-    {children}
-    </span>
+      {children}
+    </div>
+  )
 }
 
 export default ToolCard
