@@ -105,6 +105,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: docTemplate,
       context: {
         id: node.id,
+        lastModified: log.latest.date,
         previous,
         next,
       },
@@ -153,11 +154,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
           fields{
             slug
           }
-          parent {
-            ... on File {
-              modifiedTime
-            }
-          }
+          fileAbsolutePath
         }
       }
     }
@@ -174,20 +171,24 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
   const siteUrl = queryResult.site.siteMetadata.siteUrl
 
   const MySitemap = new SitemapManager({ siteURL: siteUrl })
-  queryResult.postsQuery.edges.forEach(({ node }) => {
+  for (const index in queryResult.postsQuery.edges) {
+    const { node } = queryResult.postsQuery.edges[index]
+    const { fileAbsolutePath: path } = node
+    const relativePath = path.slice(path.indexOf('/docs') + 1)
+    const lastmod = (await gitQuery(relativePath)).latest.date
+
     MySitemap.addUrl('articles', [{
       loc: new URL(node.fields.slug, siteUrl).toString(),
-      lastmod: node.parent.modifiedTime,
+      lastmod,
     }])
     MySitemap.addUrl('logs', [{
       loc: new URL(node.fields.slug + 'changelog/', siteUrl).toString(),
-      lastmod: node.parent.modifiedTime,
+      lastmod,
     }])
-  })
+  }
   queryResult.tagsQuery.group.forEach(({ fieldValue }) => {
     MySitemap.addUrl('tags', [{
       loc: new URL(`/tags/${_.kebabCase(fieldValue)}/`, siteUrl).toString(),
-      lastmod: new Date(),
     }])
   })
   MySitemap.addUrl('pages', [
