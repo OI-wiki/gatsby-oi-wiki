@@ -58,7 +58,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       color="default"
       size="small"
       disabled={propsMerged.disabled || loading}
-      startIcon={<SvgTag className={isClicked ? props.clickedClass : undefined} />}
+      startIcon={<SvgTag className={clsx(isClicked && props.clickedClass)} />}
       className={clsx(count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
       classes={count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
