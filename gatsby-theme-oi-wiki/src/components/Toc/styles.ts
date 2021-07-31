@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import scrollbarStyle from '../../styles/scrollbar'
+import { scrollbarStyle } from '../../styles/scrollbar'
 
 export const useStyles = makeStyles((theme) => ({
   main: scrollbarStyle(theme, {

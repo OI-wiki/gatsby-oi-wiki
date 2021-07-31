@@ -1,5 +1,5 @@
 // Components
-import { Typography, List, ListItem, ListItemIcon, ListItemText, Button } from '@material-ui/core'
+import { Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
 
 import BookIcon from '@material-ui/icons/Book'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
@@ -7,7 +7,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Layout from '../components/Layout'
+import StyledLayout from '../components/StyledLayout'
 
 const Tags = ({ pageContext, data, location }) => {
   const { tag } = pageContext
@@ -15,7 +15,7 @@ const Tags = ({ pageContext, data, location }) => {
   const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
 
   return (
-    <Layout location={location} noMeta="true" title={`标签页 - ${tag}`}>
+    <StyledLayout location={location} noMeta={true} title={`标签页 - ${tag}`}>
       <div>
         <Typography variant="h5" component="h2" dangerouslySetInnerHTML={{ __html: tagHeader }}>
         </Typography>
@@ -26,22 +26,22 @@ const Tags = ({ pageContext, data, location }) => {
             return (
               <ListItem button divider component="a" href={slug} key={slug}>
                 <ListItemIcon>
-                  <BookIcon />
+                  <BookIcon/>
                 </ListItemIcon>
-                <ListItemText primary={title} />
+                <ListItemText primary={title}/>
               </ListItem>
             )
           })}
         </List>
         <Button
           variant="outlined"
-          startIcon={<ArrowBackIosIcon />}
+          startIcon={<ArrowBackIosIcon/>}
           href="/tags"
         >
           所有标签
         </Button>
       </div>
-    </Layout>
+    </StyledLayout>
   )
 }
 

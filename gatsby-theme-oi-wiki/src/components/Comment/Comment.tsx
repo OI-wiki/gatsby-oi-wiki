@@ -1,5 +1,5 @@
-import { Divider, Typography, makeStyles, Tooltip, Button, CircularProgress } from '@material-ui/core'
-import React, { useState, useEffect } from 'react'
+import { Button, CircularProgress, Divider, makeStyles, Tooltip, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import GithubV3 from '@mgtd/vssue-api-github-v3'
 import GithubV4 from '@mgtd/vssue-api-github-v4'
 import createPersistedState from 'use-persisted-state'
@@ -100,22 +100,22 @@ const CommentComponent: React.FC<Props> = (props) => {
     return isAdmin
       ? <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
         <Button variant="outlined" color="primary" disabled={createIssueLoading}
-          onClick={async () => {
-            setCreateIssueLoading(true)
-            await ghAPIV4.postIssue({ accessToken: token, title: props.id, content: location.href })
-            // sleep 1s, 直接查询会返回无结果，迷惑
-            await new Promise(resolve => setTimeout(resolve, 1000))
-            const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
-            setCreateIssueLoading(false)
-            if (tmp !== 'invalidToken' && tmp !== 'noIssue') {
-              const [i, c] = tmp
-              setNoIssue(false)
-              setComments(c)
-              setIssue(i)
-            }
-          }}>
+                onClick={async () => {
+                  setCreateIssueLoading(true)
+                  await ghAPIV4.postIssue({ accessToken: token, title: props.id, content: location.href })
+                  // sleep 1s, 直接查询会返回无结果，迷惑
+                  await new Promise(resolve => setTimeout(resolve, 1000))
+                  const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
+                  setCreateIssueLoading(false)
+                  if (tmp !== 'invalidToken' && tmp !== 'noIssue') {
+                    const [i, c] = tmp
+                    setNoIssue(false)
+                    setComments(c)
+                    setIssue(i)
+                  }
+                }}>
           为本页面创建 Issue
-          {createIssueLoading && <CircularProgress size={20} style={{ marginLeft: '4px' }} />}
+          {createIssueLoading && <CircularProgress size={20} style={{ marginLeft: '4px' }}/>}
         </Button>
       </Typography>
       : <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
@@ -124,7 +124,7 @@ const CommentComponent: React.FC<Props> = (props) => {
   }
   return (
     <InputContentProvider>
-      <Typography variant="h6" >
+      <Typography variant="h6">
         <Tooltip title="在 GitHub 上查看">
           <a href={issue?.link} className={classes.link}>{`${filteredComments.length} 条评论`}</a>
         </Tooltip>
@@ -144,7 +144,7 @@ const CommentComponent: React.FC<Props> = (props) => {
           </div>
         </Tooltip>
       </Typography>
-      <Divider />
+      <Divider/>
       <CommentInput
         name={user.username}
         avatarLink={user.avatar}
@@ -166,7 +166,7 @@ const CommentComponent: React.FC<Props> = (props) => {
         }}
       />
       {noIssue
-        ? <NoIssueComponent />
+        ? <NoIssueComponent/>
         : filteredComments.map(({ content, author, createdAt, reactions, id, contentRaw }) => (
           <CommentCard
             avatarLink={author.avatar}

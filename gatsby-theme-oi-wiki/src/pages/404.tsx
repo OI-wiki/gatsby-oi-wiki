@@ -1,9 +1,9 @@
 // Components
 import React from 'react'
-import Layout from '../components/Layout'
+import StyledLayout from '../components/StyledLayout'
 
-const page: React.FC<{ location: string }> = (location) => (
-  <Layout location={location} noEdit="true" title="404" noComment="false">
+const page: React.FC<{ location: Location }> = ({ location }) => (
+  <StyledLayout location={location} noEdit={true} title="404" noComment={false}>
     <div>
       <div>
         <h1>404 is Found!</h1>
@@ -12,7 +12,7 @@ const page: React.FC<{ location: string }> = (location) => (
         <br/>
       </div>
     </div>
-  </Layout>
+  </StyledLayout>
 )
 
 export default page

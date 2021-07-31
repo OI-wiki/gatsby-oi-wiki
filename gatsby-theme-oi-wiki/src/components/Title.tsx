@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import { makeStyles, Typography, createStyles, Grid, Tooltip, IconButton, Hidden } from '@material-ui/core'
+import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import EditWarn from './EditWarn'
-type Props = {
+
+export interface TitleProps {
   title: string,
-  noEdit: string,
-  noMeta?: string,
+  noEdit: boolean,
+  noMeta?: boolean,
   relativePath: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  location: any,
+  location: Location,
 }
 
 const useStyles = makeStyles((theme) => createStyles({
@@ -23,43 +23,42 @@ const useStyles = makeStyles((theme) => createStyles({
     margin: 12,
   },
   subText: {
-    color: (theme.palette as unknown as {subTitle: string}).subTitle,
-    // make typescript and eslint happy
+    color: theme.palette.subTitle,
     lineHeight: 1.8,
   },
 }))
 
-const Title: React.FC<Props> = (props: Props) => {
+const Title: React.FC<TitleProps> = (props) => {
   const classes = useStyles()
   const [dialogOpen, setDialogOpen] = useState(false)
+  const { relativePath, location, title, noEdit } = props
 
   return (
     <>
       <EditWarn
-        relativePath={props.relativePath}
+        relativePath={relativePath}
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
-        location={props.location}
+        location={location}
       />
       <Grid container spacing={2}>
         <Grid item xs>
           <Typography variant="h4" className={classes.boldText} component="h1">
-            {props.title}
+            {title}
           </Typography>
         </Grid>
         <Grid item xs={1}>
-          {
-            props.noEdit === 'false' &&
-            <Hidden xsDown implementation="css">
-              <Tooltip title="编辑页面" placement="left" arrow>
-                <IconButton
-                  onClick={() => setDialogOpen(true)}
-                  className={classes.iconButton}
-                >
-                  <EditIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
-            </Hidden>
+          {!noEdit &&
+          <Hidden xsDown implementation="css">
+            <Tooltip title="编辑页面" placement="left" arrow>
+              <IconButton
+                onClick={() => setDialogOpen(true)}
+                className={classes.iconButton}
+              >
+                <EditIcon fontSize="small"/>
+              </IconButton>
+            </Tooltip>
+          </Hidden>
           }
         </Grid>
       </Grid>

@@ -1,67 +1,72 @@
-import { Typography, useTheme, useMediaQuery } from '@material-ui/core'
+import { Typography, useMediaQuery, useTheme } from '@material-ui/core'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import smoothScrollTo from '../../lib/smoothScroll'
-import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
-import { useStyles } from './styles'
-import { useSetting } from '../../lib/useSetting'
-
 import Slug from 'github-slugger'
 
-import Toc, { Node } from './Toc'
+import { useStyles } from './styles'
+import { useSetting } from '../../lib/useSetting'
+import TocList, { Node, TocListProps } from './Toc'
+import { Nullable } from '../../types/common'
+import smoothScrollTo from '../../lib/smoothScroll'
+import useThrottledOnScroll from '../../lib/useThrottledOnScroll'
 
-function getIDfromHash (url:string):string {
-  return url?.replace(/^#/, '')
-}
-
-interface Item{
+export interface TocItem {
   value: string;
   depth: number;
 }
-interface Toc{
+export interface TocProps {
   pathname: string;
-  toc: Item[];
+  toc: TocItem[];
 }
 
-function Tocize (items: Item[]): Node[] {
+const getIDFromHash = (url: string): string => url.substring(1, url.length)
+
+const TocConverter = (items: TocItem[]): Node[] => {
   const minLevel = items.reduce((v, i) => Math.min(v, i.depth), 5)
-  const curNode = [null, null, null, null, null, null]
-  const data = []
+  const curNode: Nullable<Node>[] = Array.from({ length: 6 }, () => null)
+  const data: Node[] = []
+  const REF_EXPR = /ref\d+$/
+  let index: number
+
   const slugs = new Slug()
   slugs.reset()
 
   items.forEach((item) => {
     const level = item.depth - minLevel
     const title = item.value.replace(/<[^>]*>?/gm, '')
+    index = level > 0 ? (curNode[level - 1]?.children.length || 0) : data.length
     const newNode: Node = {
-      url: `#${slugs.slug(title)}`,
-      title: title,
-      level: level,
+      url: `#${slugs.slug(title)}`.replace(REF_EXPR, ''),
+      title: title.replace(REF_EXPR, ''),
+      level,
+      index,
       children: [],
       status: 'collapse',
       element: null,
       parent: null,
+      selfElement: null,
     }
     curNode[level] = newNode
+
     if (level === 0) {
       data.push(newNode)
     } else {
-      if (curNode[level - 1]) curNode[level - 1].children.push(newNode)
+      if (curNode[level - 1]) curNode[level - 1]?.children.push(newNode)
       newNode.parent = curNode[level - 1]
     }
   })
-
   return data
 }
 
-function bindHTMLElement (toc: Node[]): void {
+const bindHTMLElement = (toc: Node[]): void => {
   toc.forEach((i, idx, arr) => {
-    if (i.element === null) arr[idx].element = document.getElementById(getIDfromHash(i.url))
+    if (i.element === null) arr[idx].element = document.getElementById(getIDFromHash(i.url))
+    if (i.selfElement === null) arr[idx].selfElement = document.getElementById(`toc-${i.url}`)
     if (i.children) bindHTMLElement(i.children)
   })
 }
 
-const ToC: React.FC<Toc> = (props) => {
-  const { toc, pathname } = props
+const TocEl: React.FC<TocProps> = (props) => {
+  const { toc } = props
   const items = toc
   const classes = useStyles()
   const theme = useTheme()
@@ -71,96 +76,141 @@ const ToC: React.FC<Toc> = (props) => {
   const tabHeight = isMdDown ? 64 : 112
   const scrollPadding = 24
 
-  const newItems = useRef(Tocize(items))
+  const newItems = useRef(TocConverter(items))
   const clickedRef = useRef(false)
-  const unsetClickedRef = useRef(null)
-  const [activeState, setActiveState] = useState<Node|null>(null)
+  const unsetClickedRef = useRef<ReturnType<typeof setTimeout>>()
+  const [activeState, setActiveState] = useState<Nullable<Node>>(null)
+  const lstScrollTopRef = useRef(0)
+  const navRef = useRef<HTMLElement>(null)
 
-  // eslint-disable-next-line
   useEffect(() => {
     bindHTMLElement(newItems.current)
   }, [items])
 
-  const nodeSetActive = (node: Node|null, val: boolean): void => {
+  const nodeSetActive = (node: Nullable<Node>, val: boolean): void => {
     for (let u = node; u !== null; u = u.parent) u.status = val ? 'expanded' : 'collapse'
     if (val && node) node.status = 'active'
   }
-  const updateActive = (state: Node|null) : void => {
+
+  const updateActive = useCallback((state: Nullable<Node>): void => {
+    if (activeState?.url === state?.url) return
+
     nodeSetActive(activeState, false)
     nodeSetActive(state, true)
     setActiveState(state)
-  }
-
-  const newFindActiveItem = useCallback(() => {
-    if (clickedRef.current) return
-    function filter (u: Node): boolean {
-      // console.log(tabHeight + scrollPadding, document.documentElement.clientHeight / 8)
-      return u.element?.offsetParent?.offsetTop <
-        document.documentElement.scrollTop + document.documentElement.clientHeight / 8 + 50
-    }
-    function findActive (toc: Node[]): Node|null {
-      if (!toc) return null
-      for (let i = toc.length - 1; i >= 0; i--) {
-        if (filter(toc[i])) {
-          const z = findActive(toc[i].children)
-          if (z) return z
-          else return toc[i]
-        }
-      }
-      return null
-    }
-    const active = document.documentElement.scrollTop < 200 ? null : findActive(newItems.current)
-
-    if (!(activeState?.url === active?.url)) {
-      updateActive(active)
-    }
   }, [activeState])
 
-  useThrottledOnScroll(newFindActiveItem, 166)
+  const getNextItem = useCallback((node: Node): Nullable<Node> => {
+    const parent = node.parent
+    const nextIdx = node.index + 1
+    if (parent === null) return newItems.current.length > nextIdx ? newItems.current[nextIdx] : null
+    else return parent.children.length > nextIdx ? parent.children[nextIdx] : getNextItem(parent)
+  }, [])
 
-  const handleClick = (item: Node) => (event) => {
-    const hash = item.url
-    if (settings.animation.smoothScroll) {
-      event.preventDefault()
-      // Used to disable findActiveIndex if the page scrolls due to a click
-      const targetElement = document.getElementById(
-        hash.substring(1, hash.length),
-      )
-      smoothScrollTo((targetElement?.offsetParent as any)?.offsetTop - tabHeight - scrollPadding)
-      history.pushState(null, null, hash)
-      clickedRef.current = true
-      unsetClickedRef.current = setTimeout(() => {
-        clickedRef.current = false
-      }, 1000)
+  const getLstChild = useCallback((node: Nullable<Node>): Nullable<Node> =>
+    (node && node.children.length > 0) ? getLstChild(node.children[node.children.length - 1]) : node, [])
+
+  const getPrevItem = useCallback((node: Node): Nullable<Node> => {
+    const parent = node.parent
+    const prevIdx = node.index - 1
+    return prevIdx >= 0
+      ? getLstChild((parent === null ? newItems.current : parent.children)[prevIdx])
+      : parent
+  }, [getLstChild])
+
+  const activeTocOnScroll = useCallback((): void => {
+    if (clickedRef.current) return
+
+    const TO_TOP_DIS = tabHeight + scrollPadding + 20
+    const pageScrollTop = window?.pageYOffset || document.documentElement.scrollTop
+    let node: Nullable<Node> = activeState || newItems.current[0]
+
+    // down dir
+    if (pageScrollTop > lstScrollTopRef.current) {
+      let minDisNode = node
+      while (node) {
+        if (node.element && (node.element.getBoundingClientRect().top > TO_TOP_DIS + 20)) {
+          break
+        } else {
+          if (node !== minDisNode) minDisNode = node
+          node = node.children.length > 0 ? node.children[0] : getNextItem(node)
+        }
+      }
+      node = minDisNode
+    } else {
+      while (node) {
+        // node may have no ele which caused by error id
+        if (!node.element || node.element.getBoundingClientRect().top <= TO_TOP_DIS) {
+          break
+        } else {
+          node = getPrevItem(node)
+        }
+      }
     }
 
+    if (activeState !== node) {
+      updateActive(node)
+
+      // scroll the toc
+      const behavior = settings.animation.smoothScroll ? 'smooth' : 'auto'
+      if (node?.selfElement) node.selfElement.scrollIntoView({ behavior })
+      else navRef.current?.scrollTo({ top: 0, behavior })
+    }
+
+    lstScrollTopRef.current = pageScrollTop
+  }, [activeState, getNextItem, getPrevItem, settings.animation.smoothScroll, tabHeight, updateActive])
+
+  useThrottledOnScroll(activeTocOnScroll, 100)
+
+  const handleClick: TocListProps['onClick'] = (item) => (event) => {
+    event.preventDefault()
+
+    const hash = item.url
+    const yDis = (item.element?.getBoundingClientRect().top || 0) + window?.pageYOffset - tabHeight - scrollPadding
+
+    if (settings.animation.smoothScroll) {
+      smoothScrollTo(yDis)
+    } else {
+      window?.scrollTo(0, yDis)
+    }
+
+    history.pushState(null, '', hash)
+    clickedRef.current = true
+
+    // clear last unfinished timeout
+    if (unsetClickedRef.current) clearTimeout(unsetClickedRef.current)
+    unsetClickedRef.current = setTimeout(() => {
+      clickedRef.current = false
+    }, 100)
+
     if (activeState?.url !== hash) {
-      // console.log('after click:', item)
       updateActive(item)
     }
   }
 
   useEffect(
-    () => () => {
-      clearTimeout(unsetClickedRef.current)
+    () => {
+      return () => {
+        clearTimeout(unsetClickedRef.current as never as number)
+      }
     },
     [],
   )
 
   return (
-    <nav className={classes.main} aria-label="pageTOC">
-      {newItems.current.length > 0
-        ? (
-        <>
-          <Typography gutterBottom className={classes.contents}>
-            目录
-          </Typography>
-          <Toc data={newItems.current} onClick={handleClick} />
-        </>
-          )
-        : null}
+    <nav ref={navRef} className={classes.main} aria-label="pageTOC">
+      {newItems.current.length > 0 &&
+      <>
+        <Typography gutterBottom className={classes.contents}>
+          目录
+        </Typography>
+        <TocList data={newItems.current} onClick={handleClick}/>
+      </>
+      }
     </nav>
   )
 }
 
-export default React.memo(ToC, (prev, next) => prev.pathname === next.pathname)
+const Toc = React.memo(TocEl, (prev, next) => prev.pathname === next.pathname)
+
+export default Toc

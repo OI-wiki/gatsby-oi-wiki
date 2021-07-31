@@ -8,3 +8,5 @@ node_modules
 
 yarn-error.log
 .vscode
+
+__generated__/

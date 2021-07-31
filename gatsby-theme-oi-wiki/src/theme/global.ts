@@ -16,7 +16,7 @@ const globalStyles = withStyles((theme) => ({
       padding: '1px 0 1px 1.2em',
       // paddingLeft: '1em',
       // margin: '1em 3em 1em 2em',
-      borderLeft: `4px solid ${theme.palette.blockquote}`,
+      borderLeft: `4px solid ${(theme.palette as any).blockquote}`,
     },
     '.gatsby-highlight': {
       backgroundColor: '#FFF',
@@ -37,6 +37,7 @@ const globalStyles = withStyles((theme) => ({
     },
     img: {
       maxWidth: '100%',
+      filter: 'var(--image-filter)',
     },
     ol: {
       paddingInlineStart: 30,

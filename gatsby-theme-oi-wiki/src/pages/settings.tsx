@@ -1,18 +1,18 @@
 import {
-  Grid,
   Button,
-  makeStyles,
   FormControl,
-  RadioGroup,
   FormControlLabel,
-  Radio,
   FormGroup,
+  Grid,
+  makeStyles,
+  Radio,
+  RadioGroup,
   Switch,
 } from '@material-ui/core'
 import React from 'react'
-import Layout from '../components/Layout'
 import colors, { LabeledPaletteColor } from '../styles/colors'
 import { useSetting } from '../lib/useSetting'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
   root: (props: LabeledPaletteColor) => ({
@@ -43,6 +43,7 @@ interface ColorButtonProp {
   data: LabeledPaletteColor
   onClick?: (props: LabeledPaletteColor) => any
 }
+
 const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
   const classes = useStyles(props.data.main === 'auto' ? undefined : props.data)
   return (
@@ -58,7 +59,7 @@ const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
 }
 
 type SettingsPageProps = {
-  location: string
+  location: Location
 }
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
   const { location } = props
@@ -82,11 +83,11 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
   }
 
   return (
-    <Layout
+    <StyledLayout
       location={location}
-      noMeta="true"
-      noEdit="true"
-      noToC="true"
+      noMeta={true}
+      noEdit={true}
+      noToc={true}
       title="设置"
     >
       <Grid container direction="column" spacing={2}>
@@ -104,9 +105,9 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                 })
               }}
             >
-              <FormControlLabel value="user-preference" control={<Radio />} label="跟随系统" />
-              <FormControlLabel value="always-on" control={<Radio />} label="总是打开" />
-              <FormControlLabel value="always-off" control={<Radio />} label="总是关闭" />
+              <FormControlLabel value="user-preference" control={<Radio/>} label="跟随系统"/>
+              <FormControlLabel value="always-on" control={<Radio/>} label="总是打开"/>
+              <FormControlLabel value="always-off" control={<Radio/>} label="总是关闭"/>
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -117,14 +118,14 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               <FormControlLabel
                 control={
                   <Switch checked={settings.animation.smoothScroll}
-                    onChange={(e) => {
-                      updateSetting({
-                        animation: {
-                          smoothScroll: e.target.checked,
-                        },
-                      })
-                    }
-                    } name="animation-smooth-scroll"
+                          onChange={(e) => {
+                            updateSetting({
+                              animation: {
+                                smoothScroll: e.target.checked,
+                              },
+                            })
+                          }
+                          } name="animation-smooth-scroll"
                   />
                 }
                 label="使用平滑滚动"
@@ -139,14 +140,14 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               <FormControlLabel
                 control={
                   <Switch checked={settings.theme.fallbackMonoFont}
-                    onChange={(e) => {
-                      updateSetting({
-                        theme: {
-                          fallbackMonoFont: e.target.checked,
-                        },
-                      })
-                    }
-                    } name="monofont"
+                          onChange={(e) => {
+                            updateSetting({
+                              theme: {
+                                fallbackMonoFont: e.target.checked,
+                              },
+                            })
+                          }
+                          } name="monofont"
                   />
                 }
                 label="使用浏览器默认字体"
@@ -157,17 +158,17 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         <Grid item>
           导航栏颜色
           <Grid container>
-            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onNavColorBtnClick} />))}
+            {colors.map(c => (<ColorButton data={c} key={c.main} onClick={onNavColorBtnClick}/>))}
           </Grid>
         </Grid>
         <Grid item>
           强调色
           <Grid container>
-            {colors.map(c => c.id !== '0' && (<ColorButton data={c} key={c.main} onClick={onSecondaryColorBtnClick} />))}
+            {colors.map(c => c.id !== '0' && (<ColorButton data={c} key={c.main} onClick={onSecondaryColorBtnClick}/>))}
           </Grid>
         </Grid>
       </Grid>
-    </Layout>
+    </StyledLayout>
   )
 }
 

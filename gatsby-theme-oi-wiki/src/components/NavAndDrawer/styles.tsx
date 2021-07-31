@@ -1,16 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles'
-import scrollbarStyle from '../../styles/scrollbar'
+import { scrollbarStyle } from '../../styles/scrollbar'
 
 const drawerWidth = 250
 
-interface Props{
+interface Props {
   appBar: {
     background: string;
     color: string;
   }
 }
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -54,3 +54,5 @@ export const useStyles = makeStyles((theme) => ({
     minWidth: theme.spacing(5),
   },
 }))
+
+export { useStyles }
