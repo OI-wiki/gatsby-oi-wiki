@@ -74,6 +74,9 @@ module.exports = {
               isIconAfterHeader: true,
             },
           },
+          {
+            resolve: path.resolve(__dirname, "plugins/gatsby-remark-snippets"),
+          },
         ],
         remarkPlugins: [
           require('remark-math'),
