@@ -2,9 +2,9 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import Doc from '../components/doc'
 
-export default function MdxDoc ({ data, location }) {
+export default function MdxDoc (props) {
   // console.log(data)
-  return <Doc data={data} location={location} />
+  return <Doc {...props} />
 }
 
 export const query = graphql`

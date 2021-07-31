@@ -7,6 +7,7 @@ import { SmartLink, SmartLinkProps } from './Link'
 import Tags from './Tags'
 import EditWarn from './EditWarn'
 import { uniq } from '../utils/common'
+import Time from '../components/Time'
 
 const useStyles = makeStyles((theme: any) => ({
   metaIcon: {
@@ -76,7 +77,7 @@ const Meta: React.FC<MetaProps> = (props) => {
             <HistoryIcon fontSize="small" className={classes.metaIcon}/>
             {' 本页面最近更新：'}
           </span>
-          <span>{modifiedTime}</span>，
+          <Time time={modifiedTime} updateInterval={5 * 60 * 60 * 1000} defaultShowRelative={false}/>，
           <SmartLink to='./changelog/' {...rest} state={{ ...rest }}>更新历史</SmartLink>
         </Typography>
 
