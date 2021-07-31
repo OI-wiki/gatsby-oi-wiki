@@ -105,7 +105,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: docTemplate,
       context: {
         id: node.id,
-        lastModified: log.latest.date,
+        lastModified: log.latest?.date || new Date().toString(),
         previous,
         next,
       },
@@ -175,7 +175,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
     const { node } = queryResult.postsQuery.edges[index]
     const { fileAbsolutePath: path } = node
     const relativePath = path.slice(path.indexOf('/docs') + 1)
-    const lastmod = (await gitQuery(relativePath)).latest.date
+    const lastmod = (await gitQuery(relativePath)).latest?.date || new Date().toString()
 
     MySitemap.addUrl('articles', [{
       loc: new URL(node.fields.slug, siteUrl).toString(),
