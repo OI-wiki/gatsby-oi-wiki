@@ -130,7 +130,7 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
   }, [open, content, popperRef, adjustElementPosition, rootRef])
 
   return (
-    <div
+    <span
       className={classes.container}
       onMouseEnter={() => {
         onOpen()
@@ -139,6 +139,8 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
       onMouseLeave={onClose}
       ref={rootRef}
     >
+      {/* to temporarily fix issue https://github.com/OI-wiki/gatsby-oi-wiki/issues/928 */}
+      <div className='math math-display'/>
       <GatsbyLink to={to}>
         <Fade in={open}>
           <Card
@@ -166,7 +168,7 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
         </Fade>
       </GatsbyLink>
       {children}
-    </div>
+    </span>
   )
 }
 
