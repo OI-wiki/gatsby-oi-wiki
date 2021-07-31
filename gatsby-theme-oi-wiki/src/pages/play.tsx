@@ -1,49 +1,53 @@
 import {
   Button,
+  ButtonGroup,
   CircularProgress,
-  FormControl,
+  Fade,
   Grid,
-  InputLabel,
   makeStyles,
-  MenuItem,
-  Select,
-  Typography,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
 import type { PageProps } from 'gatsby'
 import React, { useCallback, useState } from 'react'
 import CodeEditor from '../components/CodeEditor'
+import type { IndicatorProps } from '../components/Indicator'
+import { Indicator } from '../components/Indicator'
+import { LangMenu } from '../components/LangMenu'
 import Layout from '../components/Layout'
-import { langList } from '../lib/play/codeLang'
+import { Output } from '../components/Output'
 import type { LangType } from '../lib/play/codeLang'
+import type { TransformedResponseData } from '../lib/play/useRunner'
 import { useRunner } from '../lib/play/useRunner'
-import type { RunnerApiResponseData } from '../lib/play/useRunner'
 
-const useStyles = makeStyles({
-  langSelect: {
-    width: '80px',
+const useStyles = makeStyles((theme) => ({
+  langMenu: {
+    width: 96,
+    textTransform: 'none',
   },
   editor: {
-    minHeight: '250px',
+    minHeight: 400,
+  },
+  editorContainer: {
+    marginBottom: theme.spacing(2),
   },
   progress: {
     position: 'absolute',
     left: '50%',
     top: '50%',
-    marginLeft: -14,
-    marginTop: -14,
+    marginLeft: -12,
+    marginTop: -12,
   },
-})
+}))
 
 // mock runner api
+// FIXME: Cause error during webpack dev or just switch to normal import
 if (process.env.NODE_ENV === 'development') {
-  Promise.all([
-    import('msw'),
-    import('../lib/play/mockRunnerHandler'),
-  ]).then(([{ setupWorker }, { handlers }]) => {
-    const worker = setupWorker(...handlers)
-    worker.start()
-  })
+  Promise.all([import('msw'), import('../lib/play/mockRunnerHandler')]).then(
+    ([{ setupWorker }, { handlers }]) => {
+      const worker = setupWorker(...handlers)
+      worker.start({ onUnhandledRequest: 'bypass' })
+    },
+  )
 }
 
 export default function Playground ({
@@ -54,58 +58,70 @@ export default function Playground ({
 
   const [code, setCode] = useState('')
   const [input, setInput] = useState('')
-  const [output, setOutput] = useState('')
+  const [output, setOutput] = useState<TransformedResponseData | null>(null)
 
-  const [runInfo, setRunInfo] = useState('')
+  const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
 
-  const runCodeCb = useCallback((data: RunnerApiResponseData) => {
-    setRunInfo(data.info)
+  const runCodeCb = useCallback((data: TransformedResponseData) => {
+    setOutput(data)
+    setRunInfo({ type: 'success', msg: 'Success' })
+  }, [])
+  const errorCb = useCallback((msg: string) => {
+    setRunInfo({ type: 'error', msg })
   }, [])
   const { sendRunnerReq, waiting } = useRunner(
-    { input, output, code, lang },
+    { stdin: input, code, language: lang, flags: '' },
     runCodeCb,
+    errorCb,
   )
+
+  const handleRunClick = useCallback(() => {
+    setRunInfo(null)
+    sendRunnerReq()
+  }, [sendRunnerReq])
 
   return (
     <Layout location={location} title="Playground">
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={3} alignItems="center">
         <Grid item>
-          <FormControl color="secondary">
-            <InputLabel id="lang-select-label">语言</InputLabel>
-            <Select
-              labelId="lang-select-label"
-              id="lang-select"
-              className={classes.langSelect}
-              value={lang}
-              onChange={(e) => {
-                setLang(e.target.value as LangType)
-              }}
+          <ButtonGroup>
+            <LangMenu
+              lang={lang}
+              setLang={setLang}
+              variant="contained"
+              className={classes.langMenu}
+              aria-label="select language for code running"
+            />
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<PlayArrow />}
+              onClick={handleRunClick}
+              disabled={waiting}
             >
-              {langList.map((l) => (
-                <MenuItem key={l} value={l}>
-                  {l}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              运行
+              {waiting && (
+                <CircularProgress
+                  className={classes.progress}
+                  color="secondary"
+                  size={24}
+                />
+              )}
+            </Button>
+          </ButtonGroup>
         </Grid>
         <Grid item>
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<PlayArrow />}
-            onClick={sendRunnerReq}
-            disabled={waiting}
-          >
-            运行
-            {waiting && <CircularProgress className={classes.progress} color="secondary" size={28} />}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Typography>{runInfo}</Typography>
+          <Fade in={!!runInfo}>
+            <Indicator type={undefined} msg="" {...runInfo} />
+          </Fade>
         </Grid>
       </Grid>
-      <Grid container spacing={3} alignItems="stretch">
+      <Grid
+        container
+        spacing={3}
+        className={classes.editorContainer}
+        alignItems="stretch"
+      >
         <Grid xs={12} md={8} className={classes.editor} item>
           <CodeEditor
             lang={lang}
@@ -126,17 +142,9 @@ export default function Playground ({
               }}
             />
           </Grid>
-          <Grid className={classes.editor} item>
-            <CodeEditor
-              title="输出"
-              value={output}
-              onChange={(val) => {
-                setOutput(val)
-              }}
-            />
-          </Grid>
         </Grid>
       </Grid>
+      <Output output={output} />
     </Layout>
   )
 }

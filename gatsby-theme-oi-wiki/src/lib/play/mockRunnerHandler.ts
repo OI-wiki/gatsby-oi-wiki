@@ -1,9 +1,14 @@
 import { rest } from 'msw'
 import { runnerApi } from './useRunner'
+import type { RunnerApiRequestData } from './useRunner'
 
 export const handlers = [
   rest.post(runnerApi, async (req, res, ctx) => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
-    return res(ctx.status(200), ctx.json({ info: 'success' }))
+    const { code, stdin, language } = req.body as RunnerApiRequestData
+    return res(
+      // eslint-disable-next-line no-eval
+      ctx.json({ message: 'OK', stdout: 'fds' }),
+    )
   }),
 ]

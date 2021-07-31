@@ -1,20 +1,63 @@
+/* eslint-disable camelcase */
 import axios from 'axios'
+import _ from 'lodash'
 import { useCallback, useState } from 'react'
 import type { LangType } from './codeLang'
 
 export interface RunnerApiRequestData {
-  input: string
-  output: string
   code: string
-  lang: LangType
+  language: LangType
+  flags: '' | '-O2'
+  stdin: string
 }
 
-export interface RunnerApiResponseData {
-  info: string
+interface RunnerApiResponseData {
+  message: string
+  time_ms?: number
+  memory_kb?: number
+  status?:
+    | 'Compile Error'
+    | 'Run Finished'
+    | 'Time Limit Exceeded'
+    | 'Memory Limit Exceeded'
+    | 'Runtime Error'
+    | 'Execute Failure'
+  stdout?: string
+  stderr?: string
+  ce_info?: string
+}
+
+interface ResponseKeyTransformMapType {
+  time_ms: 'time'
+  memory_kb: 'memory'
+  ce_info: 'ceInfo'
+}
+const responseKeyTransformMap: ResponseKeyTransformMapType = Object.freeze({
+  time_ms: 'time',
+  memory_kb: 'memory',
+  ce_info: 'ceInfo',
+})
+
+export type TransformedResponseData = {
+  [K in keyof RunnerApiResponseData as K extends 'message'
+    ? never
+    : K extends keyof ResponseKeyTransformMapType
+    ? ResponseKeyTransformMapType[K]
+    : K]-?: RunnerApiResponseData[K]
+}
+
+function transformResponseData (
+  data: RunnerApiResponseData,
+): TransformedResponseData {
+  return _.mapKeys(_.omit(data, 'message'), (_, key) =>
+    key in Object.keys(responseKeyTransformMap)
+      ? responseKeyTransformMap[key as keyof ResponseKeyTransformMapType]
+      : key,
+  ) as TransformedResponseData
 }
 
 function responseDataGuard (data: any): data is RunnerApiResponseData {
-  return data.info !== undefined
+  return typeof data.message === 'string'
 }
 
 export const runnerApi =
@@ -22,8 +65,8 @@ export const runnerApi =
 
 export function useRunner (
   req: RunnerApiRequestData,
-  onResponse?: (data: RunnerApiResponseData) => any,
-  onError?: (msg: string) => any,
+  onResponse?: (res: TransformedResponseData) => void,
+  onError?: (msg: string) => void,
 ): {
   sendRunnerReq: () => void
   waiting: boolean
@@ -43,7 +86,11 @@ export function useRunner (
         if (!responseDataGuard(data)) {
           throw Error(`Incompatible response data format: ${data}`)
         }
-        if (onResponse) onResponse(data)
+        if (data.message === 'OK') {
+          if (onResponse) onResponse(transformResponseData(data))
+        } else {
+          throw new Error(data.message)
+        }
       })
       .catch((err) => {
         // TODO: mark err as unknown for better type safety
