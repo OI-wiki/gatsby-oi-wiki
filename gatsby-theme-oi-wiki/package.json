@@ -61,7 +61,7 @@
   "devDependencies": {
     "@types/react-helmet": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.5",
     "eslint": "^7.29.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-graphql": "^4.0.0",
