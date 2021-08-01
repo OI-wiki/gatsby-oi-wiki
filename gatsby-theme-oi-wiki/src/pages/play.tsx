@@ -10,7 +10,7 @@ import {
 import { PlayArrow } from '@material-ui/icons'
 import type { PageProps } from 'gatsby'
 import React, { useCallback, useRef, useState } from 'react'
-import CodeEditor from '../components/CodeEditor'
+import { CodeEditor } from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
 import { Indicator } from '../components/Indicator'
 import { LangMenu } from '../components/LangMenu'
