@@ -94,22 +94,22 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
     // On the left half of the screen
     if (pos.x < viewport.width / 2) {
       const cardRightX = pos.x + size.width
-      const toRight = viewport.width - cardRightX
+      const toRight = viewport.width - cardRightX - betterDis
       if (toRight >= 0) {
         left = 0
       } else {
         const gap = pos.x + toRight
-        left = (gap >= 0 ? toRight : gap) - betterDis
+        left = gap >= 0 ? toRight : gap
       }
     } else {
       const { width } = getElementSize(rootRef.current)
       const rootRightX = pos.x + width
-      const toLeft = rootRightX - size.width
+      const toLeft = rootRightX - size.width - betterDis
       if (toLeft >= 0) {
         right = 0
       } else {
         const gap = viewport.width + toLeft
-        right = (gap >= 0 ? toLeft : gap) - betterDis
+        right = gap >= 0 ? toLeft : gap
       }
     }
 
@@ -155,10 +155,10 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
                 </CardContent>
               } else if (status === 'fetched') {
                 return <CardContent>
-                  <span className={classes.fade}>
+                  <div className={classes.fade}>
                     <strong>{content?.title + ' '}</strong>
                     {content?.text}
-                  </span>
+                  </div>
                 </CardContent>
               } else {
                 return <Alert severity="error">无法获取页面预览</Alert>
