@@ -5,10 +5,11 @@ import {
   Collapse,
   Fade,
   Grid,
+  Link,
   makeStyles,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
-import type { PageProps } from 'gatsby'
+import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import React, { useCallback, useRef, useState } from 'react'
 import { CodeEditor } from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
@@ -40,6 +41,21 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: -12,
     marginTop: -12,
   },
+  footer: {
+    display: 'block',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    marginTop: theme.spacing(4),
+    color: '#FD9F40',
+    '& > img': {
+      display: 'inline',
+      verticalAlign: 'middle',
+      marginTop: -4,
+    },
+    '&:hover': {
+      color: '#FC6012',
+    },
+  },
 }))
 
 // mock runner api
@@ -69,6 +85,18 @@ export default function Playground ({
   const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
 
   const outputRef = useRef<HTMLElement>(null)
+
+  const judgeDuckImgUrl: string = useStaticQuery(graphql`
+    {
+      allFile(filter: { name: { eq: "judgeduck" } }) {
+        edges {
+          node {
+            publicURL
+          }
+        }
+      }
+    }
+  `).allFile.edges[0].node.publicURL
 
   const runCodeCb = useCallback((data: TransformedResponseData) => {
     setOutput(data)
@@ -160,6 +188,16 @@ export default function Playground ({
       <Collapse in={showOutput}>
         <Output ref={outputRef} output={output} />
       </Collapse>
+      <Link
+        className={classes.footer}
+        href="https://duck.ac/"
+        underline="none"
+        target="_blank"
+        variant="h6"
+      >
+        {'Powered by '}
+        <img src={judgeDuckImgUrl} alt="JudgeDuck" height="30" />
+      </Link>
     </Layout>
   )
 }

@@ -44,6 +44,13 @@ module.exports = {
         path: path.resolve('./docs'),
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static',
+        path: path.resolve(__dirname, 'static'),
+      },
+    },
     ...needPlugin(IS_PROD, 'gatsby-plugin-sharp'),
     {
       resolve: 'gatsby-transformer-sharp',

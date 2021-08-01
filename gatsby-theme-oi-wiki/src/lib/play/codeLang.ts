@@ -8,7 +8,7 @@ export const langModeMap = Object.freeze({
   'C++17': 'c_cpp',
   'C++20': 'c_cpp',
   Python3: 'python',
-  Javascript: 'javascript',
+  // Javascript: 'javascript',
 })
 
 export const langList = Object.keys(langModeMap)
