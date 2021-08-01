@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`,
     color: theme.palette.common.white,
     borderRadius: theme.shape.borderRadius,
+    display: 'inline-block',
   },
   info: {
     background: theme.palette.info.main,

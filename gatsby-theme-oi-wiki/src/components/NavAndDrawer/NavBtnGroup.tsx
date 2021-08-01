@@ -18,10 +18,15 @@ const useStyles = makeStyles({
   },
 })
 
-type NavBtnProps = IconButtonProps<typeof Link> & {
-  title: string
-  to: string
-  Icon: SvgIconComponent
+type NavBtnProps = IconButtonProps<typeof Link> &
+  IconButtonProps<'a'> & {
+    title: string
+    to: string
+    Icon: SvgIconComponent
+  }
+
+function isRelativeLink (link: string): boolean {
+  return link.startsWith('.') || link.startsWith('/')
 }
 
 function NavBtn ({
@@ -35,7 +40,8 @@ function NavBtn ({
     <Tooltip title={title} placement="bottom" arrow>
       <IconButton
         {...restProps}
-        component={Link}
+        component={isRelativeLink(to) ? Link : 'a'}
+        href={to}
         to={to}
         color="inherit"
         className={classes.navBtn}

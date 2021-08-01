@@ -2,22 +2,25 @@ import {
   Button,
   ButtonGroup,
   CircularProgress,
+  Collapse,
   Fade,
   Grid,
   makeStyles,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
 import type { PageProps } from 'gatsby'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import CodeEditor from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
 import { Indicator } from '../components/Indicator'
 import { LangMenu } from '../components/LangMenu'
 import Layout from '../components/Layout'
 import { Output } from '../components/Output'
+import { RunSettings, RunSettingsMenu } from '../components/RunSettingsMenu'
 import type { LangType } from '../lib/play/codeLang'
 import type { TransformedResponseData } from '../lib/play/useRunner'
 import { useRunner } from '../lib/play/useRunner'
+// import smoothScrollTo from '../lib/smoothScroll'
 
 const useStyles = makeStyles((theme) => ({
   langMenu: {
@@ -41,42 +44,49 @@ const useStyles = makeStyles((theme) => ({
 
 // mock runner api
 // FIXME: Cause error during webpack dev or just switch to normal import
-if (process.env.NODE_ENV === 'development') {
-  Promise.all([import('msw'), import('../lib/play/mockRunnerHandler')]).then(
-    ([{ setupWorker }, { handlers }]) => {
-      const worker = setupWorker(...handlers)
-      worker.start({ onUnhandledRequest: 'bypass' })
-    },
-  )
-}
+// if (process.env.NODE_ENV === 'development') {
+//   Promise.all([import('msw'), import('../lib/play/mockRunnerHandler')]).then(
+//     ([{ setupWorker }, { handlers }]) => {
+//       const worker = setupWorker(...handlers)
+//       worker.start({ onUnhandledRequest: 'bypass' })
+//     },
+//   )
+// }
 
 export default function Playground ({
   location,
 }: PageProps): React.ReactElement {
   const classes = useStyles()
+
   const [lang, setLang] = useState<LangType>('C++')
+  const [settings, setSettings] = useState<RunSettings>({ o2: false })
 
   const [code, setCode] = useState('')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState<TransformedResponseData | null>(null)
+  const [showOutput, setShowOutput] = useState(false)
 
   const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
 
+  const outputRef = useRef<HTMLElement>(null)
+
   const runCodeCb = useCallback((data: TransformedResponseData) => {
     setOutput(data)
+    setShowOutput(true)
     setRunInfo({ type: 'success', msg: 'Success' })
   }, [])
   const errorCb = useCallback((msg: string) => {
     setRunInfo({ type: 'error', msg })
   }, [])
   const { sendRunnerReq, waiting } = useRunner(
-    { stdin: input, code, language: lang, flags: '' },
+    { stdin: input, code, language: lang, flags: settings.o2 ? '-O2' : '' },
     runCodeCb,
     errorCb,
   )
 
   const handleRunClick = useCallback(() => {
     setRunInfo(null)
+    setShowOutput(false)
     sendRunnerReq()
   }, [sendRunnerReq])
 
@@ -95,7 +105,7 @@ export default function Playground ({
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<PlayArrow />}
+              endIcon={<PlayArrow />}
               onClick={handleRunClick}
               disabled={waiting}
             >
@@ -110,10 +120,13 @@ export default function Playground ({
             </Button>
           </ButtonGroup>
         </Grid>
-        <Grid item>
+        <Grid item style={{ flexGrow: 1 }}>
           <Fade in={!!runInfo}>
             <Indicator type={undefined} msg="" {...runInfo} />
           </Fade>
+        </Grid>
+        <Grid item>
+          <RunSettingsMenu settings={settings} setSettings={setSettings} />
         </Grid>
       </Grid>
       <Grid
@@ -144,7 +157,9 @@ export default function Playground ({
           </Grid>
         </Grid>
       </Grid>
-      <Output output={output} />
+      <Collapse in={showOutput}>
+        <Output ref={outputRef} output={output} />
+      </Collapse>
     </Layout>
   )
 }

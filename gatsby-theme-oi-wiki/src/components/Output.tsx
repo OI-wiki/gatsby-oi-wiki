@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     padding: `0 ${theme.spacing(2)}px`,
     '& > pre': {
       margin: 0,
+      paddingBottom: theme.spacing(2),
     },
   },
   statusLine: {
@@ -32,6 +33,18 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 16,
       marginRight: 4,
     },
+  },
+  compilationTitle: {
+    color: theme.palette.warning.dark,
+    fontWeight: 'bold',
+  },
+  errorTitle: {
+    color: theme.palette.error.dark,
+    fontWeight: 'bold',
+  },
+  outTitle: {
+    color: theme.palette.info.dark,
+    fontWeight: 'bold',
   },
 }))
 
@@ -48,12 +61,12 @@ const statusSeverityMap: Record<
   'No Status Info': 'info',
 })
 
-export function Output ({
-  output,
-}: {
-  output: TransformedResponseData | null
-}): React.ReactElement {
+export const Output = React.forwardRef<
+  unknown,
+  { output: TransformedResponseData | null }
+>(({ output }, ref) => {
   const classes = useStyles()
+
   const {
     time = '?',
     memory = '?',
@@ -64,8 +77,11 @@ export function Output ({
   } = output || {}
 
   return (
-    <Paper className={classes.root}>
+    <Paper ref={ref} className={classes.root}>
       <Grid container alignItems="center" className={classes.statusLine}>
+        <Grid item style={{ flexGrow: 1 }}>
+          <Typography variant="h6">提交详情</Typography>
+        </Grid>
         <Grid item>
           <Indicator type={statusSeverityMap[status]} msg={status} />
         </Grid>
@@ -82,21 +98,21 @@ export function Output ({
       </Grid>
       {ceInfo && (
         <>
-          <Typography variant="h6">编译信息</Typography>
+          <Typography className={classes.compilationTitle}>编译信息</Typography>
           <Divider />
           <pre>{ceInfo}</pre>
         </>
       )}
       {stderr && (
         <>
-          <Typography variant="h6">错误信息</Typography>
+          <Typography className={classes.errorTitle}>错误信息</Typography>
           <Divider />
           <pre>{stderr}</pre>
         </>
       )}
       {stdout && (
         <>
-          <Typography variant="h6">输出</Typography>
+          <Typography className={classes.outTitle}>输出</Typography>
           <Divider />
           <pre>{stdout}</pre>
         </>
@@ -104,4 +120,4 @@ export function Output ({
       <pre></pre>
     </Paper>
   )
-}
+})

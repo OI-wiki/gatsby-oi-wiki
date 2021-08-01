@@ -38,7 +38,13 @@ export function LangMenu ({
       >
         {lang}
       </Button>
-      <Menu open={!!anchorEl} anchorEl={anchorEl}>
+      <Menu
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={() => {
+          setAnchorEl(null)
+        }}
+      >
         {langList.map((l, index) => (
           <MenuItem
             key={l}

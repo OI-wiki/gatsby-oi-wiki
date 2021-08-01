@@ -50,7 +50,7 @@ function transformResponseData (
   data: RunnerApiResponseData,
 ): TransformedResponseData {
   return _.mapKeys(_.omit(data, 'message'), (_, key) =>
-    key in Object.keys(responseKeyTransformMap)
+    Object.prototype.hasOwnProperty.call(responseKeyTransformMap, key)
       ? responseKeyTransformMap[key as keyof ResponseKeyTransformMapType]
       : key,
   ) as TransformedResponseData
@@ -60,8 +60,7 @@ function responseDataGuard (data: any): data is RunnerApiResponseData {
   return typeof data.message === 'string'
 }
 
-export const runnerApi =
-  process.env.NODE_ENV === 'development' ? '/runner_api' : 'actual_api'
+export const runnerApi = 'https://api2.duck-ac.cn/259ea31bf8ab6b59/duck-api/run'
 
 export function useRunner (
   req: RunnerApiRequestData,
