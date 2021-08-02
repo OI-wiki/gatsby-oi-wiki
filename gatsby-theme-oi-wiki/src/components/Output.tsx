@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     '& > pre': {
       margin: 0,
       paddingBottom: theme.spacing(2),
+      fontSize: 14,
     },
   },
   statusLine: {
@@ -110,13 +111,11 @@ export const Output = React.forwardRef<
           <pre>{stderr}</pre>
         </>
       )}
-      {stdout && (
-        <>
-          <Typography className={classes.outTitle}>输出</Typography>
-          <Divider />
-          <pre>{stdout}</pre>
-        </>
-      )}
+      <>
+        <Typography className={classes.outTitle}>输出</Typography>
+        <Divider />
+        <pre>{stdout === '' ? '似乎没有输出哦...' : stdout}</pre>
+      </>
       <pre></pre>
     </Paper>
   )

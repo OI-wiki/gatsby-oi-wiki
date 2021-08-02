@@ -4,9 +4,11 @@ import {
   CircularProgress,
   Collapse,
   Fade,
+  FormControlLabel,
   Grid,
   Link,
   makeStyles,
+  Switch,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
 import type { PageProps } from 'gatsby'
@@ -16,13 +18,11 @@ import { CodeEditor } from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
 import { Indicator } from '../components/Indicator'
 import { LangMenu } from '../components/LangMenu'
-import Layout from '../components/StyledLayout'
 import { Output } from '../components/Output'
-import { RunSettings, RunSettingsMenu } from '../components/RunSettingsMenu'
+import Layout from '../components/StyledLayout'
 import type { LangType } from '../lib/play/codeLang'
 import type { TransformedResponseData } from '../lib/play/useRunner'
 import { useRunner } from '../lib/play/useRunner'
-// import smoothScrollTo from '../lib/smoothScroll'
 
 const useStyles = makeStyles((theme) => ({
   langMenu: {
@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -12,
   },
   footer: {
-    display: 'block',
     textAlign: 'center',
-    fontStyle: 'italic',
     marginTop: theme.spacing(4),
+  },
+  footerLink: {
     color: '#FD9F40',
     '& > img': {
       display: 'inline',
@@ -70,18 +70,17 @@ const useStyles = makeStyles((theme) => ({
 //   )
 // }
 
-export default function Playground ({
+export default function Playground({
   location,
 }: PageProps): React.ReactElement {
   const classes = useStyles()
 
   const [lang, setLang] = useState<LangType>('C++')
-  const [settings, setSettings] = useState<RunSettings>({ o2: false })
+  const [o2, setO2] = useState(false)
 
   const [code, setCode] = useState('')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState<TransformedResponseData | null>(null)
-  const [showOutput, setShowOutput] = useState(false)
 
   const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
 
@@ -101,26 +100,37 @@ export default function Playground ({
 
   const runCodeCb = useCallback((data: TransformedResponseData) => {
     setOutput(data)
-    setShowOutput(true)
-    setRunInfo({ type: 'success', msg: 'Success' })
+    setRunInfo(
+      data.status === 'Run Finished'
+        ? { type: 'success', msg: 'Success' }
+        : { type: 'warning', msg: 'Checkout output for error details' },
+    )
+
+    outputRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [])
   const errorCb = useCallback((msg: string) => {
     setRunInfo({ type: 'error', msg })
   }, [])
   const { sendRunnerReq, waiting } = useRunner(
-    { stdin: input, code, language: lang, flags: settings.o2 ? '-O2' : '' },
+    { stdin: input, code, language: lang, flags: o2 ? '-O2' : '' },
     runCodeCb,
     errorCb,
   )
 
   const handleRunClick = useCallback(() => {
     setRunInfo(null)
-    setShowOutput(false)
     sendRunnerReq()
   }, [sendRunnerReq])
 
   return (
-    <Layout location={location} title="Playground" noComment noEdit noToc noMeta>
+    <Layout
+      location={location}
+      title="Playground"
+      noComment
+      noEdit
+      noToc
+      noMeta
+    >
       <Grid container spacing={3} alignItems="center">
         <Grid item>
           <ButtonGroup>
@@ -155,7 +165,19 @@ export default function Playground ({
           </Fade>
         </Grid>
         <Grid item>
-          <RunSettingsMenu settings={settings} setSettings={setSettings} />
+          <FormControlLabel
+            checked={o2}
+            control={
+              <Switch
+                size="small"
+                checked={o2}
+                onChange={(e) => {
+                  setO2(e.target.checked)
+                }}
+              />
+            }
+            label="开启O2优化"
+          />
         </Grid>
       </Grid>
       <Grid
@@ -186,19 +208,20 @@ export default function Playground ({
           </Grid>
         </Grid>
       </Grid>
-      <Collapse in={showOutput}>
+      <Collapse in={['success', 'warning'].includes(runInfo?.type ?? '')}>
         <Output ref={outputRef} output={output} />
       </Collapse>
-      <Link
-        className={classes.footer}
-        href="https://duck.ac/"
-        underline="none"
-        target="_blank"
-        variant="h6"
-      >
-        {'Powered by '}
-        <img src={judgeDuckImgUrl} alt="JudgeDuck" height="30" />
-      </Link>
+      <div className={classes.footer}>
+        <Link className={classes.footerLink}
+          href="https://duck.ac/"
+          underline="none"
+          target="_blank"
+          variant="h6"
+        >
+          {'Powered by '}
+          <img src={judgeDuckImgUrl} alt="JudgeDuck" height="30" />
+        </Link>
+      </div>
     </Layout>
   )
 }

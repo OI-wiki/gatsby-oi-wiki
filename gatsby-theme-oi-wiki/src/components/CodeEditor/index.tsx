@@ -33,7 +33,7 @@ export function CodeEditor ({
       <Typography variant="h6">{title}</Typography>
       <Paper className={classes.paper}>
         {typeof window !== 'undefined' && (
-          <React.Suspense fallback={<div>Editor</div>}>
+          <React.Suspense fallback={<div>Loading editor...</div>}>
             <Editor className={classes.editor} lang={lang} {...aceProps} />
           </React.Suspense>
         )}
