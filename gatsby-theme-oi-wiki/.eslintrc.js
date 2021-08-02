@@ -7,14 +7,15 @@ module.exports = {
     es6: true,
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'standard',
+    'plugin:@typescript-eslint/recommended',
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
+    process: 'readonly'
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,6 +24,8 @@ module.exports = {
     },
     ecmaVersion: 2018,
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json']
   },
   plugins: [
     'react',
@@ -30,11 +33,12 @@ module.exports = {
     'graphql',
   ],
   rules: {
+    'object-curly-spacing': ['error', 'always'],
     'react/prop-types': [0],
     'comma-dangle': [2, 'always-multiline'],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
-      'error',
+      'warn',
     ],
     'no-use-before-define': [0],
     '@typescript-eslint/no-use-before-define': [1],
@@ -48,14 +52,15 @@ module.exports = {
       schemaJsonFilepath: path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json'),
     }],
   },
+  ignorePatterns: ['.eslintrc.js'],
   overrides: [
     {
       // enable the rule specifically for TypeScript files
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
-        '@typescript-eslint/no-unused-vars': [1],
+        '@typescript-eslint/explicit-function-return-type': ['warn', {allowExpressions: true}],
         '@typescript-eslint/ban-ts-comment': [1],
+        'no-undef': 'off'
       },
     },
   ],

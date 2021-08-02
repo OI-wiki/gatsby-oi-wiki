@@ -2,23 +2,27 @@ import { Link as MuiLink } from '@material-ui/core'
 import clsx from 'clsx'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { Nullable, OnClickHandler } from '../../types/common'
 
-interface Node {
+export interface Node {
   url: string;
   title: string;
   level: number;
   status: 'active' | 'expanded' | 'collapse'
-  children: Array<Node>;
-  parent: Node|null;
-  element?: any;
+  children: Node[];
+  parent: Nullable<Node>;
+  element: Nullable<HTMLElement>;
+  selfElement: Nullable<HTMLElement>
+  index: number;
 }
 
 interface Props {
-  onClick?: (item: Node) => (event: any) => void;
+  onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Node;
 }
-interface TocProps {
-  onClick?: (item: Node) => (event: any) => void;
+
+export interface TocListProps {
+  onClick?: (item: Node) => OnClickHandler<HTMLSpanElement>;
   data: Array<Node>
 }
 
@@ -44,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function TocItem (props: Props): JSX.Element {
+const TocItem: React.FC<Props> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
@@ -62,35 +66,33 @@ function TocItem (props: Props): JSX.Element {
       }}
       className={clsx(classes.link, data.status === 'active' && classes.active)}
     >
-      <span dangerouslySetInnerHTML={{ __html: data.title }} />
+      <span dangerouslySetInnerHTML={{ __html: data.title }}/>
     </MuiLink>
   )
 }
 
-function TocComponent (props: Props): JSX.Element {
+const TocComponent: React.FC<Props> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
-    <li className={clsx(classes.li)}>
+    <li id={`toc-${data.url}`} className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
-      {data.children && (<ul className={clsx(classes.ul, data.status === 'collapse' && classes.collapse)}>{
-        data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
-      }</ul>)}
+      {data.children.length > 0 &&
+      <ul className={clsx(classes.ul, data.status === 'collapse' && classes.collapse)}>{
+        data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
+      }</ul>}
     </li>
   )
 }
 
-function Toc (props: TocProps): JSX.Element {
+const TocList: React.FC<TocListProps> = (props) => {
   const { data, onClick, ...restProps } = props
   const classes = useStyles()
   return (
     <ul className={classes.ul}>{
-      data.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url} />)
+      data.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
     }</ul>
   )
 }
 
-export default Toc
-export {
-  Node,
-}
+export default TocList

@@ -2,6 +2,9 @@
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
+const path = require('path')
+const { SitemapManager } = require('sitemap-manager')
+
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
@@ -14,6 +17,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   })
 }
+
 const gitQuery = async function (prop) {
   const res = await git().log(['-15', prop]).catch(err => console.log(err))
   return res
@@ -101,6 +105,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       component: docTemplate,
       context: {
         id: node.id,
+        lastModified: log.latest?.date || new Date().toString(),
         previous,
         next,
       },
@@ -133,4 +138,64 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   if (result.errors) {
     reporter.panic(result.errors)
   }
+}
+
+exports.onPostBuild = async ({ graphql, reporter }) => {
+  let queryResult = await graphql(`{
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+    postsQuery:allMarkdownRemark {
+      edges {
+        node {
+          id
+          fields{
+            slug
+          }
+          fileAbsolutePath
+        }
+      }
+    }
+    tagsQuery:allMarkdownRemark(limit: 2000) {
+      group(field: frontmatter___tags) {
+        fieldValue
+      }
+    }
+  }`)
+  if (queryResult.errors) {
+    reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors)
+  }
+  queryResult = queryResult.data
+  const siteUrl = queryResult.site.siteMetadata.siteUrl
+
+  const MySitemap = new SitemapManager({ siteURL: siteUrl })
+  for (const index in queryResult.postsQuery.edges) {
+    const { node } = queryResult.postsQuery.edges[index]
+    const { fileAbsolutePath: path } = node
+    const relativePath = path.slice(path.indexOf('/docs') + 1)
+    const lastmod = (await gitQuery(relativePath)).latest?.date || new Date().toString()
+
+    MySitemap.addUrl('articles', [{
+      loc: new URL(node.fields.slug, siteUrl).toString(),
+      lastmod,
+    }])
+    MySitemap.addUrl('logs', [{
+      loc: new URL(node.fields.slug + 'changelog/', siteUrl).toString(),
+      lastmod,
+    }])
+  }
+  queryResult.tagsQuery.group.forEach(({ fieldValue }) => {
+    MySitemap.addUrl('tags', [{
+      loc: new URL(`/tags/${_.kebabCase(fieldValue)}/`, siteUrl).toString(),
+    }])
+  })
+  MySitemap.addUrl('pages', [
+    { loc: new URL('/pages/', siteUrl).toString() },
+    { loc: new URL('/settings/', siteUrl).toString() },
+  ])
+  await MySitemap.finish().catch((e) => {
+    reporter.error(e)
+  })
 }

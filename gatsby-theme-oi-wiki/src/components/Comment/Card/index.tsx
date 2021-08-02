@@ -52,7 +52,7 @@ const CommentCard: React.FC<Props> = (props) => {
       <CardHeader
         avatar={<Avatar alt={name} src={props.avatarLink} />}
         title={<>
-          {props.name} { currentUser.username === props.name &&
+          {props.name} {currentUser.username === props.name &&
             <IconButton
               disabled={disabled}
               size="small"
@@ -82,7 +82,8 @@ const CommentCard: React.FC<Props> = (props) => {
       </CardContent>
       <CardActions>
         <ReactionButton
-          text={<ThumbUpIcon className={classes.yellow} />}
+          icon={ThumbUpIcon}
+          clickedClass={classes.yellow}
           disabled={disabled}
           currentUser={currentUser}
           initialCount={like.count}
@@ -92,7 +93,8 @@ const CommentCard: React.FC<Props> = (props) => {
           users={like.users}
         />
         <ReactionButton
-          text={<ThumbDownIcon className={classes.yellow} />}
+          icon={ThumbDownIcon}
+          clickedClass={classes.yellow}
           disabled={disabled}
           currentUser={currentUser}
           initialCount={unlike.count}
@@ -102,7 +104,8 @@ const CommentCard: React.FC<Props> = (props) => {
           users={unlike.users}
         />
         <ReactionButton
-          text={<FavoriteIcon className={classes.red} />}
+          icon={FavoriteIcon}
+          clickedClass={classes.red}
           disabled={disabled}
           currentUser={currentUser}
           initialCount={heart.count}

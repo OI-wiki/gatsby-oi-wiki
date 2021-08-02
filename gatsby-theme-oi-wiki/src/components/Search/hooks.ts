@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 
+export interface WindowDimensions {
+  width: number;
+  height: number;
+}
+
 /**
  * 去抖动。具体来说，在组件更新的时候若 value 值发生变化后 timeout 的时间内都没有其他变化，才更新 state 值
  *
- * @param {*} value 通常是一个经常发生变化的值
- * @param {number} timeout
- * @return {*} 一个 state
+ * @param value 通常是一个经常发生变化的值
+ * @param timeout
  */
-export function useDebounce (value, timeout) {
+const useDebounce = <T = any>(value: T, timeout: number): T => {
   const [state, setState] = useState(value)
 
   useEffect(() => {
@@ -21,22 +25,18 @@ export function useDebounce (value, timeout) {
 
 /**
  * 在组件挂载后计算屏幕宽度并返回
- *
- * @return {number} 当前的屏幕宽度
  */
-export function useWindowDimensions () {
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: null,
-    height: null,
+const useWindowDimensions = (): WindowDimensions => {
+  const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>({
+    width: 0,
+    height: 0,
   })
-  // const [windowDimensions, setWindowDimensions] = useState({width: window.innerWidth, height: window.innerHeight});
 
   useEffect(() => {
-    function handleResize () {
-      // console.log('updated window')
+    const handleResize = (): void => {
       setWindowDimensions({
+        ...windowDimensions,
         width: window.innerWidth,
-        // height: window.innerHeight,
       })
     }
 
@@ -47,3 +47,5 @@ export function useWindowDimensions () {
 
   return windowDimensions
 }
+
+export { useDebounce, useWindowDimensions }

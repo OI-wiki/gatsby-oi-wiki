@@ -9,13 +9,14 @@ import {
   makeStyles,
 } from '@material-ui/core'
 import { PlayArrow } from '@material-ui/icons'
-import { graphql, PageProps, useStaticQuery } from 'gatsby'
+import type { PageProps } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import React, { useCallback, useRef, useState } from 'react'
 import { CodeEditor } from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
 import { Indicator } from '../components/Indicator'
 import { LangMenu } from '../components/LangMenu'
-import Layout from '../components/Layout'
+import Layout from '../components/StyledLayout'
 import { Output } from '../components/Output'
 import { RunSettings, RunSettingsMenu } from '../components/RunSettingsMenu'
 import type { LangType } from '../lib/play/codeLang'
@@ -119,7 +120,7 @@ export default function Playground ({
   }, [sendRunnerReq])
 
   return (
-    <Layout location={location} title="Playground">
+    <Layout location={location} title="Playground" noComment noEdit noToc noMeta>
       <Grid container spacing={3} alignItems="center">
         <Grid item>
           <ButtonGroup>

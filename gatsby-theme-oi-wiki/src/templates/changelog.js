@@ -1,11 +1,11 @@
 import {
   Timeline,
-  TimelineItem,
   TimelineConnector,
-  TimelineSeparator,
   TimelineContent,
-  TimelineOppositeContent,
   TimelineDot,
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator,
 } from '@material-ui/lab'
 import { Divider, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -15,9 +15,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import Layout from '../components/Layout'
 import Time from '../components/Time.tsx'
 import { SmartLink } from '../components/Link'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,6 +42,19 @@ const useStyles = makeStyles((theme) => ({
   timeBlock: {
     minWidth: '200px',
     maxWidth: '200px',
+    paddingTop: '4px',
+    [theme.breakpoints.down('sm')]: {
+      order: 1,
+      textAlign: 'left',
+      verticalAlign: 'top',
+    },
+  },
+  timeContent: {
+    [theme.breakpoints.down('sm')]: {
+      order: 2,
+      marginTop: '20px',
+      marginLeft: '-200px',
+    },
   },
   logContainer: {
     position: 'relative',
@@ -56,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
-    <Layout location={location} noMeta="true" title={`更新历史 - ${title}`}>
+    <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -69,10 +82,10 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                 </Typography>
               </TimelineOppositeContent>
               <TimelineSeparator>
-                <TimelineDot variant="outlined" />
-                <TimelineConnector />
+                <TimelineDot variant="outlined"/>
+                <TimelineConnector/>
               </TimelineSeparator>
-              <TimelineContent>
+              <TimelineContent className={classes.timeContent}>
                 <Paper variant="outlined" className={classes.paper}>
                   <div className={classes.infoContainer}>
                     <SmartLink href={`https://github.com/${author}`}>
@@ -98,10 +111,10 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
             ...
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot variant="outlined" />
-            <TimelineConnector />
+            <TimelineDot variant="outlined"/>
+            <TimelineConnector/>
           </TimelineSeparator>
-          <TimelineContent>
+          <TimelineContent className={classes.timeContent}>
             <Paper variant="outlined" className={classes.paper}>
               <Typography variant="h6" component="h6">
                 ...
@@ -114,12 +127,13 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
         </TimelineItem>
       </Timeline>
       <div className={classes.backContainer}>
-        <Divider />
-        <Button component={GatsbyLink} style={{ marginTop: '8px' }} size="large" color="inherit" to="../" startIcon={<ArrowBackIos />}>
+        <Divider/>
+        <Button component={GatsbyLink} style={{ marginTop: '8px' }} size="large" color="inherit" to="../"
+                startIcon={<ArrowBackIos/>}>
           返回
         </Button>
       </div>
-    </Layout>
+    </StyledLayout>
   )
 }
 

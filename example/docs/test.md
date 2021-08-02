@@ -134,3 +134,15 @@ int main() {
 - B
 - C
 - D
+
+### Snippets
+
+--8<-- "docs/test_md.md" 
+
+```cpp
+/* clang-format whatever */
+--8<-- "docs/test_code.cpp"
+
+/* snip #2 */
+--8<-- "docs/test_code.cpp"
+```
