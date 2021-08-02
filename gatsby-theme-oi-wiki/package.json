@@ -52,10 +52,11 @@
     "rehype-mathjax": "^3.1.0",
     "rehype-parse": "^7.0.1",
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
+    "rehype-react": "^6.2.1",
     "remark-details": "^3.0.0",
     "remark-math": "^3.0.1",
-    "sitemap-manager": "^2.0.1",
     "simple-git": "^2.41.1",
+    "sitemap-manager": "^2.0.1",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
