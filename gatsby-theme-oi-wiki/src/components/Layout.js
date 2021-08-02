@@ -22,6 +22,7 @@ import {
   SecondaryColorCssBaseline,
 } from '../theme'
 import Comment from './Comment'
+import Collection from './Collection'
 import BackTop from './BackTop'
 import Footer from './Footer'
 import Meta from './Meta'
@@ -91,6 +92,7 @@ function MyLayout ({
   noToC,
   overflow,
   isWIP,
+  noCollection,
 }) {
   const theme = useTheme()
   const classes = useStyles()
@@ -156,6 +158,9 @@ function MyLayout ({
                         <Comment title={title} />
                       </div>
                     )}
+                    {noCollection === 'false' && <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                      <Collection id={title}></Collection>
+                    </div>}
                   </div>
                 </main>
               </div>

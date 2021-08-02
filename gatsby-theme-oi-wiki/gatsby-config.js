@@ -3,8 +3,8 @@ const path = require('path')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
-                process.env.NODE_ENV === 'production' ||
-                process.env.RENDER === 'true'
+  process.env.NODE_ENV === 'production' ||
+  process.env.RENDER === 'true'
 
 /**
  * 根据条件生成配置，需要展开

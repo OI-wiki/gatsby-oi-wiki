@@ -17,6 +17,7 @@ function Mdx ({ data: { mdx }, location }) {
   const tags = mdx.frontmatter.tags || null
   const noMeta = mdx.frontmatter.noMeta || 'false'
   const noComment = mdx.frontmatter.noComment || 'false'
+  const noCollection = mdx.frontmatter.noCollection || 'false'
   const noEdit = mdx.frontmatter.noEdit || 'false'
   const toc = mdx.toc || null
   const relativePath = mdx.parent.relativePath || ''
@@ -100,6 +101,7 @@ function Mdx ({ data: { mdx }, location }) {
       modifiedTime={modifiedTime}
       noMeta={noMeta}
       noComment={noComment}
+      noCollection={noCollection}
       noEdit={noEdit}
       isWIP={isWIP}
     >
