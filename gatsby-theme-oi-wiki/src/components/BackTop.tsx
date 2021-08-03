@@ -30,8 +30,8 @@ const BackTop: React.FC = () => {
   const handleClick: OnClickHandler<HTMLButtonElement> = () => {
     smoothScrollTo(0)
   }
-  const [yPos, setyPos] = useState(0)
-  useThrottledOnScroll(() => setyPos(window.scrollY), 166)
+  const [yPos, setYPos] = useState(0)
+  useThrottledOnScroll(() => setYPos(window.scrollY), 166)
   return (
     <Zoom in={yPos > 400}>
       <Fab disableRipple className={classes.fab} onClick={handleClick}>

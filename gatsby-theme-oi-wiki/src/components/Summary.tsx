@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { AccordionSummary } from '@material-ui/core'
+import { AccordionSummary, AccordionSummaryProps } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import { makeStyles } from '@material-ui/core/styles'
 import EditIcon from '@material-ui/icons/Edit'
@@ -34,22 +33,21 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }))
-interface Props{
+
+export interface SummaryProps extends AccordionSummaryProps {
   className: string;
-  children: string;
-  [props: string]: any;
 }
 
-const Summary: React.FC<Props> = (props) => {
-  const { className = null, children } = props
+const Summary: React.FC<SummaryProps> = (props) => {
+  const { children, ...others } = props
   const classes = useStyles()
 
   return (
     <AccordionSummary
       classes={classes}
-      expandIcon={<ExpandMoreIcon />}
+      expandIcon={<ExpandMoreIcon/>}
       aria-controls="expand"
-      {...props}
+      {...others}
     >
       <EditIcon
         style={{

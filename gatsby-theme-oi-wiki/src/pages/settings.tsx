@@ -11,12 +11,12 @@ import {
 } from '@material-ui/core'
 import React from 'react'
 import colors, { LabeledPaletteColor } from '../styles/colors'
-import { useSetting } from '../lib/useSetting'
+import { Settings, useSetting } from '../lib/useSetting'
 import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles((theme) => ({
-  root: (props: LabeledPaletteColor) => ({
-    background: props ? props.main : undefined,
+  root: (props: LabeledPaletteColor | Record<string, never>) => ({
+    background: props?.main,
     color: props ? props.contrastText : theme.palette.background.default,
     margin: '1em 1.2em 1em 0',
     padding: 0,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     border: '.1em solid',
     borderColor: theme.palette.divider,
     '&:hover': {
-      background: props ? props.dark : undefined,
+      background: props?.dark,
     },
   }),
   label: {
@@ -39,18 +39,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-interface ColorButtonProp {
+interface ColorButtonProps {
   data: LabeledPaletteColor
-  onClick?: (props: LabeledPaletteColor) => any
+  onClick?: (props: LabeledPaletteColor) => void
 }
 
-const ColorButton: React.FC<ColorButtonProp> = (props: ColorButtonProp) => {
-  const classes = useStyles(props.data.main === 'auto' ? undefined : props.data)
+const ColorButton: React.FC<ColorButtonProps> = (props) => {
+  const { data, onClick } = props
+  const classes = useStyles(data.main === 'auto' ? {} : data)
   return (
     <Grid item>
       <Button
         classes={classes}
-        onClick={() => props.onClick(props.data)}
+        onClick={() => onClick?.(data)}
       >
         {props.data.desc}
       </Button>
@@ -65,7 +66,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
   const { location } = props
   const [settings, updateSetting] = useSetting()
 
-  const onNavColorBtnClick = (c: LabeledPaletteColor) => {
+  const onNavColorBtnClick = (c: LabeledPaletteColor): void => {
     updateSetting({
       theme: {
         primary: c.main === 'auto' ? null : c,
@@ -73,7 +74,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
     })
   }
 
-  const onSecondaryColorBtnClick = (c: LabeledPaletteColor) => {
+  const onSecondaryColorBtnClick = (c: LabeledPaletteColor): void => {
     if (c.main === 'auto') throw new Error('invalid color')
     updateSetting({
       theme: {
@@ -100,7 +101,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               onChange={(e) => {
                 updateSetting({
                   darkMode: {
-                    type: (e.target.value as unknown as ('user-preference' | 'always-on' | 'always-off')),
+                    type: (e.target.value as Settings['darkMode']['type']),
                   },
                 })
               }}
@@ -118,6 +119,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               <FormControlLabel
                 control={
                   <Switch checked={settings.animation.smoothScroll}
+                          name="animation-smooth-scroll"
                           onChange={(e) => {
                             updateSetting({
                               animation: {
@@ -125,7 +127,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                               },
                             })
                           }
-                          } name="animation-smooth-scroll"
+                          }
                   />
                 }
                 label="使用平滑滚动"
@@ -140,6 +142,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
               <FormControlLabel
                 control={
                   <Switch checked={settings.theme.fallbackMonoFont}
+                          name="monofont"
                           onChange={(e) => {
                             updateSetting({
                               theme: {
@@ -147,7 +150,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                               },
                             })
                           }
-                          } name="monofont"
+                          }
                   />
                 }
                 label="使用浏览器默认字体"

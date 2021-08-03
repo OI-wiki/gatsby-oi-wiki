@@ -2070,6 +2070,11 @@
   resolved "https://registry.yarnpkg.com/@turist/time/-/time-0.0.1.tgz#57637d2a7d1860adb9f9cecbdcc966ce4f551d63"
   integrity sha512-M2BiThcbxMxSKX8W4z5u9jKZn6datnM3+FpEU+eYw0//l31E2xhqi7vTAuJ/Sf0P3yhp66SDJgPu3bRRpvrdQQ==
 
+"@types/autosuggest-highlight@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@types/autosuggest-highlight/-/autosuggest-highlight-3.1.1.tgz#afdec910b84c06f77e9a7ed1a47ffeade4c0da6d"
+  integrity sha512-onPUHT+32TyI7ctiG7G/JtWlVkEBH2bw1onOWaea0L0dZmKNhP+KIOcrh7gnr2LTzD9/cjQlC7zJdv259dg0lg==
+
 "@types/cacheable-request@^6.0.1":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@types/cacheable-request/-/cacheable-request-6.0.2.tgz#c324da0197de0a98a2312156536ae262429ff6b9"
@@ -2206,6 +2211,13 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/jquery@*":
+  version "3.5.6"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.6.tgz#97ac8e36dccd8ad8ed3f3f3b48933614d9fd8cf0"
+  integrity sha512-SmgCQRzGPId4MZQKDj9Hqc6kSXFNWZFHpELkyK8AQhf8Zr6HKfCzFv9ZC1Fv3FyQttJZOlap3qYb12h61iZAIg==
+  dependencies:
+    "@types/sizzle" "*"
+
 "@types/json-patch@0.0.30":
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/json-patch/-/json-patch-0.0.30.tgz#7c562173216c50529e70126ceb8e7a533f865e9b"
@@ -2227,6 +2239,13 @@
   version "4.14.171"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
   integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
+
+"@types/mark.js@^8.11.6":
+  version "8.11.6"
+  resolved "https://registry.yarnpkg.com/@types/mark.js/-/mark.js-8.11.6.tgz#28406c3aafc5be277de1d75840da6246172b180a"
+  integrity sha512-mhe0gRtOd0UmsnEgO862RTVF4761fbAB5CjdFLwzN7YAhdhefbH25KNQREa++N/L6g4YotygavvHT3UO/0xgnQ==
+  dependencies:
+    "@types/jquery" "*"
 
 "@types/mathjax@^0.0.36":
   version "0.0.36"
@@ -2358,6 +2377,11 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
+"@types/sizzle@*":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.3.tgz#ff5e2f1902969d305225a047c8a0fd5c915cebef"
+  integrity sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ==
+
 "@types/tmp@^0.0.33":
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.0.33.tgz#1073c4bc824754ae3d10cfab88ab0237ba964e4d"
@@ -2367,6 +2391,13 @@
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.5.tgz#fdd299f23205c3455af88ce618dd65c14cb73e22"
   integrity sha512-wnra4Vw9dopnuybR6HBywJ/URYpYrKLoepBTEtgfJup8Ahoi2zJECPP2cwiXp7btTvOT2CULv87aQRA4eZSP6g==
+
+"@types/use-persisted-state@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@types/use-persisted-state/-/use-persisted-state-0.3.0.tgz#23370e89bd6c8468afdb05dde2d1bab898128229"
+  integrity sha512-ZT98QuckR95qM7W97lGVqc7fFS9TT6f3txp7R40fl0zxa5BLm3GG7j0i51G12h8DkoJxFAf2oQyYKU99h0pxFA==
+  dependencies:
+    "@types/react" "*"
 
 "@types/vfile-message@*":
   version "2.0.0"
@@ -13196,6 +13227,11 @@ scheduler@^0.20.2:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+schema-dts@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-0.9.0.tgz#23d9f7111774ba253b6dfda0cea47a2b323a647d"
+  integrity sha512-awQ5s+OBV7w7GcvoZvG4F/IaZQWqniOmN1L5PL99dxKLIpjYiqWB8za+LIvuZ4S69oqfzRrpJhJk8Vr4mGEEQA==
 
 schema-utils@2.7.0:
   version "2.7.0"
