@@ -9,8 +9,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2.5),
     minWidth: '0',
     '&:hover': {
-      // eslint-disable-next-line
-      //@ts-ignore
       color: theme.palette.tab.colorOnHover,
       opacity: '1',
     },
@@ -23,45 +21,43 @@ const useIndicatorStyles = makeStyles(() => ({
   },
 }))
 
-interface Props{
+interface NavTabsProps {
   tabID: number;
-  pathList: any;
+  pathList: Array<string | (Array<string | Array<string> | Array<Array<string>>>)>;
 }
 
-const NavTabs: React.FC<Props> = (props) => {
+const NavTabs: React.FC<NavTabsProps> = (props) => {
   const classes = useStyles()
   const indicatorClasses = useIndicatorStyles()
-
   const { tabID, pathList } = props
   const newTabs = []
+
   for (const curTab of pathList.values()) {
     const curTitle = Object.keys(curTab)[0]
-    const curLocation = (typeof Object.values(curTab)[0] === 'string')
-      ? Object.values(curTab)[0]
+    const values = Object.values(curTab)[0]
+    const curLocation = (typeof values === 'string')
       /*
         - 测试: /test/
       */
-      : Object.values(Object.values(curTab)[0][0])[0]
+      ? values
       /*
         - 测试:
           - 测试: /test/
       */
-
+      : Object.values(values[0])[0]
     newTabs.push({ title: curTitle, link: curLocation })
   }
-  const state = (() => {
-    return tabID
-  })()
+  const [value, setValue] = React.useState(tabID)
 
-  const [value, setValue] = React.useState(state)
-  const handleChange = function (event, newValue) : void {
-    setValue(newValue)
-  }
   return (
-    <Tabs value={value} onChange={handleChange} classes={indicatorClasses}>
+    <Tabs value={value}
+          classes={indicatorClasses}
+          onChange={(_, newValue) => {
+            setValue(newValue)
+          }}>
       {newTabs.map(({ title, link }) => (
         <Tab
-          disableRipple
+          disableRipple={true}
           key={title}
           label={title}
           component="a"

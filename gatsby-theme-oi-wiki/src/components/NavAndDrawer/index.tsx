@@ -15,8 +15,9 @@ import { flattenObject } from './utils'
 import { useSetting } from '../../lib/useSetting'
 import NavBtnGroup from './NavBtnGroup'
 import Search from '../Search'
+import { StrIndexObj } from '../../types/common'
 
-const getTabIDFromLocation = (location: string, pathList: string[]): number => {
+const getTabIDFromLocation = (location: string, pathList: StrIndexObj<StrIndexObj>): number => {
   const locationTrimmed = trimTrailingSlash(location)
   for (const v of Object.entries(pathList)) {
     if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0]

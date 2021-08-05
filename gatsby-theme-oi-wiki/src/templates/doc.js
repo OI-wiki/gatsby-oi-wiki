@@ -1,14 +1,13 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-import Doc from '../components/doc'
+import Mdx from '../components/Mdx'
 
-export default function MdxDoc (props) {
-  // console.log(data)
-  return <Doc {...props} />
+export default function MdxDoc({ data, location }) {
+  return <Mdx data={data} location={location}/>
 }
 
 export const query = graphql`
-  query($id: String!) {
+  query Doc($id: String!) {
     mdx: markdownRemark(id: { eq: $id }) {
       id
       wordCount {

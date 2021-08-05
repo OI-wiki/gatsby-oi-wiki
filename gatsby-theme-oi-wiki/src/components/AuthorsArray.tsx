@@ -8,25 +8,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const AuthorsArray: React.FC<{authors: string }> = ({ authors }) => {
-  const arr = authors && authors.split(',').map((x) => x.trim())
+export interface AuthorsArrayProps {
+  authors: string;
+}
+
+const AuthorsArray: React.FC<AuthorsArrayProps> = ({ authors }) => {
+  const arr = authors?.split(',').map((x) => x.trim())
   const classes = useStyles()
   return (
     <div>
-      {arr &&
-        arr.map((author) => (
-          <Chip
-            label={` @${author} `}
-            key={author}
-            clickable
-            className={classes.chip}
-            component="a"
-            variant="outlined"
-            href={'https://github.com/' + author.trim()}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          />
-        ))}
+      {arr?.map((author) => (
+        <Chip
+          label={` @${author} `}
+          key={author}
+          clickable
+          className={classes.chip}
+          component="a"
+          variant="outlined"
+          href={'https://github.com/' + author.trim()}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        />
+      ))}
     </div>
   )
 }

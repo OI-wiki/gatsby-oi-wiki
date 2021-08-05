@@ -106,7 +106,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
     headings = null,
     noMeta = false,
     noComment = false,
-    noEdit = false,
+    noEdit = true,
     noToc = !props.headings,
     overflow = false,
     isWIP = false,

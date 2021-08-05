@@ -13,12 +13,9 @@ import { useDebounce, useWindowDimensions } from './hooks'
  * 从 API 获取搜索数据
  * @param str 要搜索的内容
  */
-const fetchResult = (str: string): Promise<any> => fetch(
-  `https://search.oi-wiki.org:8443/?s=${encodeURIComponent(str)}`,
-  {
-    // credentials: "same-origin"
-  },
-).then((response) => response.json())
+const fetchResult = (str: string): Promise<any> =>
+  fetch(`https://search.oi-wiki.org:8443/?s=${encodeURIComponent(str)}`)
+    .then((response) => response.json())
 
 const Search: React.FC = () => {
   const [searchKey, setSearchKey] = useState('')
@@ -53,11 +50,7 @@ const Search: React.FC = () => {
       <div
         className={clsx(
           classes.search,
-          enableDark
-            ? classes.searchColorBlack
-            : (
-                open ? classes.searchColorWhite : classes.searchColorBlack
-              ),
+          (enableDark || !open) ? classes.searchColorBlack : classes.searchColorWhite,
         )}
       >
         <div className={classes.searchIcon}>
@@ -124,9 +117,6 @@ const Search: React.FC = () => {
             onChange={(ev) => {
               setSearchKey(ev.target.value)
             }}
-            // onFocus={() => {
-            //   setOpen(true)
-            // }}
             classes={{
               root: classes.smallScreenInputRoot,
               input: classes.inputInput,

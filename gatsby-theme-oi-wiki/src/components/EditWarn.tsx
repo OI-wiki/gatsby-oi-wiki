@@ -17,32 +17,29 @@ const EditWarning = (): JSX.Element => {
   )
 }
 
-interface Props {
+export interface EditWarnProps {
   relativePath: string;
   dialogOpen: boolean;
   setDialogOpen: (props: boolean) => any;
   location: Location;
 }
 
-const EditWarn: React.FC<Props> = (props: Props) => {
+const EditWarn: React.FC<EditWarnProps> = (props) => {
   const { relativePath, dialogOpen, setDialogOpen } = props
   const editURL = 'https://github.com/OI-wiki/OI-wiki/edit/master/docs/'
+  const onClose = (): void => {
+    setDialogOpen(false)
+  }
 
   return (
     <Dialog
       open={dialogOpen}
-      onClose={() => {
-        setDialogOpen(false)
-      }}
+      onClose={onClose}
     >
       <DialogTitle>编辑前须知</DialogTitle>
       <DialogContent><EditWarning/></DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => {
-            setDialogOpen(false)
-          }}
-        >
+        <Button onClick={onClose}>
           取消
         </Button>
         <Button
@@ -50,9 +47,7 @@ const EditWarn: React.FC<Props> = (props: Props) => {
           href={editURL + relativePath}
           target="_blank"
           rel="noopener noreferrer nofollow"
-          onClick={() => {
-            setDialogOpen(false)
-          }}
+          onClick={onClose}
         >
           开始编辑
         </Button>

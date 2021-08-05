@@ -52,7 +52,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
     }
     setIsClicked(!isClicked)
   }
-  const SvgTag = props.icon;
+  const SvgTag = props.icon
   return (
     <Button
       color="default"
