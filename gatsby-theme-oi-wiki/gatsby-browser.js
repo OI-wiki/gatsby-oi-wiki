@@ -1,6 +1,6 @@
-import './static/extra.css'
+require('./static/extra.css')
 
-export const onRouteUpdate = () => {
+exports.onRouteUpdate = () => {
   if (process.env.GATSBY_IS_DEV) {
     requestIdleCallback(() => MathJax.typeset())
   }
