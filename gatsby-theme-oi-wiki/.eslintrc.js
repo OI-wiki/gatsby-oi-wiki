@@ -35,10 +35,10 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
     'semi': ['error', 'never', { 'beforeStatementContinuationChars': 'always' }],
-    'react/prop-types': [0],
-    'comma-dangle': [2, 'always-multiline'],
+    'react/prop-types': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
     'no-unused-vars': 'warn',
-    'react/jsx-curly-brace-presence': [2, 'never'],
+    'react/jsx-curly-brace-presence': ['error', 'never'],
     'graphql/template-strings': ['error', {
       env: 'relay',
       tagName: 'graphql',
@@ -61,13 +61,13 @@ module.exports = {
       ],
       rules: {
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
-        '@typescript-eslint/ban-ts-comment': [1],
+        '@typescript-eslint/ban-ts-comment': 'warn',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': [
           'warn',
         ],
-        '@typescript-eslint/explicit-module-boundary-types': ['off'],
-        '@typescript-eslint/no-explicit-any': [0],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
     {
