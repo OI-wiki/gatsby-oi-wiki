@@ -155,28 +155,12 @@ module.exports = {
         emitSchema: {
           [path.resolve(__dirname, 'src/__generated__/gatsby-schema.graphql')]: true,
           [path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json')]: true,
-          'src/__generated__/gatsby-schema.graphql': true,
         },
         emitPluginDocuments: {
           [path.resolve(__dirname, 'src/__generated__/gatsby-plugin-documents.graphql')]: true,
         },
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-ts',
-    //   options: {
-    //     tsloader: {
-    //       loglevel: 'warn',
-    //     },
-    //     forktscheckerplugin: {
-    //       eslint: true,
-    //     },
-    //     filename: 'types/graphql-types.ts',
-    //     codegen: true,
-    //     codegendelay: 250,
-    //     alwayscheck: false,
-    //   },
-    // },
     // {
     //   resolve: 'gatsby-plugin-advanced-sitemap',
     //   options: {
