@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
-                process.env.NODE_ENV === 'production' ||
-                process.env.RENDER === 'true'
+  process.env.NODE_ENV === 'production' ||
+  process.env.RENDER === 'true'
 
 /**
  * 根据条件生成配置，需要展开
@@ -75,7 +74,7 @@ module.exports = {
             },
           },
           {
-            resolve: path.resolve(__dirname, "plugins/gatsby-remark-snippets"),
+            resolve: path.resolve(__dirname, 'plugins/gatsby-remark-snippets'),
           },
         ],
         remarkPlugins: [
