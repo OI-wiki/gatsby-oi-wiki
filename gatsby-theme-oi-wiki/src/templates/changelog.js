@@ -65,14 +65,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
   const classes = useStyles()
   return (
     <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { hash, date, message, refs, body, author_name: author, author_email: email } = item
           return (
             <TimelineItem key={index + '#'}>
