@@ -34,7 +34,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ./node_modules
-          key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/yarn.lock') }}
 
       - run: yarn install
 

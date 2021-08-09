@@ -21,14 +21,14 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Cache install
         uses: actions/cache@v1
         with:
           path: ./node_modules
-          key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-dep-${{ steps.node-version.outputs.ver }}-${{ hashFiles('**/yarn.lock') }}
 
       - run: yarn install
-      - run: yarn workspace example node ../genSchema
+      - run: yarn workspace example node ../gen-schema
       - run: yarn lint
