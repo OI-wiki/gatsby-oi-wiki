@@ -10,13 +10,16 @@ import clsx from 'clsx'
 import { User } from '@mgtd/vssue-api-github-v4/lib/types'
 import { useStyles } from './styles'
 
+import { SvgIconComponent } from '@material-ui/icons'
+
 const reactionButtonDefaultProps = {
   initialCount: 0,
   isClicked: false,
 }
 
 type ReactionButtonProps = {
-  text: any,
+  icon: SvgIconComponent
+  clickedClass: string
   disabled: boolean
   currentUser: User
   addReaction: () => Promise<void>,
@@ -49,14 +52,14 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
     }
     setIsClicked(!isClicked)
   }
+  const SvgTag = props.icon
   return (
     <Button
       color="default"
-      variant="outlined"
       size="small"
       disabled={propsMerged.disabled || loading}
-      startIcon={propsMerged.text}
-      className={clsx(isClicked && classes.clickedBackground, count === 0 && classes.nullReaction, classes.reactionButton)}
+      startIcon={<SvgTag className={clsx(isClicked && props.clickedClass)} />}
+      className={clsx(count === 0 && classes.nullReaction, classes.reactionButton)}
       onClick={clickFunc}
       classes={count === 0 ? { startIcon: classes.nullReactionStartIcon, label: classes.labelMargin } : undefined}
     >

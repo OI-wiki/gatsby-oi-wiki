@@ -1,8 +1,7 @@
-import './static/extra.css'
+require('./static/extra.css')
 
-export const onRouteUpdate = () => {
+exports.onRouteUpdate = () => {
   if (process.env.GATSBY_IS_DEV) {
-    // eslint-disable-next-line no-undef
     requestIdleCallback(() => MathJax.typeset())
   }
   try {

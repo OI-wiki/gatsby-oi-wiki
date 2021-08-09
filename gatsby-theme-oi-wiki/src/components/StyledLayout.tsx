@@ -6,7 +6,6 @@ import FormatPaintIcon from '@material-ui/icons/FormatPaint'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
-import { SiteSiteMetadata } from '../types/graphql-types'
 import {
   adaptiveTheme,
   AutoCssBaseline,
@@ -94,7 +93,10 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
       }
     }`)
 
-  const { description: siteDesc, title: siteTitle } = data?.site?.siteMetadata as RequiredNonNull<SiteSiteMetadata>
+  const {
+    description: siteDesc,
+    title: siteTitle,
+  } = data?.site?.siteMetadata as RequiredNonNull<GatsbyTypes.SiteSiteMetadata>
 
   const {
     title = '',
