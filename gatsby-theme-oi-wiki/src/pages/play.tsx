@@ -70,16 +70,25 @@ const useStyles = makeStyles((theme) => ({
 //   )
 // }
 
+export type PlaygroundLocationState = Partial<{
+  lang: LangType
+  code: string
+  input: string
+}>
+
 export default function Playground({
   location,
-}: PageProps): React.ReactElement {
+}: PageProps<unknown, unknown, PlaygroundLocationState>): React.ReactElement {
+  // state maybe undefined in gatsby build
+  const { state: locState = {} } = location
+
   const classes = useStyles()
 
-  const [lang, setLang] = useState<LangType>('C++')
+  const [lang, setLang] = useState<LangType>(locState.lang ?? 'C++')
   const [o2, setO2] = useState(false)
 
-  const [code, setCode] = useState('')
-  const [input, setInput] = useState('')
+  const [code, setCode] = useState(locState.code ?? '')
+  const [input, setInput] = useState(locState.input ?? '')
   const [output, setOutput] = useState<TransformedResponseData | null>(null)
 
   const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
@@ -212,7 +221,8 @@ export default function Playground({
         <Output ref={outputRef} output={output} />
       </Collapse>
       <div className={classes.footer}>
-        <Link className={classes.footerLink}
+        <Link
+          className={classes.footerLink}
           href="https://duck.ac/"
           underline="none"
           target="_blank"

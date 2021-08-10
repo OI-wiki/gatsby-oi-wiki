@@ -199,7 +199,7 @@ export default function reactiveHast (ast, components, index = 1) {
 
   const props = { key: index.toString(), ...mapAttribute(ast.tagName, ast.properties, []) }
 
-  const tag = components[ast.tagName] ?? ast.tagName
+  const tag = components(ast) ?? ast.tagName
 
   if (dangerouslySetChildren.indexOf(ast.tagName) > -1) {
     const childNode = ast.children[0]

@@ -3,10 +3,12 @@ import React, { useEffect } from 'react'
 import Mark from 'mark.js'
 import Details from './Details.tsx'
 import Summary from './Summary.tsx'
+import Code from './Code'
 import { SmartLink } from './Link'
 import SEO from './Seo'
 import clsx from 'clsx'
 import StyledLayout from './StyledLayout'
+import _ from 'lodash'
 
 function Mdx ({ data: { mdx }, pageContext: { lastModified }, location }) {
   // console.log(mdx);
@@ -65,12 +67,21 @@ function Mdx ({ data: { mdx }, pageContext: { lastModified }, location }) {
     return <code {...props} className={clsx(className, 'inline-code')}>{children}</code>
   }
 
-  const myComponents = {
-    details: Details,
-    summary: Summary,
-    a: LinkGetter(),
-    inlineCode: InlineCode,
-    inlinecode: InlineCode,
+  const myComponents = (ast) => {
+    const tagMap = {
+      details: Details,
+      summary: Summary,
+      a: LinkGetter(),
+      inlineCode: InlineCode,
+      inlinecode: InlineCode,
+    }
+    if (_.has(tagMap, ast.tagName)) {
+      return tagMap[ast.tagName]
+    }
+
+    if (_.has(ast, ['properties', 'dataLanguage'])) {
+      return Code
+    }
   }
 
   const isWIP = wordCount === 0 || (tags?.findIndex(x => x === 'WIP') >= 0)
