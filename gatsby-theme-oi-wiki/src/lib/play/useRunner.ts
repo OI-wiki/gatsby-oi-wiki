@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import axios from 'axios'
+import type { AxiosResponse } from 'axios'
 import _ from 'lodash'
 import { useCallback, useState } from 'react'
 import type { LangType } from './codeLang'
@@ -32,11 +33,11 @@ interface ResponseKeyTransformMapType {
   memory_kb: 'memory'
   ce_info: 'ceInfo'
 }
-const responseKeyTransformMap: ResponseKeyTransformMapType = Object.freeze({
+const responseKeyTransformMap: ResponseKeyTransformMapType = {
   time_ms: 'time',
   memory_kb: 'memory',
   ce_info: 'ceInfo',
-})
+}
 
 export type TransformedResponseData = {
   [K in keyof RunnerApiResponseData as K extends 'message'
@@ -49,8 +50,8 @@ export type TransformedResponseData = {
 function transformResponseData (
   data: RunnerApiResponseData,
 ): TransformedResponseData {
-  return _.mapKeys(_.omit(data, 'message'), (_, key) =>
-    Object.prototype.hasOwnProperty.call(responseKeyTransformMap, key)
+  return _.mapKeys(_.omit(data, 'message'), (__, key) =>
+    _.has(responseKeyTransformMap, key)
       ? responseKeyTransformMap[key as keyof ResponseKeyTransformMapType]
       : key,
   ) as TransformedResponseData
@@ -95,13 +96,18 @@ export function useRunner (
         // TODO: mark err as unknown for better type safety
         // https://github.com/microsoft/TypeScript/pull/41013
         let msg = String(err)
-        if (err.response) {
-          msg = `Server responded ${err.data} with code ${err.status}`
-        } else if (err.request) msg = 'No response from server'
-        else if (err.message) msg = err.message
+
+        function errResponseGuard(err: unknown): err is { response: AxiosResponse } {
+          return _.has(err, 'response')
+        }
+        if (errResponseGuard(err)) {
+          msg = `Server responded ${err.response.data} with code ${err.response.status}`
+        } else if (_.has(err, 'request')) msg = 'No response from server'
+        else if (err instanceof Error) msg = err.message
 
         if (onError) onError(msg)
-        if (process.env.NODE_ENV === 'development') console.error(err)
+        else if (process.env.NODE_ENV === 'development')
+          console.error(`Unhandled exception in code runner: ${err}`)
       })
       .finally(() => {
         setWaiting(false)
