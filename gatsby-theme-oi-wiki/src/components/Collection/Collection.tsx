@@ -20,8 +20,8 @@ const apiClient = new GithubV4({
   baseURL: 'https://github.com',
   owner: REPO_OWNER,
   repo: REPO_NAME,
-  clientId: process.env.GATSBY_GITHUB_COLLECTION_CLIENT_ID,
-  clientSecret: process.env.GATSBY_GITHUB_COLLECTION_CLIENT_SECRET,
+  clientId: process.env.GATSBY_GITHUB_CLIENT_ID,
+  clientSecret: process.env.GATSBY_GITHUB_CLIENT_SECRET,
   labels: [],
   proxy: (url: string) => `https://sparkling-silence-bf63.officeyutong.workers.dev/?${url}`,
 })

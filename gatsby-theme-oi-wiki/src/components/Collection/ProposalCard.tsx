@@ -1,12 +1,16 @@
 import { Accordion, AccordionDetails, AccordionProps, AccordionSummary, Badge, CircularProgress, Container, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { CollectionClient } from './CollectionClient'
-import { CollectionItem, CollectionUser, SortMethod } from './types'
+import { CollectionItem, CollectionUser, ProposalMeta, SortMethod } from './types'
 import { ExpandMore as ExpandMoreIcon, ThumbUp as ThumbUpIcon, Comment as CommentIcon } from '@material-ui/icons'
-interface ProposalCardProps extends CollectionItem {
+interface ProposalCardProps extends ProposalMeta {
   client: CollectionClient;
   sortMethod: SortMethod;
   user: CollectionUser;
+  id: number;
+  commentCount: number;
+  supportCount: number;
+  nodeId: string;
 }
 const useStyles = makeStyles((theme: Theme) => createStyles({
   card: {
@@ -21,6 +25,7 @@ const ProposalCard: React.FC<ProposalCardProps> = (props) => {
     url,
     id,
     description,
+    user,
   } = props
   const styles = useStyles()
   const [supportStateLoaded, setSupportStateLoaded] = useState(false)
@@ -28,13 +33,13 @@ const ProposalCard: React.FC<ProposalCardProps> = (props) => {
   const [supportCount, setSupportCount] = useState(props.supportCount)
   const [expanding, setExpanding] = useState(false)
   useEffect(() => {
-    if (!supportStateLoaded) {
+    if (!supportStateLoaded && user.login) {
       client.getSelfSupported(id).then(ok => {
         setSelfSupported(ok)
         setSupportStateLoaded(true)
       })
     }
-  }, [client, id, supportStateLoaded])
+  }, [client, id, supportStateLoaded, user.login])
   return <div className={styles.card}>
     <Accordion defaultExpanded={false} expanded={expanding} onChange={() => setExpanding(!expanding)}>
       <AccordionSummary
