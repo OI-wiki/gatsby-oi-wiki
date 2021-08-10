@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const _ = require('lodash')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
-const path = require('path')
 const { SitemapManager } = require('sitemap-manager')
 
 exports.onCreateWebpackConfig = ({ actions }) => {

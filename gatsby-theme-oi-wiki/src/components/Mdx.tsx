@@ -9,7 +9,6 @@ import { SmartLink, SmartLinkProps } from './Link'
 import SEO from './Seo'
 import StyledLayout from './StyledLayout'
 import { DeepRequiredNonNull, DeepWriteable, Nullable } from '../types/common'
-import { ReactiveHastComponents } from '../lib/reactiveHast'
 
 export interface MdxProps {
   data: DeepWriteable<DeepRequiredNonNull<GatsbyTypes.DocQuery>>
@@ -74,7 +73,7 @@ const Mdx: React.FC<MdxProps> = ({ data: { mdx }, location }) => {
     summary: Summary,
     a: LinkGetter,
     inlinecode: InlineCode,
-  } as ReactiveHastComponents
+  }
 
   const isWIP = wordCount === 0 || (tags?.findIndex((x: string) => x === 'WIP') >= 0)
 
