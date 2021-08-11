@@ -7,6 +7,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import CodeIcon from '@material-ui/icons/Code'
 
 import React from 'react'
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SmallScreenMenu: React.FC<unknown> = function (props) {
+const SmallScreenMenu: React.FC<unknown> = function (_props) {
   const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
 
   const classes = useStyles({
@@ -67,6 +68,11 @@ const SmallScreenMenu: React.FC<unknown> = function (props) {
             <LibraryBooksIcon fontSize="small" />
           </ListItemIcon>
     目录</MenuItem>
+        <MenuItem component="a" href="/play">
+          <ListItemIcon classes={{ root: classes.iconItem }}>
+            <CodeIcon fontSize="small" />
+          </ListItemIcon>
+    运行工具</MenuItem>
         <MenuItem component="a" href={OIWikiGithub}>
           <ListItemIcon classes={{ root: classes.iconItem }}>
             <GitHubIcon fontSize="small" />
