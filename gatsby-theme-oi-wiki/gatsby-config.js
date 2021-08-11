@@ -25,6 +25,8 @@ const mathRehype = IS_EXEC_BUILD
   ? [require('rehype-mathjax/chtml'), { fontURL }]
   : [require('rehype-mathjax/browser')]
 
+const { remarkDetails, rehypeDetails } = require('./gatsby-config.esm')
+
 module.exports = {
   plugins: [
     {
@@ -79,7 +81,8 @@ module.exports = {
         ],
         remarkPlugins: [
           require('remark-math'),
-          // require('remark-details'),
+          remarkDetails,
+          rehypeDetails,
           [require('@mgtd/remark-shiki'), {
             semantic: false,
             theme: 'light-plus',
@@ -87,7 +90,6 @@ module.exports = {
           }],
         ],
         rehypePlugins: [
-          require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
         ],
