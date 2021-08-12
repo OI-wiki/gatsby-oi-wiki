@@ -157,6 +157,9 @@ const TocEl: React.FC<TocProps> = (props) => {
       const behavior = settings.animation.smoothScroll ? 'smooth' : 'auto'
       if (node?.selfElement) node.selfElement.scrollIntoView({ behavior })
       else navRef.current?.scrollTo({ top: 0, behavior })
+
+      //  change hash
+      window.history.replaceState(null, '', node?.url)
     }
 
     lstScrollTopRef.current = pageScrollTop
@@ -176,7 +179,7 @@ const TocEl: React.FC<TocProps> = (props) => {
       window?.scrollTo(0, yDis)
     }
 
-    history.pushState(null, '', hash)
+    window?.history.pushState(null, '', hash)
     clickedRef.current = true
 
     // clear last unfinished timeout
