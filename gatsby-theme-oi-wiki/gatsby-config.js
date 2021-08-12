@@ -107,7 +107,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-react-helmet',
     },
-    ...needPlugin(IS_PROD, {
+    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'OI Wiki',
