@@ -39,7 +39,7 @@ module.exports = {
       },
     },
     ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
-    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-transformer-sharp'),
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
@@ -107,7 +107,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-react-helmet',
     },
-    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
+    ...needPlugin(IS_PROD, {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'OI Wiki',
