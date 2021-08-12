@@ -4,7 +4,8 @@ const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
   process.env.NODE_ENV === 'production' ||
   process.env.RENDER === 'true'
-
+const ENABLE_IMAGE_PLUGINS = false
+  
 /**
  * 根据条件生成配置，需要展开
  * @param cond boolean 条件
@@ -37,15 +38,13 @@ module.exports = {
         path: path.resolve('./docs'),
       },
     },
-    ...needPlugin(IS_PROD, 'gatsby-plugin-sharp'),
-    {
-      resolve: 'gatsby-transformer-sharp',
-    },
+    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
+    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-transformer-sharp'),
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
-          ...needPlugin(IS_PROD, {
+          ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 900,
