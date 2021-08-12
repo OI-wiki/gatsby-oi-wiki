@@ -1,0 +1,5 @@
+name: "Divide and Conquer Example 1"
+target: { test: false }
+solution:
+  cpp: 'code/dnd.cpp'
+  python: 'code/dnd.py'

@@ -76,6 +76,9 @@ module.exports = {
           {
             resolve: path.resolve(__dirname, 'plugins/gatsby-remark-snippets'),
           },
+          {
+            resolve: path.resolve(__dirname, 'plugins/gatsby-remark-problem'),
+          },
         ],
         remarkPlugins: [
           require('remark-math'),
