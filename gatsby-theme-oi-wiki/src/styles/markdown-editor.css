@@ -1,0 +1,29 @@
+.bytemd {
+	color: rgba(var(--text-primary));
+	background-color: rgba(var(--background-paper));
+	border-color: rgba(var(--divider));
+	border-radius: 3px;
+}
+
+.bytemd-toolbar {
+	border-color: rgba(var(--divider));
+	background-color: rgba(var(--background-paper));
+}
+
+.bytemd-status {
+	border-top-color: rgba(var(--divider));
+}
+
+.bytemd-split .bytemd-preview,
+.bytemd-sidebar {
+	border-color: rgba(var(--divider));
+}
+
+.bytemd-toolbar-icon[bytemd-tippy-path="4"] {
+	display: none;
+}
+
+.CodeMirror {
+	background-color: rgba(var(--background-paper));
+	color: rgba(var(--text-primary));
+}
