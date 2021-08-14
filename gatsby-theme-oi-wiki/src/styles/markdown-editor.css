@@ -3,6 +3,7 @@
 	background-color: rgba(var(--background-paper));
 	border-color: rgba(var(--divider));
 	border-radius: 3px;
+	flex-grow: 1;
 }
 
 .bytemd-toolbar {

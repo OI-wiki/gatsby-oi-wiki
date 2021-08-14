@@ -82,6 +82,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 				theme == "dark" ? "cm-s-vscode-dark" : "cm-s-default"
 			);
 		}
+		$(".bytemd").unwrap();
 	});
 	return (
 		<Editor
