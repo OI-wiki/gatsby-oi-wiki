@@ -1,6 +1,7 @@
 import "bytemd/dist/index.css";
-import "./styles/vscode-dark.css";
-import "./styles/markdown-editor.css";
+import "./styles/override.css";
+import "./styles/highlight/override.css";
+import "./styles/code-mirror/vscode-dark.css";
 import { Editor } from "@bytemd/react";
 import breaks from "@bytemd/plugin-breaks";
 import footnotes from "@bytemd/plugin-footnotes";
@@ -18,7 +19,7 @@ import React, { useState, useEffect } from "react";
 
 interface MarkdownPlugin {
 	math: boolean;
-	details: true;
+	details: boolean;
 	breaks: boolean;
 	footnotes: boolean;
 	frontmatter: boolean;
@@ -37,13 +38,13 @@ interface MarkdownEditorProps {
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 	plugins = {
 		math: true,
-		details: false,
+		highlight: true,
+		details: true,
 		breaks: false,
 		footnotes: false,
 		frontmatter: false,
 		gemoji: true,
 		gfm: false,
-		highlight: false,
 		mediumZoom: false,
 		mermaid: false,
 	},
@@ -85,6 +86,16 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 					href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
 					integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
 					crossOrigin="anonymous"
+				/>
+			)}
+			{plugins.highlight && (
+				<link
+					rel="stylesheet"
+					href={
+						"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.2.0/build/styles/" +
+						(theme == "dark" ? "vs2015" : "vs") +
+						".min.css"
+					}
 				/>
 			)}
 			<Editor
