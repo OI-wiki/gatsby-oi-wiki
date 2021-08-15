@@ -2,6 +2,7 @@ import "bytemd/dist/index.css";
 import "./styles/override.css";
 import "./styles/highlight/override.css";
 import "./styles/code-mirror/vscode-dark.css";
+import "basic-type-extensions";
 import { Editor } from "@bytemd/react";
 import breaks from "@bytemd/plugin-breaks";
 import footnotes from "@bytemd/plugin-footnotes";
@@ -16,6 +17,7 @@ import details from "./plugins/details";
 import { BytemdPlugin } from "bytemd";
 import $ from "jquery";
 import React, { useState, useEffect } from "react";
+import { DeepPartial } from "../../types/common";
 
 interface MarkdownPlugin {
 	math: boolean;
@@ -35,21 +37,22 @@ interface MarkdownEditorProps {
 	plugins?: MarkdownPlugin;
 }
 
-const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
-	plugins = {
-		math: true,
-		highlight: true,
-		details: true,
-		breaks: false,
-		footnotes: false,
-		frontmatter: false,
-		gemoji: true,
-		gfm: false,
-		mediumZoom: false,
-		mermaid: false,
-	},
-	...props
-}) => {
+const MarkdownEditor: React.FC<DeepPartial<MarkdownEditorProps>> = (props) => {
+	const plugins: MarkdownPlugin = Object.innerAssign(
+		{
+			math: true,
+			highlight: true,
+			details: true,
+			breaks: false,
+			footnotes: false,
+			frontmatter: false,
+			gemoji: true,
+			gfm: false,
+			mediumZoom: false,
+			mermaid: true,
+		},
+		props.plugins
+	);
 	const enabledPlugins: BytemdPlugin[] = [];
 	if (plugins.math) enabledPlugins.push(math());
 	if (plugins.details) enabledPlugins.push(details());
@@ -61,7 +64,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
 	if (plugins.highlight) enabledPlugins.push(highlight());
 	if (plugins.mediumZoom) enabledPlugins.push(mediumZoom());
 	if (plugins.mermaid) enabledPlugins.push(mermaid());
-	const [value, setValue] = useState(props.value);
+	const [value, setValue] = useState(props.value ?? "");
 	let theme: "dark" | "light" = "light";
 	const dataTheme = $("html").attr("data-theme");
 	if (dataTheme == "dark") theme = "dark";

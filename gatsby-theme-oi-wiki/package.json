@@ -29,6 +29,7 @@
     "@mgtd/vssue-api-github-v3": "^2.4.8",
     "@mgtd/vssue-api-github-v4": "^2.4.5",
     "autosuggest-highlight": "^3.1.1",
+    "basic-type-extensions": "^1.13.0",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.3.0",
