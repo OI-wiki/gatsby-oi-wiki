@@ -12,3 +12,6 @@ export type DeepRequiredNonNull<T> = {
 export type DeepWriteable<T> = {
   -readonly [P in keyof T]: DeepWriteable<T[P]>
 };
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[] ? DeepPartial<U>[] : DeepPartial<T[P]>
+}

@@ -1,6 +1,7 @@
 import usePersistedState from 'use-persisted-state'
-import { LabeledPaletteColor } from '../styles/colors'
 import merge from 'deepmerge'
+import { LabeledPaletteColor } from '../styles/colors'
+import { DeepPartial } from '../types/common'
 
 export interface Settings {
   darkMode: {
@@ -36,14 +37,11 @@ const defaultSettings: Settings = {
 
 // https://stackoverflow.com/questions/41980195/recursive-partialt-in-typescript
 // 第一个回答会让 linter unhappy, 所以魔改了一下
-type RecursivePartial<T> = {
-  [P in keyof T]?: T[P] extends (infer U)[] ? RecursivePartial<U>[] : RecursivePartial<T[P]>
-};
 
-export const useSetting = (): [Settings, (s: RecursivePartial<Settings>) => void] => {
+export const useSetting = (): [Settings, (s: DeepPartial<Settings>) => void] => {
   const [settings, setSettings] = usePersistedState('settings')(defaultSettings)
 
-  const updateSetting = (newSettings: RecursivePartial<Settings>): void => {
+  const updateSetting = (newSettings: DeepPartial<Settings>): void => {
     const finalSettings = merge.all([defaultSettings, settings, newSettings]) as Settings
     setSettings(finalSettings)
     window !== undefined && window['onthemechange'](finalSettings)
