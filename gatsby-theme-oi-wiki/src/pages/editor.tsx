@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import MarkdownEditor from "../components/MarkdownEditor";
+import MarkdownEditor from "../components/Editor/MarkdownEditor";
 import StyledLayout from "../components/StyledLayout";
 
 export default class EditorPage extends React.Component {
