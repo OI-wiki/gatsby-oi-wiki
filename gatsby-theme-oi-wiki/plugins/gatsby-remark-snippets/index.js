@@ -27,7 +27,6 @@ module.exports.mutateSource = async function({ markdownNode, files, loadNodeCont
             }
             contents[i] = await loadNodeContent(fileNode)
             contents[i] = contents[i].split("\n").map(l => spaceString + l).join('\n')
-            console.log(contents[i])
         }
     }
     markdownNode.internal.content = contents.join("\n")
