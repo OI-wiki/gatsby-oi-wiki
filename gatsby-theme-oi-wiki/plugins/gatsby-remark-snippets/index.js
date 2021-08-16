@@ -15,6 +15,8 @@ module.exports = {}
 module.exports.mutateSource = async function({ markdownNode, files, loadNodeContent }) {
     const contents = markdownNode.internal.content.split("\n")
     for (const i in contents) {
+        const spacesAtStart = contents[i].length - contents[i].trimLeft().length
+        const spaceString = ' '.repeat(spacesAtStart)
         const val = contents[i].trim()
         if (val.startsWith(SNIPPET_TOKEN)) {
             const path = resolvePath(val)
@@ -24,6 +26,8 @@ module.exports.mutateSource = async function({ markdownNode, files, loadNodeCont
                 continue
             }
             contents[i] = await loadNodeContent(fileNode)
+            contents[i] = contents[i].split("\n").map(l => spaceString + l).join('\n')
+            console.log(contents[i])
         }
     }
     markdownNode.internal.content = contents.join("\n")
