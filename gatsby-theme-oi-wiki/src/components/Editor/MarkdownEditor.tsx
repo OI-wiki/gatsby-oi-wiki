@@ -3,6 +3,7 @@ import "./styles/override.css";
 import "./styles/highlight/override.css";
 import "./styles/code-mirror/vscode-dark.css";
 import "basic-type-extensions";
+import { BytemdPlugin } from "bytemd";
 import { Editor } from "@bytemd/react";
 import breaks from "@bytemd/plugin-breaks";
 import footnotes from "@bytemd/plugin-footnotes";
@@ -14,7 +15,7 @@ import math from "@bytemd/plugin-math-ssr";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 import mermaid from "@bytemd/plugin-mermaid";
 import details from "./plugins/details";
-import { BytemdPlugin } from "bytemd";
+import pseudo from "./plugins/pseudo";
 import $ from "jquery";
 import React, { useState, useEffect } from "react";
 import { DeepPartial } from "../../types/common";
@@ -54,6 +55,7 @@ const MarkdownEditor: React.FC<DeepPartial<MarkdownEditorProps>> = (props) => {
 		props.plugins
 	);
 	const enabledPlugins: BytemdPlugin[] = [];
+	enabledPlugins.push(pseudo());
 	if (plugins.math) enabledPlugins.push(math());
 	if (plugins.details) enabledPlugins.push(details());
 	if (plugins.breaks) enabledPlugins.push(breaks());
