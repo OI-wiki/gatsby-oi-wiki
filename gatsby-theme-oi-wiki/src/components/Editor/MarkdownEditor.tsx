@@ -10,15 +10,14 @@ import footnotes from "@bytemd/plugin-footnotes";
 import frontmatter from "@bytemd/plugin-frontmatter";
 import gemoji from "@bytemd/plugin-gemoji";
 import gfm from "@bytemd/plugin-gfm";
-import highlight from "@bytemd/plugin-highlight-ssr";
 import math from "@bytemd/plugin-math-ssr";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 import mermaid from "@bytemd/plugin-mermaid";
+import highlight from "@bytemd/plugin-highlight-ssr";
 import details from "./plugins/details";
 import pseudo from "./plugins/pseudo";
 import $ from "jquery";
 import React, { useState, useEffect } from "react";
-import { DeepPartial } from "../../types/common";
 
 interface MarkdownPlugin {
 	math: boolean;
@@ -35,25 +34,32 @@ interface MarkdownPlugin {
 
 interface MarkdownEditorProps {
 	value: string;
-	plugins?: MarkdownPlugin;
+	plugins?: Partial<MarkdownPlugin>;
 }
 
-const MarkdownEditor: React.FC<DeepPartial<MarkdownEditorProps>> = (props) => {
-	const plugins: MarkdownPlugin = Object.innerAssign(
-		{
-			math: true,
-			highlight: true,
-			details: true,
-			breaks: false,
-			footnotes: false,
-			frontmatter: false,
-			gemoji: true,
-			gfm: false,
-			mediumZoom: false,
-			mermaid: true,
-		},
-		props.plugins
-	);
+const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = (props) => {
+	const plugins: MarkdownPlugin = {
+		math: true,
+		highlight: true,
+		details: true,
+		breaks: false,
+		footnotes: false,
+		frontmatter: false,
+		gemoji: true,
+		gfm: false,
+		mediumZoom: false,
+		mermaid: true,
+		...props.plugins,
+	};
+	let theme: "dark" | "light" = "light";
+	const dataTheme = $("html").attr("data-theme");
+	if (dataTheme == "dark") theme = "dark";
+	else if (
+		dataTheme == "auto" &&
+		window.matchMedia("(prefers-color-scheme: dark)")
+	) {
+		theme = "dark";
+	}
 	const enabledPlugins: BytemdPlugin[] = [];
 	enabledPlugins.push(pseudo());
 	if (plugins.math) enabledPlugins.push(math());
@@ -67,15 +73,6 @@ const MarkdownEditor: React.FC<DeepPartial<MarkdownEditorProps>> = (props) => {
 	if (plugins.mediumZoom) enabledPlugins.push(mediumZoom());
 	if (plugins.mermaid) enabledPlugins.push(mermaid());
 	const [value, setValue] = useState(props.value ?? "");
-	let theme: "dark" | "light" = "light";
-	const dataTheme = $("html").attr("data-theme");
-	if (dataTheme == "dark") theme = "dark";
-	else if (
-		dataTheme == "auto" &&
-		window.matchMedia("(prefers-color-scheme: dark)")
-	) {
-		theme = "dark";
-	}
 	useEffect(() => {
 		$(".bytemd")
 			.parent()

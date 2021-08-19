@@ -14,7 +14,7 @@ export default class EditorPage extends React.Component {
 				overflow={true}
 				title="Markdown编辑器"
 			>
-				<MarkdownEditor value="" plugins={{ details: false }} />
+				<MarkdownEditor value="" />
 			</StyledLayout>
 		);
 	}
