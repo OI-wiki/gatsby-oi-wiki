@@ -1,26 +1,26 @@
 {
-  "private": true,
-  "workspaces": [
-    "gatsby-theme-oi-wiki",
-    "example"
-  ],
-  "scripts": {
-    "dev": "yarn workspace example develop",
-    "develop": "yarn workspace example develop",
-    "build": "yarn workspace example build && cp -r example/public public",
-    "clean": "yarn workspace example clean && rm -rf public .cache",
-    "lint": "yarn workspace gatsby-theme-oi-wiki eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "cl-dev": "yarn workspace example clean && rm -rf public .cache && yarn workspace example develop"
-  },
-  "devDependencies": {
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "3.3.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.0.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  }
+	"private": true,
+	"workspaces": [
+		"gatsby-theme-oi-wiki",
+		"example"
+	],
+	"scripts": {
+		"dev": "yarn workspace example develop",
+		"develop": "yarn workspace example develop",
+		"build": "yarn workspace example build && cp -r example/public public",
+		"clean": "yarn workspace example clean && rm -rf public .cache",
+		"lint": "yarn workspace gatsby-theme-oi-wiki eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+		"cl-dev": "yarn workspace example clean && rm -rf public .cache && yarn workspace example develop"
+	},
+	"devDependencies": {
+		"commitizen": "^4.2.4",
+		"cz-conventional-changelog": "3.3.0",
+		"husky": "^7.0.1",
+		"lint-staged": "^11.0.0"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	}
 }

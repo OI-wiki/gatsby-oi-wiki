@@ -28,7 +28,11 @@ const mathRehype = IS_EXEC_BUILD
 	? [require("rehype-mathjax/chtml"), { fontURL }]
 	: [require("rehype-mathjax/browser")];
 
-const { remarkDetails, rehypeDetails } = require("./gatsby-config.esm");
+const {
+	remarkDetails,
+	rehypeDetails,
+	rehypePseudo,
+} = require("./gatsby-config.esm");
 
 module.exports = {
 	plugins: [
@@ -64,31 +68,25 @@ module.exports = {
 							ignoreFileExtensions: ["md"],
 						},
 					},
-					/** {
-              resolve: `gatsby-remark-autolink-headers`,
-              options: {
-                isIconAfterHeader: true,
-              },
-            }, */
 					{
 						resolve: "gatsby-local-autolink-headers",
 						options: {
 							isIconAfterHeader: true,
 						},
 					},
-					{
+					/*{
 						resolve: path.resolve(
 							__dirname,
 							"plugins/gatsby-remark-snippets"
 						),
-					},
+					},*/
 				],
 				remarkPlugins: [
 					require("remark-math"),
 					remarkDetails,
 					rehypeDetails,
 					[
-						require("@mgtd/remark-shiki"),
+						require("remark-shiki").remarkShiki,
 						{
 							semantic: false,
 							theme: "light-plus",
@@ -97,7 +95,8 @@ module.exports = {
 					],
 				],
 				rehypePlugins: [
-					require("./plugins/rehype-pseudocodejs"),
+					rehypePseudo,
+					//require("./plugins/rehype-pseudocodejs"),
 					mathRehype,
 				],
 				// extensions: ['.mdx', '.md'],
