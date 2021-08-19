@@ -72,6 +72,7 @@ module.exports = {
 			files: [
 				".eslintrc.js",
 				"gatsby-config.js",
+				"gatsby-config.esm.js",
 				"gatsby-node.js",
 				"gatsby-ssr.js",
 				"gatsby-browser.js",
