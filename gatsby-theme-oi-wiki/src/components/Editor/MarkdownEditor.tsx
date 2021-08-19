@@ -44,11 +44,11 @@ const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = (props) => {
 		details: true,
 		breaks: false,
 		footnotes: false,
-		frontmatter: false,
+		frontmatter: true,
 		gemoji: true,
 		gfm: false,
 		mediumZoom: false,
-		mermaid: true,
+		mermaid: false,
 		...props.plugins,
 	};
 	let theme: "dark" | "light" = "light";
