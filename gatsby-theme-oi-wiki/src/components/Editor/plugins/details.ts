@@ -1,10 +1,9 @@
 import { BytemdPlugin } from "bytemd";
+import remarkDetails from "remark-details";
+import rehypeDetails from "rehype-details";
 
-const remarkDetails = require("remark-details");
-const rehypeDetails = require("rehype-details");
 export default function math(): BytemdPlugin {
 	return {
-		remark: u => u.use(remarkDetails),
-		rehype: u => u.use(rehypeDetails)
+		remark: processor => processor.use(remarkDetails as any).use(rehypeDetails as any),
 	}
 }
