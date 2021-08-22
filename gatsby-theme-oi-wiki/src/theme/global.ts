@@ -31,6 +31,7 @@ const globalStyles = withStyles((theme) => ({
     },
     html: {
       '--code-block-font': '"Fira Mono", "Menlo", "Monaco", "Consolas", "Andale Mono", "Ubuntu Mono", "Courier New", "Hack", "Fira Code", "Jetbrains Mono", monospace',
+      'color-scheme': 'var(--color-scheme)',
     },
     'html[data-monofont=fallback]': {
       '--code-block-font': 'monospace',
