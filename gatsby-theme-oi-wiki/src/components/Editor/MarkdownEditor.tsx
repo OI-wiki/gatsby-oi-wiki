@@ -16,7 +16,6 @@ import mermaid from "@bytemd/plugin-mermaid";
 import highlight from "@bytemd/plugin-highlight-ssr";
 import details from "./plugins/details";
 import pseudo from "./plugins/pseudo";
-import $ from "jquery";
 import React, { useState, useEffect } from "react";
 
 interface MarkdownPlugin {
@@ -52,7 +51,10 @@ const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = (props) => {
 		...props.plugins,
 	};
 	let theme: "dark" | "light" = "light";
-	const dataTheme = $("html").attr("data-theme");
+	const dataTheme = document
+		.getElementsByTagName("html")
+		.item(0)
+		?.getAttribute("data-theme");
 	if (dataTheme == "dark") theme = "dark";
 	else if (
 		dataTheme == "auto" &&
@@ -74,11 +76,14 @@ const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = (props) => {
 	if (plugins.mermaid) enabledPlugins.push(mermaid());
 	const [value, setValue] = useState(props.value ?? "");
 	useEffect(() => {
-		$(".bytemd")
-			.parent()
-			.css("flex-grow", 1)
-			.css("display", "flex")
-			.css("flex-direction", "column");
+		const containerEl = document
+			.getElementsByClassName("bytemd")
+			.item(0)?.parentElement;
+		if (containerEl != null) {
+			containerEl.style.flexGrow = "1";
+			containerEl.style.display = "flex";
+			containerEl.style.flexDirection = "column";
+		}
 	});
 	return (
 		<>
