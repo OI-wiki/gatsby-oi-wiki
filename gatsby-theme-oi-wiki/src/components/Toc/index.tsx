@@ -1,4 +1,4 @@
-import { Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Slug from 'github-slugger'
 
@@ -69,12 +69,7 @@ const TocEl: React.FC<TocProps> = (props) => {
   const { toc } = props
   const items = toc
   const classes = useStyles()
-  const theme = useTheme()
   const [settings] = useSetting()
-
-  const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
-  const tabHeight = isMdDown ? 64 : 112
-  const scrollPadding = 24
 
   const newItems = useRef(TocConverter(items))
   const clickedRef = useRef(false)
@@ -82,6 +77,7 @@ const TocEl: React.FC<TocProps> = (props) => {
   const [activeState, setActiveState] = useState<Nullable<Node>>(null)
   const lstScrollTopRef = useRef(0)
   const navRef = useRef<HTMLElement>(null)
+  const behavior = settings.animation.smoothScroll ? 'smooth' : 'auto'
 
   useEffect(() => {
     bindHTMLElement(newItems.current)
@@ -121,7 +117,7 @@ const TocEl: React.FC<TocProps> = (props) => {
   const activeTocOnScroll = useCallback((): void => {
     if (clickedRef.current) return
 
-    const TO_TOP_DIS = tabHeight + scrollPadding + 20
+    const TO_TOP_DIS = 20
     const pageScrollTop = window?.pageYOffset || document.documentElement.scrollTop
     let node: Nullable<Node> = activeState || newItems.current[0]
 
@@ -152,13 +148,15 @@ const TocEl: React.FC<TocProps> = (props) => {
       updateActive(node)
 
       // scroll the toc
-      const behavior = settings.animation.smoothScroll ? 'smooth' : 'auto'
       if (node?.selfElement) node.selfElement.scrollIntoView({ behavior })
       else navRef.current?.scrollTo({ top: 0, behavior })
+
+      //  change hash
+      window.history.replaceState(null, '', node?.url)
     }
 
     lstScrollTopRef.current = pageScrollTop
-  }, [activeState, getNextItem, getPrevItem, settings.animation.smoothScroll, tabHeight, updateActive])
+  }, [activeState, behavior, getNextItem, getPrevItem, updateActive])
 
   useThrottledOnScroll(activeTocOnScroll, 100)
 
@@ -166,7 +164,7 @@ const TocEl: React.FC<TocProps> = (props) => {
     event.preventDefault()
 
     const hash = item.url
-    const yDis = (item.element?.getBoundingClientRect().top || 0) + window?.pageYOffset - tabHeight - scrollPadding
+    const yDis = (item.element?.getBoundingClientRect().top || 0) + window?.pageYOffset
 
     if (settings.animation.smoothScroll) {
       smoothScrollTo(yDis)
@@ -174,7 +172,7 @@ const TocEl: React.FC<TocProps> = (props) => {
       window?.scrollTo(0, yDis)
     }
 
-    history.pushState(null, '', hash)
+    window?.history.pushState(null, '', hash)
     clickedRef.current = true
 
     // clear last unfinished timeout
