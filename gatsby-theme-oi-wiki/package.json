@@ -15,7 +15,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.58",
-    "@mgtd/remark-shiki": "^2.0.1",
+    "@mgtd/remark-shiki": "^2.1.0",
     "@mgtd/vssue-api-github-v3": "^2.4.8",
     "@mgtd/vssue-api-github-v4": "^2.4.5",
     "autosuggest-highlight": "^3.1.1",
