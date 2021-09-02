@@ -5,11 +5,15 @@ import {
   makeStyles,
   Paper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core'
 import { AccessTime, Storage } from '@material-ui/icons'
 import React from 'react'
 import type { TransformedResponseData } from '../lib/play/useRunner'
 import { Indicator, IndicatorProps } from './Indicator'
+import useDarkMode from '../lib/useDarkMode'
+import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,17 +28,29 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   statusLine: {
-    margin: `${theme.spacing(1)}px 0`,
+    '& > *': {
+      margin: `${theme.spacing(1)}px 0`,
+    },
   },
-  measurement: {
+  basicInfo: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 'auto',
+  },
+  basicInfoSm: {
+    alignItems: 'flex-end',
+    flexDirection: 'column',
+  },
+  measurement: ({ darkMode }: { darkMode: boolean }) => ({
     display: 'inline-flex',
     alignItems: 'center',
-    color: theme.palette.grey[600],
+    color: theme.palette.grey[darkMode ? 400 : 600],
     '& > svg': {
       marginLeft: 16,
       marginRight: 4,
     },
-  },
+  }),
   compilationTitle: {
     color: theme.palette.warning.dark,
     fontWeight: 'bold',
@@ -66,7 +82,9 @@ export const Output = React.forwardRef<
   unknown,
   { output: TransformedResponseData | null }
 >(({ output }, ref) => {
-  const classes = useStyles()
+  const classes = useStyles({ darkMode: useDarkMode() })
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('xs'))
 
   const {
     time = '?',
@@ -79,23 +97,27 @@ export const Output = React.forwardRef<
 
   return (
     <Paper ref={ref} className={classes.root}>
-      <Grid container alignItems="center" className={classes.statusLine}>
-        <Grid item style={{ flexGrow: 1 }}>
+      <Grid container className={classes.statusLine}>
+        <Grid item>
           <Typography variant="h6">提交详情</Typography>
         </Grid>
-        <Grid item>
+        <Box
+          className={clsx(classes.basicInfo, {
+            [classes.basicInfoSm]: matches,
+          })}
+        >
           <Indicator type={statusSeverityMap[status]} msg={status} />
-        </Grid>
-        <Grid item>
-          <Box className={classes.measurement}>
-            <AccessTime fontSize="small" />
-            <Typography display="inline">{time}ms</Typography>
+          <Box style={matches ? { marginTop: 8, marginBottom: -28 } : {}}>
+            <Box className={classes.measurement}>
+              <AccessTime fontSize="small" />
+              <Typography display="inline">{time}ms</Typography>
+            </Box>
+            <Box className={classes.measurement}>
+              <Storage fontSize="small" />
+              <Typography display="inline">{memory}KB</Typography>
+            </Box>
           </Box>
-          <Box className={classes.measurement}>
-            <Storage fontSize="small" />
-            <Typography display="inline">{memory}KB</Typography>
-          </Box>
-        </Grid>
+        </Box>
       </Grid>
       {ceInfo && (
         <>
@@ -111,12 +133,9 @@ export const Output = React.forwardRef<
           <pre>{stderr}</pre>
         </>
       )}
-      <>
-        <Typography className={classes.outTitle}>输出</Typography>
-        <Divider />
-        <pre>{stdout === '' ? '似乎没有输出哦...' : stdout}</pre>
-      </>
-      <pre></pre>
+      <Typography className={classes.outTitle}>输出</Typography>
+      <Divider />
+      <pre>{stdout === '' ? '似乎没有输出哦...' : stdout}</pre>
     </Paper>
   )
 })

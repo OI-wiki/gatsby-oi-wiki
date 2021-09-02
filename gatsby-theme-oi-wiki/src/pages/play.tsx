@@ -168,12 +168,12 @@ export default function Playground({
             </Button>
           </ButtonGroup>
         </Grid>
-        <Grid item style={{ flexGrow: 1 }}>
+        <Grid item>
           <Fade in={!!runInfo}>
             <Indicator type={undefined} msg="" {...runInfo} />
           </Fade>
         </Grid>
-        <Grid item>
+        <Grid item style={{ marginLeft: "auto" }}>
           <FormControlLabel
             checked={o2}
             control={
