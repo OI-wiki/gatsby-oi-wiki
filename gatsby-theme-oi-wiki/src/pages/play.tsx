@@ -79,8 +79,8 @@ export type PlaygroundLocationState = Partial<{
 export default function Playground({
   location,
 }: PageProps<unknown, unknown, PlaygroundLocationState>): React.ReactElement {
-  // state maybe undefined in gatsby build
-  const { state: locState = {} } = location
+  // state maybe undefined/null in gatsby build
+  const locState = location.state ?? {}
 
   const classes = useStyles()
 
