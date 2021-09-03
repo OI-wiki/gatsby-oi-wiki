@@ -65,7 +65,10 @@ export default function Code({
       <Tooltip
         title={copyToolTipText}
         onClose={() => {
-          setCopyToolTipText('复制')
+          // workaround for delay of css transition
+          setTimeout(() => {
+            setCopyToolTipText('复制')
+          }, 250)
         }}
         arrow
       >
