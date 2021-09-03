@@ -112,7 +112,7 @@ export function useRunner (
       .finally(() => {
         setWaiting(false)
       })
-  }, [onError, onResponse, req])
+  }, [onError, onResponse, req]) // FIXME: req is always changing, the useCallback cache is useless
 
   return { sendRunnerReq, waiting }
 }
