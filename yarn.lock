@@ -1938,10 +1938,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-2.0.0-next.8.tgz#66ecc27b78e07a3ea2eb1a8fc5a99dfa0ba96690"
   integrity sha512-T0BcXmNzEunFkuxrO8BFw44htvTPuAoKbLvTG41otyZBDV1Rs+JMddcUuaP5vXpTWtgD3grhcrPEwyx88RUumQ==
 
-"@mgtd/remark-shiki@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.1.0.tgz#490a31274acace5be021a7e7745a95140a253a4c"
-  integrity sha512-e7UG7qdBCBhImXDw/R9wDtBermO+oNJPGVSDtAQYn4iofuG+V4IYOLslranJclLz7q4Xev57W6s6B1Ka4j81WA==
+"@mgtd/remark-shiki@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.1.1.tgz#5d4fd704ecc740e1dd8c54395b60513030f7d20f"
+  integrity sha512-W3OQuztc/W2uUK7mEJBmiT7QktHYFP13WWhUYrxbulDQvo7awjqzSDfdMU18F4y2XmzlxJ8a89tHBMHPPCNxPQ==
   dependencies:
     shiki "^0.9.6"
     unist-util-visit "^2.0.3"

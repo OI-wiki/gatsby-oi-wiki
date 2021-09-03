@@ -79,7 +79,7 @@ module.exports = {
         remarkPlugins: [
           require('remark-math'),
           require('remark-details'),
-          [require('@mgtd/remark-shiki'), {
+          [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
             theme: 'light-plus',
             skipInline: true,
