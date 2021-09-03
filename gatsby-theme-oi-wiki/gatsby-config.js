@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
-                process.env.NODE_ENV === 'production' ||
-                process.env.RENDER === 'true'
+  process.env.NODE_ENV === 'production' ||
+  process.env.RENDER === 'true'
+const ENABLE_IMAGE_PLUGINS = false
 
 /**
  * 根据条件生成配置，需要展开
@@ -45,15 +45,13 @@ module.exports = {
         path: path.resolve(__dirname, 'static'),
       },
     },
-    ...needPlugin(IS_PROD, 'gatsby-plugin-sharp'),
-    {
-      resolve: 'gatsby-transformer-sharp',
-    },
+    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
-          ...needPlugin(IS_PROD, {
+          ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 900,
@@ -82,15 +80,15 @@ module.exports = {
             },
           },
           {
-            resolve: path.resolve(__dirname, "plugins/gatsby-remark-snippets"),
+            resolve: path.resolve(__dirname, 'plugins/gatsby-remark-snippets'),
           },
         ],
         remarkPlugins: [
           require('remark-math'),
           require('remark-details'),
-          [require('@mgtd/remark-shiki'), {
+          [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
-            theme: 'light-plus',
+            theme: 'css-variables',
             skipInline: true,
           }],
         ],
@@ -98,6 +96,16 @@ module.exports = {
           require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
+          function transformCodeBlock() {
+            return (tree) => {
+              const visit = require('unist-util-visit')
+              visit(tree, 'element', (node) => {
+                if (typeof node.properties.dataLanguage !== 'undefined') {
+                  node.tagName = 'codeblock'
+                }
+              })
+            }
+          },
         ],
         extensions: ['.mdx', '.md'],
       },
@@ -163,65 +171,13 @@ module.exports = {
         emitSchema: {
           [path.resolve(__dirname, 'src/__generated__/gatsby-schema.graphql')]: true,
           [path.resolve(__dirname, 'src/__generated__/gatsby-introspection.json')]: true,
-          'src/__generated__/gatsby-schema.graphql': true,
         },
         emitPluginDocuments: {
           [path.resolve(__dirname, 'src/__generated__/gatsby-plugin-documents.graphql')]: true,
         },
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-ts',
-    //   options: {
-    //     tsloader: {
-    //       loglevel: 'warn',
-    //     },
-    //     forktscheckerplugin: {
-    //       eslint: true,
-    //     },
-    //     filename: 'types/graphql-types.ts',
-    //     codegen: true,
-    //     codegendelay: 250,
-    //     alwayscheck: false,
-    //   },
-    // },
-    // {
-    //   resolve: 'gatsby-plugin-advanced-sitemap',
-    //   options: {
-    //     // 1 query for each data type
-    //     query: `
-    //     {
-    //       allMarkdownRemark {
-    //         edges {
-    //           node {
-    //             id
-    //             fields{
-    //               slug
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }`,
-    //     mapping: {
-    //       // Each data type can be mapped to a predefined sitemap
-    //       // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
-    //       // The default sitemap - if none is passed - will be pages
-    //       allMarkdownRemark: {
-    //         sitemap: 'documents',
-    //       },
-    //     },
-    //     exclude: [
-    //       '/dev-404-page/',
-    //       '/404.tsx/',
-    //       '/404.html',
-    //       '/offline-plugin-app-shell-fallback/',
-    //       //          `/(\/)?hash-\S*/`, // you can also pass valid RegExp to exclude internal tags for example
-    //     ],
-    //     createLinkInHead: true, // optional: create a link in the `<head>` of your site
-    //     addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
-    //   },
-    // },
-    // 'gatsby-plugin-preact',
+    'gatsby-plugin-preact',
     // "gatsby-plugin-webpack-bundle-analyser-v2",
     // when you need to analyze bundle size, enable it
   ],

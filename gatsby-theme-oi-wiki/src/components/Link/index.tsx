@@ -6,10 +6,10 @@ import LinkTooltip from './LinkTooltip'
 import path from 'path'
 import clsx from 'clsx'
 import { GatsbyLinkProps } from 'gatsby-link'
-import smoothScrollTo from "../../lib/smoothScroll";
-import { useSetting } from "../../lib/useSetting";
-import { useMediaQuery, useTheme } from "@material-ui/core";
-import { OnClickHandler } from "../../types/common";
+import smoothScrollTo from '../../lib/smoothScroll'
+import { useSetting } from '../../lib/useSetting'
+import { useMediaQuery, useTheme } from '@material-ui/core'
+import { OnClickHandler } from '../../types/common'
 
 const MD_EXPR = /\.(md|markdown|mdtext|mdx)/g
 const NO_SLASH_EXPR = /[^/]$/

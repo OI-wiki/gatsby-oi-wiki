@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     right: 8,
   },
   runBtn: {
-    right: theme.spacing(5) + 8,
+    right: theme.spacing(4) + 8,
   },
 }))
 

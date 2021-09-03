@@ -59,17 +59,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-// mock runner api
-// FIXME: Cause error during webpack dev or just switch to normal import
-// if (process.env.NODE_ENV === 'development') {
-//   Promise.all([import('msw'), import('../lib/play/mockRunnerHandler')]).then(
-//     ([{ setupWorker }, { handlers }]) => {
-//       const worker = setupWorker(...handlers)
-//       worker.start({ onUnhandledRequest: 'bypass' })
-//     },
-//   )
-// }
-
 export type PlaygroundLocationState = Partial<{
   lang: LangType
   code: string
@@ -173,7 +162,7 @@ export default function Playground({
             <Indicator type={undefined} msg="" {...runInfo} />
           </Fade>
         </Grid>
-        <Grid item style={{ marginLeft: "auto" }}>
+        <Grid item style={{ marginLeft: 'auto' }}>
           <FormControlLabel
             checked={o2}
             control={

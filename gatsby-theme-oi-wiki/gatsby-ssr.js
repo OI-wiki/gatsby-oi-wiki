@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const React = require('react')
 const script = require('./static/script')
 
@@ -9,25 +8,25 @@ const HtmlAttributes = {
 }
 
 const HeadComponents = [
-  <meta key="charset" charSet="utf-8" />,
-  <meta key="ua" httpEquiv="x-ua-compatible" content="ie=edge" />,
+  <meta key="charset" charSet="utf-8"/>,
+  <meta key="ua" httpEquiv="x-ua-compatible" content="ie=edge"/>,
   <meta key="viewport" name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
   />,
   <script key="analytics" dangerouslySetInnerHTML={{
     __html: `window.ga_tid = "UA-124485594-1";
     window.ga_api = "https://margatroid.xyz/vue.min.js";`,
-  }} />,
+  }}/>,
   <script key="cfga" src="https://cdn.jsdelivr.net/npm/cfga@1.0.3" async></script>,
   <script key="theme" dangerouslySetInnerHTML={{
     __html: darkModeSwitch,
-  }} />,
+  }}/>,
 ]
 
 exports.onPreRenderHTML = ({
-  getPostBodyComponents,
-  replacePostBodyComponents,
-}) => {
+                             getPostBodyComponents,
+                             replacePostBodyComponents,
+                           }) => {
   const comps = getPostBodyComponents()
   process.env.GATSBY_IS_DEV && comps.push(
     <script
@@ -39,9 +38,9 @@ exports.onPreRenderHTML = ({
 }
 
 exports.onRenderBody = ({
-  setHeadComponents,
-  setHtmlAttributes,
-}) => {
+                          setHeadComponents,
+                          setHtmlAttributes,
+                        }) => {
   setHtmlAttributes(HtmlAttributes)
   setHeadComponents(HeadComponents)
 }

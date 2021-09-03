@@ -6,3 +6,9 @@ export type OnClickHandler<T = HTMLAnchorElement> = ((e: React.MouseEvent<T>) =>
 export type RequiredNonNull<T> = {
   [P in keyof T]-?: NonNullable<T[P]>;
 }
+export type DeepRequiredNonNull<T> = {
+  [P in keyof T]-?: DeepRequiredNonNull<NonNullable<T[P]>>;
+}
+export type DeepWriteable<T> = {
+  -readonly [P in keyof T]: DeepWriteable<T[P]>
+};

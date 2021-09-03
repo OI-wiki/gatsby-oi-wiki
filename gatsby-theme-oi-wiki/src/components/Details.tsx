@@ -2,20 +2,12 @@ import { Accordion, AccordionDetails } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 
-type Props = {
-  className: string;
-  children: string[] | string;
-  [props: string]: any;
-}
-
 const getDetailsClasses = makeStyles((theme) => ({
   root: {
     '&, &:first-child, &:last-child': {
       margin: '1.2em 0 !important',
     },
     borderLeft: '.3rem solid',
-    // eslint-disable-next-line
-    // @ts-ignore
     borderLeftColor: theme.palette.details.border,
     boxShadow: theme.shadows[1],
   },
@@ -34,12 +26,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Details: React.FC<Props> = (props: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { className = '', children, ...rest } = props
+export interface DetailsProps {
+  className: string;
+  children: string[] | string;
+}
+
+const Details: React.FC<DetailsProps> = (props) => {
+  const { className = '', children } = props
   const detailsClasses = getDetailsClasses()
   const classes = useStyles()
-  const cont = children instanceof Array ? children : [children]
+  const cont = Array.isArray(children) ? children : [children]
   return (
     <Accordion
       variant="outlined"
