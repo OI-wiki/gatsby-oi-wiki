@@ -81,7 +81,7 @@ module.exports = {
           require('remark-details'),
           [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
-            theme: 'light-plus',
+            theme: 'css-variables',
             skipInline: true,
           }],
         ],

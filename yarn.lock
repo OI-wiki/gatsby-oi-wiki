@@ -1938,12 +1938,12 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-2.0.0-next.8.tgz#66ecc27b78e07a3ea2eb1a8fc5a99dfa0ba96690"
   integrity sha512-T0BcXmNzEunFkuxrO8BFw44htvTPuAoKbLvTG41otyZBDV1Rs+JMddcUuaP5vXpTWtgD3grhcrPEwyx88RUumQ==
 
-"@mgtd/remark-shiki@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.1.1.tgz#5d4fd704ecc740e1dd8c54395b60513030f7d20f"
-  integrity sha512-W3OQuztc/W2uUK7mEJBmiT7QktHYFP13WWhUYrxbulDQvo7awjqzSDfdMU18F4y2XmzlxJ8a89tHBMHPPCNxPQ==
+"@mgtd/remark-shiki@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.2.0.tgz#104c8871a17a0d6469f1511c1d6aa17586e032ef"
+  integrity sha512-CqeB2eWsL4V9YrMv93JI4lPq3p+T5V17s31XKUOHIM+5U6yGRA4P5qC6wg5aOWm6GMrDHeJEsUx2aJhLKvzQ/w==
   dependencies:
-    shiki "^0.9.6"
+    shiki "^0.9.10"
     unist-util-visit "^2.0.3"
 
 "@mgtd/vssue-api-github-v3@^2.4.8":
@@ -13404,7 +13404,7 @@ shell-quote@1.7.2:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
-shiki@^0.9.6:
+shiki@^0.9.10:
   version "0.9.10"
   resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.9.10.tgz#feb8d4938b5dd71c5c8b1c1c7cd28fbbd37da087"
   integrity sha512-xeM7Oc6hY+6iW5O/T5hor8ul7mEprzyl5y4r5zthEHToQNw7MIhREMgU3r2gKDB0NaMLNrkcEQagudCdzE13Lg==
