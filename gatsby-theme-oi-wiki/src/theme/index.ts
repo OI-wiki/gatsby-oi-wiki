@@ -10,6 +10,9 @@ import paletteColors from '../styles/colors'
 import { Nullable, StrIndexObj } from '../types/common'
 import { noopNull } from '../utils/common'
 
+import DarkPlus from './hightlight-themes/darkplus'
+import LightPlus from './hightlight-themes/lightplus'
+
 type DStrIndexObj = StrIndexObj<StrIndexObj>
 type HexToRGBAParamType = (color?: string, alpha?: number) => string | null
 type ApplyDefaultsType = (theme: Palette, ...keys: (keyof Palette)[]) => StrIndexObj<Nullable<string>>
@@ -96,10 +99,10 @@ const lightCss = {
       '--fade-background': 'linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%)',
       '--link-default': hexToRGBAParam('#576ad4'),
       '--link-hover': hexToRGBAParam('#03a9f4'),
-      '--highlight-filter': '',
       '--inline-code-color': hexToRGBAParam('#37474f'),
       '--inline-code-background': '236, 236, 236, .5',
       '--color-scheme': 'light',
+      ...LightPlus,
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
@@ -127,10 +130,10 @@ const darkCss = {
       '--fade-background': 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 66, 66, 1) 50%)',
       '--link-default': hexToRGBAParam('#20baff'),
       '--link-hover': hexToRGBAParam('#52ebff'),
-      '--highlight-filter': 'invert(98%) hue-rotate(180deg)',
       '--inline-code-color': hexToRGBAParam('#c4c4c4'),
       '--inline-code-background': hexToRGBAParam('#424242'),
       '--color-scheme': 'dark',
+      ...DarkPlus,
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
