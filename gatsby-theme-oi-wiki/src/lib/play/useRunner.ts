@@ -28,22 +28,17 @@ interface RunnerApiResponseData {
   ce_info?: string
 }
 
-interface ResponseKeyTransformMapType {
-  time_ms: 'time'
-  memory_kb: 'memory'
-  ce_info: 'ceInfo'
-}
-const responseKeyTransformMap: ResponseKeyTransformMapType = {
+const responseKeyTransformMap = {
   time_ms: 'time',
   memory_kb: 'memory',
   ce_info: 'ceInfo',
-}
+} as const
 
 export type TransformedResponseData = {
   [K in keyof RunnerApiResponseData as K extends 'message'
     ? never
-    : K extends keyof ResponseKeyTransformMapType
-    ? ResponseKeyTransformMapType[K]
+    : K extends keyof typeof responseKeyTransformMap
+    ? (typeof responseKeyTransformMap)[K]
     : K]-?: RunnerApiResponseData[K]
 }
 
@@ -52,7 +47,7 @@ function transformResponseData (
 ): TransformedResponseData {
   return _.mapKeys(_.omit(data, 'message'), (__, key) =>
     _.has(responseKeyTransformMap, key)
-      ? responseKeyTransformMap[key as keyof ResponseKeyTransformMapType]
+      ? responseKeyTransformMap[key as keyof typeof responseKeyTransformMap]
       : key,
   ) as TransformedResponseData
 }
@@ -104,8 +99,11 @@ export function useRunner (
         }
         if (errResponseGuard(err)) {
           msg = `Server responded ${err.response.data} with code ${err.response.status}`
-        } else if (_.has(err, 'request')) msg = 'No response from server'
-        else if (err instanceof Error) msg = err.message
+        } else if (_.has(err, 'request')) {
+          msg = 'No response from server'
+        } else if (err instanceof Error) {
+          msg = err.message
+        }
 
         if (onError) onError(msg)
         else if (process.env.NODE_ENV === 'development')

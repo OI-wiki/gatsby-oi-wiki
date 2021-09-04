@@ -76,21 +76,6 @@ const Mdx: React.FC<MdxProps> = ({ data: { mdx }, location }) => {
     inlinecode: InlineCode,
     codeblock: Code,
   }
-  // const myComponents = (ast) => {
-  //   const tagMap = {
-  //     details: Details,
-  //     summary: Summary,
-  //     a: LinkGetter,
-  //     inlinecode: InlineCode,
-  //   }
-  //   if (_.has(tagMap, ast.tagName)) {
-  //     return tagMap[ast.tagName]
-  //   }
-
-  //   if (_.has(ast, ['properties', 'dataLanguage'])) {
-  //     return Code
-  //   }
-  // }
 
   const isWIP = wordCount === 0 || (tags?.findIndex((x: string) => x === 'WIP') >= 0)
 

@@ -11,7 +11,6 @@ import type { PlaygroundLocationState } from '../pages/play'
 const useStyles = makeStyles((theme) => ({
   container: {
     position: 'relative',
-    // paddingRight: theme.spacing(5) + 8 + 32,
   },
   btn: {
     top: 8,
@@ -93,7 +92,6 @@ export default function Code({
           className={clsx(classes.btn, classes.runBtn)}
           onClick={() => {
             navigate('/play', {
-              // type definition of navigate function doesn't have type param
               state: {
                 code: getCode(),
                 lang: mdxLangMap[dataLanguage],

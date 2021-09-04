@@ -2,11 +2,10 @@ import React from 'react'
 import Ace from 'react-ace'
 import useDarkMode from '../../lib/useDarkMode'
 import { langModeMap } from '../../lib/play/codeLang'
+
 // add language to support here
 import 'ace-builds/src-noconflict/mode-c_cpp'
-// import 'ace-builds/src-noconflict/mode-java'
 import 'ace-builds/src-noconflict/mode-python'
-// import 'ace-builds/src-noconflict/mode-javascript'
 
 // light/dark theme
 import 'ace-builds/src-noconflict/theme-chrome'
