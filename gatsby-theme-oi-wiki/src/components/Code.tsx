@@ -1,10 +1,10 @@
 import { Box, IconButton, makeStyles, Tooltip } from '@material-ui/core'
-import { AssignmentOutlined, CodeOutlined } from '@material-ui/icons'
+import AssignmentOutlined from '@material-ui/icons/AssignmentOutlined'
+import CodeOutlined from '@material-ui/icons/CodeOutlined'
 import clsx from 'clsx'
 import { navigate } from 'gatsby'
-import _ from 'lodash'
-import React, { useCallback, useRef } from 'react'
-import { useState } from 'react'
+import has from 'lodash/has'
+import React, { useCallback, useRef, useState } from 'react'
 import type { LangType } from '../lib/play/codeLang'
 import type { PlaygroundLocationState } from '../pages/play'
 
@@ -88,7 +88,7 @@ export default function Code({
       </Tooltip>
       <Tooltip title="运行" arrow>
         <IconButton
-          disabled={!_.has(mdxLangMap, dataLanguage)}
+          disabled={!has(mdxLangMap, dataLanguage)}
           className={clsx(classes.btn, classes.runBtn)}
           onClick={() => {
             navigate('/play', {

@@ -10,7 +10,7 @@ import {
   makeStyles,
   Switch,
 } from '@material-ui/core'
-import { PlayArrow } from '@material-ui/icons'
+import PlayArrow from '@material-ui/icons/PlayArrow'
 import type { PageProps } from 'gatsby'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useCallback, useRef, useState } from 'react'

@@ -8,7 +8,8 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core'
-import { AccessTime, Storage } from '@material-ui/icons'
+import AccessTime from '@material-ui/icons/AccessTime'
+import Storage from '@material-ui/icons/Storage'
 import React from 'react'
 import type { TransformedResponseData } from '../lib/play/useRunner'
 import { Indicator, IndicatorProps } from './Indicator'

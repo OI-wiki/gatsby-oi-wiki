@@ -1,6 +1,6 @@
 import type { ButtonProps } from '@material-ui/core'
 import { Button, Menu, MenuItem } from '@material-ui/core'
-import { ArrowDropDownOutlined } from '@material-ui/icons'
+import ArrowDropDownOutlined from '@material-ui/icons/ArrowDropDownOutlined'
 import React, { useCallback, useState } from 'react'
 import type { LangType } from '../lib/play/codeLang'
 import { langList } from '../lib/play/codeLang'
