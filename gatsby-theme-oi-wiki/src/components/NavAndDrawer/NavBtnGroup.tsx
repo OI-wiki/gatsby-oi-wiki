@@ -29,13 +29,9 @@ function isRelativeLink (link: string): boolean {
   return link.startsWith('.') || link.startsWith('/')
 }
 
-function NavBtn ({
-  title,
-  to,
-  Icon,
-  ...restProps
-}: NavBtnProps): React.ReactElement {
+const NavBtn: React.FC<NavBtnProps> = (props) => {
   const classes = useStyles()
+  const { title, to, Icon, ...restProps } = props
   return (
     <Tooltip title={title} placement="bottom" arrow>
       <IconButton
@@ -54,7 +50,7 @@ function NavBtn ({
 
 const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
 
-export default function NavBtnGroup (): React.ReactElement {
+const NavBtnGroup: React.FC = () => {
   return (
     <>
       <NavBtn title="设置页" to="/settings" Icon={SettingsIcon} />
@@ -72,3 +68,4 @@ export default function NavBtnGroup (): React.ReactElement {
   )
 }
 
+export default NavBtnGroup

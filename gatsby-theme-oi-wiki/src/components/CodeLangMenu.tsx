@@ -5,16 +5,16 @@ import React, { useCallback, useState } from 'react'
 import type { LangType } from '../lib/play/codeLang'
 import { langList } from '../lib/play/codeLang'
 
-interface LangMenuProps extends ButtonProps {
+interface CodeLangMenuProps extends ButtonProps {
   lang: LangType
   setLang: React.Dispatch<React.SetStateAction<LangType>>
 }
 
-export function CodeLangMenu ({
+const CodeLangMenu: React.FC<CodeLangMenuProps> = ({
   lang,
   setLang,
   ...buttonProps
-}: LangMenuProps): React.ReactElement {
+}) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleButtonClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -58,3 +58,5 @@ export function CodeLangMenu ({
     </>
   )
 }
+
+export default CodeLangMenu

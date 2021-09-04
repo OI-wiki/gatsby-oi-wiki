@@ -14,11 +14,11 @@ import PlayArrow from '@material-ui/icons/PlayArrow'
 import type { PageProps } from 'gatsby'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useCallback, useRef, useState } from 'react'
-import { CodeEditor } from '../components/CodeEditor'
+import CodeEditor from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
-import { Indicator } from '../components/Indicator'
-import { CodeLangMenu } from '../components/CodeLangMenu'
-import { Output } from '../components/Output'
+import Indicator from '../components/Indicator'
+import CodeLangMenu from '../components/CodeLangMenu'
+import Output from '../components/Output'
 import Layout from '../components/StyledLayout'
 import type { LangType } from '../lib/play/codeLang'
 import type { TransformedResponseData } from '../lib/play/useRunner'
@@ -65,9 +65,9 @@ export type PlaygroundLocationState = Partial<{
   input: string
 }>
 
-export default function Playground({
-  location,
-}: PageProps<unknown, unknown, PlaygroundLocationState>): React.ReactElement {
+const Playground: React.FC<
+  PageProps<unknown, unknown, PlaygroundLocationState>
+> = ({ location }) => {
   // state maybe undefined/null in gatsby build
   const locState = location.state ?? {}
 
@@ -224,3 +224,5 @@ export default function Playground({
     </Layout>
   )
 }
+
+export default Playground

@@ -28,7 +28,7 @@ export interface IndicatorProps {
   msg: string
 }
 
-export function Indicator ({ type, msg }: IndicatorProps): React.ReactElement {
+const Indicator: React.FC<IndicatorProps> = ({ type, msg }: IndicatorProps) => {
   const classes = useStyles()
   return (
     <Typography
@@ -43,3 +43,5 @@ export function Indicator ({ type, msg }: IndicatorProps): React.ReactElement {
     </Typography>
   )
 }
+
+export default Indicator

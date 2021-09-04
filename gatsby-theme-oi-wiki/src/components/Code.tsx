@@ -31,16 +31,11 @@ const mdxLangMap: Readonly<Record<string, LangType>> = Object.freeze({
   python: 'Python3',
 })
 
-export default function Code({
-  children,
-  'data-language': dataLanguage,
-  className,
-  ...rest
-}: {
+const Code: React.FC<{
   children: React.ReactNode
   className: string
   'data-language': string
-}): React.ReactElement {
+}> = ({ children, 'data-language': dataLanguage, className, ...rest }) => {
   const classes = useStyles()
 
   const boxRef = useRef<HTMLElement>(null)
@@ -107,3 +102,5 @@ export default function Code({
     </Box>
   )
 }
+
+export default Code

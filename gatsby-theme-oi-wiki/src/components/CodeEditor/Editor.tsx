@@ -13,10 +13,10 @@ import 'ace-builds/src-noconflict/theme-tomorrow_night'
 
 import { CodeEditorProps } from '.'
 
-export default function Editor ({
+const Editor: React.FC<Omit<CodeEditorProps, 'title'>> = ({
   lang,
   ...aceProps
-}: Omit<CodeEditorProps, 'title'>): React.ReactElement {
+}) => {
   const isDarkMode = useDarkMode()
 
   return (
@@ -30,3 +30,5 @@ export default function Editor ({
     />
   )
 }
+
+export default Editor

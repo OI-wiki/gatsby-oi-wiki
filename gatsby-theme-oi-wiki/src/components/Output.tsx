@@ -12,7 +12,7 @@ import AccessTime from '@material-ui/icons/AccessTime'
 import Storage from '@material-ui/icons/Storage'
 import React from 'react'
 import type { TransformedResponseData } from '../lib/play/useRunner'
-import { Indicator, IndicatorProps } from './Indicator'
+import Indicator, { IndicatorProps } from './Indicator'
 import useDarkMode from '../lib/useDarkMode'
 import clsx from 'clsx'
 
@@ -79,7 +79,7 @@ const statusSeverityMap: Record<
   'No Status Info': 'info',
 })
 
-export const Output = React.forwardRef<
+const Output = React.forwardRef<
   unknown,
   { output: TransformedResponseData | null }
 >(({ output }, ref) => {
@@ -140,3 +140,5 @@ export const Output = React.forwardRef<
     </Paper>
   )
 })
+
+export default Output

@@ -21,11 +21,11 @@ const useStyles = makeStyles({
 // fix ssr issue related to react-ace
 const Editor = React.lazy(() => import('./Editor'))
 
-export function CodeEditor ({
+const CodeEditor: React.FC<CodeEditorProps> = ({
   title,
   lang,
   ...aceProps
-}: CodeEditorProps): React.ReactElement {
+}) => {
   const classes = useStyles()
 
   return (
@@ -34,14 +34,12 @@ export function CodeEditor ({
       <Paper className={classes.paper}>
         {typeof window !== 'undefined' && (
           <React.Suspense fallback={<div>Loading editor...</div>}>
-            <Editor
-              className={classes.editor}
-              lang={lang}
-              {...aceProps}
-            />
+            <Editor className={classes.editor} lang={lang} {...aceProps} />
           </React.Suspense>
         )}
       </Paper>
     </>
   )
 }
+
+export default CodeEditor
