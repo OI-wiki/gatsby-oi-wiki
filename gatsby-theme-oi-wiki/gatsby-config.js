@@ -96,16 +96,7 @@ module.exports = {
           require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
-          function transformCodeBlock() {
-            return (tree) => {
-              const visit = require('unist-util-visit')
-              visit(tree, 'element', (node) => {
-                if (typeof node.properties.dataLanguage !== 'undefined') {
-                  node.tagName = 'codeblock'
-                }
-              })
-            }
-          },
+          require('./plugins/rehype-codeblock'),
         ],
         extensions: ['.mdx', '.md'],
       },

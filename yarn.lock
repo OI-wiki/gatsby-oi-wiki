@@ -12657,6 +12657,11 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
+"rehype-codeblock@file:gatsby-theme-oi-wiki/plugins/rehype-codeblock":
+  version "1.0.0"
+  dependencies:
+    unist-util-visit "^2.0.3"
+
 rehype-details@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/rehype-details/-/rehype-details-1.9.0.tgz#d4ddeb8626bf3a9798197c67a588279a3a5b4648"

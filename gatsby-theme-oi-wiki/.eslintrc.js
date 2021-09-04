@@ -77,6 +77,7 @@ module.exports = {
         'gatsby-node.js',
         'gatsby-ssr.js',
         'gatsby-browser.js',
+        'plugins/**/*.js',
       ],
       env: {
         node: true,
