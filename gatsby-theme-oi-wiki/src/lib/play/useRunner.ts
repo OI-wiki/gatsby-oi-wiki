@@ -2,7 +2,7 @@
 import axios from 'axios'
 import type { AxiosResponse } from 'axios'
 import _ from 'lodash'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import type { LangType } from './codeLang'
 
 export interface RunnerApiRequestData {
@@ -73,7 +73,7 @@ export function useRunner (
 } {
   const [waiting, setWaiting] = useState(false)
 
-  const sendRunnerReq = useCallback(() => {
+  const sendRunnerReq = (): void => {
     setWaiting(true)
 
     axios
@@ -97,7 +97,9 @@ export function useRunner (
         // https://github.com/microsoft/TypeScript/pull/41013
         let msg = String(err)
 
-        function errResponseGuard(err: unknown): err is { response: AxiosResponse } {
+        function errResponseGuard(
+          err: unknown,
+        ): err is { response: AxiosResponse } {
           return _.has(err, 'response')
         }
         if (errResponseGuard(err)) {
@@ -112,7 +114,7 @@ export function useRunner (
       .finally(() => {
         setWaiting(false)
       })
-  }, [onError, onResponse, req]) // FIXME: req is always changing, the useCallback cache is useless
+  }
 
   return { sendRunnerReq, waiting }
 }

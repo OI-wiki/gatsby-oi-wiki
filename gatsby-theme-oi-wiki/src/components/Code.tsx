@@ -76,12 +76,12 @@ export default function Code({
           className={clsx(classes.btn, classes.clipboardBtn)}
           aria-label="copy"
           onClick={() => {
-            // TODO: compatibility with more browsers
             const code = getCode()
-            if (code !== undefined)
+            if (code !== undefined) {
               navigator.clipboard.writeText(code).then(() => {
                 setCopyToolTipText('已复制')
               })
+            }
           }}
         >
           <AssignmentOutlined />
