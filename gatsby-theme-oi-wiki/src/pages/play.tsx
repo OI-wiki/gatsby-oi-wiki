@@ -17,7 +17,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import { CodeEditor } from '../components/CodeEditor'
 import type { IndicatorProps } from '../components/Indicator'
 import { Indicator } from '../components/Indicator'
-import { LangMenu } from '../components/LangMenu'
+import { CodeLangMenu } from '../components/CodeLangMenu'
 import { Output } from '../components/Output'
 import Layout from '../components/StyledLayout'
 import type { LangType } from '../lib/play/codeLang'
@@ -132,7 +132,7 @@ export default function Playground({
       <Grid container spacing={3} alignItems="center">
         <Grid item>
           <ButtonGroup>
-            <LangMenu
+            <CodeLangMenu
               lang={lang}
               setLang={setLang}
               variant="contained"

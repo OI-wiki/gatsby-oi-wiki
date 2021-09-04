@@ -10,7 +10,7 @@ interface LangMenuProps extends ButtonProps {
   setLang: React.Dispatch<React.SetStateAction<LangType>>
 }
 
-export function LangMenu ({
+export function CodeLangMenu ({
   lang,
   setLang,
   ...buttonProps
