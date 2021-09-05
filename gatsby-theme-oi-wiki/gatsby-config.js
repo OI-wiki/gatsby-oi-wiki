@@ -5,7 +5,7 @@ const IS_PROD = process.env.PRODUCTION === 'true' ||
   process.env.NODE_ENV === 'production' ||
   process.env.RENDER === 'true'
 const ENABLE_IMAGE_PLUGINS = false
-  
+
 /**
  * 根据条件生成配置，需要展开
  * @param cond boolean 条件
@@ -36,6 +36,13 @@ module.exports = {
       options: {
         name: './docs',
         path: path.resolve('./docs'),
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static',
+        path: path.resolve(__dirname, 'static'),
       },
     },
     ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
@@ -89,6 +96,7 @@ module.exports = {
           require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
+          require('./plugins/rehype-codeblock'),
         ],
         extensions: ['.mdx', '.md'],
       },
