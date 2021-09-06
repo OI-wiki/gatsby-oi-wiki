@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         Copyright © 2016 - {dateStr?.substr(0, 4)} OI Wiki Team
       </Typography>
       <Typography gutterBottom>
-        {'最近更新： '}
+        最近更新：
         <SmartLink className={classes.link} href="https://github.com/OI-wiki/OI-wiki/commits">
           {hashFrag}
         </SmartLink>

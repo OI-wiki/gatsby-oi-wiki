@@ -7,6 +7,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import LocalOfferIcon from '@material-ui/icons/LocalOffer'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import CodeIcon from '@material-ui/icons/Code'
 
 import React from 'react'
 
@@ -38,8 +39,9 @@ const SmallScreenMenu: React.FC = () => {
         color="inherit"
         onClick={(e) => handleClick(e)}
         disableRipple={true}
-        disableFocusRipple={true}>
-        <MoreVertIcon/>
+        disableFocusRipple={true}
+      >
+        <MoreVertIcon />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -50,30 +52,37 @@ const SmallScreenMenu: React.FC = () => {
       >
         <MenuItem component="a" href="/settings">
           <ListItemIcon classes={{ root: classes.iconItem }}>
-            <SettingsIcon fontSize="small"/>
+            <SettingsIcon fontSize="small" />
           </ListItemIcon>
           设置
         </MenuItem>
         <MenuItem component="a" href="/tags">
           <ListItemIcon classes={{ root: classes.iconItem }}>
-            <LocalOfferIcon fontSize="small"/>
+            <LocalOfferIcon fontSize="small" />
           </ListItemIcon>
           标签
         </MenuItem>
         <MenuItem component="a" href="/pages">
           <ListItemIcon classes={{ root: classes.iconItem }}>
-            <LibraryBooksIcon fontSize="small"/>
+            <LibraryBooksIcon fontSize="small" />
           </ListItemIcon>
           目录
         </MenuItem>
+        <MenuItem component="a" href="/play">
+          <ListItemIcon classes={{ root: classes.iconItem }}>
+            <CodeIcon fontSize="small" />
+          </ListItemIcon>
+          运行工具
+        </MenuItem>
         <MenuItem component="a" href={OIWikiGithub}>
           <ListItemIcon classes={{ root: classes.iconItem }}>
-            <GitHubIcon fontSize="small"/>
+            <GitHubIcon fontSize="small" />
           </ListItemIcon>
           GitHub
         </MenuItem>
       </Menu>
-    </Hidden>)
+    </Hidden>
+  )
 }
 
 export default SmallScreenMenu

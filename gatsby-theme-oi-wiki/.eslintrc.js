@@ -74,6 +74,7 @@ module.exports = {
       files: [
         '.eslintrc.js',
         'gatsby-*.js',
+        'plugins/**/*.js',
       ],
       env: {
         node: true,
