@@ -71,7 +71,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
     <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
-          const { hash, date, message, refs, body, author_name: author, author_email: email } = item
+          const { hash, date, message, author_name: author } = item
           return (
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
