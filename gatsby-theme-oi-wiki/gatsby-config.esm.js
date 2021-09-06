@@ -21,7 +21,6 @@ const esmRequire = esm(module, {
 
 const imports = {
   remarkDetails: esmRequire('remark-details').default,
-  rehypeDetails: esmRequire('rehype-details').default,
 }
 
 Module._extensions['.js'] = orig
