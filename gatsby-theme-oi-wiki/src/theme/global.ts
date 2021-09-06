@@ -19,18 +19,18 @@ const globalStyles = withStyles((theme) => ({
       borderLeft: `4px solid ${(theme.palette as any).blockquote}`,
     },
     '.gatsby-highlight': {
-      backgroundColor: '#FFF',
+      backgroundColor: 'var(--shiki-color-background)',
       padding: '2px 16px',
       margin: '8px 0',
       borderRadius: '4px',
       boxShadow: '0 2px 4px rgba(var(--divider))',
-      filter: 'var(--highlight-filter)',
     },
     '.gatsby-highlight code': {
       fontFamily: 'var(--code-block-font)',
     },
     html: {
       '--code-block-font': '"Fira Mono", "Menlo", "Monaco", "Consolas", "Andale Mono", "Ubuntu Mono", "Courier New", "Hack", "Fira Code", "Jetbrains Mono", monospace',
+      'color-scheme': 'var(--color-scheme)',
     },
     'html[data-monofont=fallback]': {
       '--code-block-font': 'monospace',

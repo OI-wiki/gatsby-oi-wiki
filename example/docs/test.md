@@ -158,3 +158,10 @@ include: code/dnd.problem
 solution:
     cpp: test_code.cpp
 ```
+!!! note "snippet test"
+    ```cpp
+    /* clang-format whatever */
+    --8<-- "docs/test_code.cpp"
+    /* snip #2 */
+    --8<-- "docs/test_code.cpp"
+    ```

@@ -4,6 +4,7 @@ const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
   process.env.NODE_ENV === 'production' ||
   process.env.RENDER === 'true'
+const ENABLE_IMAGE_PLUGINS = false
 
 /**
  * 根据条件生成配置，需要展开
@@ -37,15 +38,20 @@ module.exports = {
         path: path.resolve('./docs'),
       },
     },
-    ...needPlugin(IS_PROD, 'gatsby-plugin-sharp'),
     {
-      resolve: 'gatsby-transformer-sharp',
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'static',
+        path: path.resolve(__dirname, 'static'),
+      },
     },
+    ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
-          ...needPlugin(IS_PROD, {
+          ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 900,
@@ -83,9 +89,9 @@ module.exports = {
         remarkPlugins: [
           require('remark-math'),
           require('remark-details'),
-          [require('@mgtd/remark-shiki'), {
+          [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
-            theme: 'light-plus',
+            theme: 'css-variables',
             skipInline: true,
           }],
         ],
@@ -93,6 +99,7 @@ module.exports = {
           require('rehype-details'),
           require('./plugins/rehype-pseudocodejs'),
           mathRehype,
+          require('./plugins/rehype-codeblock'),
         ],
         extensions: ['.mdx', '.md'],
       },

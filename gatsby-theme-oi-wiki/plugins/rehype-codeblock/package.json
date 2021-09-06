@@ -1,0 +1,10 @@
+{
+  "name": "rehype-codeblock",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^2.0.3"
+  }
+}
