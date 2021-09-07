@@ -464,10 +464,6 @@ $$
     }
     ```
 
-??? "FFT 模板（ [HDU 1402](http://acm.hdu.edu.cn/showproblem.php?pid=1402) ）"
-    ```cpp
-    --8<-- "docs/math/code/poly/fft/fft_1.cpp"
-    ```
 
 ## 快速数论变换
 
