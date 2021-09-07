@@ -57,7 +57,7 @@
     "rehype-parse": "^7.0.1",
     "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "rehype-react": "^6.2.1",
-    "remark-details": "OI-wiki/remark-details#remark-13",
+    "remark-details": "^4.0.0",
     "remark-math": "^4.0.0",
     "simple-git": "^2.41.1",
     "sitemap-manager": "^2.0.1",
