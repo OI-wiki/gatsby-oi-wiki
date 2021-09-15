@@ -96,7 +96,6 @@ module.exports = {
 				],
 				rehypePlugins: [
 					rehypePseudo,
-					//require("./plugins/rehype-pseudocodejs"),
 					mathRehype,
 				],
 				// extensions: ['.mdx', '.md'],
