@@ -1,9 +1,9 @@
 import { Comments, Reactions } from '@mgtd/vssue-api-github-v4/lib/types'
 
 export interface User {
-  avatar: string,
-  homepage: string,
-  username: string
+  username: string,
+  avatar?: string,
+  homepage?: string
 }
 
 export interface Issue {

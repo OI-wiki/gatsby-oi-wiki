@@ -16,7 +16,7 @@ import {
 } from "../theme";
 import { scrollbarStyle } from "../styles/scrollbar";
 import Comment from "./Comment";
-import Toc, { TocObj } from "./Toc";
+import Toc, { TocItem } from "./Toc";
 import BackTop from "./BackTop";
 import Footer from "./Footer";
 import Meta, { MetaProps } from "./Meta";
@@ -24,7 +24,6 @@ import Title from "./Title";
 import NavAndDrawer from "./NavAndDrawer";
 import { RequiredNonNull } from "../types/common";
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
-import { TrafficRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => {
 	const flexContainer: CSSProperties = {
@@ -87,7 +86,7 @@ const useStyles = makeStyles((theme) => {
 
 interface MyLayoutProps extends Partial<MetaProps> {
 	description?: string;
-	toc?: TocObj;
+	toc?: TocItem[];
 	noTitle?: boolean;
 	noMeta?: boolean;
 	noComment?: boolean;
@@ -126,7 +125,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 		noMeta = false,
 		noComment = false,
 		noEdit = true,
-		noToc = !props.toc?.items,
+		noToc = !props.toc || props.toc.length == 0,
 		overflow = false,
 		isWIP = false,
 		location = window.location,
@@ -221,7 +220,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 					<Footer />
 				</div>
 			</div>
-			{!noToc && toc?.items && (
+			{!noToc && toc?.length && (
 				<Grid item xs>
 					<Toc toc={toc} pathname={location.pathname} />
 				</Grid>
