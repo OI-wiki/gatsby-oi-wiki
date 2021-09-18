@@ -75,7 +75,8 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
   return (
     <Helmet>
       <meta name="description" content={seo.description}/>
-      <meta name="image" content={seo.image}/>
+      <meta name="image" content={seo.image} />
+      <link rel="canonical" href={`https://oi-wiki.org${pathname}`}/>
 
       {seo.url && <meta property="og:url" content={seo.url}/>}
 

@@ -1,11 +1,11 @@
-const path = require("path");
+const path = require('path')
+const esmRequire = require('./esmRequire')
 
-const IS_EXEC_BUILD = process.env.gatsby_executing_command === "build";
-const IS_PROD =
-	process.env.PRODUCTION === "true" ||
-	process.env.NODE_ENV === "production" ||
-	process.env.RENDER === "true";
-const ENABLE_IMAGE_PLUGINS = false;
+const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
+const IS_PROD = process.env.PRODUCTION === 'true' ||
+	process.env.NODE_ENV === 'production' ||
+	process.env.RENDER === 'true'
+const ENABLE_IMAGE_PLUGINS = false
 
 /**
  * 根据条件生成配置，需要展开
@@ -28,12 +28,6 @@ const mathRehype = IS_EXEC_BUILD
 	? [require("rehype-mathjax/chtml"), { fontURL }]
 	: [require("rehype-mathjax/browser")];
 
-const {
-	remarkDetails,
-	rehypeDetails,
-	rehypePseudo,
-} = require("./gatsby-config.esm");
-
 module.exports = {
 	plugins: [
 		{
@@ -44,6 +38,13 @@ module.exports = {
 			options: {
 				name: "./docs",
 				path: path.resolve("./docs"),
+			},
+		},
+		{
+			resolve: 'gatsby-source-filesystem',
+			options: {
+				name: 'static',
+				path: path.resolve(__dirname, 'static'),
 			},
 		},
 		...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, "gatsby-plugin-sharp"),
@@ -83,8 +84,7 @@ module.exports = {
 				],
 				remarkPlugins: [
 					require("remark-math"),
-					remarkDetails,
-					rehypeDetails,
+					esmRequire('remark-details').default,
 					[
 						require("remark-shiki").remarkShiki,
 						{
@@ -95,8 +95,9 @@ module.exports = {
 					],
 				],
 				rehypePlugins: [
-					rehypePseudo,
+					esmRequire("rehype-pseudo").default,
 					mathRehype,
+					require('./plugins/rehype-codeblock')
 				],
 				// extensions: ['.mdx', '.md'],
 			},

@@ -1,19 +1,15 @@
-import React from "react";
+import type { IconButtonProps } from '@material-ui/core'
+import { IconButton, makeStyles, Tooltip } from '@material-ui/core'
+import type { SvgIconComponent } from '@material-ui/icons'
 import {
-	IconButton,
-	IconButtonProps,
-	makeStyles,
-	Tooltip,
-} from "@material-ui/core";
-
-import {
-	GitHub as GitHubIcon,
-	LibraryBooks as LibraryBooksIcon,
-	LocalOffer as LocalOfferIcon,
-	Settings as SettingsIcon,
-	Edit as EditIcon,
-	SvgIconComponent,
-} from "@material-ui/icons";
+  Code as CodeIcon,
+  GitHub as GitHubIcon,
+  LibraryBooks as LibraryBooksIcon,
+  LocalOffer as LocalOfferIcon,
+  Settings as SettingsIcon,
+} from '@material-ui/icons'
+import { Link } from 'gatsby'
+import React from 'react'
 
 const useStyles = makeStyles({
 	navBtn: {
@@ -22,50 +18,54 @@ const useStyles = makeStyles({
 	},
 });
 
-interface NavBtnProps
-	extends IconButtonProps<
-		"a",
-		React.AnchorHTMLAttributes<HTMLAnchorElement>
-	> {
-	title: string;
-	Icon: SvgIconComponent;
+type NavBtnProps = IconButtonProps<typeof Link> &
+  IconButtonProps<'a'> & {
+    title: string
+    to: string
+    Icon: SvgIconComponent
+  }
+
+function isRelativeLink (link: string): boolean {
+  return link.startsWith('.') || link.startsWith('/')
 }
 
 const NavBtn: React.FC<NavBtnProps> = (props) => {
-	const classes = useStyles();
-	const { title, href, Icon, ...restProps } = props;
-	return (
-		<Tooltip title={title} placement="bottom" arrow>
-			<IconButton
-				component="a"
-				href={href}
-				className={classes.navBtn}
-				{...restProps}
-			>
-				<Icon />
-			</IconButton>
-		</Tooltip>
-	);
-};
+  const classes = useStyles()
+  const { title, to, Icon, ...restProps } = props
+  return (
+    <Tooltip title={title} placement="bottom" arrow>
+      <IconButton
+        {...restProps}
+        component={isRelativeLink(to) ? Link : 'a'}
+        href={to}
+        to={to}
+        color="inherit"
+        className={classes.navBtn}
+      >
+        <Icon />
+      </IconButton>
+    </Tooltip>
+  )
+}
 
 const OIWikiGithub = "https://github.com/OI-wiki/OI-wiki";
 
 const NavBtnGroup: React.FC = () => {
-	return (
-		<>
-			<NavBtn title="设置页" href="/settings" Icon={SettingsIcon} />
-			<NavBtn title="标签页" href="/tags" Icon={LocalOfferIcon} />
-			<NavBtn title="目录页" href="/pages" Icon={LibraryBooksIcon} />
-			<NavBtn title="Markdown编辑器" href="/editor" Icon={EditIcon} />
-			<NavBtn
-				title="GitHub 存储库"
-				href={OIWikiGithub}
-				Icon={GitHubIcon}
-				target="_blank"
-				rel="noreferrer noopener"
-			/>
-		</>
-	);
-};
+  return (
+    <>
+      <NavBtn title="设置页" to="/settings" Icon={SettingsIcon} />
+      <NavBtn title="标签页" to="/tags" Icon={LocalOfferIcon} />
+      <NavBtn title="目录页" to="/pages" Icon={LibraryBooksIcon} />
+      <NavBtn title="运行工具" to="/play" Icon={CodeIcon} />
+      <NavBtn
+        title="GitHub 存储库"
+        to={OIWikiGithub}
+        Icon={GitHubIcon}
+        target="_blank"
+        rel="noreferrer noopener"
+      />
+    </>
+  )
+}
 
 export default NavBtnGroup;
