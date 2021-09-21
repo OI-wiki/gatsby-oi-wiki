@@ -13,7 +13,7 @@ import {
   DarkCssBaseline,
   LightCssBaseline,
   SecondaryColorCssBaseline,
-} from '../theme'
+} from '../theme/old-index'
 import { scrollbarStyle } from '../styles/scrollbar'
 import Comment from './Comment'
 import Toc, { TocObj } from './Toc'

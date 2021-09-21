@@ -73,7 +73,9 @@ module.exports = {
     {
       files: [
         '.eslintrc.js',
-        'gatsby-*.js',
+        'gatsby-node.js',
+        'gatsby-config.js',
+        'gatsby-config.esm.js',
         'plugins/**/*.js',
       ],
       env: {

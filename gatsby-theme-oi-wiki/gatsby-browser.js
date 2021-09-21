@@ -1,6 +1,7 @@
-require('./static/extra.css')
+import('./static/extra.css')
+import WrapRootElement from './src/gatsby-func/WrapRootElement'
 
-exports.onRouteUpdate = () => {
+const onRouteUpdate = () => {
   if (process.env.GATSBY_IS_DEV) {
     requestIdleCallback(() => MathJax.typeset())
   }
@@ -10,3 +11,5 @@ exports.onRouteUpdate = () => {
     console.error(e)
   }
 }
+
+export { onRouteUpdate, WrapRootElement as wrapRootElement }

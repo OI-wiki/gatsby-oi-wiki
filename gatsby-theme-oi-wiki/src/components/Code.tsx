@@ -6,7 +6,7 @@ import { navigate } from 'gatsby'
 import has from 'lodash/has'
 import React, { useCallback, useRef, useState } from 'react'
 import type { LangType } from '../lib/play/codeLang'
-import type { PlaygroundLocationState } from '../pages/play'
+import type { PlaygroundLocationState } from '../old-pages/play'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -78,7 +78,7 @@ const Code: React.FC<{
             }
           }}
         >
-          <AssignmentOutlined />
+          <AssignmentOutlined/>
         </IconButton>
       </Tooltip>
       <Tooltip title="运行" arrow>
@@ -95,7 +95,7 @@ const Code: React.FC<{
           }}
           aria-label="run"
         >
-          <CodeOutlined />
+          <CodeOutlined/>
         </IconButton>
       </Tooltip>
       {children}

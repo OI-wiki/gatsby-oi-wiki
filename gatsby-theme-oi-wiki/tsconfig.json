@@ -26,6 +26,8 @@
     "experimentalDecorators": true,
     // 启用装饰器
     "emitDecoratorMetadata": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "skipLibCheck": true,
     "strictNullChecks": true
   },
@@ -35,7 +37,8 @@
     "./.cache"
   ],
   "include": [
-    "src"
+    "src",
+    "../node_modules/localforage/typings/localforage.d.ts"
   ],
   "plugins": [
     {
