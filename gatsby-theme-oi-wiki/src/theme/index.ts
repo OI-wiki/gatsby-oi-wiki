@@ -2,7 +2,7 @@ import createPalette, { Palette, PaletteColor } from '@material-ui/core/styles/c
 import blue from '@material-ui/core/colors/blue'
 import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
-import { createTheme, hexToRgb, ThemeOptions, withStyles } from '@material-ui/core/styles'
+import { createTheme, hexToRgb, Theme, ThemeOptions, withStyles } from '@material-ui/core/styles'
 
 import globalStyles from './global'
 
@@ -163,6 +163,28 @@ const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() =>
     return obj
   }, { '@global': {} as StrIndexObj<any> })))
 
+const additionalPalette = {
+  footer: {
+    background: 'rgba(var(--footer-bg))',
+    text: 'rgba(var(--footer-text))',
+  },
+  details: {
+    border: 'rgba(var(--details-border))',
+    main: 'rgba(var(--details-main))',
+  },
+  blockquote: 'rgba(var(--blockquote))',
+  search: {
+    messageBackground: 'rgba(var(--search-bg))',
+  },
+  tab: {
+    colorOnHover: 'rgba(var(--tab-hover))',
+  },
+  divider: 'rgba(var(--divider))',
+  subTitle: 'rgba(var(--subtitle-text))',
+  reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
+  fadeTextBackground: 'var(--fade-background)',
+};
+type CustomTheme = Theme & { palette: typeof additionalPalette };
 const adaptiveTheme = createTheme({
   palette: {
     primary: {
@@ -175,34 +197,7 @@ const adaptiveTheme = createTheme({
       main: 'rgba(var(--secondary-main))',
       contrastText: 'rgba(var(--secondary-contrast-text))',
     },
-    footer: {
-      background: 'rgba(var(--footer-bg))',
-      text: 'rgba(var(--footer-text))',
-    },
-    details: {
-      border: 'rgba(var(--details-border))',
-      main: 'rgba(var(--details-main))',
-    },
-    blockquote: 'rgba(var(--blockquote))',
-    search: {
-      messageBackground: 'rgba(var(--search-bg))',
-      // highlight: 'rgba(var(--search-highlight))',
-    },
-    tab: {
-      colorOnHover: 'rgba(var(--tab-hover))',
-    },
-    divider: 'rgba(var(--divider))',
-    // getContrastText (color) {
-    //   if (color.startsWith('rgba(v')) return 'rgba(var(--text-primary))'
-    //   else return lightColor.getContrastText(color)
-    // },
-    subTitle: 'rgba(var(--subtitle-text))',
-    reactionButtonBackground: 'rgba(var(--clicked-reaction-button))',
-    fadeTextBackground: 'var(--fade-background)',
-    // link: {
-    //   default: 'rgba(var(--link-default))',
-    //   hover: 'rgba(var(--link-hover))',
-    // },
+    ...additionalPalette
   },
   // Material-UI hard-coded and/or used color manipulator in several components
   // override them here as a workaround
@@ -234,6 +229,6 @@ const adaptiveTheme = createTheme({
   typography: {
     fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
   },
-} as ThemeOptions)
+} as ThemeOptions) as CustomTheme;
 
-export { adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline, SecondaryColorCssBaseline }
+export { adaptiveTheme, CustomTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline, SecondaryColorCssBaseline }

@@ -1,55 +1,56 @@
-import { CssBaseline, Divider, Grid, Typography } from "@material-ui/core";
+import { CssBaseline, Divider, Grid, Typography } from '@material-ui/core';
 
-import { makeStyles, ThemeProvider, useTheme } from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
-import FormatPaintIcon from "@material-ui/icons/FormatPaint";
-import React from "react";
-import { Helmet } from "react-helmet";
-import { graphql, useStaticQuery } from "gatsby";
+import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+import FormatPaintIcon from '@material-ui/icons/FormatPaint';
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { graphql, useStaticQuery } from 'gatsby';
 import {
 	adaptiveTheme,
 	AutoCssBaseline,
 	CustomCssBaseline,
+	CustomTheme,
 	DarkCssBaseline,
 	LightCssBaseline,
 	SecondaryColorCssBaseline,
-} from "../theme";
-import { scrollbarStyle } from "../styles/scrollbar";
-import Comment from "./Comment";
-import Toc, { TocItem } from "./Toc";
-import BackTop from "./BackTop";
-import Footer from "./Footer";
-import Meta, { MetaProps } from "./Meta";
-import Title from "./Title";
-import NavAndDrawer from "./NavAndDrawer";
-import { RequiredNonNull } from "../types/common";
-import { CSSProperties } from "@material-ui/core/styles/withStyles";
+} from '../theme';
+import { scrollbarStyle } from '../styles/scrollbar';
+import Comment from './Comment';
+import Toc, { TocItem } from './Toc';
+import BackTop from './BackTop';
+import Footer from './Footer';
+import Meta, { MetaProps } from './Meta';
+import Title from './Title';
+import NavAndDrawer from './NavAndDrawer';
+import { RequiredNonNull } from '../types/common';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles<CustomTheme>((theme) => {
 	const flexContainer: CSSProperties = {
-		display: "flex",
-		flexDirection: "column",
+		display: 'flex',
+		flexDirection: 'column',
 	};
 	return {
 		toolbar: {
-			[theme.breakpoints.down("md")]: {
+			[theme.breakpoints.down('md')]: {
 				minHeight: 64,
 			},
 			minHeight: 48 + 64,
-			alignItems: "flex-start",
+			alignItems: 'flex-start',
 		},
 		content: {
 			flexGrow: 1,
-			width: "100%",
+			width: '100%',
 			...flexContainer,
 		},
 		main: {
 			padding: theme.spacing(5),
-			[theme.breakpoints.down("md")]: {
+			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(2),
 			},
-			"& .math-display": scrollbarStyle(theme, {
-				overflow: "auto",
+			'& .math-display': scrollbarStyle(theme, {
+				overflow: 'auto',
 			}),
 			flexGrow: 1,
 			...flexContainer,
@@ -62,15 +63,15 @@ const useStyles = makeStyles((theme) => {
 			background: theme.palette.footer.background,
 			color: theme.palette.footer.text,
 			padding: theme.spacing(3),
-			[theme.breakpoints.up("lg")]: {
+			[theme.breakpoints.up('lg')]: {
 				marginLeft: 250,
 			},
 		},
 		container: {
-			[theme.breakpoints.up("lg")]: {
+			[theme.breakpoints.up('lg')]: {
 				marginLeft: 250,
 			},
-			overflow: "hidden",
+			overflow: 'hidden',
 			flexGrow: 1,
 			...flexContainer,
 		},
@@ -114,11 +115,11 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 		?.siteMetadata as RequiredNonNull<GatsbyTypes.SiteSiteMetadata>;
 
 	const {
-		title = "",
-		description = "",
-		authors = "",
-		relativePath = "",
-		modifiedTime = "",
+		title = '',
+		description = '',
+		authors = '',
+		relativePath = '',
+		modifiedTime = '',
 		tags = [],
 		toc = null,
 		noTitle = false,
@@ -150,14 +151,14 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 		<>
 			<Helmet>
 				<title>{`${
-					!title || title === siteTitle ? "" : `${title} - `
+					!title || title === siteTitle ? '' : `${title} - `
 				}${siteTitle}`}</title>
 				<meta name="color-scheme" content="dark light" />
 				<meta name="description" content={desc} />
 			</Helmet>
 			<NavAndDrawer pathname={location?.pathname} />
 			<div className="maincontentdiv">
-				<Grid container style={{ minHeight: "100vh" }}>
+				<Grid container style={{ minHeight: '100vh' }}>
 					<Grid
 						item
 						xs={12}
@@ -166,8 +167,8 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 						lg={gridWidthMdUp}
 						xl={gridWidthMdUp}
 						style={{
-							display: "flex",
-							flexDirection: "column",
+							display: 'flex',
+							flexDirection: 'column',
 						}}
 					>
 						<div className={classes.toolbar} />
@@ -203,7 +204,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 									{!noComment && (
 										<div
 											style={{
-												width: "100%",
+												width: '100%',
 												marginTop: theme.spacing(2),
 											}}
 										>

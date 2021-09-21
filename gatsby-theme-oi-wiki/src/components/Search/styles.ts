@@ -1,7 +1,8 @@
 import { alpha, makeStyles } from '@material-ui/core/styles'
 import { scrollbarStyle } from '../../styles/scrollbar'
+import { CustomTheme } from '../../theme'
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles<CustomTheme>((theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -48,9 +49,9 @@ export const useStyles = makeStyles((theme) => ({
       },
     },
     [`&::-webkit-search-decoration,
-       &::-webkit-search-cancel-button,
-       &::-webkit-search-results-button,
-       &::-webkit-search-results-decoration`]: {
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration`]: {
       display: 'none',
     },
   },

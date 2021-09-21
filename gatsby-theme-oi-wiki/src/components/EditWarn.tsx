@@ -4,10 +4,10 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import React from "react";
-import { SmartLink } from "./Link";
+import React from 'react';
+import { SmartLink } from './Link';
 
 const EditWarning = (): JSX.Element => {
 	return (
@@ -38,7 +38,7 @@ export interface EditWarnProps {
 
 const EditWarn: React.FC<EditWarnProps> = (props) => {
 	const { relativePath, dialogOpen, setDialogOpen } = props;
-	const editURL = "/editor";
+	const editURL = '/editor';
 	const onClose = (): void => {
 		setDialogOpen(false);
 	};
@@ -54,7 +54,6 @@ const EditWarn: React.FC<EditWarnProps> = (props) => {
 				<Button
 					component="a"
 					href={`${editURL}?doc=${relativePath}`}
-					target="_blank"
 					rel="noopener noreferrer nofollow"
 					onClick={onClose}
 				>

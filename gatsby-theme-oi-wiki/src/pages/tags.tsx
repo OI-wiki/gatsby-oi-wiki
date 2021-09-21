@@ -1,10 +1,10 @@
-import Chip from "@material-ui/core/Chip";
-import { makeStyles } from "@material-ui/core/styles";
-import { graphql, useStaticQuery } from "gatsby";
-import kebabCase from "lodash/kebabCase";
-import React from "react";
-import StyledLayout from "../components/StyledLayout";
-import { DeepRequiredNonNull, DeepWriteable } from "../types/common";
+import Chip from '@material-ui/core/Chip';
+import { makeStyles } from '@material-ui/core/styles';
+import { graphql, useStaticQuery } from 'gatsby';
+import kebabCase from 'lodash/kebabCase';
+import React from 'react';
+import StyledLayout from '../components/StyledLayout';
+import { DeepRequiredNonNull, DeepWriteable } from '../types/common';
 
 const useStyles = makeStyles((theme) => ({
 	chip: {
@@ -56,7 +56,7 @@ const TagsPage: React.FC<TagsPageProps> = (props) => {
 						component="a"
 						clickable={true}
 						key={tag.fieldValue}
-						href={"/tags/" + kebabCase(tag.fieldValue)}
+						href={'/tags/' + kebabCase(tag.fieldValue)}
 						className={classes.chip}
 					/>
 				))}
