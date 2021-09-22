@@ -128,6 +128,7 @@ const Playground: React.FC<
 			noEdit
 			noToc
 			noMeta
+			overflow
 		>
 			<Grid container spacing={3} alignItems="center">
 				<Grid item>
