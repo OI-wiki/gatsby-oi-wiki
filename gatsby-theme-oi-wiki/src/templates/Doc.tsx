@@ -4,18 +4,11 @@ import { DeepRequiredNonNull } from '../types/common'
 import unified from 'unified'
 import rehypeReact, { Options } from 'rehype-react'
 import { Root } from 'hast'
-import { Helmet } from 'react-helmet'
 import Grid from '@mui/material/Grid'
+import Header from '../components/Header'
 
 export const query = graphql`
   query DocInfo($id: String!) {
-    site {
-      siteMetadata {
-        description,
-        title
-      }
-    }
-
     mdx: markdownRemark(id: { eq: $id }) {
       id
       wordCount {
@@ -55,10 +48,12 @@ export const query = graphql`
   }
 `
 
+
 interface DocProps {
   data: DeepRequiredNonNull<GatsbyTypes.DocInfoQuery>,
   location: Location
 }
+
 
 const processor = unified()
   .use(rehypeReact, {
@@ -70,7 +65,7 @@ const contentParser = (htmlAst: Root): JSX.Element =>
 
 const Doc: React.FC<DocProps> = (props) => {
   const { data, location } = props
-  const { mdx, site } = data
+  const { mdx } = data
 
   const title = mdx.fields.slug === '/' ? '' : mdx.frontmatter.title
   const description = mdx.frontmatter.description || mdx.excerpt
@@ -87,14 +82,13 @@ const Doc: React.FC<DocProps> = (props) => {
   const dateModified = mdx.parent.changeTime || ''
   const isIndex = mdx.fields.isIndex
   const isWIP = wordCount === 0 || (tags?.findIndex((x: string) => x === 'WIP') >= 0)
-  const siteTitle = site.siteMetadata.title
 
 
   return (
     <>
-      <Helmet title={`${title ? title + ' - ' : ''}${siteTitle}`}/>
-
       <Grid container={true} flexDirection="column">
+
+        <Header title={title}/>
         <article>
           {contentParser(mdx.htmlAst)}
         </article>
