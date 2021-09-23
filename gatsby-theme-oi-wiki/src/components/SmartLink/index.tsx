@@ -140,4 +140,4 @@ const SmartLink: React.FC<SmartLinkProps> = (props) => {
   }
 }
 
-export { SmartLink }
+export default SmartLink
