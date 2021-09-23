@@ -7,6 +7,7 @@ import { Root } from 'hast'
 import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
 import Main from '../components/Main'
+import NavSidebar from '../components/NavSidebar'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -92,6 +93,7 @@ const Doc: React.FC<DocProps> = (props) => {
         <Header title={title}/>
 
         <Grid container={true} item={true} flexGrow={1} sx={{ flexFlow: 'row' }}>
+          <NavSidebar pathname={location.pathname}/>
 
           <Main item={true}>
             <article>
