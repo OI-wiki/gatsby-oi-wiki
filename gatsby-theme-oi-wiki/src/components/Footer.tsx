@@ -1,19 +1,30 @@
-import { Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { css } from '@emotion/react'
+import Typography from '@mui/material/Typography'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect } from 'react'
-import { SmartLink } from './Link'
+import styled from '@mui/material/styles/styled'
+import Box from '@mui/material/Box'
+import SmartLink from './SmartLink'
 
-const useStyles = makeStyles((theme) => ({
-  link: {
-    color: theme.palette.footer.text,
-  },
-}))
+const BG_COLOR = `rgb(238, 238, 238)`
+const COLOR = `rgb(97, 97, 97)`
+
+const linkStyle = css`
+  color: ${COLOR};
+`
+
+const Container = styled(Box)(({ theme }) => css`
+  background-color: ${BG_COLOR};
+  color: ${COLOR};
+  padding: ${theme.spacing(3)};
+  ${theme.breakpoints.up('lg')}: {
+    margin-left: 250px;
+  }
+`)
 
 let eggShowed = false
 
 const Footer: React.FC = () => {
-  const classes = useStyles()
   const data = useStaticQuery<GatsbyTypes.lastestCommitQuery>(graphql`
     query lastestCommit {
       allGitCommit(limit: 1) {
@@ -39,28 +50,30 @@ const Footer: React.FC = () => {
   }, [hash, hashFrag])
 
   return (
-    <>
+    <Container>
       <Typography gutterBottom>
         Copyright © 2016 - {dateStr?.substr(0, 4)} OI Wiki Team
       </Typography>
       <Typography gutterBottom>
         最近更新：
-        <SmartLink className={classes.link} href="https://github.com/OI-wiki/OI-wiki/commits">
+        <SmartLink className={linkStyle.name} href="https://github.com/OI-wiki/OI-wiki/commits">
           {hashFrag}
         </SmartLink>
         , {dateStr?.substr(0, 10)}
       </Typography>
       <Typography>
         联系方式：
-        <SmartLink className={classes.link} href="https://t.me/OIwiki">
+        <SmartLink className={linkStyle.name} href="https://t.me/OIwiki">
           Telegram 群组
         </SmartLink>{' / '}
-        <SmartLink className={classes.link} href="https://jq.qq.com/?_wv=1027&k=5EfkM6K">
+        <SmartLink className={linkStyle.name} href="https://jq.qq.com/?_wv=1027&k=5EfkM6K">
           QQ 群组
         </SmartLink>
       </Typography>
-    </>
+    </Container>
   )
 }
 
-export default Footer
+const FooterMemo = React.memo(Footer, () => true)
+
+export default FooterMemo

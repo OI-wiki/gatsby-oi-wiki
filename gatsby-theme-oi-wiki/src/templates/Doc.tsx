@@ -6,6 +6,7 @@ import rehypeReact, { Options } from 'rehype-react'
 import { Root } from 'hast'
 import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -92,6 +93,8 @@ const Doc: React.FC<DocProps> = (props) => {
         <article>
           {contentParser(mdx.htmlAst)}
         </article>
+
+        <Footer/>
       </Grid>
     </>
   )
