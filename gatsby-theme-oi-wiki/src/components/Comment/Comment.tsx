@@ -5,18 +5,19 @@ import {
 	makeStyles,
 	Tooltip,
 	Typography,
-} from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import GithubV3 from "@mgtd/vssue-api-github-v3";
-import GithubV4 from "@mgtd/vssue-api-github-v4";
-import createPersistedState from "use-persisted-state";
-import CommentCard from "./Card";
-import CommentInput from "./CommentInput";
-import { Comments, Issue, User } from "./types";
-import { InputContentProvider } from "./inputContext";
-import { getComments } from "./api";
+} from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import GithubV3 from '@mgtd/vssue-api-github-v3';
+import GithubV4 from '@mgtd/vssue-api-github-v4';
+import createPersistedState from 'use-persisted-state';
+import CommentCard from './Card';
+import CommentInput from './CommentInput';
+import { Comments, Issue, User } from './types';
+import { InputContentProvider } from './inputContext';
+import { getComments } from './api';
 
-const useToken = createPersistedState("github-access-token");
+const useToken = createPersistedState('github-access-token');
+const useUser = createPersistedState('github-user');
 
 interface Props {
 	clientID: string;
@@ -33,15 +34,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const anonymousUser: User = { username: '未登录用户' };
+
 const CommentComponent: React.FC<Props> = (props) => {
 	const classes = useStyles();
-	const defaultUser: User = { username: "未登录用户" };
 	const [token, setToken] = useToken<string | undefined>(undefined);
 	const revokeToken = (): void => {
 		setToken(undefined);
-		setUser(defaultUser);
+		setUser(anonymousUser);
 	};
-	const [user, setUser] = useState<User>(defaultUser);
+	const [user, setUser] = useUser<User>(anonymousUser);
 	const [comments, setComments] = useState<Comments>({
 		count: 0,
 		page: 0,
@@ -50,57 +52,51 @@ const CommentComponent: React.FC<Props> = (props) => {
 	});
 	const [noIssue, setNoIssue] = useState(false);
 	const filteredComments = comments.data.filter(
-		({ isMinimized }) => !isMinimized
+		(comment) => !comment.isMinimized
 	);
 	const [issue, setIssue] = useState<Issue | null>(null);
 	const [createIssueLoading, setCreateIssueLoading] = useState(false);
 	const authorized =
-		user.username !== "未登录用户" && token != null && !noIssue;
+		user.username !== anonymousUser.username && token != null && !noIssue;
 	const isAdmin = props.admin.indexOf(user.username) >= 0;
-	const ghAPIV3 = new GithubV3({
-		baseURL: "https://github.com",
+	const githubApiProps = {
+		baseURL: 'https://github.com',
 		owner: props.owner,
 		repo: props.repo,
-		labels: ["gitalk"],
+		labels: ['gitalk'],
 		clientId: props.clientID,
 		clientSecret: props.clientSecret,
-		state: "123",
+		state: '123',
 		proxy: (url: string) => `https://cors-anywhere.mgt.workers.dev/?${url}`,
-	});
-	const ghAPIV4 = new GithubV4({
-		baseURL: "https://github.com",
-		owner: props.owner,
-		repo: props.repo,
-		labels: ["gitalk"],
-		clientId: props.clientID,
-		clientSecret: props.clientSecret,
-		state: "123",
-		proxy: (url: string) => `https://cors-anywhere.mgt.workers.dev/?${url}`,
-	});
+	};
+	const [githubApi3, githubApi4] = [
+		new GithubV3(githubApiProps),
+		new GithubV4(githubApiProps),
+	];
 	useEffect(() => {
 		const asyncFunc = async (): Promise<void> => {
 			let tk = token;
 			if (!tk) {
-				tk = await ghAPIV3.handleAuth();
+				tk = await githubApi3.handleAuth();
 				if (tk !== null) {
 					setToken(tk);
 				}
 			}
 			const result = await getComments(
-				ghAPIV3,
-				ghAPIV4,
+				githubApi3,
+				githubApi4,
 				props.id,
 				revokeToken,
 				tk
 			);
-			if (result === "noIssue") {
+			if (result === 'noIssue') {
 				setNoIssue(true);
-			} else if (result !== "invalidToken") {
+			} else if (result !== 'invalidToken') {
 				const [i, c] = result;
 				setComments(c);
 				setIssue(i);
 			}
-			const u: User = await ghAPIV3.getUser({ accessToken: tk });
+			const u: User = await githubApi3.getUser({ accessToken: tk });
 			setUser(u);
 		};
 
@@ -112,13 +108,13 @@ const CommentComponent: React.FC<Props> = (props) => {
 	}, [props.clientID, props.clientSecret, props.id]);
 	const updateComments = async (): Promise<void> => {
 		const result = await getComments(
-			ghAPIV3,
-			ghAPIV4,
+			githubApi3,
+			githubApi4,
 			props.id,
 			revokeToken,
 			token
 		);
-		if (result !== "invalidToken" && result !== "noIssue") {
+		if (result !== 'invalidToken' && result !== 'noIssue') {
 			const [, c] = result;
 			setComments(c);
 		}
@@ -127,7 +123,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 		return isAdmin ? (
 			<Typography
 				variant="body1"
-				style={{ padding: "24px", textAlign: "center" }}
+				style={{ padding: '24px', textAlign: 'center' }}
 			>
 				<Button
 					variant="outlined"
@@ -135,7 +131,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 					disabled={createIssueLoading}
 					onClick={async () => {
 						setCreateIssueLoading(true);
-						await ghAPIV4.postIssue({
+						await githubApi4.postIssue({
 							accessToken: token,
 							title: props.id,
 							content: location.href,
@@ -145,14 +141,14 @@ const CommentComponent: React.FC<Props> = (props) => {
 							setTimeout(resolve, 1000)
 						);
 						const result = await getComments(
-							ghAPIV3,
-							ghAPIV4,
+							githubApi3,
+							githubApi4,
 							props.id,
 							revokeToken,
 							token
 						);
 						setCreateIssueLoading(false);
-						if (result !== "invalidToken" && result !== "noIssue") {
+						if (result !== 'invalidToken' && result !== 'noIssue') {
 							const [i, c] = result;
 							setNoIssue(false);
 							setComments(c);
@@ -164,7 +160,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 					{createIssueLoading && (
 						<CircularProgress
 							size={20}
-							style={{ marginLeft: "4px" }}
+							style={{ marginLeft: '4px' }}
 						/>
 					)}
 				</Button>
@@ -172,7 +168,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 		) : (
 			<Typography
 				variant="body1"
-				style={{ padding: "24px", textAlign: "center" }}
+				style={{ padding: '24px', textAlign: 'center' }}
 			>
 				没有找到与本页面相关联的 issue
 			</Typography>
@@ -187,15 +183,15 @@ const CommentComponent: React.FC<Props> = (props) => {
 						className={classes.link}
 					>{`${filteredComments.length} 条评论`}</a>
 				</Tooltip>
-				<Tooltip title={authorized ? "登出" : "登录"}>
+				<Tooltip title={authorized ? '登出' : '登录'}>
 					<div
-						style={{ float: "right", cursor: "pointer" }}
+						style={{ float: 'right', cursor: 'pointer' }}
 						onClick={() => {
 							if (!token) {
-								ghAPIV3.redirectAuth();
+								githubApi3.redirectAuth();
 							} else {
 								setToken(undefined);
-								setUser(defaultUser);
+								setUser(anonymousUser);
 							}
 						}}
 					>
@@ -210,12 +206,12 @@ const CommentComponent: React.FC<Props> = (props) => {
 				authorized={authorized}
 				showLogin={token === null}
 				handleLogin={() => {
-					ghAPIV3.redirectAuth();
+					githubApi3.redirectAuth();
 				}}
 				sendComment={async (v, setLoading) => {
 					setLoading(true);
 					try {
-						await ghAPIV3.postComment({
+						await githubApi3.postComment({
 							accessToken: token,
 							issueId: issue!.id,
 							content: v,
@@ -258,7 +254,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 								setDeleteLoading
 							) => {
 								setDeleteLoading(true);
-								await ghAPIV4.deleteComment({
+								await githubApi4.deleteComment({
 									accessToken: token,
 									commentId,
 									issueId: issue!.id,
@@ -267,7 +263,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 								setDeleteLoading(false);
 							}}
 							addReaction={async (commentId, reaction) => {
-								await ghAPIV4.postCommentReaction({
+								await githubApi4.postCommentReaction({
 									accessToken: token,
 									commentId,
 									reaction,
@@ -275,7 +271,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 								});
 							}}
 							removeReaction={async (commentId, reaction) => {
-								await ghAPIV4.deleteCommentReaction({
+								await githubApi4.deleteCommentReaction({
 									accessToken: token,
 									commentId,
 									reaction,
