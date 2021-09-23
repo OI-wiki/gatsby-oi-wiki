@@ -1,18 +1,20 @@
-import { makeStyles } from '@material-ui/core/styles'
 import { Link as GatsbyLink } from 'gatsby'
 import isAbsoluteURL from 'is-absolute-url'
 import React from 'react'
 import LinkTooltip from './LinkTooltip'
 import path from 'path'
-import clsx from 'clsx'
-import { GatsbyLinkProps } from 'gatsby-link'
 import smoothScrollTo from '../../lib/smoothScroll'
-import { useSetting } from '../../lib/useSetting'
-import { useMediaQuery, useTheme } from '@material-ui/core'
 import { OnClickHandler } from '../../types/common'
+import { css, SerializedStyles } from '@emotion/react'
+import styled from '@mui/material/styles/styled'
+import Link, { LinkProps } from '@mui/material/Link'
+import { getElementViewPosition } from './utils'
+import { observer } from 'mobx-react-lite'
+import { headerStore } from '../../stores/headerStore'
+import { computed } from 'mobx'
+import { Theme } from '@mui/material/styles/createTheme'
 
 const MD_EXPR = /\.(md|markdown|mdtext|mdx)/g
-const NO_SLASH_EXPR = /[^/]$/
 
 /**
  * 修复相对路径的页面链接
@@ -28,45 +30,44 @@ const NO_SLASH_EXPR = /[^/]$/
  * 实际上不需要当前页面的 path
  */
 const linkFix = (link: string, isIndex: boolean): string => {
-  if (/^\//.test(link)) return link // absolute path
+  if (link.startsWith('/')) return link // absolute path
 
   let newLink = link.replace(MD_EXPR, '/').replace('index', '')
   if (!isIndex) newLink = '../' + newLink
-  if (NO_SLASH_EXPR.test(newLink) && !/#/.test(newLink)) {
-    newLink += '/' // append '/' for links, but excluding urls includes `#`.
+  // append '/' for links, but excluding urls includes `#`.
+  if (newLink.endsWith('/') && !newLink.includes('#')) {
+    newLink += '/'
   }
   return newLink
 }
 
 const getAPILink = (link: string, pathname: string, isIndex: boolean): string => {
   let newLink = link.replace(MD_EXPR, '/').replace(/#(.*?)$/, '')
-  if (/^[^/]/.test(newLink)) {
+  if (!newLink.startsWith('/')) {
     if (!isIndex) newLink = '../' + newLink
-    if (NO_SLASH_EXPR.test(pathname)) pathname += '/'
+    if (pathname.endsWith('/')) pathname += '/'
     newLink = path.resolve(pathname, newLink)
   }
   return `https://api.mgt.moe/preview?path=${newLink}`
 }
 
-const isRef = (link: string): boolean => /^#/.test(link)
+const isRef = (link: string): boolean => link.startsWith('#')
 
-const useStyles = makeStyles((theme) => ({
-  link: {
-    color: theme.palette.secondary.main,
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-      color: theme.palette.secondary.light,
-    },
-    transition: `color ${250}ms ease-in-out`,
-  },
-}))
+const linkStyle = ({ theme }: { theme?: Theme }): SerializedStyles => css`
+  color: ${theme?.palette.secondary.main};
+  text-decoration: none;
+  transition: color 225ms ease-in-out;
 
-export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> {
-  /** 指向的链接 */
-  to?: string;
-  /** to 的别名，两者同时存在时优先使用 href */
-  href?: string;
+  &:hover {
+    color: ${theme?.palette.secondary.main};
+  }
+`
+
+const StyledLink = styled(Link)(linkStyle)
+
+const StyledGLink = styled(GatsbyLink)(linkStyle)
+
+export interface SmartLinkProps extends LinkProps {
   /** 类名 */
   className?: string;
   /** 是否对站内链接启用 Tooltip 预览，如果为 true 则必须给出 pathname */
@@ -77,6 +78,28 @@ export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> 
   isIndex?: boolean;
 }
 
+const SCROLL_PADDING = 24
+
+const RefLink: React.FC<SmartLinkProps> = observer((props) => {
+  const { href = '', children, ...others } = props
+  const headerHeight = computed((): number => headerStore.appear ? headerHeight : 0).get()
+
+  const onClick: OnClickHandler = (e) => {
+    e.preventDefault()
+
+    const target = document.getElementById(href.substring(1, href.length))
+    const yDis = getElementViewPosition(target).y + window?.pageYOffset - headerHeight - SCROLL_PADDING
+
+    smoothScrollTo(yDis)
+  }
+
+  return (
+    <StyledGLink to={href} onClick={onClick} {...others as any}>
+      {children}
+    </StyledGLink>
+  )
+})
+
 /**
  * 智能链接
  *
@@ -86,59 +109,31 @@ export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> 
  * - 如果是 path 则根据 tooltip 属性决定是否启用 Tooltip
  */
 const SmartLink: React.FC<SmartLinkProps> = (props) => {
-  const theme = useTheme()
-  const classes = useStyles()
-  
-  // in case Link is constructed wrongly
-  const href = typeof props?.to === 'string' ? props?.to : ''
-  const { tooltip = false, isIndex = true, className, pathname, children, ...others } = props
-  const classList = clsx(className, classes.link)
-  const [settings] = useSetting()
-  const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
+  const { tooltip = false, href = '', isIndex = true, pathname, children, ...others } = props
 
-
-  if (className && className.search('anchor') > -1) {
-    return <a {...others} href={href}>{children}</a>
+  if (others?.className?.includes('anchor')) {
+    delete others.className
+    return <Link {...others} href={href}>{children}</Link>
   } else if (isAbsoluteURL(href)) {
     return (
-      <a {...others} href={href} className={classList} target="_blank" rel="noopener noreferrer nofollow">
+      <StyledLink href={href} target="_blank" rel="noopener noreferrer nofollow">
         {children}
-      </a>
+      </StyledLink>
     )
   } else if (isRef(href)) {
-    const tabHeight = isMdDown ? 64 : 112
-    const scrollPadding = 24
-
-    const onClick: OnClickHandler = (e) => {
-      e.preventDefault()
-
-      const target = document.getElementById(href.substring(1, href.length))
-      const yDis = (target?.getBoundingClientRect().top as number) + window?.pageYOffset - tabHeight - scrollPadding
-
-      if (settings.animation.smoothScroll) {
-        smoothScrollTo(yDis)
-      } else {
-        window?.scrollTo(0, yDis)
-      }
-    }
-
-    return (
-      <GatsbyLink {...others as any} to={href} className={classList} onClick={onClick}>
-        {children}
-      </GatsbyLink>
-    )
+    return <RefLink href={href} {...others}>{children}</RefLink>
   } else if (tooltip) {
     if (!pathname) throw new Error('tooltip 为 true 时必须给出 pathname')
     return (
       <LinkTooltip url={getAPILink(href, pathname, isIndex)} to={linkFix(href, isIndex)}>
-        <GatsbyLink {...others as any} to={linkFix(href, isIndex)} className={classList}>
+        <StyledGLink to={linkFix(href, isIndex)} {...others as any}>
           {children}
-        </GatsbyLink>
+        </StyledGLink>
       </LinkTooltip>
     )
   } else {
     return (
-      <GatsbyLink {...others as any} to={linkFix(href, isIndex)} className={classList}>
+      <GatsbyLink to={linkFix(href, isIndex)} {...others as any}>
         {children}
       </GatsbyLink>
     )

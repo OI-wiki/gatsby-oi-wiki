@@ -1,55 +1,63 @@
 import React, { createRef, useCallback, useEffect, useRef, useState } from 'react'
-import { Card, CardContent, CircularProgress, Fade, makeStyles } from '@material-ui/core'
 import { Link as GatsbyLink } from 'gatsby'
-
 import { FetchStatus, PreviewData } from './LinkTooltip'
 import { useDelay } from './hooks'
 import { getElementSize, getElementViewPosition, Position, Size } from './utils'
 import { Nullable } from '../../types/common'
-import { Alert } from '@material-ui/lab'
+import styled from '@mui/material/styles/styled'
+import Card from '@mui/material/Card'
+import { css } from '@emotion/react'
+import CardContent from '@mui/material/CardContent'
+import Fade from '@mui/material/Fade'
+import CircularProgress from '@mui/material/CircularProgress'
+import Alert from '@mui/material/Alert'
 
-const lines = 4
-const lineHeight = 1.5
-const cardDis = '2rem'
-const useStyles = makeStyles((theme) => ({
-  container: {
-    position: 'relative',
-    display: 'inline-block',
-  },
-  fade: {
-    lineHeight: `${lineHeight}em`,
-    height: `${lineHeight * lines}em`,
-    overflow: 'hidden',
-    position: 'relative',
-    '&:after': {
-      content: '""',
-      textAlign: 'right',
-      position: 'absolute',
-      bottom: 0,
-      right: 0,
-      width: '30%',
-      height: '1.5em',
-      background: theme.palette.fadeTextBackground,
-    },
-  },
-  toolCard: {
-    position: 'absolute',
-    zIndex: 9999,
-    width: '320px',
-    left: 0,
-    top: cardDis,
-    maxWidth: 'calc(100vw - 40px)',
-  },
-  aboveMedian: {
-    top: 'initial',
-    bottom: cardDis,
-  },
-  fetching: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}))
+const LINES = 4
+const LINE_HEIGHT = 1.5
+const CARD_DIS = '2rem'
+
+const Container = styled('span')`
+  position: relative;
+  display: inline-block;
+`
+
+const StyledCard = styled(Card)(({ theme }) => css`
+  width: 320px;
+  position: absolute;
+  left: 0;
+  top: ${CARD_DIS};
+  max-width: calc(100vw - 40px);
+  z-index: ${theme.zIndex.tooltip};
+`)
+
+const FetchingContent = styled(CardContent)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const FetchedContentDiv = styled('div')`
+  line-height: ${LINE_HEIGHT}em;
+  height: ${LINE_HEIGHT * LINES}em;
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: ${LINE_HEIGHT}em;
+    background-color: white;
+  }
+`
+
+const aboveMedianStyle = css`
+  top: initial;
+  bottom: ${CARD_DIS};
+`
 
 interface PositionAndSize {
   pos: Position,
@@ -68,11 +76,10 @@ export interface ToolCardProps {
 }
 
 const ToolCard: React.FC<ToolCardProps> = (props) => {
-  const classes = useStyles()
   const { children, content, status, closeDelay = 0, openDelay = 0, onHover, to } = props
   const [open, setOpen] = useState(false)
   const rootRef = createRef<HTMLDivElement>()
-  const popperRef = useRef<HTMLElement>()
+  const popperRef = useRef<HTMLDivElement>(null)
   const [onOpen, onClose] = useDelay(() => {
     setOpen(true)
     props.onOpen?.()
@@ -115,9 +122,9 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
 
     element.style.setProperty('right', typeof right === 'undefined' ? 'auto' : `${right}px`)
     element.style.setProperty('left', typeof left === 'undefined' ? 'auto' : `${left}px`)
-    element.classList.toggle(classes.aboveMedian, pos.y > viewport.height / 2)
+    element.classList.toggle(aboveMedianStyle.name, pos.y > viewport.height / 2)
 
-  }, [classes.aboveMedian, rootRef])
+  }, [rootRef])
 
   useEffect(() => {
     if (open && popperRef.current) {
@@ -130,8 +137,7 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
   }, [open, content, popperRef, adjustElementPosition, rootRef])
 
   return (
-    <span
-      className={classes.container}
+    <Container
       onMouseEnter={() => {
         onOpen()
         onHover?.()
@@ -143,32 +149,31 @@ const ToolCard: React.FC<ToolCardProps> = (props) => {
       <div className='math math-display'/>
       <GatsbyLink to={to}>
         <Fade in={open}>
-          <Card
-            className={classes.toolCard}
+          <StyledCard
             elevation={3}
             ref={popperRef}
           >
             {(() => {
               if (status === 'not_fetched' || status === 'fetching') {
-                return <CardContent className={classes.fetching}>
+                return <FetchingContent>
                   <CircularProgress/>
-                </CardContent>
+                </FetchingContent>
               } else if (status === 'fetched') {
                 return <CardContent>
-                  <div className={classes.fade}>
+                  <FetchedContentDiv>
                     <strong>{content?.title + ' '}</strong>
                     {content?.text}
-                  </div>
+                  </FetchedContentDiv>
                 </CardContent>
               } else {
                 return <Alert severity="error">无法获取页面预览</Alert>
               }
             })()}
-          </Card>
+          </StyledCard>
         </Fade>
       </GatsbyLink>
       {children}
-    </span>
+    </Container>
   )
 }
 
