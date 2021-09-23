@@ -6,7 +6,7 @@ import rehypeReact, { Options } from 'rehype-react'
 import { Root } from 'hast'
 import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Main from '../components/Main'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -64,6 +64,7 @@ const processor = unified()
 const contentParser = (htmlAst: Root): JSX.Element =>
   (processor.stringify(htmlAst) as never as JSX.Element)
 
+
 const Doc: React.FC<DocProps> = (props) => {
   const { data, location } = props
   const { mdx } = data
@@ -87,14 +88,19 @@ const Doc: React.FC<DocProps> = (props) => {
 
   return (
     <>
-      <Grid container={true} flexDirection="column">
-
+      <Grid container={true} direction="column">
         <Header title={title}/>
-        <article>
-          {contentParser(mdx.htmlAst)}
-        </article>
 
-        <Footer/>
+        <Grid container={true} item={true} flexGrow={1} sx={{ flexFlow: 'row' }}>
+
+          <Main item={true}>
+            <article>
+              {contentParser(mdx.htmlAst)}
+            </article>
+          </Main>
+
+        </Grid>
+
       </Grid>
     </>
   )
