@@ -1,12 +1,10 @@
 /* eslint-disable*/
 import axios, { AxiosInstance } from 'axios'
 import { sha256 } from 'js-sha256'
-import { CollectionItem, GeneralGithubUser, ProposalMeta, SortMethod } from './types';
+import { CollectionItem, GeneralGithubUser, ProposalComment, ProposalMeta, SortMethod } from './types';
 import { graphql } from '@octokit/graphql'
 import { graphql as TGraphQL } from '@octokit/graphql/dist-types/types';
-// import { GraphQlQueryResponseData } from "@octokit/graphql";
 const LABEL_PROPOSAL = 'collection-proposal'
-// const LABEL_COMMENT = 'collection-comment'
 class CollectionClient {
   private owner: string;
   private repo: string;
@@ -58,7 +56,14 @@ class CollectionClient {
   makeProposalTitle(pageId: string, name: string): string {
     return `collection-${sha256(pageId).substr(0, 8)}-${sha256(name)}`
   }
-  async deleteProposal(issueId: string): Promise<{ ok: boolean; message?: string; }> {
+  async sendComment(issueId: number, text: string): Promise<void> {
+    await this.client.post(`/repos/${this.owner}/${this.repo}/issues/${issueId}/comments`, { body: text })
+  }
+  async getIssueCommentCount(issudId: number): Promise<number> {
+    const resp = (await this.client.get(`/repos/${this.owner}/${this.repo}/issues/${issudId}`)).data
+    return resp.comments as number
+  }
+  async deleteProposal(nodeId: string): Promise<{ ok: boolean; message?: string; }> {
     // const title = this.makeProposalTitle(id, name)
     await this.gqlclient(`
     mutation ($input: DeleteIssueInput!) {
@@ -66,7 +71,11 @@ class CollectionClient {
         clientMutationId
       }
     }
-    `, { input: issueId })
+    `, {
+      input: {
+        issueId: nodeId
+      }
+    })
     return { ok: true }
   }
   async sendProposal(id: string, name: string, url: string, description: string): Promise<{ ok: boolean; message: string }> {
@@ -89,8 +98,48 @@ class CollectionClient {
 
     return { ok: true, message: '' }
   }
-  async getComments(issueId: number, page: number = 1, itemsPerPage: number = 20) {
-
+  async getUserDetails(username: string): Promise<GeneralGithubUser> {
+    return (await this.client.get(`/users/${username}`)).data
+  }
+  async getComments(issueId: number, page: number = 1, itemsPerPage: number = 20): Promise<ProposalComment[]> {
+    const resp = (await this.client.get(`/repos/${this.owner}/${this.repo}/issues/${issueId}/comments`, {
+      params: {
+        per_page: itemsPerPage,
+        page: page
+      }
+    })).data as ProposalComment[];
+    return resp;
+  }
+  async setSupportState(nodeId: string, state: boolean) {
+    if (state) {
+      await this.gqlclient(`
+      mutation ($data: AddReactionInput!) {
+        addReaction(input: $data) {
+          reaction {
+            content
+          }
+          subject {
+            id
+          }
+        }
+      }      
+      `, {
+        data: { subjectId: nodeId, content: 'THUMBS_UP' }
+      })
+    } else {
+      await this.gqlclient(`
+      mutation ($data: RemoveReactionInput!) {
+        removeReaction(input: $data) {
+          reaction {
+            content
+          }
+          subject {
+            id
+          }
+        }
+      }      
+      `, { data: { subjectId: nodeId, content: 'THUMBS_UP' } })
+    }
   }
   async getSelfSupported(id: number): Promise<boolean> {
     const { repository } = await this.gqlclient(`

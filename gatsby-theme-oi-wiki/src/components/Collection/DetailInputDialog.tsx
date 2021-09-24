@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button, CircularProgress, createStyles, Dialog, DialogActions, DialogContent, DialogTitle, Grid, makeStyles, TextField, Theme } from '@material-ui/core'
 import React, { useState } from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CollectionClient } from './CollectionClient'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: '100%',
   },
   dialogContent: {
-    width: '400px',
+    // width: '400px',
   },
 }))
 
@@ -38,18 +39,49 @@ const DetailInputDialog: React.FC<{ open: boolean; onClose: () => void; finishCa
     finishCallback()
   }
   return <div>
-    <Dialog open={open} onClose={onClose}>
+    <Dialog
+      open={open}
+      onClose={(_, reason) => {
+        if (reason !== 'backdropClick') onClose()
+      }}
+      fullWidth
+      maxWidth='sm'
+    >
       <DialogTitle>添加提案</DialogTitle>
       <DialogContent className={styles.dialogContent}>
-        <div>
-          <TextField error={nameErrorText !== ''} disabled={loading} className={styles.input} label='题目名' value={name} onChange={e => { setName(e.target.value); setNameErrorText('') }} helperText={nameErrorText !== '' ? nameErrorText : '题目名用以同其他提案相区分，请保证唯一性'}></TextField>
-        </div>
-        <div>
-          <TextField disabled={loading} className={styles.input} label='题目链接' value={url} onChange={e => setUrl(e.target.value)}></TextField>
-        </div>
-        <div>
-          <TextField disabled={loading} className={styles.input} variant='outlined' label='题目详情' value={description} multiline onChange={e => setDescription(e.target.value)}></TextField>
-        </div>
+        <TextField
+          fullWidth
+          error={nameErrorText !== ''}
+          disabled={loading}
+          className={styles.input}
+          label='题目名'
+          value={name}
+          onChange={e => {
+            setName(e.target.value)
+            setNameErrorText('')
+          }}
+          helperText={nameErrorText !== '' ? nameErrorText : '题目名用以同其他提案相区分，请保证唯一性'}
+        ></TextField>
+        <TextField
+          fullWidth
+          disabled={loading}
+          className={styles.input}
+          label='题目链接'
+          value={url}
+          onChange={e => setUrl(e.target.value)}
+        ></TextField>
+        <TextField
+          fullWidth
+          rows={5}
+          disabled={loading}
+          className={styles.input}
+          variant='outlined'
+          label='题目详情'
+          value={description}
+          multiline
+          onChange={e => setDescription(e.target.value)}
+        ></TextField>
+
         {loading && <Grid container justifyContent='center'>
           <Grid item>
             <CircularProgress />

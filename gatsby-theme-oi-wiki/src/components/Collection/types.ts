@@ -2,7 +2,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable spaced-comment */
 
-type CollectionUser = { login: false; } | { login: true; username: string; avatar: string; homepage: string }
+type CollectionUser = { login: false; } | {
+  login: true;
+  username: string;
+  avatar: string;
+  homepage: string;
+  id: number;
+  node_id: string;
+}
 
 interface GeneralGithubUser {
   login: string;//用户名
@@ -23,6 +30,7 @@ interface GeneralGithubUser {
   received_events_url: string;
   type: 'User';
   site_admin: boolean;
+  avatar_url: string;
 }
 
 interface Response_getIssue {
@@ -47,6 +55,17 @@ interface CollectionItem extends ProposalMeta {
   nodeId: string;
 }
 type SortMethod = 'support' | 'comment'
+type ButtonClickEvent = React.MouseEventHandler<HTMLButtonElement>;
+
+interface ProposalComment {
+  id: number;
+  node_id: string;
+  body: string;
+  user: GeneralGithubUser;
+  created_at: string;
+  updated_at: string;
+}
+
 export type {
   CollectionUser,
   ReturnValue_getIssue,
@@ -55,4 +74,6 @@ export type {
   ProposalMeta,
   CollectionItem,
   SortMethod,
+  ButtonClickEvent,
+  ProposalComment,
 }

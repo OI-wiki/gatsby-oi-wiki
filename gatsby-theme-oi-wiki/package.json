@@ -20,6 +20,7 @@
     "@mgtd/vssue-api-github-v4": "^2.4.5",
     "@octokit/graphql": "^4.6.4",
     "autosuggest-highlight": "^3.1.1",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "clsx": "^1.1.1",
     "constate": "^3.3.0",
@@ -41,7 +42,9 @@
     "gatsby-transformer-remark-rehype": "^1.0.3",
     "gatsby-transformer-sharp": "^3.9",
     "hast-util-to-text": "^3.0.0",
+    "js-sha256": "^0.9.0",
     "lodash": "^4.17.21",
+    "luxon": "^2.0.2",
     "mark.js": "^8.11.1",
     "mdast-util-toc": "^6.0.0",
     "path-browserify": "^1.0.1",
@@ -56,11 +59,10 @@
     "remark-details": "^3.0.0",
     "remark-math": "^3.0.1",
     "simple-git": "^2.41.1",
-    "use-persisted-state": "^0.3.0",
-    "js-sha256": "^0.9.0",
-    "axios": "^0.21.1"
+    "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
+    "@types/luxon": "^2.0.4",
     "@types/react-helmet": "^6.1.1",
     "@types/use-persisted-state": "^0.3.0",
     "@typescript-eslint/eslint-plugin": "^4.28.1",

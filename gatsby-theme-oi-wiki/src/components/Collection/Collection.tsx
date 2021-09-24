@@ -20,6 +20,7 @@ const apiClient = new GithubV4({
   baseURL: 'https://github.com',
   owner: REPO_OWNER,
   repo: REPO_NAME,
+  // 使用和评论区相同的OAuth App
   clientId: process.env.GATSBY_GITHUB_CLIENT_ID,
   clientSecret: process.env.GATSBY_GITHUB_CLIENT_SECRET,
   labels: [],
@@ -50,11 +51,16 @@ const Collection: React.FC<{ id: string }> = ({ id }) => {
   const [page, setPage] = useState(1)
   const [, setCount] = useState(0)
   const [itemsPerPage, setItemsPerPage] = useItemsPerPage<number>(10)
-  const [sortMethod, setSortMethod] = usePreferredSortMethod<SortMethod>('support')
+  const [sortMethod0, setSortMethod] = usePreferredSortMethod<SortMethod>('support')
   const [contentLoading, setContentLoading] = useState(false)
   const [showDetailInput, setShowDetailInput] = useState(false)
+  const [shouldLoad, setShouldLoad] = useState(false)
   const login = user.login
   const client = new CollectionClient(token, REPO_OWNER, REPO_NAME)
+  const sortMethod: SortMethod = React.useMemo(() => {
+    if (sortMethod0 === 'comment' || sortMethod0 === 'support') return sortMethod0
+    return 'support'
+  }, [sortMethod0])
   const revokeToken = (): void => {
     setToken(null)
     setUser({ login: false })
@@ -67,31 +73,42 @@ const Collection: React.FC<{ id: string }> = ({ id }) => {
     setPageCount(resp.totalPage)
     setCount(resp.proposalCount)
     setData(resp.data)
+    setLoaded(true)
   }
   useEffect(() => {
     (async () => {
       if (token) {
         try {
-          const resp = await apiClient.getUser({ accessToken: token })
-          setUser({ ...resp, login: true } as CollectionUser)
+          const { username, avatar, homepage } = await apiClient.getUser({ accessToken: token })
+          const resp = await client.getUserDetails(username)
+          setUser({
+            login: true,
+            avatar: avatar as string,
+            homepage: homepage as string,
+            id: resp.id,
+            node_id: resp.node_id,
+            username: username,
+          })
+          // console.log(resp)
         } catch (e) {
           revokeToken()
-          return
+          // return
         }
       } else {
         const token = await apiClient.handleAuth()
         console.log('token=', token)
         setToken(token)
       }
-      await loadPage(1)
-      setLoaded(true)
+      // await loadPage(1)
+      // setLoaded(true)
+      setShouldLoad(true)
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded, token])
   useEffect(() => {
-    if (loaded) loadPage(1)
+    if (shouldLoad) loadPage(1)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemsPerPage, sortMethod])
+  }, [itemsPerPage, sortMethod, shouldLoad])
   return <div>
     {!loaded
       ? <div>
@@ -102,29 +119,29 @@ const Collection: React.FC<{ id: string }> = ({ id }) => {
         </Grid>
       </div>
       : <div>
-        <Typography>
-          <Grid spacing={2} container>
-            {user.login && <Hidden smDown>
-              <Grid item>
+        <Grid spacing={2} container>
+          {user.login && <Hidden smDown>
+            <Grid item>
+              <a href={user.homepage}>
                 <Avatar alt={user.username} src={user.avatar}></Avatar>
-              </Grid>
-            </Hidden>}
-            <Grid item xs={(login ? 10 : 11) as GridSize}>
-              <Typography >
-                {user.login
-                  ? <Tooltip title={user.username}>
-                    <Typography variant='h6'>{user.username}</Typography>
-                  </Tooltip>
-                  : <Tooltip title='未登录'><Typography variant='h6'></Typography></Tooltip>}
-              </Typography>
+              </a>
             </Grid>
-            <Grid item xs={1}>
-              <div style={{ float: 'right' }}>
-                <Button color='primary' variant='contained' onClick={() => (login ? revokeToken() : apiClient.redirectAuth())}>{login ? '登出' : '登录'}</Button>
-              </div>
-            </Grid>
+          </Hidden>}
+          <Grid item xs={(login ? 10 : 11) as GridSize}>
+            {user.login
+              ? <Tooltip title={user.username}>
+                <Typography variant='h6'>
+                  {user.username}
+                </Typography>
+              </Tooltip>
+              : <Tooltip title='未登录'><Typography variant='h6'></Typography></Tooltip>}
           </Grid>
-        </Typography>
+          <Grid item xs={1}>
+            <div style={{ float: 'right' }}>
+              <Button color='primary' variant='contained' onClick={() => (login ? revokeToken() : apiClient.redirectAuth())}>{login ? '登出' : '登录'}</Button>
+            </div>
+          </Grid>
+        </Grid>
         <Divider className={styles.divider}></Divider>
         {contentLoading
           ? <div style={{ height: '100px' }}>
@@ -136,11 +153,26 @@ const Collection: React.FC<{ id: string }> = ({ id }) => {
           </div>
           : <div>
             {data.map((x, i) => <ProposalCard
-              key={i}
-              {...x}
+              key={x.name}
+              commentCount={x.commentCount}
+              description={x.description}
+              id={x.id}
+              name={x.name}
+              nodeId={x.nodeId}
+              supportCount={x.supportCount}
+              url={x.url}
               client={client}
               sortMethod={sortMethod}
               user={user}
+              proposalUser={x.user}
+              updateSupportCount={v => {
+                const newval = [...data]
+                for (const val of newval) { if (val.id === x.id) { val.supportCount = v } }
+                setData(newval)
+              }}
+              removeCallback={() => {
+                setData(data.filter(y => y.id !== x.id))
+              }}
             ></ProposalCard>)}
           </div>}
         <Divider className={styles.divider}></Divider>
@@ -153,10 +185,12 @@ const Collection: React.FC<{ id: string }> = ({ id }) => {
                 labelId='collection-sort-method-input-label'
                 id='collection-sort-method-select'
                 value={sortMethod}
-                onChange={e => setSortMethod(e.target.value as SortMethod)}
+                onChange={e => {
+                  setSortMethod(e.target.value as SortMethod)
+                }}
               >
-                <MenuItem value={'proposal' as SortMethod}>支持数</MenuItem>
-                <MenuItem value={'comments' as SortMethod}>评论数</MenuItem>
+                <MenuItem value={'support' as SortMethod}>支持数</MenuItem>
+                <MenuItem value={'comment' as SortMethod}>评论数</MenuItem>
               </Select>
             </FormControl>
           </Grid>
