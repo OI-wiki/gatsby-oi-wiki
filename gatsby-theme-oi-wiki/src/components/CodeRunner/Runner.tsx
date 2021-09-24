@@ -13,7 +13,7 @@ import 'ace-builds/src-noconflict/theme-tomorrow_night'
 
 import { CodeEditorProps } from '.'
 
-const Editor: React.FC<Omit<CodeEditorProps, 'title'>> = ({
+const Runner: React.FC<Omit<CodeEditorProps, 'title'>> = ({
   lang,
   ...aceProps
 }) => {
@@ -31,4 +31,4 @@ const Editor: React.FC<Omit<CodeEditorProps, 'title'>> = ({
   )
 }
 
-export default Editor
+export default Runner
