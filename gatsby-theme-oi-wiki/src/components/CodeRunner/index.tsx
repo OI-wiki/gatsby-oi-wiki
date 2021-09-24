@@ -2,7 +2,7 @@ import { makeStyles, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 
 import type { IAceEditorProps } from 'react-ace';
-import type { LangType } from '../../lib/play/codeLang';
+import type { LangType } from './codeLang';
 
 export interface CodeEditorProps extends Omit<IAceEditorProps, 'mode'> {
 	title: string;

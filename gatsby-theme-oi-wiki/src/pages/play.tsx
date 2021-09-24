@@ -20,9 +20,9 @@ import Indicator from '../components/Indicator';
 import CodeLangMenu from '../components/CodeLangMenu';
 import Output from '../components/Output';
 import Layout from '../components/StyledLayout';
-import type { LangType } from '../lib/play/codeLang';
-import type { TransformedResponseData } from '../lib/play/useRunner';
-import { useRunner } from '../lib/play/useRunner';
+import type { LangType } from '../components/CodeRunner/codeLang';
+import type { TransformedResponseData } from '../components/CodeRunner/useRunner';
+import { useRunner } from '../components/CodeRunner/useRunner';
 
 const useStyles = makeStyles((theme) => ({
 	langMenu: {
