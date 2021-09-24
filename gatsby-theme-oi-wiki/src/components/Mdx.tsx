@@ -23,6 +23,7 @@ const Mdx: React.FC<MdxProps> = ({ data: { mdx }, location }) => {
   const tags = mdx.frontmatter.tags || []
   const noMeta = mdx.frontmatter.noMeta || false
   const noComment = mdx.frontmatter.noComment || false
+  const noCollection = mdx.frontmatter.noCollection || false
   const noEdit = false
   const headings = mdx.headings || null
   const relativePath = mdx.parent.relativePath || ''
@@ -91,6 +92,7 @@ const Mdx: React.FC<MdxProps> = ({ data: { mdx }, location }) => {
       modifiedTime={modifiedTime}
       noMeta={noMeta}
       noComment={noComment}
+      noCollection={noCollection}
       noEdit={noEdit}
       isWIP={isWIP}
     >

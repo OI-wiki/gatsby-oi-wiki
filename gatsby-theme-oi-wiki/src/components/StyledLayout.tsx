@@ -23,6 +23,7 @@ import Meta, { MetaProps } from './Meta'
 import Title from './Title'
 import NavAndDrawer from './NavAndDrawer'
 import { RequiredNonNull } from '../types/common'
+import Collection from './Collection'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -74,6 +75,7 @@ interface MyLayoutProps extends Partial<MetaProps> {
   headings?: TocObj;
   noMeta?: boolean;
   noComment?: boolean;
+  noCollection?: boolean;
   noEdit?: boolean;
   noToc?: boolean;
   overflow?: boolean;
@@ -108,6 +110,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
     headings = null,
     noMeta = false,
     noComment = false,
+    noCollection = false,
     noEdit = true,
     noToc = !props.headings,
     overflow = false,
@@ -122,7 +125,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
   const desc = description || siteDesc
 
   const WIPAlert = (
-    <Alert severity="info" icon={<FormatPaintIcon/>} className={classes.wip}>
+    <Alert severity="info" icon={<FormatPaintIcon />} className={classes.wip}>
       本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！
     </Alert>
   )
@@ -130,10 +133,10 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
     <>
       <Helmet>
         <title>{`${(!title || title === siteTitle) ? '' : `${title} - `}${siteTitle}`}</title>
-        <meta name="color-scheme" content="dark light"/>
-        <meta name="description" content={desc}/>
+        <meta name="color-scheme" content="dark light" />
+        <meta name="description" content={desc} />
       </Helmet>
-      <NavAndDrawer pathname={location?.pathname}/>
+      <NavAndDrawer pathname={location?.pathname} />
       <div className="maincontentdiv">
         <Grid container>
           <Grid
@@ -144,46 +147,49 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
             lg={gridWidthMdUp}
             xl={gridWidthMdUp}
           >
-            <div className={classes.toolbar}/>
+            <div className={classes.toolbar} />
             <div className={classes.container}>
               <main className={classes.content}>
                 <div className={classes.main}>
                   <Title noEdit={noEdit} noMeta={noMeta} {...titleMetaProps} />
-                  <Divider className={classes.divider}/>
+                  <Divider className={classes.divider} />
                   {isWIP && WIPAlert}
                   <Typography variant="body1" component="div">
                     {children}
                   </Typography>
                   {!noMeta && <Meta {...titleMetaProps} {...metaProps} />}
                   {!noComment && <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
-                    <Comment title={title}/>
+                    <Comment title={title} />
+                  </div>}
+                  {!noCollection && <div style={{ width: '100%', marginTop: theme.spacing(2) }}>
+                    <Collection id={title}></Collection>
                   </div>}
                 </div>
               </main>
             </div>
           </Grid>
         </Grid>
-        <Divider/>
+        <Divider />
         <div className={classes.footer}>
-          <Footer/>
+          <Footer />
         </div>
       </div>
       {!noToc && headings && <Grid item xs>
-        <Toc toc={headings} pathname={location.pathname}/>
+        <Toc toc={headings} pathname={location.pathname} />
       </Grid>}
-      <BackTop/>
+      <BackTop />
     </>
   )
 }
 
 const StyledLayout: React.FC<MyLayoutProps> = (props) =>
   <ThemeProvider theme={adaptiveTheme}>
-    <CssBaseline/>
-    <CustomCssBaseline/>
-    <LightCssBaseline/>
-    <DarkCssBaseline/>
-    <SecondaryColorCssBaseline/>
-    <AutoCssBaseline/>
+    <CssBaseline />
+    <CustomCssBaseline />
+    <LightCssBaseline />
+    <DarkCssBaseline />
+    <SecondaryColorCssBaseline />
+    <AutoCssBaseline />
     <MyLayout {...props} />
   </ThemeProvider>
 
