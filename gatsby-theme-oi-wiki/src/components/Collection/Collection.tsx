@@ -15,7 +15,7 @@ const useItemsPerPage = createPersistedState('collection-items-per-page')
 const usePreferredSortMethod = createPersistedState('collection-preferred-sort-method')
 const REPO_OWNER = process.env.GATSBY_GITHUB_COLLECTION_REPO_OWNER || 'officeyutong'
 const REPO_NAME = process.env.GATSBY_GITHUB_COLLECTION_REPO_NAME || 'collection-test'
-
+const PROYX_URL = process.env.GATSBY_GITHUB_COLLECTION_PROXYURL || 'https://sparkling-silence-bf63.officeyutong.workers.dev/?'
 const apiClient = new GithubV4({
   baseURL: 'https://github.com',
   owner: REPO_OWNER,
@@ -24,7 +24,7 @@ const apiClient = new GithubV4({
   clientId: process.env.GATSBY_GITHUB_CLIENT_ID,
   clientSecret: process.env.GATSBY_GITHUB_CLIENT_SECRET,
   labels: [],
-  proxy: (url: string) => `https://sparkling-silence-bf63.officeyutong.workers.dev/?${url}`,
+  proxy: (url: string) => `${PROYX_URL}${url}`,
 })
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
