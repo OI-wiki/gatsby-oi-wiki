@@ -11,7 +11,7 @@ interface SidebarStore {
 
 const sidebarStoreModel: SidebarStore = {
   collapsed: false,
-  width: 300,
+  width: 260,
 
   setCollapsed(val) {
     this.collapsed = val
