@@ -1,13 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { DeepRequiredNonNull } from '../types/common'
+import { DeepRequiredNonNull, DeepWriteable } from '../types/common'
 import unified from 'unified'
 import rehypeReact, { Options } from 'rehype-react'
 import { Root } from 'hast'
 import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
 import Main from '../components/Main'
+import TocSidebar from '../components/TocSidebar'
+import Img from '../components/stand-in/Img'
 import NavSidebar from '../components/NavSidebar'
+import styled from '@mui/material/styles/styled'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -52,7 +55,7 @@ export const query = graphql`
 
 
 interface DocProps {
-  data: DeepRequiredNonNull<GatsbyTypes.DocInfoQuery>,
+  data: DeepWriteable<DeepRequiredNonNull<GatsbyTypes.DocInfoQuery>>,
   location: Location
 }
 
@@ -60,11 +63,19 @@ interface DocProps {
 const processor = unified()
   .use(rehypeReact, {
     createElement: React.createElement,
+    Fragment: React.Fragment,
+    components: {
+      img: Img,
+    },
   } as Options<typeof React.createElement>)
 
 const contentParser = (htmlAst: Root): JSX.Element =>
   (processor.stringify(htmlAst) as never as JSX.Element)
 
+const MainContentDiv = styled(Grid)`
+  flex-grow: 1;
+  flex-flow: row;
+`
 
 const Doc: React.FC<DocProps> = (props) => {
   const { data, location } = props
@@ -92,16 +103,15 @@ const Doc: React.FC<DocProps> = (props) => {
       <Grid container={true} direction="column">
         <Header title={title}/>
 
-        <Grid container={true} item={true} flexGrow={1} sx={{ flexFlow: 'row' }}>
+        <MainContentDiv className="maincontentdiv" container={true} item={true}>
           <NavSidebar pathname={location.pathname}/>
 
           <Main item={true}>
-            <article>
-              {contentParser(mdx.htmlAst)}
-            </article>
+            {contentParser(mdx.htmlAst)}
           </Main>
 
-        </Grid>
+          <TocSidebar toc={headings}/>
+        </MainContentDiv>
 
       </Grid>
     </>
