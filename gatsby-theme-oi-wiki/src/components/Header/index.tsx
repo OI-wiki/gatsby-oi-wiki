@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import Slide from '@mui/material/Slide'
 import styled from '@emotion/styled'
 import { AppBar, Button, IconButton, Tooltip } from '@mui/material'
-import { HEADER_HEIGHT, headerStore } from '../stores/headerStore'
-import useSiteMetadata from '../hooks/useSiteMetadata'
+import { HEADER_HEIGHT, headerStore } from '../../stores/headerStore'
+import useSiteMetadata from '../../hooks/useSiteMetadata'
 import Grid from '@mui/material/Grid'
 import { Link } from 'gatsby'
 import { observer } from 'mobx-react-lite'
 import { useScroll } from '@use-gesture/react'
 import { Helmet } from 'react-helmet'
-import { Nullable } from '../types/common'
+import { Nullable } from '../../types/common'
 import School from '@mui/icons-material/School'
-import NavBtnStack from './Header/NavBtnStack'
+import NavBtnStack from './NavBtnStack'
 
 interface HeaderProps {
   title?: Nullable<string>
@@ -27,6 +27,7 @@ const StyledAppBar = styled(AppBar)`
   height: ${HEADER_HEIGHT}px;
 `
 
+const DIS = headerStore.height + 20
 const Header: React.FC<HeaderProps> = observer((props) => {
   const { title } = props
   const { title: siteTitle, description } = useSiteMetadata()
@@ -34,8 +35,10 @@ const Header: React.FC<HeaderProps> = observer((props) => {
 
   if (typeof window !== 'undefined') {
     useScroll(({ xy: [, y], delta: [, dy] }) => {
+      headerStore.setOnTop(y <= DIS)
       setElevation(y > 0 ? 2 : 0)
-      headerStore.setAppear(y <= 260 || dy < 0)
+      if (dy < -10 || y <= DIS) headerStore.setAppear(true)
+      if (dy > 5) headerStore.setAppear(false)
     }, {
       target: window,
     })
