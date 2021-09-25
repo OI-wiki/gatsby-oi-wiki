@@ -1,23 +1,13 @@
-import {
-	Button,
-	CircularProgress,
-	Divider,
-	makeStyles,
-	Tooltip,
-	Typography,
-} from '@material-ui/core';
+import { Button, CircularProgress, Divider, makeStyles, Tooltip, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import GithubV3 from '@mgtd/vssue-api-github-v3';
 import GithubV4 from '@mgtd/vssue-api-github-v4';
-import createPersistedState from 'use-persisted-state';
 import CommentCard from './Card';
 import CommentInput from './CommentInput';
-import { Comments, Issue, User } from './types';
+import { Comments, Issue } from './types';
 import { InputContentProvider } from './inputContext';
 import { getComments } from './api';
-
-const useToken = createPersistedState('github-access-token');
-const useUser = createPersistedState('github-user');
+import authenticate, { User, anonymousUser } from '../../lib/authenticate';
 
 interface Props {
 	clientID: string;
@@ -28,22 +18,20 @@ interface Props {
 	id: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	link: {
 		color: theme.palette.text.primary,
 	},
 }));
 
-const anonymousUser: User = { username: '未登录用户' };
-
-const CommentComponent: React.FC<Props> = (props) => {
+const CommentComponent: React.FC<Props> = props => {
 	const classes = useStyles();
-	const [token, setToken] = useToken<string | undefined>(undefined);
+	const [token, setToken] = useState<string | undefined>(undefined);
 	const revokeToken = (): void => {
 		setToken(undefined);
 		setUser(anonymousUser);
 	};
-	const [user, setUser] = useUser<User>(anonymousUser);
+	const [user, setUser] = useState<User>(anonymousUser);
 	const [comments, setComments] = useState<Comments>({
 		count: 0,
 		page: 0,
@@ -51,13 +39,10 @@ const CommentComponent: React.FC<Props> = (props) => {
 		data: [],
 	});
 	const [noIssue, setNoIssue] = useState(false);
-	const filteredComments = comments.data.filter(
-		(comment) => !comment.isMinimized
-	);
+	const filteredComments = comments.data.filter(comment => !comment.isMinimized);
 	const [issue, setIssue] = useState<Issue | null>(null);
 	const [createIssueLoading, setCreateIssueLoading] = useState(false);
-	const authorized =
-		user.username !== anonymousUser.username && token != null && !noIssue;
+	const authorized = user.username !== anonymousUser.username && token != null && !noIssue;
 	const isAdmin = props.admin.indexOf(user.username) >= 0;
 	const githubApiProps = {
 		baseURL: 'https://github.com',
@@ -69,51 +54,25 @@ const CommentComponent: React.FC<Props> = (props) => {
 		state: '123',
 		proxy: (url: string) => `https://cors-anywhere.mgt.workers.dev/?${url}`,
 	};
-	const [githubApi3, githubApi4] = [
-		new GithubV3(githubApiProps),
-		new GithubV4(githubApiProps),
-	];
+	const [githubApi3, githubApi4] = [new GithubV3(githubApiProps), new GithubV4(githubApiProps)];
 	useEffect(() => {
-		const asyncFunc = async (): Promise<void> => {
-			let tk = token;
-			if (!tk) {
-				tk = await githubApi3.handleAuth();
-				if (tk !== null) {
-					setToken(tk);
+		authenticate().then(async identity => {
+			if (typeof identity == 'string') console.log(identity);
+			else {
+				setToken(identity[0]);
+				setUser(identity[1]);
+				const result = await getComments(githubApi3, githubApi4, props.id, revokeToken, identity[0]);
+				if (result === 'noIssue') setNoIssue(true);
+				else if (result !== 'invalidToken') {
+					setIssue(result[0]);
+					setComments(result[1]);
 				}
 			}
-			const result = await getComments(
-				githubApi3,
-				githubApi4,
-				props.id,
-				revokeToken,
-				tk
-			);
-			if (result === 'noIssue') {
-				setNoIssue(true);
-			} else if (result !== 'invalidToken') {
-				const [i, c] = result;
-				setComments(c);
-				setIssue(i);
-			}
-			const u: User = await githubApi3.getUser({ accessToken: tk });
-			setUser(u);
-		};
-
-		asyncFunc().catch((reject) => {
-			console.log(reject);
-		});
-
+		}, console.log);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.clientID, props.clientSecret, props.id]);
 	const updateComments = async (): Promise<void> => {
-		const result = await getComments(
-			githubApi3,
-			githubApi4,
-			props.id,
-			revokeToken,
-			token
-		);
+		const result = await getComments(githubApi3, githubApi4, props.id, revokeToken, token);
 		if (result !== 'invalidToken' && result !== 'noIssue') {
 			const [, c] = result;
 			setComments(c);
@@ -121,10 +80,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 	};
 	const NoIssueComponent = (): React.ReactElement => {
 		return isAdmin ? (
-			<Typography
-				variant="body1"
-				style={{ padding: '24px', textAlign: 'center' }}
-			>
+			<Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
 				<Button
 					variant="outlined"
 					color="primary"
@@ -137,16 +93,8 @@ const CommentComponent: React.FC<Props> = (props) => {
 							content: location.href,
 						});
 						// sleep 1s, 直接查询会返回无结果，迷惑
-						await new Promise((resolve) =>
-							setTimeout(resolve, 1000)
-						);
-						const result = await getComments(
-							githubApi3,
-							githubApi4,
-							props.id,
-							revokeToken,
-							token
-						);
+						await new Promise(resolve => setTimeout(resolve, 1000));
+						const result = await getComments(githubApi3, githubApi4, props.id, revokeToken, token);
 						setCreateIssueLoading(false);
 						if (result !== 'invalidToken' && result !== 'noIssue') {
 							const [i, c] = result;
@@ -157,19 +105,11 @@ const CommentComponent: React.FC<Props> = (props) => {
 					}}
 				>
 					为本页面创建 Issue
-					{createIssueLoading && (
-						<CircularProgress
-							size={20}
-							style={{ marginLeft: '4px' }}
-						/>
-					)}
+					{createIssueLoading && <CircularProgress size={20} style={{ marginLeft: '4px' }} />}
 				</Button>
 			</Typography>
 		) : (
-			<Typography
-				variant="body1"
-				style={{ padding: '24px', textAlign: 'center' }}
-			>
+			<Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
 				没有找到与本页面相关联的 issue
 			</Typography>
 		);
@@ -178,10 +118,7 @@ const CommentComponent: React.FC<Props> = (props) => {
 		<InputContentProvider>
 			<Typography variant="h6">
 				<Tooltip title="在 GitHub 上查看">
-					<a
-						href={issue?.link}
-						className={classes.link}
-					>{`${filteredComments.length} 条评论`}</a>
+					<a href={issue?.link} className={classes.link}>{`${filteredComments.length} 条评论`}</a>
 				</Tooltip>
 				<Tooltip title={authorized ? '登出' : '登录'}>
 					<div
@@ -227,60 +164,46 @@ const CommentComponent: React.FC<Props> = (props) => {
 			{noIssue ? (
 				<NoIssueComponent />
 			) : (
-				filteredComments.map(
-					({
-						content,
-						author,
-						createdAt,
-						reactions,
-						id,
-						contentRaw,
-					}) => (
-						<CommentCard
-							avatarLink={author.avatar!}
-							disabled={!authorized}
-							name={author.username}
-							contentHTML={content}
-							contentRaw={contentRaw}
-							time={createdAt}
-							key={id}
-							reactions={
-								reactions === null ? undefined : reactions
-							}
-							currentUser={user}
-							commentID={id}
-							deleteComment={async (
+				filteredComments.map(({ content, author, createdAt, reactions, id, contentRaw }) => (
+					<CommentCard
+						avatarLink={author.avatar!}
+						disabled={!authorized}
+						name={author.username}
+						contentHTML={content}
+						contentRaw={contentRaw}
+						time={createdAt}
+						key={id}
+						reactions={reactions === null ? undefined : reactions}
+						currentUser={user}
+						commentID={id}
+						deleteComment={async (commentId, setDeleteLoading) => {
+							setDeleteLoading(true);
+							await githubApi4.deleteComment({
+								accessToken: token,
 								commentId,
-								setDeleteLoading
-							) => {
-								setDeleteLoading(true);
-								await githubApi4.deleteComment({
-									accessToken: token,
-									commentId,
-									issueId: issue!.id,
-								});
-								updateComments();
-								setDeleteLoading(false);
-							}}
-							addReaction={async (commentId, reaction) => {
-								await githubApi4.postCommentReaction({
-									accessToken: token,
-									commentId,
-									reaction,
-									issueId: issue!.id,
-								});
-							}}
-							removeReaction={async (commentId, reaction) => {
-								await githubApi4.deleteCommentReaction({
-									accessToken: token,
-									commentId,
-									reaction,
-									issueId: issue!.id,
-								});
-							}}
-						/>
-					)
-				)
+								issueId: issue!.id,
+							});
+							updateComments();
+							setDeleteLoading(false);
+						}}
+						addReaction={async (commentId, reaction) => {
+							await githubApi4.postCommentReaction({
+								accessToken: token,
+								commentId,
+								reaction,
+								issueId: issue!.id,
+							});
+						}}
+						removeReaction={async (commentId, reaction) => {
+							await githubApi4.deleteCommentReaction({
+								accessToken: token,
+								commentId,
+								reaction,
+								issueId: issue!.id,
+							});
+						}}
+					/>
+				))
 			)}
 		</InputContentProvider>
 	);
