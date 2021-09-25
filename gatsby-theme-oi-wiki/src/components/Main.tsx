@@ -3,35 +3,44 @@ import Box from '@mui/material/Box'
 import React from 'react'
 import Grid, { GridProps } from '@mui/material/Grid'
 import Footer from './Footer'
-import { navSidebarStore } from '../stores/sidebarStore'
+import { observer } from 'mobx-react-lite'
+import { navSidebarStore, tocSidebarStore } from '../stores/sidebarStore'
+
+const Container = styled(Grid)`
+  flex-grow: 1;
+  flex-flow: column;
+  position: relative;
+  margin: 0;
+  transition: margin 225ms ease-in-out;
+
+
+  &[data-expanded] > div {
+    padding-inline: 120px;
+  }
+`
 
 const Content = styled(Box)`
   flex-flow: row;
   flex-grow: 1;
   margin: auto;
-  padding: 0 50px 120px;
   width: 100%;
+  padding: 0 50px 120px;
+  transition: padding 225ms ease-in-out;
 `
 
-const Main: React.FC<GridProps> = (props) => {
+const Main: React.FC<GridProps> = observer((props) => {
   const { children, ...others } = props
-  const width = `calc(100vw - ${navSidebarStore.width}px)`
+  const ml = (navSidebarStore.collapsed ? 0 : navSidebarStore.width) + 'px'
+  const mr = (tocSidebarStore.collapsed ? 0 : tocSidebarStore.width) + 'px'
+  const expanded = navSidebarStore.collapsed || tocSidebarStore.collapsed ? true : undefined
 
   return (
-    <Grid
-      container={true}
-      flexGrow={1}
-      flexDirection="column"
-      position="relative"
-      {...others}>
-      <Content sx={{ width }}>
-        {children}
-      </Content>
-
+    <Container container={true} sx={{ ml, mr }} data-expanded={expanded} {...others}>
+      <Content as='article'>{children}</Content>
       <Footer/>
-    </Grid>
+    </Container>
   )
-}
+})
 
 export default Main
 
