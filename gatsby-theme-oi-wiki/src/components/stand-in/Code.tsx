@@ -1,29 +1,25 @@
 import styled from '@mui/material/styles/styled'
+import { grey } from '@mui/material/colors'
+import React from 'react'
 
-const Code = styled('code')`
-  &::selection {
-    text-shadow: none;
-    background: #b3d4fc;
-  }
+const StyledCode = styled('code')`
+  color: ${grey[800]};
+  background-color: ${grey[100]};
+  word-break: break-word;
+  font-family: var(--code-block-font);
+  font-size: .9rem;
 
-  @media print {
-    text-shadow: none;
-  }
-
-  span.shiki-line {
-    :before {
-      content: counter(shiki-line-number);
-      display: inline-block;
-      counter-increment: shiki-line-number;
-      color: #888;
-      margin-right: 1em;
-      margin-left: -8px;
-      text-align: right;
-      min-width: 2em;
-      pointer-events: none;
-      user-select: none;
-    }
-  }
+  border-radius: .2rem;
+  padding: 0.2rem 0.4rem 0;
+  margin: 0 0.2rem;
+  box-decoration-break: clone;
 `
+
+const Code: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
+  const { children, className, ...others } = props
+  return typeof className === 'undefined'
+    ? <StyledCode {...others}>{children}</StyledCode>
+    : <code className={className} {...others}>{children}</code>
+}
 
 export default Code

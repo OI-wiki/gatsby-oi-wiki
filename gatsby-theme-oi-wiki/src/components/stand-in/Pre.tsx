@@ -26,6 +26,23 @@ const Pre = styled('pre')`
   @media print {
     text-shadow: none;
   }
+
+  & > code {
+    span.shiki-line {
+      :before {
+        content: counter(shiki-line-number);
+        display: inline-block;
+        counter-increment: shiki-line-number;
+        color: #888;
+        margin-right: 1em;
+        margin-left: -8px;
+        text-align: right;
+        min-width: 2em;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+  }
 `
 
 export default Pre
