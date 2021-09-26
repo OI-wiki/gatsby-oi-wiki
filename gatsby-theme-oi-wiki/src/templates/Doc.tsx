@@ -8,13 +8,9 @@ import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
 import Main from '../components/Main'
 import TocSidebar from '../components/TocSidebar'
-import Img from '../components/stand-in/Img'
 import NavSidebar from '../components/NavSidebar'
 import styled from '@mui/material/styles/styled'
-import Pre from '../components/stand-in/Pre'
-import Code from '../components/stand-in/Code'
-import Table from '../components/stand-in/Table'
-import Blockquote from '../components/stand-in/Blockquote'
+import components from '../components/stand-in'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -68,13 +64,7 @@ const processor = unified()
   .use(rehypeReact, {
     createElement: React.createElement,
     Fragment: React.Fragment,
-    components: {
-      img: Img,
-      pre: Pre,
-      code: Code,
-      blockquote: Blockquote,
-      ...Table,
-    },
+    components,
   } as Options<typeof React.createElement>)
 
 const contentParser = (htmlAst: Root): JSX.Element =>
