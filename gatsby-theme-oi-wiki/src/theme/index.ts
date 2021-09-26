@@ -9,7 +9,9 @@ const commonTypo: CSSProperties = {
 }
 
 const theme = createTheme({
+  unstable_strictMode: true,
   typography: {
+    fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
     h1: {
       fontSize: '2.5rem',
       paddingBottom: '.3rem',

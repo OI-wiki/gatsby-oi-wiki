@@ -1,6 +1,8 @@
 import { decomposeColor, hslToRgb } from '@mui/system/colorManipulator'
 import { Palette, PaletteColor, TypeAction, TypeText } from '@mui/material/styles/createPalette'
 import { css, SerializedStyles } from '@emotion/react'
+import lightPlus from '../theme/code-hightlight/lightPlus'
+import darkPlus from '../theme/code-hightlight/darkPlus'
 
 const paletteColorKeys: (keyof Palette)[] = [
   'primary',
@@ -135,12 +137,14 @@ const computeCss = (light: VarMap, dark: VarMap): SerializedStyles => {
   return css`
     :root {
       color-scheme: light;
-      ${mapToStr(light)}
+      ${lightPlus};
+      ${mapToStr(light)};
     }
 
     :root[data-theme="dark"] {
       color-scheme: dark;
-      ${mapToStr(dark)}
+      ${darkPlus};
+      ${mapToStr(dark)};
     }
   `
 }

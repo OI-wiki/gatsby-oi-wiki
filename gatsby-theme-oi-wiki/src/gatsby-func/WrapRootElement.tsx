@@ -6,6 +6,8 @@ import { theme } from '../theme'
 import { cssVarsStore, VARS_STORE_ID } from '../stores/cssVarsStore'
 import { observer } from 'mobx-react-lite'
 import { autorun } from 'mobx'
+import { GlobalStyles } from '@mui/material'
+import globalStyle from '../theme/globalStyle'
 
 const StoreHandler: React.FC = observer(() => {
 
@@ -34,6 +36,7 @@ const WrapRootElement = ({ element }: WrapRootElementBrowserArgs): JSX.Element =
       <StoreHandler/>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
+        <GlobalStyles styles={globalStyle(theme)}/>
         {element}
       </ThemeProvider>
     </React.StrictMode>

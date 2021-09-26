@@ -11,6 +11,8 @@ import TocSidebar from '../components/TocSidebar'
 import Img from '../components/stand-in/Img'
 import NavSidebar from '../components/NavSidebar'
 import styled from '@mui/material/styles/styled'
+import Pre from '../components/stand-in/Pre'
+import Code from '../components/stand-in/Code'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -66,6 +68,8 @@ const processor = unified()
     Fragment: React.Fragment,
     components: {
       img: Img,
+      pre: Pre,
+      code: Code,
     },
   } as Options<typeof React.createElement>)
 

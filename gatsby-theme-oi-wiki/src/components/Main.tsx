@@ -26,6 +26,11 @@ const Content = styled(Box)`
   width: 100%;
   padding: 0 50px 120px;
   transition: padding 225ms ease-in-out;
+
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
 `
 
 const Main: React.FC<GridProps> = observer((props) => {
