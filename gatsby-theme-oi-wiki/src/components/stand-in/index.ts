@@ -8,6 +8,8 @@ import CodeBlock from './Codeblock'
 import { ComponentLike } from 'rehype-react'
 import { FC } from 'react'
 import Link from './Link'
+import Details from './Details'
+import Summary from './Summary'
 
 interface GetComponentsArg {
   pathname: string;
@@ -26,6 +28,8 @@ const getComponents = (arg: GetComponentsArg): Components => ({
     pathname: arg.pathname,
     isIndex: arg.isIndex,
   }),
+  details: Details,
+  summary: Summary,
   ...Table,
   ...List,
 }) as unknown as Components
