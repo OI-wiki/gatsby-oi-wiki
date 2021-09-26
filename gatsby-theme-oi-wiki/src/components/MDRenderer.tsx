@@ -9,10 +9,10 @@ export interface MDRendererProps {
 }
 
 const MDRenderer: React.FC<MDRendererProps> = (props) => {
-  const processor = unified().use(rehypeReact, {
+  const processor = React.useMemo(() => unified().use(rehypeReact, {
     createElement: React.createElement,
     components: props.components,
-  })
+  }), [props.components])
 
   return processor.stringify(props.htmlAst) as never as JSX.Element
 }

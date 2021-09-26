@@ -1,16 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { DeepRequiredNonNull, DeepWriteable } from '../types/common'
-import unified from 'unified'
-import rehypeReact, { Options } from 'rehype-react'
-import { Root } from 'hast'
 import Grid from '@mui/material/Grid'
 import Header from '../components/Header'
 import Main from '../components/Main'
 import TocSidebar from '../components/TocSidebar'
 import NavSidebar from '../components/NavSidebar'
 import styled from '@mui/material/styles/styled'
-import components from '../components/stand-in'
+import getComponents from '../components/stand-in'
+import MDRenderer from '../components/MDRenderer'
+import { HistoryLocation } from '../types/location'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -56,19 +55,8 @@ export const query = graphql`
 
 interface DocProps {
   data: DeepWriteable<DeepRequiredNonNull<GatsbyTypes.DocInfoQuery>>,
-  location: Location
+  location: HistoryLocation
 }
-
-
-const processor = unified()
-  .use(rehypeReact, {
-    createElement: React.createElement,
-    Fragment: React.Fragment,
-    components,
-  } as Options<typeof React.createElement>)
-
-const contentParser = (htmlAst: Root): JSX.Element =>
-  (processor.stringify(htmlAst) as never as JSX.Element)
 
 const MainContentDiv = styled(Grid)`
   flex-grow: 1;
@@ -95,17 +83,21 @@ const Doc: React.FC<DocProps> = (props) => {
   const isIndex = mdx.fields.isIndex
   const isWIP = wordCount === 0 || (tags?.findIndex((x: string) => x === 'WIP') >= 0)
 
+  const components = getComponents({
+    pathname: location.pathname,
+    isIndex,
+  })
 
   return (
     <>
-      <Grid container={true} direction="column">
+      <Grid container={true} direction="column" minHeight="100vh">
         <Header title={title}/>
 
         <MainContentDiv className="maincontentdiv" container={true} item={true}>
           <NavSidebar pathname={location.pathname}/>
 
           <Main item={true}>
-            {contentParser(mdx.htmlAst)}
+            <MDRenderer htmlAst={mdx.htmlAst} components={components}/>
           </Main>
 
           <TocSidebar toc={headings}/>
