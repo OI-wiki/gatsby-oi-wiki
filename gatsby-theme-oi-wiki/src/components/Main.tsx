@@ -12,11 +12,6 @@ const Container = styled(Grid)`
   position: relative;
   margin: 0;
   transition: margin 225ms ease-in-out;
-
-
-  &[data-expanded] > div {
-    padding-inline: 120px;
-  }
 `
 
 const Content = styled(Box)`
@@ -28,9 +23,12 @@ const Content = styled(Box)`
   transition: padding 225ms ease-in-out;
 
   font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: 400;
   line-height: 1.5;
+
+  &[data-expanded] {
+    padding-inline: 120px;
+  }
 `
 
 const Main: React.FC<GridProps> = observer((props) => {
@@ -40,8 +38,8 @@ const Main: React.FC<GridProps> = observer((props) => {
   const expanded = navSidebarStore.collapsed || tocSidebarStore.collapsed ? true : undefined
 
   return (
-    <Container container={true} sx={{ ml, mr }} data-expanded={expanded} {...others}>
-      <Content as='article'>{children}</Content>
+    <Container container={true} sx={{ ml, mr }} {...others}>
+      <Content as='article' data-expanded={expanded}>{children}</Content>
       <Footer/>
     </Container>
   )
