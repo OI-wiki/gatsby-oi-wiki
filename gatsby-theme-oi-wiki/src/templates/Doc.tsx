@@ -13,6 +13,7 @@ import NavSidebar from '../components/NavSidebar'
 import styled from '@mui/material/styles/styled'
 import Pre from '../components/stand-in/Pre'
 import Code from '../components/stand-in/Code'
+import Table from '../components/stand-in/Table'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -70,6 +71,7 @@ const processor = unified()
       img: Img,
       pre: Pre,
       code: Code,
+      ...Table,
     },
   } as Options<typeof React.createElement>)
 
