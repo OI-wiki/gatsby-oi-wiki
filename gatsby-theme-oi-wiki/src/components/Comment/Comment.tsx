@@ -56,12 +56,14 @@ const CommentComponent: React.FC<Props> = props => {
 	};
 	const [githubApi3, githubApi4] = [new GithubV3(githubApiProps), new GithubV4(githubApiProps)];
 	useEffect(() => {
-		authenticate().then(async identity => {
-			if (typeof identity == 'string') console.log(identity);
-			else {
-				setToken(identity[0]);
-				setUser(identity[1]);
-				const result = await getComments(githubApi3, githubApi4, props.id, revokeToken, identity[0]);
+		authenticate(undefined, false).then(async identities => {
+			if (typeof identities == 'string') {
+				console.log(identities);
+				revokeToken();
+			} else {
+				setToken(identities[0]);
+				setUser(identities[1]);
+				const result = await getComments(githubApi3, githubApi4, props.id, revokeToken, token);
 				if (result === 'noIssue') setNoIssue(true);
 				else if (result !== 'invalidToken') {
 					setIssue(result[0]);
@@ -124,12 +126,8 @@ const CommentComponent: React.FC<Props> = props => {
 					<div
 						style={{ float: 'right', cursor: 'pointer' }}
 						onClick={() => {
-							if (!token) {
-								githubApi3.redirectAuth();
-							} else {
-								setToken(undefined);
-								setUser(anonymousUser);
-							}
+							if (token) revokeToken();
+							else githubApi3.redirectAuth();
 						}}
 					>
 						{user.username}
@@ -142,9 +140,7 @@ const CommentComponent: React.FC<Props> = props => {
 				avatarLink={user.avatar!}
 				authorized={authorized}
 				showLogin={token === null}
-				handleLogin={() => {
-					githubApi3.redirectAuth();
-				}}
+				handleLogin={githubApi3.redirectAuth}
 				sendComment={async (v, setLoading) => {
 					setLoading(true);
 					try {
