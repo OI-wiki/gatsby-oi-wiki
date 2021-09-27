@@ -1,36 +1,32 @@
-import Chip from '@material-ui/core/Chip'
-import { makeStyles } from '@material-ui/core/styles'
 import kebabCase from 'lodash/kebabCase'
 import React from 'react'
+import styled from '@mui/material/styles/styled'
+import Chip from '@mui/material/Chip'
+import { css } from '@emotion/react'
+import SmartLink from './SmartLink'
+import Box from '@mui/material/Box'
 
-const useStyles = makeStyles((theme) => ({
-  chip: {
-    margin: theme.spacing(0.5),
-  },
-}))
+const StyledChip = styled(Chip)(({ theme }) => css`
+  margin: ${theme.spacing(0.5)};
+`) as typeof Chip
 
-interface Props{
-  tags: Array<string>
+export interface TagsProps {
+  tags: string[]
 }
 
-const Tags: React.FC<Props> = (props: Props) => {
-  const arr = props.tags
-  const classes = useStyles()
+const Tags: React.FC<TagsProps> = (props: TagsProps) => {
   return (
-    <div>
-      {arr &&
-        arr.map((tag) => (
-          <Chip
-            label={` #${tag} `}
-            href={'/tags/' + kebabCase(tag)}
-            key={`tag-${tag}`}
-            component="a"
-            variant="outlined"
-            clickable
-            className={classes.chip}
-          />
-        ))}
-    </div>
+    <Box>
+      {props.tags.map((tag) => (
+        <StyledChip
+          key={`tag-${tag}`}
+          component={SmartLink}
+          href={'/tags/' + kebabCase(tag)}
+          label={` #${tag} `}
+          variant="outlined"
+          clickable={true}/>
+      ))}
+    </Box>
   )
 }
 
