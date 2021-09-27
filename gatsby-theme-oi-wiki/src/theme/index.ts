@@ -40,7 +40,11 @@ const theme = createTheme({
       fontSize: '1rem',
       ...commonTypo,
     },
-
+    body2: {
+      fontSize: '0.875rem',
+      lineHeight: '1.5rem',
+      marginBlockEnd: '0.5rem',
+    },
   },
 })
 

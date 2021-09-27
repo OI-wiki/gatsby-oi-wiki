@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite'
 import { autorun } from 'mobx'
 import { GlobalStyles } from '@mui/material'
 import globalStyle from '../theme/globalStyle'
+import EditWarn from '../components/EditWarn'
 
 const StoreHandler: React.FC = observer(() => {
 
@@ -37,6 +38,7 @@ const WrapRootElement = ({ element }: WrapRootElementBrowserArgs): JSX.Element =
       <ThemeProvider theme={theme}>
         <CssBaseline/>
         <GlobalStyles styles={globalStyle(theme)}/>
+        <EditWarn/>
         {element}
       </ThemeProvider>
     </React.StrictMode>
