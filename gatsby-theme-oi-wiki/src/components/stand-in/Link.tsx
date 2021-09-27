@@ -8,7 +8,7 @@ interface DefaultProps extends SmartLinkProps {
 
 const Link: (defaultProps: DefaultProps) => React.FC<SmartLinkProps> = (defaultProps) => {
   return function Link(props) {
-    return <SmartLink {...defaultProps} {...props}/>
+    return <SmartLink tooltip={true} {...defaultProps} {...props}/>
   }
 }
 export default Link
