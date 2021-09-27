@@ -41,6 +41,10 @@ const Header: React.FC<HeaderProps> = observer((props) => {
       if (dy > 5) headerStore.setAppear(false)
     }, {
       target: window,
+      enabled: !headerStore.appearLock,
+      eventOptions: {
+        passive: true,
+      },
     })
   }
 

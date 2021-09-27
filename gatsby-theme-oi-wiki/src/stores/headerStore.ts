@@ -2,11 +2,14 @@ import { computed, observable } from 'mobx'
 
 export interface HeaderStore {
   appear: boolean;
+  appearLock: boolean;
   onTop: boolean;
 
   height: number;
 
   setAppear(val: boolean): void;
+
+  setAppearLock(val: boolean): void;
 
   setOnTop(val: boolean): void;
 }
@@ -16,6 +19,7 @@ const HEADER_HEIGHT = 60
 
 const headerStore = observable<HeaderStore>({
   appear: true,
+  appearLock: false,
   onTop: true,
 
   get height() {
@@ -23,7 +27,12 @@ const headerStore = observable<HeaderStore>({
   },
 
   setAppear(val) {
-    this.appear = val
+    if (!this.appearLock) {
+      this.appear = val
+    }
+  },
+  setAppearLock(val: boolean) {
+    this.appearLock = val
   },
   setOnTop(val) {
     this.onTop = val
