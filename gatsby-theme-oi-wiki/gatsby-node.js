@@ -19,7 +19,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 const gitQuery = async function (prop) {
 	const res = await git()
 		.log(['-15', prop])
-		.catch((err) => console.log(err));
+		.catch(err => console.log(err));
 	return res;
 };
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -41,9 +41,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 			// whether it is a index.md
 			name: 'isIndex',
 			node: node,
-			value: /index\.(md|markdown|mdx|mdtext)$/.test(
-				node.fileAbsolutePath
-			),
+			value: /index\.(md|markdown|mdx|mdtext)$/.test(node.fileAbsolutePath),
 		});
 	}
 };
@@ -57,10 +55,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
 	const result = await graphql(`
 		{
-			postsRemark: allMarkdownRemark(
-				sort: { order: DESC, fields: [frontmatter___title] }
-				limit: 2000
-			) {
+			postsRemark: allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___title] }, limit: 2000) {
 				edges {
 					node {
 						fields {
@@ -93,9 +88,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 	// console.log(posts)
 	// Create post detail pages
 
-	for (const index in posts) {
+	for (let index = 0; index < posts.length; ++index) {
 		const { node } = posts[index];
-
 		const previous = index === posts.length - 1 ? null : posts[index + 1];
 		const next = index === 0 ? null : posts[index - 1];
 		// /workspace/gatsby-oi-wiki/docs/empty.md -> docs/empty.md
@@ -128,7 +122,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 	const tags = result.data.tagsGroup.group;
 
 	// Make tag pages
-	tags.forEach((tag) => {
+	tags.forEach(tag => {
 		createPage({
 			path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
 			component: tagTemplate,
@@ -170,10 +164,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
 		}
 	`);
 	if (queryResult.errors) {
-		reporter.panicOnBuild(
-			'Error while running GraphQL query to create sitemaps.',
-			queryResult.errors
-		);
+		reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors);
 	}
 	queryResult = queryResult.data;
 	const siteUrl = queryResult.site.siteMetadata.siteUrl;
@@ -183,9 +174,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
 		const { node } = queryResult.postsQuery.edges[index];
 		const { fileAbsolutePath: path } = node;
 		const relativePath = path.slice(path.indexOf('/docs') + 1);
-		const lastmod =
-			(await gitQuery(relativePath)).latest?.date ||
-			new Date().toString();
+		const lastmod = (await gitQuery(relativePath)).latest?.date || new Date().toString();
 
 		MySitemap.addUrl('articles', [
 			{
@@ -195,10 +184,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
 		]);
 		MySitemap.addUrl('logs', [
 			{
-				loc: new URL(
-					node.fields.slug + 'changelog/',
-					siteUrl
-				).toString(),
+				loc: new URL(node.fields.slug + 'changelog/', siteUrl).toString(),
 				lastmod,
 			},
 		]);
@@ -206,10 +192,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
 	queryResult.tagsQuery.group.forEach(({ fieldValue }) => {
 		MySitemap.addUrl('tags', [
 			{
-				loc: new URL(
-					`/tags/${_.kebabCase(fieldValue)}/`,
-					siteUrl
-				).toString(),
+				loc: new URL(`/tags/${_.kebabCase(fieldValue)}/`, siteUrl).toString(),
 			},
 		]);
 	});
@@ -217,7 +200,7 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
 		{ loc: new URL('/pages/', siteUrl).toString() },
 		{ loc: new URL('/settings/', siteUrl).toString() },
 	]);
-	await MySitemap.finish().catch((e) => {
+	await MySitemap.finish().catch(e => {
 		reporter.error(e);
 	});
 };
