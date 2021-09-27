@@ -6,7 +6,7 @@
  * @param {number} previous in milliseconds
  * @return {string}  string
  */
-export default function timeDifference (current: number, previous: number): string {
+function timeDifference(current: number, previous: number): string {
   const msPerMinute = 60 * 1000
   const msPerHour = msPerMinute * 60
   const msPerDay = msPerHour * 24
@@ -31,3 +31,5 @@ export default function timeDifference (current: number, previous: number): stri
   }
   return `约 ${Math.round(elapsed / msPerYear)} 年前`
 }
+
+export { timeDifference }
