@@ -11,6 +11,7 @@ import getComponents from '../components/stand-in'
 import MDRenderer from '../components/MDRenderer'
 import { HistoryLocation } from '../types/location'
 import Title from '../components/Title'
+import Meta from '../components/Meta'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -70,8 +71,8 @@ const Doc: React.FC<DocProps> = (props) => {
 
   const title = mdx.fields.slug === '/' ? '' : mdx.frontmatter.title
   const description = mdx.frontmatter.description || mdx.excerpt
-  const authors = mdx.frontmatter.author || ''
-  const tags = mdx.frontmatter.tags || []
+  const authors = mdx.frontmatter.author
+  const tags = mdx.frontmatter.tags
   const noMeta = mdx.frontmatter.noMeta || false
   const noComment = mdx.frontmatter.noComment || false
   const noEdit = false
@@ -100,6 +101,12 @@ const Doc: React.FC<DocProps> = (props) => {
           <Main item={true}>
             <Title title={title} noEdit={noEdit} relativePath={relativePath}/>
             <MDRenderer htmlAst={mdx.htmlAst} components={components}/>
+            {!noMeta && <Meta
+              modifiedTime={modifiedTime}
+              title={title}
+              tags={tags}
+              authors={authors}
+              relativePath={relativePath}/>}
           </Main>
 
           <TocSidebar toc={headings}/>

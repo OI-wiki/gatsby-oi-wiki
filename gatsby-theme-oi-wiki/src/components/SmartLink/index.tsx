@@ -76,6 +76,8 @@ export interface SmartLinkProps extends LinkProps {
   pathname?: string;
   /** 用于 markdown 内链的修复, 设置为 true 可以避免相关影响 */
   isIndex?: boolean;
+  /** state data only exist on GatsbyLink */
+  state?: Record<string, any>
 }
 
 const SCROLL_PADDING = 24
