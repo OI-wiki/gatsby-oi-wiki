@@ -10,6 +10,7 @@ import styled from '@mui/material/styles/styled'
 import getComponents from '../components/stand-in'
 import MDRenderer from '../components/MDRenderer'
 import { HistoryLocation } from '../types/location'
+import Title from '../components/Title'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -97,6 +98,7 @@ const Doc: React.FC<DocProps> = (props) => {
           <NavSidebar pathname={location.pathname}/>
 
           <Main item={true}>
+            <Title title={title} noEdit={noEdit} relativePath={relativePath}/>
             <MDRenderer htmlAst={mdx.htmlAst} components={components}/>
           </Main>
 
