@@ -28,7 +28,7 @@ const TocSidebar: React.FC<TocSidebarProps> = observer((props) => {
 
   return (
     <WrapperBox sx={{
-      transform: `translate3d(${translateX}px, ${top}px, 0)`,
+      transform: `translate3d(${translateX}px, ${headerStore.currentHeight}px, 0)`,
       height: `calc(100vh - ${headerStore.currentHeight}px)`,
       borderRight: 'unset',
       right: 0,
