@@ -11,7 +11,6 @@ import Link, { LinkProps } from '@mui/material/Link'
 import { getElementViewPosition } from './utils'
 import { observer } from 'mobx-react-lite'
 import { headerStore } from '../../stores/headerStore'
-import { computed } from 'mobx'
 import { Theme } from '@mui/material/styles/createTheme'
 
 const MD_EXPR = /\.(md|markdown|mdtext|mdx)/g
@@ -84,13 +83,12 @@ const SCROLL_PADDING = 24
 
 const RefLink: React.FC<SmartLinkProps> = observer((props) => {
   const { href = '', children, ...others } = props
-  const headerHeight = computed((): number => headerStore.appear ? headerHeight : 0).get()
 
   const onClick: OnClickHandler = (e) => {
     e.preventDefault()
 
     const target = document.getElementById(href.substring(1, href.length))
-    const yDis = getElementViewPosition(target).y + window?.pageYOffset - headerHeight - SCROLL_PADDING
+    const yDis = getElementViewPosition(target).y + window?.pageYOffset - headerStore.currentHeight - SCROLL_PADDING
 
     smoothScrollTo(yDis)
   }

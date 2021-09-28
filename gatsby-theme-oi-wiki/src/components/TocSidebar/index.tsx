@@ -23,14 +23,13 @@ const TocCollapseBtn = observer(() => {
 })
 
 const TocSidebar: React.FC<TocSidebarProps> = observer((props) => {
-  const top = headerStore.appear ? headerStore.height : 0
   const scaleX = tocSidebarStore.collapsed ? 0 : 1
   const translateX = tocSidebarStore.collapsed ? tocSidebarStore.width : 0
 
   return (
     <WrapperBox sx={{
       transform: `translate3d(${translateX}px, ${top}px, 0)`,
-      height: `calc(100vh - ${top}px)`,
+      height: `calc(100vh - ${headerStore.currentHeight}px)`,
       borderRight: 'unset',
       right: 0,
     }}>

@@ -6,6 +6,7 @@ export interface HeaderStore {
   onTop: boolean;
 
   height: number;
+  currentHeight: number;
 
   setAppear(val: boolean): void;
 
@@ -25,6 +26,9 @@ const headerStore = observable<HeaderStore>({
   get height() {
     return HEADER_HEIGHT
   },
+  get currentHeight() {
+    return this.appear ? this.height : 0
+  },
 
   setAppear(val) {
     if (!this.appearLock) {
@@ -39,6 +43,7 @@ const headerStore = observable<HeaderStore>({
   },
 }, {
   height: computed,
+  currentHeight: computed,
 }, {
   autoBind: true,
 })

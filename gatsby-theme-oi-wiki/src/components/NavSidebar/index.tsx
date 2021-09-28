@@ -77,7 +77,6 @@ const NavSidebar: React.FC<NavSidebarProps> = observer((props) => {
   const { pathname } = props
   const scaleX = navSidebarStore.collapsed ? 0 : 1
   const translateX = navSidebarStore.collapsed ? -navSidebarStore.width : 0
-  const translateY = headerStore.appear ? headerStore.height : 0
   const navList = React.useMemo(
     () => getTypedPathList(pathList)
       .map((item) => listItemBuilder(item, 16, pathname))
@@ -88,8 +87,8 @@ const NavSidebar: React.FC<NavSidebarProps> = observer((props) => {
   return (
     <WrapperBox
       sx={{
-        transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
-        height: `calc(100vh - ${translateY}px)`,
+        transform: `translate3d(${translateX}px, ${headerStore.currentHeight}px, 0)`,
+        height: `calc(100vh - ${headerStore.currentHeight}px)`,
         borderLeft: 'unset',
       }}
     >
