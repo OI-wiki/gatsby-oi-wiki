@@ -75,7 +75,7 @@ module.exports = {
         '.eslintrc.js',
         'gatsby-node.js',
         'gatsby-config.js',
-        'gatsby-config.esm.js',
+        'esmRequire.js',
         'plugins/**/*.js',
       ],
       env: {

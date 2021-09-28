@@ -1,4 +1,5 @@
 const path = require('path')
+const esmRequire = require('./esmRequire')
 
 const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD = process.env.PRODUCTION === 'true' ||
@@ -25,8 +26,6 @@ const fontURL = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fon
 const mathRehype = IS_EXEC_BUILD
   ? [require('rehype-mathjax/chtml'), { fontURL }]
   : [require('rehype-mathjax/browser')]
-
-const { remarkDetails } = require('./gatsby-config.esm')
 
 module.exports = {
   plugins: [
@@ -87,7 +86,7 @@ module.exports = {
         ],
         remarkPlugins: [
           require('remark-math'),
-          remarkDetails,
+          esmRequire('remark-details').default,
           [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
             theme: 'css-variables',
