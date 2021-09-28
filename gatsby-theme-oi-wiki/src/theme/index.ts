@@ -2,7 +2,7 @@ import createTheme from '@mui/material/styles/createTheme'
 import { grey } from '@mui/material/colors'
 import { CSSProperties } from '@mui/material/styles/createTypography'
 
-const commonTypo: CSSProperties = {
+const commonTypStyle: CSSProperties = {
   fontWeight: 'bold',
   marginBlockEnd: '1rem',
   marginBlockStart: '1.5rem',
@@ -16,29 +16,29 @@ const theme = createTheme({
       fontSize: '2.5rem',
       paddingBottom: '.3rem',
       borderBlockEnd: `1px solid ${grey['300']}`,
-      ...commonTypo,
+      ...commonTypStyle,
     },
     h2: {
       fontSize: '2rem',
       paddingBottom: '.3rem',
       borderBlockEnd: `1px solid ${grey['300']}`,
-      ...commonTypo,
+      ...commonTypStyle,
     },
     h3: {
       fontSize: '1.75rem',
-      ...commonTypo,
+      ...commonTypStyle,
     },
     h4: {
       fontSize: '1.5rem',
-      ...commonTypo,
+      ...commonTypStyle,
     },
     h5: {
       fontSize: '1.25rem',
-      ...commonTypo,
+      ...commonTypStyle,
     },
     h6: {
       fontSize: '1rem',
-      ...commonTypo,
+      ...commonTypStyle,
     },
     body2: {
       fontSize: '0.875rem',
