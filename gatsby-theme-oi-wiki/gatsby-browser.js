@@ -1,5 +1,5 @@
 import('./static/extra.css')
-import WrapRootElement from './src/gatsby-func/WrapRootElement'
+import WrapRootElement from './src/gatsby/WrapRootElement'
 
 const onRouteUpdate = () => {
   if (process.env.GATSBY_IS_DEV) {
