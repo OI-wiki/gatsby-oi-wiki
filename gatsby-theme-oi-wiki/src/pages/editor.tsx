@@ -1,24 +1,40 @@
 import 'basic-type-extensions';
 import React, { useState, useEffect, useRef } from 'react';
-import { AppBar, Avatar, Box, Button, Toolbar } from '@material-ui/core';
+import { AppBar, Avatar, Box, Button, TextField, Toolbar } from '@material-ui/core';
 import { Octokit } from '@octokit/rest';
 import type { RequestError } from '@octokit/types';
 import { Buffer } from 'buffer';
 import MarkdownEditor from '../components/MarkdownEditor';
 import StyledLayout from '../components/StyledLayout';
 import Confirm from '../components/Confirm';
+import Message from '../components/Message';
 import authenticate, { User, anonymousUser } from '../lib/authenticate';
 import { PromiseValue } from '../utils/common';
 
 type Repository = PromiseValue<ReturnType<Octokit['rest']['repos']['get']>>['data'];
 const EditorPage: React.FC = _ => {
-	const [token, setToken] = useState<string | undefined>(undefined);
 	const [user, setUser] = useState<User>(anonymousUser);
 	const [content, setContent] = useState<string>('');
 	const [curValue, setCurValue] = useState<string>('');
 	const [repo, setRepo] = useState<Repository | null>(null);
+	const [sha, setSha] = useState<string | null>(null);
+	const [github, setGithub] = useState<Octokit | null>(null);
 	const confirmRef = useRef<Confirm | null>(null);
-	let github: Octokit | null = null;
+	const messageRef = useRef<Message | null>(null);
+	const relativePath = new URL(location.href).searchParams.get('path');
+	useEffect(() => {
+		authenticate().then(
+			async identities => {
+				if (typeof identities == 'string') {
+					messageRef.current!.error(identities);
+					return;
+				}
+				setUser(identities[1]);
+				setGithub(new Octokit({ auth: identities[0] }));
+			},
+			error => messageRef.current!.error(error.toString())
+		);
+	}, []);
 	async function checkFork(owner: string, repo: string): Promise<boolean> {
 		return github!.rest.repos
 			.listCommits({
@@ -46,17 +62,11 @@ const EditorPage: React.FC = _ => {
 			);
 	}
 	useEffect(() => {
-		authenticate().then(async identities => {
-			if (typeof identities == 'string') {
-				console.log(identities);
-				return;
-			}
-			setToken(identities[0]);
-			setUser(identities[1]);
-			github = new Octokit({ auth: token });
+		if (!github || !user) return;
+		(async () => {
 			const forkedRepos = (
 				await github.rest.repos.listForUser({
-					username: identities[1].username,
+					username: user.username,
 					type: 'owner',
 				})
 			).data.filter(repo => repo.fork);
@@ -64,7 +74,7 @@ const EditorPage: React.FC = _ => {
 			for (const forkedRepo of forkedRepos) {
 				const details = (
 					await github.rest.repos.get({
-						owner: identities[1].username,
+						owner: user.username,
 						repo: forkedRepo.name,
 					})
 				).data;
@@ -82,30 +92,31 @@ const EditorPage: React.FC = _ => {
 				});
 				if (result) {
 					await createFork('OI-wiki', 'gatsby-oi-wiki');
-					await Promise.wait(() => checkFork(identities[1].username, 'gatsby-oi-wiki'), 500);
+					await Promise.wait(() => checkFork(user.username, 'gatsby-oi-wiki'), 500);
 					target = (
 						await github.rest.repos.get({
-							owner: identities[1].username,
+							owner: user.username,
 							repo: 'gatsby-oi-wiki',
 						})
 					).data;
 					setRepo(target);
 				}
 			}
-			const relativePath = new URL(location.href).searchParams.get('path');
-			let docSHA;
 			if (!String.isNullOrEmpty(relativePath)) {
 				await github.rest.repos
 					.getContent({
-						owner: identities[1].username,
+						owner: user.username,
 						repo: target!.name,
 						path: `example/docs/${relativePath}`,
 					})
 					.then(
 						({ data }) => {
-							docSHA = (data as { sha: string }).sha;
-							const doc = Buffer.from((data as any).content as string, 'base64').toString('utf8');
-							setContent(doc);
+							setSha((data as { sha: string }).sha);
+							const draft = localStorage.getItem(`editor-draft[${relativePath}]`);
+							if (!String.isNullOrEmpty(draft)) {
+								setContent(draft!);
+								messageRef.current!.success('成功加载草稿');
+							} else setContent(Buffer.from((data as any).content as string, 'base64').toString('utf8'));
 						},
 						(error: RequestError) => {
 							if (error.status == 404) alert(`路径${relativePath}不存在`);
@@ -113,8 +124,44 @@ const EditorPage: React.FC = _ => {
 						}
 					);
 			}
-		}, console.log);
-	}, []);
+		})();
+	}, [github, user]);
+	function saveDraft() {
+		localStorage.setItem(`editor-draft[${relativePath}]`, curValue);
+		messageRef.current!.success('草稿已保存');
+	}
+	async function submitCommit() {
+		let message = `docs: update ${relativePath}`;
+		const confirmed = await confirmRef.current!.show({
+			message: (
+				<TextField
+					variant="standard"
+					label="Commit Message"
+					defaultValue={message}
+					style={{ minWidth: 300 }}
+					onChange={event => (message = event.target.value)}
+				/>
+			),
+		});
+		if (!confirmed) return;
+		await github!.rest.repos
+			.createOrUpdateFileContents({
+				owner: user.username,
+				repo: repo!.name,
+				message,
+				path: `example/docs/${relativePath}`,
+				sha: sha!,
+				content: Buffer.from(curValue, 'utf8').toString('base64'),
+			})
+			.then(
+				({ data: { commit } }) => {
+					messageRef.current!.success(`Commit成功，SHA为${commit.sha}`);
+					localStorage.removeItem(`editor-draft[${relativePath}]`);
+				},
+				error => messageRef.current!.error(error.toString())
+			);
+	}
+	function createPullRequest() {}
 	return (
 		<StyledLayout
 			location={location}
@@ -146,13 +193,13 @@ const EditorPage: React.FC = _ => {
 						>
 							TEST
 						</Button>
-						<Button variant="outlined" onClick={() => console.log(curValue)}>
+						<Button variant="outlined" onClick={saveDraft}>
 							保存草稿
 						</Button>
-						<Button variant="outlined" onClick={() => console.log(curValue)}>
+						<Button variant="outlined" onClick={submitCommit}>
 							提交Commit
 						</Button>
-						<Button variant="outlined" onClick={() => console.log(curValue)}>
+						<Button variant="outlined" onClick={createPullRequest}>
 							发起Pull Request
 						</Button>
 					</Toolbar>
@@ -160,6 +207,7 @@ const EditorPage: React.FC = _ => {
 			</Box>
 			<MarkdownEditor value={content} onChange={setCurValue} />
 			<Confirm ref={confirmRef} />
+			<Message ref={messageRef} />
 		</StyledLayout>
 	);
 };
