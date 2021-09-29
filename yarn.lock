@@ -10326,7 +10326,7 @@ micromark-factory-whitespace@^1.0.0:
     micromark-util-symbol "^1.0.0"
     micromark-util-types "^1.0.0"
 
-micromark-util-character@^1.0.0:
+micromark-util-character@^1.0.0, micromark-util-character@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/micromark-util-character/-/micromark-util-character-1.1.0.tgz#d97c54d5742a0d9611a68ca0cd4124331f264d86"
   integrity sha512-agJ5B3unGNJ9rJvADMJ5ZiYjBRyDpzKAOk01Kpi1TKhlT1APx3XZk6eN7RtSz1erbWHC2L8T3xLZ81wdtGRZzg==
@@ -12694,15 +12694,17 @@ relay-runtime@11.0.2:
     fbjs "^3.0.0"
     invariant "^2.2.4"
 
-remark-details@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/remark-details/-/remark-details-4.0.2.tgz#a5a0433489711e86fade5ed7a8ad2d10e5ff720f"
-  integrity sha512-R7VeOFCgDJM1PWv/Hrf0sT5BrRKc0jYKd3MeQWoXxHecDt2Y7BGfQ8ORsxBMDFpmoa3WiT2c6qDwzBT69rFBGw==
+remark-details@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/remark-details/-/remark-details-4.0.3.tgz#e32ce75bd6d2dd0de0b17f609d3773c98fe6f10a"
+  integrity sha512-i9FYBSxE95/0dVOiyus1XEwnda/1sq05WuOGn9nfH5yDBur3rC3h+DgMVwo34c3pYlywsOWpItxPybqKYf5/AQ==
   dependencies:
     hast "^1.0.0"
     hastscript "^7.0.2"
     mdast-util-from-markdown "^1.0.2"
     micromark-factory-space "^1.0.0"
+    micromark-util-character "^1.1.0"
+    micromark-util-symbol "^1.0.0"
     micromark-util-types "^1.0.1"
     unified "^10.1.0"
     unist-util-visit "^4.1.0"
