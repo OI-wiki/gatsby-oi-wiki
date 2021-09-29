@@ -1,12 +1,12 @@
 import 'basic-type-extensions';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AppBar, Avatar, Box, Button, Toolbar } from '@material-ui/core';
 import { Octokit } from '@octokit/rest';
 import type { RequestError } from '@octokit/types';
 import { Buffer } from 'buffer';
 import MarkdownEditor from '../components/MarkdownEditor';
 import StyledLayout from '../components/StyledLayout';
-import { confirmService } from '../components/Confirm';
+import Confirm from '../components/Confirm';
 import authenticate, { User, anonymousUser } from '../lib/authenticate';
 import { PromiseValue } from '../utils/common';
 
@@ -17,6 +17,7 @@ const EditorPage: React.FC = _ => {
 	const [content, setContent] = useState<string>('');
 	const [curValue, setCurValue] = useState<string>('');
 	const [repo, setRepo] = useState<Repository | null>(null);
+	const confirmRef = useRef<Confirm | null>(null);
 	let github: Octokit | null = null;
 	async function checkFork(owner: string, repo: string): Promise<boolean> {
 		return github!.rest.repos
@@ -74,7 +75,7 @@ const EditorPage: React.FC = _ => {
 				}
 			}
 			if (target == null) {
-				const result = await confirmService.show({
+				const result = await confirmRef.current!.show({
 					title: 'Fork本项目到您的GitHub仓库',
 					message:
 						'编辑内容需要先将本项目fork到自己的账号，以方便通过Pull Request提出修改建议。点击确定将会执行fork操作，取消将返回原页面。',
@@ -135,6 +136,16 @@ const EditorPage: React.FC = _ => {
 				>
 					<Toolbar>
 						<Avatar alt={user?.username} src={user?.avatar} style={{ height: 32, width: 32 }} />
+						<Button
+							variant="outlined"
+							onClick={() =>
+								confirmRef
+									.current!.show({ title: 'test', message: <Button>Button</Button> })
+									.then(console.log)
+							}
+						>
+							TEST
+						</Button>
 						<Button variant="outlined" onClick={() => console.log(curValue)}>
 							保存草稿
 						</Button>
@@ -148,6 +159,7 @@ const EditorPage: React.FC = _ => {
 				</AppBar>
 			</Box>
 			<MarkdownEditor value={content} onChange={setCurValue} />
+			<Confirm ref={confirmRef} />
 		</StyledLayout>
 	);
 };
