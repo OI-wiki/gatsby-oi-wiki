@@ -102,7 +102,7 @@ const Mdx: React.FC<MdxProps> = ({ data: { mdx }, location }) => {
         dateModified={dateModified}
         datePublished={datePublished}
         article/>
-      <MDRenderer components={myComponents} htmlAst={mdx.htmlAst}/>
+      <MDRenderer components={myComponents} htmlAst={mdx.childHtmlRehype.htmlAst}/>
     </StyledLayout>
   )
 }

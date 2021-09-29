@@ -18,7 +18,9 @@ export const query = graphql`
         isIndex
       }
       excerpt
-      htmlAst
+      childHtmlRehype {
+        htmlAst
+      }
       headings {
         value
       }

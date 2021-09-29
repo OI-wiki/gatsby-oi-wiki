@@ -49,7 +49,7 @@ module.exports = {
     ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, 'gatsby-plugin-sharp'),
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-transformer-remark-rehype',
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
@@ -83,21 +83,42 @@ module.exports = {
           {
             resolve: path.resolve(__dirname, 'plugins/gatsby-remark-snippets'),
           },
+          {
+            resolve: path.resolve(__dirname, 'plugins/use-unified-plugins'),
+            options: {
+              unifiedPlugins: [
+                require('remark-math'),
+                esmRequire('remark-details').default,
+                [require('@mgtd/remark-shiki').remarkShiki, {
+                  semantic: false,
+                  theme: 'css-variables',
+                  skipInline: true,
+                }],
+              ]
+            },
+          },
+          {
+            resolve: 'gatsby-transformer-rehype',
+            options: {
+              filter: node => node.internal.type === 'MarkdownRemark',
+              source: node => node.html,
+              plugins: [
+                {
+                  resolve: path.resolve(__dirname, 'plugins/use-unified-plugins'),
+                  options: {
+                    unifiedPlugins: [
+                      require('./plugins/rehype-pseudocodejs'),
+                      mathRehype,
+                      require('./plugins/rehype-codeblock'),
+                    ],
+                    nodeName: 'htmlAst',
+                  }
+                }
+              ]
+            }
+          },
         ],
-        remarkPlugins: [
-          require('remark-math'),
-          esmRequire('remark-details').default,
-          [require('@mgtd/remark-shiki').remarkShiki, {
-            semantic: false,
-            theme: 'css-variables',
-            skipInline: true,
-          }],
-        ],
-        rehypePlugins: [
-          require('./plugins/rehype-pseudocodejs'),
-          mathRehype,
-          require('./plugins/rehype-codeblock'),
-        ],
+        rehypePlugins: []
         // extensions: ['.mdx', '.md'],
       },
     },
