@@ -1,27 +1,30 @@
-import { makeStyles, Typography } from '@material-ui/core'
-import clsx from 'clsx'
 import React from 'react'
+import styled from '@mui/material/styles/styled'
+import { css } from '@emotion/react'
+import Typography from '@mui/material/Typography'
 
-const useStyles = makeStyles((theme) => ({
-  indicator: {
-    padding: `${theme.spacing(0.5)}px ${theme.spacing(1)}px`,
-    color: theme.palette.common.white,
-    borderRadius: theme.shape.borderRadius,
-    display: 'inline-block',
-  },
-  info: {
-    background: theme.palette.info.main,
-  },
-  success: {
-    background: theme.palette.success.main,
-  },
-  warning: {
-    background: theme.palette.warning.main,
-  },
-  error: {
-    background: theme.palette.error.main,
-  },
-}))
+const StyledTyp = styled(Typography)(({ theme }) => css`
+  padding: ${theme.spacing(0.5)}px ${theme.spacing(1)}px;
+  color: ${theme.palette.common.white};
+  border-radius: ${theme.shape.borderRadius};
+  display: inline-block;
+
+  &.info {
+    background-color: ${theme.palette.info.main};
+  }
+
+  &.success {
+    background-color: ${theme.palette.success.main};
+  }
+
+  &.warning {
+    background-color: ${theme.palette.warning.main};
+  }
+
+  &.error {
+    background-color: ${theme.palette.error.main};
+  }
+`)
 
 export interface IndicatorProps {
   type: 'info' | 'success' | 'error' | 'warning' | undefined
@@ -29,18 +32,10 @@ export interface IndicatorProps {
 }
 
 const Indicator: React.FC<IndicatorProps> = ({ type, msg }: IndicatorProps) => {
-  const classes = useStyles()
   return (
-    <Typography
-      className={clsx(classes.indicator, {
-        [classes.info]: type === 'info',
-        [classes.success]: type === 'success',
-        [classes.error]: type === 'error',
-        [classes.warning]: type === 'warning',
-      })}
-    >
+    <StyledTyp className={type}>
       {msg}
-    </Typography>
+    </StyledTyp>
   )
 }
 
