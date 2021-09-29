@@ -26,7 +26,7 @@ import NavAndDrawer from './NavAndDrawer';
 import { RequiredNonNull } from '../types/common';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-const useStyles = makeStyles<CustomTheme>((theme) => {
+const useStyles = makeStyles<CustomTheme>(theme => {
 	const flexContainer: CSSProperties = {
 		display: 'flex',
 		flexDirection: 'column',
@@ -97,7 +97,7 @@ interface MyLayoutProps extends Partial<MetaProps> {
 	isWIP?: boolean;
 }
 
-const MyLayout: React.FC<MyLayoutProps> = (props) => {
+const MyLayout: React.FC<MyLayoutProps> = props => {
 	const theme = useTheme();
 	const classes = useStyles();
 	const data = useStaticQuery<GatsbyTypes.SiteDescQuery>(graphql`
@@ -139,20 +139,14 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 	const desc = description || siteDesc;
 
 	const WIPAlert = (
-		<Alert
-			severity="info"
-			icon={<FormatPaintIcon />}
-			className={classes.wip}
-		>
+		<Alert severity="info" icon={<FormatPaintIcon />} className={classes.wip}>
 			本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！
 		</Alert>
 	);
 	return (
 		<>
 			<Helmet>
-				<title>{`${
-					!title || title === siteTitle ? '' : `${title} - `
-				}${siteTitle}`}</title>
+				<title>{`${!title || title === siteTitle ? '' : `${title} - `}${siteTitle}`}</title>
 				<meta name="color-scheme" content="dark light" />
 				<meta name="description" content={desc} />
 			</Helmet>
@@ -177,30 +171,15 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 								<div className={classes.main}>
 									{!noTitle && (
 										<>
-											<Title
-												noEdit={noEdit}
-												noMeta={noMeta}
-												{...titleMetaProps}
-											/>
-											<Divider
-												className={classes.divider}
-											/>
+											<Title noEdit={noEdit} noMeta={noMeta} {...titleMetaProps} />
+											<Divider className={classes.divider} />
 										</>
 									)}
 									{isWIP && WIPAlert}
-									<Typography
-										className={classes.paragraph}
-										variant="body1"
-										component="div"
-									>
+									<Typography className={classes.paragraph} variant="body1" component="div">
 										{children}
 									</Typography>
-									{!noMeta && (
-										<Meta
-											{...titleMetaProps}
-											{...metaProps}
-										/>
-									)}
+									{!noMeta && <Meta {...titleMetaProps} {...metaProps} />}
 									{!noComment && (
 										<div
 											style={{
@@ -231,7 +210,7 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
 	);
 };
 
-const StyledLayout: React.FC<MyLayoutProps> = (props) => (
+const StyledLayout: React.FC<MyLayoutProps> = props => (
 	<ThemeProvider theme={adaptiveTheme}>
 		<CssBaseline />
 		<CustomCssBaseline />
