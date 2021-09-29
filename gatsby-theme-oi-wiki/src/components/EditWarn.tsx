@@ -53,7 +53,7 @@ const EditWarn: React.FC<EditWarnProps> = (props) => {
 				<Button onClick={onClose}>取消</Button>
 				<Button
 					component="a"
-					href={`${editURL}?doc=${relativePath}`}
+					href={`${editURL}?path=${relativePath}`}
 					rel="noopener noreferrer nofollow"
 					onClick={onClose}
 				>
