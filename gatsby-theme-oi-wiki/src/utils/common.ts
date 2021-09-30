@@ -9,6 +9,8 @@ export const noopNull: NoopNull = () => null;
 
 export type PromiseValue<T> = T extends PromiseLike<infer U> ? U : T;
 
+export type ArrayItem<T> = T extends (infer U)[] ? U : T;
+
 // 导出以统一项目内命名
 // FIXME: 存在无法准确推断 paths 的问题，暂未找到合适的方式实现（本意是处理这个问题的）
 export { pick, omit, throttle, uniq };
