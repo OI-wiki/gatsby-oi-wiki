@@ -28,45 +28,22 @@ const EditorPage: React.FC = _ => {
 	const confirmRef = useRef<Confirm | null>(null);
 	const messageRef = useRef<Message | null>(null);
 	const relativePath = new URL(location.href).searchParams.get('path');
+	const handleError = (error: any) => messageRef.current!.error(error.toString());
 	useEffect(() => {
-		authenticate().then(
-			async identities => {
-				if (typeof identities == 'string') {
-					messageRef.current!.error(identities);
-					return;
-				}
-				setUser(identities[1]);
-				setGithub(new Octokit({ auth: identities[0] }));
-			},
-			error => messageRef.current!.error(error.toString())
-		);
+		if (String.isNullOrEmpty(relativePath)) {
+			alert('URL中缺少文档路径参数');
+			history.back();
+			return;
+		}
+		authenticate().then(async identities => {
+			if (typeof identities == 'string') {
+				messageRef.current!.error(identities);
+				return;
+			}
+			setUser(identities[1]);
+			setGithub(new Octokit({ auth: identities[0] }));
+		}, handleError);
 	}, []);
-	async function checkFork(owner: string, repo: string): Promise<boolean> {
-		return github!.rest.repos
-			.listCommits({
-				owner,
-				repo,
-				per_page: 1,
-			})
-			.then(
-				() => true,
-				() => false
-			);
-	}
-	async function createFork(
-		owner: string,
-		repo: string
-	): Promise<false | PromiseValue<ReturnType<Octokit['rest']['repos']['createFork']>>['data']> {
-		return github!.rest.repos
-			.createFork({
-				owner,
-				repo,
-			})
-			.then(
-				({ data }) => data,
-				_ => false
-			);
-	}
 	useEffect(() => {
 		if (!github || !user) return;
 		(async () => {
@@ -76,7 +53,7 @@ const EditorPage: React.FC = _ => {
 					type: 'owner',
 				})
 			).data.filter(repo => repo.fork);
-			let target: Repository | null = null;
+			let found = false;
 			for (const forkedRepo of forkedRepos) {
 				const details = (
 					await github.rest.repos.get({
@@ -85,68 +62,81 @@ const EditorPage: React.FC = _ => {
 					})
 				).data;
 				if (details.parent!.full_name == `${originRepo.owner}/${originRepo.repo}`) {
-					target = details;
-					setRepo(target);
+					setRepo(details);
+					found = true;
 					break;
 				}
 			}
-			if (target == null) {
+			if (!found) {
 				const result = await confirmRef.current!.show({
 					title: 'Fork本项目到您的GitHub仓库',
 					message:
 						'编辑内容需要先将本项目fork到自己的账号，以方便通过Pull Request提出修改建议。点击确定将会执行fork操作，取消将返回原页面。',
 				});
-				if (result) {
-					await createFork(originRepo.owner, originRepo.repo);
-					await Promise.wait(() => checkFork(user.username, originRepo.repo), 500);
-					target = (
+				if (!result) {
+					history.back();
+					return;
+				}
+				await github!.rest.repos.createFork(originRepo);
+				function checkFork(): Promise<boolean> {
+					return github!.rest.repos
+						.listCommits({
+							owner: user.username,
+							repo: originRepo.repo,
+							per_page: 1,
+						})
+						.then(
+							() => true,
+							() => false
+						);
+				}
+				await Promise.wait(checkFork, 500);
+				setRepo(
+					(
 						await github.rest.repos.get({
 							owner: user.username,
 							repo: originRepo.repo,
 						})
-					).data;
-					setRepo(target);
-				}
-			}
-			if (!String.isNullOrEmpty(relativePath)) {
-				await github.rest.repos
-					.getContent({
-						owner: user.username,
-						repo: target!.name,
-						path: `example/docs/${relativePath}`,
-					})
-					.then(
-						({ data }) => {
-							setSha((data as { sha: string }).sha);
-							const draft = localStorage.getItem(`editor-draft[${relativePath}]`);
-							if (!String.isNullOrEmpty(draft)) {
-								setContent(draft!);
-								messageRef.current!.success('成功加载草稿');
-							} else setContent(Buffer.from((data as any).content as string, 'base64').toString('utf8'));
-						},
-						(error: RequestError) => {
-							if (error.status == 404) alert(`路径${relativePath}不存在`);
-							else throw error;
-						}
-					);
+					).data
+				);
 			}
 		})();
 	}, [github, user]);
 	useEffect(() => {
 		if (!repo) return;
+		github!.rest.repos
+			.getContent({
+				owner: user.username,
+				repo: repo!.name,
+				path: `example/docs/${relativePath}`,
+			})
+			.then(
+				({ data }) => {
+					setSha((data as { sha: string }).sha);
+					const draft = localStorage.getItem(`editor-draft[${relativePath}]`);
+					if (!String.isNullOrEmpty(draft)) {
+						setContent(draft!);
+						messageRef.current!.success('成功加载草稿');
+					} else setContent(Buffer.from((data as any).content as string, 'base64').toString('utf8'));
+				},
+				(error: RequestError) => {
+					if (error.status == 404) {
+						alert(`路径${relativePath}不存在`);
+						history.back();
+					} else throw error;
+				}
+			);
 		github!.pulls
 			.list({
 				...originRepo,
+				state: 'all',
 				head: `${user.username}:master`,
 				page: 1,
 				per_page: 1,
 			})
-			.then(
-				async ({ data: prs }) => {
-					if (prs.length > 0) setPr(prs[0]);
-				},
-				error => messageRef.current!.error(error.toString())
-			);
+			.then(async ({ data: prs }) => {
+				if (prs.length > 0) setPr(prs[0]);
+			}, handleError);
 	}, [repo]);
 	function saveDraft() {
 		localStorage.setItem(`editor-draft[${relativePath}]`, curValue);
@@ -175,13 +165,10 @@ const EditorPage: React.FC = _ => {
 				sha: sha!,
 				content: Buffer.from(curValue, 'utf8').toString('base64'),
 			})
-			.then(
-				({ data: { commit } }) => {
-					messageRef.current!.success(`Commit成功，SHA为${commit.sha}`);
-					localStorage.removeItem(`editor-draft[${relativePath}]`);
-				},
-				error => messageRef.current!.error(error.toString())
-			);
+			.then(({ data: { commit } }) => {
+				messageRef.current!.success(`Commit成功，SHA为${commit.sha}`);
+				localStorage.removeItem(`editor-draft[${relativePath}]`);
+			}, handleError);
 	}
 	async function createPullRequest() {
 		let title = '';
@@ -216,13 +203,10 @@ const EditorPage: React.FC = _ => {
 				head: `${user.username}:master`,
 				base: 'master',
 			})
-			.then(
-				({ data }) => {
-					messageRef.current!.success(`成功创建PR，编号为${data.number}`);
-					setPr(data as any);
-				},
-				error => messageRef.current!.error(error.toString())
-			);
+			.then(({ data }) => {
+				messageRef.current!.success(`成功创建PR，编号为${data.number}`);
+				setPr(data as any);
+			}, handleError);
 	}
 	function viewReview() {
 		window.open(`https://github.com/${originRepo.owner}/${originRepo.repo}/pull/${pr!.number}`, '_blank')?.focus();
@@ -237,36 +221,38 @@ const EditorPage: React.FC = _ => {
 			overflow={true}
 			title="Markdown编辑器"
 		>
-			<Box>
-				<AppBar
-					position="static"
-					style={{
-						borderRadius: '3px 3px 0 0',
-						borderColor: 'rgba(var(--divider))',
-						backgroundColor: 'rgba(var(--background-paper))',
-					}}
-				>
-					<Toolbar>
-						<Avatar alt={user?.username} src={user?.avatar} style={{ height: 32, width: 32 }} />
-						<Button variant="outlined" onClick={saveDraft}>
-							保存草稿
-						</Button>
-						<Button variant="outlined" onClick={submitCommit}>
-							提交Commit
-						</Button>
-						{(pr == null || pr.state == 'closed') && (
-							<Button variant="outlined" onClick={createPullRequest}>
-								发起PR
+			{repo != null && (
+				<Box>
+					<AppBar
+						position="static"
+						style={{
+							borderRadius: '3px 3px 0 0',
+							borderColor: 'rgba(var(--divider))',
+							backgroundColor: 'rgba(var(--background-paper))',
+						}}
+					>
+						<Toolbar>
+							<Avatar alt={user?.username} src={user?.avatar} style={{ height: 32, width: 32 }} />
+							<Button variant="outlined" onClick={saveDraft}>
+								保存草稿
 							</Button>
-						)}
-						{pr?.state == 'open' && (
-							<Button variant="outlined" onClick={viewReview}>
-								查看PR
+							<Button variant="outlined" onClick={submitCommit}>
+								提交Commit
 							</Button>
-						)}
-					</Toolbar>
-				</AppBar>
-			</Box>
+							{(pr == null || pr.state == 'closed') && (
+								<Button variant="outlined" onClick={createPullRequest}>
+									发起PR
+								</Button>
+							)}
+							{pr?.state == 'open' && (
+								<Button variant="outlined" onClick={viewReview}>
+									查看PR
+								</Button>
+							)}
+						</Toolbar>
+					</AppBar>
+				</Box>
+			)}
 			<MarkdownEditor value={content} onChange={setCurValue} />
 			<Confirm ref={confirmRef} />
 			<Message ref={messageRef} />
