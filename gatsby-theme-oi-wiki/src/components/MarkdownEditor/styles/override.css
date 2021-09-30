@@ -20,7 +20,11 @@
 	border-color: rgba(var(--divider));
 }
 
-.bytemd-toolbar-icon[bytemd-tippy-path="4"] {
+.bytemd-toolbar-icon[bytemd-tippy-path='4'] {
+	display: none;
+}
+
+.bytemd-toolbar-icon[bytemd-tippy-path='5'] {
 	display: none;
 }
 

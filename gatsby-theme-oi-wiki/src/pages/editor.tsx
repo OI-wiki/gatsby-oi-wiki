@@ -1,6 +1,9 @@
 import 'basic-type-extensions';
 import React, { useState, useEffect, useRef } from 'react';
-import { AppBar, Avatar, Box, Button, TextField, Toolbar } from '@material-ui/core';
+import { AppBar, Avatar, Box, TextField, Toolbar, Tooltip } from '@material-ui/core';
+import DraftsIcon from '@material-ui/icons/DraftsOutlined';
+import PublishIcon from '@material-ui/icons/PublishOutlined';
+import CallMergeIcon from '@material-ui/icons/CallMergeOutlined';
 import { Octokit } from '@octokit/rest';
 import type { RequestError } from '@octokit/types';
 import { Buffer } from 'buffer';
@@ -208,9 +211,17 @@ const EditorPage: React.FC = _ => {
 				setPr(data as any);
 			}, handleError);
 	}
-	function viewReview() {
+	function viewPullRequest() {
 		window.open(`https://github.com/${originRepo.owner}/${originRepo.repo}/pull/${pr!.number}`, '_blank')?.focus();
 	}
+	const dataTheme = document.getElementsByTagName('html').item(0)?.getAttribute('data-theme');
+	const darkTheme =
+		dataTheme == 'dark' || (dataTheme == 'auto' && window.matchMedia('(prefers-color-scheme: dark)') != null);
+	const toolbarItems = [
+		<DraftsIcon onClick={saveDraft} />,
+		<PublishIcon onClick={submitCommit} />,
+		<CallMergeIcon onClick={createPullRequest} />,
+	];
 	return (
 		<StyledLayout
 			location={location}
@@ -221,39 +232,29 @@ const EditorPage: React.FC = _ => {
 			overflow={true}
 			title="Markdown编辑器"
 		>
-			{repo != null && (
-				<Box>
-					<AppBar
-						position="static"
-						style={{
-							borderRadius: '3px 3px 0 0',
-							borderColor: 'rgba(var(--divider))',
-							backgroundColor: 'rgba(var(--background-paper))',
-						}}
-					>
-						<Toolbar>
-							<Avatar alt={user?.username} src={user?.avatar} style={{ height: 32, width: 32 }} />
-							<Button variant="outlined" onClick={saveDraft}>
-								保存草稿
-							</Button>
-							<Button variant="outlined" onClick={submitCommit}>
-								提交Commit
-							</Button>
-							{(pr == null || pr.state == 'closed') && (
-								<Button variant="outlined" onClick={createPullRequest}>
-									发起PR
-								</Button>
-							)}
-							{pr?.state == 'open' && (
-								<Button variant="outlined" onClick={viewReview}>
-									查看PR
-								</Button>
-							)}
-						</Toolbar>
-					</AppBar>
-				</Box>
-			)}
-			<MarkdownEditor value={content} onChange={setCurValue} />
+			<MarkdownEditor theme={darkTheme ? 'dark' : 'light'} value={content} onChange={setCurValue}>
+				{repo != null && (
+					<>
+						<Tooltip title="保存草稿">
+							<DraftsIcon onClick={saveDraft} />
+						</Tooltip>
+						<Tooltip title="提交Commit">
+							<PublishIcon onClick={submitCommit} />
+						</Tooltip>
+						{(pr == null || pr.state == 'closed') && (
+							<Tooltip title="发起PR">
+								<CallMergeIcon onClick={createPullRequest} />
+							</Tooltip>
+						)}
+						{pr?.state == 'open' && (
+							<Tooltip title="查看PR">
+								<CallMergeIcon onClick={viewPullRequest} />
+							</Tooltip>
+						)}
+						<Avatar alt={user?.username} src={user?.avatar} style={{ width: 24, height: 24 }} />)
+					</>
+				)}
+			</MarkdownEditor>
 			<Confirm ref={confirmRef} />
 			<Message ref={messageRef} />
 		</StyledLayout>
