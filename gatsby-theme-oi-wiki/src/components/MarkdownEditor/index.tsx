@@ -42,9 +42,7 @@ const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = props => {
 			toolbarEl = document.createElement('div');
 			toolbarEl.className = 'bytemd-toolbar-right';
 			toolbarEl.setAttribute('custom-toolbar', '');
-		}
-		for (const item of toolbarEl.children) {
-			if (item.hasAttribute('custom-toolbar-item')) toolbarEl.removeChild(item);
+			document.getElementsByClassName('bytemd-toolbar')[0].appendChild(toolbarEl);
 		}
 		const items: ReactElement[] = [];
 		function addItems(el: any) {
@@ -52,8 +50,7 @@ const MarkdownEditor: React.FC<Partial<MarkdownEditorProps>> = props => {
 			const element = el as ReactElement;
 			if (element.props.children != null && Object.keys(element.props).length == 1) {
 				for (const item of element.props.children) addItems(item);
-			}
-			items.push(element);
+			} else items.push(element);
 		}
 		if (!Object.isNullOrEmpty(props.children)) {
 			addItems(props.children);

@@ -217,11 +217,6 @@ const EditorPage: React.FC = _ => {
 	const dataTheme = document.getElementsByTagName('html').item(0)?.getAttribute('data-theme');
 	const darkTheme =
 		dataTheme == 'dark' || (dataTheme == 'auto' && window.matchMedia('(prefers-color-scheme: dark)') != null);
-	const toolbarItems = [
-		<DraftsIcon onClick={saveDraft} />,
-		<PublishIcon onClick={submitCommit} />,
-		<CallMergeIcon onClick={createPullRequest} />,
-	];
 	return (
 		<StyledLayout
 			location={location}
@@ -235,23 +230,25 @@ const EditorPage: React.FC = _ => {
 			<MarkdownEditor theme={darkTheme ? 'dark' : 'light'} value={content} onChange={setCurValue}>
 				{repo != null && (
 					<>
-						<Tooltip title="保存草稿">
+						<Tooltip title={user.username} placement="top">
+							<Avatar alt={user?.username} src={user?.avatar} style={{ width: 24, height: 24 }} />
+						</Tooltip>
+						<Tooltip title="保存草稿" placement="top">
 							<DraftsIcon onClick={saveDraft} />
 						</Tooltip>
-						<Tooltip title="提交Commit">
+						<Tooltip title="提交Commit" placement="top">
 							<PublishIcon onClick={submitCommit} />
 						</Tooltip>
 						{(pr == null || pr.state == 'closed') && (
-							<Tooltip title="发起PR">
+							<Tooltip title="发起PR" placement="top">
 								<CallMergeIcon onClick={createPullRequest} />
 							</Tooltip>
 						)}
 						{pr?.state == 'open' && (
-							<Tooltip title="查看PR">
+							<Tooltip title="查看PR" placement="top">
 								<CallMergeIcon onClick={viewPullRequest} />
 							</Tooltip>
 						)}
-						<Avatar alt={user?.username} src={user?.avatar} style={{ width: 24, height: 24 }} />)
 					</>
 				)}
 			</MarkdownEditor>
