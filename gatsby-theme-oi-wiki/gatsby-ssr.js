@@ -1,11 +1,11 @@
-const React = require('react');
-const script = require('./static/script');
+const React = require('react')
+const script = require('./static/script')
 
-const darkModeSwitch = `(${script.default.toString()})()`;
+const darkModeSwitch = `(${script.default.toString()})()`
 
 const HtmlAttributes = {
   lang: 'zh-cmn-Hans',
-};
+}
 
 const HeadComponents = [
   <meta key="charset" charSet="utf-8" />,
@@ -25,16 +25,16 @@ const HeadComponents = [
       __html: darkModeSwitch,
     }}
   />,
-];
+]
 
 exports.onPreRenderHTML = ({ getPostBodyComponents, replacePostBodyComponents }) => {
-  const comps = getPostBodyComponents();
+  const comps = getPostBodyComponents()
   process.env.GATSBY_IS_DEV &&
-    comps.push(<script src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" id="MathJax-script" />);
-  replacePostBodyComponents(comps);
-};
+    comps.push(<script src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" id="MathJax-script" />)
+  replacePostBodyComponents(comps)
+}
 
 exports.onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
-  setHtmlAttributes(HtmlAttributes);
-  setHeadComponents(HeadComponents);
-};
+  setHtmlAttributes(HtmlAttributes)
+  setHeadComponents(HeadComponents)
+}

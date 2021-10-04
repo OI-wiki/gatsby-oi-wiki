@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   root: true,
@@ -31,9 +31,10 @@ module.exports = {
   rules: {
     'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    semi: ['error', 'always', { beforeStatementContinuationChars: 'always' }],
+    semi: ['error', 'never', { beforeStatementContinuationChars: 'always' }],
     'react/prop-types': 'off',
-    'comma-dangle': ['error', 'always-multiline'],
+    'comma-dangle': ['warn', 'always-multiline'],
+    'no-inner-declarations': 'off',
     'no-unused-vars': 'warn',
     'react/jsx-curly-brace-presence': ['error', 'never'],
     'graphql/template-strings': [
@@ -59,9 +60,9 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
         '@typescript-eslint/ban-ts-comment': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
-        'no-unused-vars': 'off',
+        '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
         '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/no-unused-vars': ['warn'],
+        '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
       },
@@ -87,4 +88,4 @@ module.exports = {
       version: 'detect',
     },
   },
-};
+}

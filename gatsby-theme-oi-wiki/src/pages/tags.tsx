@@ -1,19 +1,19 @@
-import Chip from '@material-ui/core/Chip';
-import { makeStyles } from '@material-ui/core/styles';
-import { graphql, useStaticQuery } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
-import React from 'react';
-import StyledLayout from '../components/StyledLayout';
-import { DeepRequiredNonNull, DeepWriteable } from '../types/common';
+import Chip from '@material-ui/core/Chip'
+import { makeStyles } from '@material-ui/core/styles'
+import { graphql, useStaticQuery } from 'gatsby'
+import kebabCase from 'lodash/kebabCase'
+import React from 'react'
+import StyledLayout from '../components/StyledLayout'
+import { DeepRequiredNonNull, DeepWriteable } from '../types/common'
 
 const useStyles = makeStyles(theme => ({
   chip: {
     margin: theme.spacing(0.5),
   },
-}));
+}))
 
 export interface TagsPageProps {
-  location: Location;
+  location: Location
 }
 
 const TagsPage: React.FC<TagsPageProps> = props => {
@@ -33,12 +33,12 @@ const TagsPage: React.FC<TagsPageProps> = props => {
         }
       }
     }
-  `) as DeepWriteable<DeepRequiredNonNull<GatsbyTypes.TagsQuery>>;
+  `) as DeepWriteable<DeepRequiredNonNull<GatsbyTypes.TagsQuery>>
 
-  const classes = useStyles();
-  const { location } = props;
+  const classes = useStyles()
+  const { location } = props
 
-  group.sort((a, b) => b.totalCount - a.totalCount);
+  group.sort((a, b) => b.totalCount - a.totalCount)
 
   return (
     <StyledLayout location={location} noMeta={true} overflow={true} noComment={true} title="标签页">
@@ -56,7 +56,7 @@ const TagsPage: React.FC<TagsPageProps> = props => {
         ))}
       </div>
     </StyledLayout>
-  );
-};
+  )
+}
 
-export default TagsPage;
+export default TagsPage

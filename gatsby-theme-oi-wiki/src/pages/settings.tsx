@@ -8,11 +8,11 @@ import {
   Radio,
   RadioGroup,
   Switch,
-} from '@material-ui/core';
-import React from 'react';
-import colors, { LabeledPaletteColor } from '../styles/colors';
-import { Settings, useSetting } from '../lib/useSetting';
-import StyledLayout from '../components/StyledLayout';
+} from '@material-ui/core'
+import React from 'react'
+import colors, { LabeledPaletteColor } from '../styles/colors'
+import { Settings, useSetting } from '../lib/useSetting'
+import StyledLayout from '../components/StyledLayout'
 
 const useStyles = makeStyles(theme => ({
   root: (props: LabeledPaletteColor | Record<string, never>) => ({
@@ -37,48 +37,48 @@ const useStyles = makeStyles(theme => ({
     left: '.3em',
     width: 'calc(100% - .6em)',
   },
-}));
+}))
 
 interface ColorButtonProps {
-  data: LabeledPaletteColor;
-  onClick?: (props: LabeledPaletteColor) => void;
+  data: LabeledPaletteColor
+  onClick?: (props: LabeledPaletteColor) => void
 }
 
 const ColorButton: React.FC<ColorButtonProps> = props => {
-  const { data, onClick } = props;
-  const classes = useStyles(data.main === 'auto' ? {} : data);
+  const { data, onClick } = props
+  const classes = useStyles(data.main === 'auto' ? {} : data)
   return (
     <Grid item>
       <Button classes={classes} onClick={() => onClick?.(data)}>
         {props.data.desc}
       </Button>
     </Grid>
-  );
-};
+  )
+}
 
 type SettingsPageProps = {
-  location: Location;
-};
+  location: Location
+}
 const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => {
-  const { location } = props;
-  const [settings, updateSetting] = useSetting();
+  const { location } = props
+  const [settings, updateSetting] = useSetting()
 
   const onNavColorBtnClick = (c: LabeledPaletteColor): void => {
     updateSetting({
       theme: {
         primary: c.main === 'auto' ? null : c,
       },
-    });
-  };
+    })
+  }
 
   const onSecondaryColorBtnClick = (c: LabeledPaletteColor): void => {
-    if (c.main === 'auto') throw new Error('invalid color');
+    if (c.main === 'auto') throw new Error('invalid color')
     updateSetting({
       theme: {
         secondary: c.id,
       },
-    });
-  };
+    })
+  }
 
   return (
     <StyledLayout
@@ -102,7 +102,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                   darkMode: {
                     type: e.target.value as Settings['darkMode']['type'],
                   },
-                });
+                })
               }}
             >
               <FormControlLabel value="user-preference" control={<Radio />} label="跟随系统" />
@@ -125,7 +125,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                         animation: {
                           smoothScroll: e.target.checked,
                         },
-                      });
+                      })
                     }}
                   />
                 }
@@ -148,7 +148,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
                         theme: {
                           fallbackMonoFont: e.target.checked,
                         },
-                      });
+                      })
                     }}
                   />
                 }
@@ -173,7 +173,7 @@ const SettingsPage: React.FC<SettingsPageProps> = (props: SettingsPageProps) => 
         </Grid>
       </Grid>
     </StyledLayout>
-  );
-};
+  )
+}
 
-export default SettingsPage;
+export default SettingsPage

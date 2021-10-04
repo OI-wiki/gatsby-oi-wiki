@@ -1,8 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import React from 'react';
-import { CustomTheme } from '../theme';
+import { makeStyles } from '@material-ui/core/styles'
+import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+import React from 'react'
+import { CustomTheme } from '../theme'
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
   tab: {
@@ -14,28 +14,28 @@ const useStyles = makeStyles<CustomTheme>(theme => ({
       opacity: '1',
     },
   },
-}));
+}))
 
 const useIndicatorStyles = makeStyles(() => ({
   indicator: {
     height: '3px',
   },
-}));
+}))
 
 interface NavTabsProps {
-  tabID: number;
-  pathList: Array<string | Array<string | Array<string> | Array<Array<string>>>>;
+  tabID: number
+  pathList: Array<string | Array<string | Array<string> | Array<Array<string>>>>
 }
 
 const NavTabs: React.FC<NavTabsProps> = props => {
-  const classes = useStyles();
-  const indicatorClasses = useIndicatorStyles();
-  const { tabID, pathList } = props;
-  const newTabs = [];
+  const classes = useStyles()
+  const indicatorClasses = useIndicatorStyles()
+  const { tabID, pathList } = props
+  const newTabs = []
 
   for (const curTab of pathList.values()) {
-    const curTitle = Object.keys(curTab)[0];
-    const values = Object.values(curTab)[0];
+    const curTitle = Object.keys(curTab)[0]
+    const values = Object.values(curTab)[0]
     const curLocation =
       typeof values === 'string'
         ? /*
@@ -46,24 +46,24 @@ const NavTabs: React.FC<NavTabsProps> = props => {
         - 测试:
           - 测试: /test/
       */
-          Object.values(values[0])[0];
-    newTabs.push({ title: curTitle, link: curLocation });
+          Object.values(values[0])[0]
+    newTabs.push({ title: curTitle, link: curLocation })
   }
-  const [value, setValue] = React.useState(tabID);
+  const [value, setValue] = React.useState(tabID)
 
   return (
     <Tabs
       value={value}
       classes={indicatorClasses}
       onChange={(_, newValue) => {
-        setValue(newValue);
+        setValue(newValue)
       }}
     >
       {newTabs.map(({ title, link }) => (
         <Tab disableRipple={true} key={title} label={title} component="a" className={classes.tab} href={link || '.'} />
       ))}
     </Tabs>
-  );
-};
+  )
+}
 
-export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID);
+export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)

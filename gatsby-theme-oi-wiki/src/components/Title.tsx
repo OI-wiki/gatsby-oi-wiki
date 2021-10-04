@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import EditWarn from './EditWarn';
-import { CustomTheme } from '../theme';
+import React, { useState } from 'react'
+import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import EditWarn from './EditWarn'
+import { CustomTheme } from '../theme'
 
 export interface TitleProps {
-  title: string;
-  noEdit: boolean;
-  noMeta?: boolean;
-  relativePath: string;
-  location: Location;
+  title: string
+  noEdit: boolean
+  noMeta?: boolean
+  relativePath: string
+  location: Location
 }
 
 const useStyles = makeStyles<CustomTheme>(theme =>
@@ -29,12 +29,12 @@ const useStyles = makeStyles<CustomTheme>(theme =>
       lineHeight: 1.8,
     },
   })
-);
+)
 
 const Title: React.FC<TitleProps> = props => {
-  const classes = useStyles();
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const { relativePath, location, title, noEdit } = props;
+  const classes = useStyles()
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const { relativePath, location, title, noEdit } = props
 
   return (
     <>
@@ -58,7 +58,7 @@ const Title: React.FC<TitleProps> = props => {
         </Grid>
       </Grid>
     </>
-  );
-};
+  )
+}
 
-export default Title;
+export default Title

@@ -1,7 +1,7 @@
-import { Accordion, AccordionDetails } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
-import { CustomTheme } from '../theme';
+import { Accordion, AccordionDetails } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
+import { CustomTheme } from '../theme'
 
 const getDetailsClasses = makeStyles<CustomTheme>(theme => ({
   root: {
@@ -17,7 +17,7 @@ const getDetailsClasses = makeStyles<CustomTheme>(theme => ({
       margin: '1.2em 0 !important',
     },
   },
-}));
+}))
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -25,18 +25,18 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
-}));
+}))
 
 export interface DetailsProps {
-  className: string;
-  children: string[] | string;
+  className: string
+  children: string[] | string
 }
 
 const Details: React.FC<DetailsProps> = props => {
-  const { className = '', children } = props;
-  const detailsClasses = getDetailsClasses();
-  const classes = useStyles();
-  const cont = Array.isArray(children) ? children : [children];
+  const { className = '', children } = props
+  const detailsClasses = getDetailsClasses()
+  const classes = useStyles()
+  const cont = Array.isArray(children) ? children : [children]
   return (
     <Accordion variant="outlined" classes={detailsClasses} defaultExpanded={!!className.match('open')}>
       {cont[0]}
@@ -44,7 +44,7 @@ const Details: React.FC<DetailsProps> = props => {
         <div className={classes.container}>{cont.slice(1)}</div>
       </AccordionDetails>
     </Accordion>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details

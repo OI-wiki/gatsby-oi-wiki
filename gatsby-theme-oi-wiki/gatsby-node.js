@@ -1,7 +1,7 @@
-const _ = require('lodash');
-const git = require('simple-git');
-const { createFilePath } = require('gatsby-source-filesystem');
-const { SitemapManager } = require('sitemap-manager');
+const _ = require('lodash')
+const git = require('simple-git')
+const { createFilePath } = require('gatsby-source-filesystem')
+const { SitemapManager } = require('sitemap-manager')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -13,22 +13,22 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         fs: false,
       },
     },
-  });
-};
+  })
+}
 
 const gitQuery = async function (prop) {
   const res = await git()
     .log(['-15', prop])
-    .catch(err => console.log(err));
-  return res;
-};
+    .catch(err => console.log(err))
+  return res
+}
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
+  const { createNodeField } = actions
   // you only want to operate on `Mdx` nodes. If you had content from a
   // remote CMS you could also check to see if the parent node was a
   // `File` node here
   if (node.internal.type === 'MarkdownRemark') {
-    const value = createFilePath({ node, getNode });
+    const value = createFilePath({ node, getNode })
     createNodeField({
       name: 'slug', // Name of the field you are adding
       node: node, // Individual MDX node
@@ -36,22 +36,22 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       // don't need a separating "/" before the value because
       // createFilePath returns a path with the leading "/".
       value: `${value}`,
-    });
+    })
     createNodeField({
       // whether it is a index.md
       name: 'isIndex',
       node: node,
       value: /index\.(md|markdown|mdx|mdtext)$/.test(node.fileAbsolutePath),
-    });
+    })
   }
-};
+}
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
 
-  const docTemplate = require.resolve('./src/templates/doc.js');
-  const tagTemplate = require.resolve('./src/templates/tags.js');
-  const logTemplate = require.resolve('./src/templates/changelog.js');
+  const docTemplate = require.resolve('./src/templates/doc.js')
+  const tagTemplate = require.resolve('./src/templates/tags.js')
+  const logTemplate = require.resolve('./src/templates/changelog.js')
 
   const result = await graphql(`
     {
@@ -76,27 +76,27 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     }
-  `);
+  `)
 
   // handle errors
   if (result.errors) {
-    reporter.panicOnBuild('Error while running GraphQL query.');
-    return;
+    reporter.panicOnBuild('Error while running GraphQL query.')
+    return
   }
 
-  const posts = result.data.postsRemark.edges;
+  const posts = result.data.postsRemark.edges
   // console.log(posts)
   // Create post detail pages
 
   for (let index = 0; index < posts.length; ++index) {
-    const { node } = posts[index];
-    const previous = index === posts.length - 1 ? null : posts[index + 1];
-    const next = index === 0 ? null : posts[index - 1];
+    const { node } = posts[index]
+    const previous = index === posts.length - 1 ? null : posts[index + 1]
+    const next = index === 0 ? null : posts[index - 1]
     // /workspace/gatsby-oi-wiki/docs/empty.md -> docs/empty.md
-    const { fileAbsolutePath: path } = node;
-    const relativePath = path.slice(path.indexOf('/docs') + 1);
+    const { fileAbsolutePath: path } = node
+    const relativePath = path.slice(path.indexOf('/docs') + 1)
 
-    const log = await gitQuery(relativePath);
+    const log = await gitQuery(relativePath)
     createPage({
       path: node.fields.slug,
       component: docTemplate,
@@ -106,7 +106,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         previous,
         next,
       },
-    });
+    })
     createPage({
       path: node.fields.slug + 'changelog/',
       component: logTemplate,
@@ -115,11 +115,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         changelog: log,
         relativePath,
       },
-    });
+    })
   }
 
   // Extract tag data from query
-  const tags = result.data.tagsGroup.group;
+  const tags = result.data.tagsGroup.group
 
   // Make tag pages
   tags.forEach(tag => {
@@ -129,13 +129,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       context: {
         tag: tag.fieldValue,
       },
-    });
-  });
+    })
+  })
 
   if (result.errors) {
-    reporter.panic(result.errors);
+    reporter.panic(result.errors)
   }
-};
+}
 
 exports.onPostBuild = async ({ graphql, reporter }) => {
   let queryResult = await graphql(`
@@ -162,45 +162,45 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
         }
       }
     }
-  `);
+  `)
   if (queryResult.errors) {
-    reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors);
+    reporter.panicOnBuild('Error while running GraphQL query to create sitemaps.', queryResult.errors)
   }
-  queryResult = queryResult.data;
-  const siteUrl = queryResult.site.siteMetadata.siteUrl;
+  queryResult = queryResult.data
+  const siteUrl = queryResult.site.siteMetadata.siteUrl
 
-  const MySitemap = new SitemapManager({ siteURL: siteUrl });
+  const MySitemap = new SitemapManager({ siteURL: siteUrl })
   for (const index in queryResult.postsQuery.edges) {
-    const { node } = queryResult.postsQuery.edges[index];
-    const { fileAbsolutePath: path } = node;
-    const relativePath = path.slice(path.indexOf('/docs') + 1);
-    const lastmod = (await gitQuery(relativePath)).latest?.date || new Date().toString();
+    const { node } = queryResult.postsQuery.edges[index]
+    const { fileAbsolutePath: path } = node
+    const relativePath = path.slice(path.indexOf('/docs') + 1)
+    const lastmod = (await gitQuery(relativePath)).latest?.date || new Date().toString()
 
     MySitemap.addUrl('articles', [
       {
         loc: new URL(node.fields.slug, siteUrl).toString(),
         lastmod,
       },
-    ]);
+    ])
     MySitemap.addUrl('logs', [
       {
         loc: new URL(node.fields.slug + 'changelog/', siteUrl).toString(),
         lastmod,
       },
-    ]);
+    ])
   }
   queryResult.tagsQuery.group.forEach(({ fieldValue }) => {
     MySitemap.addUrl('tags', [
       {
         loc: new URL(`/tags/${_.kebabCase(fieldValue)}/`, siteUrl).toString(),
       },
-    ]);
-  });
+    ])
+  })
   MySitemap.addUrl('pages', [
     { loc: new URL('/pages/', siteUrl).toString() },
     { loc: new URL('/settings/', siteUrl).toString() },
-  ]);
+  ])
   await MySitemap.finish().catch(e => {
-    reporter.error(e);
-  });
-};
+    reporter.error(e)
+  })
+}

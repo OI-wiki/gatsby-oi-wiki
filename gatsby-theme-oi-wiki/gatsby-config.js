@@ -1,10 +1,10 @@
-const path = require('path');
-const esmRequire = require('./esmRequire');
+const path = require('path')
+const esmRequire = require('./esmRequire')
 
-const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build';
+const IS_EXEC_BUILD = process.env.gatsby_executing_command === 'build'
 const IS_PROD =
-  process.env.PRODUCTION === 'true' || process.env.NODE_ENV === 'production' || process.env.RENDER === 'true';
-const ENABLE_IMAGE_PLUGINS = false;
+  process.env.PRODUCTION === 'true' || process.env.NODE_ENV === 'production' || process.env.RENDER === 'true'
+const ENABLE_IMAGE_PLUGINS = false
 
 /**
  * 根据条件生成配置，需要展开
@@ -12,17 +12,17 @@ const ENABLE_IMAGE_PLUGINS = false;
  * @param v any 配置
  * @returns {[v]} 返回 [v] 或 []
  */
-const needPlugin = (cond, v) => (cond ? [v] : []);
+const needPlugin = (cond, v) => (cond ? [v] : [])
 
 // 提供一些警告
 if (IS_PROD && !IS_EXEC_BUILD) {
-  console.warn('Using production configurations in non-build environment');
+  console.warn('Using production configurations in non-build environment')
 } else if (!IS_PROD && process.env.CI === 'true') {
-  console.warn('Using development configurations in build environment');
+  console.warn('Using development configurations in build environment')
 }
 
-const fontURL = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2';
-const mathRehype = IS_EXEC_BUILD ? [require('rehype-mathjax/chtml'), { fontURL }] : [require('rehype-mathjax/browser')];
+const fontURL = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/output/chtml/fonts/woff-v2'
+const mathRehype = IS_EXEC_BUILD ? [require('rehype-mathjax/chtml'), { fontURL }] : [require('rehype-mathjax/browser')]
 
 module.exports = {
   plugins: [
@@ -165,4 +165,4 @@ module.exports = {
     // "gatsby-plugin-webpack-bundle-analyser-v2",
     // when you need to analyze bundle size, enable it
   ],
-};
+}

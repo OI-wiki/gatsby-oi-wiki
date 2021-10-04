@@ -1,12 +1,12 @@
-require('./static/extra.css');
+require('./static/extra.css')
 
 exports.onRouteUpdate = () => {
   if (process.env.GATSBY_IS_DEV) {
-    requestIdleCallback(() => MathJax.typeset());
+    requestIdleCallback(() => MathJax.typeset())
   }
   try {
-    window.cfga();
+    window.cfga()
   } catch (e) {
-    console.error(e);
+    console.error(e)
   }
-};
+}

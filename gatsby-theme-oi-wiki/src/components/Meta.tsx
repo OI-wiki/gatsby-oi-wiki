@@ -1,13 +1,13 @@
-import { makeStyles, Paper, Typography } from '@material-ui/core';
-import CopyrightIcon from '@material-ui/icons/Copyright';
-import EditIcon from '@material-ui/icons/Edit';
-import { Group as GroupIcon, History as HistoryIcon } from '@material-ui/icons';
-import React, { useState } from 'react';
-import { SmartLink, SmartLinkProps } from './Link';
-import Tags from './Tags';
-import EditWarn from './EditWarn';
-import { uniq } from '../utils/common';
-import Time from '../components/Time';
+import { makeStyles, Paper, Typography } from '@material-ui/core'
+import CopyrightIcon from '@material-ui/icons/Copyright'
+import EditIcon from '@material-ui/icons/Edit'
+import { Group as GroupIcon, History as HistoryIcon } from '@material-ui/icons'
+import React, { useState } from 'react'
+import { SmartLink, SmartLinkProps } from './Link'
+import Tags from './Tags'
+import EditWarn from './EditWarn'
+import { uniq } from '../utils/common'
+import Time from '../components/Time'
 
 const useStyles = makeStyles((theme: any) => ({
   metaIcon: {
@@ -30,32 +30,32 @@ const useStyles = makeStyles((theme: any) => ({
     paddingLeft: theme.spacing(1),
     display: 'inline-block',
   },
-}));
+}))
 
 export interface MetaProps {
-  tags: string[];
-  relativePath: string;
-  modifiedTime: string;
-  location: Location;
-  authors?: string;
-  title: string;
+  tags: string[]
+  relativePath: string
+  modifiedTime: string
+  location: Location
+  authors?: string
+  title: string
 }
 
 const Meta: React.FC<MetaProps> = props => {
-  const { tags, relativePath, modifiedTime, location, ...rest } = props;
-  const classes = useStyles();
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const { tags, relativePath, modifiedTime, location, ...rest } = props
+  const classes = useStyles()
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const Author: React.FC<{ name: string }> = ({ name }) => (
     <SmartLink href={`https://github.com/${name}`} className={classes.authorLink}>
       {`@${name}`}
     </SmartLink>
-  );
+  )
 
   const click: SmartLinkProps['onClick'] = e => {
-    e.preventDefault();
-    setDialogOpen(true);
-  };
+    e.preventDefault()
+    setDialogOpen(true)
+  }
 
   return (
     <>
@@ -110,7 +110,7 @@ const Meta: React.FC<MetaProps> = props => {
         </div>
       </Paper>
     </>
-  );
-};
+  )
+}
 
-export default Meta;
+export default Meta

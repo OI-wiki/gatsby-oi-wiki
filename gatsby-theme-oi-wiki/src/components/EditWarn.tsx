@@ -1,7 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
 
-import React from 'react';
-import { SmartLink } from './Link';
+import React from 'react'
+import { SmartLink } from './Link'
 
 const EditWarning = (): JSX.Element => {
   return (
@@ -16,22 +16,22 @@ const EditWarning = (): JSX.Element => {
       </p>
       <p>在阅读完之后，请点击下方的按钮，然后开始编辑。</p>
     </>
-  );
-};
+  )
+}
 
 export interface EditWarnProps {
-  relativePath: string;
-  dialogOpen: boolean;
-  setDialogOpen: (props: boolean) => any;
-  location: Location;
+  relativePath: string
+  dialogOpen: boolean
+  setDialogOpen: (props: boolean) => any
+  location: Location
 }
 
 const EditWarn: React.FC<EditWarnProps> = props => {
-  const { relativePath, dialogOpen, setDialogOpen } = props;
-  const editURL = '/editor';
+  const { relativePath, dialogOpen, setDialogOpen } = props
+  const editURL = '/editor'
   const onClose = (): void => {
-    setDialogOpen(false);
-  };
+    setDialogOpen(false)
+  }
 
   return (
     <Dialog open={dialogOpen} onClose={onClose}>
@@ -51,7 +51,7 @@ const EditWarn: React.FC<EditWarnProps> = props => {
         </Button>
       </DialogActions>
     </Dialog>
-  );
-};
+  )
+}
 
-export default EditWarn;
+export default EditWarn
