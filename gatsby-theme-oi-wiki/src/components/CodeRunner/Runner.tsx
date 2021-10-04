@@ -13,22 +13,19 @@ import 'ace-builds/src-noconflict/theme-tomorrow_night';
 
 import { CodeEditorProps } from '.';
 
-const Runner: React.FC<Omit<CodeEditorProps, 'title'>> = ({
-	lang,
-	...aceProps
-}) => {
-	const isDarkMode = useDarkMode();
+const Runner: React.FC<Omit<CodeEditorProps, 'title'>> = ({ lang, ...aceProps }) => {
+  const isDarkMode = useDarkMode();
 
-	return (
-		<Ace
-			theme={isDarkMode ? 'tomorrow_night' : 'chrome'}
-			width=""
-			height=""
-			fontSize={13}
-			mode={lang ? langModeMap[lang] : 'text'}
-			{...aceProps}
-		/>
-	);
+  return (
+    <Ace
+      theme={isDarkMode ? 'tomorrow_night' : 'chrome'}
+      width=""
+      height=""
+      fontSize={13}
+      mode={lang ? langModeMap[lang] : 'text'}
+      {...aceProps}
+    />
+  );
 };
 
 export default Runner;

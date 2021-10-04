@@ -3,6 +3,6 @@
 	"semi": true,
 	"printWidth": 120,
 	"arrowParens": "avoid",
-	"tabWidth": 4,
-	"useTabs": true
+	"tabWidth": 2,
+	"useTabs": false
 }

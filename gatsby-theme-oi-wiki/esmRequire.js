@@ -9,13 +9,13 @@ const Module = require('module');
 // Node: bypass [ERR_REQUIRE_ESM]
 const backup = Module._extensions['.js'];
 Module._extensions['.js'] = function (module, filename) {
-	const content = fs.readFileSync(filename, 'utf8');
-	module._compile(content, filename);
+  const content = fs.readFileSync(filename, 'utf8');
+  module._compile(content, filename);
 };
 
 const esmRequire = esm(module, {
-	cjs: true,
-	mode: 'all',
+  cjs: true,
+  mode: 'all',
 });
 
 // don't pollute Module
