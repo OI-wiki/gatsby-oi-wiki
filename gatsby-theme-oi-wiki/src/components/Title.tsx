@@ -14,7 +14,6 @@ interface EditBtnProps {
 }
 
 export interface TitleProps extends EditBtnProps {
-  title: string;
   noEdit: boolean;
 }
 
@@ -53,11 +52,11 @@ const EditBtn: React.FC<EditBtnProps> = observer((props) => {
 })
 
 const Title: React.FC<TitleProps> = (props) => {
-  const { relativePath, title, noEdit } = props
+  const { relativePath, noEdit, children } = props
 
   return (
     <StyledGrid container={true}>
-      <StyledTyp variant="h1" flexGrow={1}>{title}</StyledTyp>
+      <StyledTyp variant="h1" flexGrow={1}>{children}</StyledTyp>
       {!noEdit && <EditBtn relativePath={relativePath}/>}
     </StyledGrid>
   )
