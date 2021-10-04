@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const kebabCase = require('lodash/kebabCase')
 const git = require('simple-git')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { SitemapManager } = require('sitemap-manager')
@@ -81,9 +81,10 @@ exports.createPages = async (args) => {
 
   const { createPage } = actions
   const data = result.data
-  const docTemplate = require.resolve('./src/templates/Doc.tsx')
 
+  // Extract doc data from query
   const posts = data.postsRemark.edges
+  const docTemplate = require.resolve('./src/templates/Doc.tsx')
 
   for (const index in posts) {
     const { node } = posts[index]
@@ -105,6 +106,22 @@ exports.createPages = async (args) => {
       },
     })
   }
+
+
+  // Extract tag data from query
+  const tags = result.data.tagsGroup.group
+  const tagsTemplate = require.resolve('./src/templates/Tag.tsx')
+
+  // Make tag pages
+  tags.forEach((tag) => {
+    createPage({
+      path: `/tags/${kebabCase(tag.fieldValue)}/`,
+      component: tagsTemplate,
+      context: {
+        tag: tag.fieldValue,
+      },
+    })
+  })
 }
 
 // exports.createPages = async ({ actions, graphql, reporter }) => {
