@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { headerStore } from '../../stores/headerStore'
 import TocContainer, { TocContainerProps } from './TocContainer'
 
-type TocSidebarProps = TocContainerProps
+export type TocSidebarProps = TocContainerProps
 
 const TocCollapseBtn = observer(() => {
   return (

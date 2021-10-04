@@ -1,17 +1,12 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { DeepRequiredNonNull, DeepWriteable } from '../types/common'
-import Grid from '@mui/material/Grid'
-import Header from '../components/Header'
-import Main from '../components/Main'
-import TocSidebar from '../components/TocSidebar'
-import NavSidebar from '../components/NavSidebar'
-import styled from '@mui/material/styles/styled'
 import getComponents from '../components/customed'
 import MDRenderer from '../components/MDRenderer'
 import { HistoryLocation } from '../types/location'
 import Title from '../components/Title'
 import Meta from '../components/Meta'
+import Layout from '../components/Layout'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -60,10 +55,6 @@ interface DocProps {
   location: HistoryLocation
 }
 
-const MainContentDiv = styled(Grid)`
-  flex-grow: 1;
-  flex-flow: row;
-`
 
 const Doc: React.FC<DocProps> = (props) => {
   const { data, location } = props
@@ -91,29 +82,18 @@ const Doc: React.FC<DocProps> = (props) => {
   })
 
   return (
-    <>
-      <Grid container={true} direction="column" minHeight="100vh">
-        <Header title={title}/>
+    <Layout title={title} pathname={location.pathname} toc={headings}>
+      <Title noEdit={noEdit} relativePath={relativePath}>{title}</Title>
 
-        <MainContentDiv className="maincontentdiv" container={true} item={true}>
-          <NavSidebar pathname={location.pathname}/>
+      <MDRenderer htmlAst={mdx.htmlAst} components={components}/>
 
-          <Main item={true}>
-            <Title title={title} noEdit={noEdit} relativePath={relativePath}/>
-            <MDRenderer htmlAst={mdx.htmlAst} components={components}/>
-            {!noMeta && <Meta
-              modifiedTime={modifiedTime}
-              title={title}
-              tags={tags}
-              authors={authors}
-              relativePath={relativePath}/>}
-          </Main>
-
-          <TocSidebar toc={headings}/>
-        </MainContentDiv>
-
-      </Grid>
-    </>
+      {!noMeta && <Meta
+        modifiedTime={modifiedTime}
+        title={title}
+        tags={tags}
+        authors={authors}
+        relativePath={relativePath}/>}
+    </Layout>
   )
 }
 

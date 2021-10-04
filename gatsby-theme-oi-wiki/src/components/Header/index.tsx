@@ -13,7 +13,7 @@ import { Nullable } from '../../types/common'
 import School from '@mui/icons-material/School'
 import NavBtnStack from './NavBtnStack'
 
-interface HeaderProps {
+export interface HeaderProps {
   title?: Nullable<string>
 }
 
