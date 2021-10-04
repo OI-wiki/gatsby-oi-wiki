@@ -5,6 +5,7 @@ import Grid, { GridProps } from '@mui/material/Grid'
 import Footer from './Footer'
 import { observer } from 'mobx-react-lite'
 import { navSidebarStore, tocSidebarStore } from '../stores/sidebarStore'
+import { LayoutProps } from './Layout'
 
 const Container = styled(Grid)`
   flex-grow: 1;
@@ -31,11 +32,15 @@ const Content = styled(Box)`
   }
 `
 
-const Main: React.FC<GridProps> = observer((props) => {
-  const { children, ...others } = props
-  const ml = (navSidebarStore.collapsed ? 0 : navSidebarStore.width) + 'px'
-  const mr = (tocSidebarStore.collapsed ? 0 : tocSidebarStore.width) + 'px'
-  const expanded = navSidebarStore.collapsed || tocSidebarStore.collapsed ? true : undefined
+interface MainProps extends GridProps, Pick<LayoutProps, 'withNav' | 'withToc'> {
+}
+
+const Main: React.FC<MainProps> = observer((props) => {
+  const { children, withNav = true, withToc = true, ...others } = props
+
+  const ml = (!withNav || navSidebarStore.collapsed ? 0 : navSidebarStore.width) + 'px'
+  const mr = (!withToc || tocSidebarStore.collapsed ? 0 : tocSidebarStore.width) + 'px'
+  const expanded = !withNav || !withToc || navSidebarStore.collapsed || tocSidebarStore.collapsed ? true : undefined
 
   return (
     <Container container={true} sx={{ ml, mr }} {...others}>
