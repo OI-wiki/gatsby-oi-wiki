@@ -32,7 +32,7 @@ export const query = graphql`
 `
 
 
-interface TagsProps {
+interface TagProps {
   data: DeepWriteable<DeepRequiredNonNull<GatsbyTypes.TagInfoQuery>>;
   location: HistoryLocation;
   pageContext: {
@@ -41,7 +41,7 @@ interface TagsProps {
 }
 
 interface TagListProps {
-  edges: TagsProps['data']['allMarkdownRemark']['edges']
+  edges: TagProps['data']['allMarkdownRemark']['edges']
 }
 
 
@@ -64,7 +64,7 @@ const TagList: React.FC<TagListProps> = (props) => {
   )
 }
 
-const Tag: React.FC<TagsProps> = (props) => {
+const Tag: React.FC<TagProps> = (props) => {
   const { data: { allMarkdownRemark: { edges, totalCount } }, pageContext: { tag } } = props
 
   return (
