@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Slide from '@mui/material/Slide'
 import styled from '@emotion/styled'
 import { AppBar, Button, IconButton, Tooltip } from '@mui/material'
@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet'
 import { Nullable } from '../../types/common'
 import School from '@mui/icons-material/School'
 import NavBtnStack from './NavBtnStack'
+import { useLocation } from '@reach/router'
 
 export interface HeaderProps {
   title?: Nullable<string>
@@ -32,21 +33,24 @@ const Header: React.FC<HeaderProps> = observer((props) => {
   const { title } = props
   const { title: siteTitle, description } = useSiteMetadata()
   const [elevation, setElevation] = useState(0)
+  const location = useLocation()
 
-  if (typeof window !== 'undefined') {
-    useScroll(({ xy: [, y], delta: [, dy] }) => {
-      headerStore.setOnTop(y <= DIS)
-      setElevation(y > 0 ? 2 : 0)
-      if (dy < -10 || y <= DIS) headerStore.setAppear(true)
-      if (dy > 5) headerStore.setAppear(false)
-    }, {
-      target: window,
-      enabled: !headerStore.appearLock,
-      eventOptions: {
-        passive: true,
-      },
-    })
-  }
+  useEffect(() => {
+    if (window?.scrollY <= DIS) headerStore.setAppear(true)
+  }, [location])
+
+  useScroll(({ xy: [, y], delta: [, dy] }) => {
+    headerStore.setOnTop(y <= DIS)
+    setElevation(y > 0 ? 2 : 0)
+    if (dy < -10 || y <= DIS) headerStore.setAppear(true)
+    if (dy > 5) headerStore.setAppear(false)
+  }, {
+    target: typeof window === 'undefined' ? null : window,
+    enabled: !headerStore.appearLock,
+    eventOptions: {
+      passive: true,
+    },
+  })
 
   return (
     <>
