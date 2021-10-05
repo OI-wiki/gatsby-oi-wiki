@@ -5,7 +5,7 @@ import { Tooltip } from '@mui/material'
 
 export interface TimeProps {
   time: number | Date | string;
-  showRelative: boolean,
+  showRelative?: boolean,
 }
 
 

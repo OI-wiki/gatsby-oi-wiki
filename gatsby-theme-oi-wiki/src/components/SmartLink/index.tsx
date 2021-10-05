@@ -116,7 +116,7 @@ const SmartLink: React.FC<SmartLinkProps> = (props) => {
     return <Link {...others} href={href}>{children}</Link>
   } else if (isAbsoluteURL(href)) {
     return (
-      <StyledLink href={href} target="_blank" rel="noopener noreferrer nofollow">
+      <StyledLink href={href} target="_blank" rel="noopener noreferrer nofollow" {...others as any}>
         {children}
       </StyledLink>
     )

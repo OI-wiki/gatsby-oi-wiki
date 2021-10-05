@@ -85,6 +85,7 @@ exports.createPages = async (args) => {
   // Extract doc data from query
   const posts = data.postsRemark.edges
   const docTemplate = require.resolve('./src/templates/Doc.tsx')
+  const logTemplate = require.resolve('./src/templates/Changelog.tsx')
 
   for (const index in posts) {
     const { node } = posts[index]
@@ -95,6 +96,7 @@ exports.createPages = async (args) => {
 
     const log = await gitQuery(relativePath).catch(err => console.error(err))
 
+    // Make doc page
     createPage({
       path: node.fields.slug,
       component: docTemplate,
@@ -103,6 +105,16 @@ exports.createPages = async (args) => {
         lastModified: log.latest?.date || new Date().toString(),
         prev,
         next,
+      },
+    })
+    // Make changelog page
+    createPage({
+      path: node.fields.slug + 'changelog/',
+      component: logTemplate,
+      context: {
+        title: node.frontmatter.title,
+        changelog: log,
+        relativePath,
       },
     })
   }
