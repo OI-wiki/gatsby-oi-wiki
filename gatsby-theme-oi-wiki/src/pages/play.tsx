@@ -141,11 +141,13 @@ const Playground: React.FC<PageProps<unknown, unknown, PlaygroundLocationState>>
     sendRunnerReq()
   }, [sendRunnerReq])
 
-  return (
-    <Layout withNav={false} withToc={false} title="Playground">
-      <Title noEdit={true} relativePath="">Playground</Title>
+  const title = 'Playground'
 
-      <Grid container={true} alignItems="center">
+  return (
+    <Layout withNav={false} withToc={false} title={title}>
+      <Title noEdit={true} relativePath="">{title}</Title>
+
+      <Grid container={true} alignItems="center" columnSpacing={3}>
         <Grid item={true}>
           <ButtonGroup>
             <LangMenu
@@ -167,11 +169,11 @@ const Playground: React.FC<PageProps<unknown, unknown, PlaygroundLocationState>>
           </ButtonGroup>
         </Grid>
         <Grid item={true}>
-          <Fade in={!!runInfo}>
-            <Indicator type="info" msg="" {...runInfo} />
-          </Fade>
+          {runInfo && <Fade in={!!runInfo}>
+            <Indicator {...runInfo} />
+          </Fade>}
         </Grid>
-        <Grid item={true} style={{ marginLeft: 'auto' }}>
+        <Grid item={true} ml="auto">
           <FormControlLabel
             checked={o2}
             control={
@@ -188,7 +190,7 @@ const Playground: React.FC<PageProps<unknown, unknown, PlaygroundLocationState>>
         </Grid>
       </Grid>
 
-      <EditorContainerGrid container={true} width="auto">
+      <EditorContainerGrid container={true} columnSpacing={3}>
         <EditorGrid item={true} xs={12} md={8}>
           <CodeEditor
             lang={lang}

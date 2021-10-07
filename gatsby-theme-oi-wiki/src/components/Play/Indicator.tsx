@@ -4,9 +4,9 @@ import { css } from '@emotion/react'
 import Typography from '@mui/material/Typography'
 
 const StyledTyp = styled(Typography)(({ theme }) => css`
-  padding: ${theme.spacing(0.5)}px ${theme.spacing(1)}px;
+  padding: ${theme.spacing(0.5)} ${theme.spacing(1)};
   color: ${theme.palette.common.white};
-  border-radius: ${theme.shape.borderRadius};
+  border-radius: ${theme.shape.borderRadius}px;
   display: inline-block;
 
   &.info {
@@ -35,9 +35,11 @@ const Indicator = React.forwardRef<HTMLSpanElement, IndicatorProps>(
   function Indicator(props, ref) {
     const { type, msg } = props
     return (
-      <StyledTyp className={type} ref={ref}>
-        {msg}
-      </StyledTyp>
+      <>
+        {msg && <StyledTyp className={type} ref={ref}>
+          {msg}
+        </StyledTyp>}
+      </>
     )
   },
 )

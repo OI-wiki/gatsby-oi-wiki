@@ -10,7 +10,7 @@ export interface CodeEditorProps extends EditorProps {
 }
 
 const StyledPaper = styled(Paper)`
-  height: calc(100% - 32px);
+  height: 60vh;
 `
 
 const editorStyle = {
