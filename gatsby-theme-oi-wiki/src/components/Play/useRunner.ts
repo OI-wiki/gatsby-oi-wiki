@@ -1,9 +1,8 @@
-/* eslint-disable camelcase */
 import type { AxiosResponse } from 'axios'
 import axios from 'axios'
 import has from 'lodash/has'
 import { useState } from 'react'
-import type { LangType } from './codeLang'
+import { LangType } from './codeLang'
 
 export interface RunnerApiRequestData {
   code: string
@@ -38,8 +37,8 @@ export type TransformedResponseData = {
   [K in keyof RunnerApiResponseData as K extends 'message'
     ? never
     : K extends keyof typeof responseKeyTransformMap
-    ? (typeof responseKeyTransformMap)[K]
-    : K]-?: RunnerApiResponseData[K]
+      ? (typeof responseKeyTransformMap)[K]
+      : K]-?: RunnerApiResponseData[K]
 }
 
 function transformResponseData(
@@ -58,13 +57,17 @@ function transformResponseData(
     }, {} as TransformedResponseData)
 }
 
-function responseDataGuard (data: any): data is RunnerApiResponseData {
+function responseDataGuard(data: any): data is RunnerApiResponseData {
   return typeof data.message === 'string'
+}
+
+function errResponseGuard(err: unknown): err is { response: AxiosResponse } {
+  return has(err, 'response')
 }
 
 export const runnerApi = 'https://api2.duck-ac.cn/259ea31bf8ab6b59/duck-api/run'
 
-export function useRunner (
+export function useRunner(
   req: RunnerApiRequestData,
   onResponse?: (res: TransformedResponseData) => void,
   onError?: (msg: string) => void,
@@ -84,25 +87,19 @@ export function useRunner (
         data: req,
       })
       .then(({ data }) => {
-        if (!responseDataGuard(data)) {
-          throw Error(`Incompatible response data format: ${data}`)
-        }
-        if (data.message === 'OK') {
-          if (onResponse) onResponse(transformResponseData(data))
+        if (responseDataGuard(data)) {
+          if (data.message === 'OK') {
+            onResponse?.(transformResponseData(data))
+          } else {
+            throw new Error(data.message)
+          }
         } else {
-          throw new Error(data.message)
+          throw Error(`Incompatible response data format: ${data}`)
         }
       })
       .catch((err) => {
-        // TODO: mark err as unknown for better type safety
-        // https://github.com/microsoft/TypeScript/pull/41013
         let msg = String(err)
 
-        function errResponseGuard(
-          err: unknown,
-        ): err is { response: AxiosResponse } {
-          return has(err, 'response')
-        }
         if (errResponseGuard(err)) {
           msg = `Server responded ${err.response.data} with code ${err.response.status}`
         } else if (has(err, 'request')) {
@@ -112,8 +109,9 @@ export function useRunner (
         }
 
         if (onError) onError(msg)
-        else if (process.env.NODE_ENV === 'development')
+        else if (process.env.NODE_ENV === 'development') {
           console.error(`Unhandled exception in code runner: ${err}`)
+        }
       })
       .finally(() => {
         setWaiting(false)

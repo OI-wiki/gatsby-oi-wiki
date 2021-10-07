@@ -1,21 +1,19 @@
-import type { ButtonProps } from '@material-ui/core'
-import { Button, Menu, MenuItem } from '@material-ui/core'
-import ArrowDropDownOutlined from '@material-ui/icons/ArrowDropDownOutlined'
 import React, { useCallback, useState } from 'react'
-import type { LangType } from '../lib/play/codeLang'
-import { langList } from '../lib/play/codeLang'
+import Menu from '@mui/material/Menu'
+import { Nullable } from '../../types/common'
+import ArrowDropDownOutlined from '@mui/icons-material/ArrowDropDownOutlined'
+import Button, { ButtonProps } from '@mui/material/Button'
+import MenuItem from '@mui/material/MenuItem'
+import { langList, LangType } from './codeLang'
 
 interface CodeLangMenuProps extends ButtonProps {
   lang: LangType
   setLang: React.Dispatch<React.SetStateAction<LangType>>
 }
 
-const CodeLangMenu: React.FC<CodeLangMenuProps> = ({
-  lang,
-  setLang,
-  ...buttonProps
-}) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+const CodeLangMenu: React.FC<CodeLangMenuProps> = (props) => {
+  const { lang, setLang, ...buttonProps } = props
+  const [anchorEl, setAnchorEl] = useState<Nullable<HTMLElement>>(null)
 
   const handleButtonClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget)
@@ -33,7 +31,7 @@ const CodeLangMenu: React.FC<CodeLangMenuProps> = ({
     <>
       <Button
         onClick={handleButtonClick}
-        endIcon={<ArrowDropDownOutlined />}
+        endIcon={<ArrowDropDownOutlined/>}
         {...buttonProps}
       >
         {lang}

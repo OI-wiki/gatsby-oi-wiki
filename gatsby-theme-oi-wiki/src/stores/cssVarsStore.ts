@@ -4,6 +4,7 @@ import persistStore from '../utils/persistStore'
 import { SerializedStyles } from '@emotion/react'
 import { Nullable } from '../types/common'
 import { computed, observable } from 'mobx'
+import { ThemeMode } from '../types/ThemeMode'
 
 export interface VarsStore {
   light: VarMap;
@@ -18,13 +19,10 @@ export interface VarsStore {
 
   setStyleEl(el: Nullable<HTMLElement>): void;
 
-  setWithKey(label: ModeLabel, key: string, val: string): void;
+  setWithKey(label: ThemeMode, key: string, val: string): void;
 
-  getWithKey(label: ModeLabel, key: string): string;
+  getWithKey(label: ThemeMode, key: string): string;
 }
-
-export type ModeLabel = 'light' | 'dark'
-
 
 const VARS_STORE_ID = 'css-vars'
 const { lightMap, darkMap } = createCSSVars(theme.palette)

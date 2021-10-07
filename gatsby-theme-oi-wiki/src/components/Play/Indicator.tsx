@@ -31,12 +31,15 @@ export interface IndicatorProps {
   msg: string
 }
 
-const Indicator: React.FC<IndicatorProps> = ({ type, msg }: IndicatorProps) => {
-  return (
-    <StyledTyp className={type}>
-      {msg}
-    </StyledTyp>
-  )
-}
+const Indicator = React.forwardRef<HTMLSpanElement, IndicatorProps>(
+  function Indicator(props, ref) {
+    const { type, msg } = props
+    return (
+      <StyledTyp className={type} ref={ref}>
+        {msg}
+      </StyledTyp>
+    )
+  },
+)
 
 export default Indicator

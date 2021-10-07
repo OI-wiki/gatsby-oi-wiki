@@ -1,4 +1,3 @@
-import { LangType } from '../../lib/play/codeLang'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import Box from '@mui/material/Box'
 import styled from '@mui/material/styles/styled'
@@ -11,6 +10,7 @@ import AssignmentOutlined from '@mui/icons-material/AssignmentOutlined'
 import CodeOutlined from '@mui/icons-material/CodeOutlined'
 import { navigate } from 'gatsby'
 import has from 'lodash/has'
+import { LangType } from '../../utils/codeLang'
 
 interface ToolBtnProps extends IconButtonProps {
   title: string;
