@@ -21,6 +21,7 @@ const originRepo = {
   repo: 'gatsby-oi-wiki',
 }
 const EditorPage: React.FC = _ => {
+  const [darkTheme, setDarkTheme] = useState<boolean>(false)
   const [user, setUser] = useState<User>(anonymousUser)
   const [content, setContent] = useState<string>('')
   const [curValue, setCurValue] = useState<string>('')
@@ -30,8 +31,15 @@ const EditorPage: React.FC = _ => {
   const [pr, setPr] = useState<PullRequest | null>(null)
   const confirmRef = useRef<Confirm | null>(null)
   const messageRef = useRef<Message | null>(null)
-  const relativePath = new URL(location.href).searchParams.get('path')
   const handleError = (error: any) => messageRef.current!.error(error.toString())
+  let relativePath: string | null = null
+  useEffect(() => {
+    relativePath = new URL(location.href).searchParams.get('path')
+    const dataTheme = document.getElementsByTagName('html').item(0)?.getAttribute('data-theme')
+    setDarkTheme(
+      dataTheme == 'dark' || (dataTheme == 'auto' && window.matchMedia('(prefers-color-scheme: dark)') != null)
+    )
+  }, [])
   useEffect(() => {
     if (String.isNullOrEmpty(relativePath)) {
       alert('URL中缺少文档路径参数')
@@ -46,7 +54,7 @@ const EditorPage: React.FC = _ => {
       setUser(identities[1])
       setGithub(new Octokit({ auth: identities[0] }))
     }, handleError)
-  }, [])
+  }, [relativePath])
   useEffect(() => {
     if (!github || !user) return
     ;(async () => {
@@ -214,19 +222,8 @@ const EditorPage: React.FC = _ => {
   function viewPullRequest() {
     window.open(`https://github.com/${originRepo.owner}/${originRepo.repo}/pull/${pr!.number}`, '_blank')?.focus()
   }
-  const dataTheme = document.getElementsByTagName('html').item(0)?.getAttribute('data-theme')
-  const darkTheme =
-    dataTheme == 'dark' || (dataTheme == 'auto' && window.matchMedia('(prefers-color-scheme: dark)') != null)
   return (
-    <StyledLayout
-      location={location}
-      noTitle={true}
-      noMeta={true}
-      noComment={true}
-      noToc={true}
-      overflow={true}
-      title="Markdown编辑器"
-    >
+    <StyledLayout noTitle={true} noMeta={true} noComment={true} noToc={true} overflow={true} title="Markdown编辑器">
       <MarkdownEditor theme={darkTheme ? 'dark' : 'light'} value={content} onChange={setCurValue}>
         {repo != null && (
           <>

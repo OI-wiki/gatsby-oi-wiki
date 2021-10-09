@@ -115,5 +115,3 @@ export default class Message extends Component<Partial<MessageProps>, MessageSta
     )
   }
 }
-
-export const messageService = Message.create()

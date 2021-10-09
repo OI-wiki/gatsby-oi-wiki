@@ -84,5 +84,3 @@ export default class Confirm extends Component<Partial<ConfirmProps>, ConfirmSta
     )
   }
 }
-
-export const confirmService = Confirm.create()
