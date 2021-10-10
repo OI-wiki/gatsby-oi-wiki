@@ -1,0 +1,10 @@
+{
+  "name": "Gatsby OI Wiki",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "14"
+    }
+  },
+  "postStartCommand": "yarn install"
+}
