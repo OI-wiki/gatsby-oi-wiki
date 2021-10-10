@@ -55,10 +55,10 @@
     "rehype-codeblock": "file:plugins/rehype-codeblock",
     "rehype-mathjax": "^3.1.0",
     "rehype-parse": "^7.0.1",
-    "rehype-pseudocodejs": "file:plugins/rehype-pseudocodejs",
     "rehype-react": "^6.2.1",
     "remark-details": "oi-wiki/remark-details#gatsby-patch-1",
     "remark-math": "^4.0.0",
+    "remark-pseudocodejs": "file:plugins/remark-pseudocodejs",
     "simple-git": "^2.41.1",
     "sitemap-manager": "^2.0.1",
     "use-persisted-state": "^0.3.0"
