@@ -88,14 +88,21 @@ export interface SmartLinkProps<T = any> extends Omit<GatsbyLinkProps<T>, 'to'> 
 const SmartLink: React.FC<SmartLinkProps> = (props) => {
   const theme = useTheme()
   const classes = useStyles()
-  
-  // in case Link is constructed wrongly
-  const href = typeof props?.to === 'string' ? props?.to : ''
-  const { tooltip = false, isIndex = true, className, pathname, children, ...others } = props
+
+  const {
+    tooltip = false,
+    isIndex = true,
+    href: link,
+    to,
+    className,
+    pathname,
+    children,
+    ...others
+  } = props
   const classList = clsx(className, classes.link)
   const [settings] = useSetting()
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
-
+  const href = to || link || ''
 
   if (className && className.search('anchor') > -1) {
     return <a {...others} href={href}>{children}</a>
