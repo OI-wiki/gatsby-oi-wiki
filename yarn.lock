@@ -12960,10 +12960,10 @@ relay-runtime@11.0.2:
     fbjs "^3.0.0"
     invariant "^2.2.4"
 
-remark-details@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/remark-details/-/remark-details-4.0.3.tgz#e32ce75bd6d2dd0de0b17f609d3773c98fe6f10a"
-  integrity sha512-i9FYBSxE95/0dVOiyus1XEwnda/1sq05WuOGn9nfH5yDBur3rC3h+DgMVwo34c3pYlywsOWpItxPybqKYf5/AQ==
+remark-details@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/remark-details/-/remark-details-4.0.4.tgz#681ac9866a47d409984cf5292d481fc9fa4b16a3"
+  integrity sha512-RIYqRxl2hIYnWmCN/lRQhFTM05RLmcA4tVOQmLwm1R4JeR00uW3iDdTZoDuXHxGpdNPKfazbXaQfpxGN2fShQw==
   dependencies:
     hast "^1.0.0"
     hastscript "^7.0.2"
