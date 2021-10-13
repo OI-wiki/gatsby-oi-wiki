@@ -38,7 +38,7 @@
     "gatsby-remark-images": "^5.6",
     "gatsby-source-filesystem": "^3.6.0",
     "gatsby-source-local-git": "^1.2.2",
-    "gatsby-transformer-remark-rehype": "^4.0.0",
+    "gatsby-transformer-remark-rehype": "^4.1.0-alpha.1",
     "gatsby-transformer-sharp": "^3.9",
     "hast-util-to-text": "^3.0.0",
     "lodash": "^4.17.21",
@@ -61,6 +61,7 @@
     "remark-pseudocodejs": "file:plugins/remark-pseudocodejs",
     "simple-git": "^2.41.1",
     "sitemap-manager": "^2.0.1",
+    "unified": "^10.1.0",
     "use-persisted-state": "^0.3.0"
   },
   "devDependencies": {
