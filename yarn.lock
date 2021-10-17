@@ -9971,6 +9971,17 @@ mdast-util-definitions@^5.0.0:
     "@types/unist" "^2.0.0"
     unist-util-visit "^3.0.0"
 
+mdast-util-directive@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-util-directive/-/mdast-util-directive-2.1.1.tgz#1c7d42f452227752f450c314071fb6ebd8665cab"
+  integrity sha512-FzQQdO1SZGMflk3SoXITE64yPy+RAfsZgtfAuOVlc4G6H8g0XLkeKZ044z2q9tdY/rD1JfRrI+bmKry9wKhnjA==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    mdast-util-to-markdown "^1.0.0"
+    parse-entities "^3.0.0"
+    stringify-entities "^4.0.0"
+    unist-util-visit-parents "^5.0.0"
+
 mdast-util-find-and-replace@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mdast-util-find-and-replace/-/mdast-util-find-and-replace-2.1.0.tgz#69728acd250749f8aac6e150e07d1fd15619e829"
@@ -10357,6 +10368,19 @@ micromark-core-commonmark@^1.0.1:
     micromark-util-symbol "^1.0.0"
     micromark-util-types "^1.0.1"
     parse-entities "^3.0.0"
+
+micromark-extension-directive@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/micromark-extension-directive/-/micromark-extension-directive-2.0.3.tgz#e876eddd29897bcb8916f2c8940cd4274b9f8cbf"
+  integrity sha512-kypTk6AOKTqYs7ObYFumojYcZlq07iiybq7CiFTIys4jQEieJnnzeAQ+KsdpoJ5pX2oxYWLA/ghBmPsIaahCfA==
+  dependencies:
+    micromark-factory-space "^1.0.0"
+    micromark-factory-whitespace "^1.0.0"
+    micromark-util-character "^1.0.0"
+    micromark-util-symbol "^1.0.0"
+    micromark-util-types "^1.0.0"
+    parse-entities "^3.0.0"
+    uvu "^0.5.0"
 
 micromark-extension-footnote@^1.0.0:
   version "1.0.2"
@@ -12960,6 +12984,11 @@ relay-runtime@11.0.2:
     fbjs "^3.0.0"
     invariant "^2.2.4"
 
+"remark-codetab@file:gatsby-theme-oi-wiki/plugins/remark-codetab":
+  version "1.0.0"
+  dependencies:
+    unist-util-visit "^4.1.0"
+
 remark-details@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/remark-details/-/remark-details-4.0.4.tgz#681ac9866a47d409984cf5292d481fc9fa4b16a3"
@@ -12974,6 +13003,16 @@ remark-details@^4.0.4:
     micromark-util-types "^1.0.1"
     unified "^10.1.0"
     unist-util-visit "^4.1.0"
+
+remark-directive@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/remark-directive/-/remark-directive-2.0.0.tgz#db838ab7a2543dea0b07a2041fe982112f611add"
+  integrity sha512-1AMpSzp/NsvursAORfucrP+FeXJOm5kgA5Au8nID45zYNKAmI7PtI8ywExXl2U2pJlG4KtPyhA75flPRZz5K4A==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    mdast-util-directive "^2.0.0"
+    micromark-extension-directive "^2.0.0"
+    unified "^10.0.0"
 
 remark-footnotes@^4.0.0:
   version "4.0.1"
