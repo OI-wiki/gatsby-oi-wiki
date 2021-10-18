@@ -1,19 +1,19 @@
 'use strict'
 
-const SNIPPET_TOKEN = "--8<-- "
+const SNIPPET_TOKEN = '--8<-- '
 
 function resolvePath (snip) {
     let str = snip.substring(SNIPPET_TOKEN.length)
     if((str.startsWith('"') && str.endsWith('"')) || 
-       (str.startsWith("'") && str.endsWith("'"))) {
+       (str.startsWith('\'') && str.endsWith('\''))) {
         str = str.substring(1, str.length - 1)
     }
-    return str.replace(/^docs\//, "")
+    return str.replace(/^docs\//, '')
 }
 
 module.exports = {}
-module.exports.mutateSource = async function({ markdownNode, files, loadNodeContent }) {
-    const contents = markdownNode.internal.content.split("\n")
+module.exports.mutateSource = async function({ markdownNode, files, loadNodeContent, reporter }) {
+    const contents = markdownNode.internal.content.split('\n')
     for (const i in contents) {
         const spacesAtStart = contents[i].length - contents[i].trimLeft().length
         const spaceString = ' '.repeat(spacesAtStart)
@@ -26,8 +26,8 @@ module.exports.mutateSource = async function({ markdownNode, files, loadNodeCont
                 continue
             }
             contents[i] = await loadNodeContent(fileNode)
-            contents[i] = contents[i].split("\n").map(l => spaceString + l).join('\n')
+            contents[i] = contents[i].split('\n').map(l => spaceString + l).join('\n')
         }
     }
-    markdownNode.internal.content = contents.join("\n")
+    markdownNode.internal.content = contents.join('\n')
 }
