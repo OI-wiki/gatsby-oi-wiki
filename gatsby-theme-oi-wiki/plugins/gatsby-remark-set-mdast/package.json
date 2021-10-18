@@ -1,0 +1,10 @@
+{
+  "name": "gatsby-remark-set-mdast",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Xiaodai Dai",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "1.4.1"
+  }
+}

@@ -231,6 +231,25 @@ Indents:
     /* snip #2 */
     --8<-- "docs/snippet_code.cpp"
     ```
+### mdast
+
+don't try this at home, it will set your house on fire
+```__internal_dangerously_set_mdast
+{
+    "type": "paragraph",
+    "children": [
+        {
+            "type": "strong",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "replace mdast"
+                }
+            ]    
+        }
+    ]
+}
+```
 
 
 [^ref1]: https://www.merriam-webster.com/dictionary/ascension

@@ -52,6 +52,9 @@ module.exports = {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
+          {
+            resolve: 'gatsby-remark-set-mdast',
+          },
           ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
