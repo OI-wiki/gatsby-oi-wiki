@@ -1,141 +1,113 @@
-import { Backdrop, Dialog, IconButton, InputBase, Paper } from '@material-ui/core'
-import { ArrowBack as ArrowBackIcon, Search as SearchIcon } from '@material-ui/icons'
+import React from 'react'
 
-import clsx from 'clsx'
-import React, { useEffect, useRef, useState } from 'react'
-import useDarkMode from '../../lib/useDarkMode'
+import SearchResult from './SearchResult'
+import { useWindowDimensions } from './hooks'
+import Backdrop from '@mui/material/Backdrop'
+import styled from '@mui/material/styles/styled'
+import Box from '@mui/material/Box'
+import { css } from '@emotion/react'
+import { Dialog } from '@mui/material'
+import IconButton from '@mui/material/IconButton'
+import SearchIcon from '@mui/icons-material/Search'
+import { ArrowBack } from '@mui/icons-material'
+import Paper from '@mui/material/Paper'
+import SearchInput from './SearchInput'
+import { observer } from 'mobx-react-lite'
+import { searchStore } from './store'
 
-import { useStyles } from './styles'
-import SearchResultList from './ResultList'
-import { useDebounce, useWindowDimensions } from './hooks'
 
-/**
- * 从 API 获取搜索数据
- * @param str 要搜索的内容
- */
-const fetchResult = (str: string): Promise<any> =>
-  fetch(`https://search.oi-wiki.org:8443/?s=${encodeURIComponent(str)}`)
-    .then((response) => response.json())
+const SearchContainer = styled(Box)(({ theme }) => css`
+  position: relative;
+  border-radius: ${theme.shape.borderRadius};
+  max-width: calc(30vw + 1em + ${theme.spacing(4)});
+  margin-left: 0;
+  width: 100%;
+  z-index: ${theme.zIndex.drawer + 2};
 
-const Search: React.FC = () => {
-  const [searchKey, setSearchKey] = useState('')
-  const [result, setResult] = useState([])
-  const [open, setOpen] = useState(false)
-  const debouncedKey = useDebounce(searchKey, 500)
-  const classes = useStyles()
+  ${theme.breakpoints.up('md')} {
+    margin-left: ${theme.spacing(3)};
+    width: auto;
+  }
+`)
 
-  const isFirstRun = useRef(true)
+const StyledBackdrop = styled(Backdrop)(({ theme }) => css`
+  z-index: ${theme.zIndex.drawer + 1};
+`)
 
-  const enableDark = useDarkMode()
+const SearchIconWrapper = styled(Box)(({ theme }) => css`
+  padding: ${theme.spacing(0, 2)};
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`)
+
+const SearchIconBlock: React.FC = () => {
+  return (
+    <SearchIconWrapper>
+      <SearchIcon fontSize="small"/>
+    </SearchIconWrapper>
+  )
+}
+
+const SmallScreenSearchIconBtn = styled(IconButton)(({ theme }) => css`
+  height: 100%;
+  padding: ${theme.spacing(1.5)};
+  color: inherit;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`)
+
+const SmallScreenReturnBtn = styled(IconButton)(({ theme }) => css`
+  padding: ${theme.spacing(1.5)};
+  position: absolute;
+  display: flex;
+`)
+
+const SmallScreenDialogHeaderPaper = styled(Paper)`
+  align-items: center;
+  border-radius: 0;
+`
+
+const Search: React.FC = observer(() => {
   const { width } = useWindowDimensions()
-
-  useEffect(() => {
-    if (debouncedKey !== '') {
-      fetchResult(debouncedKey).then((val) => {
-        // the order is tricky here
-        // set result after set isFirstRun
-        // so when there's no result on first run
-        // the user is prompted with the notice
-        isFirstRun.current = false
-        setResult(val)
-      })
-    } else {
-      setResult([])
-    }
-  }, [debouncedKey])
 
   // 600px is sm
   if (width > 600) {
     return <>
-      <div
-        className={clsx(
-          classes.search,
-          (enableDark || !open) ? classes.searchColorBlack : classes.searchColorWhite,
-        )}
-      >
-        <div className={classes.searchIcon}>
-          <SearchIcon fontSize="small"/>
-        </div>
-        <InputBase
-          type="search"
-          placeholder="键入以开始搜索"
-          onChange={(ev) => {
-            setSearchKey(ev.target.value)
-          }}
-          onFocus={() => {
-            setOpen(true)
-          }}
-          classes={{
-            root: clsx(classes.inputRoot, searchKey && classes.wideInput),
-            input: classes.inputInput,
-          }}
-          defaultValue={searchKey}
-        />
-        {open && (
-          <Paper className={classes.resultPaper}>
-            <SearchResultList
-              searchKey={searchKey}
-              result={result}
-              isFirstRun={isFirstRun}
-              classes={classes}
-            />
-          </Paper>
-        )}
-      </div>
-      <Backdrop
-        className={classes.backdrop}
-        open={open}
-        onClick={() => {
-          setOpen(false)
-        }}
-      />
+      <SearchContainer>
+        <SearchIconBlock/>
+        <SearchInput/>
+        <SearchResult/>
+      </SearchContainer>
+      <StyledBackdrop open={searchStore.open} onClick={searchStore.disableSearch}/>
     </>
   } else {
     return <>
-      <IconButton onClick={() => {
-        setOpen(true)
-      }} className={classes.smallScreenSearchIcon}>
+      <SmallScreenSearchIconBtn onClick={searchStore.enableSearch}>
         <SearchIcon/>
-      </IconButton>
+      </SmallScreenSearchIconBtn>
       <Dialog
-        open={open}
-        onClose={() => {
-          setOpen(false)
-        }}
+        open={searchStore.open}
+        onClose={searchStore.disableSearch}
         fullWidth={true}
-        fullScreen
+        fullScreen={true}
       >
-        <Paper component="div" className={classes.dialogHeader}>
-          <IconButton className={classes.smallScreenReturnIcon} onClick={() => {
-            setOpen(false)
-          }}>
-            <ArrowBackIcon/>
-          </IconButton>
-          <InputBase
-            type="search"
-            placeholder="键入以开始搜索"
-            onChange={(ev) => {
-              setSearchKey(ev.target.value)
-            }}
-            classes={{
-              root: classes.smallScreenInputRoot,
-              input: classes.inputInput,
-            }}
-            autoFocus
-            defaultValue={searchKey}
-          />
-        </Paper>
-        {open && (
-          <SearchResultList
-            searchKey={searchKey}
-            result={result}
-            isFirstRun={isFirstRun}
-            classes={classes}
-          />
-        )}
+        <SmallScreenDialogHeaderPaper>
+          <SmallScreenReturnBtn onClick={searchStore.disableSearch}>
+            <ArrowBack/>
+          </SmallScreenReturnBtn>
+          <SearchInput isSmallScreen={true} autoFocus={true}/>
+        </SmallScreenDialogHeaderPaper>
+        <SearchResult/>
       </Dialog>
     </>
   }
-}
+})
 
 export default Search

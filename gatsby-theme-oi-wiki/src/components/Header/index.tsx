@@ -13,6 +13,7 @@ import { Nullable } from '../../types/common'
 import School from '@mui/icons-material/School'
 import NavBtnStack from './NavBtnStack'
 import { useLocation } from '@reach/router'
+import Search from '../Search'
 
 export interface HeaderProps {
   title?: Nullable<string>
@@ -78,6 +79,8 @@ const Header: React.FC<HeaderProps> = observer((props) => {
           </Tooltip>
 
           <Grid flexGrow={1}/>
+
+          <Search/>
 
           <NavBtnStack/>
         </StyledAppBar>
