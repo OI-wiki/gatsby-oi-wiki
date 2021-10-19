@@ -21,8 +21,8 @@ import Title from '../components/Title'
 
 interface PageItemInfo {
   id: string;
-  frontmatter: Pick<GatsbyTypes.MarkdownRemarkFrontmatter, 'title' | 'tags'>;
-  fields: Pick<GatsbyTypes.MarkdownRemarkFields, 'slug'>;
+  frontmatter: Partial<Pick<GatsbyTypes.MarkdownRemarkFrontmatter, 'title' | 'tags'>>;
+  fields: Partial<Pick<GatsbyTypes.MarkdownRemarkFields, 'slug'>>;
 }
 
 interface PageItemProps extends DeepWriteable<DeepRequiredNonNull<PageItemInfo>> {
@@ -47,7 +47,7 @@ const PageItem: React.FC<PageItemProps> = (props) => {
         </CardContent>
 
         <CardActions>
-          <Tags tags={tags}/>
+          {!!tags && <Tags tags={tags}/>}
         </CardActions>
       </Card>
     </Grid>
