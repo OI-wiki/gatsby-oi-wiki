@@ -12,3 +12,4 @@ export type DeepRequiredNonNull<T> = {
 export type DeepWriteable<T> = {
   -readonly [P in keyof T]: DeepWriteable<T[P]>
 };
+export type ArrayItemType<T extends any[]> = T extends (infer U)[] ? U : never;
