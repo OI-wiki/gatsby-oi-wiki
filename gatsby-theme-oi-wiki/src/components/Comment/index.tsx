@@ -1,7 +1,13 @@
-import { Accordion, AccordionDetails, AccordionSummary, Container, makeStyles, Typography } from '@material-ui/core'
-import { ExpandMore as ExpandMoreIcon, Forum as ForumIcon } from '@material-ui/icons'
 import React from 'react'
-import CommentComponent from './Comment'
+import CommentBlock from './CommentBlock'
+import Forum from '@mui/icons-material/Forum'
+import styled from '@mui/material/styles/styled'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import Typography from '@mui/material/Typography'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import Container from '@mui/material/Container'
 
 export interface CommentSystemProps {
   title: string
@@ -10,7 +16,7 @@ export interface CommentSystemProps {
 export type CommentComponentProps = CommentSystemProps
 
 const CommentSystem: React.FC<CommentSystemProps> = ({ title }) => (
-  <CommentComponent
+  <CommentBlock
     id={`${title} - OI Wiki`}
     owner="OI-wiki"
     repo="gitment"
@@ -31,21 +37,18 @@ const CommentSystem: React.FC<CommentSystemProps> = ({ title }) => (
   />
 )
 
-const useStyles = makeStyles({
-  metaIcon: {
-    verticalAlign: 'sub',
-  },
-})
+const StyledForumIcon = styled(Forum)`
+  vertical-align: sub;
+  font-size: small;
+`
 
-const Comment: React.FC<CommentComponentProps> = ({ title }) => {
-  const classes = useStyles()
+const Comment: React.FC<CommentComponentProps> = (props) => {
+  const { title } = props
+
   return (
-    <Accordion variant="outlined" defaultExpanded>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon/>}
-        aria-controls="comment"
-      >
-        <Typography><ForumIcon fontSize="small" className={classes.metaIcon}/>{' 评论'}</Typography>
+    <Accordion variant="outlined" defaultExpanded={true}>
+      <AccordionSummary expandIcon={<ExpandMore/>} aria-controls="comment">
+        <Typography><StyledForumIcon/>{' 评论'}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Container>

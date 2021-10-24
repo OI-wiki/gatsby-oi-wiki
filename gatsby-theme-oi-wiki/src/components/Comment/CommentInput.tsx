@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
-import { makeStyles, Avatar, TextField, Grid, Button, Hidden, LinearProgress } from '@material-ui/core'
-import { useInputContentContext } from './inputContext'
+import { useInputContentContext } from './inputContentContext'
+import LinearProgress from '@mui/material/LinearProgress'
+import Grid from '@mui/material/Grid'
+import styled from '@mui/material/styles/styled'
+import { css } from '@emotion/react'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
+import { TextField } from '@mui/material'
 
-interface Props {
+interface CommentInputProps {
   avatarLink: string,
   name: string
   sendComment: (res: string, setLoading: (loading: boolean) => void) => Promise<void>,
@@ -11,64 +18,51 @@ interface Props {
   authorized: boolean,
 }
 
-const useStyles = makeStyles(theme => ({
-  contentRoot: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: '0px',
-  },
-  headerRoot: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: '0px',
-    paddingTop: theme.spacing(2),
-  },
-  commentMargin: {
-    marginTop: theme.spacing(1),
-  },
-  button: {
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  },
-  buttonDiv: {
-    textAlign: 'right',
-    marginBottom: theme.spacing(1),
-  },
-}))
+const StyledGrid = styled(Grid)(({ theme }) => css`
+  margin-top: ${theme.spacing(1)};
+`) as typeof Grid
 
-const CommentInput: React.FC<Props> = (props) => {
-  const classes = useStyles()
+const BtnWrapper = styled(Box)(({ theme }) => css`
+  text-align: right;
+  margin-bottom: ${theme.spacing(1)};
+`)
+
+const StyledBtn = styled(Button)(({ theme }) => css`
+  margin-block: ${theme.spacing(1)};
+`)
+
+const CommentInput: React.FC<CommentInputProps> = (props) => {
+  const { name, avatarLink, authorized } = props
   const { inputContent, setInputContent } = useInputContentContext()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
+
   return (
     <>
-      {loading && <LinearProgress />}
-      <Grid container className={classes.commentMargin} justify="space-around" spacing={2}>
-        <Hidden smDown>
-          <Grid item>
-            <Avatar alt={props.name} src={props.avatarLink}/>
-          </Grid>
-        </Hidden>
-        <Grid item xs>
+      {loading && <LinearProgress/>}
+      <StyledGrid container={true} spacing={2} justifyContent="center">
+        <Grid item={true} sx={{ display: { sm: 'none', md: 'block' } }}>
+          <Avatar alt={name} src={avatarLink}/>
+        </Grid>
+        <Grid item={true} xs={true}>
           <TextField
             placeholder="我们鼓励在讨论区讨论有意义的内容及关于文章的勘误，无意义的讨论将会被管理员删除"
-            multiline
-            fullWidth
-            disabled={!props.authorized || loading}
+            multiline={true}
+            fullWidth={true}
+            disabled={!authorized || loading}
             rows={5}
             value={inputContent}
-            onChange={(e) => { setInputContent(e.target.value) }}
+            onChange={(e) => {
+              setInputContent(e.target.value)
+            }}
             variant="outlined"
           />
         </Grid>
-      </Grid>
-      <div className={classes.buttonDiv}>
-        <Button
+      </StyledGrid>
+      <BtnWrapper>
+        <StyledBtn
           variant="contained"
           color="primary"
-          className={classes.button}
           size="small"
-          // disabled={loading && props.showLogin ? false : !props.authorized}
           onClick={() => {
             if (props.showLogin) {
               props.handleLogin()
@@ -78,8 +72,8 @@ const CommentInput: React.FC<Props> = (props) => {
             }
           }}>
           {props.showLogin ? '登录' : '评论'}
-        </Button>
-      </div>
+        </StyledBtn>
+      </BtnWrapper>
     </>
   )
 }
