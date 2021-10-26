@@ -4,6 +4,7 @@ import { Nullable } from '../../types/common'
 import persistStore from '../../utils/persistStore'
 import GithubV3 from '@mgtd/vssue-api-github-v3'
 import GithubV4 from '@mgtd/vssue-api-github-v4'
+import { observable } from 'mobx'
 
 interface ApiInfo {
   baseURL: string;
@@ -24,6 +25,8 @@ export interface CommentStore {
   issue: Nullable<Issue>;
   token: Nullable<string>;
   apiInfo: Nullable<ApiInfo>;
+  noIssue: boolean;
+
 
   setComments(val: Nullable<Comments>): void;
 
@@ -35,19 +38,18 @@ export interface CommentStore {
 
   setApiInfo(val: Nullable<ApiInfo>): void;
 
+  setNoIssue(val: boolean): void;
+
   createApiInfo(val: Pick<ApiInfo, 'owner' | 'repo' | 'clientId' | 'clientSecret'>): void;
 
   revokeToken(): void;
 
   resetUser(): void;
 
-  getUserName(): string;
-
   getComments(id: string): Promise<Result>;
 
   updateComments(id: string): Promise<void>;
 
-  get noIssue(): boolean;
 
   get filteredCommentsData(): Comments['data'];
 
@@ -58,10 +60,10 @@ export interface CommentStore {
   get ghApiV4(): GithubV4;
 }
 
-const COMMENT_TOKEN = 'github-access-token'
+const COMMENT_STORE_ID = 'github-access-token'
 
 const DEFAULT_USER: User = {
-  username: '',
+  username: '未登录用户',
   avatar: '',
   homepage: '',
 }
@@ -72,6 +74,7 @@ const commentStore = persistStore<CommentStore>({
   issue: null,
   token: null,
   apiInfo: null,
+  noIssue: false,
 
   setComments(val) {
     this.comments = val
@@ -87,6 +90,9 @@ const commentStore = persistStore<CommentStore>({
   },
   setApiInfo(val) {
     this.apiInfo = val
+  },
+  setNoIssue(val: boolean) {
+    this.noIssue = val
   },
   createApiInfo(val) {
     this.setApiInfo({
@@ -112,12 +118,15 @@ const commentStore = persistStore<CommentStore>({
       })
       .then((issue) => {
         if (issue === null) {
+          this.setNoIssue(true)
           throw 'noIssue'
         } else {
           return issue
         }
       })
       .then(async (issue) => {
+        this.setNoIssue(false)
+
         const comments = this.token
           ? await this.ghApiV4.getComments({
             accessToken: this.token,
@@ -129,6 +138,7 @@ const commentStore = persistStore<CommentStore>({
             issueId: issue.id,
             query: { page: 1, perPage: 100 },
           })
+
         return [issue, comments]
       })
   },
@@ -139,14 +149,9 @@ const commentStore = persistStore<CommentStore>({
     }
   },
 
-  get getUserName() {
-    return this.user?.username || '未登录用户'
-  },
-  get noIssue() {
-    return !this.issue
-  },
+
   get filteredCommentsData() {
-    return this.comments?.data.filter((v: { isMinimized: boolean }) => v.isMinimized) || []
+    return this.comments?.data.filter((v: { isMinimized: boolean }) => !v.isMinimized) || []
   },
   get authorized() {
     return !!this.user && !!this.token && !this.noIssue
@@ -159,8 +164,12 @@ const commentStore = persistStore<CommentStore>({
   },
 
 }, {
-  name: COMMENT_TOKEN,
+  name: COMMENT_STORE_ID,
   properties: ['token'],
+}, {
+  decorators: {
+    apiInfo: observable.ref,
+  },
 })
 
-export { commentStore, COMMENT_TOKEN, DEFAULT_USER }
+export { commentStore, COMMENT_STORE_ID, DEFAULT_USER }

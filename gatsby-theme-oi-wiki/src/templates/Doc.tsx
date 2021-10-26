@@ -7,6 +7,7 @@ import { HistoryLocation } from '../types/location'
 import Title from '../components/Title'
 import Meta from '../components/Meta'
 import Layout from '../components/Layout'
+import Comment from '../components/Comment'
 
 export const query = graphql`
   query DocInfo($id: String!) {
@@ -93,6 +94,8 @@ const Doc: React.FC<DocProps> = (props) => {
         tags={tags}
         authors={authors}
         relativePath={relativePath}/>}
+
+      {!noComment && <Comment title={title}/>}
     </Layout>
   )
 }

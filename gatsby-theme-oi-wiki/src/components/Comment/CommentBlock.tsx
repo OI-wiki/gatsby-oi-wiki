@@ -48,7 +48,7 @@ const LoginBlock: React.FC = observer(() => {
           }
         }}
       >
-        {commentStore.getUserName()}
+        {commentStore.user.username}
       </Box>
     </Tooltip>
   )
@@ -61,7 +61,7 @@ interface NoIssueBlockProps {
 
 const NoIssueBlock: React.FC<NoIssueBlockProps> = (props) => {
   const { admin, id } = props
-  const isAdmin = computed(() => admin.indexOf(commentStore.getUserName())).get()
+  const isAdmin = computed(() => admin.includes(commentStore.user.username)).get()
   const [createIssueLoading, setCreateIssueLoading] = useState(false)
   const { href } = useLocation()
 
@@ -162,10 +162,6 @@ const CommentBlock: React.FC<CommentBlockProps> = observer((props) => {
       clientSecret,
       clientId: clientID,
     })
-
-    return () => {
-      commentStore.stopStore()
-    }
   }, [clientID, clientSecret, owner, repo])
 
 
@@ -197,7 +193,6 @@ const CommentBlock: React.FC<CommentBlockProps> = observer((props) => {
 
   }, [id])
 
-
   return (
     <InputContentProvider>
       <Typography variant="h6">
@@ -206,7 +201,7 @@ const CommentBlock: React.FC<CommentBlockProps> = observer((props) => {
       </Typography>
       <Divider/>
       <CommentInput
-        name={commentStore.getUserName()}
+        name={commentStore.user.username}
         avatarLink={commentStore.user.avatar || ''}
         authorized={commentStore.authorized}
         showLogin={commentStore.token === null}

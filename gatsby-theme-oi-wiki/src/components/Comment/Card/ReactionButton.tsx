@@ -34,7 +34,7 @@ const StyledBtn = styled(Button)`
   }
 `
 
-const StyledAvatarGroup = styled(AvatarGroup)(({ theme }) => css`
+const StyledAvatar = styled(Avatar)(({ theme }) => css`
   width: ${theme.spacing(3)};
   height: ${theme.spacing(3)};
   font-size: ${theme.spacing(1.5)};
@@ -93,14 +93,14 @@ const ReactionButton: React.FC<ReactionButtonProps> = (props) => {
       onClick={clickFunc}
     >
       {loading
-        ? <CircularProgress size={24} sx={{ mx: 4 }}/>
+        ? <CircularProgress size={24} sx={{ mx: '4px' }}/>
         : <>
           {count !== 0 && count}
-          <StyledAvatarGroup max={3} sx={{ ml: 4 }}>
+          <AvatarGroup max={3} sx={{ ml: '4px' }}>
             {users.map(({ avatar, username }) => (
-              <Avatar alt={username} src={avatar} key={username}/>
+              <StyledAvatar alt={username} src={avatar} key={username}/>
             ))}
-          </StyledAvatarGroup>
+          </AvatarGroup>
         </>
       }
     </StyledBtn>
