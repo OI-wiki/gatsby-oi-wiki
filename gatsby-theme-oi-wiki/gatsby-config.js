@@ -52,9 +52,6 @@ module.exports = {
       resolve: 'gatsby-transformer-remark-rehype',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-set-mdast',
-          },
           ...needPlugin(ENABLE_IMAGE_PLUGINS && IS_PROD, {
             resolve: 'gatsby-remark-images',
             options: {
@@ -91,6 +88,7 @@ module.exports = {
           require('remark-math'),
           esmRequire('remark-directive').default,
           esmRequire('remark-details').default,
+          esmRequire('remark-details-directive').default,
           esmRequire('remark-codetab').default,
           require('remark-pseudocodejs'),
           [require('@mgtd/remark-shiki').remarkShiki, {
