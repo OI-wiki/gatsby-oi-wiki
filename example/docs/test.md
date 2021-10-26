@@ -212,6 +212,13 @@ int main() {
     
     Paragraph
 
+**Directive**
+::::detail[**Bold** *Itailc* $a^2+b^2=c^2$ name]{.warning open=true}
+The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.
+:::detail[About Sangonomiya Kokomi: Directives]
+The battlefield is unpredictable — one false move could mark utter defeat. Before the onset of battle, I bring every possible scenario into consideration, and turn my thoughts into written directives. 
+:::
+::::
 
 ### blocks
 Reference:
@@ -259,25 +266,5 @@ Indents:
     /* snip #2 */
     --8<-- "docs/snippet_code.cpp"
     ```
-### mdast
-
-don't try this at home, it will set your house on fire
-```__internal_dangerously_set_mdast
-{
-    "type": "paragraph",
-    "children": [
-        {
-            "type": "strong",
-            "children": [
-                {
-                    "type": "text",
-                    "value": "replace mdast"
-                }
-            ]    
-        }
-    ]
-}
-```
-
 
 [^ref1]: https://www.merriam-webster.com/dictionary/ascension
