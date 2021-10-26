@@ -60,7 +60,7 @@
     "remark-details": "^4.0.4",
     "remark-details-directive": "file:plugins/remark-details-directive",
     "remark-directive": "^2.0.0",
-    "remark-math": "^4.0.0",
+    "remark-math": "^5.1.0",
     "remark-pseudocodejs": "file:plugins/remark-pseudocodejs",
     "simple-git": "^2.41.1",
     "sitemap-manager": "^2.0.1",
