@@ -213,9 +213,9 @@ int main() {
     Paragraph
 
 **Directive**
-::::detail[**Bold** *Itailc* $a^2+b^2=c^2$ name]{.warning open=true}
+::::details[**Bold** *Itailc* $a^2+b^2=c^2$ name]{.warning open=true}
 The Divine Priestess of Watatsumi Island. All of the island's affairs are at this young lady's fingertips.
-:::detail[About Sangonomiya Kokomi: Directives]
+:::details[About Sangonomiya Kokomi: Directives]
 The battlefield is unpredictable — one false move could mark utter defeat. Before the onset of battle, I bring every possible scenario into consideration, and turn my thoughts into written directives. 
 :::
 ::::

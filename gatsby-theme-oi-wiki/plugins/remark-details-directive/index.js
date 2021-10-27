@@ -3,7 +3,7 @@ import { visit } from 'unist-util-visit'
 export default function attacher () {
     return function transformer (ast) {
         visit(ast, 'containerDirective', function(node) {
-            if (node.name !== 'detail') return
+            if (node.name !== 'details') return
             node.data = {
                 'hName': 'details',
                 'hProperties': {}
