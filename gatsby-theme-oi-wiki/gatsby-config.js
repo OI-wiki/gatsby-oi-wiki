@@ -100,6 +100,7 @@ module.exports = {
         rehypePlugins: [
           mathRehype,
           require('rehype-codeblock'),
+          require('rehype-footnote-heading'),
         ],
         // extensions: ['.mdx', '.md'],
       },
