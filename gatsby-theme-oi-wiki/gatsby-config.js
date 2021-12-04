@@ -86,7 +86,11 @@ module.exports = {
         ],
         remarkPlugins: [
           require('remark-math'),
+          esmRequire('remark-directive').default,
           esmRequire('remark-details').default,
+          esmRequire('remark-details-directive').default,
+          esmRequire('remark-codetab').default,
+          require('remark-pseudocodejs'),
           [require('@mgtd/remark-shiki').remarkShiki, {
             semantic: false,
             theme: 'css-variables',
@@ -94,9 +98,8 @@ module.exports = {
           }],
         ],
         rehypePlugins: [
-          require('./plugins/rehype-pseudocodejs'),
           mathRehype,
-          require('./plugins/rehype-codeblock'),
+          require('rehype-codeblock'),
         ],
         // extensions: ['.mdx', '.md'],
       },

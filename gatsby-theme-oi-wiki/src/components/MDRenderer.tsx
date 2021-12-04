@@ -1,5 +1,5 @@
 import React from 'react'
-import unified from 'unified'
+import { unified } from 'unified'
 import rehypeReact from 'rehype-react'
 import { Root } from 'hast'
 

@@ -1,0 +1,10 @@
+{
+  "name": "remark-details-directive",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Xiaodai Dai",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^4.1.0"
+  }
+}
