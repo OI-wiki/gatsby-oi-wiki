@@ -1,50 +1,48 @@
 import createTheme from '@mui/material/styles/createTheme'
 import { grey } from '@mui/material/colors'
-import { CSSProperties } from '@mui/material/styles/createTypography'
+import { CSSProperties, TypographyStyleOptions } from '@mui/material/styles/createTypography'
 
-const commonTypStyle: CSSProperties = {
+const commonTypographyStyle: CSSProperties = {
   fontWeight: 'bold',
   marginBlockEnd: '1rem',
   marginBlockStart: '1.5rem',
+}
+
+function withTypographyStyle(t: TypographyStyleOptions): TypographyStyleOptions {
+  return { t, ...commonTypographyStyle }
 }
 
 const theme = createTheme({
   unstable_strictMode: true,
   typography: {
     fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
-    h1: {
+    h1: withTypographyStyle({
       fontSize: '2.5rem',
       paddingBottom: '.3rem',
       borderBlockEnd: `1px solid ${grey['300']}`,
-      ...commonTypStyle,
-    },
+    }),
     h2: {
       fontSize: '2rem',
       paddingBottom: '.3rem',
       borderBlockEnd: `1px solid ${grey['300']}`,
-      ...commonTypStyle,
     },
-    h3: {
+    h3: withTypographyStyle({
       fontSize: '1.75rem',
-      ...commonTypStyle,
-    },
-    h4: {
+    }),
+    h4: withTypographyStyle({
       fontSize: '1.5rem',
-      ...commonTypStyle,
-    },
-    h5: {
+    }),
+    h5: withTypographyStyle({
       fontSize: '1.25rem',
-      ...commonTypStyle,
-    },
-    h6: {
+    }),
+    h6: withTypographyStyle({
       fontSize: '1rem',
-      ...commonTypStyle,
-    },
-    body2: {
+    }),
+    body2: withTypographyStyle({
       fontSize: '0.875rem',
       lineHeight: '1.5rem',
       marginBlockEnd: '0.5rem',
-    },
+    }),
   },
 })
 
