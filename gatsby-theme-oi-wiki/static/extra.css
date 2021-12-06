@@ -114,6 +114,7 @@ pre.shiki {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  padding: 1rem;
 }
 
 
@@ -203,4 +204,3 @@ table:not([class]) td {
 table:not([class]) tr:first-child td {
   border-top-width: 0;
 }
-
