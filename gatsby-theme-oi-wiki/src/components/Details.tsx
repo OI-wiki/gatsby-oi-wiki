@@ -1,6 +1,6 @@
-import { Accordion, AccordionDetails } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import React from 'react'
+import { Accordion, AccordionDetails } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const getDetailsClasses = makeStyles((theme) => ({
   root: {
@@ -16,7 +16,7 @@ const getDetailsClasses = makeStyles((theme) => ({
       margin: '1.2em 0 !important',
     },
   },
-}))
+}));
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
-}))
+}));
 
 export interface DetailsProps {
   className: string;
@@ -32,10 +32,10 @@ export interface DetailsProps {
 }
 
 const Details: React.FC<DetailsProps> = (props) => {
-  const { className = '', children } = props
-  const detailsClasses = getDetailsClasses()
-  const classes = useStyles()
-  const cont = Array.isArray(children) ? children : [children]
+  const { className = '', children } = props;
+  const detailsClasses = getDetailsClasses();
+  const classes = useStyles();
+  const cont = Array.isArray(children) ? children : [children];
   return (
     <Accordion
       variant="outlined"
@@ -47,7 +47,7 @@ const Details: React.FC<DetailsProps> = (props) => {
         <div className={classes.container}>{cont.slice(1)}</div>
       </AccordionDetails>
     </Accordion>
-  )
-}
+  );
+};
 
-export default Details
+export default Details;

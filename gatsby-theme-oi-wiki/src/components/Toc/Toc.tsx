@@ -1,8 +1,8 @@
-import { Link as MuiLink } from '@material-ui/core'
-import clsx from 'clsx'
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Nullable, OnClickHandler } from '../../types/common'
+import { Link as MuiLink } from '@material-ui/core';
+import clsx from 'clsx';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Nullable, OnClickHandler } from '../../types/common';
 
 export interface Node {
   url: string;
@@ -46,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
   active: {
     borderLeft: `4px solid ${theme.palette.secondary.main}`,
   },
-}))
+}));
 
 const TocItem: React.FC<Props> = (props) => {
-  const { data, onClick, ...restProps } = props
-  const classes = useStyles()
+  const { data, onClick, ...restProps } = props;
+  const classes = useStyles();
   return (
     <MuiLink
       {...restProps}
@@ -59,7 +59,7 @@ const TocItem: React.FC<Props> = (props) => {
       href={data.url}
       underline="none"
       onClick={(e) => {
-        onClick && onClick(data)(e)
+        onClick && onClick(data)(e);
       }}
       style={{
         paddingLeft: `${data.level + 1}em`,
@@ -68,12 +68,12 @@ const TocItem: React.FC<Props> = (props) => {
     >
       <span dangerouslySetInnerHTML={{ __html: data.title }}/>
     </MuiLink>
-  )
-}
+  );
+};
 
 const TocComponent: React.FC<Props> = (props) => {
-  const { data, onClick, ...restProps } = props
-  const classes = useStyles()
+  const { data, onClick, ...restProps } = props;
+  const classes = useStyles();
   return (
     <li id={`toc-${data.url}`} className={clsx(classes.li)}>
       <TocItem data={data} onClick={onClick} {...restProps} />
@@ -82,17 +82,17 @@ const TocComponent: React.FC<Props> = (props) => {
         data.children.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
       }</ul>}
     </li>
-  )
-}
+  );
+};
 
 const TocList: React.FC<TocListProps> = (props) => {
-  const { data, onClick, ...restProps } = props
-  const classes = useStyles()
+  const { data, onClick, ...restProps } = props;
+  const classes = useStyles();
   return (
     <ul className={classes.ul}>{
       data.map(i => <TocComponent data={i} onClick={onClick} {...restProps} key={i.url}/>)
     }</ul>
-  )
-}
+  );
+};
 
-export default TocList
+export default TocList;

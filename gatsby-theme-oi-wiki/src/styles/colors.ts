@@ -3,18 +3,18 @@ import {
   darken,
   getContrastRatio,
   SimplePaletteColorOptions,
-} from '@material-ui/core/styles'
+} from '@material-ui/core/styles';
 
 function addLightOrDark (obj, typ: string, tonalOffset): SimplePaletteColorOptions {
-  const tonalOffsetLight = tonalOffset.light || tonalOffset
-  const tonalOffsetDark = tonalOffset.dark || tonalOffset * 1.5
+  const tonalOffsetLight = tonalOffset.light || tonalOffset;
+  const tonalOffsetDark = tonalOffset.dark || tonalOffset * 1.5;
 
-  if (obj[typ]) return
+  if (obj[typ]) return;
 
   if (typ === 'light') {
-    obj.light = lighten(obj.main, tonalOffsetLight)
+    obj.light = lighten(obj.main, tonalOffsetLight);
   } else if (typ === 'dark') {
-    obj.dark = darken(obj.main, tonalOffsetDark)
+    obj.dark = darken(obj.main, tonalOffsetDark);
   }
 }
 
@@ -24,26 +24,26 @@ function addLightOrDark (obj, typ: string, tonalOffset): SimplePaletteColorOptio
 function getContrastText (background, contrastThreshold) : string {
   const contrastText = getContrastRatio(background, '#fff') >= contrastThreshold
     ? '#fff'
-    : 'rgba(0, 0, 0, 0.87)'
+    : 'rgba(0, 0, 0, 0.87)';
 
-  return contrastText
+  return contrastText;
 }
 
 function createPaletteColor (color: string, tonalOffset: number): SimplePaletteColorOptions {
-  const contrastThreshold = 3
+  const contrastThreshold = 3;
   const obj: SimplePaletteColorOptions = {
     main: color,
-  }
+  };
   if (color === 'auto') {
-    obj.light = 'auto'
-    obj.dark = 'auto'
-    obj.contrastText = 'auto'
-    return obj
+    obj.light = 'auto';
+    obj.dark = 'auto';
+    obj.contrastText = 'auto';
+    return obj;
   }
-  addLightOrDark(obj, 'light', tonalOffset)
-  addLightOrDark(obj, 'dark', tonalOffset)
-  obj.contrastText = getContrastText(obj.main, contrastThreshold)
-  return obj
+  addLightOrDark(obj, 'light', tonalOffset);
+  addLightOrDark(obj, 'dark', tonalOffset);
+  obj.contrastText = getContrastText(obj.main, contrastThreshold);
+  return obj;
 }
 
 const colors: Array<{desc: string, color: string}> = [
@@ -70,7 +70,7 @@ const colors: Array<{desc: string, color: string}> = [
   { color: '#795548', desc: 'Brown' },
   { color: '#757575', desc: 'Grey' },
   { color: '#546e7a', desc: 'Blue Grey' },
-]
+];
 
 export interface LabeledPaletteColor extends SimplePaletteColorOptions {
   desc: string;
@@ -81,6 +81,6 @@ const paletteColors: Array<LabeledPaletteColor> = colors.map((c, i) => ({
   ...createPaletteColor(c.color, 0.2),
   desc: c.desc,
   id: i.toString(),
-}))
+}));
 
-export default paletteColors
+export default paletteColors;

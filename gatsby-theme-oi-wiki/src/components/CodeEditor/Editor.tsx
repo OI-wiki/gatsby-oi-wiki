@@ -1,23 +1,23 @@
-import React from 'react'
-import Ace from 'react-ace'
-import useDarkMode from '../../lib/useDarkMode'
-import { langModeMap } from '../../lib/play/codeLang'
+import React from 'react';
+import Ace from 'react-ace';
+import useDarkMode from '../../lib/useDarkMode';
+import { langModeMap } from '../../lib/play/codeLang';
 
 // add language to support here
-import 'ace-builds/src-noconflict/mode-c_cpp'
-import 'ace-builds/src-noconflict/mode-python'
+import 'ace-builds/src-noconflict/mode-c_cpp';
+import 'ace-builds/src-noconflict/mode-python';
 
 // light/dark theme
-import 'ace-builds/src-noconflict/theme-chrome'
-import 'ace-builds/src-noconflict/theme-tomorrow_night'
+import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/src-noconflict/theme-tomorrow_night';
 
-import { CodeEditorProps } from '.'
+import { CodeEditorProps } from '.';
 
 const Editor: React.FC<Omit<CodeEditorProps, 'title'>> = ({
   lang,
   ...aceProps
 }) => {
-  const isDarkMode = useDarkMode()
+  const isDarkMode = useDarkMode();
 
   return (
     <Ace
@@ -28,7 +28,7 @@ const Editor: React.FC<Omit<CodeEditorProps, 'title'>> = ({
       mode={lang ? langModeMap[lang] : 'text'}
       {...aceProps}
     />
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;

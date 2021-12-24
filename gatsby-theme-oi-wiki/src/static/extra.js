@@ -12,4 +12,4 @@ MathJax.Hub.Config({
   svg: {
     fontCache: 'global',
   },
-})
+});

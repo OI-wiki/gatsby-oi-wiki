@@ -1,22 +1,22 @@
-import type { IconButtonProps } from '@material-ui/core'
-import { IconButton, makeStyles, Tooltip } from '@material-ui/core'
-import type { SvgIconComponent } from '@material-ui/icons'
+import type { IconButtonProps } from '@material-ui/core';
+import { IconButton, makeStyles, Tooltip } from '@material-ui/core';
+import type { SvgIconComponent } from '@material-ui/icons';
 import {
   Code as CodeIcon,
   GitHub as GitHubIcon,
   LibraryBooks as LibraryBooksIcon,
   LocalOffer as LocalOfferIcon,
   Settings as SettingsIcon,
-} from '@material-ui/icons'
-import { Link } from 'gatsby'
-import React from 'react'
+} from '@material-ui/icons';
+import { Link } from 'gatsby';
+import React from 'react';
 
 const useStyles = makeStyles({
   navBtn: {
     padding: 0,
     margin: 12,
   },
-})
+});
 
 type NavBtnProps = IconButtonProps<typeof Link> &
   IconButtonProps<'a'> & {
@@ -26,12 +26,12 @@ type NavBtnProps = IconButtonProps<typeof Link> &
   }
 
 function isRelativeLink (link: string): boolean {
-  return link.startsWith('.') || link.startsWith('/')
+  return link.startsWith('.') || link.startsWith('/');
 }
 
 const NavBtn: React.FC<NavBtnProps> = (props) => {
-  const classes = useStyles()
-  const { title, to, Icon, ...restProps } = props
+  const classes = useStyles();
+  const { title, to, Icon, ...restProps } = props;
   return (
     <Tooltip title={title} placement="bottom" arrow>
       <IconButton
@@ -45,10 +45,10 @@ const NavBtn: React.FC<NavBtnProps> = (props) => {
         <Icon />
       </IconButton>
     </Tooltip>
-  )
-}
+  );
+};
 
-const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
+const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki';
 
 const NavBtnGroup: React.FC = () => {
   return (
@@ -65,7 +65,7 @@ const NavBtnGroup: React.FC = () => {
         rel="noreferrer noopener"
       />
     </>
-  )
-}
+  );
+};
 
-export default NavBtnGroup
+export default NavBtnGroup;

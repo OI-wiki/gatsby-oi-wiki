@@ -1,11 +1,11 @@
-import Fab from '@material-ui/core/Fab'
-import { makeStyles } from '@material-ui/core/styles'
-import Zoom from '@material-ui/core/Zoom'
-import ArrowUpward from '@material-ui/icons/ArrowUpward'
-import React, { useState } from 'react'
-import useThrottledOnScroll from '../lib/useThrottledOnScroll'
-import smoothScrollTo from '../lib/smoothScroll'
-import { OnClickHandler } from '../types/common'
+import Fab from '@material-ui/core/Fab';
+import { makeStyles } from '@material-ui/core/styles';
+import Zoom from '@material-ui/core/Zoom';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import React, { useState } from 'react';
+import useThrottledOnScroll from '../lib/useThrottledOnScroll';
+import smoothScrollTo from '../lib/smoothScroll';
+import { OnClickHandler } from '../types/common';
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -23,22 +23,22 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(8),
     zIndex: 2,
   },
-}))
+}));
 
 const BackTop: React.FC = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   const handleClick: OnClickHandler<HTMLButtonElement> = () => {
-    smoothScrollTo(0)
-  }
-  const [yPos, setYPos] = useState(0)
-  useThrottledOnScroll(() => setYPos(window.scrollY), 166)
+    smoothScrollTo(0);
+  };
+  const [yPos, setYPos] = useState(0);
+  useThrottledOnScroll(() => setYPos(window.scrollY), 166);
   return (
     <Zoom in={yPos > 400}>
       <Fab disableRipple className={classes.fab} onClick={handleClick}>
         <ArrowUpward/>
       </Fab>
     </Zoom>
-  )
-}
+  );
+};
 
-export default BackTop
+export default BackTop;

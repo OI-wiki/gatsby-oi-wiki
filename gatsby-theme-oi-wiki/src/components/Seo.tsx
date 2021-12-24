@@ -1,9 +1,9 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import { useLocation } from '@reach/router'
-import { graphql, useStaticQuery } from 'gatsby'
-import { Article, WithContext } from 'schema-dts'
-import { DeepRequiredNonNull } from '../types/common'
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { useLocation } from '@reach/router';
+import { graphql, useStaticQuery } from 'gatsby';
+import { Article, WithContext } from 'schema-dts';
+import { DeepRequiredNonNull } from '../types/common';
 
 interface SEOProps {
   title: string;
@@ -17,7 +17,7 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = (props: SEOProps) => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const { site: { siteMetadata } } = useStaticQuery<GatsbyTypes.SEOQuery>(graphql`
     query SEO {
       site {
@@ -29,7 +29,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
         }
       }
     }
-  `) as DeepRequiredNonNull<GatsbyTypes.SEOQuery>
+  `) as DeepRequiredNonNull<GatsbyTypes.SEOQuery>;
 
   const {
     title = null,
@@ -39,7 +39,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
     tags = null,
     dateModified,
     datePublished,
-  } = props
+  } = props;
 
   const seo = {
     title: title || siteMetadata.defaultTitle,
@@ -48,7 +48,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
     url: `${siteMetadata.siteUrl}${pathname}`,
     author: author && author.split(','),
     tags: tags,
-  }
+  };
 
   const schemaMarkUp: WithContext<Article> = {
     '@context': 'https://schema.org',
@@ -70,7 +70,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
         url: seo.image,
       },
     },
-  }
+  };
 
   return (
     <Helmet>
@@ -99,7 +99,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
       {seo.image && <meta name="twitter:image" content={seo.image}/>}
       {schemaMarkUp && <script type="application/ld+json">{JSON.stringify(schemaMarkUp, null, 2)}</script>}
     </Helmet>
-  )
-}
+  );
+};
 
-export default SEO
+export default SEO;

@@ -1,6 +1,6 @@
-import { makeStyles, Typography } from '@material-ui/core'
-import clsx from 'clsx'
-import React from 'react'
+import { makeStyles, Typography } from '@material-ui/core';
+import clsx from 'clsx';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   indicator: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   error: {
     background: theme.palette.error.main,
   },
-}))
+}));
 
 export interface IndicatorProps {
   type: 'info' | 'success' | 'error' | 'warning' | undefined
@@ -29,7 +29,7 @@ export interface IndicatorProps {
 }
 
 const Indicator: React.FC<IndicatorProps> = ({ type, msg }: IndicatorProps) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Typography
       className={clsx(classes.indicator, {
@@ -41,7 +41,7 @@ const Indicator: React.FC<IndicatorProps> = ({ type, msg }: IndicatorProps) => {
     >
       {msg}
     </Typography>
-  )
-}
+  );
+};
 
-export default Indicator
+export default Indicator;

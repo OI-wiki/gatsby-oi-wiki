@@ -7,14 +7,14 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@material-ui/core'
-import AccessTime from '@material-ui/icons/AccessTime'
-import Storage from '@material-ui/icons/Storage'
-import React from 'react'
-import type { TransformedResponseData } from '../lib/play/useRunner'
-import Indicator, { IndicatorProps } from './Indicator'
-import useDarkMode from '../lib/useDarkMode'
-import clsx from 'clsx'
+} from '@material-ui/core';
+import AccessTime from '@material-ui/icons/AccessTime';
+import Storage from '@material-ui/icons/Storage';
+import React from 'react';
+import type { TransformedResponseData } from '../lib/play/useRunner';
+import Indicator, { IndicatorProps } from './Indicator';
+import useDarkMode from '../lib/useDarkMode';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.info.dark,
     fontWeight: 'bold',
   },
-}))
+}));
 
 const statusSeverityMap: Record<
   TransformedResponseData['status'] | 'No Status Info',
@@ -77,15 +77,15 @@ const statusSeverityMap: Record<
   'Runtime Error': 'error',
   'Execute Failure': 'error',
   'No Status Info': 'info',
-})
+});
 
 const Output = React.forwardRef<
   unknown,
   { output: TransformedResponseData | null }
 >(({ output }, ref) => {
-  const classes = useStyles({ darkMode: useDarkMode() })
-  const theme = useTheme()
-  const matches = useMediaQuery(theme.breakpoints.down('xs'))
+  const classes = useStyles({ darkMode: useDarkMode() });
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
   const {
     time = '?',
@@ -94,7 +94,7 @@ const Output = React.forwardRef<
     ceInfo,
     stdout,
     stderr,
-  } = output || {}
+  } = output || {};
 
   return (
     <Paper ref={ref} className={classes.root}>
@@ -138,7 +138,7 @@ const Output = React.forwardRef<
       <Divider />
       <pre>{stdout === '' ? '似乎没有输出哦...' : stdout}</pre>
     </Paper>
-  )
-})
+  );
+});
 
-export default Output
+export default Output;

@@ -1,5 +1,5 @@
-import React from 'react'
-import StyledLayout from '../components/StyledLayout'
+import React from 'react';
+import StyledLayout from '../components/StyledLayout';
 
 const page: React.FC<{ location: Location }> = ({ location }) => (
   <StyledLayout location={location} noEdit={true} title="404" noComment={false}>
@@ -12,6 +12,6 @@ const page: React.FC<{ location: Location }> = ({ location }) => (
       </div>
     </div>
   </StyledLayout>
-)
+);
 
-export default page
+export default page;

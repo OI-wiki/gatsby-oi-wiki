@@ -1,15 +1,15 @@
-import { Button, CircularProgress, Divider, makeStyles, Tooltip, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-import GithubV3 from '@mgtd/vssue-api-github-v3'
-import GithubV4 from '@mgtd/vssue-api-github-v4'
-import createPersistedState from 'use-persisted-state'
-import CommentCard from './Card'
-import CommentInput from './CommentInput'
-import { Comments, Issue, User } from './types'
-import { InputContentProvider } from './inputContext'
-import { getComments } from './api'
+import { Button, CircularProgress, Divider, makeStyles, Tooltip, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import GithubV3 from '@mgtd/vssue-api-github-v3';
+import GithubV4 from '@mgtd/vssue-api-github-v4';
+import createPersistedState from 'use-persisted-state';
+import CommentCard from './Card';
+import CommentInput from './CommentInput';
+import { Comments, Issue, User } from './types';
+import { InputContentProvider } from './inputContext';
+import { getComments } from './api';
 
-const useToken = createPersistedState('github-access-token')
+const useToken = createPersistedState('github-access-token');
 
 interface Props {
   clientID: string,
@@ -24,24 +24,24 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: theme.palette.text.primary,
   },
-}))
+}));
 
 const CommentComponent: React.FC<Props> = (props) => {
-  const classes = useStyles()
-  const defaultUser = { username: '未登录用户', avatar: undefined, homepage: undefined }
-  const [token, setToken] = useToken(null)
+  const classes = useStyles();
+  const defaultUser = { username: '未登录用户', avatar: undefined, homepage: undefined };
+  const [token, setToken] = useToken(null);
   const revokeToken = (): void => {
-    setToken(null)
-    setUser(defaultUser)
-  }
-  const [user, setUser] = useState<User>(defaultUser)
-  const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] })
-  const [noIssue, setNoIssue] = useState(false)
-  const filteredComments = comments.data.filter(({ isMinimized }) => !isMinimized)
-  const [issue, setIssue] = useState<Issue>()
-  const [createIssueLoading, setCreateIssueLoading] = useState(false)
-  const authorized = user.username !== '未登录用户' && token && !noIssue
-  const isAdmin = props.admin.indexOf(user.username) >= 0
+    setToken(null);
+    setUser(defaultUser);
+  };
+  const [user, setUser] = useState<User>(defaultUser);
+  const [comments, setComments] = useState<Comments>({ count: 0, page: 0, perPage: 0, data: [] });
+  const [noIssue, setNoIssue] = useState(false);
+  const filteredComments = comments.data.filter(({ isMinimized }) => !isMinimized);
+  const [issue, setIssue] = useState<Issue>();
+  const [createIssueLoading, setCreateIssueLoading] = useState(false);
+  const authorized = user.username !== '未登录用户' && token && !noIssue;
+  const isAdmin = props.admin.indexOf(user.username) >= 0;
   const ghAPIV3 = new GithubV3({
     baseURL: 'https://github.com',
     owner: props.owner,
@@ -51,7 +51,7 @@ const CommentComponent: React.FC<Props> = (props) => {
     clientSecret: props.clientSecret,
     state: '123',
     proxy: url => `https://cors-anywhere.mgt.workers.dev/?${url}`,
-  })
+  });
   const ghAPIV4 = new GithubV4({
     baseURL: 'https://github.com',
     owner: props.owner,
@@ -61,57 +61,57 @@ const CommentComponent: React.FC<Props> = (props) => {
     clientSecret: props.clientSecret,
     state: '123',
     proxy: url => `https://cors-anywhere.mgt.workers.dev/?${url}`,
-  })
+  });
   useEffect(() => {
     const asyncFunc = async (): Promise<void> => {
-      let tk = token
+      let tk = token;
       if (!tk) {
-        tk = await ghAPIV3.handleAuth()
+        tk = await ghAPIV3.handleAuth();
         if (tk !== null) {
-          setToken(tk)
+          setToken(tk);
         }
       }
-      const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, tk)
+      const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, tk);
       if (tmp === 'noIssue') {
-        setNoIssue(true)
+        setNoIssue(true);
       } else if (tmp !== 'invalidToken') {
-        const [i, c] = tmp
-        setComments(c)
-        setIssue(i)
+        const [i, c] = tmp;
+        setComments(c);
+        setIssue(i);
       }
-      const u: User = await ghAPIV3.getUser({ accessToken: tk })
-      setUser(u)
-    }
+      const u: User = await ghAPIV3.getUser({ accessToken: tk });
+      setUser(u);
+    };
 
     asyncFunc().catch(reject => {
-      console.log(reject)
-    })
+      console.log(reject);
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.clientID, props.clientSecret, props.id])
+  }, [props.clientID, props.clientSecret, props.id]);
   const updateComments = async (): Promise<void> => {
-    const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
+    const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token);
     if (tmp !== 'invalidToken' && tmp !== 'noIssue') {
-      const [, c] = tmp
-      setComments(c)
+      const [, c] = tmp;
+      setComments(c);
     }
-  }
+  };
   const NoIssueComponent = (): React.ReactElement => {
     return isAdmin
       ? <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
         <Button variant="outlined" color="primary" disabled={createIssueLoading}
                 onClick={async () => {
-                  setCreateIssueLoading(true)
-                  await ghAPIV4.postIssue({ accessToken: token, title: props.id, content: location.href })
+                  setCreateIssueLoading(true);
+                  await ghAPIV4.postIssue({ accessToken: token, title: props.id, content: location.href });
                   // sleep 1s, 直接查询会返回无结果，迷惑
-                  await new Promise(resolve => setTimeout(resolve, 1000))
-                  const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token)
-                  setCreateIssueLoading(false)
+                  await new Promise(resolve => setTimeout(resolve, 1000));
+                  const tmp = await getComments(ghAPIV3, ghAPIV4, props.id, revokeToken, token);
+                  setCreateIssueLoading(false);
                   if (tmp !== 'invalidToken' && tmp !== 'noIssue') {
-                    const [i, c] = tmp
-                    setNoIssue(false)
-                    setComments(c)
-                    setIssue(i)
+                    const [i, c] = tmp;
+                    setNoIssue(false);
+                    setComments(c);
+                    setIssue(i);
                   }
                 }}>
           为本页面创建 Issue
@@ -120,8 +120,8 @@ const CommentComponent: React.FC<Props> = (props) => {
       </Typography>
       : <Typography variant="body1" style={{ padding: '24px', textAlign: 'center' }}>
         没有找到与本页面相关联的 issue
-      </Typography>
-  }
+      </Typography>;
+  };
   return (
     <InputContentProvider>
       <Typography variant="h6">
@@ -133,10 +133,10 @@ const CommentComponent: React.FC<Props> = (props) => {
             style={{ float: 'right', cursor: 'pointer' }}
             onClick={() => {
               if (!token) {
-                ghAPIV3.redirectAuth()
+                ghAPIV3.redirectAuth();
               } else {
-                setToken(null)
-                setUser(defaultUser)
+                setToken(null);
+                setUser(defaultUser);
               }
             }}
           >
@@ -151,18 +151,18 @@ const CommentComponent: React.FC<Props> = (props) => {
         authorized={authorized}
         showLogin={token === null}
         handleLogin={() => {
-          ghAPIV3.redirectAuth()
+          ghAPIV3.redirectAuth();
         }}
         sendComment={async (v, setLoading) => {
-          setLoading(true)
+          setLoading(true);
           try {
-            await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v })
+            await ghAPIV3.postComment({ accessToken: token, issueId: issue.id, content: v });
           } catch (e) {
-            setLoading(false)
-            return
+            setLoading(false);
+            return;
           }
-          updateComments()
-          setLoading(false)
+          updateComments();
+          setLoading(false);
         }}
       />
       {noIssue
@@ -180,22 +180,22 @@ const CommentComponent: React.FC<Props> = (props) => {
             currentUser={user}
             commentID={id}
             deleteComment={async (commentId, setDeleteLoading) => {
-              setDeleteLoading(true)
-              await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id })
-              updateComments()
-              setDeleteLoading(false)
+              setDeleteLoading(true);
+              await ghAPIV4.deleteComment({ accessToken: token, commentId, issueId: issue.id });
+              updateComments();
+              setDeleteLoading(false);
             }}
             addReaction={async (commentId, reaction) => {
-              await ghAPIV4.postCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id })
+              await ghAPIV4.postCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id });
             }}
             removeReaction={async (commentId, reaction) => {
-              await ghAPIV4.deleteCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id })
+              await ghAPIV4.deleteCommentReaction({ accessToken: token, commentId, reaction, issueId: issue.id });
             }}
           />
         ))
       }
     </InputContentProvider>
-  )
-}
+  );
+};
 
-export default CommentComponent
+export default CommentComponent;

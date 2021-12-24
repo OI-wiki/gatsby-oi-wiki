@@ -1,52 +1,52 @@
-import { AppBar, Button, Drawer, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles'
-import { Link } from 'gatsby'
-import React from 'react'
-import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons'
-import clsx from 'clsx'
+import { AppBar, Button, Drawer, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import { Link } from 'gatsby';
+import React from 'react';
+import { Menu as MenuIcon, School as SchoolIcon } from '@material-ui/icons';
+import clsx from 'clsx';
 
-import trimTrailingSlash from '../../lib/trailingSlash'
-import pathList from '../../sidebar.yaml'
-import SiderContent from '../Sidebar'
-import Tabs from '../Tabs'
-import SmallScreenMenu from '../SmallScreenMenu'
-import { useStyles } from './styles'
-import { flattenObject } from './utils'
-import { useSetting } from '../../lib/useSetting'
-import NavBtnGroup from './NavBtnGroup'
-import Search from '../Search'
-import { StrIndexObj } from '../../types/common'
+import trimTrailingSlash from '../../lib/trailingSlash';
+import pathList from '../../sidebar.yaml';
+import SiderContent from '../Sidebar';
+import Tabs from '../Tabs';
+import SmallScreenMenu from '../SmallScreenMenu';
+import { useStyles } from './styles';
+import { flattenObject } from './utils';
+import { useSetting } from '../../lib/useSetting';
+import NavBtnGroup from './NavBtnGroup';
+import Search from '../Search';
+import { StrIndexObj } from '../../types/common';
 
 const getTabIDFromLocation = (location: string, pathList: StrIndexObj<StrIndexObj>): number => {
-  const locationTrimmed = trimTrailingSlash(location)
+  const locationTrimmed = trimTrailingSlash(location);
   for (const v of Object.entries(pathList)) {
-    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0]
+    if (Object.values(flattenObject(v[1])).map(v => trimTrailingSlash(v as string)).indexOf(locationTrimmed) > -1) return +v[0];
   }
-  return -1
-}
+  return -1;
+};
 
 interface ResponsiveDrawerProps {
   pathname: string
 }
 
 const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = (props) => {
-  const { pathname } = props
-  const [settings] = useSetting()
-  const theme = useTheme()
+  const { pathname } = props;
+  const [settings] = useSetting();
+  const theme = useTheme();
   const [navColor, textColor] = settings.theme.primary
     ? [settings.theme.primary.main, settings.theme.primary.contrastText]
-    : [theme.palette.background.paper, 'rgba(var(--text-primary))']
+    : [theme.palette.background.paper, 'rgba(var(--text-primary))'];
   const classes = useStyles({
     appBar: {
       background: navColor,
       color: textColor as string,
     },
-  })
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  });
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = (): void => {
-    setMobileOpen(!mobileOpen)
-  }
-  const tabID = getTabIDFromLocation(pathname, pathList)
+    setMobileOpen(!mobileOpen);
+  };
+  const tabID = getTabIDFromLocation(pathname, pathList);
 
   return (
     <>
@@ -106,9 +106,9 @@ const ResponsiveDrawer: React.FC<ResponsiveDrawerProps> = (props) => {
         </Drawer>
       </Hidden>
     </>
-  )
-}
+  );
+};
 
-const NavAndDrawer = React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname)
+const NavAndDrawer = React.memo(ResponsiveDrawer, (a, b) => a.pathname === b.pathname);
 
-export default NavAndDrawer
+export default NavAndDrawer;

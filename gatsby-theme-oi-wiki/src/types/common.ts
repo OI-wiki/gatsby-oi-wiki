@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export type Nullable<T> = T | null
 export type StrIndexObj<T = string> = { [k: string]: T }

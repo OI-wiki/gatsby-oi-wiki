@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core'
-import EditIcon from '@material-ui/icons/Edit'
-import EditWarn from './EditWarn'
+import React, { useState } from 'react';
+import { createStyles, Grid, Hidden, IconButton, makeStyles, Tooltip, Typography } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import EditWarn from './EditWarn';
 
 export interface TitleProps {
   title: string,
@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) => createStyles({
     color: theme.palette.subTitle,
     lineHeight: 1.8,
   },
-}))
+}));
 
 const Title: React.FC<TitleProps> = (props) => {
-  const classes = useStyles()
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const { relativePath, location, title, noEdit } = props
+  const classes = useStyles();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { relativePath, location, title, noEdit } = props;
 
   return (
     <>
@@ -63,7 +63,7 @@ const Title: React.FC<TitleProps> = (props) => {
         </Grid>
       </Grid>
     </>
-  )
-}
+  );
+};
 
-export default Title
+export default Title;

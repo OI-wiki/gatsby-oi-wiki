@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { scrollbarStyle } from '../../styles/scrollbar'
+import { makeStyles } from '@material-ui/core/styles';
+import { scrollbarStyle } from '../../styles/scrollbar';
 
 export const useStyles = makeStyles((theme) => ({
   main: scrollbarStyle(theme, {
@@ -26,4 +26,4 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     paddingLeft: theme.spacing(1.5),
   },
-}))
+}));

@@ -1,5 +1,5 @@
-import { alpha, makeStyles } from '@material-ui/core/styles'
-import { scrollbarStyle } from '../../styles/scrollbar'
+import { alpha, makeStyles } from '@material-ui/core/styles';
+import { scrollbarStyle } from '../../styles/scrollbar';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -140,4 +140,4 @@ export const useStyles = makeStyles((theme) => ({
     '-moz-border-radius': '0',
     'border-radius': '0',
   },
-}))
+}));

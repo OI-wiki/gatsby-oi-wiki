@@ -1,16 +1,16 @@
-import grey from '@material-ui/core/colors/grey'
-import { alpha, Theme } from '@material-ui/core/styles'
-import { CSSProperties } from '@material-ui/core/styles/withStyles'
+import grey from '@material-ui/core/colors/grey';
+import { alpha, Theme } from '@material-ui/core/styles';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 const scrollbarStyle = (theme: Theme, otherStyles: CSSProperties, width?: number): CSSProperties => {
-  const size = width || 0.4
+  const size = width || 0.4;
   const scrollbarWidth = {
     '&::-webkit-scrollbar': {
       // width relative to self font-size
       width: `${size}rem`,
       height: `${size}rem`,
     },
-  }
+  };
 
   return ({
     ...{
@@ -25,7 +25,7 @@ const scrollbarStyle = (theme: Theme, otherStyles: CSSProperties, width?: number
     },
     ...scrollbarWidth,
     ...otherStyles,
-  })
-}
+  });
+};
 
-export { scrollbarStyle }
+export { scrollbarStyle };

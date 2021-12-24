@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
-import Tab from '@material-ui/core/Tab'
-import Tabs from '@material-ui/core/Tabs'
-import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   tab: {
@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
       opacity: '1',
     },
   },
-}))
+}));
 
 const useIndicatorStyles = makeStyles(() => ({
   indicator: {
     height: '3px',
   },
-}))
+}));
 
 interface NavTabsProps {
   tabID: number;
@@ -27,14 +27,14 @@ interface NavTabsProps {
 }
 
 const NavTabs: React.FC<NavTabsProps> = (props) => {
-  const classes = useStyles()
-  const indicatorClasses = useIndicatorStyles()
-  const { tabID, pathList } = props
-  const newTabs = []
+  const classes = useStyles();
+  const indicatorClasses = useIndicatorStyles();
+  const { tabID, pathList } = props;
+  const newTabs = [];
 
   for (const curTab of pathList.values()) {
-    const curTitle = Object.keys(curTab)[0]
-    const values = Object.values(curTab)[0]
+    const curTitle = Object.keys(curTab)[0];
+    const values = Object.values(curTab)[0];
     const curLocation = (typeof values === 'string')
       /*
         - 测试: /test/
@@ -44,16 +44,16 @@ const NavTabs: React.FC<NavTabsProps> = (props) => {
         - 测试:
           - 测试: /test/
       */
-      : Object.values(values[0])[0]
-    newTabs.push({ title: curTitle, link: curLocation })
+      : Object.values(values[0])[0];
+    newTabs.push({ title: curTitle, link: curLocation });
   }
-  const [value, setValue] = React.useState(tabID)
+  const [value, setValue] = React.useState(tabID);
 
   return (
     <Tabs value={value}
           classes={indicatorClasses}
           onChange={(_, newValue) => {
-            setValue(newValue)
+            setValue(newValue);
           }}>
       {newTabs.map(({ title, link }) => (
         <Tab
@@ -66,7 +66,7 @@ const NavTabs: React.FC<NavTabsProps> = (props) => {
         />
       ))}
     </Tabs>
-  )
-}
+  );
+};
 
-export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID)
+export default React.memo(NavTabs, (prev, next) => prev.tabID === next.tabID);

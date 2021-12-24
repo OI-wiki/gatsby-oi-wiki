@@ -1,8 +1,8 @@
-import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
-import { Link } from 'gatsby'
-import React from 'react'
-import { FindInPage as FindInPageIcon } from '@material-ui/icons'
-import { useStyles } from './styles'
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import { Link } from 'gatsby';
+import React from 'react';
+import { FindInPage as FindInPageIcon } from '@material-ui/icons';
+import { useStyles } from './styles';
 
 export interface ResultItem {
   url: string;
@@ -18,8 +18,8 @@ export interface SearchResultListProps {
 }
 
 const SearchResultList: React.FC<SearchResultListProps> = props => {
-  const { result, isFirstRun, searchKey, classes } = props
-  const resultCount = result.length
+  const { result, isFirstRun, searchKey, classes } = props;
+  const resultCount = result.length;
   return resultCount === 0
     ? (isFirstRun.current
       ? <></>
@@ -66,7 +66,7 @@ const SearchResultList: React.FC<SearchResultListProps> = props => {
             />
           </ListItem>)}
       </List>
-    </>)
-}
+    </>);
+};
 
-export default SearchResultList
+export default SearchResultList;

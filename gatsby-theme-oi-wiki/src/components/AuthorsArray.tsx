@@ -1,20 +1,20 @@
-import Chip from '@material-ui/core/Chip'
-import { makeStyles } from '@material-ui/core/styles'
-import React from 'react'
+import Chip from '@material-ui/core/Chip';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   chip: {
     margin: theme.spacing(0.5),
   },
-}))
+}));
 
 export interface AuthorsArrayProps {
   authors: string;
 }
 
 const AuthorsArray: React.FC<AuthorsArrayProps> = ({ authors }) => {
-  const arr = authors?.split(',').map((x) => x.trim())
-  const classes = useStyles()
+  const arr = authors?.split(',').map((x) => x.trim());
+  const classes = useStyles();
   return (
     <div>
       {arr?.map((author) => (
@@ -31,7 +31,7 @@ const AuthorsArray: React.FC<AuthorsArrayProps> = ({ authors }) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default AuthorsArray
+export default AuthorsArray;

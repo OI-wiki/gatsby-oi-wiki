@@ -6,7 +6,7 @@ import {
   CardHeader,
   CircularProgress,
   IconButton,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 import {
   Favorite as FavoriteIcon,
@@ -14,15 +14,15 @@ import {
   ThumbDown as ThumbDownIcon,
   Reply as ReplyIcon,
   Delete as DeleteIcon,
-} from '@material-ui/icons'
+} from '@material-ui/icons';
 
-import React, { useState } from 'react'
-import { User } from '@mgtd/vssue-api-github-v4/lib/types'
-import Time from '../../Time'
-import { Reactions } from '../types'
-import { useInputContentContext } from '../inputContext'
-import { useStyles } from './styles'
-import ReactionButton from './ReactionButton'
+import React, { useState } from 'react';
+import { User } from '@mgtd/vssue-api-github-v4/lib/types';
+import Time from '../../Time';
+import { Reactions } from '../types';
+import { useInputContentContext } from '../inputContext';
+import { useStyles } from './styles';
+import ReactionButton from './ReactionButton';
 
 interface Props {
   disabled: boolean,
@@ -40,13 +40,13 @@ interface Props {
 }
 
 const CommentCard: React.FC<Props> = (props) => {
-  const { name, time, disabled, currentUser, reactions, commentID } = props
-  const classes = useStyles()
-  const like = reactions.find(item => item.type === 'like')
-  const unlike = reactions.find(item => item.type === 'unlike')
-  const heart = reactions.find(item => item.type === 'heart')
-  const [deleteLoading, setDeleteLoading] = useState(false)
-  const { setInputContent } = useInputContentContext()
+  const { name, time, disabled, currentUser, reactions, commentID } = props;
+  const classes = useStyles();
+  const like = reactions.find(item => item.type === 'like');
+  const unlike = reactions.find(item => item.type === 'unlike');
+  const heart = reactions.find(item => item.type === 'heart');
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const { setInputContent } = useInputContentContext();
   return (
     <Card variant="outlined" className={classes.commentMargin}>
       <CardHeader
@@ -59,7 +59,7 @@ const CommentCard: React.FC<Props> = (props) => {
               aria-label="delete"
               className={classes.floatRight}
               onClick={
-                () => { props.deleteComment(commentID, setDeleteLoading) }
+                () => { props.deleteComment(commentID, setDeleteLoading); }
               }>
               {deleteLoading
                 ? <CircularProgress size={20} />
@@ -70,7 +70,7 @@ const CommentCard: React.FC<Props> = (props) => {
             aria-label="reply"
             className={classes.floatRight}
             onClick={() => {
-              setInputContent(`> ${props.contentRaw}`)
+              setInputContent(`> ${props.contentRaw}`);
             }}>
             <ReplyIcon fontSize="small" />
           </IconButton>
@@ -88,8 +88,8 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={currentUser}
           initialCount={like.count}
           isClicked={like.viewerHasReacted}
-          addReaction={async () => { await props.addReaction(commentID, 'like') }}
-          removeReaction={async () => { await props.removeReaction(commentID, 'like') }}
+          addReaction={async () => { await props.addReaction(commentID, 'like'); }}
+          removeReaction={async () => { await props.removeReaction(commentID, 'like'); }}
           users={like.users}
         />
         <ReactionButton
@@ -99,8 +99,8 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={currentUser}
           initialCount={unlike.count}
           isClicked={unlike.viewerHasReacted}
-          addReaction={async () => { await props.addReaction(commentID, 'unlike') }}
-          removeReaction={async () => { await props.removeReaction(commentID, 'unlike') }}
+          addReaction={async () => { await props.addReaction(commentID, 'unlike'); }}
+          removeReaction={async () => { await props.removeReaction(commentID, 'unlike'); }}
           users={unlike.users}
         />
         <ReactionButton
@@ -110,12 +110,12 @@ const CommentCard: React.FC<Props> = (props) => {
           currentUser={currentUser}
           initialCount={heart.count}
           isClicked={heart.viewerHasReacted}
-          addReaction={async () => { await props.addReaction(commentID, 'heart') }}
-          removeReaction={async () => { await props.removeReaction(commentID, 'heart') }}
+          addReaction={async () => { await props.addReaction(commentID, 'heart'); }}
+          removeReaction={async () => { await props.removeReaction(commentID, 'heart'); }}
           users={heart.users}
         />
       </CardActions>
-    </Card>)
-}
+    </Card>);
+};
 
-export default CommentCard
+export default CommentCard;

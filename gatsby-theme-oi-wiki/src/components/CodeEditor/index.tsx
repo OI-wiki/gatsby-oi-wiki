@@ -1,8 +1,8 @@
-import { makeStyles, Paper, Typography } from '@material-ui/core'
-import React from 'react'
+import { makeStyles, Paper, Typography } from '@material-ui/core';
+import React from 'react';
 
-import type { IAceEditorProps } from 'react-ace'
-import type { LangType } from '../../lib/play/codeLang'
+import type { IAceEditorProps } from 'react-ace';
+import type { LangType } from '../../lib/play/codeLang';
 
 export interface CodeEditorProps extends Omit<IAceEditorProps, 'mode'> {
   title: string
@@ -16,17 +16,17 @@ const useStyles = makeStyles({
   editor: {
     height: '100%',
   },
-})
+});
 
 // fix ssr issue related to react-ace
-const Editor = React.lazy(() => import('./Editor'))
+const Editor = React.lazy(() => import('./Editor'));
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
   title,
   lang,
   ...aceProps
 }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <>
@@ -39,7 +39,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         )}
       </Paper>
     </>
-  )
-}
+  );
+};
 
-export default CodeEditor
+export default CodeEditor;

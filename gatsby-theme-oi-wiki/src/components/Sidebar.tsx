@@ -1,11 +1,11 @@
-import { Collapse, List, ListItem, ListItemText, Typography } from '@material-ui/core'
+import { Collapse, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles'
-import React, { useState } from 'react'
-import ExpandLessIcon from '@material-ui/icons/ExpandLess'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import { Link } from 'gatsby'
-import trimTrailingSlash from '../lib/trailingSlash'
+import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Link } from 'gatsby';
+import trimTrailingSlash from '../lib/trailingSlash';
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
-}))
+}));
 
 enum NodeType {
   Leaf, NonLeaf
@@ -67,9 +67,9 @@ export interface SidebarProps {
 }
 
 const NonLeafItem: React.FC<NonLeafItemProps> = (props) => {
-  const classes = useStyles()
-  const { name, padding, childItems, isOpen } = props
-  const [open, setOpen] = useState(isOpen)
+  const classes = useStyles();
+  const { name, padding, childItems, isOpen } = props;
+  const [open, setOpen] = useState(isOpen);
 
   return <div>
     <ListItem
@@ -90,12 +90,12 @@ const NonLeafItem: React.FC<NonLeafItemProps> = (props) => {
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List disablePadding>{childItems}</List>
     </Collapse>
-  </div>
-}
+  </div>;
+};
 
 const LeafItem: React.FC<LeafItemProps> = (props) => {
-  const classes = useStyles()
-  const { name, path, padding, selected } = props
+  const classes = useStyles();
+  const { name, path, padding, selected } = props;
 
   return <Link key={name} to={path}>
     <ListItem
@@ -112,60 +112,60 @@ const LeafItem: React.FC<LeafItemProps> = (props) => {
         }
       />
     </ListItem>
-  </Link>
-}
+  </Link>;
+};
 
 function Item(node: PathListNode, padding: number, pathname: string): [React.ReactElement, boolean] {
   if (node.type === NodeType.Leaf) {
-    const selected = trimTrailingSlash(node.path) === trimTrailingSlash(pathname)
+    const selected = trimTrailingSlash(node.path) === trimTrailingSlash(pathname);
     return [
       <LeafItem key={node.path} padding={padding} selected={selected} {...node}/>,
       selected,
-    ]
+    ];
   } else {
-    const children = node.children
-    let isOpen = false
-    const items: NonLeafItemProps['childItems'] = []
+    const children = node.children;
+    let isOpen = false;
+    const items: NonLeafItemProps['childItems'] = [];
 
     children.forEach((v) => {
-      const [item, selected] = Item(v, padding + 16, pathname)
-      if (selected) isOpen = selected
-      items.push(item)
-    })
+      const [item, selected] = Item(v, padding + 16, pathname);
+      if (selected) isOpen = selected;
+      items.push(item);
+    });
 
     return [
       <NonLeafItem key={node.name} isOpen={isOpen} childItems={items} padding={padding} {...node} />,
       isOpen,
-    ]
+    ];
   }
 }
 
 function getTypedPathList(pathList: PathListType): TypedPathList {
-  const resArray: TypedPathList = []
+  const resArray: TypedPathList = [];
   for (const i of pathList) {
-    const [[name, a]] = Object.entries(i)
+    const [[name, a]] = Object.entries(i);
     if (typeof a === 'string') {
-      resArray.push({ name, path: a, type: NodeType.Leaf })
+      resArray.push({ name, path: a, type: NodeType.Leaf });
     } else {
-      resArray.push({ name, children: getTypedPathList(a), type: NodeType.NonLeaf })
+      resArray.push({ name, children: getTypedPathList(a), type: NodeType.NonLeaf });
     }
   }
-  return resArray
+  return resArray;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-  const classes = useStyles()
-  const pathList = props.pathList
-  const typedPathList = getTypedPathList(pathList)
+  const classes = useStyles();
+  const pathList = props.pathList;
+  const typedPathList = getTypedPathList(pathList);
   const res = typedPathList
     .map((item) => Item(item, 16, props.pathname))
-    .map(([x]) => x)
+    .map(([x]) => x);
   return (
     <List className={classes.list}>
       {res}
     </List>
-  )
-}
+  );
+};
 
 // 只比较 pathname，而不比较 pathList，考虑到当 pathList 不同时，pathname 也一定不同，因此这样比较可以节省计算量
-export default React.memo(Sidebar, (prev, next) => prev.pathname === next.pathname)
+export default React.memo(Sidebar, (prev, next) => prev.pathname === next.pathname);

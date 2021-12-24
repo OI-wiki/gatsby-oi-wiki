@@ -6,18 +6,18 @@ import {
   TimelineItem,
   TimelineOppositeContent,
   TimelineSeparator,
-} from '@material-ui/lab'
-import { Divider, Paper, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
-import Button from '@material-ui/core/Button'
-import lightBlue from '@material-ui/core/colors/lightBlue'
+} from '@material-ui/lab';
+import { Divider, Paper, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
+import Button from '@material-ui/core/Button';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 
-import React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import Time from '../components/Time.tsx'
-import { SmartLink } from '../components/Link'
-import StyledLayout from '../components/StyledLayout'
+import React from 'react';
+import { Link as GatsbyLink } from 'gatsby';
+import Time from '../components/Time.tsx';
+import { SmartLink } from '../components/Link';
+import StyledLayout from '../components/StyledLayout';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,15 +63,15 @@ const useStyles = makeStyles((theme) => ({
   backContainer: {
     marginTop: '30px',
   },
-}))
+}));
 
 const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <StyledLayout location={location} noMeta={true} title={`更新历史${title ? ` - ${title}` : ''}`}>
       <Timeline>
         {changelog.all.map((item, index) => {
-          const { hash, date, message, author_name: author } = item
+          const { hash, date, message, author_name: author } = item;
           return (
             <TimelineItem key={index + '#'}>
               <TimelineOppositeContent className={classes.timeBlock}>
@@ -102,7 +102,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
                 </Paper>
               </TimelineContent>
             </TimelineItem>
-          )
+          );
         })}
         <TimelineItem>
           <TimelineOppositeContent className={classes.timeBlock}>
@@ -132,7 +132,7 @@ const ChangeLog = ({ pageContext: { title, changelog, relativePath }, location }
         </Button>
       </div>
     </StyledLayout>
-  )
-}
+  );
+};
 
-export default ChangeLog
+export default ChangeLog;
