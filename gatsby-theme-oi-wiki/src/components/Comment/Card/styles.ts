@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core'
-import Red from '@material-ui/core/colors/red'
+import { makeStyles } from '@material-ui/core';
+import Red from '@material-ui/core/colors/red';
 
 export const useStyles = makeStyles(theme => ({
   contentRoot: {
@@ -45,4 +45,4 @@ export const useStyles = makeStyles(theme => ({
   floatRight: {
     float: 'right',
   },
-}))
+}));

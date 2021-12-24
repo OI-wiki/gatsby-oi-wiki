@@ -9,20 +9,20 @@ import {
   Link,
   makeStyles,
   Switch,
-} from '@material-ui/core'
-import PlayArrow from '@material-ui/icons/PlayArrow'
-import type { PageProps } from 'gatsby'
-import { graphql, useStaticQuery } from 'gatsby'
-import React, { useCallback, useRef, useState } from 'react'
-import CodeEditor from '../components/CodeEditor'
-import type { IndicatorProps } from '../components/Indicator'
-import Indicator from '../components/Indicator'
-import CodeLangMenu from '../components/CodeLangMenu'
-import Output from '../components/Output'
-import Layout from '../components/StyledLayout'
-import type { LangType } from '../lib/play/codeLang'
-import type { TransformedResponseData } from '../lib/play/useRunner'
-import { useRunner } from '../lib/play/useRunner'
+} from '@material-ui/core';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import type { PageProps } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import React, { useCallback, useRef, useState } from 'react';
+import CodeEditor from '../components/CodeEditor';
+import type { IndicatorProps } from '../components/Indicator';
+import Indicator from '../components/Indicator';
+import CodeLangMenu from '../components/CodeLangMenu';
+import Output from '../components/Output';
+import Layout from '../components/StyledLayout';
+import type { LangType } from '../lib/play/codeLang';
+import type { TransformedResponseData } from '../lib/play/useRunner';
+import { useRunner } from '../lib/play/useRunner';
 
 const useStyles = makeStyles((theme) => ({
   langMenu: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#FC6012',
     },
   },
-}))
+}));
 
 export type PlaygroundLocationState = Partial<{
   lang: LangType
@@ -69,20 +69,20 @@ const Playground: React.FC<
   PageProps<unknown, unknown, PlaygroundLocationState>
 > = ({ location }) => {
   // state maybe undefined/null in gatsby build
-  const locState = location.state ?? {}
+  const locState = location.state ?? {};
 
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [lang, setLang] = useState<LangType>(locState.lang ?? 'C++')
-  const [o2, setO2] = useState(false)
+  const [lang, setLang] = useState<LangType>(locState.lang ?? 'C++');
+  const [o2, setO2] = useState(false);
 
-  const [code, setCode] = useState(locState.code ?? '')
-  const [input, setInput] = useState(locState.input ?? '')
-  const [output, setOutput] = useState<TransformedResponseData | null>(null)
+  const [code, setCode] = useState(locState.code ?? '');
+  const [input, setInput] = useState(locState.input ?? '');
+  const [output, setOutput] = useState<TransformedResponseData | null>(null);
 
-  const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null)
+  const [runInfo, setRunInfo] = useState<IndicatorProps | null>(null);
 
-  const outputRef = useRef<HTMLElement>(null)
+  const outputRef = useRef<HTMLElement>(null);
 
   const judgeDuckImgUrl: string = useStaticQuery(graphql`
     {
@@ -94,31 +94,31 @@ const Playground: React.FC<
         }
       }
     }
-  `).allFile.edges[0].node.publicURL
+  `).allFile.edges[0].node.publicURL;
 
   const runCodeCb = useCallback((data: TransformedResponseData) => {
-    setOutput(data)
+    setOutput(data);
     setRunInfo(
       data.status === 'Run Finished'
         ? { type: 'success', msg: 'Success' }
         : { type: 'warning', msg: 'Checkout output for error details' },
-    )
+    );
 
-    outputRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+    outputRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
   const errorCb = useCallback((msg: string) => {
-    setRunInfo({ type: 'error', msg })
-  }, [])
+    setRunInfo({ type: 'error', msg });
+  }, []);
   const { sendRunnerReq, waiting } = useRunner(
     { stdin: input, code, language: lang, flags: o2 ? '-O2' : '' },
     runCodeCb,
     errorCb,
-  )
+  );
 
   const handleRunClick = useCallback(() => {
-    setRunInfo(null)
-    sendRunnerReq()
-  }, [sendRunnerReq])
+    setRunInfo(null);
+    sendRunnerReq();
+  }, [sendRunnerReq]);
 
   return (
     <Layout
@@ -170,7 +170,7 @@ const Playground: React.FC<
                 size="small"
                 checked={o2}
                 onChange={(e) => {
-                  setO2(e.target.checked)
+                  setO2(e.target.checked);
                 }}
               />
             }
@@ -190,7 +190,7 @@ const Playground: React.FC<
             title="代码"
             value={code}
             onChange={(val) => {
-              setCode(val)
+              setCode(val);
             }}
           />
         </Grid>
@@ -200,7 +200,7 @@ const Playground: React.FC<
               title="输入"
               value={input}
               onChange={(val) => {
-                setInput(val)
+                setInput(val);
               }}
             />
           </Grid>
@@ -222,7 +222,7 @@ const Playground: React.FC<
         </Link>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Playground
+export default Playground;

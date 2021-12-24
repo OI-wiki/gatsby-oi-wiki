@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export interface WindowDimensions {
   width: number;
@@ -12,16 +12,16 @@ export interface WindowDimensions {
  * @param timeout
  */
 const useDebounce = <T = any>(value: T, timeout: number): T => {
-  const [state, setState] = useState(value)
+  const [state, setState] = useState(value);
 
   useEffect(() => {
-    const handler = setTimeout(() => setState(value), timeout)
+    const handler = setTimeout(() => setState(value), timeout);
 
-    return () => clearTimeout(handler)
-  }, [value, timeout])
+    return () => clearTimeout(handler);
+  }, [value, timeout]);
 
-  return state
-}
+  return state;
+};
 
 /**
  * 在组件挂载后计算屏幕宽度并返回
@@ -30,22 +30,22 @@ const useWindowDimensions = (): WindowDimensions => {
   const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>({
     width: 0,
     height: 0,
-  })
+  });
 
   useEffect(() => {
     const handleResize = (): void => {
       setWindowDimensions({
         width: window.innerWidth,
         height: window.innerHeight,
-      })
-    }
+      });
+    };
 
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  return windowDimensions
-}
+  return windowDimensions;
+};
 
-export { useDebounce, useWindowDimensions }
+export { useDebounce, useWindowDimensions };

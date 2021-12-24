@@ -1,9 +1,9 @@
-import { AccordionSummary, AccordionSummaryProps } from '@material-ui/core'
-import blue from '@material-ui/core/colors/blue'
-import { makeStyles } from '@material-ui/core/styles'
-import EditIcon from '@material-ui/icons/Edit'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import React from 'react'
+import { AccordionSummary, AccordionSummaryProps } from '@material-ui/core';
+import blue from '@material-ui/core/colors/blue';
+import { makeStyles } from '@material-ui/core/styles';
+import EditIcon from '@material-ui/icons/Edit';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   expanded: {}, // DONT DELETE THIS
@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
     },
     fontWeight: 'bold',
   },
-}))
+}));
 
 export interface SummaryProps extends AccordionSummaryProps {
   className: string;
 }
 
 const Summary: React.FC<SummaryProps> = (props) => {
-  const { children, ...others } = props
-  const classes = useStyles()
+  const { children, ...others } = props;
+  const classes = useStyles();
 
   return (
     <AccordionSummary
@@ -58,7 +58,7 @@ const Summary: React.FC<SummaryProps> = (props) => {
       />
       {children}
     </AccordionSummary>
-  )
-}
+  );
+};
 
-export default Summary
+export default Summary;

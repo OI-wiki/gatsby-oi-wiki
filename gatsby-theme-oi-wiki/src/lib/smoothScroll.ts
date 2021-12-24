@@ -1,4 +1,4 @@
-import { Nullable } from '../types/common'
+import { Nullable } from '../types/common';
 
 export type SmoothScrollToType = ((yCoordinate: number, duration?: number, optimizeForSmallScreen?: boolean) => void)
 
@@ -27,17 +27,17 @@ export type SmoothScrollToType = ((yCoordinate: number, duration?: number, optim
  * plot(res, xmin=0)
  * */
 const getDisplacement = (progress: number): number => {
-  if (progress < 0) return 0
+  if (progress < 0) return 0;
 
   function f (t: number): number {
     return 1 + 0.25 * (
       1.1622776601683795 * Math.exp((-10 / 3) * t * 8.16227766016838) -
       5.16227766016838 * Math.exp((10 / 3) * t * -1.8377223398316205)
-    )
+    );
   }
 
-  return f(progress) * 1.00283
-}
+  return f(progress) * 1.00283;
+};
 
 /**
  *
@@ -46,40 +46,40 @@ const getDisplacement = (progress: number): number => {
  * @param optimizeForSmallScreen 为小屏幕使用 CSS 动画来解决性能问题
  */
 const smoothScrollTo: SmoothScrollToType = (yCoordinate, duration = -1, optimizeForSmallScreen = true) => {
-  const maximumCoordinate = document.body.scrollHeight - window.innerHeight
-  const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY
-  const isSmallScreen = window.innerWidth <= 600
+  const maximumCoordinate = document.body.scrollHeight - window.innerHeight;
+  const offset = Math.min(yCoordinate, maximumCoordinate) - window.scrollY;
+  const isSmallScreen = window.innerWidth <= 600;
 
   if (isSmallScreen && optimizeForSmallScreen) {
-    window.scrollTo({ top: yCoordinate, behavior: 'smooth' })
-    return
+    window.scrollTo({ top: yCoordinate, behavior: 'smooth' });
+    return;
   }
 
   if (duration === -1) {
-    const absOffset = Math.abs(offset)
-    duration = 300 + Math.sqrt(2 * absOffset / 0.02)
+    const absOffset = Math.abs(offset);
+    duration = 300 + Math.sqrt(2 * absOffset / 0.02);
   }
 
-  const startTime = performance.now()
-  const startPosition = window.scrollY
-  const el: Nullable<HTMLDivElement> = document.querySelector('.maincontentdiv')
+  const startTime = performance.now();
+  const startPosition = window.scrollY;
+  const el: Nullable<HTMLDivElement> = document.querySelector('.maincontentdiv');
 
-  if (!el) throw new Error('.maincontentdiv 缺失')
+  if (!el) throw new Error('.maincontentdiv 缺失');
 
-  window.scrollTo(0, yCoordinate)
+  window.scrollTo(0, yCoordinate);
   const performAnimation = (time: number): void => {
     if (time - startTime > duration) {
-      el.style.transform = ''
-      return
+      el.style.transform = '';
+      return;
     }
 
-    const displacement = offset * getDisplacement((time - startTime) / duration)
+    const displacement = offset * getDisplacement((time - startTime) / duration);
     // window.scrollTo(0, startPosition + displacement)
-    el.style.transform = `translateY(${yCoordinate - startPosition - displacement}px)`
-    requestAnimationFrame(performAnimation)
-  }
+    el.style.transform = `translateY(${yCoordinate - startPosition - displacement}px)`;
+    requestAnimationFrame(performAnimation);
+  };
 
-  requestAnimationFrame(performAnimation)
-}
+  requestAnimationFrame(performAnimation);
+};
 
-export default smoothScrollTo
+export default smoothScrollTo;

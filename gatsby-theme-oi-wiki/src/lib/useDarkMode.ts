@@ -1,23 +1,23 @@
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { useSetting } from './useSetting'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useSetting } from './useSetting';
 
 export default function useDarkMode (): boolean {
-  const [setting] = useSetting()
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true })
+  const [setting] = useSetting();
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)', { noSsr: true });
   // noSsr: when it is false(by default), preact is enabled and user prefers dark mode,
   // useMediaQuery will return twice. Firstly false, then true. That leads to flicker whenever the route changes.
   // According to the documentation https://material-ui.com/zh/components/use-media-query/#usemediaquery-query-options-matches
   // , it should be false if you are using server side rendering.
   // However, I found that ssr still works well even if i set it to true. Therefore I enable noSsr as a workaround.
-  let enableDark: boolean
+  let enableDark: boolean;
   if (setting.darkMode.type === 'always-on') {
-    enableDark = true
+    enableDark = true;
   } else if (setting.darkMode.type === 'always-off') {
-    enableDark = false
+    enableDark = false;
   } else if (setting.darkMode.type === 'user-preference') {
-    enableDark = prefersDarkMode
+    enableDark = prefersDarkMode;
   } else {
-    enableDark = prefersDarkMode // TODO: to be implemented
+    enableDark = prefersDarkMode; // TODO: to be implemented
   }
-  return enableDark
+  return enableDark;
 }

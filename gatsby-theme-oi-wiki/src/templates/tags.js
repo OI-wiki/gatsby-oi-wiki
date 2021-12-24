@@ -1,18 +1,18 @@
 // Components
-import { Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core'
+import { Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 
-import BookIcon from '@material-ui/icons/Book'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import BookIcon from '@material-ui/icons/Book';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-import { graphql } from 'gatsby'
-import PropTypes from 'prop-types'
-import React from 'react'
-import StyledLayout from '../components/StyledLayout'
+import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
+import StyledLayout from '../components/StyledLayout';
 
 const Tags = ({ pageContext, data, location }) => {
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`
+  const { tag } = pageContext;
+  const { edges, totalCount } = data.allMarkdownRemark;
+  const tagHeader = `共 ${totalCount} 篇文章被打上了 <code>${tag}</code> 标签：`;
 
   return (
     <StyledLayout location={location} noMeta={true} title={`标签页 - ${tag}`}>
@@ -21,8 +21,8 @@ const Tags = ({ pageContext, data, location }) => {
         </Typography>
         <List>
           {edges.map(({ node }) => {
-            const { slug } = node.fields
-            const { title } = node.frontmatter
+            const { slug } = node.fields;
+            const { title } = node.frontmatter;
             return (
               <ListItem button divider component="a" href={slug} key={slug}>
                 <ListItemIcon>
@@ -30,7 +30,7 @@ const Tags = ({ pageContext, data, location }) => {
                 </ListItemIcon>
                 <ListItemText primary={title}/>
               </ListItem>
-            )
+            );
           })}
         </List>
         <Button
@@ -42,8 +42,8 @@ const Tags = ({ pageContext, data, location }) => {
         </Button>
       </div>
     </StyledLayout>
-  )
-}
+  );
+};
 
 Tags.propTypes = {
   pageContext: PropTypes.shape({
@@ -66,9 +66,9 @@ Tags.propTypes = {
       ),
     }),
   }),
-}
+};
 
-export default Tags
+export default Tags;
 
 export const pageQuery = graphql`
   query($tag: String) {
@@ -90,4 +90,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

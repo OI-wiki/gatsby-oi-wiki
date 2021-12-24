@@ -10,4 +10,4 @@ export default {
   '--shiki-token-string-expression': '#800000',
   '--shiki-token-punctuation': '#000000',
   '--shiki-token-link': '#000000',
-}
+};

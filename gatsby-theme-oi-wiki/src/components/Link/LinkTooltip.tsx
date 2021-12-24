@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import ToolCard from './ToolCard'
-import { useDidUpdateEffect } from './hooks'
-import { Nullable } from '../../types/common'
+import React, { useState } from 'react';
+import ToolCard from './ToolCard';
+import { useDidUpdateEffect } from './hooks';
+import { Nullable } from '../../types/common';
 
 export interface PreviewData {
   text: string,
@@ -18,32 +18,32 @@ export interface LinkTooltipProps {
 export type FetchStatus = 'error' | 'fetching' | 'fetched' | 'not_fetched'
 
 async function getExcerpt(url: string): Promise<PreviewData> {
-  return await fetch(url).then(res => res.json())
+  return await fetch(url).then(res => res.json());
 }
 
 const LinkTooltip: React.FC<LinkTooltipProps> = (props) => {
-  const { url, children } = props
-  const [content, setContent] = useState<Nullable<PreviewData>>(null)
-  const [status, setStatus] = useState<FetchStatus>('not_fetched')
-  const [open, setOpen] = useState<boolean>()
+  const { url, children } = props;
+  const [content, setContent] = useState<Nullable<PreviewData>>(null);
+  const [status, setStatus] = useState<FetchStatus>('not_fetched');
+  const [open, setOpen] = useState<boolean>();
 
   useDidUpdateEffect(() => {
     if (status === 'not_fetched') {
       // 防止重复获取
-      setStatus('fetching')
+      setStatus('fetching');
       getExcerpt(url).then(data => {
-        setContent(data)
-        setStatus('fetched')
+        setContent(data);
+        setStatus('fetched');
       }).catch(e => {
-        console.error(e)
-        setStatus('error')
-      })
+        console.error(e);
+        setStatus('error');
+      });
     }
-  }, [open])
+  }, [open]);
 
   return <ToolCard
     onHover={() => {
-      setOpen(true)
+      setOpen(true);
     }}
     content={content}
     to={props.to}
@@ -52,7 +52,7 @@ const LinkTooltip: React.FC<LinkTooltipProps> = (props) => {
     openDelay={500}
   >
     {children}
-  </ToolCard>
-}
+  </ToolCard>;
+};
 
-export default LinkTooltip
+export default LinkTooltip;

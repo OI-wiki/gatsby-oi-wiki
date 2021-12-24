@@ -34,7 +34,7 @@ module.exports = {
   rules: {
     'object-curly-spacing': ['error', 'always'],
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
-    'semi': ['error', 'never', { 'beforeStatementContinuationChars': 'always' }],
+    'semi': ['error', 'always'],
     'react/prop-types': 'off',
     'comma-dangle': ['error', 'always-multiline'],
     'no-unused-vars': 'warn',

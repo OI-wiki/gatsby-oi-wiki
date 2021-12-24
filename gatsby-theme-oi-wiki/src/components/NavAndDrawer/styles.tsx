@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { scrollbarStyle } from '../../styles/scrollbar'
+import { makeStyles } from '@material-ui/core/styles';
+import { scrollbarStyle } from '../../styles/scrollbar';
 
-const drawerWidth = 250
+const drawerWidth = 250;
 
 interface Props {
   appBar: {
@@ -53,6 +53,6 @@ const useStyles = makeStyles((theme) => ({
   iconItem: {
     minWidth: theme.spacing(5),
   },
-}))
+}));
 
-export { useStyles }
+export { useStyles };

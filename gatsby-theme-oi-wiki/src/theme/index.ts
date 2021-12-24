@@ -1,17 +1,17 @@
-import createPalette, { Palette, PaletteColor } from '@material-ui/core/styles/createPalette'
-import blue from '@material-ui/core/colors/blue'
-import grey from '@material-ui/core/colors/grey'
-import red from '@material-ui/core/colors/red'
-import { createTheme, hexToRgb, ThemeOptions, withStyles } from '@material-ui/core/styles'
+import createPalette, { Palette, PaletteColor } from '@material-ui/core/styles/createPalette';
+import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
+import red from '@material-ui/core/colors/red';
+import { createTheme, hexToRgb, ThemeOptions, withStyles } from '@material-ui/core/styles';
 
-import globalStyles from './global'
+import globalStyles from './global';
 
-import paletteColors from '../styles/colors'
-import { Nullable, StrIndexObj } from '../types/common'
-import { noopNull } from '../utils/common'
+import paletteColors from '../styles/colors';
+import { Nullable, StrIndexObj } from '../types/common';
+import { noopNull } from '../utils/common';
 
-import DarkPlus from './hightlight-themes/darkplus'
-import LightPlus from './hightlight-themes/lightplus'
+import DarkPlus from './hightlight-themes/darkplus';
+import LightPlus from './hightlight-themes/lightplus';
 
 type DStrIndexObj = StrIndexObj<StrIndexObj>
 type HexToRGBAParamType = (color?: string, alpha?: number) => string | null
@@ -20,62 +20,62 @@ type ApplyAdaptiveType = (...keys: (keyof Palette)[]) => DStrIndexObj
 type WithStylesReturnType = ReturnType<typeof withStyles>
 type GetThemeCSSElType = (style: WithStylesReturnType) => ReturnType<WithStylesReturnType>
 
-const RGBA_EXPR = /^rgba\((.*)\)$/
-const RGB_EXPR = /^rgb\((.*)\)$/
-const HEX_EXPR = /^#([A-Fa-f0-9]{3}){1,2}$/
+const RGBA_EXPR = /^rgba\((.*)\)$/;
+const RGB_EXPR = /^rgb\((.*)\)$/;
+const HEX_EXPR = /^#([A-Fa-f0-9]{3}){1,2}$/;
 const hexToRGBAParam: HexToRGBAParamType = (color, alpha = 1) => {
   if (color) {
-    let res
-    if (color === 'auto') return color
+    let res;
+    if (color === 'auto') return color;
     else if ((res = color.match(RGBA_EXPR)) !== null) {
-      return res[1]
+      return res[1];
     } else if ((res = color.match(RGB_EXPR)) !== null) {
-      return `${res[1]}, ${alpha}`
+      return `${res[1]}, ${alpha}`;
     } else if (HEX_EXPR.test(color)) {
-      return `${hexToRgb(color).trim().match(RGB_EXPR)?.[1]}, ${alpha}`
-    } else throw new Error('Bad Hex ' + color)
-  } else return null
-}
+      return `${hexToRgb(color).trim().match(RGB_EXPR)?.[1]}, ${alpha}`;
+    } else throw new Error('Bad Hex ' + color);
+  } else return null;
+};
 
 const applyDefaults: ApplyDefaultsType = (theme, ...keys) => {
-  const exp = /^(#|rgba)/
-  const keyObj: ReturnType<ApplyDefaultsType> = {}
+  const exp = /^(#|rgba)/;
+  const keyObj: ReturnType<ApplyDefaultsType> = {};
   keys.forEach(k => {
-    const colorKind = theme[k as keyof Palette]
+    const colorKind = theme[k as keyof Palette];
     Object.keys(colorKind).forEach(el => {
-      const hex = (colorKind as PaletteColor)[el as keyof PaletteColor]
+      const hex = (colorKind as PaletteColor)[el as keyof PaletteColor];
       if (exp.test(hex)) {
-        keyObj[`--${k}-${el}`] = hexToRGBAParam(hex.toString())
+        keyObj[`--${k}-${el}`] = hexToRGBAParam(hex.toString());
       }
-    })
-  })
+    });
+  });
 
-  return keyObj
-}
+  return keyObj;
+};
 
 const applyAdaptive: ApplyAdaptiveType = (...keys) => {
-  const exp = /^(#|rgba)/
-  const rst: ReturnType<ApplyAdaptiveType> = {}
+  const exp = /^(#|rgba)/;
+  const rst: ReturnType<ApplyAdaptiveType> = {};
   keys.forEach(k => {
-    const obj: StrIndexObj = {}
-    const colorKind = lightColor[k]
+    const obj: StrIndexObj = {};
+    const colorKind = lightColor[k];
     Object.keys(colorKind).forEach(el => {
-      const color = (colorKind as PaletteColor)[el as keyof PaletteColor]
-      obj[el] = exp.test(color) ? `rgba(var(--${k}-${el}))` : color
-    })
-    rst[k] = obj
-  })
+      const color = (colorKind as PaletteColor)[el as keyof PaletteColor];
+      obj[el] = exp.test(color) ? `rgba(var(--${k}-${el}))` : color;
+    });
+    rst[k] = obj;
+  });
 
-  return rst
-}
+  return rst;
+};
 
-const getThemeCssEl: GetThemeCSSElType = (style) => style(noopNull)
+const getThemeCssEl: GetThemeCSSElType = (style) => style(noopNull);
 
-export const CustomCssBaseline = globalStyles(noopNull as any)
+export const CustomCssBaseline = globalStyles(noopNull as any);
 
-const lightColor = createPalette({ type: 'light' })
-const darkColor = createPalette({ type: 'dark' })
-const paletteKeys: (keyof Palette)[] = ['primary', 'secondary', 'text', 'background', 'action', 'error', 'warning', 'info', 'success']
+const lightColor = createPalette({ type: 'light' });
+const darkColor = createPalette({ type: 'dark' });
+const paletteKeys: (keyof Palette)[] = ['primary', 'secondary', 'text', 'background', 'action', 'error', 'warning', 'info', 'success'];
 
 const lightCss = {
   '@global': {
@@ -106,7 +106,7 @@ const lightCss = {
       ...applyDefaults(lightColor, ...paletteKeys),
     },
   },
-}
+};
 
 const darkCss = {
   '@global': {
@@ -137,10 +137,10 @@ const darkCss = {
       ...applyDefaults(darkColor, ...paletteKeys),
     },
   },
-}
+};
 
-const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss))
-const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss))
+const LightCssBaseline = getThemeCssEl(withStyles(() => lightCss));
+const DarkCssBaseline = getThemeCssEl(withStyles(() => darkCss));
 const AutoCssBaseline = getThemeCssEl(withStyles(() => ({
   '@global': {
     'html[data-theme=auto]': lightCss['@global']['html[data-theme=light]'],
@@ -148,7 +148,7 @@ const AutoCssBaseline = getThemeCssEl(withStyles(() => ({
       'html[data-theme=auto]': darkCss['@global']['html[data-theme=dark]'],
     },
   },
-})))
+})));
 
 const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() =>
   paletteColors.reduce((obj, c) => {
@@ -158,10 +158,10 @@ const SecondaryColorCssBaseline = getThemeCssEl(withStyles(() =>
         '--secondary-dark': hexToRGBAParam(c.dark),
         '--secondary-main': hexToRGBAParam(c.main),
         '--secondary-contrast-text': hexToRGBAParam(c.contrastText),
-      }
+      };
     }
-    return obj
-  }, { '@global': {} as StrIndexObj<any> })))
+    return obj;
+  }, { '@global': {} as StrIndexObj<any> })));
 
 const adaptiveTheme = createTheme({
   palette: {
@@ -234,6 +234,6 @@ const adaptiveTheme = createTheme({
   typography: {
     fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
   },
-} as ThemeOptions)
+} as ThemeOptions);
 
-export { adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline, SecondaryColorCssBaseline }
+export { adaptiveTheme, LightCssBaseline, DarkCssBaseline, AutoCssBaseline, SecondaryColorCssBaseline };

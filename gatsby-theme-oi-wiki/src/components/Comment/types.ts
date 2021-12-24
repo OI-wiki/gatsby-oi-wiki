@@ -1,4 +1,4 @@
-import { Comments, Reactions } from '@mgtd/vssue-api-github-v4/lib/types'
+import { Comments, Reactions } from '@mgtd/vssue-api-github-v4/lib/types';
 
 export interface User {
   avatar: string,
@@ -13,4 +13,4 @@ export interface Issue {
   link: string
 }
 
-export { Comments, Reactions }
+export { Comments, Reactions };

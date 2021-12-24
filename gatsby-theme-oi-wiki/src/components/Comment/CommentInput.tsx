@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { makeStyles, Avatar, TextField, Grid, Button, Hidden, LinearProgress } from '@material-ui/core'
-import { useInputContentContext } from './inputContext'
+import React, { useState } from 'react';
+import { makeStyles, Avatar, TextField, Grid, Button, Hidden, LinearProgress } from '@material-ui/core';
+import { useInputContentContext } from './inputContext';
 
 interface Props {
   avatarLink: string,
@@ -34,12 +34,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right',
     marginBottom: theme.spacing(1),
   },
-}))
+}));
 
 const CommentInput: React.FC<Props> = (props) => {
-  const classes = useStyles()
-  const { inputContent, setInputContent } = useInputContentContext()
-  const [loading, setLoading] = useState<boolean>(false)
+  const classes = useStyles();
+  const { inputContent, setInputContent } = useInputContentContext();
+  const [loading, setLoading] = useState<boolean>(false);
   return (
     <>
       {loading && <LinearProgress />}
@@ -57,7 +57,7 @@ const CommentInput: React.FC<Props> = (props) => {
             disabled={!props.authorized || loading}
             rows={5}
             value={inputContent}
-            onChange={(e) => { setInputContent(e.target.value) }}
+            onChange={(e) => { setInputContent(e.target.value); }}
             variant="outlined"
           />
         </Grid>
@@ -71,17 +71,17 @@ const CommentInput: React.FC<Props> = (props) => {
           // disabled={loading && props.showLogin ? false : !props.authorized}
           onClick={() => {
             if (props.showLogin) {
-              props.handleLogin()
+              props.handleLogin();
             } else {
-              props.sendComment(inputContent, setLoading)
-              setInputContent('')
+              props.sendComment(inputContent, setLoading);
+              setInputContent('');
             }
           }}>
           {props.showLogin ? '登录' : '评论'}
         </Button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CommentInput
+export default CommentInput;

@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
 const globalStyles = withStyles((theme) => ({
   '@global': {
@@ -58,6 +58,6 @@ const globalStyles = withStyles((theme) => ({
       fontFamily: 'var(--code-block-font)',
     },
   },
-}))
+}));
 
-export default globalStyles
+export default globalStyles;

@@ -1,15 +1,15 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
-import { Hidden, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core'
+import { Hidden, IconButton, ListItemIcon, Menu, MenuItem } from '@material-ui/core';
 
-import SettingsIcon from '@material-ui/icons/Settings'
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
-import LocalOfferIcon from '@material-ui/icons/LocalOffer'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import CodeIcon from '@material-ui/icons/Code'
+import SettingsIcon from '@material-ui/icons/Settings';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CodeIcon from '@material-ui/icons/Code';
 
-import React from 'react'
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   iconItem: {
@@ -18,20 +18,20 @@ const useStyles = makeStyles((theme) => ({
   sideMenu: {
     transition: 'none !important',
   },
-}))
+}));
 
 const SmallScreenMenu: React.FC = () => {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki'
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const OIWikiGithub = 'https://github.com/OI-wiki/OI-wiki';
 
   const handleClick = React.useCallback((event): void => {
-    setAnchorEl(event.currentTarget)
-  }, [])
+    setAnchorEl(event.currentTarget);
+  }, []);
 
   const handleClose = React.useCallback((): void => {
-    setAnchorEl(null)
-  }, [])
+    setAnchorEl(null);
+  }, []);
 
   return (
     <Hidden mdUp implementation="js">
@@ -82,7 +82,7 @@ const SmallScreenMenu: React.FC = () => {
         </MenuItem>
       </Menu>
     </Hidden>
-  )
-}
+  );
+};
 
-export default SmallScreenMenu
+export default SmallScreenMenu;
