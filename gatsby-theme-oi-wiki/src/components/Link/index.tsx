@@ -45,7 +45,7 @@ const getAPILink = (link: string, pathname: string, isIndex: boolean): string =>
     if (NO_SLASH_EXPR.test(pathname)) pathname += '/'
     newLink = path.resolve(pathname, newLink)
   }
-  return `https://api.mgt.moe/preview?path=${newLink}`
+  return `https://api.oi-wiki.org/preview?path=${newLink}`
 }
 
 const isRef = (link: string): boolean => /^#/.test(link)
