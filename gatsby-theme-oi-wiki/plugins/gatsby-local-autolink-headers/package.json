@@ -9,7 +9,7 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "gatsby": "^2.0.0"
+    "gatsby": "^4.0.0"
   },
   "engines": {
     "node": ">=10.13.0"

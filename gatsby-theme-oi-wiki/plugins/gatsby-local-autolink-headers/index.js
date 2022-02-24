@@ -1,5 +1,5 @@
-const toString = require('mdast-util-to-string')
-const visit = require('unist-util-visit')
+const { toString } = require('mdast-util-to-string')
+const { visit } = require('unist-util-visit')
 const slugs = require('github-slugger')()
 const deburr = require('lodash/deburr')
 

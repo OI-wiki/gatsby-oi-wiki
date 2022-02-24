@@ -30,7 +30,7 @@ const mathRehype = IS_EXEC_BUILD
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-local-git',
+      resolve: 'gatsby-source-local-git-modern',
     },
     {
       resolve: 'gatsby-source-filesystem',
