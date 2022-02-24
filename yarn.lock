@@ -2043,12 +2043,12 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
 
-"@mgtd/remark-shiki@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.2.1.tgz#57314d182ba12f107d3f18f828a8150e22c80e40"
-  integrity sha512-b/5ANwLiIHNviq364LxgTJ0USgPW9rwh3dbE0B4gvFRdsN4oxPWMEx8sl2S1jsG0uT6vCnDDKOxkIUHUvqugnQ==
+"@mgtd/remark-shiki@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@mgtd/remark-shiki/-/remark-shiki-2.3.1.tgz#9b5c18767b2488e56a38990a1caaccbb2b9d97c0"
+  integrity sha512-apsmxKusItdr1LRSftBcC6+zUMf+m6DYU8oMhznZcp3z9PT0pMX3UTq4OBe8pLBqwjywoohogJ3GLbhgeVv/oQ==
   dependencies:
-    shiki "^0.9.10"
+    shiki "^0.10.1"
     unist-util-visit "^2.0.3"
 
 "@mgtd/vssue-api-github-v3@^2.4.8":
@@ -12269,10 +12269,10 @@ shell-quote@1.7.2:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
-shiki@^0.9.10:
-  version "0.9.15"
-  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.9.15.tgz#2481b46155364f236651319d2c18e329ead6fa44"
-  integrity sha512-/Y0z9IzhJ8nD9nbceORCqu6NgT9X6I8Fk8c3SICHI5NbZRLdZYFaB233gwct9sU0vvSypyaL/qaKvzyQGJBZSw==
+shiki@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.10.1.tgz#6f9a16205a823b56c072d0f1a0bcd0f2646bef14"
+  integrity sha512-VsY7QJVzU51j5o1+DguUd+6vmCmZ5v/6gYu4vyYAhzjuNQU6P/vmSy4uQaOhvje031qQMiW0d2BwgMH52vqMng==
   dependencies:
     jsonc-parser "^3.0.0"
     vscode-oniguruma "^1.6.1"
