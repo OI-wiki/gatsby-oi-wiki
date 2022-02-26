@@ -204,3 +204,9 @@ table:not([class]) td {
 table:not([class]) tr:first-child td {
   border-top-width: 0;
 }
+
+/* image background begin */
+img {
+  background-color: rgba(var(--image-background));
+}
+/* image background end */
