@@ -82,7 +82,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.1.2",
     "esm": "^3.2.25",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.27",
     "schema-dts": "^0.9.0",
     "ts-graphql-plugin": "^2.1.4",
     "typescript": "^4.3.5"
