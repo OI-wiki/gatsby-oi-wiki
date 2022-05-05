@@ -57,6 +57,9 @@ const globalStyles = withStyles((theme) => ({
       fontSize: '90%',
       fontFamily: 'var(--code-block-font)',
     },
+    '.anchorLink': {
+      fill: 'rgba(var(--text-primary))',
+    },
   },
 }))
 
