@@ -3,7 +3,7 @@
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/OI-wiki/gatsby-oi-wiki)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FOI-wiki%2Fgatsby-oi-wiki?ref=badge_shield)
 
-正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。
+正在开发中的基于 gatsby 的渲染框架。欢迎您点击下方链接入群并参与项目。    
 
 Demo：https://next.oi-wiki.org/
 
