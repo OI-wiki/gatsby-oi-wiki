@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Giscus from '@giscus/react'
 import useDarkMode from '../../lib/useDarkMode'
 
-const useToken = createPersistedState('github-access-token')
-
 interface Props {
   repo: string, // 存储库名
   id: string, // 文章 id
