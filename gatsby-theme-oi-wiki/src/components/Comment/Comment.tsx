@@ -10,7 +10,6 @@ interface Props {
 }
 
 const CommentComponent: React.FC<Props> = (props) => {
-  const isAdmin = props.admin.indexOf(user.username) >= 0
   let colorScheme = 'light'
   if (useDarkMode) {
     colorScheme = 'dark'
