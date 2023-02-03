@@ -1,4 +1,4 @@
-import { CssBaseline, Divider, Grid, Typography } from '@material-ui/core'
+import { Collapse, CssBaseline, Divider, Grid, Typography } from '@material-ui/core'
 
 import { makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
@@ -126,6 +126,9 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
       本文内容尚不完善，我们正在努力施工中。您可以保存此页链接稍后再看，或者帮助我们修订此页面！
     </Alert>
   )
+
+  const [showDeprecationNotice, setShowDeprecationNotice] = React.useState(true)
+  
   return (
     <>
       <Helmet>
@@ -146,6 +149,11 @@ const MyLayout: React.FC<MyLayoutProps> = (props) => {
           >
             <div className={classes.toolbar}/>
             <div className={classes.container}>
+              <Collapse in={showDeprecationNotice}>
+                <Alert severity='info' onClose={() => { setShowDeprecationNotice(false) }}>
+                  OI Wiki Next 目前不再活跃开发，部分页面可能出现渲染问题。<a href="//oi-wiki.org">访问主站 &gt;</a>
+                </Alert>
+              </Collapse>
               <main className={classes.content}>
                 <div className={classes.main}>
                   <Title noEdit={noEdit} noMeta={noMeta} {...titleMetaProps} />
