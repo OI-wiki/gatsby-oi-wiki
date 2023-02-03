@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---gatsby-theme-oi-wiki-src-templates-changelog-js",
+    "path": "/intro/format/changelog/",
+    "result": {"pageContext":{"title":"","changelog":{"all":[{"hash":"6dd233b3ece4b538540c815cfa12c438fd7cb8fd","date":"2021-09-07T17:38:31+08:00","message":"test: update fft and add format","refs":"","body":"","author_name":"mgt","author_email":"mgt@oi-wiki.org"}],"latest":{"hash":"6dd233b3ece4b538540c815cfa12c438fd7cb8fd","date":"2021-09-07T17:38:31+08:00","message":"test: update fft and add format","refs":"","body":"","author_name":"mgt","author_email":"mgt@oi-wiki.org"},"total":1},"relativePath":"docs/intro/format.md"}},
+    "staticQueryHashes": ["2462162885","3656965534"]}

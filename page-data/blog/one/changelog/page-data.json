@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---gatsby-theme-oi-wiki-src-templates-changelog-js",
+    "path": "/blog/one/changelog/",
+    "result": {"pageContext":{"title":"第一篇博客","changelog":{"all":[{"hash":"25b77d9c9040e4357c763e2e6fa3e8863c86be1f","date":"2021-10-13T09:19:15+08:00","message":"add rand tech to repo","refs":"","body":"","author_name":"mgt","author_email":"mgt@oi-wiki.org"},{"hash":"ab077e461f8ccbf9d4b51872b13d8e4159ea8092","date":"2020-09-27T15:17:56+08:00","message":"feat: themize project structure","refs":"","body":"","author_name":"Xiaodai Dai","author_email":"diauweb@live.com"}],"latest":{"hash":"25b77d9c9040e4357c763e2e6fa3e8863c86be1f","date":"2021-10-13T09:19:15+08:00","message":"add rand tech to repo","refs":"","body":"","author_name":"mgt","author_email":"mgt@oi-wiki.org"},"total":2},"relativePath":"docs/blog/one.md"}},
+    "staticQueryHashes": ["2462162885","3656965534"]}

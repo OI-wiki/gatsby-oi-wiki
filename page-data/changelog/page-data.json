@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---gatsby-theme-oi-wiki-src-templates-changelog-js",
+    "path": "/changelog/",
+    "result": {"pageContext":{"title":"OI Wiki","changelog":{"all":[{"hash":"6199547789f27937719a4b3111bae5a554952149","date":"2022-02-19T08:04:25+00:00","message":"test","refs":"","body":"","author_name":"Haoshen Zhong","author_email":"chungzh07@gmail.com"},{"hash":"f8f6a6d22c389ffac02900dcc2228c44ecb93c01","date":"2022-02-19T08:01:54+00:00","message":"feat: image background","refs":"","body":"","author_name":"Haoshen Zhong","author_email":"chungzh07@gmail.com"},{"hash":"ab077e461f8ccbf9d4b51872b13d8e4159ea8092","date":"2020-09-27T15:17:56+08:00","message":"feat: themize project structure","refs":"","body":"","author_name":"Xiaodai Dai","author_email":"diauweb@live.com"}],"latest":{"hash":"6199547789f27937719a4b3111bae5a554952149","date":"2022-02-19T08:04:25+00:00","message":"test","refs":"","body":"","author_name":"Haoshen Zhong","author_email":"chungzh07@gmail.com"},"total":3},"relativePath":"docs/index.md"}},
+    "staticQueryHashes": ["2462162885","3656965534"]}
