@@ -12915,6 +12915,11 @@ regjsparser@^0.6.4:
   dependencies:
     unist-util-visit "^2.0.3"
 
+"rehype-footnote-heading@file:gatsby-theme-oi-wiki/plugins/rehype-footnote-heading":
+  version "1.0.0"
+  dependencies:
+    unist-util-visit "^2.0.3"
+
 rehype-mathjax@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/rehype-mathjax/-/rehype-mathjax-3.1.0.tgz#d0282243bf68f3f18dd63a062e0f8c45662ecc26"

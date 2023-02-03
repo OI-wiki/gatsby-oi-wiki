@@ -53,6 +53,7 @@
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.2",
     "rehype-codeblock": "file:plugins/rehype-codeblock",
+    "rehype-footnote-heading": "file:plugins/rehype-footnote-heading",
     "rehype-mathjax": "^3.1.0",
     "rehype-parse": "^7.0.1",
     "rehype-react": "^6.2.1",

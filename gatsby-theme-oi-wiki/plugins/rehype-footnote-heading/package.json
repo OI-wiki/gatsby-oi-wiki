@@ -1,0 +1,10 @@
+{
+  "name": "rehype-footnote-heading",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Xiaodai Dai",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^2.0.3"
+  }
+}
