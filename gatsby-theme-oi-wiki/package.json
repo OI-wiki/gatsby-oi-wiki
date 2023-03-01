@@ -72,7 +72,7 @@
     "@types/mark.js": "^8.11.6",
     "@types/react-helmet": "^6.1.1",
     "@types/use-persisted-state": "^0.3.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.29.0",
     "eslint-config-standard": "^16.0.3",
