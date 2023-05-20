@@ -11,23 +11,9 @@ export type CommentComponentProps = CommentSystemProps
 
 const CommentSystem: React.FC<CommentSystemProps> = ({ title }) => (
   <CommentComponent
-    id={`${title} - OI Wiki`}
-    owner="OI-wiki"
-    repo="gitment"
-    admin={[
-      '24OI-bot',
-      'Enter-tainer',
-      'Ir1d',
-      'cjsoft',
-      'billchenchina',
-      'Xeonacid',
-      'StudyingFather',
-      'ouuan',
-      'sshwy',
-      'Marcythm',
-    ]}
-    clientID={process.env.GATSBY_GITHUB_CLIENT_ID || ''}
-    clientSecret={process.env.GATSBY_GITHUB_CLIENT_SECRET || ''}
+    id = {`${title}`}
+    repo = "_______"
+    repoid = "_______"
   />
 )
 
